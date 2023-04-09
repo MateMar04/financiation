@@ -1,5 +1,5 @@
 """
-URL configuration for finaciationDjango project.
+URL configuration for financiationDjango project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
