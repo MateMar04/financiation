@@ -204,6 +204,7 @@ Referentes_Contactados --> Emails_Referentes
 Referentes_Contactados --> Telefonos_Referentes
 Vehiculos --> Patentes_Vehiculos
 Vehiculos --> Marcas_Vehiculos
+Vehiculos --> Modelos_Vehiculos
 Marcas_Vehiculos --> Modelos_Vehiculos
 
 @enduml
