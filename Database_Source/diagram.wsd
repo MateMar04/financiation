@@ -1,0 +1,29 @@
+@startumml Diagram
+
+class Usuarios {}
+
+class Roles {}
+
+class Visitas {}
+
+class Grupos {}
+
+class Consultas {}
+
+class Intendentes {}
+
+class Vehiculos {}
+
+class Cronogramas {}
+
+class Estados_Usuarios {}
+
+class Estados_Visitas {}
+
+class Localidades {}
+
+class Departamentos {}
+
+
+
+
