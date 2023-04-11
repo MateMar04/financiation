@@ -3,13 +3,13 @@
 class Usuarios {
     -id : int
     -nombre_de_usuario : str
-    -email : mail
     -CUIL : int
     -contraseña : password
+    -foto_perfil : img
+    -email : mail
     -rol : Rol
     -verificacion : Estados_Verificaion_Usuarios
     -estado : Estado_Usuario
-    -foto_perfil : img
 }
 
 class Roles {
@@ -20,22 +20,21 @@ class Roles {
 
 class Visitas {
     -id : int
-    -localidad : Localidad
     -flyer : boolean
     -distancia : int
     -tiempo_de_viaje : time
     -fecha_de_visita : date
-    -grupo : Grupo
     -registro_civil : boolean
     -hospedaje : boolean
-    -intendente : Intendente
-    -confirmacion : Estado_Visita
-    -convenios_firmados : Convenio
     -fondo_modernizacion : boolean
     -horario_inicio : datetime
     -horario_finalizacion : datetime
-    -referente_contactado : Referente_Contactado
     -nombre_del_lugar : str
+    -localidad : Localidad
+    -grupo : Grupo
+    -estado_visita : Estado_Visita
+    -convenios_firmados : Convenio
+    -referente_contactado : Referente_Contactado
     -direccion : Direccion
     -logos : Logos
 }
@@ -43,10 +42,12 @@ class Visitas {
 class Grupos {
     -id : int
     -coordinador : Usuario
+    -asesores : Usuarios
 }
 
 class Consultas {
     -id : int
+    -visita : Visita
     -asesorado : Asesorado
     -asesor : Usuario
     -departamento : Departamento_Ministerio
@@ -66,11 +67,6 @@ class Vehiculos {
     -marca : Marca
 }
 
-class Cronogramas {
-    id : int
-    grupo : Grupo
-    visita : Visita
-}
 
 class Estados_Usuarios {
     -id : int
@@ -116,8 +112,8 @@ class Partidos_Politicos {
 
 class Medios_de_Contacto {
     -id : int
-    -tipo : Tipo_de_Medio_de_Contacto
     -dato : str
+    -tipo : Tipo_de_Medio_de_Contacto
 }
 
 class Tipos_de_Medios_de_Contacto {
@@ -136,6 +132,8 @@ class Referentes_Contactados {
     -id : int
     -nombre : str
     -apellido : str
+    -medios_de_contacto : Medios_de_Contacto
+
 }
 
 class Direcciones {
@@ -181,12 +179,11 @@ class Marcas_Vehiculos {
 
 
 Usuarios --> Roles
-Usuarios --> Grupos
+Usuarios <-- Grupos
 Usuarios --> Estados_Usuarios
 Usuarios --> Estados_Verificacion_Usuarios
-Usuarios --> Cronogramas
-Grupos --> Visitas
-Visitas --> Consultas
+Grupos <-- Visitas
+Visitas <-- Consultas
 Visitas --> Localidades
 Visitas --> Estados_Visitas
 Visitas --> Referentes_Contactados
