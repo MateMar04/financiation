@@ -110,18 +110,6 @@ class Partidos_Politicos {
     -descripcion : str
 }
 
-class Medios_de_Contacto {
-    -id : int
-    -dato : str
-    -tipo : Tipo_de_Medio_de_Contacto
-}
-
-class Tipos_de_Medios_de_Contacto {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
-
 class Convenios {
     -id : int
     -nombre : str
@@ -132,8 +120,8 @@ class Referentes_Contactados {
     -id : int
     -nombre : str
     -apellido : str
-    -medios_de_contacto : Medios_de_Contacto
-
+    -email : emails_referentes
+    -telefono : telefonos_referentes
 }
 
 class Direcciones {
@@ -177,11 +165,26 @@ class Marcas_Vehiculos {
     -descripcion : str
 }
 
+class Emails_Usuarios {
+    -id : int
+    -email : str
+}
+
+class Emails_Referentes {
+    -id : int
+    -email : str
+}
+
+class Telefonos_Referentes {
+    -id : int
+    -telefono : int
+}
 
 Usuarios --> Roles
 Usuarios <-- Grupos
 Usuarios --> Estados_Usuarios
 Usuarios --> Estados_Verificacion_Usuarios
+Usuarios --> Emails_Usuarios
 Grupos <-- Visitas
 Visitas <-- Consultas
 Visitas --> Localidades
@@ -197,10 +200,10 @@ Consultas --> FAQs
 Consultas --> Usuarios
 Consultas --> Asesorados
 Consultas --> Departamentos_Ministerio
-Referentes_Contactados --> Medios_de_Contacto
-Medios_de_Contacto --> Tipos_de_Medios_de_Contacto
+Referentes_Contactados --> Emails_Referentes
+Referentes_Contactados --> Telefonos_Referentes
 Vehiculos --> Patentes_Vehiculos
-Vehiculos --> Modelos_Vehiculos
 Vehiculos --> Marcas_Vehiculos
+Marcas_Vehiculos --> Modelos_Vehiculos
 
 @enduml
