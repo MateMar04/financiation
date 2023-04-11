@@ -77,8 +77,13 @@ WSGI_APPLICATION = 'financiationDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'financiation',  # Nombre de la base de datos
+        'USER': 'bdi',  # Usuario de mysql
+        'PASSWORD': 'pepe1234',  # Contrasenia de mysql
+        'HOST': 'localhost',
+        # Or anIP Address that your DB is hostedon
+        'PORT': '3306',
     }
 }
 
