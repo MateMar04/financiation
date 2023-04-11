@@ -1,29 +1,185 @@
-@startumml Diagram
+@startuml Diagram
 
-class Usuarios {}
+class Usuarios {
+    -id : int
+    -nombre_de_usuario : str
+    -email : mail
+    -CUIL : int
+    -contraseña : password
+    -rol : Rol
+    -verificacion : Estados_Verificaion_Usuarios
+    -estado : Estado_Usuario
+    -foto_perfil : img
+}
 
-class Roles {}
+class Roles {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
-class Visitas {}
+class Visitas {
+    -id : int
+    -localidad : Localidad
+    -departamento : Departamento_Ciudad
+    -flyer : boolean
+    -distancia : int
+    -tiempo_de_viaje : time
+    -fecha_de_visita : date
+    -grupo : Grupo
+    -registro_civil : boolean
+    -hospedaje : boolean
+    -partido_politico : Partido_Politico
+    -intendente : Intendente
+    -medios_de_contacto : Medio_de_Contacto
+    -confirmacion : Estado_Visita
+    -convenios_firmados : Convenio
+    -fondo_modernizacion : boolean
+    -horario_inicio : datetime
+    -horario_finalizacion : datetime
+    -referente_contactado : Referente_Contactado
+    -nombre_del_lugar : str
+    -direccion : Direccion
+    -logos : Logos
+}
 
-class Grupos {}
+class Grupos {
+    -id : int
+    -coordinador : Usuario
+}
 
-class Consultas {}
+class Consultas {
+    -id : int
+    -asesorado : Asesorado
+    -asesor : Usuario
+    -departamento : Departamento_Ministerio
+    -faq : FAQ
+}
 
-class Intendentes {}
+class Intendentes {
+    -id : int
+    -nombre : str
+    -apellido : str
+}
 
-class Vehiculos {}
+class Vehiculos {
+    -id : int
+    -patente : Patente
+    -modelo : Modelo
+    -marca : Marca
+}
 
-class Cronogramas {}
+class Cronogramas {
+    id : int
+    grupo : Grupo
+    visita : Visita
+}
 
-class Estados_Usuarios {}
+class Estados_Usuarios {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
-class Estados_Visitas {}
+class Estados_Verificacion_Usuarios {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
-class Localidades {}
+class Estados_Visitas {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
-class Departamentos {}
+class Localidades {
+    -id : int
+    -nombre : str
+    -departamento : Departamento
+}
 
+class Departamentos_Ministerio {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
+class Departamentos_Ciudad {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
+class Partidos_Politicos {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
 
+class Medios_de_Contacto {
+    -id : int
+    -tipo : Tipo_de_Medio_de_Contacto
+    -dato : str
+}
+
+class Tipos_de_Medios_de_Contacto {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
+class Convenios {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
+class Referentes_Contactados {
+    -id : int
+    -nombre : str
+    -apellido : str
+}
+
+class Direcciones {
+    -id : int
+    -calle : str
+    -altura : int
+}
+
+class Logos {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
+class Asesorados {
+    -id : int
+    -CUIL : int
+    -nombre : str
+    -apellido : str
+}
+
+class FAQs {
+    -id : int
+    -pregunta : str
+}
+
+class Patentes_Vehiculos {
+    -id : int
+    -patente : str
+}
+
+class Modelos_Vehiculos {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
+class Marcas_Vehiculos {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
+@enduml
