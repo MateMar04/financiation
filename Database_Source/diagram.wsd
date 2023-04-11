@@ -21,7 +21,6 @@ class Roles {
 class Visitas {
     -id : int
     -localidad : Localidad
-    -departamento : Departamento_Ciudad
     -flyer : boolean
     -distancia : int
     -tiempo_de_viaje : time
@@ -29,9 +28,7 @@ class Visitas {
     -grupo : Grupo
     -registro_civil : boolean
     -hospedaje : boolean
-    -partido_politico : Partido_Politico
     -intendente : Intendente
-    -medios_de_contacto : Medio_de_Contacto
     -confirmacion : Estado_Visita
     -convenios_firmados : Convenio
     -fondo_modernizacion : boolean
@@ -181,5 +178,32 @@ class Marcas_Vehiculos {
     -nombre : str
     -descripcion : str
 }
+
+
+Usuarios --> Roles
+Usuarios --> Grupos
+Usuarios --> Estados_Usuarios
+Usuarios --> Estados_Verificacion_Usuarios
+Usuarios --> Cronogramas
+Grupos --> Visitas
+Visitas --> Consultas
+Visitas --> Localidades
+Visitas --> Estados_Visitas
+Visitas --> Referentes_Contactados
+Visitas --> Convenios
+Visitas --> Direcciones
+Visitas --> Logos
+Localidades --> Departamentos_Ciudad
+Localidades --> Partidos_Politicos
+Localidades --> Intendentes
+Consultas --> FAQs
+Consultas --> Usuarios
+Consultas --> Asesorados
+Consultas --> Departamentos_Ministerio
+Referentes_Contactados --> Medios_de_Contacto
+Medios_de_Contacto --> Tipos_de_Medios_de_Contacto
+Vehiculos --> Patentes_Vehiculos
+Vehiculos --> Modelos_Vehiculos
+Vehiculos --> Marcas_Vehiculos
 
 @enduml
