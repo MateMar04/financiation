@@ -242,7 +242,7 @@ class Usuarios(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     nombre_de_usuario = models.CharField(db_column='NOMBRE_DE_USUARIO', max_length=30, blank=True, null=True)  # Field name made lowercase.
     cuil = models.BigIntegerField(db_column='CUIL', blank=True, null=True)  # Field name made lowercase.
-    contrase�a = models.TextField(db_column='CONTRASE�A', blank=True, null=True)  # Field name made lowercase.
+    contrasenia = models.TextField(db_column='CONTRASE�A', blank=True, null=True)  # Field name made lowercase.
     foto_de_perfil = models.TextField(db_column='FOTO_DE_PERFIL', blank=True, null=True)  # Field name made lowercase.
     id_email = models.ForeignKey(EmailsUsuarios, models.DO_NOTHING, db_column='ID_EMAIL', blank=True, null=True)  # Field name made lowercase.
     id_rol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='ID_ROL', blank=True, null=True)  # Field name made lowercase.
