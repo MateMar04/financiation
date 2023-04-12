@@ -212,10 +212,9 @@ class ReferentesContactados(models.Model):
     nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=True, null=True)  # Field name made lowercase.
     apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=True,
                                 null=True)  # Field name made lowercase.
-    id_email = models.ManyToManyField(EmailsReferentesContactados, models.DO_NOTHING, db_column='ID_EMAIL', blank=True,
-                                      null=True)  # Field name made lowercase.
-    id_telefono = models.ManyToManyField(TelefonosReferentesContactados, models.DO_NOTHING, db_column='ID_TELEFONO',
-                                         blank=True, null=True)  # Field name made lowercase.
+    id_email = models.ManyToManyField(EmailsReferentesContactados, db_column='ID_EMAIL')  # Field name made lowercase.
+    id_telefono = models.ManyToManyField(TelefonosReferentesContactados,
+                                         db_column='ID_TELEFONO')  # Field name made lowercase.
 
     class Meta:
         managed = False
@@ -229,8 +228,7 @@ class Usuarios(models.Model):
     cuil = models.BigIntegerField(db_column='CUIL', blank=True, null=True)  # Field name made lowercase.
     contrasenia = models.TextField(db_column='CONTRASENIA', blank=True, null=True)  # Field name made lowercase.
     foto_de_perfil = models.TextField(db_column='FOTO_DE_PERFIL', blank=True, null=True)  # Field name made lowercase.
-    id_email = models.ManyToManyField(EmailsUsuarios, models.DO_NOTHING, db_column='ID_EMAIL', blank=True,
-                                      null=True)  # Field name made lowercase.
+    id_email = models.ManyToManyField(EmailsUsuarios, db_column='ID_EMAIL')  # Field name made lowercase.
     id_rol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='ID_ROL', blank=True,
                                null=True)  # Field name made lowercase.
     id_estado_de_verificacion = models.ForeignKey(EstadosDeVerificacionDeUsuario, models.DO_NOTHING,
@@ -293,15 +291,14 @@ class Visitas(models.Model):
                                  null=True)  # Field name made lowercase.
     id_estado_de_visita = models.ForeignKey(EstadosDeVisita, models.DO_NOTHING, db_column='ID_ESTADO_DE_VISITA',
                                             blank=True, null=True)  # Field name made lowercase.
-    id_convenio_firmado = models.ManyToManyField(Convenios, models.DO_NOTHING, db_column='ID_CONVENIO_FIRMADO',
-                                                 blank=True, null=True)  # Field name made lowercase.
+    id_convenio_firmado = models.ManyToManyField(Convenios,
+                                                 db_column='ID_CONVENIO_FIRMADO')  # Field name made lowercase.
     id_referente_contactado = models.ForeignKey(ReferentesContactados, models.DO_NOTHING,
                                                 db_column='ID_REFERENTE_CONTACTADO', blank=True,
                                                 null=True)  # Field name made lowercase.
     id_direccion = models.ForeignKey(Direcciones, models.DO_NOTHING, db_column='ID_DIRECCION', blank=True,
                                      null=True)  # Field name made lowercase.
-    id_logo = models.ManyToManyField(Logos, models.DO_NOTHING, db_column='ID_LOGO', blank=True,
-                                     null=True)  # Field name made lowercase.
+    id_logo = models.ManyToManyField(Logos, db_column='ID_LOGO')  # Field name made lowercase.
 
     class Meta:
         managed = False
