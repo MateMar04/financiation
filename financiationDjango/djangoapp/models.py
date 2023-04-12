@@ -244,9 +244,7 @@ class Usuarios(models.Model):
 
 class Grupos(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    id_coordinador = models.ForeignKey(Usuarios, models.DO_NOTHING, db_column='ID_COORDINADOR', blank=True,
-                                       null=True)  # Field name made lowercase.
-    id_asesor = models.ManyToManyField(Usuarios, db_column='ID_ASESOR')  # Field name made lowercase.
+    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -322,3 +320,28 @@ class Consultas(models.Model):
     class Meta:
         managed = False
         db_table = 'consultas'
+
+
+class Coordinadores(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_usuario = models.OneToOneField('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=True,
+                                      null=True)  # Field name made lowercase.
+    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='ID_GRUPO', blank=True,
+                                 null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'coordinadores'
+
+
+class Asesores(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=True,
+                                   null=True)  # Field name made lowercase.
+    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='ID_GRUPO', blank=True,
+                                 null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'asesores'
+        unique_together = (('id_usuario', 'id_grupo'),)
