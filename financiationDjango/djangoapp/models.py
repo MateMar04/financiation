@@ -221,7 +221,6 @@ class Usuarios(models.Model):
     cuil = models.BigIntegerField(db_column='CUIL', blank=False, null=False)
     contrasenia = models.TextField(db_column='CONTRASENIA', blank=False, null=False)
     foto_de_perfil = models.TextField(db_column='FOTO_DE_PERFIL', blank=True, null=True)
-    id_email = models.ManyToManyField(EmailsUsuarios, db_column='ID_EMAIL')
     id_rol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='ID_ROL', blank=False, null=False)
     id_estado_de_verificacion = models.ForeignKey(EstadosDeVerificacionDeUsuario, models.DO_NOTHING,
                                                   db_column='ID_ESTADO_DE_VERIFICACION', blank=False, null=False)
@@ -352,8 +351,7 @@ class EmailsReferentesContactados(models.Model):
 class EmailsUsuarios(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
     mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False,
-                                   null=False)
+    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False, null=False)
 
     class Meta:
         managed = False
