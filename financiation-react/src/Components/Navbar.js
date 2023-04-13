@@ -33,7 +33,7 @@ function Navbar() {
                             <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-user-friends fa-lg"></i><span class="small">Contacto</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-briefcase fa-lg"></i><span class="small">Nosotros</span></a>
+                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-briefcase fa-lg"></i><span class="small">Nosotro</span></a>
                         </li>
                         
                         <li class="nav-item">
