@@ -1,22 +1,34 @@
 import React from 'react';
+import '../assets/styles/bienvenida.css'
 import imagenPanal from '../assets/images/panal.jpg'
+import LOGOGOBIERNO from "../assets/images/LOGOGOBIERNO.png";
 
 function Bienvenida() {
-    return(
-        <div class='container-fluid'>
-            <div className="row">
-                <div className="col-lg-6">
-                    <img src={imagenPanal} alt="" className="imagen"/>
-                </div>
-                <div className="col-lg-6">
-                    <div className="card">
-                        <input type="button" value="Log-In"/>
-                        <input type="button" value="Log-In"/>
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className='container-fluid general'>
+      <div className="row contenedor-imagen">
+        <div className="col-lg-6">
+          <img src={imagenPanal} alt="" className="imagen"/>
         </div>
-    );
+        <div className="col-lg-6 informacion">
+          <div className="card container-fluid carta">
+            <div className="container">
+              <img src={LOGOGOBIERNO} alt="React Logo" className="img-fluid"/>
+            </div>
+            <div>
+              <p>Si todavia no tenes una cuenta puede crearte una</p>
+              <input type="button" value="Sign-In" className="boton"/>
+            </div>
+            <hr/>
+            <div>
+              <p>Si ya tienes una cuenta accede</p>
+              <input type="button" value="Log-In" className="boton"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Bienvenida;

@@ -1,4 +1,4 @@
-* BASIC */
+/* BASIC */
 
 html {
   background-color: #56baed;
@@ -141,7 +141,7 @@ input[type=text]:focus {
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=text]::placeholder {
   color: #cccccc;
 }
 
