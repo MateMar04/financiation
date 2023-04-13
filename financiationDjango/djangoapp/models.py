@@ -207,9 +207,8 @@ class TelefonosReferentesContactados(models.Model):
 class ReferentesContactados(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
     nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=False, null=False)
-    id_email = models.ManyToManyField(EmailsReferentesContactados, db_column='ID_EMAIL')
-    id_telefono = models.ManyToManyField(TelefonosReferentesContactados, db_column='ID_TELEFONO')
+    apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=False,
+                                null=False)
 
     class Meta:
         managed = False
@@ -282,14 +281,25 @@ class Visitas(models.Model):
         db_table = 'visitas'
 
 
-class Consultas(models.Model):
+class EstadoDeConsulta(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
-    id_visita = models.ForeignKey(Visitas, models.DO_NOTHING, db_column='ID_VISITA', blank=False, null=False)
+    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
+    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'estado_de_consulta'
+
+
+class Consultas(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_visita = models.ForeignKey('Visitas', models.DO_NOTHING, db_column='ID_VISITA', blank=False, null=False)
     id_asesorado = models.ForeignKey(Asesorados, models.DO_NOTHING, db_column='ID_ASESORADO', blank=False, null=False)
-    id_asesor = models.ForeignKey(Usuarios, models.DO_NOTHING, db_column='ID_ASESOR', blank=False, null=False)
+    id_asesor = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_ASESOR', blank=False, null=False)
     id_departamento_ministerio = models.ForeignKey('DepartamentosDelMinisterio', models.DO_NOTHING,
                                                    db_column='ID_DEPARTAMENTO_MINISTERIO', blank=False, null=False)
-    id_faq = models.ForeignKey(Faqs, models.DO_NOTHING, db_column='ID_FAQ', blank=False, null=False)
+    id_faq = models.ForeignKey('Faqs', models.DO_NOTHING, db_column='ID_FAQ', blank=False, null=False)
+    id_estado = models.ForeignKey('EstadoDeConsulta', models.DO_NOTHING, db_column='ID_ESTADO', blank=False, null=False)
 
     class Meta:
         managed = False
@@ -315,3 +325,58 @@ class Asesores(models.Model):
         managed = False
         db_table = 'asesores'
         unique_together = (('id_usuario', 'id_grupo'),)
+
+
+class EmailsIntendentes(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
+    id_intendente = models.ForeignKey('Intendentes', models.DO_NOTHING, db_column='ID_INTENDENTE', blank=False,
+                                      null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'emails_intendentes'
+
+
+class EmailsReferentesContactados(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
+    id_referente = models.ForeignKey('ReferentesContactados', models.DO_NOTHING, db_column='ID_REFERENTE', blank=False,
+                                     null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'emails_referentes_contactados'
+
+
+class EmailsUsuarios(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
+    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False,
+                                   null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'emails_usuarios'
+
+
+class TelefonosIntendentes(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
+    id_intendente = models.ForeignKey(Intendentes, models.DO_NOTHING, db_column='ID_INTENDENTE', blank=False,
+                                      null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'telefonos_intendentes'
+
+
+class TelefonosReferentesContactados(models.Model):
+    id = models.AutoField(db_column='ID', primary_key=True)
+    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
+    id_referente = models.ForeignKey(ReferentesContactados, models.DO_NOTHING, db_column='ID_REFERENTE', blank=False,
+                                     null=False)
+
+    class Meta:
+        managed = False
+        db_table = 'telefonos_referentes_contactados'

@@ -192,6 +192,22 @@ class Coordinadores {
     -usuario : Usuario
 }
 
+class Emails_Intendentes {
+    -id : int
+    -email : str
+}
+
+class Telefonos_Intendentes {
+    -id : int
+    -telefono : int
+}
+
+class Estados_Constulta {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
 Usuarios --> Roles
 Usuarios <-- Grupos
 Usuarios --> Estados_Usuarios
@@ -222,5 +238,8 @@ Usuarios --> Coordinadores
 Grupos <-- Coordinadores
 Usuarios --> Asesores
 Grupos <-- Asesores
+Intendentes --> Telefonos_Intendentes
+Intendentes --> Emails_Intendentes
+Consultas --> Estados_Constulta
 
 @enduml
