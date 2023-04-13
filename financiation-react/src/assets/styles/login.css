@@ -114,7 +114,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text] , [type=password]{
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -235,7 +235,7 @@ input[type=text]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #56baed;
+  background-color: #ff0000;
   content: "";
   transition: width 0.2s;
 }
@@ -248,7 +248,24 @@ input[type=text]:placeholder {
   width: 100%;
 }
 
+.register:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #fffb00;
+  content: "";
+  transition: width 0.2s;
+}
 
+.register:hover {
+  color: #020202;
+}
+
+.register:hover:after{
+  width: 100%;
+}
 
 /* OTHERS */
 
