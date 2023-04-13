@@ -39,12 +39,6 @@ class Visitas {
     -logos : Logos
 }
 
-class Grupos {
-    -id : int
-    -coordinador : Usuario
-    -asesores : Usuarios
-}
-
 class Consultas {
     -id : int
     -visita : Visita
@@ -180,6 +174,40 @@ class Telefonos_Referentes {
     -telefono : int
 }
 
+class Grupos {
+    -id : int
+    -nombre : str
+}
+
+
+class Asesores {
+    -id : int
+    -grupo : Grupo
+    -usuario : Usuario
+}
+
+class Coordinadores {
+    -id : int
+    -grupo : Grupo
+    -usuario : Usuario
+}
+
+class Emails_Intendentes {
+    -id : int
+    -email : str
+}
+
+class Telefonos_Intendentes {
+    -id : int
+    -telefono : int
+}
+
+class Estados_Constulta {
+    -id : int
+    -nombre : str
+    -descripcion : str
+}
+
 Usuarios --> Roles
 Usuarios <-- Grupos
 Usuarios --> Estados_Usuarios
@@ -206,5 +234,12 @@ Vehiculos --> Patentes_Vehiculos
 Vehiculos --> Marcas_Vehiculos
 Vehiculos --> Modelos_Vehiculos
 Marcas_Vehiculos --> Modelos_Vehiculos
+Usuarios --> Coordinadores
+Grupos <-- Coordinadores
+Usuarios --> Asesores
+Grupos <-- Asesores
+Intendentes --> Telefonos_Intendentes
+Intendentes --> Emails_Intendentes
+Consultas --> Estados_Constulta
 
 @enduml
