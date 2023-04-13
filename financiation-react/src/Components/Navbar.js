@@ -1,5 +1,6 @@
 import React from "react"
 import "../Assets/Styles/Navbar.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Navbar() {
     return (
@@ -8,10 +9,10 @@ function Navbar() {
             <div class="container">
 
                 <a class="navbar-brand" href="#"><i class="fab fa-linkedin fa-2x"></i></a>
-                <form class="input-group" style="width: 400px">
-                    <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
-                    <button class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
-                        Search
+                <form class="input-group">
+                    <input type="search" class="form-control" placeholder="¿Que estas buscando?" aria-label="Search" />
+                    <button class="btn btn-outline-primary" type="button" data-mdb-ripple-color="dark" >
+                        Buscar
                     </button>
                 </form>
 
@@ -29,16 +30,14 @@ function Navbar() {
                             <a class="nav-link active d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-home fa-lg"></i><span class="small">Home</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-user-friends fa-lg"></i><span class="small">My Network</span></a>
+                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-user-friends fa-lg"></i><span class="small">Contacto</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-briefcase fa-lg"></i><span class="small">Jobs</span></a>
+                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-briefcase fa-lg"></i><span class="small">Nosotros</span></a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-comment-dots fa-lg"></i><span class="small">Messaging</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-bell fa-lg"></i><span class="small">Notifications</span></a>
+                            <a class="nav-link d-flex flex-column text-center" aria-current="page" href="#"><i class="fas fa-bell fa-lg"></i><span class="small">Notificaciones</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a
@@ -70,9 +69,9 @@ function Navbar() {
             </div>
 
         </nav>
-        
 
-    
+
+
 
 
     );
