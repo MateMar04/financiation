@@ -52,6 +52,7 @@ h2 {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  justify-content: center;
 }
 
 #formFooter {
@@ -275,4 +276,14 @@ input[type=text]:placeholder {
 
 #icon {
   width:60%;
+}
+
+.LOGOGOBIERNO{
+  height: auto;
+  width: auto;
+  object-fit:fill;
+}
+
+.registrarse{
+  padding: 10px;
 }
