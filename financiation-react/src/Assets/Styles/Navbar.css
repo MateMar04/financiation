@@ -1,0 +1,29 @@
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+  color: #262626;
+}
+
+.navbar-scroll {
+  background-color: #FFC017;
+}
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+  color: #262626;
+}
+
+.navbar-scrolled {
+  background-color: #fff;
+}
+
+.navbar.navbar-scroll.navbar-scrolled {
+  padding-top: auto;
+  padding-bottom: auto;
+}
+
+.navbar-brand {
+  font-size: unset;
+  height: 3.5rem;
+}
