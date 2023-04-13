@@ -2,3 +2,4 @@
 /venv
 /.idea
 financiationDjango/djangoapp/__pycache__
+/node_modules
