@@ -19,9 +19,10 @@ function Signinform() {
                                     <input type='text' placeholder='Usuario' />
                                     <input type='text' placeholder='Contraseña' />
                                     <input type='text' placeholder='Nombre' />
+                                    <input type="tel" id="phone" name="phone" placeholder="Ingresa tu número de teléfono" pattern="^[0-9]{3}-?[0-9]{7}$" required></input>
                                 </div>
                                 <div class='col-lg-6'>
-                                    <input type='email' placeholder='Mail' id='botonemail' />
+                                    <input type='email' placeholder='Mail' id='botones' />
                                     <input type='password' placeholder='Repetir Contraseña' />
                                     <input type='text' placeholder='Apellido' />
                                 </div>
