@@ -35,7 +35,7 @@ h2 {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 20px;
+  padding: 40px;
 }
 
 #formContent {
@@ -285,3 +285,4 @@ input[type=text]:placeholder {
   border-radius: 5px 5px 5px 5px;
 
 }
+

@@ -19,12 +19,13 @@ function Signinform() {
                                     <input type='text' placeholder='Usuario' />
                                     <input type='text' placeholder='Contraseña' />
                                     <input type='text' placeholder='Nombre' />
-                                    <input type="tel" id="phone" name="phone" placeholder="Ingresa tu número de teléfono" pattern="^[0-9]{3}-?[0-9]{7}$" required></input>
+                                    <input type="tel" id="botones" name="phone" placeholder="Ingresa tu número de teléfono" pattern="^\d{4}\s\d{3}-\d{4}$"></input>
                                 </div>
                                 <div class='col-lg-6'>
                                     <input type='email' placeholder='Mail' id='botones' />
                                     <input type='password' placeholder='Repetir Contraseña' />
                                     <input type='text' placeholder='Apellido' />
+                                    <input type='tel' placeholder='Cuil' id='botones' pattern="^[0-9]{3}-?[0-9]{7}$" />
                                 </div>
                             </div>
                         </div>
@@ -35,7 +36,8 @@ function Signinform() {
 
 
                     <div id="formFooter">
-                        <a className="underlineHover" href="#">Forgot Password?</a>
+                        <a className="underlineHover" href="#">Ya tienes una cuenta?</a>
+                         {/* Agregar el link cuando este conectado.*/}
                     </div>
                 </div>
             </div>
