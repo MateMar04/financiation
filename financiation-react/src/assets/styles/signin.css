@@ -1,3 +1,5 @@
+/* BASIC */
+
 html {
   background-color: #56baed;
 }
@@ -43,12 +45,13 @@ h2 {
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   width: 90%;
-  max-width: 700px;
+  max-width: 450px;
   position: relative;
-  padding: 0px;
+  padding: 0;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+  justify-content: center;
 }
 
 #formFooter {
@@ -77,7 +80,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset], input[type=tel], input[type=email]  {
+input[type=button], input[type=submit], input[type=reset]  {
   background-color: #56baed;
   border: none;
   color: white;
@@ -111,17 +114,16 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text], input[type=password] {
+input[type=text], [type=password], input[type=tel], input[type=email]{
   background-color: #f6f6f6;
-  border: none;
   color: #0d0d0d;
-  padding: 15px 16px;
+  padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 5px;
-  width: 90%;
+  width: 85%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -136,12 +138,6 @@ input[type=text]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
-
-input[type=text]:placeholder {
-  color: #cccccc;
-}
-
-
 
 /* ANIMATIONS */
 
@@ -232,7 +228,7 @@ input[type=text]:placeholder {
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #56baed;
+  background-color: #ff0000;
   content: "";
   transition: width 0.2s;
 }
@@ -245,7 +241,24 @@ input[type=text]:placeholder {
   width: 100%;
 }
 
+.register:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #fffb00;
+  content: "";
+  transition: width 0.2s;
+}
 
+.register:hover {
+  color: #020202;
+}
+
+.register:hover:after{
+  width: 100%;
+}
 
 /* OTHERS */
 
@@ -257,31 +270,17 @@ input[type=text]:placeholder {
   width:60%;
 }
 
+.LOGOGOBIERNO{
+  height: auto;
+  width: auto;
+  object-fit:fill;
+}
+
+.registrarse{
+  padding: 10px;
+}
+
 #LOGOGOB{
   width: auto;
-  margin: 10px;
-  margin-top: 15px;
+  margin: 15px;
 }
-
-#botones{
-  background-color: #f6f6f6;
-  border: none;
-  color: #0d0d0d;
-  padding: 15px 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 5px;
-  width: 90%;
-  border: 2px solid #f6f6f6;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -o-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-
-}
-

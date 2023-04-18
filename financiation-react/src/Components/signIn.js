@@ -13,16 +13,17 @@ function Signinform() {
                     </div>
 
                     <form>
-                        <div class='container-fluid'>
-                            <div class='row'>
-                                <div class='col-lg-6'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <div className='col-lg-6'>
                                     <input type='text' placeholder='Usuario' />
-                                    <input type='text' placeholder='Contraseña' />
+                                    <input type='password' placeholder='Contraseña' />
                                     <input type='text' placeholder='Nombre' />
                                     <input type="tel" id="botones" name="phone" placeholder="Telefono" pattern=""></input>
+
                                 </div>
-                                <div class='col-lg-6'>
-                                    <input type='email' placeholder='Mail' id='botones' />
+                                <div className='col-lg-6'>
+                                    <input type='email' placeholder='Mail' />
                                     <input type='password' placeholder='Repetir Contraseña' />
                                     <input type='text' placeholder='Apellido' />
                                     <input type='tel' placeholder='Cuil' id='botones' pattern="" />
@@ -30,7 +31,6 @@ function Signinform() {
                             </div>
                         </div>
                         <input class="inputizquierda" type="submit" className="fadeIn fourth" value="SIGN IN" />
-
                     </form>
 
 
