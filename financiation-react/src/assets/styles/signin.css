@@ -20,7 +20,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
 
@@ -31,18 +31,17 @@ h2 {
 .wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 40px;
+  padding: 20px;
 }
 
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
-  padding: 30px;
   width: 90%;
   max-width: 700px;
   position: relative;
@@ -78,7 +77,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type=button], input[type=submit], input[type=reset], input[type=tel], input[type=email]  {
   background-color: #56baed;
   border: none;
   color: white;
@@ -252,7 +251,7 @@ input[type=text]:placeholder {
 
 *:focus {
     outline: none;
-} 
+}
 
 #icon {
   width:60%;
