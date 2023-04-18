@@ -18,7 +18,7 @@ function Bienvenida() {
             <hr/>
             <div className="contenedor">
               <p>Si todavia no tenes una cuenta puede crearte una</p>
-              <input type="button" value="Crear" className="boton"/>
+              <input type="button" value="Crear" className="boton" />
             </div>
             <hr/>
             <div className="contenedor">

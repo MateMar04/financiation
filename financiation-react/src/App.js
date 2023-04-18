@@ -7,7 +7,10 @@ import Bienvenida from "./components/bienvenida";
 function App() {
   return (
     <div className="App">
-      <Bienvenida></Bienvenida>
+    
+        <Bienvenida/>
+        <Login/>
+        
     </div>
   );
 }
