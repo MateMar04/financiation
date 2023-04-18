@@ -13,23 +13,23 @@ function Signinform() {
                     </div>
 
                     <form>
-                        <div class='container-fluid'>
-                            <div class='row'>
-                                <div class='col-lg-6'>
+                        <div className='container-fluid'>
+                            <div className='row'>
+                                <div className='col-lg-6'>
                                     <input type='text' placeholder='Usuario' />
-                                    <input type='text' placeholder='Contraseña' />
+                                    <input type='password' placeholder='Contraseña' />
                                     <input type='text' placeholder='Nombre' />
-                                    <input type="tel" id="botones" name="phone" placeholder="Ingresa tu número de teléfono" pattern="^\d{4}\s\d{3}-\d{4}$"></input>
+                                    <input type="tel" name="phone" placeholder="Ingresa tu número de teléfono" pattern="^\d{4}\s\d{3}-\d{4}$"></input>
                                 </div>
-                                <div class='col-lg-6'>
-                                    <input type='email' placeholder='Mail' id='botones' />
+                                <div className='col-lg-6'>
+                                    <input type='email' placeholder='Mail' />
                                     <input type='password' placeholder='Repetir Contraseña' />
                                     <input type='text' placeholder='Apellido' />
-                                    <input type='tel' placeholder='Cuil' id='botones' pattern="^[0-9]{3}-?[0-9]{7}$" />
+                                    <input type='tel' placeholder='Cuil' pattern="^[0-9]{3}-?[0-9]{7}$" />
                                 </div>
                             </div>
                         </div>
-                        <input class="inputizquierda" type="submit" className="fadeIn fourth" value="Sign In" />
+                        <input className="inputizquierda fadeIn fourth" type="submit" value="Sign In" />
 
                     </form>
 
