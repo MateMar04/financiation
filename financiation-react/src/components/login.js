@@ -12,9 +12,12 @@ function Login() {
           <div className="fadeIn first">
             <img src={LOGOGOBIERNO} alt="React Logo" className="img-fluid" style={{ padding: "10%" }} />
           </div>
+
+         
           <input type="text" id="CUIL" className="fadeIn second" name="User" placeholder="Usuario" />
           <OjoPassword/> 
-  
+          
+
           <input type="submit" className="fadeIn fourth" value="Entrar" style={{ margin: '10px' }} />
 
           <div>

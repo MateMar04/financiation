@@ -35,7 +35,6 @@ h2 {
   align-items: center;
   flex-direction: column; 
   justify-content: center;
-  width: 100%;
   min-height: 100%;
   padding: 20px;
 }
@@ -121,11 +120,12 @@ input[type=text] , [type=password]{
   color: #0d0d0d;
   padding: 15px 32px;
   text-align: center;
+  align-items: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 5px;
-  width: 85%;
+  width: 80%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -145,7 +145,9 @@ input[type=text]::placeholder {
   color: #cccccc;
 }
 
-
+.input-wrap{
+  position: relative;
+}
 
 /* ANIMATIONS */
 
@@ -288,3 +290,15 @@ input[type=text]::placeholder {
   padding: 10px;
 }
 
+.input-wrapper {
+  position: relative;
+  display: inline;
+}
+.boton-puton {
+  
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+}
