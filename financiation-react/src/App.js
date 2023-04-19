@@ -1,16 +1,14 @@
 import './App.css';
-import Login from './components/login';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Bienvenida from "./components/bienvenida";
 
+import Signinform from "./components/signInForm";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
-    
         <Bienvenida/>
         <Login/>
-        
+        <Signinform></Signinform>
     </div>
   );
 }
