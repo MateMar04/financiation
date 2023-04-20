@@ -1,192 +1,180 @@
 from django.db import models
 
 
-class Asesorados(models.Model):
+class Advised(models.Model):
     cuil = models.BigIntegerField(blank=False, null=False)
-    nombre = models.CharField(max_length=70, blank=False, null=False)
-    apellido = models.CharField(max_length=70, blank=False, null=False)
+    first_name = models.CharField(max_length=70, blank=False, null=False)
+    last_name = models.CharField(max_length=70, blank=False, null=False)
 
 
-class Convenios(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class Agreement(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class DepartamentosCiudad(models.Model):
-    nombre = models.CharField(max_length=70, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class CityDepartment(models.Model):
+    name = models.CharField(max_length=70, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class DepartamentosDelMinisterio(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class MinistryDepartment(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class Direcciones(models.Model):
-    calle = models.CharField(max_length=70, blank=False, null=False)
-    altura = models.IntegerField(blank=False, null=False)
+class Address(models.Model):
+    street = models.CharField(max_length=70, blank=False, null=False)
+    number = models.IntegerField(blank=False, null=False)
 
 
-class EstadosDeUsuario(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class UserStatus(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class EstadosDeVerificacionDeUsuario(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class UserVerifiedStatus(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class EstadosDeVisita(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class VisitStatus(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class Faqs(models.Model):
-    pregunta = models.TextField(blank=True, null=False)
+class Faq(models.Model):
+    faq = models.TextField(blank=True, null=False)
 
 
-class Intendentes(models.Model):
-    nombre = models.CharField(max_length=70, blank=False, null=False)
-    apellido = models.CharField(max_length=70, blank=False, null=False)
+class Mayor(models.Model):
+    first_name = models.CharField(max_length=70, blank=False, null=False)
+    last_name = models.CharField(max_length=70, blank=False, null=False)
 
 
-class Localidades(models.Model):
-    nombre = models.CharField(max_length=70, blank=False, null=False)
-    id_departamento = models.ForeignKey(DepartamentosCiudad, models.DO_NOTHING, db_column='ID_DEPARTAMENTO',
-                                        blank=False, null=False)
+class Locality(models.Model):
+    name = models.CharField(max_length=70, blank=False, null=False)
+    id_department = models.ForeignKey(CityDepartment, models.DO_NOTHING, blank=False, null=False)
 
 
-class Logos(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class Logo(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class MarcasDeVehiculos(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
+class VehicleBrand(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
 
 
-class ModelosDeVehiculos(models.Model):
-    nombre = models.CharField(max_length=50, blank=False, null=False)
-    id_marca = models.ForeignKey(MarcasDeVehiculos, models.DO_NOTHING, blank=False, null=False)
+class VehicleModel(models.Model):
+    name = models.CharField(max_length=50, blank=False, null=False)
+    id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING, blank=False, null=False)
 
 
-class PartidosPoliticos(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class PoliticParty(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class PatentesDeVehiculos(models.Model):
-    patente = models.CharField(max_length=7, blank=False, null=False)
+class VehiclePlate(models.Model):
+    plate = models.CharField(max_length=7, blank=False, null=False)
 
 
 class Roles(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class ReferentesContactados(models.Model):
-    nombre = models.CharField(max_length=70, blank=False, null=False)
-    apellido = models.CharField(max_length=70, blank=False,
-                                null=False)
+class ContactedReferrer(models.Model):
+    first_name = models.CharField(max_length=70, blank=False, null=False)
+    last_name = models.CharField(max_length=70, blank=False, null=False)
 
 
-class Usuarios(models.Model):
-    nombre_de_usuario = models.CharField(max_length=30, blank=False, null=False)
+class User(models.Model):
+    username = models.CharField(max_length=30, blank=False, null=False)
     cuil = models.BigIntegerField(blank=False, null=False)
-    contrasenia = models.TextField(blank=False, null=False)
-    foto_de_perfil = models.TextField(blank=True, null=True)
-    id_rol = models.ForeignKey(Roles, models.DO_NOTHING, blank=False, null=False)
-    id_estado_de_verificacion = models.ForeignKey(EstadosDeVerificacionDeUsuario, models.DO_NOTHING,
-                                                  blank=False, null=False)
-    id_estado_de_usuario = models.ForeignKey(EstadosDeUsuario, models.DO_NOTHING, db_column='ID_ESTADO_DE_USUARIO',
-                                             blank=False, null=False)
+    password = models.TextField(blank=False, null=False)
+    profile_picture = models.TextField(blank=True, null=True)
+    id_role = models.ForeignKey(Roles, models.DO_NOTHING, blank=False, null=False)
+    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING, blank=False, null=False)
+    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, blank=False, null=False)
 
 
-class Grupos(models.Model):
-    nombre = models.CharField(max_length=70, blank=False, null=False)
+class Group(models.Model):
+    name = models.CharField(max_length=70, blank=False, null=False)
 
 
-class Vehiculos(models.Model):
-    id_patente = models.ForeignKey(PatentesDeVehiculos, models.DO_NOTHING, blank=False,
-                                   null=False)
-    id_marca = models.ForeignKey(MarcasDeVehiculos, models.DO_NOTHING, blank=False, null=False)
-    id_modelo = models.ForeignKey(ModelosDeVehiculos, models.DO_NOTHING, blank=False, null=False)
+class Vehicles(models.Model):
+    id_plate = models.ForeignKey(VehiclePlate, models.DO_NOTHING, blank=False, null=False)
+    id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING, blank=False, null=False)
+    id_model = models.ForeignKey(VehicleModel, models.DO_NOTHING, blank=False, null=False)
 
 
-class Visitas(models.Model):
+class Visit(models.Model):
     flyer = models.IntegerField(blank=False, null=False)
-    distancia = models.IntegerField(blank=False, null=False)
-    tiempo_de_viaje = models.IntegerField(blank=False, null=False)
-    fecha_de_visita = models.DateField(blank=False, null=False)
-    registro_civil = models.IntegerField(blank=False, null=False)
-    hospedaje = models.IntegerField(blank=False, null=False)
-    fondo_de_modernizacion = models.IntegerField(blank=False, null=False)
-    horario_inicio = models.DateTimeField(blank=False, null=False)
-    horario_finalizacion = models.DateTimeField(blank=False, null=False)
-    nombre_lugar = models.CharField(max_length=70, blank=False, null=False)
-    id_localidad = models.ForeignKey(Localidades, models.DO_NOTHING, blank=False, null=False)
-    id_grupo = models.ForeignKey(Grupos, models.DO_NOTHING, blank=False, null=False)
-    id_estado_de_visita = models.ForeignKey(EstadosDeVisita, models.DO_NOTHING, db_column='ID_ESTADO_DE_VISITA',
-                                            blank=False, null=False)
-    id_convenio_firmado = models.ManyToManyField(Convenios, db_column='ID_CONVENIO_FIRMADO')
-    id_referente_contactado = models.ForeignKey(ReferentesContactados, models.DO_NOTHING,
-                                                blank=False, null=False)
-    id_direccion = models.ForeignKey(Direcciones, models.DO_NOTHING, blank=False, null=False)
-    id_logo = models.ManyToManyField(Logos, db_column='ID_LOGO')
+    distance = models.IntegerField(blank=False, null=False)
+    travel_time = models.IntegerField(blank=False, null=False)
+    visit_date = models.DateField(blank=False, null=False)
+    civil_registration = models.IntegerField(blank=False, null=False)
+    accommodation = models.IntegerField(blank=False, null=False)
+    modernization_fund = models.IntegerField(blank=False, null=False)
+    start_time = models.DateTimeField(blank=False, null=False)
+    finish_time = models.DateTimeField(blank=False, null=False)
+    place_name = models.CharField(max_length=70, blank=False, null=False)
+    id_locality = models.ForeignKey(Locality, models.DO_NOTHING, blank=False, null=False)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING, blank=False, null=False)
+    id_visit_status = models.ForeignKey(VisitStatus, models.DO_NOTHING, blank=False, null=False)
+    id_agreement = models.ManyToManyField(Agreement)
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING, blank=False, null=False)
+    id_address = models.ForeignKey(Address, models.DO_NOTHING, blank=False, null=False)
+    id_logo = models.ManyToManyField(Logo)
 
 
-class EstadoDeConsulta(models.Model):
-    nombre = models.CharField(max_length=30, blank=False, null=False)
-    descripcion = models.TextField(blank=True, null=True)
+class RequestStatus(models.Model):
+    name = models.CharField(max_length=30, blank=False, null=False)
+    description = models.TextField(blank=True, null=True)
 
 
-class Consultas(models.Model):
-    id_visita = models.ForeignKey('Visitas', models.DO_NOTHING, blank=False, null=False)
-    id_asesorado = models.ForeignKey(advised, models.DO_NOTHING, blank=False, null=False)
-    id_asesor = models.ForeignKey('Usuarios', models.DO_NOTHING, blank=False, null=False)
-    id_departamento_ministerio = models.ForeignKey('DepartamentosDelMinisterio', models.DO_NOTHING,
-                                                   blank=False, null=False)
-    id_faq = models.ForeignKey('Faqs', models.DO_NOTHING, blank=False, null=False)
-    id_estado = models.ForeignKey('EstadoDeConsulta', models.DO_NOTHING, blank=False, null=False)
+class Coordinator(models.Model):
+    id_user = models.OneToOneField(User, models.DO_NOTHING, blank=False, null=False)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING, blank=False, null=False)
 
 
-class Coordinadores(models.Model):
-    id_usuario = models.OneToOneField('Usuarios', models.DO_NOTHING, blank=False, null=False)
-    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, blank=False, null=False)
-
-
-class Asesores(models.Model):
-    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, blank=False, null=False)
-    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, blank=False, null=False)
+class Advisor(models.Model):
+    id_user = models.ForeignKey(User, models.DO_NOTHING, blank=False, null=False)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING, blank=False, null=False)
 
     unique_together = (('id_usuario', 'id_grupo'),)
 
 
-class EmailsIntendentes(models.Model):
+class Request(models.Model):
+    id_visit = models.ForeignKey(Visit, models.DO_NOTHING, blank=False, null=False)
+    id_advised = models.ForeignKey(Advised, models.DO_NOTHING, blank=False, null=False)
+    id_advisor = models.ForeignKey(Advisor, models.DO_NOTHING, blank=False, null=False)
+    id_ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING, blank=False, null=False)
+    id_faq = models.ForeignKey(Faq, models.DO_NOTHING, blank=False, null=False)
+    id_status = models.ForeignKey(RequestStatus, models.DO_NOTHING, blank=False, null=False)
+
+
+class MayorEmail(models.Model):
     mail = models.CharField(max_length=100, blank=False, null=False)
-    id_intendente = models.ForeignKey('Intendentes', models.DO_NOTHING, blank=False,
-                                      null=False)
+    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING, blank=False, null=False)
 
 
-class EmailsReferentesContactados(models.Model):
+class ContactedReferrerEmail(models.Model):
     mail = models.CharField(max_length=100, blank=False, null=False)
-    id_referente = models.ForeignKey('ReferentesContactados', models.DO_NOTHING, blank=False,
-                                     null=False)
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING, blank=False, null=False)
 
 
-class EmailsUsuarios(models.Model):
+class UserEmail(models.Model):
     mail = models.CharField(max_length=100, blank=False, null=False)
-    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, blank=False, null=False)
+    id_user = models.ForeignKey(User, models.DO_NOTHING, blank=False, null=False)
 
 
-class TelefonosIntendentes(models.Model):
-    telefono = models.BigIntegerField(blank=False, null=False)
-    id_intendente = models.ForeignKey(Intendentes, models.DO_NOTHING, blank=False,
-                                      null=False)
+class MayorPhone(models.Model):
+    phone = models.BigIntegerField(blank=False, null=False)
+    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING, blank=False, null=False)
 
 
-class TelefonosReferentesContactados(models.Model):
-    telefono = models.BigIntegerField(blank=False, null=False)
-    id_referente = models.ForeignKey(ReferentesContactados, models.DO_NOTHING, blank=False,
-                                     null=False)
+class ContactedReferrerPhone(models.Model):
+    phone = models.BigIntegerField(blank=False, null=False)
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING, blank=False, null=False)
