@@ -109,9 +109,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+"""
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
+"""
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 REST_FRAMEWORK = {
@@ -134,7 +137,11 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
     'SEND_ACTIVATION_EMAIL': True,
-    'SERIALIZERS': {}
+    'SERIALIZERS': {
+        'user_create': 'djangoapp.serializers.UserCreateSerializer',
+        'user': 'djangoapp.serializers.UserCreateSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer'
+    }
 }
 
 # Default primary key field type
@@ -142,4 +149,4 @@ DJOSER = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'djangoapp.UserAccount'
+#AUTH_USER_MODEL = 'djangoapp.UserAccount'
