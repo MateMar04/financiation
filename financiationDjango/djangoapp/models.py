@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Advised(models.Model):
-    cuil = models.BigIntegerField(blank=False, null=False)
+    ssn = models.BigIntegerField(blank=False, null=False)
     first_name = models.CharField(max_length=70, blank=False, null=False)
     last_name = models.CharField(max_length=70, blank=False, null=False)
 
@@ -91,7 +91,7 @@ class ContactedReferrer(models.Model):
 
 class User(models.Model):
     username = models.CharField(max_length=30, blank=False, null=False)
-    cuil = models.BigIntegerField(blank=False, null=False)
+    ssn = models.BigIntegerField(blank=False, null=False)
     password = models.TextField(blank=False, null=False)
     profile_picture = models.TextField(blank=True, null=True)
     id_role = models.ForeignKey(Roles, models.DO_NOTHING, blank=False, null=False)
@@ -143,7 +143,7 @@ class Advisor(models.Model):
     id_user = models.ForeignKey(User, models.DO_NOTHING, blank=False, null=False)
     id_group = models.ForeignKey(Group, models.DO_NOTHING, blank=False, null=False)
 
-    unique_together = (('id_usuario', 'id_grupo'),)
+    unique_together = (('id_user', 'id_group'),)
 
 
 class Request(models.Model):
