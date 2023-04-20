@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
 
@@ -79,7 +80,7 @@ class VehiclePlate(models.Model):
     plate = models.CharField(max_length=7)
 
 
-class Roles(models.Model):
+class Role(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
@@ -89,12 +90,52 @@ class ContactedReferrer(models.Model):
     last_name = models.CharField(max_length=70)
 
 
+class UserAccountManager(BaseUserManager):
+    def create_user(self, username, email, first_name, last_name, ssn, password=None):
+        if not email:
+            raise ValueError("Users must have an email address")
+
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn)
+
+        user.set_password(password)
+        user.save()
+
+        return user
+
+
+class UserAccount(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=30)
+    email = models.EmailField(max_length=2550)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    ssn = models.BigIntegerField()
+    profile_picture = models.TextField()
+    id_role = models.ForeignKey(Role, models.DO_NOTHING)
+    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
+    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
+
+    objects = UserAccountManager()
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn']
+
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def get_last_name(self):
+        return self.last_name
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} {self.ssn} -> {self.username}"
+
+
 class User(models.Model):
     username = models.CharField(max_length=30)
     ssn = models.BigIntegerField()
     password = models.TextField()
     profile_picture = models.TextField()
-    id_role = models.ForeignKey(Roles, models.DO_NOTHING)
+    id_role = models.ForeignKey(Role, models.DO_NOTHING)
     id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
 
