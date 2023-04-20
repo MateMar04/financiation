@@ -1,30 +1,39 @@
-.navbar-scroll .nav-link,
-.navbar-scroll .navbar-toggler-icon,
-.navbar-scroll .navbar-brand {
-  color: #262626;
+#navbarcs{
+  background-color: #1fa4e6;;
 }
 
-.navbar-scroll {
-  background-color: #FFC017;
+
+.img-fluid{
+ position: relative;
+
+ }
+
+#homecs{
+  padding-left: 100px;
+  color: rgb(255, 255, 255);
 }
 
-.navbar-scrolled .nav-link,
-.navbar-scrolled .navbar-toggler-icon,
-.navbar-scroll .navbar-brand {
-  color: #262626;
+#contactocs{
+  padding-left: 70px;
+  color: rgb(255, 255, 255);
 }
 
-.navbar-scrolled {
-  background-color: #fff;
+#navbarScrollingDropdown{
+  padding-left: 50px;
+  color: rgb(255, 255, 255);
+  
 }
 
-.navbar.navbar-scroll.navbar-scrolled {
-  padding-top: auto;
-  padding-bottom: auto;
+#notics{
+  padding-left: 50px;
+  color: rgb(255, 255, 255);
+}
+ 
+#buttoncs {
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
 }
 
-.navbar-brand {
-  font-size: unset;
-  height: 3.5rem;
+#inputcs {
+  border: 2px solid #1fa4e6;
 }
-
