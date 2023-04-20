@@ -59,24 +59,6 @@ class Direcciones(models.Model):
         db_table = 'direcciones'
 
 
-class EmailsReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_referentes_contactados'
-
-
-class EmailsUsuarios(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_usuarios'
-
-
 class EstadosDeUsuario(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)
     nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
@@ -193,15 +175,6 @@ class Roles(models.Model):
     class Meta:
         managed = False
         db_table = 'roles'
-
-
-class TelefonosReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'telefonos_referentes_contactados'
 
 
 class ReferentesContactados(models.Model):
