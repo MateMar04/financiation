@@ -21,8 +21,6 @@ function NavScrollExample() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        
-
                         <Nav.Link href="#action2" id="navbar">Contacto</Nav.Link>
                         <NavDropdown title="Nosotros" id="navbar">
                             <NavDropdown.Item href="#action3" >Nosotros</NavDropdown.Item>
@@ -35,7 +33,7 @@ function NavScrollExample() {
                             </NavDropdown.Item>
                         </NavDropdown>
                         <Nav.Link href="#" id="navbar">
-                            Notificaciones
+                            Calendario
                         </Nav.Link>
                     </Nav>
                     <Form className="d-flex">
