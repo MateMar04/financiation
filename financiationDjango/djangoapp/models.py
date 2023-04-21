@@ -103,6 +103,18 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
+    def create_superuser(self, username, email, first_name, last_name, ssn, password=None, is_staff=True):
+        if not email:
+            raise ValueError("Users must have an email address")
+
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn, is_staff=is_staff)
+
+        user.set_password(password)
+        user.save()
+
+        return user
+
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
@@ -110,11 +122,14 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     ssn = models.BigIntegerField()
+    is_staff = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
+    """
     profile_picture = models.TextField()
     id_role = models.ForeignKey(Role, models.DO_NOTHING)
     id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
-
+"""
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'username'
