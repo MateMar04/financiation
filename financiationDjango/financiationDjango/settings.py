@@ -149,4 +149,4 @@ DJOSER = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#AUTH_USER_MODEL = 'djangoapp.UserAccount'
+AUTH_USER_MODEL = 'djangoapp.UserAccount'
