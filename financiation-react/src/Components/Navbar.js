@@ -7,15 +7,13 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "../Assets/Styles/Navbar.css"
-let Logo = require('../Assets/Imagenes/LOGOGOBIERNO.png');
+import logofinanzas from '../Assets/Imagenes/logofinanzas.png';
 
 function NavScrollExample() {
     return (
         <Navbar expand="lg" id="navbarcs">
             <Container fluid>
-                <div id="container">
-                    <img className="img-fluid" src={Logo} alt="React Logo" />
-                </div>
+            <Navbar.Brand href="#action1" id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'></img></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav
@@ -23,9 +21,10 @@ function NavScrollExample() {
                         style={{ maxHeight: '100px' }}
                         navbarScroll
                     >
-                        <Nav.Link href="#action1" id="homecs">Home</Nav.Link>
-                        <Nav.Link href="#action2" id="contactocs">Contacto</Nav.Link>
-                        <NavDropdown title="Nosotros" id="navbarScrollingDropdown">
+                        
+
+                        <Nav.Link href="#action2" id="navbar">Contacto</Nav.Link>
+                        <NavDropdown title="Nosotros" id="navbar">
                             <NavDropdown.Item href="#action3" >Nosotros</NavDropdown.Item>
                             <NavDropdown.Item href="#action4">
                                 Another action
@@ -35,7 +34,7 @@ function NavScrollExample() {
                                 Something else here
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="#" id="notics">
+                        <Nav.Link href="#" id="navbar">
                             Notificaciones
                         </Nav.Link>
                     </Nav>

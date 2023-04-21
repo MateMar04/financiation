@@ -1,39 +1,23 @@
 #navbarcs{
-  background-color: #1fa4e6;;
+  background-color:  #1fa4e6;
 }
 
 
-.img-fluid{
- position: relative;
-
- }
-
-#homecs{
-  padding-left: 100px;
-  color: rgb(255, 255, 255);
-}
-
-#contactocs{
-  padding-left: 70px;
-  color: rgb(255, 255, 255);
-}
-
-#navbarScrollingDropdown{
-  padding-left: 50px;
-  color: rgb(255, 255, 255);
-  
-}
-
-#notics{
-  padding-left: 50px;
-  color: rgb(255, 255, 255);
-}
- 
 #buttoncs {
-  border: 2px solid rgb(255, 255, 255);
   color: rgb(255, 255, 255);
 }
 
 #inputcs {
   border: 2px solid #1fa4e6;
+}
+
+#navbar{
+  color: rgb(255, 255, 255);
+  padding: 30px;
+  text-align: center;
+}
+
+#logoboton{
+  max-width: 200px;
+  max-height: 50px;
 }
