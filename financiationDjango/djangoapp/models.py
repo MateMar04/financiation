@@ -108,12 +108,14 @@ class UserAccountManager(BaseUserManager):
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn, is_staff=is_staff)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
+                          is_staff=is_staff)
 
         user.set_password(password)
         user.save()
 
         return user
+
 
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
