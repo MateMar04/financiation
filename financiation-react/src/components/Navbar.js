@@ -6,8 +6,8 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import "../Assets/Styles/Navbar.css"
-import logofinanzas from '../Assets/Imagenes/logofinanzas.png';
+import "../assets/styles/Navbar.css"
+import logofinanzas from '../assets/images/logofinanzas.png';
 
 function NavScrollExample() {
     return (
