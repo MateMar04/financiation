@@ -115,21 +115,20 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-
 class UserAccount(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=30, unique=True)
     email = models.EmailField(max_length=2550)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     ssn = models.BigIntegerField()
-    is_staff = models.BooleanField(default=True)
-    is_active = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     """
     profile_picture = models.TextField()
     id_role = models.ForeignKey(Role, models.DO_NOTHING)
     id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
-"""
+    """
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'username'
