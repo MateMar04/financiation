@@ -1,380 +1,237 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 from django.db import models
 
 
-class Asesorados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    cuil = models.BigIntegerField(db_column='CUIL', blank=False, null=False)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=False, null=False)
+class Advised(models.Model):
+    ssn = models.BigIntegerField()
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
 
-    class Meta:
-        managed = False
-        db_table = 'asesorados'
 
+class Agreement(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-class Convenios(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'convenios'
+class CityDepartment(models.Model):
+    name = models.CharField(max_length=70)
+    description = models.TextField()
 
 
-class DepartamentosCiudad(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
+class MinistryDepartment(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'departamentos_ciudad'
 
+class Address(models.Model):
+    street = models.CharField(max_length=70)
+    number = models.IntegerField()
 
-class DepartamentosDelMinisterio(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'departamentos_del_ministerio'
+class UserStatus(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
 
-class Direcciones(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    calle = models.CharField(db_column='CALLE', max_length=70, blank=False, null=False)
-    altura = models.IntegerField(db_column='ALTURA', blank=False, null=False)
+class UserVerifiedStatus(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'direcciones'
 
+class VisitStatus(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-class EmailsReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
 
-    class Meta:
-        managed = False
-        db_table = 'emails_referentes_contactados'
+class Faq(models.Model):
+    faq = models.TextField()
 
 
-class EmailsUsuarios(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
+class Mayor(models.Model):
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
 
-    class Meta:
-        managed = False
-        db_table = 'emails_usuarios'
 
+class Locality(models.Model):
+    name = models.CharField(max_length=70)
+    id_department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
 
-class EstadosDeUsuario(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'estados_de_usuario'
+class Logo(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
 
-class EstadosDeVerificacionDeUsuario(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
+class VehicleBrand(models.Model):
+    name = models.CharField(max_length=30)
 
-    class Meta:
-        managed = False
-        db_table = 'estados_de_verificacion_de_usuario'
 
+class VehicleModel(models.Model):
+    name = models.CharField(max_length=50)
+    id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING)
 
-class EstadosDeVisita(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'estados_de_visita'
+class PoliticParty(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
 
-class Faqs(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    pregunta = models.TextField(db_column='PREGUNTA', blank=True, null=False)
+class VehiclePlate(models.Model):
+    plate = models.CharField(max_length=7)
 
-    class Meta:
-        managed = False
-        db_table = 'faqs'
 
+class Role(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-class Intendentes(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=False, null=False)
 
-    class Meta:
-        managed = False
-        db_table = 'intendentes'
+class ContactedReferrer(models.Model):
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
 
 
-class Localidades(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    id_departamento = models.ForeignKey(DepartamentosCiudad, models.DO_NOTHING, db_column='ID_DEPARTAMENTO',
-                                        blank=False, null=False)
+class UserAccountManager(BaseUserManager):
+    def create_user(self, username, email, first_name, last_name, ssn, password=None):
+        if not email:
+            raise ValueError("Users must have an email address")
 
-    class Meta:
-        managed = False
-        db_table = 'localidades'
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn)
 
+        user.set_password(password)
+        user.save()
 
-class Logos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
+        return user
 
-    class Meta:
-        managed = False
-        db_table = 'logos'
+    def create_superuser(self, username, email, first_name, last_name, ssn, password=None, is_staff=True):
+        if not email:
+            raise ValueError("Users must have an email address")
 
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
+                          is_staff=is_staff)
 
-class MarcasDeVehiculos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
+        user.set_password(password)
+        user.save()
 
-    class Meta:
-        managed = False
-        db_table = 'marcas_de_vehiculos'
+        return user
 
 
-class ModelosDeVehiculos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=50, blank=False, null=False)
-    id_marca = models.ForeignKey(MarcasDeVehiculos, models.DO_NOTHING, db_column='ID_MARCA', blank=False, null=False)
+class UserAccount(AbstractBaseUser, PermissionsMixin):
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(max_length=2550, unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    ssn = models.BigIntegerField()
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    """
+    profile_picture = models.TextField()
+    id_role = models.ForeignKey(Role, models.DO_NOTHING)
+    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
+    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
+    """
+    objects = UserAccountManager()
 
-    class Meta:
-        managed = False
-        db_table = 'modelos_de_vehiculos'
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn']
 
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}"
 
-class PartidosPoliticos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
+    def get_last_name(self):
+        return self.last_name
 
-    class Meta:
-        managed = False
-        db_table = 'partidos_politicos'
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} {self.ssn} -> {self.username}"
 
 
-class PatentesDeVehiculos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    patente = models.CharField(db_column='PATENTE', max_length=7, blank=False, null=False)
+class User(models.Model):
+    username = models.CharField(max_length=30)
+    ssn = models.BigIntegerField()
+    password = models.TextField()
+    profile_picture = models.TextField()
+    id_role = models.ForeignKey(Role, models.DO_NOTHING)
+    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
+    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'patentes_de_vehiculos'
 
+class Group(models.Model):
+    name = models.CharField(max_length=70)
 
-class Roles(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'roles'
+class Vehicles(models.Model):
+    id_plate = models.ForeignKey(VehiclePlate, models.DO_NOTHING)
+    id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING)
+    id_model = models.ForeignKey(VehicleModel, models.DO_NOTHING)
 
 
-class TelefonosReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
+class Visit(models.Model):
+    flyer = models.IntegerField()
+    distance = models.IntegerField()
+    travel_time = models.IntegerField()
+    visit_date = models.DateField()
+    civil_registration = models.IntegerField()
+    accommodation = models.IntegerField()
+    modernization_fund = models.IntegerField()
+    start_time = models.DateTimeField()
+    finish_time = models.DateTimeField()
+    place_name = models.CharField(max_length=70)
+    id_locality = models.ForeignKey(Locality, models.DO_NOTHING)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING)
+    id_visit_status = models.ForeignKey(VisitStatus, models.DO_NOTHING)
+    id_agreement = models.ManyToManyField(Agreement)
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
+    id_address = models.ForeignKey(Address, models.DO_NOTHING)
+    id_logo = models.ManyToManyField(Logo)
 
-    class Meta:
-        managed = False
-        db_table = 'telefonos_referentes_contactados'
 
+class RequestStatus(models.Model):
+    name = models.CharField(max_length=30)
+    description = models.TextField()
 
-class ReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
-    apellido = models.CharField(db_column='APELLIDO', max_length=70, blank=False,
-                                null=False)
 
-    class Meta:
-        managed = False
-        db_table = 'referentes_contactados'
+class Coordinator(models.Model):
+    id_user = models.OneToOneField(User, models.DO_NOTHING)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
 
-class Usuarios(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre_de_usuario = models.CharField(db_column='NOMBRE_DE_USUARIO', max_length=30, blank=False, null=False)
-    cuil = models.BigIntegerField(db_column='CUIL', blank=False, null=False)
-    contrasenia = models.TextField(db_column='CONTRASENIA', blank=False, null=False)
-    foto_de_perfil = models.TextField(db_column='FOTO_DE_PERFIL', blank=True, null=True)
-    id_rol = models.ForeignKey(Roles, models.DO_NOTHING, db_column='ID_ROL', blank=False, null=False)
-    id_estado_de_verificacion = models.ForeignKey(EstadosDeVerificacionDeUsuario, models.DO_NOTHING,
-                                                  db_column='ID_ESTADO_DE_VERIFICACION', blank=False, null=False)
-    id_estado_de_usuario = models.ForeignKey(EstadosDeUsuario, models.DO_NOTHING, db_column='ID_ESTADO_DE_USUARIO',
-                                             blank=False, null=False)
+class Advisor(models.Model):
+    id_user = models.ForeignKey(User, models.DO_NOTHING)
+    id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'usuarios'
+    unique_together = (('id_user', 'id_group'),)
 
 
-class Grupos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=70, blank=False, null=False)
+class Request(models.Model):
+    id_visit = models.ForeignKey(Visit, models.DO_NOTHING)
+    id_advised = models.ForeignKey(Advised, models.DO_NOTHING)
+    id_advisor = models.ForeignKey(Advisor, models.DO_NOTHING)
+    id_ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
+    id_faq = models.ForeignKey(Faq, models.DO_NOTHING)
+    id_status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'grupos'
 
+class MayorEmail(models.Model):
+    mail = models.CharField(max_length=100)
+    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
-class Vehiculos(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    id_patente = models.ForeignKey(PatentesDeVehiculos, models.DO_NOTHING, db_column='ID_PATENTE', blank=False,
-                                   null=False)
-    id_marca = models.ForeignKey(MarcasDeVehiculos, models.DO_NOTHING, db_column='ID_MARCA', blank=False, null=False)
-    id_modelo = models.ForeignKey(ModelosDeVehiculos, models.DO_NOTHING, db_column='ID_MODELO', blank=False, null=False)
 
-    class Meta:
-        managed = False
-        db_table = 'vehiculos'
+class ContactedReferrerEmail(models.Model):
+    mail = models.CharField(max_length=100)
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
 
 
-class Visitas(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    flyer = models.IntegerField(db_column='FLYER', blank=False, null=False)
-    distancia = models.IntegerField(db_column='DISTANCIA', blank=False, null=False)
-    tiempo_de_viaje = models.IntegerField(db_column='TIEMPO_DE_VIAJE', blank=False, null=False)
-    fecha_de_visita = models.DateField(db_column='FECHA_DE_VISITA', blank=False, null=False)
-    registro_civil = models.IntegerField(db_column='REGISTRO_CIVIL', blank=False, null=False)
-    hospedaje = models.IntegerField(db_column='HOSPEDAJE', blank=False, null=False)
-    fondo_de_modernizacion = models.IntegerField(db_column='FONDO_DE_MODERNIZACION', blank=False, null=False)
-    horario_inicio = models.DateTimeField(db_column='HORARIO_INICIO', blank=False, null=False)
-    horario_finalizacion = models.DateTimeField(db_column='HORARIO_FINALIZACION', blank=False, null=False)
-    nombre_lugar = models.CharField(db_column='NOMBRE_LUGAR', max_length=70, blank=False, null=False)
-    id_localidad = models.ForeignKey(Localidades, models.DO_NOTHING, db_column='ID_LOCALIDAD', blank=False, null=False)
-    id_grupo = models.ForeignKey(Grupos, models.DO_NOTHING, db_column='ID_GRUPO', blank=False, null=False)
-    id_estado_de_visita = models.ForeignKey(EstadosDeVisita, models.DO_NOTHING, db_column='ID_ESTADO_DE_VISITA',
-                                            blank=False, null=False)
-    id_convenio_firmado = models.ManyToManyField(Convenios, db_column='ID_CONVENIO_FIRMADO')
-    id_referente_contactado = models.ForeignKey(ReferentesContactados, models.DO_NOTHING,
-                                                db_column='ID_REFERENTE_CONTACTADO', blank=False, null=False)
-    id_direccion = models.ForeignKey(Direcciones, models.DO_NOTHING, db_column='ID_DIRECCION', blank=False, null=False)
-    id_logo = models.ManyToManyField(Logos, db_column='ID_LOGO')
+class UserEmail(models.Model):
+    mail = models.CharField(max_length=100)
+    id_user = models.ForeignKey(User, models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'visitas'
 
+class MayorPhone(models.Model):
+    phone = models.BigIntegerField()
+    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
-class EstadoDeConsulta(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    nombre = models.CharField(db_column='NOMBRE', max_length=30, blank=False, null=False)
-    descripcion = models.TextField(db_column='DESCRIPCION', blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'estado_de_consulta'
-
-
-class Consultas(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    id_visita = models.ForeignKey('Visitas', models.DO_NOTHING, db_column='ID_VISITA', blank=False, null=False)
-    id_asesorado = models.ForeignKey(Asesorados, models.DO_NOTHING, db_column='ID_ASESORADO', blank=False, null=False)
-    id_asesor = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_ASESOR', blank=False, null=False)
-    id_departamento_ministerio = models.ForeignKey('DepartamentosDelMinisterio', models.DO_NOTHING,
-                                                   db_column='ID_DEPARTAMENTO_MINISTERIO', blank=False, null=False)
-    id_faq = models.ForeignKey('Faqs', models.DO_NOTHING, db_column='ID_FAQ', blank=False, null=False)
-    id_estado = models.ForeignKey('EstadoDeConsulta', models.DO_NOTHING, db_column='ID_ESTADO', blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'consultas'
-
-
-class Coordinadores(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    id_usuario = models.OneToOneField('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False, null=False)
-    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='ID_GRUPO', blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'coordinadores'
-
-
-class Asesores(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False, null=False)
-    id_grupo = models.ForeignKey('Grupos', models.DO_NOTHING, db_column='ID_GRUPO', blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'asesores'
-        unique_together = (('id_usuario', 'id_grupo'),)
-
-
-class EmailsIntendentes(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-    id_intendente = models.ForeignKey('Intendentes', models.DO_NOTHING, db_column='ID_INTENDENTE', blank=False,
-                                      null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_intendentes'
-
-
-class EmailsReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-    id_referente = models.ForeignKey('ReferentesContactados', models.DO_NOTHING, db_column='ID_REFERENTE', blank=False,
-                                     null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_referentes_contactados'
-
-
-class EmailsUsuarios(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    mail = models.CharField(db_column='MAIL', max_length=100, blank=False, null=False)
-    id_usuario = models.ForeignKey('Usuarios', models.DO_NOTHING, db_column='ID_USUARIO', blank=False, null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'emails_usuarios'
-
-
-class TelefonosIntendentes(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
-    id_intendente = models.ForeignKey(Intendentes, models.DO_NOTHING, db_column='ID_INTENDENTE', blank=False,
-                                      null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'telefonos_intendentes'
-
-
-class TelefonosReferentesContactados(models.Model):
-    id = models.AutoField(db_column='ID', primary_key=True)
-    telefono = models.BigIntegerField(db_column='TELEFONO', blank=False, null=False)
-    id_referente = models.ForeignKey(ReferentesContactados, models.DO_NOTHING, db_column='ID_REFERENTE', blank=False,
-                                     null=False)
-
-    class Meta:
-        managed = False
-        db_table = 'telefonos_referentes_contactados'
+class ContactedReferrerPhone(models.Model):
+    phone = models.BigIntegerField()
+    id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
