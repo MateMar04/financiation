@@ -141,7 +141,7 @@ input[type=text]::placeholder {
 }
 
 
-.input-wrap{
+.input-wrap {
   position: relative;
 }
 
@@ -314,6 +314,7 @@ input[type=text]::placeholder {
   position: relative;
   display: inline;
 }
+
 .boton-puton {
   position: absolute;
   right: 0;

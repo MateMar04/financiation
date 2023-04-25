@@ -21,7 +21,8 @@ function SignInForm() {
                                     <input type='text' placeholder='Usuario' className="placeholder"/>
                                     <input type='password' placeholder='Contraseña' className="placeholder"/>
                                     <input type='text' placeholder='Nombre' className="placeholder"/>
-                                    <input type="tel" id="botones" name="phone" placeholder="Telefono" className="placeholder"/>
+                                    <input type="tel" id="botones" name="phone" placeholder="Telefono"
+                                           className="placeholder"/>
 
                                 </div>
                                 <div className='col-lg-6'>
