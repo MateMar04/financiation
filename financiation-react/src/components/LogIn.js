@@ -1,35 +1,32 @@
 import React from 'react';
 import '../assets/styles/login.css'
-import LOGOGOBIERNO from '../assets/images/LOGOGOBIERNO.png';
-import OjoPassword from './PasswordInput';
+import Container from "react-bootstrap/Container";
+import Logo from "../assets/images/PRUEBA.PNG";
+import Form from "react-bootstrap/Form";
+import PasswordInput from "./PasswordInput";
+import Button from "react-bootstrap/Button";
 
 function LogIn() {
     return (
+        <Container fluid className="general">
+            <Container fluid className="image-container">
+                <img src={Logo} alt="Logo del ministerio de finanzas"/>
+            </Container>
+            <Form>
+                <Container>
+                    <Form.Control placeholder="Username" type="text"/>
+                </Container>
+                <Container>
+                    <PasswordInput/>
+                </Container>
+                <Button className="login">LogIn</Button>
+                <Container fluid>
+                    <Button variant="link" className="link">Dont have an account yet? SignIn</Button>
+                    <Button variant="link" className="link">Forgot password</Button>
+                </Container>
+            </Form>
+        </Container>
 
-        <div className='container-fluid'>
-            <div className="wrapper fadeInDown">
-                <div id="formContent">
-                    <div className="fadeIn first">
-                        <img src={LOGOGOBIERNO} alt="React Logo" className="img-fluid" style={{padding: "10%"}}/>
-                    </div>
-
-
-                    <input type="text" id="CUIL" className="fadeIn second" name="User" placeholder="Usuario"/>
-                    <OjoPassword/>
-
-
-                    <input type="submit" className="fadeIn fourth" value="Entrar" style={{margin: '10px'}}/>
-
-                    <div>
-                        <a className="register" href="#" style={{paddingBottom: '15px'}}>Registrarse</a>
-                    </div>
-
-                    <div id="formFooter">
-                        <a className="underlineHover" href="#">Olvidé mi constraseña</a>
-                    </div>
-                </div>
-            </div>
-        </div>
     );
 }
 
