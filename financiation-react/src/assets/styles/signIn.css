@@ -7,12 +7,14 @@
 }
 
 .col-lg-6 {
-    padding: 1vh;
+    padding: 2vh;
 }
 
 .form-control {
+    padding: 2vh;
     min-height: 50px ;
     height: 5%;
+    box-shadow: rgba(17, 12, 46, 0.1) 5px 5px 10px 0;
 }
 
 .create {
@@ -22,3 +24,8 @@
 .link {
     margin: 1vh;
 }
+
+.image-container {
+    margin: 1vh;
+}
+

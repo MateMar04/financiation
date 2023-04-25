@@ -15,7 +15,7 @@ function SignInForm() {
     return (
         <Container fluid className="general">
             <Container fluid className="image-container">
-                <img src={Logo}/>
+                <img src={Logo} alt="Logo del ministerio de finanzas"/>
             </Container>
             <Form>
                 <Row>
