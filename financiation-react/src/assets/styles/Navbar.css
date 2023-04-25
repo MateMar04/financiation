@@ -4,14 +4,7 @@
     text-align: left;
 }
 
-#buttoncs {
-    color: rgb(255, 255, 255);
-    max-width: 20%;
-    padding: 50px;
-    text-align: center;
-}
-
-#inputcs {
+#buscador {
     border: 2px solid #1fa4e6;
     max-width: 70%;
 }
@@ -19,15 +12,11 @@
 #navbar {
     color: rgb(255, 255, 255);
     padding: 30px;
-
 }
 
 #logoboton {
     max-width: 200px;
-    max-height: 50px;
+    max-height: fit-content;
     overflow-y: hidden;
-}
-
-#dropdownn{
-    overflow-y: hidden;
+    
 }

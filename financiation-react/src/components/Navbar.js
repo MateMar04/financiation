@@ -5,52 +5,34 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import "../assets/styles/Navbar.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
 
+
+
 function NavScrollExample() {
     return (
-        <Navbar expand="lg" id="navbarcs">
+        <Navbar expand="lg" id="navbarcs" className="navbarcs">
             <Container fluid>
-                <Navbar.Brand href="#action1" id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'
+                <Navbar.Brand href="#home" id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'
                     alt="logo de ministerio de finanzas"></img></Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px' }}
-                        navbarScroll
-                    >
 
-                        <Nav.Link href="#action2" id="navbar">Contacto</Nav.Link>
-                        <NavDropdown title="Nosotros" id="navbar">
+                <Navbar.Collapse>
+                    <Nav className="me-auto my-2 my-lg-0">
 
-                            <NavDropdown.Item href="#action3">Nosotros</NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
-                            </NavDropdown.Item>
-                        </NavDropdown>
+                        <Nav.Link href="#action1" id="navbar">Lorem Ipsum</Nav.Link>
+                        <Nav.Link href="#action2" id="navbar">Lorem Ipsum</Nav.Link>
+                        <Nav.Link href="#action3" id="navbar">Lorem Ipsum</Nav.Link>
+                        <Nav.Link href="#action4" id="navbar">Lorem Ipsum</Nav.Link>
 
-                        <Nav.Link href="#" id="navbar">
-                            Calendario
-                        </Nav.Link>
                     </Nav>
 
                     <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="¿Que estas buscando?"
-                            className="me-2"
-                            aria-label="Search"
-                            id="inputcs"
-                        />
+                        <Form.Control type="search" placeholder="¿Que estas buscando?" className="me-2" id="buscador"/>
                         <Button variant="outline-light">Buscar</Button>{' '}
                     </Form>
+
                 </Navbar.Collapse>
             </Container>
         </Navbar >
