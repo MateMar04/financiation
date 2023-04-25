@@ -48,10 +48,10 @@ function SignInForm() {
                     </Col>
                 </Row>
                 <Row>
-                    <Button>Create Account</Button>
+                    <Button className="create">Create Account</Button>
                 </Row>
                 <Row>
-                    <Button variant="link">Already have an account? LogIn</Button>
+                    <Button variant="link" className="link">Already have an account? LogIn</Button>
                 </Row>
             </Form>
         </Container>

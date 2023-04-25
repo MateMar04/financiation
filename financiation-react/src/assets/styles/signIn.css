@@ -2,3 +2,22 @@
     padding: 2vw;
 }
 
+.row {
+    margin: 1vh;
+}
+
+.col-lg-6 {
+    padding: 1vh;
+}
+
+.form-control {
+    height: 5vh;
+}
+
+.create {
+    width: 20vw;
+}
+
+.link {
+    width: 30vw;
+}
