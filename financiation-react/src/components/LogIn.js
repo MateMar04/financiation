@@ -3,7 +3,7 @@ import '../assets/styles/login.css'
 import LOGOGOBIERNO from '../assets/images/LOGOGOBIERNO.png';
 import OjoPassword from './PasswordInput';
 
-function Login() {
+function LogIn() {
     return (
 
         <div className='container-fluid'>
@@ -33,7 +33,7 @@ function Login() {
     );
 }
 
-export default Login;
+export default LogIn;
 
 
 
