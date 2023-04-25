@@ -14,6 +14,9 @@ let Logo = require('../assets/images/PRUEBA.PNG');
 function SignInForm() {
     return (
         <Container fluid className="general">
+            <Container fluid className="image-container">
+                <img src={Logo}/>
+            </Container>
             <Form>
                 <Row>
                     <Col lg="6">

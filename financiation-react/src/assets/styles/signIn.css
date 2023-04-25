@@ -11,13 +11,14 @@
 }
 
 .form-control {
-    height: 5vh;
+    min-height: 50px ;
+    height: 5%;
 }
 
 .create {
-    width: 20vw;
+    margin: 1vh;
 }
 
 .link {
-    width: 30vw;
+    margin: 1vh;
 }
