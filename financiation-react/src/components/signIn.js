@@ -47,12 +47,12 @@ function SignInForm() {
                         <PasswordInput />
                     </Col>
                 </Row>
-                <Row>
+                <Container>
                     <Button className="create">Create Account</Button>
-                </Row>
-                <Row>
+                </Container>
+                <Container>
                     <Button variant="link" className="link">Already have an account? LogIn</Button>
-                </Row>
+                </Container>
             </Form>
         </Container>
 
