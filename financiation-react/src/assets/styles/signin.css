@@ -128,6 +128,7 @@ input[type=text], [type=password], input[type=tel], input[type=email] {
   transition: all 0.5s ease-in-out;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;
+  cursor: auto;
 }
 
 input[type=text]:focus, [type=password]:focus, input[type=tel]:focus, input[type=email]:focus {
