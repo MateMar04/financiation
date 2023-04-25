@@ -315,7 +315,6 @@ input[type=text]::placeholder {
   display: inline;
 }
 .boton-puton {
-  
   position: absolute;
   right: 0;
   top: 0;

@@ -281,5 +281,6 @@ input[type=text]:focus ,[type=password]:focus , input[type=tel]:focus , input[ty
   margin-top: 5px;
 }
 
-
-
+input[type=text]::placeholder, [type=password]::placeholder, input[type=tel]::placeholder, input[type=email]::placeholder{
+  color: #282c34;
+}
