@@ -1,7 +1,7 @@
 import React from 'react';
 import '../assets/styles/login.css'
 import LOGOGOBIERNO from '../assets/images/LOGOGOBIERNO.png';
-import OjoPassword from './password';
+import OjoPassword from './PasswordInput';
 
 function Login() {
     return (

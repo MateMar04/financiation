@@ -1,12 +1,12 @@
 import React from 'react';
 import '../assets/images/PRUEBA.PNG';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/styles/signin.css';
+import '../assets/styles/signIn.css';
 import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import ToggleMaskDemo from "./password";
+import PasswordInput from "./PasswordInput";
 
 let Logo = require('../assets/images/PRUEBA.PNG');
 
@@ -41,10 +41,10 @@ function SignInForm() {
                 </Row>
                 <Row>
                     <Col lg="6">
-                        <ToggleMaskDemo />
+                        <PasswordInput />
                     </Col>
                     <Col lg="6">
-                        <Form.Control placeholder="retype password" type="password"/>
+                        <PasswordInput />
                     </Col>
                 </Row>
                 <Row>
