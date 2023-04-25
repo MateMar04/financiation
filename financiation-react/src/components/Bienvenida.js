@@ -1,11 +1,36 @@
 import React from 'react';
-import '../assets/styles/bienvenida.css'
 import imagenPanal from '../assets/images/panal.jpg'
-import LOGOGOBIERNO from "../assets/images/LOGOGOBIERNO.png";
+import Logo from "../assets/images/LOGOGOBIERNO.png"
+import Container from "react-bootstrap/Container";
+import {Card} from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import '../assets/styles/bienvenida.css'
 
 function Bienvenida() {
     return (
-        <div className='container-fluid general'>
+        <Container fluid className="background">
+            <Container fluid>
+                <img src={imagenPanal} alt="" className="imagen"/>
+            </Container>
+            <Card id="carta">
+                <Container>
+                    <img src={Logo} alt="React Logo" className="img-fluid"/>
+                </Container>
+                <hr/>
+                <Container>
+                    <p>Si todavia no tenes una cuenta puede crearte una</p>
+                    <Button>Crea una Cuenta</Button>
+                </Container>
+                <hr/>
+                <Container>
+                    <p>Si todavia no tenes una cuenta puede crearte una</p>
+                    <Button>Crea una Cuenta</Button>
+                </Container>
+            </Card>
+        </Container>
+
+
+        /* <div className='container-fluid general'>
             <div className="row contenedor-imagen">
                 <div className="col-lg-6">
                     <img src={imagenPanal} alt="" className="imagen"/>
@@ -29,6 +54,7 @@ function Bienvenida() {
                 </div>
             </div>
         </div>
+    */
     );
 }
 
