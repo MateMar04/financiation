@@ -18,17 +18,18 @@ function SignInForm() {
                         <div className='container-fluid'>
                             <div className='row'>
                                 <div className='col-lg-6'>
-                                    <input type='text' placeholder='Usuario'/>
-                                    <input type='password' placeholder='Contraseña'/>
-                                    <input type='text' placeholder='Nombre'/>
-                                    <input type="tel" id="botones" name="phone" placeholder="Telefono" pattern=""/>
+                                    <input type='text' placeholder='Usuario' className="placeholder"/>
+                                    <input type='password' placeholder='Contraseña' className="placeholder"/>
+                                    <input type='text' placeholder='Nombre' className="placeholder"/>
+                                    <input type="tel" id="botones" name="phone" placeholder="Telefono"
+                                           className="placeholder"/>
 
                                 </div>
                                 <div className='col-lg-6'>
-                                    <input type='email' placeholder='Mail'/>
-                                    <input type='password' placeholder='Repetir Contraseña'/>
-                                    <input type='text' placeholder='Apellido'/>
-                                    <input type='tel' placeholder='Cuil' id='botones' pattern=""/>
+                                    <input type='email' placeholder='Mail' className="placeholder"/>
+                                    <input type='password' placeholder='Repetir Contraseña' className="placeholder"/>
+                                    <input type='text' placeholder='Apellido' className="placeholder"/>
+                                    <input type='tel' placeholder='Cuil' id='botones' className="placeholder"/>
                                 </div>
                             </div>
                         </div>
