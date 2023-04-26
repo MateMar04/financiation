@@ -3,6 +3,7 @@ import '../assets/images/PRUEBA.PNG';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../assets/styles/signin.css';
 
+
 let Logo = require('../assets/images/PRUEBA.PNG');
 
 function SignInForm() {

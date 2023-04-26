@@ -3,6 +3,7 @@ import NavScrollExample from "./components/Navbar";
 import Bienvenida from "./components/bienvenida";
 import Login from "./components/login";
 import Signinform from "./components/signInForm";
+import MyModal from './components/succesfull';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Bienvenida/>
         <Login/>
         <Signinform/>
+        <MyModal/>
     </div>
   );
 }
