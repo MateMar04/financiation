@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import { login } from "../actions/auth";
 import '../assets/styles/login.css'
+import {Link} from "react-router-dom";
 
 const LogIn = ({ login }) => {
     const [formData, setFormData] = useState({
@@ -41,8 +42,8 @@ const LogIn = ({ login }) => {
                     <Button type="submit">LogIn</Button>
                 </Container>
             </Form>
-            <Button variant="link" className="link" href="/signup">Dont have an account yet? SignIn</Button>
-            <Button variant="link" className="link" href="/reset-password">Forgot password</Button>
+            <Link to="/signup/"><Button variant="link" className="link">Dont have an account yet? SignIn</Button></Link>
+            <Link to="/reset-password/"><Button variant="link" className="link" >Forgot password</Button></Link>
         </Container>
     )
 };
