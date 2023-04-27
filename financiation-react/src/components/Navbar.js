@@ -21,16 +21,14 @@ function NavScrollExample() {
                 <Navbar.Collapse>
                     <Nav className="me-auto my-2 my-lg-0">
 
-                        <Nav.Link href="#action1" id="navbar">Lorem Ipsum</Nav.Link>
-                        <Nav.Link href="#action2" id="navbar">Lorem Ipsum</Nav.Link>
-                        <Nav.Link href="#action3" id="navbar">Lorem Ipsum</Nav.Link>
-                        <Nav.Link href="#action4" id="navbar">Lorem Ipsum</Nav.Link>
-
+                        <Nav.Link href="#action1" id="navbar">Nueva Consulta</Nav.Link>
+                        <Nav.Link href="#action2" id="navbar">Hoja de Rutas</Nav.Link>
+                        <Nav.Link href="#action3" id="navbar">Grupos</Nav.Link>
+                        <Nav.Link href="#action4" id="navbar">Calendario</Nav.Link>
                     </Nav>
 
                     <Form className="d-flex">
-                        <Form.Control type="search" placeholder="¿Que estas buscando?" className="me-2" id="buscador"/>
-                        <Button variant="outline-light">Buscar</Button>{' '}
+                        <Button variant="outline-light">Acceder</Button>{' '}
                     </Form>
 
                 </Navbar.Collapse>
