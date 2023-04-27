@@ -47,9 +47,6 @@ const LogIn = ({ login }) => {
     )
 };
 
-/*const mapStateToProps = state => ({
-
-});*/
 
 
 export default connect(null, { login })(LogIn);
