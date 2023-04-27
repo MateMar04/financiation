@@ -6,6 +6,7 @@ import {Col, Row} from "react-bootstrap";
 import PasswordInput from "../components/PasswordInput";
 import Button from "react-bootstrap/Button";
 import "../assets/styles/signIn.css"
+import {Link} from "react-router-dom";
 
 const SingUp = () => (
     <Container fluid className="general">
@@ -49,7 +50,7 @@ const SingUp = () => (
                 <Button className="create">Create Account</Button>
             </Container>
             <Container>
-                <Button variant="link" className="link">Already have an account? LogIn</Button>
+                <Link to="/login/"><Button variant="link" className="link">Already have an account? LogIn</Button></Link>
             </Container>
         </Form>
     </Container>
