@@ -31,15 +31,18 @@ let Check = require('../assets/images/checked.png');
     
             <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title class=''>Felicitaciones!</Modal.Title>
+                <Modal.Title id="Titulo">Felicitaciones!</Modal.Title>
             </Modal.Header>
             
             <Modal.Body>
+            <div id='a'>
+            <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid" fluid />
             
-            <img src={Check} alt="CheckButton" id="CheckButton" class='img-thumbnail'/>
+            </div>
              <p className="text-center">
                 Tu cuenta a sido verficada! chequea el mail para mas detalles!
                 </p>
+                
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="success" onClick={handleClose}>
