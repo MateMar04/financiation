@@ -7,16 +7,20 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "../assets/styles/navbar.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-
+import {Link} from "react-router-dom";
 
 
 function NavScrollExample() {
     return (
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
             <Container fluid>
-                <Navbar.Brand href="#home" id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'
-                    alt="logo de ministerio de finanzas"></img></Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" />
+                <Link to="/">
+                    <Navbar.Brand id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'
+                                                                      alt="logo de ministerio de finanzas" />
+                    </Navbar.Brand>
+                </Link>
+
+                <Navbar.Toggle aria-controls="navbarScroll"/>
 
                 <Navbar.Collapse>
                     <Nav className="me-auto my-2 my-lg-0">
