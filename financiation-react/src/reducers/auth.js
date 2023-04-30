@@ -5,7 +5,11 @@ import {
     LOGIN_SUCCESS,
     LOGOUT,
     USER_LOADED_FAIL,
-    USER_LOADED_SUCCESS
+    USER_LOADED_SUCCESS,
+    PASSWORD_RESET_SUCCESS,
+    PASSWORD_RESET_FAIL,
+    PASSWORD_RESET_CONFIRM_SUCCESS,
+    PASSWORD_RESET_CONFIRM_FAIL
 } from '../actions/types'
 
 const initialState = {
@@ -65,6 +69,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 user: null
+            }
+        case PASSWORD_RESET_SUCCESS:
+        case PASSWORD_RESET_FAIL:
+        case PASSWORD_RESET_CONFIRM_SUCCESS:
+        case PASSWORD_RESET_CONFIRM_FAIL:
+            return {
+                ...state
             }
 
         default:
