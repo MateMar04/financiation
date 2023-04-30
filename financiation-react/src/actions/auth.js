@@ -1,5 +1,6 @@
 import axios from "axios";
-import {LOGIN_FAIL, LOGIN_SUCCESS, USER_LOADED_FAIL, USER_LOADED_SUCCESS} from "./types";
+import {LOGIN_FAIL, LOGIN_SUCCESS, USER_LOADED_FAIL, USER_LOADED_SUCCESS, AUTHENTICATED_SUCCESS, AUTHENTICATED_FAIL, LOGOUT} from "./types";
+
 
 
 export const load_user = () => async dispatch => {
@@ -57,3 +58,9 @@ export const login = (username, password) => async dispatch => {
         });
     }
 };
+
+export const logout = () => dispatch => {
+    dispatch({
+        type: LOGOUT
+    });
+}
