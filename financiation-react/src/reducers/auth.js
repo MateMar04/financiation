@@ -15,8 +15,8 @@ const initialState = {
     user: null,
 }
 
-export default function (state = initialState, action){
-    const { type, payload } = action;
+export default function (state = initialState, action) {
+    const {type, payload} = action;
     switch (type) {
         case AUTHENTICATED_SUCCESS:
             return {
@@ -71,4 +71,4 @@ export default function (state = initialState, action){
             return state
     }
 
-    }
+}

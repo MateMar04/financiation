@@ -50,7 +50,8 @@ const SingUp = () => (
                 <Button className="create">Create Account</Button>
             </Container>
             <Container>
-                <Link to="/login/"><Button variant="link" className="link">Already have an account? LogIn</Button></Link>
+                <Link to="/login/"><Button variant="link" className="link">Already have an account?
+                    LogIn</Button></Link>
             </Container>
         </Form>
     </Container>

@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import NavigationBar from "../components/Navbar";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import {checkAuthenticated, load_user} from "../actions/auth";
 
 const Layout = (props) => {
@@ -17,4 +17,4 @@ const Layout = (props) => {
         </div>
     );
 }
-export default connect(null, { checkAuthenticated,  load_user})(Layout);
+export default connect(null, {checkAuthenticated, load_user})(Layout);
