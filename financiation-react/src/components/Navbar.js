@@ -27,7 +27,7 @@ const NavigationBar = ({logout, isAuthenticated}) => {
 
     const authLinks = () => (
         <li className='nav-item'>
-            <a className="nav-link" href="#" onClick={logout} >Cerrar Sesion</a>
+            <a className="nav-link" href="#!" onClick={logout} >Cerrar Sesion</a>
         </li>
     );
 
