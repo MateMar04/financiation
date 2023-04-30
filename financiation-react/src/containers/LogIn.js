@@ -6,9 +6,9 @@ import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import { login } from "../actions/auth";
 import '../assets/styles/login.css'
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 
-const LogIn = ({ login }) => {
+const LogIn = ({ login, isAuthenticated }) => {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -23,6 +23,10 @@ const LogIn = ({ login }) => {
 
         login(username, password);
     };
+
+    if (isAuthenticated) {
+        return <Navigate to='/' />
+    }
 
     return (
         <Container fluid className="general">
@@ -48,6 +52,9 @@ const LogIn = ({ login }) => {
     )
 };
 
+const mapStateProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
 
 
-export default connect(null, { login })(LogIn);
+export default connect(mapStateProps, { login })(LogIn);
