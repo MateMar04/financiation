@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password_confirm} from "../actions/auth";
 
@@ -68,4 +68,4 @@ const mapStateProps = state => ({
 });
 
 
-export default connect(mapStateProps, {reset_password_confirm})(ResetPasswordConfirm);;
+export default connect(mapStateProps, {reset_password_confirm})(ResetPasswordConfirm);

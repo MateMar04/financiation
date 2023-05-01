@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password} from "../actions/auth";
 
