@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import "../assets/styles/signIn.css"
 import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
+import {signup} from "../actions/auth";
 
 
 const Signup = ({signup, isAuthenticated}) => {
@@ -45,7 +46,7 @@ const Signup = ({signup, isAuthenticated}) => {
             <Container fluid className="image-container">
                 <img src={Logo} alt="Logo del ministerio de finanzas"/>
             </Container>
-            <Form>
+            <Form onSubmit={e => onSubmit(e)}>
                 <Row>
                     <Col lg="6">
                         <Form.Control placeholder="First name" type="text" name='first_name' value={first_name}
@@ -103,4 +104,4 @@ const mapStateProps = state => ({
 });
 
 
-export default connect(mapStateProps, {login})(LogIn);
+export default connect(mapStateProps, {signup})(Signup);
