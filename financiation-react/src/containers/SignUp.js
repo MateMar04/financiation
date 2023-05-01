@@ -88,7 +88,7 @@ const Signup = ({signup, isAuthenticated}) => {
                     </Col>
                 </Row>
                 <Container>
-                    <Button className="create">Create Account</Button>
+                    <Button className="create" type="submit">Create Account</Button>
                 </Container>
                 <Container>
                     <Link to="/login/"><Button variant="link" className="link">Already have an account?
