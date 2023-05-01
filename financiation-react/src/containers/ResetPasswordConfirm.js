@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {reset_password_confirm} from "../actions/auth";
 
 
-const ResetPasswordConfirm = ({match, reset_password}) => {
+const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
     const [requestSent, setRequestSent] = useState(false);
     const [formData, setFormData] = useState({
         new_password: '',
