@@ -48,36 +48,42 @@ const Signup = ({signup, isAuthenticated}) => {
             <Form>
                 <Row>
                     <Col lg="6">
-                        <Form.Control placeholder="First name" type="text"/>
+                        <Form.Control placeholder="First name" type="text" name='first_name' value={first_name}
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                     <Col lg="6">
-                        <Form.Control placeholder="Last name" type="text"/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="Username" type="text"/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="SSN" type="number"/>
+                        <Form.Control placeholder="Last name" type="text" name='last_name' value={last_name}
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg="6">
-                        <Form.Control placeholder="e-mail" type="email"/>
+                        <Form.Control placeholder="Username" type="text" name='username' value={username}
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                     <Col lg="6">
-                        <Form.Control placeholder="phone" type="tel"/>
+                        <Form.Control placeholder="SSN" type="number" name='ssn' value={ssn}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg="6">
+                        <Form.Control placeholder="e-mail" type="email" name='email' value={email}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                    <Col lg="6">
+                        <Form.Control placeholder="phone" type="tel" name='phone' value={phone}
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg="6">
                         <Form.Control placeholder="password" type="password" name="password" value={password}
-                                      onChange={e => onChange(e)} minLength='6' required/>
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                     <Col lg="6">
                         <Form.Control placeholder="re password" type="password" name="re_password" value={re_password}
-                                      onChange={e => onChange(e)} minLength='6' required/>
+                                      onChange={e => onChange(e)} required/>
                     </Col>
                 </Row>
                 <Container>
