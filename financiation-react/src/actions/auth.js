@@ -6,11 +6,7 @@ import {
     LOGIN_SUCCESS,
     LOGOUT,
     USER_LOADED_FAIL,
-    USER_LOADED_SUCCESS,
-    PASSWORD_RESET_SUCCESS,
-    PASSWORD_RESET_FAIL,
-    PASSWORD_RESET_CONFIRM_SUCCESS,
-    PASSWORD_RESET_CONFIRM_FAIL
+    USER_LOADED_SUCCESS
 } from "./types";
 
 export const checkAuthenticated = () => async dispatch => {
@@ -51,7 +47,7 @@ export const checkAuthenticated = () => async dispatch => {
     }
 }
 
-export const loadUser = () => async dispatch => {
+export const load_user = () => async dispatch => {
     if (localStorage.getItem('access')) {
         const config = {
             headers: {
@@ -98,7 +94,7 @@ export const login = (username, password) => async dispatch => {
             payload: res.data
         });
 
-        dispatch(loadUser());
+        dispatch(load_user());
 
     } catch (err) {
         dispatch({
@@ -106,53 +102,6 @@ export const login = (username, password) => async dispatch => {
         });
     }
 };
-
-export const resetPassword = (email) => async dispatch => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-
-    const body = JSON.stringify({email})
-
-    try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password/}`, body, config);
-
-        dispatch({
-            type: PASSWORD_RESET_SUCCESS
-        });
-
-    } catch (err) {
-        dispatch({
-            type: PASSWORD_RESET_FAIL
-        });
-    }
-
-}
-
-export const resetPasswordConfirm = (uid, token, new_password, re_new_password) => async dispatch => {
-    const config = {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-
-    const body = JSON.stringify({uid, token, new_password, re_new_password})
-
-     try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/reset_password_confirm/}`, body, config);
-
-        dispatch({
-            type: PASSWORD_RESET_CONFIRM_SUCCESS
-        });
-
-    } catch (err) {
-        dispatch({
-            type: PASSWORD_RESET_CONFIRM_FAIL
-        });
-    }
-}
 
 export const logout = () => dispatch => {
     dispatch({
