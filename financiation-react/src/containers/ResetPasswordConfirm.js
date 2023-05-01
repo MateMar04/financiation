@@ -63,7 +63,9 @@ const ResetPasswordConfirm = ({match, reset_password}) => {
     );
 };
 
+const mapStateProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
 
 
-
-export default connect( {reset_password_confirm})(ResetPasswordConfirm);;
+export default connect(mapStateProps, {reset_password_confirm})(ResetPasswordConfirm);;
