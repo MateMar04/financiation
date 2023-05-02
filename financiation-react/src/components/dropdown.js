@@ -21,12 +21,10 @@ export default function SelectArea() {
     ];
 
     return (
-        <Container fluid className="">
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name"
-                      placeholder="Seleccione Area" className="w-full md:w-14rem" />
-        </div>
-        </Container>
+                      showClear placeholder="Seleccione Area" className="w-full md:w-14rem" />
+            </div>
     )
 }
 
