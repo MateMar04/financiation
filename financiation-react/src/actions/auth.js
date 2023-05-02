@@ -62,7 +62,7 @@ export const load_user = () => async dispatch => {
         };
 
         try {
-            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/}`, config)
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}/auth/users/me/`, config)
 
             dispatch({
                 type: USER_LOADED_SUCCESS,
@@ -91,7 +91,7 @@ export const login = (username, password) => async dispatch => {
     const body = JSON.stringify({username, password});
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/}`, body, config)
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/jwt/create/`, body, config)
 
         dispatch({
             type: LOGIN_SUCCESS,
@@ -117,7 +117,7 @@ export const signup = (first_name, last_name, username, ssn, email, phone, passw
     const body = JSON.stringify({first_name, last_name, username, ssn, email, phone, password, re_password});
 
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/}`, body, config)
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/`, body, config)
 
         dispatch({
             type: SIGNUP_SUCCESS,
@@ -142,7 +142,7 @@ export const verify = (uid, token) => async dispatch => {
     const body = JSON.stringify({uid, token});
 
     try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/}`, body, config)
+        await axios.post(`${process.env.REACT_APP_API_URL}/auth/users/activation/`, body, config)
 
         dispatch({
             type: ACTIVATION_SUCCESS,

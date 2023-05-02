@@ -10,8 +10,8 @@ const Activate = ({verify, match}) => {
 
     const [verified, setVerified] = useState(false)
     const verify_account = e => {
-        const uid = match.params.uid
-        const token = match.params.token
+        const uid = match.params.uid;
+        const token = match.params.token;
         verify(uid, token);
         setVerified(true)
     };
