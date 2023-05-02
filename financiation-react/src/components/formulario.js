@@ -9,10 +9,14 @@ import "../assets/styles/formulario.css"
     function Formulario(){
         return(
             <Container fluid className="general">
-                <Container fluid className="image-container">
-                    <img src={Logo} alt="Logo del ministerio de finanzas"/>
+
+                <div fluid className="col-md-2">
+                    <h5 className="Text1"><b>NUEVA CONSULTA</b></h5>
+                </div>
+
+                <Container fluid className="col-md-11">
+                <SelectArea/>
                 </Container>
-            <SelectArea/>
             </Container>
         );
     }

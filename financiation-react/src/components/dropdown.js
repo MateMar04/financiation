@@ -3,7 +3,6 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 import { Dropdown } from 'primereact/dropdown';
 import "../assets/styles/dropdown.css"
-import { Container } from 'react-bootstrap';
 
 export default function SelectArea() {
     const [selectedCity, setSelectedCity] = useState(null);
@@ -23,7 +22,7 @@ export default function SelectArea() {
     return (
         <div className="card flex justify-content-center">
             <Dropdown value={selectedCity} onChange={(e) => setSelectedCity(e.value)} options={cities} optionLabel="name"
-                      showClear placeholder="Seleccione Area" className="w-full md:w-14rem" />
+                      showClear placeholder="Seleccione Área" className="w-full md:w-14rem" />
             </div>
     )
 }

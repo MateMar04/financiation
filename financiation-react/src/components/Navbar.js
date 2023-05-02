@@ -7,9 +7,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "../assets/styles/Navbar.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-
-
-
 function NavScrollExample() {
     return (
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
