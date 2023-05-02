@@ -1,4 +1,23 @@
 import './App.css';
+import NavScrollExample from "./components/Navbar";
+import Bienvenida from "./components/bienvenida";
+import Login from "./components/login";
+import Signinform from "./components/signInForm";
+import MyModal from './components/succesfull';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+function App() {
+  return (
+    <div className="App">
+        <NavScrollExample />
+        <Bienvenida/>
+        <Login/>
+        <Signinform/>
+        <MyModal/>
+    </div>
+  );
+}
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Landing from "./containers/Landing";
