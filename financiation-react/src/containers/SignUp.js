@@ -10,6 +10,7 @@ import {connect} from "react-redux";
 import {signup} from "../actions/auth";
 
 
+
 const Signup = ({signup, isAuthenticated}) => {
     const [accountCreated, setAccountCreated] = useState(false)
     const [formData, setFormData] = useState({
