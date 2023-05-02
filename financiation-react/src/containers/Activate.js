@@ -4,14 +4,13 @@ import Button from "react-bootstrap/Button";
 import {connect} from "react-redux";
 import {verify} from "../actions/auth";
 import '../assets/styles/login.css'
-import {Navigate} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 
-const Activate = ({verify, match}) => {
-
+const Activate = ({verify}) => {
+    const {uid} = useParams();
+    const {token} = useParams();
     const [verified, setVerified] = useState(false)
     const verify_account = e => {
-        const uid = match.params.uid;
-        const token = match.params.token;
         verify(uid, token);
         setVerified(true)
     };
