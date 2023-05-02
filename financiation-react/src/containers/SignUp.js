@@ -4,8 +4,7 @@ import Logo from "../assets/images/PRUEBA.PNG";
 import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import PasswordInput from "../components/PasswordInput";
-import Button from "react-bootstrap/Button";
-import "../assets/styles/signIn.css"
+import Button from "react-bootstrap/Button";    
 import {Link} from "react-router-dom";
 
 const SingUp = () => (
