@@ -4,7 +4,7 @@ import Logo from "../assets/images/PRUEBA.PNG";
 import Form from "react-bootstrap/Form";
 import {Col, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import "../assets/styles/signIn.css"
+import "../assets/styles/login.css"
 import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {signup} from "../actions/auth";
