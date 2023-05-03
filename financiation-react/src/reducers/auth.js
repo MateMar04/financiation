@@ -1,9 +1,13 @@
 import {
+    ACTIVATION_FAIL,
+    ACTIVATION_SUCCESS,
     AUTHENTICATED_FAIL,
     AUTHENTICATED_SUCCESS,
     LOGIN_FAIL,
     LOGIN_SUCCESS,
     LOGOUT,
+    SIGNUP_FAIL,
+    SIGNUP_SUCCESS,
     USER_LOADED_FAIL,
     USER_LOADED_SUCCESS
 } from '../actions/types'
@@ -23,20 +27,37 @@ export default function (state = initialState, action) {
                 ...state,
                 isAuthenticated: true
             }
-        case AUTHENTICATED_FAIL:
-            return {
-                ...state,
-                isAuthenticated: false
-            }
         case LOGIN_SUCCESS:
             localStorage.setItem('access', payload.access)
+            localStorage.setItem('refresh', payload.refresh)
             return {
                 ...state,
                 isAuthenticated: true,
                 access: payload.access,
                 refresh: payload.refresh
             }
+        case SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: false
+            }
+        case USER_LOADED_SUCCESS:
+            return {
+                ...state,
+                user: payload
+            }
+        case AUTHENTICATED_FAIL:
+            return {
+                ...state,
+                isAuthenticated: false
+            }
+        case USER_LOADED_FAIL:
+            return {
+                ...state,
+                user: null
+            }
         case LOGIN_FAIL:
+        case SIGNUP_FAIL:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             return {
@@ -47,8 +68,8 @@ export default function (state = initialState, action) {
                 user: null
             }
         case LOGOUT:
-            localStorage.removeItem('access')
-            localStorage.removeItem('refresh')
+            localStorage.removeItem('access');
+            localStorage.removeItem('refresh');
             return {
                 ...state,
                 access: null,
@@ -56,17 +77,11 @@ export default function (state = initialState, action) {
                 isAuthenticated: false,
                 user: null
             }
-        case USER_LOADED_SUCCESS:
+        case ACTIVATION_SUCCESS:
+        case ACTIVATION_FAIL:
             return {
-                ...state,
-                user: payload
+                ...state
             }
-        case USER_LOADED_FAIL:
-            return {
-                ...state,
-                user: null
-            }
-
         default:
             return state
     }
