@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password_confirm} from "../actions/auth";
 
@@ -14,6 +14,9 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
     const {new_password, re_new_password} = formData;
 
     const onChange = e => setFormData({...formData, [e.target.name]: e.target.value});
+
+    const {uid} = useParams();
+    const {token} = useParams();
 
     const onSubmit = e => {
         e.preventDefault();
