@@ -21,10 +21,6 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
     const onSubmit = e => {
         e.preventDefault();
 
-        const uid= match.params.uid;
-        const token= match.params.token;
-
-
         reset_password_confirm(uid, token, new_password, re_new_password);
         setRequestSent(true);
     };
