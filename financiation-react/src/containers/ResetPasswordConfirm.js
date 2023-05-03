@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Navigate, useParams } from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password_confirm} from "../actions/auth";
 
@@ -8,7 +8,7 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
     const [requestSent, setRequestSent] = useState(false);
     const [formData, setFormData] = useState({
         new_password: '',
-        re_new_password:''
+        re_new_password: ''
     });
 
     const {new_password, re_new_password} = formData;

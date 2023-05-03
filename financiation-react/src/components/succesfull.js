@@ -1,15 +1,11 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from 'react-bootstrap';
+import {Button, Modal} from 'react-bootstrap';
 import '../assets/styles/succesfull.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
 
 let Check = require('../assets/images/checked.png');
-
-
-
 
 
 function MyModal() {
@@ -32,7 +28,7 @@ function MyModal() {
 
                 <Modal.Body>
                     <div id='a'>
-                        <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid" fluid />
+                        <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid" fluid/>
 
                     </div>
                     <p className="text-center">
