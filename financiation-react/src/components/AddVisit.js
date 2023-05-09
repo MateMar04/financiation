@@ -4,7 +4,7 @@ const AddVisit = () => {
   const [flyer, setImage] = useState(null);
   const [distance, setDistance] = useState("");
   const [travel_time, setTravelTime] = useState("");
-  const [visit_date, setVisitDate] = useState("");
+  const [visit_date, setVisitDate] = useState("");  
   const [civil_registration, setCivilRegistration] = useState("");
   const [accommodation, setAccommodation] = useState("");
   const [modernization_fund, setModernizationFund] = useState("");
