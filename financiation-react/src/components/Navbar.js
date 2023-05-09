@@ -16,19 +16,19 @@ const NavigationBar = ({logout, isAuthenticated}) => {
 
     const guestLinks = () => (
         <Fragment>
-            <li className='nav-item'>
-                <Link to="/login/">Iniciar Sesion</Link>
-            </li>
-            <li className='nav-item'>
-                <Link to="/signup/">Crear Cuenta</Link>
-            </li>
+            <Nav.Item>
+                <Nav.Link to="/login/">Iniciar Sesion</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+                <Nav.Link to="/signup/">Crear Cuenta</Nav.Link>
+            </Nav.Item>
         </Fragment>
     );
 
     const authLinks = () => (
-        <li className='nav-item'>
+        <Nav.Item>
             <a className="nav-link" href="#!" onClick={logout}>Cerrar Sesion</a>
-        </li>
+        </Nav.Item>
     );
 
     return (
