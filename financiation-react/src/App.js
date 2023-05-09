@@ -24,6 +24,7 @@ const App = () => (
                     <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm/>}/>
                     <Route exact path='/activate/:uid/:token' element={<Activate/>}/>
                     <Route exact path='/successful' element={<MyModal/>}/>
+                    <Route exact path='/AddVisit' element={<AddVisit/>}/>
                 </Routes>
             </Layout>
         </Router>
