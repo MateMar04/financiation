@@ -11,6 +11,7 @@ import Layout from "./hocs/Layout";
 import {Provider} from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
+import AddVisit from './components/AddVisit';
 
 const App = () => (
     <Provider store={store}>
