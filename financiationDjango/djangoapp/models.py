@@ -91,12 +91,13 @@ class ContactedReferrer(models.Model):
 
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, username, email, first_name, last_name, ssn, password=None):
+    def create_user(self, username, email, first_name, last_name, ssn, phone_number, password=None):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn)
+        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
+                          phone_number=phone_number)
 
         user.set_password(password)
         user.save()
@@ -126,7 +127,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     phone_number = models.BigIntegerField()
-    #profile_picture = models.TextField()
+    # profile_picture = models.TextField()
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
