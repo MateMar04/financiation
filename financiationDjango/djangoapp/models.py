@@ -103,13 +103,13 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, username, email, first_name, last_name, ssn, password=None, is_staff=True):
+    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
-                          is_staff=is_staff)
+                          is_staff=is_staff, phone_number=phone_number)
 
         user.set_password(password)
         user.save()
@@ -125,16 +125,16 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     ssn = models.BigIntegerField()
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    """
-    profile_picture = models.TextField()
-    id_role = models.ForeignKey(Role, models.DO_NOTHING)
-    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
-    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
-    """
+    phone_number = models.BigIntegerField()
+    #profile_picture = models.TextField()
+    id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
+    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING, null=True)
+    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
+
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn', 'phone_number']
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
@@ -144,16 +144,6 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.ssn} -> {self.username}"
-
-
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    ssn = models.BigIntegerField()
-    password = models.TextField()
-    profile_picture = models.TextField()
-    id_role = models.ForeignKey(Role, models.DO_NOTHING)
-    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING)
-    id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING)
 
 
 class Group(models.Model):
@@ -192,12 +182,12 @@ class RequestStatus(models.Model):
 
 
 class Coordinator(models.Model):
-    id_user = models.OneToOneField(User, models.DO_NOTHING)
+    id_user = models.OneToOneField(UserAccount, models.DO_NOTHING)
     id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
 
 class Advisor(models.Model):
-    id_user = models.ForeignKey(User, models.DO_NOTHING)
+    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
     id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
     unique_together = (('id_user', 'id_group'),)
@@ -224,12 +214,17 @@ class ContactedReferrerEmail(models.Model):
 
 class UserEmail(models.Model):
     mail = models.CharField(max_length=100)
-    id_user = models.ForeignKey(User, models.DO_NOTHING)
+    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
 
 
 class MayorPhone(models.Model):
     phone = models.BigIntegerField()
     id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+
+
+class UserPhone(models.Model):
+    phone = models.BigIntegerField()
+    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
 
 
 class ContactedReferrerPhone(models.Model):
