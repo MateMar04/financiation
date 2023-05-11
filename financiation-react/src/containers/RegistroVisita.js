@@ -8,6 +8,22 @@ import { Form } from 'react-bootstrap';
 
 export default function RegistroVisita() {
 
+    const areasDeTrabajo = [
+        'Ventas',
+        'Marketing',
+        'Desarrollo',
+        'Recursos Humanos',
+        'Operaciones',
+    ];
+
+    const localidades = [
+        'Ciudad A',
+        'Ciudad B',
+        'Ciudad C',
+        'Ciudad D',
+        'Ciudad E',
+    ];
+
     return (
         <Container fluid>
             <Container>
@@ -16,14 +32,15 @@ export default function RegistroVisita() {
                         <h2 id="tittle">Registro de Visitas</h2>
                     </container>
                     <container id="containerregi">
-                        <input type="text" id="input2" placeholder="Localidad" />
-                        <Form.Control id="input2" as="textarea" rows={3} />
+                        <Form.Control id="input2" as="select"><option value="">Selecciona una localidad</option>{localidades.map((localidad, index) =>
+                            (<option key={index} value={localidad}>{localidad}</option>))}</Form.Control>
+                        <Form.Control id="input2" as="select"> {areasDeTrabajo.map((area, index) => (<option key={index}>{area}</option>))}</Form.Control>
                         <Form.Control type="date" id="inputdate" name="dob" placeholder="Fecha" />
                     </container>
                     <container id="containerregi">
                         <input type="text" id="inpu1" placeholder="Nombre" />
                         <input type="text" id="inpu2" placeholder="Cargo" />
-                        <Form.Control id="inputnum" type="tel" placeholder="Numero" />                    
+                        <Form.Control id="inputnum" type="tel" placeholder="Numero" />
                     </container>
                     <container id="containerregi">
                         <Form.Control id="inp1" type="time" />
