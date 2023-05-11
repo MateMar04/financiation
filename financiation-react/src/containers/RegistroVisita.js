@@ -6,43 +6,33 @@ import Container from "react-bootstrap/esm/Container";
 import Button from 'react-bootstrap/Button';
 import { Form } from 'react-bootstrap';
 
-export default function Registrovisita() {
-    const [value2, setValue2] = useState();
-    const [selectedCity, setSelectedCity] = useState(null);
-    const localidades = [
-        { name: 'Alta Gracia', code: 'NY' },
-        { name: 'Cosquin', code: 'RM' },
-        { name: 'Villa Carlos Paz', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-
-    ];
+export default function RegistroVisita() {
 
     return (
-        <div className="container-fluid">
-            <div className="wrapper fadeInDown">
-                <div id="formContent">
-                    <div>
+        <Container fluid>
+            <Container>
+                <row classname=" " id="Rowcontent">
+                    <container>
                         <h2 id="tittle">Registro de Visitas</h2>
-                    </div>
-                    <div className="container">
+                    </container>
+                    <container id="containerregi">
                         <input type="text" id="input2" placeholder="Localidad" />
-                        <input type="text" id="input2" placeholder="Area" />
-                        <Form.Control type="date" id="input3" name="dob" placeholder="Fecha" />
-                    </div>
-                    <div className="container">
-                        <input type="text" id="input1" placeholder="Nombre" />
-                        <input type="text" id="input2" placeholder="Cargo" />
-                        <input type="text" id="input3" placeholder="Numero" />
-                    </div>
-                    <div className="container">
-                        <input type="text" id="inputt1" placeholder="Rango Horario" />
-                        <input type="text" id="inputt2" placeholder="Lugar" />
+                        <Form.Control id="input2" as="textarea" rows={3} />
+                        <Form.Control type="date" id="inputdate" name="dob" placeholder="Fecha" />
+                    </container>
+                    <container id="containerregi">
+                        <input type="text" id="inpu1" placeholder="Nombre" />
+                        <input type="text" id="inpu2" placeholder="Cargo" />
+                        <Form.Control id="inputnum" type="tel" placeholder="Numero" />                    
+                    </container>
+                    <container id="containerregi">
+                        <Form.Control id="inp1" type="time" />
+                        <input type="text" id="inp2" placeholder="Lugar" />
                         <Button id="bt1" variant="primary">Registar</Button>{' '}
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </container>
+                </row>
+            </Container>
+        </Container>
 
     )
 }

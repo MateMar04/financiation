@@ -3,7 +3,7 @@
   margin-bottom: 30px;
 }
 
-.container{
+#containerregi{
   display: flex;
   flex-direction: row;
   margin-bottom: 80px;
@@ -12,37 +12,60 @@
 #input1{
   margin-right: 20px;
   width: 400px;
+  height: 57px;
 }
 
 
 #input2{
   margin-right: 10px;
   width: 400px;
+  height: 57px;
 }
 
-#input3{
+#inputdate{
   margin-right: 10px;
-  height: 57px;
-  margin-top: 5px;
+  height: 58px;
   width: 400px;
 }
 
-#inputt1{
-  margin-right: 20px;
-  width: 340px;
+#inpu1{
+  margin-right: 10px;
+  width: 400px;
+  height: 57px;
 }
 
-#inputt2{
+#inpu2{
+  margin-right: 10px;
+  width: 400px;
+  height: 57px;
+}
+
+#inputnum{
+  margin-right: 10px;
+  height: 58px;
+  width: 400px;
+}
+
+#inp1{
   margin-right: 20px;
-  width: 340px;
+  width: 400px;
+  height: 57px;
+}
+
+#inp2{
+  margin-right: 10px;
+  width: 400px;
+  height: 57px;
 }
 
 #bt1{
+  width: 100px;
+  height: 57px;
   margin-left: 120px;
   padding: 5px 10px;
 }
 
-#formContent {
+#Rowcontent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
   background: #fff;
