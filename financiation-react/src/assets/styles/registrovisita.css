@@ -1,0 +1,57 @@
+#tittle{
+  color: lightblue;
+  margin-bottom: 30px;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 80px;
+}
+
+#input1{
+  margin-right: 20px;
+  width: 400px;
+}
+
+
+#input2{
+  margin-right: 10px;
+  width: 400px;
+}
+
+#input3{
+  margin-right: 10px;
+  height: 57px;
+  margin-top: 5px;
+  width: 400px;
+}
+
+#inputt1{
+  margin-right: 20px;
+  width: 340px;
+}
+
+#inputt2{
+  margin-right: 20px;
+  width: 340px;
+}
+
+#bt1{
+  margin-left: 120px;
+  padding: 5px 10px;
+}
+
+#formContent {
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border-radius: 10px 10px 10px 10px;
+  background: #fff;
+  width: 90%;
+  max-width: 1100px;
+  position: relative;
+  padding: 0;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+  text-align: center;
+  justify-content: center;
+}
