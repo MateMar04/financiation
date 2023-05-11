@@ -1,14 +1,12 @@
-import React from "react"
+import React, {Fragment} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import "../assets/styles/Navbar.css"
+import "../assets/styles/navbar.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-
-
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {logout} from "../actions/auth";
@@ -69,35 +67,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {logout})(NavigationBar);
-
-/*
-<Navbar expand="lg" id="navbarcs" className="navbarcs">
-            <Container className="col-md-2">
-                <Navbar.Brand href="#home" id="logoboton" alt='logoboton'><img src={logofinanzas} id='logoboton'
-                    alt="logo de ministerio de finanzas"></img></Navbar.Brand>
-            </Container>
-
-                <Navbar.Toggle aria-controls="navbarScroll"/>
-                <Navbar.Collapse>
-                    <Container className="col-md-7">
-                    <Nav>
-                        <Nav.Link href="#action1" id="navbar">Nueva Consulta</Nav.Link>
-                        <Nav.Link href="#action2" id="navbar">Hoja de Rutas</Nav.Link>
-                        <Nav.Link href="#action3" id="navbar">Grupos</Nav.Link>
-                        <Nav.Link href="#action4" id="navbar">Calendario</Nav.Link>
-                    </Nav>
-                    </Container>
-
-                    <Form className="accederbutton">
-                        <Button variant="outline-light">Acceder</Button>{' '}
-                    </Form>
-
-                </Navbar.Collapse>
-
-        </Navbar >
-
-    );
-}
-
-export default NavScrollExample;
- */

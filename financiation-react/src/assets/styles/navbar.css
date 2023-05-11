@@ -3,19 +3,22 @@
     max-height: 20%;
     text-align: left;
 }
+
+#buscador {
+    border: 2px solid #1fa4e6;
+    max-width: 70%;
+}
+
 #navbar {
     color: rgb(255, 255, 255);
-    padding: 15px;
+    padding: 30px;
 }
 
 #logoboton {
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 200px;
+    max-height: fit-content;
     overflow-y: hidden;
-}
 
-.accederbutton{
-    padding:10px;
 }
 
 .nav-link {

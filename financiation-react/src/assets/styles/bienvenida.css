@@ -1,32 +1,63 @@
 * {
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-.general {
+.background {
+    margin: 0;
     padding: 0;
+    background-color: lightblue;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
 }
 
 .imagen {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     object-fit: cover;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.card {
+    text-align: center;
+}
+
+
+@media screen and (min-width: 1000px) {
+    #carta {
+        position: absolute;
+        min-height: fit-content;
+        height: auto;
+        top: 10vh;
+        left: 30vw;
+        right: 30vw;
+    }
+}
+
+
+@media screen and (max-width: 1000px) and (min-width: 700px) {
+    #carta {
+        position: absolute;
+        min-height: fit-content;
+        height: auto;
+        top: 10vh;
+        left: 20vw;
+        right: 20vw;
+    }
 
 }
 
-.informacion {
-    display: flex;
-    align-items: center;
-}
+@media screen and (max-width: 700px) {
+    #carta {
+        position: absolute;
+        min-height: fit-content;
+        height: auto;
+        top: 10vh;
+        left: 10vw;
+        right: 10vw;
 
-.carta {
-    margin: 2vh;
-    padding: 2vh;
-}
-
-.boton {
-    width: 90%;
-}
-
-.contenedor {
-    margin: 1vh;
+    }
 }
