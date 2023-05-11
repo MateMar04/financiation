@@ -1,5 +1,75 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+const AddVisit=()=>{
+  const[name,setName]=useState("")
+  const[description,setDescription]=useState("")
+
+  const navigate = useNavigate();
+
+
+  const AddVisitStatus=async()=>{
+    let formField=new FormData()
+    
+    
+    formField.append('name',name)
+    formField.append('description',description)
+
+    await axios ({
+      method: 'post',
+      url:'http://localhost:8000/api/',
+      data: formField
+
+    }).then((response)=>{
+      console.log(response.data);
+      navigate.push('/')
+
+    })
+
+
+  }
+
+  return(
+    <div>
+      <div className='container'>
+
+        <div className='form-control'>
+
+          <div className='form-group'>
+          <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Visit status name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            </div>
+          </div>
+          <div className='form-control'>
+          
+
+          <div className='form-group'>
+          <input
+              type="text"
+              className="form-control form-control-lg"
+              placeholder="Enter Visit status description"
+              name="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+
+          </div>
+          <button className='btn btn-success'onClick={AddVisitStatus}>Add Visit status</button>
+          
+          </div>
+        </div>
+      </div>
+  );
+};
+
+/*
 const AddVisit = () => {
   const [flyer, setImage] = useState(null);
   const [distance, setDistance] = useState("");
@@ -17,6 +87,8 @@ const AddVisit = () => {
   const [id_agreement, setAgreement] = useState("");
   const [id_contacted_referrer, setContactedReferrer] = useState("");
   const [id_address, setAddress] = useState("");
+
+
 
   return (
     <div>
@@ -95,42 +167,51 @@ const AddVisit = () => {
               name="place_name"
               value={place_name}
               onChange={(e) => setPlaceName(e.target.value)}
-            /><input
+              
+
+              
+            />
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_locality"
             name="id_locality"
             value={id_locality}
             onChange={(e) => setLocality(e.target.value)}
-            /><input
+            />
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_group"
             name="id_group"
             value={id_group}
             onChange={(e) => setGroup(e.target.value)}
-            /><input
+            />
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_visit_status"
             name="id_visit_status"
             value={id_visit_status}
             onChange={(e) => setVisitStatus(e.target.value)}
-            /><input
+            />
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_agreement"
             name="id_agreement"
             value={id_agreement}
             onChange={(e) => setAgreement(e.target.value)}
-            /><input
+            />
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_contacted_referrer"
             name="id_contacted_referrer"
             value={id_contacted_referrer}
             onChange={(e) => setContactedReferrer(e.target.value)}
-            /> <input
+            /> 
+            <input
             type="text"
             className="form-control form-control-lg"
             placeholder="Enter id_address"
@@ -139,12 +220,12 @@ const AddVisit = () => {
             onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-        <button className='btn btn-success' onClick={AddVisit} >Submit</button>
+          <button className='btn btn-success' onClick={AddVisit} >Submit</button>
 
         </div>
       </div>
     </div>
   );
 };
-
-export default AddVisit;
+*/
+export default AddVisit; 
