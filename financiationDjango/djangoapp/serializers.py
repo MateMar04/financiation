@@ -1,14 +1,13 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
-
-"""from .models import Project
+from .models import Project
 
 class ProjectSerializer(serializers.ModelSerializer) :
     class Meta:
         model = Project
         fields = ('id', 'title', 'description', 'technology', 'created_at')
         read_only_fields = ('created_at', )
-"""
+
 
 User = get_user_model()
 
