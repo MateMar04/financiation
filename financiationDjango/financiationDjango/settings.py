@@ -1,6 +1,5 @@
 import os.path
 from pathlib import Path
-from datetime import timedelta, datetime
 
 import rest_framework.permissions
 
@@ -112,11 +111,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+"""
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'build/static')
 ]
-
+"""
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
@@ -131,8 +130,6 @@ REST_FRAMEWORK = {
 
 SIMPLE_JWT = {
    'AUTH_HEADER_TYPES': ('JWT',),
-   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-   'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
 DJOSER = {

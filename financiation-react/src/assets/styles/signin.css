@@ -34,6 +34,7 @@ h2 {
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   min-height: 100%;
   padding: 20px;
 }
@@ -43,7 +44,7 @@ h2 {
   border-radius: 10px 10px 10px 10px;
   background: #fff;
   width: 90%;
-  max-width: 450px;
+  max-width: 700px;
   position: relative;
   padding: 0;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
@@ -84,7 +85,6 @@ input[type=button], input[type=submit], input[type=reset] {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  text-transform: uppercase;
   font-size: 13px;
   -webkit-box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
   box-shadow: 0 10px 30px 0 rgba(95, 186, 233, 0.4);
@@ -110,17 +110,16 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
   transform: scale(0.95);
 }
 
-input[type=text], [type=password] {
+input[type=text], [type=password], input[type=tel], input[type=email] {
   background-color: #f6f6f6;
   color: #0d0d0d;
   padding: 15px 32px;
   text-align: center;
-  align-items: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 5px;
-  width: 80%;
+  width: 95%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -131,20 +130,10 @@ input[type=text], [type=password] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, [type=password]:focus, input[type=tel]:focus, input[type=email]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
-
-input[type=text]::placeholder {
-  color: #cccccc;
-}
-
-
-.input-wrap {
-  position: relative;
-}
-
 
 /* ANIMATIONS */
 
@@ -300,25 +289,18 @@ input[type=text]::placeholder {
   width: 60%;
 }
 
-.LOGOGOBIERNO {
-  height: auto;
+
+#LOGOGOB {
   width: auto;
-  object-fit: fill;
+  margin: 15px;
+
 }
 
-.registrarse {
-  padding: 10px;
+.row {
+  margin-bottom: 20px;
+  margin-top: 5px;
 }
 
-.input-wrapper {
-  position: relative;
-  display: inline;
-}
-
-.boton-puton {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
+input[type=text]::placeholder, [type=password]::placeholder, input[type=tel]::placeholder, input[type=email]::placeholder {
+  color: #282c34;
 }
