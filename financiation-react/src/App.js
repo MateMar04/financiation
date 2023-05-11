@@ -12,6 +12,7 @@ import Layout from "./hocs/Layout";
 import { Provider } from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
+import GroupCard from './components/Groupcard';
 
 const App = () => (
   <Provider store={store}>
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route exact path='/' element={<Landing />} />
           <Route path='/login' element={<LogIn />} />
+          <Route path='/CartaGrupo' element={<GroupCard />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/reset-password' element={<ResetPassword />} />
           <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
