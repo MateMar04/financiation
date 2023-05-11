@@ -6,10 +6,10 @@
     background-color:#fff8ff;
     border: none;
     
-    
-    box-shadow: rgba(17, 12, 46, 0.1) 5px 5px 10px 0;
+    font-family: 'roboto';
+    box-shadow: rgba(42, 20, 165, 0.1) 10px 10px 10px 0;
 
-    max-width: 700px;
+    max-width: 65%;
          
     position: relative;
     top: 10%;
@@ -19,6 +19,11 @@
     margin: auto;
 }
 .cont1{
-    border-bottom: 2px solid #1fa4e6;
-    border-right: 2px solid #1fa4e6;
+    border-bottom: 2px solid #d4c8ff;
+    border-right: 2px solid #d4c8ff;
+    
+}
+.columnas{
+    
+    
 }
