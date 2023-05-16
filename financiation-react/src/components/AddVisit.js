@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import "../assets/styles/AddVisit.css"
+
 
 const navigate = useNavigate;
 
@@ -55,7 +57,7 @@ const AddVisit = () => {
 
     return (
       
-        <div className="container">
+        <div className="container scrolling">
           <div className="from-group">
             <div className="form-control">
 
