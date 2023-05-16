@@ -1,16 +1,17 @@
 .row1 {
     border-color: blue;
+
 }
 
 .CartaGroupcard {
-    background-color:#fff8ff;
+    background-color: #f1f1f1;
     border: none;
-    
+
     font-family: 'roboto';
     box-shadow: rgba(42, 20, 165, 0.1) 10px 10px 10px 0;
 
     max-width: 65%;
-         
+
     position: relative;
     top: 10%;
     bottom: 10%;
@@ -18,12 +19,46 @@
     right: 0;
     margin: auto;
 }
-.cont1{
+
+.cont1 {
     border-bottom: 2px solid #d4c8ff;
     border-right: 2px solid #d4c8ff;
-    
+
 }
-.columnas{
+
+
+.rowgroupcard {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.colgroupcard {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.rowgroupcard {
+    background-color: #f1f1f1;
+    padding: 5px;
+}
+
+.colgroupcard {
+    background-color: #f1f1f1;
+    padding: 5px;
+    font-size: medium;
+    font-family: sans-serif;
+}
+.PrimeraColumna{
     
-    
+    text-align: center;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+    text-transform: uppercase;
+    color: #333333;
+    font-weight: bold;
+
 }

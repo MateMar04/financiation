@@ -13,7 +13,7 @@ import { Provider } from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
 import GroupCard from './components/Groupcard';
-
+import GroupCard2 from './components/Groupcard2';
 const App = () => (
   <Provider store={store}>
     <Router>
