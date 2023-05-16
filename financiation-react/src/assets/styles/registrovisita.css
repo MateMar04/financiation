@@ -9,14 +9,12 @@
   margin-bottom: 80px;
 }
 
-#input1{
-  margin-right: 20px;
-  width: 400px;
-  height: 57px;
+.row {
+  display: flex; 
 }
 
-
-#input2{
+#input {
+  flex: 1; 
   margin-right: 10px;
   width: 400px;
   height: 57px;
@@ -28,34 +26,10 @@
   width: 400px;
 }
 
-#inpu1{
-  margin-right: 10px;
-  width: 400px;
-  height: 57px;
-}
-
-#inpu2{
-  margin-right: 10px;
-  width: 400px;
-  height: 57px;
-}
-
 #inputnum{
   margin-right: 10px;
   height: 58px;
   width: 400px;
-}
-
-#inp1{
-  margin-right: 20px;
-  width: 400px;
-  height: 57px;
-}
-
-#inp2{
-  margin-right: 10px;
-  width: 400px;
-  height: 57px;
 }
 
 #bt1{
