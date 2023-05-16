@@ -1,16 +1,17 @@
+from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
-from .models import VisitStatus
+from .models import Visit
 
 class ProjectSerializer(serializers.ModelSerializer) :
     class Meta:
-        model = VisitStatus
-        fields = ('id', 'title', 'description', 'technology', 'created_at')
-        read_only_fields = ('created_at', )
-
+        model = Visit
+        fields = ('flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
+                    'accommodation', 'modernization_fund', 'start_time', 'finish_time',
+                    'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+                    'id_contacted_referrer', 'id_address', 'id_logo')
 
 User = get_user_model()
-
 
 class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
