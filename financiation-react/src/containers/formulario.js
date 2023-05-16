@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import "../assets/styles/formulario.css"
 
 
-const MyComponent = () => {
+const Formulario = () => {
     const [selectedOption, setSelectedOption] = useState(null);
 
-    const handleDropdownChange = (eventKey) => {
-        setSelectedOption(eventKey);
+    const handleDropdownChange = (event) => {
+        setSelectedOption(event.target.value);
     };
 
     return (
-        <div>
-            <Dropdown onSelect={handleDropdownChange}>
-                <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                    Seleccionar opción
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                    <Dropdown.Item eventKey="componente1">Componente 1</Dropdown.Item>
-                    <Dropdown.Item eventKey="componente2">Componente 2</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+        <Container className="general1">
+            <Row className="justify-content-md-center">
+            <Col md="3">
+            <select value={selectedOption} onChange={handleDropdownChange} className="dropdowAreas">
+                <option value="">Seleccionar opción</option>
+                <option value="componente1">Componente 1</option>
+                <option value="componente2">Componente 2</option>
+            </select>
 
             {selectedOption === "componente1" && <Componente1 />}
             {selectedOption === "componente2" && <Componente2 />}
-        </div>
+            </Col>
+                </Row>
+
+        </Container>
     );
 };
 
@@ -37,4 +39,4 @@ const Componente2 = () => {
     return <h2>Componente 2</h2>;
 };
 
-export default MyComponent;
+export default Formulario;
