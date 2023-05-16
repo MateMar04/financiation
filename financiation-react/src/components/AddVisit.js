@@ -2,74 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddVisit=()=>{
-  const[name,setName]=useState("")
-  const[description,setDescription]=useState("")
-
-  const navigate = useNavigate();
 
 
-  const AddVisitStatus=async()=>{
-    let formField=new FormData()
-    
-    
-    formField.append('name',name)
-    formField.append('description',description)
-
-    await axios ({
-      method: 'post',
-      url:'http://localhost:8000/api/',
-      data: formField
-
-    }).then((response)=>{
-      console.log(response.data);
-      navigate.push('/')
-
-    })
-
-
-  }
-
-  return(
-    <div>
-      <div className='container'>
-
-        <div className='form-control'>
-
-          <div className='form-group'>
-          <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Visit status name"
-              name="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            </div>
-          </div>
-          <div className='form-control'>
-          
-
-          <div className='form-group'>
-          <input
-              type="text"
-              className="form-control form-control-lg"
-              placeholder="Enter Visit status description"
-              name="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
-
-          </div>
-          <button className='btn btn-success'onClick={AddVisitStatus}>Add Visit status</button>
-          
-          </div>
-        </div>
-      </div>
-  );
-};
-
-/*
 const AddVisit = () => {
   const [flyer, setImage] = useState(null);
   const [distance, setDistance] = useState("");
@@ -88,6 +22,37 @@ const AddVisit = () => {
   const [id_contacted_referrer, setContactedReferrer] = useState("");
   const [id_address, setAddress] = useState("");
 
+  const AddVisit=async()=>{
+    let formField=new FormData()
+    
+    formField.append('distance',distance)
+    formField.append('travel_time',travel_time)
+    formField.append('visit_date',visit_date)
+    formField.append('civil_registration',civil_registration)
+    formField.append('accommodation',accommodation)
+    formField.append('modernization_fund',modernization_fund)
+    formField.append('start_time',start_time)
+    formField.append('finish_time',finish_time)
+    formField.append('place_name',place_name)
+    formField.append('id_locality',id_locality)
+    formField.append('id_group',id_group)
+    formField.append('id_visit_status',id_visit_status)
+    formField.append('id_agreement',id_agreement)
+    formField.append('id_contacted_referrer',id_contacted_referrer)
+    formField.append('id_address',id_address)
+
+    const navigate = useNavigate;
+
+    await axios ({
+      method: 'post',
+      url:'http://localhost:8000/api',
+      data: formField
+
+    }).then((response)=>{
+      console.log(response.data);
+      navigate.push('/')
+
+    })
 
 
   return (
@@ -226,6 +191,6 @@ const AddVisit = () => {
       </div>
     </div>
   );
+  };
 };
-*/
-export default AddVisit; 
+export default AddVisit;
