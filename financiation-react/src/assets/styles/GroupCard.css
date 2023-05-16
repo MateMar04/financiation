@@ -7,7 +7,7 @@
     background-color: #f1f1f1;
     border: none;
 
-    font-family: 'roboto';
+    
     box-shadow: rgba(42, 20, 165, 0.1) 10px 10px 10px 0;
 
     max-width: 65%;
@@ -23,6 +23,7 @@
 .cont1 {
     border-bottom: 2px solid #d4c8ff;
     border-right: 2px solid #d4c8ff;
+    font-weight: bold;
 
 }
 
@@ -31,6 +32,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 10px 0;
+    
 }
 
 .colgroupcard {
@@ -61,4 +63,8 @@
     color: #333333;
     font-weight: bold;
 
+}
+.cont2{
+    border-color: #333333;
+    border-top: 2px solid #d4c8ff;
 }

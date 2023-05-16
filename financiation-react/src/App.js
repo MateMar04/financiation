@@ -22,6 +22,7 @@ const App = () => (
           <Route exact path='/' element={<Landing />} />
           <Route path='/login' element={<LogIn />} />
           <Route path='/CartaGrupo' element={<GroupCard />} />
+          <Route path='/CartaGrupo2' element={<GroupCard2 />} />
           <Route exact path='/signup' element={<SignUp />} />
           <Route exact path='/reset-password' element={<ResetPassword />} />
           <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />

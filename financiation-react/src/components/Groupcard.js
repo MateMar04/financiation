@@ -74,7 +74,17 @@ function GroupCard() {
             </Row>
         </Container>
         
-
+        <Container fluid className='cont2'>
+          <Row xs={1} md={1} >
+          
+            
+            
+            
+            <Col className=''>Grupo asignado a la ciudad de Carlos Paz 
+            <p></p>Estado: En progreso </Col>
+            
+            </Row>
+        </Container>
 
 
         
