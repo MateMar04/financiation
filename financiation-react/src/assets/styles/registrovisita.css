@@ -3,40 +3,9 @@
   margin-bottom: 30px;
 }
 
-#containerregi{
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 80px;
-}
-
-.row {
-  display: flex; 
-}
-
-#input {
-  flex: 1; 
-  margin-right: 10px;
-  width: 400px;
-  height: 57px;
-}
-
-#inputdate{
-  margin-right: 10px;
-  height: 58px;
-  width: 400px;
-}
-
-#inputnum{
-  margin-right: 10px;
-  height: 58px;
-  width: 400px;
-}
-
-#bt1{
-  width: 100px;
-  height: 57px;
-  margin-left: 120px;
-  padding: 5px 10px;
+#RegistroVisita {
+  overflow: auto; 
+  height: 100vh; 
 }
 
 #Rowcontent {
@@ -45,10 +14,34 @@
   background: #fff;
   width: 90%;
   max-width: 1100px;
-  position: relative;
   padding: 0;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
   justify-content: center;
 }
+
+#input {
+  flex: 1; 
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 400px;
+  height: 57px;
+}
+
+#bt1{
+  width: 48%; 
+  height: 40px; 
+  font-size: 14px; 
+  margin-left: 10px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  #bt1 {
+    
+  }
+}
+
