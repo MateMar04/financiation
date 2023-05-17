@@ -1,4 +1,80 @@
 
-.dropdowAreas{
+.wrapper {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper .title {
+    font-size: 14px;
+    color: white;
+}
+
+.select_wrap {
+    width: 225px;
+    margin: 10px auto;
+    position: relative;
+}
+
+.select_wrap .default_option {
+    background: white;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+.select_wrap .default_option .icon {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    height: 20px;
+    transition: all 0.5s ease;
+}
+
+.select_wrap .default_option li {
+    padding: 12px 20px;
+    font-weight: 700;
+}
+
+.select_wrap .select_ul {
+    position: absolute;
+    top: 50px;
+    left: 0;
     width: 100%;
+    padding: 10px;
+    background: white;
+    border-radius: 3px;
+    display: none;
+}
+
+.select_wrap .select_ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-bottom: 1px;
+}
+
+.select_wrap .select_ul li:last-child {
+    margin-bottom: 0;
+}
+
+.select_wrap .select_ul li:hover,
+.select_wrap .select_ul li.active {
+    background: grey;
+}
+
+.select_wrap .option {
+    display: flex;
+    align-items: center;
+}
+
+.select_wrap.active .select_ul {
+    display: block;
+}
+
+.select_wrap.active .default_option .icon {
+    top: 13px;
+    transform: rotate(180deg);
 }
