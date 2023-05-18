@@ -29,4 +29,7 @@ class Migration(migrations.Migration):
     """
      migrations.RunSQL("INSERT INTO djangoapp_citydepartment (name, description) ")
      migrations.RunSQL("INSERT INTO djangoapp_locality (name, department_id)")
+     migrations.RunSQL("INSERT INTO djangoapp_mayor" (first_name, last_name)")
+     migrations.RunSQL("INSERT INTO djangoapp_logo" (name, description)")
+     migrations.RunSQL("INSERT INTO djangoapp_politicparty)
      """
