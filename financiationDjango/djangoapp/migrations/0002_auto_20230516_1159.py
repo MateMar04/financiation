@@ -10,11 +10,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunSQL(
-            "INSERT INTO djangoapp_role (name, description) VALUES ('Referente', 'El rol de referente es aquel que constestara las consultas que no puedan los Asesores'), ('Secretario/a', 'El rol de secretario/a es el encargado de agendar visitas y proveer informacion sobre ella'), ('Administrador', 'Este rol es capaz de hacer cualquier cosa en el sistema')")
+            "INSERT INTO djangoapp_role (name, description) VALUES ('Referente', 'El rol de referente es aquel que constestara las consultas que no puedan los Asesores'), ('Secretario/a', 'El rol de secretario/a es el encargado de agendar visitas y proveer informacion sobre ella'), ('Administrador', 'Este rol es capaz de hacer cualquier cosa en el sistema')"),
+
+        migrations.RunSQL(
+            "INSERT INTO djangoapp_faq (faq) VALUES ('Impresion Cedulón 2023'), ('Asesoramiento de gestiones online'), ('Consulta y regularizacion de deuda'), ('Pago online con tarjetas de debito y credito'), ('Adhesion a debito automatico'), ('Consulta de extenciones impositivas'), ('Tramite de DNI y Pasaporte', ('Inicio de tramite de partidas de nacimiento y matrimonio'), ('Jubilaciones o pensiones'), ('Futuros beneficiarios'), ('Subsidios por fallecimiento o seguros'), ('Historia Laboral'), ('Creacion de cuentas de Ciudadano Digital Nivel 2'), ('Recuperacion de cuentas'), ('Actualizacion de mails'), ('Inscripcion de vivienda como Bien de Familia'), ('No conoce los cales de atencion habilitados'), ('No logro realizar la gestion via web/online'), ('No dispone de acceso a tecnologia/internet'), ('Prefiere atencion presencial')")
     ]
 
     """
-     migrations.RunSQL("INSERT INTO djangoapp_faq (faq) ")
+     
      migrations.RunSQL("INSERT INTO djangoapp_citydepartment (name, description) ")
      migrations.RunSQL("INSERT INTO djangoapp_locality (name, department_id)")
      migrations.RunSQL("INSERT INTO djangoapp_ministrydepartment (name, description)")
