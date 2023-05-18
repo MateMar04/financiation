@@ -16,12 +16,15 @@ class Migration(migrations.Migration):
             "INSERT INTO djangoapp_faq (faq) VALUES ('Impresion Cedulón 2023'), ('Asesoramiento de gestiones online'), ('Consulta y regularizacion de deuda'), ('Pago online con tarjetas de debito y credito'), ('Adhesion a debito automatico'), ('Consulta de extenciones impositivas'), ('Tramite de DNI y Pasaporte'), ('Inicio de tramite de partidas de nacimiento y matrimonio'), ('Jubilaciones o pensiones'), ('Futuros beneficiarios'), ('Subsidios por fallecimiento o seguros'), ('Historia Laboral'), ('Creacion de cuentas de Ciudadano Digital Nivel 2'), ('Recuperacion de cuentas'), ('Actualizacion de mails'), ('Inscripcion de vivienda como Bien de Familia'), ('No conoce los cales de atencion habilitados'), ('No logro realizar la gestion via web/online'), ('No dispone de acceso a tecnologia/internet'), ('Prefiere atencion presencial')"),
 
         migrations.RunSQL(
-            "INSERT INTO djangoapp_ministrydepartment (name, description) VALUES ('Rentas Cordoba', 'Direccion General de Rentas de la Provincia de Cordoba'), ('Registro Civil', 'Registro Civil'), ('Catastro', 'Datos de inmuebles'), ('Caja de Jubilaciones', 'Caja de Jubilaciones, Pensiones y Retiros de la Provincia de Córdoba'), ('CiDi', 'Ciudadano Digital'), ('IPJ', 'Inspecion de Personas Juridicas'), ('Registro de la Propiedad', 'Registro de la Propiedad')")
+            "INSERT INTO djangoapp_ministrydepartment (name, description) VALUES ('Rentas Cordoba', 'Direccion General de Rentas de la Provincia de Cordoba'), ('Registro Civil', 'Registro Civil'), ('Catastro', 'Datos de inmuebles'), ('Caja de Jubilaciones', 'Caja de Jubilaciones, Pensiones y Retiros de la Provincia de Córdoba'), ('CiDi', 'Ciudadano Digital'), ('IPJ', 'Inspecion de Personas Juridicas'), ('Registro de la Propiedad', 'Registro de la Propiedad')"),
+
+        migrations.RunSQL(
+            "INSERT INTO djangoapp_visitstatus (name, description) VALUES ('No Confirmada', 'La visita no se confirmo todavia'), ('Confirmada', 'La visita se confirmo'), ('Pendiente', 'La visita esta confirmada pero todavia no se realizo'), ('En proceso', 'La visita esta siendo realizada'), ('Finalizada', 'La visita se realizo')")
 
     ]
 
     """
      migrations.RunSQL("INSERT INTO djangoapp_citydepartment (name, description) ")
      migrations.RunSQL("INSERT INTO djangoapp_locality (name, department_id)")
-     migrations.RunSQL("INSERT INTO djangoapp_visitstatus (name, description)")
+     migrations.RunSQL("INSERT INTO djangoapp_requeststatus")
      """
