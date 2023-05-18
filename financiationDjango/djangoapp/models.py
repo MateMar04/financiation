@@ -33,11 +33,6 @@ class UserStatus(models.Model):
     description = models.TextField()
 
 
-class UserVerifiedStatus(models.Model):
-    name = models.CharField(max_length=30)
-    description = models.TextField()
-
-
 class VisitStatus(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
@@ -129,7 +124,6 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     phone_number = models.BigIntegerField()
     # profile_picture = models.TextField()
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
-    id_verified_status = models.ForeignKey(UserVerifiedStatus, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
     objects = UserAccountManager()
