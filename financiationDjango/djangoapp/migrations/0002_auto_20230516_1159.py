@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             "INSERT INTO djangoapp_ministrydepartment (name, description) VALUES ('Rentas Cordoba', 'Direccion General de Rentas de la Provincia de Cordoba'), ('Registro Civil', 'Registro Civil'), ('Catastro', 'Datos de inmuebles'), ('Caja de Jubilaciones', 'Caja de Jubilaciones, Pensiones y Retiros de la Provincia de Córdoba'), ('CiDi', 'Ciudadano Digital'), ('IPJ', 'Inspecion de Personas Juridicas'), ('Registro de la Propiedad', 'Registro de la Propiedad')"),
 
         migrations.RunSQL(
-            "INSERT INTO djangoapp_visitstatus (name, description) VALUES ('No Confirmada', 'La visita no se confirmo todavia'), ('Confirmada', 'La visita se confirmo'), ('Pendiente', 'La visita esta confirmada pero todavia no se realizo'), ('En proceso', 'La visita esta siendo realizada'), ('Finalizada', 'La visita se realizo')")
+            "INSERT INTO djangoapp_visitstatus (name, description) VALUES ('No Confirmada', 'La visita no se confirmo todavia'), ('Pendiente', 'La visita esta confirmada pero todavia no se realizo'), ('En proceso', 'La visita esta siendo realizada'), ('Finalizada', 'La visita se realizo')")
 
     ]
 
