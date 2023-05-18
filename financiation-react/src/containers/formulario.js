@@ -3,10 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "../assets/styles/formulario.css";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+
 import {Municipios_y_Comunas, Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, Inteligencia_Fiscal, Ropyce} from "./Areas";
 
 
@@ -20,28 +17,23 @@ const Formulario = () => {
 
     return (
     <div>
-
-                    <FormControl sx={{m:1, minWidth:500}}>
-                        <InputLabel>Area</InputLabel>
-                        <Select
+                        <select
                             value={selectedOption}
                             onChange={handleDropdownChange}
-                            label="Area"
-
+                            placeholder="Area"
+                            className='form-select'
                         >
-                            <MenuItem value="municipios_y_comunas">Municipios y Comunas</MenuItem>
-                            <MenuItem value="rentas">Rentas</MenuItem>
-                            <MenuItem value="caja_de_jubilados">Caja de Jubilados</MenuItem>
-                            <MenuItem value="ipj">Inspeccion de Personas Juridicas</MenuItem>
-                            <MenuItem value="registro_civil">Registro Civil</MenuItem>
-                            <MenuItem value="registro_propiedad">Registro de la propiedad</MenuItem>
-                            <MenuItem value="catastro">Catastro</MenuItem>
-                            <MenuItem value="inteligencia_fiscal">Inteligencia Fiscal</MenuItem>
-                            <MenuItem value="ropyce">ROPyCE</MenuItem>
+                            <option value="municipios_y_comunas">Municipios y Comunas</option>
+                            <option value="rentas">Rentas</option>
+                            <option value="caja_de_jubilados">Caja de Jubilados</option>
+                            <option value="ipj">Inspeccion de Personas Juridicas</option>
+                            <option value="registro_civil">Registro Civil</option>
+                            <option value="registro_propiedad">Registro de la propiedad</option>
+                            <option value="catastro">Catastro</option>
+                            <option value="inteligencia_fiscal">Inteligencia Fiscal</option>
+                            <option value="ropyce">ROPyCE</option>
 
-                        </Select>
-                    </FormControl>
-
+                        </select>
 
         {selectedOption === "municipios_y_comunas" && <Municipios_y_Comunas />}
         {selectedOption === "rentas" && <Rentas />}
@@ -52,6 +44,7 @@ const Formulario = () => {
         {selectedOption === "catastro" && <Catastro/>}
         {selectedOption === "inteligencia_fiscal" && <Inteligencia_Fiscal />}
         {selectedOption === "ropyce" && <Ropyce />}
+
 
     </div>
     );
