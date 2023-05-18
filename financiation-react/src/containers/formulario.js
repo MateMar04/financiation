@@ -3,11 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "../assets/styles/formulario.css";
-
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select from '@mui/material/Select';
+import {Municipios_y_Comunas, Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, Inteligencia_Fiscal, Ropyce} from "./Areas";
 
 
 
@@ -20,41 +20,43 @@ const Formulario = () => {
 
     return (
     <div>
-        <Container className="general1">
-            <Row className="justify-content-md-center">
-                <Col md="11">
-                    <h1>Elegir area</h1>
-                    <FormControl sx={{ m: 1, minWidth: 800 }}>
+
+                    <FormControl sx={{m:1, minWidth:500}}>
                         <InputLabel>Area</InputLabel>
                         <Select
                             value={selectedOption}
                             onChange={handleDropdownChange}
-                            autoWidth
                             label="Area"
+
                         >
+                            <MenuItem value="municipios_y_comunas">Municipios y Comunas</MenuItem>
+                            <MenuItem value="rentas">Rentas</MenuItem>
+                            <MenuItem value="caja_de_jubilados">Caja de Jubilados</MenuItem>
+                            <MenuItem value="ipj">Inspeccion de Personas Juridicas</MenuItem>
+                            <MenuItem value="registro_civil">Registro Civil</MenuItem>
+                            <MenuItem value="registro_propiedad">Registro de la propiedad</MenuItem>
+                            <MenuItem value="catastro">Catastro</MenuItem>
+                            <MenuItem value="inteligencia_fiscal">Inteligencia Fiscal</MenuItem>
+                            <MenuItem value="ropyce">ROPyCE</MenuItem>
 
-                <MenuItem value="componente1">Componente 1</MenuItem>
-                <MenuItem value="componente2">Componente 2</MenuItem>
-            </Select>
-        </FormControl>
-                </Col>
-            </Row>
-        </Container>
+                        </Select>
+                    </FormControl>
 
-        {selectedOption === "componente1" && <Componente1 />}
-        {selectedOption === "componente2" && <Componente2 />}
+
+        {selectedOption === "municipios_y_comunas" && <Municipios_y_Comunas />}
+        {selectedOption === "rentas" && <Rentas />}
+        {selectedOption === "caja_de_jubilados" && <Caja_de_Jubilados />}
+        {selectedOption === "ipj" && <IPJ />}
+        {selectedOption === "registro_civil" && <Registro_Civil />}
+        {selectedOption === "registro_propiedad" && <Registro_Propiedad />}
+        {selectedOption === "catastro" && <Catastro/>}
+        {selectedOption === "inteligencia_fiscal" && <Inteligencia_Fiscal />}
+        {selectedOption === "ropyce" && <Ropyce />}
+
     </div>
     );
 };
 
-
-const Componente1 = () => {
-    return <h2>Componente 1</h2>;
-};
-
-const Componente2 = () => {
-    return <h2>Componente 2</h2>;
-};
 
 export default Formulario;
 
