@@ -9,10 +9,14 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunSQL("INSERT INTO djangoapp_role (name, description) VALUES ('Referente', 'El rol de referente es aquel que constestara las consultas que no puedan los Asesores'), ('Secretario/a', 'El rol de secretario/a es el encargado de agendar visitas y proveer informacion sobre ella'), ('Administrador', 'Este rol es capaz de hacer cualquier cosa en el sistema')")
-        migrations.RunSQL("INSERT INTO djangoapp_faq (faq) ")
-        migrations.RunSQL("INSERT INTO djangoapp_citydepartment (name, description) ")
-        migrations.RunSQL("INSERT INTO djangoapp_locality (name, department_id)")
-        migrations.RunSQL("INSERT INTO djangoapp_ministrydepartment (name, description)")
-        migrations.RunSQL("INSERT INTO djangoapp_visitstatus (name, description)")
+        migrations.RunSQL(
+            "INSERT INTO djangoapp_role (name, description) VALUES ('Referente', 'El rol de referente es aquel que constestara las consultas que no puedan los Asesores'), ('Secretario/a', 'El rol de secretario/a es el encargado de agendar visitas y proveer informacion sobre ella'), ('Administrador', 'Este rol es capaz de hacer cualquier cosa en el sistema')")
     ]
+
+    """
+     migrations.RunSQL("INSERT INTO djangoapp_faq (faq) ")
+     migrations.RunSQL("INSERT INTO djangoapp_citydepartment (name, description) ")
+     migrations.RunSQL("INSERT INTO djangoapp_locality (name, department_id)")
+     migrations.RunSQL("INSERT INTO djangoapp_ministrydepartment (name, description)")
+     migrations.RunSQL("INSERT INTO djangoapp_visitstatus (name, description)")
+     """
