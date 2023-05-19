@@ -6,7 +6,6 @@ from django.db import migrations
 from django.db import transaction
 
 
-
 def get_city_departments(app, *args):
     try:
         with transaction.atomic():
@@ -23,20 +22,20 @@ def get_city_departments(app, *args):
         print("--------------ERROR--------------")
 
 
-"""def get_localities(app, *args):
+def get_localities(app, *args):
     try:
         with transaction.atomic():
             Locality = app.get_model('djangoapp', 'Locality')
-            URL = "https://apis.datos.gob.ar/georef/api/localidades?provincia=Córdoba&campos=nombre&max=1000"
+            URL = "https://apis.datos.gob.ar/georef/api/localidades?provincia=Córdoba&campos=nombre,departamento&max=1000"
             r = requests.get(URL)
             data = r.json()
             localidades = []
             for d in data.get("localidades"):
-                localidad = Locality(name=d.get("nombre"), id_department_id=1)
+                localidad = Locality(name=d.get("nombre"), id_department_id=d.get("departamento").get("id"))
                 localidades.append(localidad)
             Locality.objects.bulk_create(localidades)
     except IntegrityError:
-        print("--------------ERROR--------------")"""
+        print("--------------ERROR--------------")
 
 
 class Migration(migrations.Migration):
@@ -60,8 +59,9 @@ class Migration(migrations.Migration):
         migrations.RunSQL(
             "INSERT INTO djangoapp_requeststatus (name, description) VALUES ('Resuelta', 'La consulta ha sido resuelta'), ('No resuelta', 'La consulta ni ha sido resuelta')"),
 
+        migrations.RunPython(get_city_departments),
 
-        migrations.RunPython(get_city_departments)
+        migrations.RunPython(get_localities)
 
     ]
 
