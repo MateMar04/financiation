@@ -15,13 +15,32 @@ const Formulario = () => {
         setSelectedOption(event.target.value);
     };
 
+    const selectStyle = {
+        padding: '15px',
+    };
+
+    var today = new Date();
+
+    var day = today.getDate();
+
+    var month = today.getMonth() + 1;
+
+    var year = today.getFullYear();
+
+
     return (
     <div>
+        <Container>
+            <Row className='justify-content-md-center'>
+                <Col xs={6} md={12}>{day}/{month}/{year}</Col>
+                <Col xs={12} md={8}>
                         <select
                             value={selectedOption}
                             onChange={handleDropdownChange}
                             placeholder="Area"
                             className='form-select'
+                            style={selectStyle}
+
                         >
                             <option value="municipios_y_comunas">Municipios y Comunas</option>
                             <option value="rentas">Rentas</option>
@@ -32,8 +51,14 @@ const Formulario = () => {
                             <option value="catastro">Catastro</option>
                             <option value="inteligencia_fiscal">Inteligencia Fiscal</option>
                             <option value="ropyce">ROPyCE</option>
-
                         </select>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                </Col>
+            </Row>
+        </Container>
 
         {selectedOption === "municipios_y_comunas" && <Municipios_y_Comunas />}
         {selectedOption === "rentas" && <Rentas />}
@@ -44,8 +69,6 @@ const Formulario = () => {
         {selectedOption === "catastro" && <Catastro/>}
         {selectedOption === "inteligencia_fiscal" && <Inteligencia_Fiscal />}
         {selectedOption === "ropyce" && <Ropyce />}
-
-
     </div>
     );
 };

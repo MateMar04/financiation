@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 export function Municipios_y_Comunas(){
     return(
       <div>
-          <h1>Municipios y comunas</h1>
+          <h3>Municipios y comunas</h3>
+          <button>Enviar Consulta</button>
+
       </div>
     );
 }
