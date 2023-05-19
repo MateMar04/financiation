@@ -1,23 +1,47 @@
 import React, { useState } from 'react';
-
-export function Municipios_y_Comunas(){
-    return(
-      <div>
-          <h3>Municipios y comunas</h3>
-          <button>Enviar Consulta</button>
-
-      </div>
-    );
-}
-
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 export function Rentas(){
+
+    const selectStyle = {
+        padding: '15px',
+    };
     return(
-        <div>
-            <h1>Rentas</h1>
-        </div>
+        <Container>
+          <h3>Rentas Córdoba</h3>
+
+
+            <div className="py-3">
+            <Row className="justify-content-center align-items-center">
+                <Col md={8}>
+            <FloatingLabel controlId="floatingTextarea2" label="Consulta del cliente">
+                <Form.Control
+                    as="textarea"
+                    placeholder="Consulta del cliente"
+                    style={{ height: '100px'}}
+                />
+            </FloatingLabel>
+                </Col>
+            </Row>
+            </div>
+
+                <Row className="justify-content-center align-items-center">
+                    <Col xs={5} md={8}>
+                    <Button variant="secondary" size="sm">Enviar Consulta</Button>
+                    </Col>
+                    <Col>
+                    <Button variant="secondary" size="sm">Enviar consulta a otro referente</Button>
+                    </Col>
+                </Row>
+        </Container>
     );
 }
+
 
 export function Caja_de_Jubilados(){
     return(
