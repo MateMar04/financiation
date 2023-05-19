@@ -5,8 +5,6 @@ import Col from 'react-bootstrap/Col';
 import "../assets/styles/formulario.css";
 import {Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, Inteligencia_Fiscal, Ropyce} from "./Areas";
 
-
-
 const Formulario = () => {
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -18,21 +16,10 @@ const Formulario = () => {
         padding: '15px',
     };
 
-    var today = new Date();
-
-    var day = today.getDate();
-
-    var month = today.getMonth() + 1;
-
-    var year = today.getFullYear();
-
-
     return (
     <div>
         <Container>
             <Row>
-
-
                 <Col xs={6} md={4}>
                     <select
                         placeholder="Localidad"
@@ -50,30 +37,30 @@ const Formulario = () => {
                     </select>
                 </Col>
 
-                <Col xs={6} md={4}><h6>{day}/{month}/{year}</h6></Col>
+                <Col xs={6} md={4}><input type="date" className='input-group-text'></input></Col>
             </Row>
             <div className="py-3">
             <Row className='justify-content-md-center'>
-
-                <Col xs={12} md={8}>
+                <Col xs={12} md={10}>
                         <select
                             value={selectedOption}
                             onChange={handleDropdownChange}
                             placeholder="Area"
                             className='form-select'
                             style={selectStyle}
-
                         >
                             <option>Areas</option>
                             <option value="rentas">Rentas</option>
-                            <option value="caja_de_jubilados">Caja de Jubilados</option>
-                            <option value="ipj">Inspeccion de Personas Juridicas</option>
                             <option value="registro_civil">Registro Civil</option>
-                            <option value="registro_propiedad">Registro de la propiedad</option>
                             <option value="catastro">Catastro</option>
-                            <option value="inteligencia_fiscal">Inteligencia Fiscal</option>
-                            <option value="ropyce">ROPyCE</option>
+                            <option value="caja_de_jubilados">Caja de Jubilaciones</option>
+                            <option value="inteligencia_fiscal">CiDi</option>
+                            <option value="ipj">Inspeccion de Personas Juridicas</option>
+                            <option value="registro_propiedad">Registro de la propiedad</option>
+
                         </select>
+
+
                 </Col>
             </Row>
             </div>
