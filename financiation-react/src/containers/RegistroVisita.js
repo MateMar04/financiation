@@ -1,64 +1,18 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "../assets/styles/registrovisita.css"
+import "../assets/styles/registrovisita.css";
 import "primereact/resources/primereact.min.css";
-import Container from "react-bootstrap/esm/Container";
-import Button from 'react-bootstrap/Button';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Container, Button, Form, Row, Col } from 'react-bootstrap';
 
 export default function RegistroVisita() {
-
-    const localidades = [
-        'Ciudad A',
-        'Ciudad B',
-        'Ciudad C',
-        'Ciudad D',
-        'Ciudad E',
-    ];
-
-    const lugar = [
-        'Ciudad A',
-        'Ciudad B',
-        'Ciudad C',
-        'Ciudad D',
-        'Ciudad E',
-    ];
-
-    const grupo = [
-        'Grupo 1',
-        'Grupo 2',
-        'Grupo 3',
-        'Grupo 4',
-        'Grupo 5',
-    ];
-
-    const visitstatus = [
-        'Confirmado',
-        'Pendiente',
-    ];
-
-    const agreement = [
-        'Si',
-        'No',
-    ];
-
-    const contactedreferrer = [
-        'Ventas',
-        'Marketing',
-        'Desarrollo',
-        'Recursos Humanos',
-        'Operaciones',
-    ];
-
-    const address = [
-        'Si',
-        'No',
-    ];
-
-    const logo = [
-        'Si',
-        'No',
-    ];
+  const localidades = ['Ciudad A', 'Ciudad B', 'Ciudad C', 'Ciudad D', 'Ciudad E'];
+  const lugar = ['Ciudad A', 'Ciudad B', 'Ciudad C', 'Ciudad D', 'Ciudad E'];
+  const grupo = ['Grupo 1', 'Grupo 2', 'Grupo 3', 'Grupo 4', 'Grupo 5'];
+  const visitstatus = ['Confirmado', 'Pendiente'];
+  const agreement = ['Si', 'No'];
+  const contactedreferrer = ['Ventas', 'Marketing', 'Desarrollo', 'Recursos Humanos', 'Operaciones'];
+  const address = ['Si', 'No'];
+  const logo = ['Si', 'No'];
 
     return (
         <Container fluid className="general" id="RegistroVisita">
