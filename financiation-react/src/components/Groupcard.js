@@ -7,17 +7,12 @@ function GroupCard() {
   return (
 
     <Container fluid className="background">
-
-
-
-
-
       <Card className="CartaGroupcard">
-      <Container fluid className='cont1'>
+        <Container fluid className='cont1'>
           <Row xs={3} md={2} className=''>
-          
+
             <Col className='PrimeraColumna'>Lista Grupos</Col>
-            </Row>
+          </Row>
         </Container>
         <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey="0">
@@ -26,7 +21,7 @@ function GroupCard() {
               <Container fluid className='cont1'>
                 <Row xs={3} md={2} className=''>
 
-                  <Col className='PrimeraColumna'>Carlos Paz</Col>
+                  <Col xs={12} md={12} className='PrimeraColumna'>Carlos Paz</Col>
 
 
 
@@ -34,12 +29,12 @@ function GroupCard() {
                 </Row>
               </Container>
               <Container fluid className='cont1'>
-                <Row xs={2} md={2} className='rowgroupcard'>
+                <Row xs={6} md={6} className='rowgroupcard'>
 
-                  <Col className='colgroupcard'>Advisors</Col>
+                  <Col xs={12} md={12} lg={12} className='colgroupcard'>Advisors</Col>
 
 
-                  <Col className='colgroupcard'>Coordinadores</Col>
+                  <Col xs={12} md={12} className='colgroupcard'>Coordinadores</Col>
 
                 </Row>
               </Container>
@@ -84,34 +79,28 @@ function GroupCard() {
                 </Row>
               </Container>
 
-              <Container fluid className='cont2'>
-                <Row xs={1} md={1} >
+              <Container fluid className='ContDescripcion'>
+                <Row xs={1} md={1} className='RowDescripcion' >
 
 
 
 
-                  <Col className=''>Grupo asignado a la ciudad de Carlos Paz
+                  <Col className='ColDescripcion'>Grupo asignado a la ciudad de Carlos Paz
                     <p></p>Estado: En progreso </Col>
 
                 </Row>
               </Container>
 
-
-
-
-
-
             </Accordion.Body>
           </Accordion.Item>
+
           <Accordion.Item eventKey="1">
             <Accordion.Header>Grupo Numero 2</Accordion.Header>
             <Accordion.Body>
               <Container fluid className='cont1'>
                 <Row xs={3} md={2} className=''>
 
-                  <Col className='PrimeraColumna'>Santa Maria</Col>
-
-
+                  <Col xs={12} md={12} className='PrimeraColumna'>Santa Maria</Col>
 
 
                 </Row>
@@ -145,8 +134,14 @@ function GroupCard() {
                   <Col className='colgroupcard'>Pablo</Col>
 
                 </Row>
+
+
               </Container>
+
+
               <Container fluid>
+
+
                 <Row xs={2} md={2} className='rowgroupcard'>
 
                   <Col className='colgroupcard'>Ricardo</Col>
@@ -155,8 +150,14 @@ function GroupCard() {
                   <Col className='colgroupcard'>Maria</Col>
 
                 </Row>
+
+
               </Container>
+
+
               <Container fluid>
+
+
                 <Row xs={2} md={2} className='rowgroupcard'>
 
                   <Col className='colgroupcard'>Jose</Col>
@@ -165,16 +166,19 @@ function GroupCard() {
                   <Col className='colgroupcard'>Pedro</Col>
 
                 </Row>
+
+
               </Container>
 
-              <Container fluid className='cont2'>
+              <Container fluid className='ContDescripcion'>
+
                 <Row xs={1} md={1} >
 
 
 
 
                   <Col className=''>Grupo asignado a la ciudad de santa maria
-                    <p></p>Estado: A fallecido una cordinadora </Col>
+                    <p></p>Estado: Fallido, A fallecido una cordinadora</Col>
 
                 </Row>
               </Container>
@@ -186,11 +190,12 @@ function GroupCard() {
 
             </Accordion.Body>
           </Accordion.Item>
-          </Accordion>
 
+        </Accordion>
 
       </Card>
-    </Container >
+
+    </Container>
   );
 
 }
