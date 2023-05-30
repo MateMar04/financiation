@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
 from .models import Visit
 
-class ProjectSerializer(serializers.ModelSerializer) :
+class VisitSerializer(serializers.ModelSerializer) :
     class Meta:
         model = Visit
         fields = ('flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
