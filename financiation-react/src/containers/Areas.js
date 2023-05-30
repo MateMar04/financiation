@@ -14,20 +14,13 @@ export function Rentas(){
     };
     return(
         <Container>
-            <Row className="justify-content-center align-items-center">
-                <Col md={8}>
-            <FloatingLabel controlId="floatingTextarea2" label="Consulta del cliente">
-                <Form.Control
-                    as="textarea"
-                    placeholder="Consulta del cliente"
-                    style={{ height: '100px'}}
-                />
-            </FloatingLabel>
-                </Col>
+            <Row>
+                <h3>El cliente pregunta por</h3>
             </Row>
             <Container>
             <div className='py-3'>
             <Row>
+
                 <Col>
                     <Form.Check aria-label="option 1" label={`Impresión Cedulón 2023`} className='formschecks'/>
                     <Form.Check aria-label="option 1" label={`Consulta y regularización de deuda`} className='formschecks'/>
@@ -38,10 +31,20 @@ export function Rentas(){
                     <Form.Check aria-label="option 1" label={`Pago online con tarjetas de débito y crédito`} className='formschecks'/>
                     <Form.Check aria-label="option 1" label={'Consulta de exenciones impositivas'} className='formschecks'/>
                 </Col>
-
-
-
             </Row>
+                <div className='py-3'>
+                <Row className="justify-content-center align-items-center">
+                    <Col md={8}>
+                    <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                        <Form.Control
+                            as="textarea"
+                            placeholder="Consulta del cliente"
+                            style={{ height: '100px'}}
+                        />
+                    </FloatingLabel>
+                    </Col>
+                </Row>
+                </div>
             </div>
             <div className='py-3'>
                 <Row className="justify-content-center align-items-center">
