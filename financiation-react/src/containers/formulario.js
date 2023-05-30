@@ -94,15 +94,36 @@ const Formulario = () => {
                 {selectedOption === "otros" && <Otros/>}
             </Col>
         </Row>
-        <div className="py-3">
-        <Row className='justify-content-md-center'>
-        <Col xs={3} md={2}>
-            <Button variant="secondary" size="sm">Enviar Consulta</Button>
-        </Col>
-        </Row>
-        </div>
+
     </Container>
-    </div>
+            <Container>
+                <div className="py-3">
+                <Row className='justify-content-md-center'>
+                    <Col xs={12} md={10}>
+                        <select
+                            placeholder="Por que vino?"
+                            className='form-select'
+                            style={selectStyle}
+                        >
+                            <option>Ejecutivo de Atención que atendió</option>
+                            <option>Pepe</option>
+                            <option>Mateo</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </Col>
+                </Row>
+                </div>
+                <div className="py-3">
+                    <Row className='justify-content-md-center'>
+                        <Col xs={3} md={2}>
+                            <Button variant="secondary" size="sm">Enviar Consulta</Button>
+                        </Col>
+                    </Row>
+                </div>
+            </Container>
+
+
+</div>
 
     );
 };
