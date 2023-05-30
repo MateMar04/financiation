@@ -8,14 +8,13 @@ import Form from 'react-bootstrap/Form';
 
 
 export function Rentas(){
-
     const selectStyle = {
         padding: '15px',
     };
     return(
         <Container>
             <Row>
-                <h3>El cliente pregunta por</h3>
+                <h3>El ciudadano consulta por</h3>
             </Row>
             <Container>
             <div className='py-3'>
@@ -46,78 +45,243 @@ export function Rentas(){
                 </Row>
                 </div>
             </div>
-            <div className='py-3'>
-                <Row className="justify-content-center align-items-center">
-                    <Col xs={3} md={2}>
-                    <Button variant="secondary" size="sm">Enviar Consulta</Button>
-                    </Col>
+            </Container>
+        </Container>
+    );
+}
+export function Registro_Civil(){
+    return(
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento en gestiones online`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Trámite de DNI y Pasaporte`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Inicio de trámite de partidas de nacimiento y matrimonio`} className='formschecks'/>
+                        </Col>
+                    </Row>
 
-                </Row>
-            </div>
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Consulta del cliente"
+                                        style={{ height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+            </Container>
+        </Container>
+
+    );
+}
+
+export function Catastro(){
+    return(
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
+                        </Col>
+                    </Row>
+
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Otros"
+                                        style={{ height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+            </Container>
+        </Container>
+    );
+}
+
+export function Caja_de_Jubilados(){
+    return(
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Jubilaciones o pensiones`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Futuros beneficiarios`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={'Subsidios por fallecimiento o seguros'} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Historia Laboral`} className='formschecks'/>
+                        </Col>
+                    </Row>
+
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Otros"
+                                        style={{ height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+            </Container>
+        </Container>
+    );
+}
+
+export function CiDi(){
+    return(
+
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Creación de cuentas de Ciudadano Digital Nivel 2`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Recuperación de cuentas`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Actualización de mails`} className='formschecks'/>
+
+                        </Col>
+                    </Row>
+
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Otros"
+                                        style={{ height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+            </Container>
+        </Container>
+    );
+}
+
+export function IPJ(){
+    return(
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Sociedades, Asociaciones Civiles y Fundaciones.`} className='formschecks'/>
+                        </Col>
+                    </Row>
+
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Otros"
+                                        style={{ height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
             </Container>
         </Container>
     );
 }
 
 
-export function Caja_de_Jubilados(){
-    return(
-        <div>
-            <h1>Caja_de_Jubilados</h1>
-        </div>
+export function Registro_Propiedad() {
+    return (
+        <Container>
+            <Row>
+                <h3>El ciudadano consulta por</h3>
+            </Row>
+            <Container>
+                <div className='py-3'>
+                    <Row>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Inscripción de vivienda como Bien de Familia`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento en gestiones online`}
+                                        className='formschecks'/>
+                        </Col>
+                    </Row>
+
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Otros"
+                                        style={{height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
+                </div>
+
+            </Container>
+        </Container>
     );
 }
-
-
-export function IPJ(){
-    return(
-        <div>
-            <h1>IPJ</h1>
-        </div>
-    );
-}
-
-
-export function Registro_Civil(){
-    return(
-        <div>
-            <h1>Registro_Civil</h1>
-        </div>
-    );
-}
-
-
-export function Registro_Propiedad(){
-    return(
-        <div>
-            <h1>Registro_Propiedad</h1>
-        </div>
-    );
-}
-
-
-export function Catastro(){
-    return(
-        <div>
-            <h1>Catastro</h1>
-        </div>
-    );
-}
-
-
-export function Inteligencia_Fiscal(){
-    return(
-        <div>
-            <h1>Inteligencia_Fiscal</h1>
-        </div>
-    );
-}
-
-
-export function Ropyce(){
-    return(
-        <div>
-            <h1>Ropyce</h1>
+export function Otros() {
+    return (
+        <div className='py-3'>
+            <Row className="justify-content-center align-items-center">
+                <Col md={8}>
+                    <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                        <Form.Control
+                            as="textarea"
+                            placeholder="Otros"
+                            style={{height: '100px'}}
+                        />
+                    </FloatingLabel>
+                </Col>
+            </Row>
         </div>
     );
 }
