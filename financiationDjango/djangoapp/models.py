@@ -122,7 +122,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     phone_number = models.BigIntegerField()
-    # profile_picture = models.TextField()
+    profile_picture = models.ImageField(upload_to='images/profile_pictures/', default=None)
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
