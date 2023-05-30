@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
 
 export function Rentas(){
 
@@ -13,10 +14,6 @@ export function Rentas(){
     };
     return(
         <Container>
-          <h3>Rentas Córdoba</h3>
-
-
-            <div className="py-3">
             <Row className="justify-content-center align-items-center">
                 <Col md={8}>
             <FloatingLabel controlId="floatingTextarea2" label="Consulta del cliente">
@@ -28,16 +25,33 @@ export function Rentas(){
             </FloatingLabel>
                 </Col>
             </Row>
-            </div>
+            <Container>
+            <div className='py-3'>
+            <Row>
+                <Col>
+                    <Form.Check aria-label="option 1" label={`Impresión Cedulón 2023`} className='formschecks'/>
+                    <Form.Check aria-label="option 1" label={`Consulta y regularización de deuda`} className='formschecks'/>
+                    <Form.Check aria-label="option 1" label={`Adhesión a débito automático`} className='formschecks'/>
+                </Col>
+                <Col>
+                    <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
+                    <Form.Check aria-label="option 1" label={`Pago online con tarjetas de débito y crédito`} className='formschecks'/>
+                    <Form.Check aria-label="option 1" label={'Consulta de exenciones impositivas'} className='formschecks'/>
+                </Col>
 
+
+
+            </Row>
+            </div>
+            <div className='py-3'>
                 <Row className="justify-content-center align-items-center">
-                    <Col xs={5} md={8}>
+                    <Col xs={3} md={2}>
                     <Button variant="secondary" size="sm">Enviar Consulta</Button>
                     </Col>
-                    <Col>
-                    <Button variant="secondary" size="sm">Enviar consulta a otro referente</Button>
-                    </Col>
+
                 </Row>
+            </div>
+            </Container>
         </Container>
     );
 }

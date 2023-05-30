@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import "../assets/styles/formulario.css";
 import {Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, Inteligencia_Fiscal, Ropyce} from "./Areas";
 
+
 const Formulario = () => {
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -17,10 +18,11 @@ const Formulario = () => {
     };
 
     return (
-    <div>
+        <div>
         <Container>
             <Row>
-                <Col xs={6} md={4}>
+                <Container>
+                <Col xs={2} md={3}>
                     <select
                         placeholder="Localidad"
                         className='form-select'
@@ -28,7 +30,7 @@ const Formulario = () => {
                         <option>Localidad</option>
                     </select>
                 </Col>
-                <Col xs={6} md={4}>
+                <Col xs={2} md={3}>
                     <select
                         placeholder="Localidad"
                         className='form-select'
@@ -36,9 +38,9 @@ const Formulario = () => {
                         <option>Asesor que atendió</option>
                     </select>
                 </Col>
-
-                <Col xs={6} md={4}><input type="date" className='input-group-text'></input></Col>
-            </Row>
+                <Col xs={6} md={8}><input type="date" className='input-group-text'></input></Col>
+                </Container>
+                </Row>
             <div className="py-3">
             <Row className='justify-content-md-center'>
                 <Col xs={12} md={10}>
@@ -59,8 +61,6 @@ const Formulario = () => {
                             <option value="registro_propiedad">Registro de la propiedad</option>
 
                         </select>
-
-
                 </Col>
             </Row>
             </div>
