@@ -99,13 +99,13 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True):
+    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True, is_superuser=True):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
-                          is_staff=is_staff, phone_number=phone_number)
+                          is_staff=is_staff, phone_number=phone_number, is_superuser=is_superuser)
 
         user.set_password(password)
         user.save()
@@ -121,6 +121,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     ssn = models.BigIntegerField()
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
     profile_picture = models.ImageField(upload_to='images/profile_pictures/', default=None)
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
