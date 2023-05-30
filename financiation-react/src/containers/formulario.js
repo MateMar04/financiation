@@ -116,7 +116,7 @@ const Formulario = () => {
                 <div className="py-3">
                     <Row className='justify-content-md-center'>
                         <Col xs={3} md={2}>
-                            <Button variant="secondary" size="sm">Enviar Consulta</Button>
+                            <Button variant="primary" size="lg">Enviar Consulta</Button>
                         </Col>
                     </Row>
                 </div>
