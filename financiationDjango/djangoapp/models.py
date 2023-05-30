@@ -197,19 +197,9 @@ class Request(models.Model):
     id_status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
 
 
-class MayorEmail(models.Model):
-    mail = models.CharField(max_length=100)
-    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
-
-
 class ContactedReferrerEmail(models.Model):
     mail = models.CharField(max_length=100)
     id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
-
-
-class UserEmail(models.Model):
-    mail = models.CharField(max_length=100)
-    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
 
 
 class MayorPhone(models.Model):
@@ -217,9 +207,9 @@ class MayorPhone(models.Model):
     id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
 
-class UserPhone(models.Model):
-    phone = models.BigIntegerField()
-    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
+class MayorEmail(models.Model):
+    mail = models.CharField(max_length=100)
+    id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
 
 class ContactedReferrerPhone(models.Model):
