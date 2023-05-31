@@ -7,82 +7,133 @@ class Advised(models.Model):
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Agreement(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class CityDepartment(models.Model):
     name = models.CharField(max_length=70)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class MinistryDepartment(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Address(models.Model):
     street = models.CharField(max_length=70)
     number = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.street} {self.number}"
+
 
 class UserStatus(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class VisitStatus(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Faq(models.Model):
     faq = models.TextField()
+
+    def __str__(self):
+        return f"{self.faq}"
 
 
 class Mayor(models.Model):
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Locality(models.Model):
     name = models.CharField(max_length=70)
     id_department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Logo(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class VehicleBrand(models.Model):
     name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class VehicleModel(models.Model):
     name = models.CharField(max_length=50)
     id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING)
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class PoliticParty(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class VehiclePlate(models.Model):
     plate = models.CharField(max_length=7)
+
+    def __str__(self):
+        return f"{self.plate}"
 
 
 class Role(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class ContactedReferrer(models.Model):
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class UserAccountManager(BaseUserManager):
@@ -99,7 +150,8 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True, is_superuser=True):
+    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True,
+                         is_superuser=True):
         if not email:
             raise ValueError("Users must have an email address")
 
@@ -139,17 +191,23 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
         return self.last_name
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} {self.ssn} -> {self.username}"
+        return f"{self.username}"
 
 
 class Group(models.Model):
     name = models.CharField(max_length=70)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Vehicles(models.Model):
     id_plate = models.ForeignKey(VehiclePlate, models.DO_NOTHING)
     id_brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING)
     id_model = models.ForeignKey(VehicleModel, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.id_brand} {self.id_model} {self.id_plate}"
 
 
 class Visit(models.Model):
@@ -171,15 +229,24 @@ class Visit(models.Model):
     id_address = models.ForeignKey(Address, models.DO_NOTHING)
     id_logo = models.ManyToManyField(Logo)
 
+    def __str__(self):
+        return f"Visit to {self.id_locality}"
+
 
 class RequestStatus(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Coordinator(models.Model):
     id_user = models.OneToOneField(UserAccount, models.DO_NOTHING)
     id_group = models.ForeignKey(Group, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.id_user} {self.id_group}"
 
 
 class Advisor(models.Model):
@@ -187,6 +254,9 @@ class Advisor(models.Model):
     id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
     unique_together = (('id_user', 'id_group'),)
+
+    def __str__(self):
+        return f"{self.id_user} {self.id_group}"
 
 
 class Request(models.Model):
@@ -196,6 +266,9 @@ class Request(models.Model):
     id_ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
     id_faq = models.ForeignKey(Faq, models.DO_NOTHING)
     id_status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"Request {self.id}"
 
 
 class ContactedReferrerEmail(models.Model):
