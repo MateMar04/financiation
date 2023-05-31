@@ -29,7 +29,7 @@ class CityDepartmentAdmin(admin.ModelAdmin):
 class MinistryDepartmentAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'description')
     search_fields = ('id', 'name', 'description')
-    list_filter = ('id', 'street', 'number')
+    list_filter = ('id', 'name', 'description')
     list_per_page = 10
 
 
@@ -155,18 +155,18 @@ class VisitAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
         'modernization_fund',
-        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-        'id_contacted_referrer', 'id_address', 'id_logo')
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status',
+        'id_contacted_referrer', 'id_address')
     search_fields = (
         'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
         'modernization_fund',
-        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-        'id_contacted_referrer', 'id_address', 'id_logo')
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status',
+        'id_contacted_referrer', 'id_address')
     list_filter = (
         'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
         'modernization_fund',
-        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-        'id_contacted_referrer', 'id_address', 'id_logo')
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status',
+        'id_contacted_referrer', 'id_address')
     list_per_page = 10
 
 
