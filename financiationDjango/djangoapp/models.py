@@ -275,17 +275,29 @@ class ContactedReferrerEmail(models.Model):
     mail = models.CharField(max_length=100)
     id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
 
+    def __str__(self):
+        return f"Request {self.mail}"
+
 
 class MayorPhone(models.Model):
     phone = models.BigIntegerField()
     id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"Request {self.phone}"
 
 
 class MayorEmail(models.Model):
     mail = models.CharField(max_length=100)
     id_mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
+    def __str__(self):
+        return f"Request {self.mail}"
+
 
 class ContactedReferrerPhone(models.Model):
     phone = models.BigIntegerField()
     id_contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"Request {self.phone}"
