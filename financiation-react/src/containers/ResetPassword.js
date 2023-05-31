@@ -2,6 +2,10 @@ import React, {useState} from "react";
 import {Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password} from "../actions/auth";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import '../assets/styles/resetPassword.css'
 
 
 const ResetPassword = ({reset_password}) => {
@@ -26,10 +30,13 @@ const ResetPassword = ({reset_password}) => {
     }
 
     return (
-        <div className='container mt-5'>
-            <h1>Request Password Reset:</h1>
+        <Container className='resetpswd'>
+            <h2>Restablecer contraseña:</h2>
             <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
+                <Row className='justify-content-md-center'>
+                    <Col lg="5" className='input-required'>
+                        <a>Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.</a>
+                        <h6>Introduzca su email</h6>
                     <input
                         className='form-control'
                         type='email'
@@ -39,10 +46,18 @@ const ResetPassword = ({reset_password}) => {
                         onChange={e => onChange(e)}
                         required
                     />
-                </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
+
+                    </Col>
+
+                </Row>
+                <Row>
+                    <Col>
+                <button className='btn btn-primary' type='submit'>Restablecer Contraseña</button>
+                    </Col>
+                </Row>
             </form>
-        </div>
+            </Container>
+
     );
 };
 
