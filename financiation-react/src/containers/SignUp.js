@@ -42,11 +42,13 @@ const Signup = ({signup, isAuthenticated}) => {
         return <Navigate to='/login/'/>
     }
     return (
+        <Container>
         <Container fluid className="general">
             <Form onSubmit={e => onSubmit(e)}>
-
+                <h3>REGISTRARSE</h3>
                 <Row className='justify-content-md-center'>
                     <Col lg="5" className='input-required'>
+
                         <Form.Control placeholder="Nombre" type="text" className='input-required' name='first_name' value={first_name}
                                       onChange={e => onChange(e)} required/>
                     </Col>
@@ -101,6 +103,7 @@ const Signup = ({signup, isAuthenticated}) => {
                 </Container>
 
             </Form>
+        </Container>
         </Container>
     );
 }
