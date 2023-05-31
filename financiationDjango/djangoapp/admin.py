@@ -152,16 +152,47 @@ class VehiclesAdmin(admin.ModelAdmin):
 
 
 class VisitAdmin(admin.ModelAdmin):
-    list_display = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
-                    'accommodation', 'modernization_fund', 'start_time', 'finish_time',
-                    'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-                    'id_contacted_referrer', 'id_address', 'id_logo')
-    search_fields = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
-                     'accommodation', 'modernization_fund', 'start_time', 'finish_time',
-                     'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-                     'id_contacted_referrer', 'id_address', 'id_logo')
-    list_filter = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
-                   'accommodation', 'modernization_fund', 'start_time', 'finish_time',
-                   'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
-                   'id_contacted_referrer', 'id_address', 'id_logo')
+    list_display = (
+        'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
+        'modernization_fund',
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+        'id_contacted_referrer', 'id_address', 'id_logo')
+    search_fields = (
+        'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
+        'modernization_fund',
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+        'id_contacted_referrer', 'id_address', 'id_logo')
+    list_filter = (
+        'id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration', 'accommodation',
+        'modernization_fund',
+        'start_time', 'finish_time', 'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+        'id_contacted_referrer', 'id_address', 'id_logo')
+    list_per_page = 10
+
+
+class RequestStatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+    search_fields = ('id', 'name', 'description')
+    list_filter = ('id', 'name', 'description')
+    list_per_page = 10
+
+
+class CoordinatorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'id_user', 'id_group')
+    search_fields = ('id', 'id_user', 'id_group')
+    list_filter = ('id', 'id_user', 'id_group')
+    list_per_page = 10
+
+
+class AdvisorAdmin(admin.ModelAdmin):
+    list_display = ('id', 'id_user', 'id_group')
+    search_fields = ('id', 'id_user', 'id_group')
+    list_filter = ('id', 'id_user', 'id_group')
+    list_per_page = 10
+
+
+class RequestAdmin(admin.ModelAdmin):
+    list_display = ('id', 'id_visit', 'id_advised', 'id_advisor', 'id_ministry_department', 'id_faq', 'id_status')
+    search_fields = ('id', 'id_visit', 'id_advised', 'id_advisor', 'id_ministry_department', 'id_faq', 'id_status')
+    list_filter = ('id', 'id_visit', 'id_advised', 'id_advisor', 'id_ministry_department', 'id_faq', 'id_status')
     list_per_page = 10
