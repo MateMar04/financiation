@@ -122,3 +122,46 @@ class ContactedReferrerAdmin(admin.ModelAdmin):
     search_fields = ('id', 'first_name', 'last_name')
     list_filter = ('id', 'first_name', 'last_name')
     list_per_page = 10
+
+
+class UserAccountAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'id_role', 'id_user_status',
+        'is_active', 'is_staff', 'is_superuser')
+    search_fields = (
+        'id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'id_role', 'id_user_status',
+        'is_active', 'is_staff', 'is_superuser')
+    list_filter = (
+        'id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'id_role', 'id_user_status',
+        'is_active', 'is_staff', 'is_superuser')
+    list_per_page = 10
+
+
+class GroupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('id', 'name')
+    list_filter = ('id', 'name')
+    list_per_page = 10
+
+
+class VehiclesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'id_plate', 'id_brand', 'id_model')
+    search_fields = ('id', 'id_plate', 'id_brand', 'id_model')
+    list_filter = ('id', 'id_plate', 'id_brand', 'id_model')
+    list_per_page = 10
+
+
+class VisitAdmin(admin.ModelAdmin):
+    list_display = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
+                    'accommodation', 'modernization_fund', 'start_time', 'finish_time',
+                    'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+                    'id_contacted_referrer', 'id_address', 'id_logo')
+    search_fields = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
+                     'accommodation', 'modernization_fund', 'start_time', 'finish_time',
+                     'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+                     'id_contacted_referrer', 'id_address', 'id_logo')
+    list_filter = ('id', 'flyer', 'distance', 'travel_time', 'visit_date', 'civil_registration',
+                   'accommodation', 'modernization_fund', 'start_time', 'finish_time',
+                   'place_name', 'id_locality', 'id_group', 'id_visit_status', 'id_agreement',
+                   'id_contacted_referrer', 'id_address', 'id_logo')
+    list_per_page = 10
