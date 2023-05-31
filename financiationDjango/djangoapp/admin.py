@@ -196,3 +196,31 @@ class RequestAdmin(admin.ModelAdmin):
     search_fields = ('id', 'id_visit', 'id_advised', 'id_advisor', 'id_ministry_department', 'id_faq', 'id_status')
     list_filter = ('id', 'id_visit', 'id_advised', 'id_advisor', 'id_ministry_department', 'id_faq', 'id_status')
     list_per_page = 10
+
+
+class ContactedReferrerEmailAdmin(admin.ModelAdmin):
+    list_display = ('id', 'mail', 'id_contacted_referrer')
+    search_fields = ('id', 'mail', 'id_contacted_referrer')
+    list_filter = ('id', 'mail', 'id_contacted_referrer')
+    list_per_page = 10
+
+
+class MayorPhoneAdmin(admin.ModelAdmin):
+    list_display = ('id', 'phone', 'id_mayor')
+    search_fields = ('id', 'phone', 'id_mayor')
+    list_filter = ('id', 'phone', 'id_mayor')
+    list_per_page = 10
+
+
+class MayorEmailAdmin(admin.ModelAdmin):
+    list_display = ('id', 'mail', 'id_mayor')
+    search_fields = ('id', 'mail', 'id_mayor')
+    list_filter = ('id', 'mail', 'id_mayor')
+    list_per_page = 10
+
+
+class ContactedReferrerPhoneAdmin(admin.ModelAdmin):
+    list_display = ('id', 'phone', 'id_contacted_referrer')
+    search_fields = ('id', 'phone', 'id_contacted_referrer')
+    list_filter = ('id', 'phone', 'id_contacted_referrer')
+    list_per_page = 10
