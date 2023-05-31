@@ -73,3 +73,52 @@ class LocalityAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name', 'id_department')
     list_filter = ('id', 'name', 'id_department')
     list_per_page = 10
+
+
+class LogoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+    search_fields = ('id', 'name', 'description')
+    list_filter = ('id', 'name', 'description')
+    list_per_page = 10
+
+
+class VehicleBrandAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('id', 'name')
+    list_filter = ('id', 'name')
+    list_per_page = 10
+
+
+class VehicleModelAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'id_brand')
+    search_fields = 'id', 'name', 'id_brand'
+    list_filter = 'id', 'name', 'id_brand'
+    list_per_page = 10
+
+
+class PoliticPartyAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+    search_fields = ('id', 'name', 'description')
+    list_filter = ('id', 'name', 'description')
+    list_per_page = 10
+
+
+class VehiclePlateAdmin(admin.ModelAdmin):
+    list_display = ('id', 'plate')
+    search_fields = ('id', 'plate')
+    list_filter = ('id', 'plate')
+    list_per_page = 10
+
+
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description')
+    search_fields = ('id', 'name', 'description')
+    list_filter = ('id', 'name', 'description')
+    list_per_page = 10
+
+
+class ContactedReferrerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name')
+    search_fields = ('id', 'first_name', 'last_name')
+    list_filter = ('id', 'first_name', 'last_name')
+    list_per_page = 10
