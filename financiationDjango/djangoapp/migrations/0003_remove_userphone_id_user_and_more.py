@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('djangoapp', '0002_auto_20230516_1159'),
+        ('djangoapp', '0002_get_localities_and_departments'),
     ]
 
     operations = [
