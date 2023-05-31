@@ -12,7 +12,7 @@ import Layout from "./hocs/Layout";
 import { Provider } from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
-import GroupCard from './components/Groupcard';
+import GroupCard from './components/groupCard';
 
 const App = () => (
   <Provider store={store}>
