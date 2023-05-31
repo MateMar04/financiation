@@ -23,6 +23,7 @@ const AddVisit = () => {
   const [id_agreement, setAgreement] = useState("");
   const [id_contacted_referrer, setContactedReferrer] = useState("");
   const [id_address, setAddress] = useState("");
+  const [id_logo, setLogo] = useState("");
 
   const AddVisitInfo = async () => {
     let formField = new FormData()
@@ -42,6 +43,7 @@ const AddVisit = () => {
     formField.append('id_agreement', id_agreement)
     formField.append('id_contacted_referrer', id_contacted_referrer)
     formField.append('id_address', id_address)
+    formField.append('id_logo', id_logo)
 
     await axios({
       method: 'post',
@@ -184,6 +186,14 @@ const AddVisit = () => {
                 value={id_address}
                 onChange={(e) => setAddress(e.target.value)}
               />
+              <input
+                type="text"
+                className="form-control form-control-lg"
+                placeholder="Enter id_logo"
+                name="id_logo"
+                value={id_logo}
+                onChange={(e) => setLogo(e.target.value)}
+              />              
             </div>
             <button className='btn btn-success' onClick={AddVisitInfo} >Submit</button>
 
