@@ -43,57 +43,63 @@ const Signup = ({signup, isAuthenticated}) => {
     }
     return (
         <Container fluid className="general">
-            <Container fluid className="image-container">
-                <img src={Logo} alt="Logo del ministerio de finanzas"/>
-            </Container>
             <Form onSubmit={e => onSubmit(e)}>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="First name" type="text" name='first_name' value={first_name}
+
+                <Row className='justify-content-md-center'>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Nombre" type="text" className='input-required' name='first_name' value={first_name}
                                       onChange={e => onChange(e)} required/>
                     </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="Last name" type="text" name='last_name' value={last_name}
-                                      onChange={e => onChange(e)} required/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="Username" type="text" name='username' value={username}
-                                      onChange={e => onChange(e)} required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="SSN" type="number" name='ssn' value={ssn}
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Apellido" type="text" name='last_name' value={last_name}
                                       onChange={e => onChange(e)} required/>
                     </Col>
                 </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="e-mail" type="email" name='email' value={email}
+
+                <Row className='justify-content-md-center'>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Usuario" type="text" name='username' value={username}
                                       onChange={e => onChange(e)} required/>
                     </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="phone" type="tel" name='phone' value={phone}
-                                      onChange={e => onChange(e)} required/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="password" type="password" name="password" value={password}
-                                      onChange={e => onChange(e)} required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="re password" type="password" name="re_password" value={re_password}
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="DNI" type="number" name='ssn' value={ssn}
                                       onChange={e => onChange(e)} required/>
                     </Col>
                 </Row>
+
+                <Row className='justify-content-md-center'>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Correo electronico" type="email" name='email' value={email}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Telefono" type="tel" name='phone' value={phone}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                </Row>
+
+                <Row className='justify-content-md-center'>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Contraseña" type="password" name="password" value={password}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                    <Col lg="5" className='input-required'>
+                        <Form.Control placeholder="Repita Contraseña" type="password" name="re_password" value={re_password}
+                                      onChange={e => onChange(e)} required/>
+                    </Col>
+                </Row>
+
                 <Container>
-                    <Button className="create" type="submit">Create Account</Button>
+                    <Row>
+                        <Col>
+                    <Button className="create" type="submit">Crear Cuenta</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                    <Link to="/login/"><Button variant="link" className="link">Ya tengo una cuenta</Button></Link>
+                    </Row>
                 </Container>
-                <Container>
-                    <Link to="/login/"><Button variant="link" className="link">Already have an account?
-                        LogIn</Button></Link>
-                </Container>
+
             </Form>
         </Container>
     );
