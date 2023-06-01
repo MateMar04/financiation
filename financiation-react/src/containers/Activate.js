@@ -21,8 +21,10 @@ const Activate = ({verify}) => {
         setVerified(true)
     };
 
+
+
     if (verified) {
-        return <Navigate to='/'/>
+        return<Navigate to='/'/>
     }
 
     return (

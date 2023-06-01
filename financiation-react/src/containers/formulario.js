@@ -22,8 +22,8 @@ const Formulario = () => {
         <div>
             <Container>
         <Container>
+            <Container>
             <Row>
-
                 <Col>
                     <select
                         placeholder="Localidad"
@@ -40,8 +40,11 @@ const Formulario = () => {
                         <option>Asesor que atendió</option>
                     </select>
                 </Col>
-                <Col><input type="date" className='input-group-text'></input></Col>
+                <Col>
+                    <input type="date" className='input-group-text'></input>
+                </Col>
                 </Row>
+            </Container>
             <div className="py-3">
             <Row className='justify-content-md-center'>
                 <Col xs={12} md={10}>
@@ -97,7 +100,7 @@ const Formulario = () => {
                 <div className="py-3">
                     <Row className='justify-content-md-center'>
                         <Col xs={3} md={2}>
-                            <Button variant="primary" size="lg" className='buttonconsulta'>Enviar Consulta</Button>
+                            <Button variant="primary" size="md" className='buttonconsulta'>Enviar Consulta</Button>
                         </Col>
                     </Row>
                 </div>

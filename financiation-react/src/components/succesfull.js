@@ -3,9 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Modal} from 'react-bootstrap';
 import '../assets/styles/succesfull.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-
-
-let Check = require('../assets/images/checked.png');
+import Check from '../assets/images/checked.gif';
 
 
 function MyModal() {
@@ -18,22 +16,17 @@ function MyModal() {
 
         <div className="text-center">
             <Button variant="primary" onClick={handleShow}>
-                Click to Open Confirm Modal
+                Verificar cuenta
             </Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title id="Titulo">Felicitaciones!</Modal.Title>
+                    <Modal.Title id="Titulo">Verificacion de cuenta</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
-                    <div id='a'>
-                        <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid" fluid/>
-
-                    </div>
-                    <p className="text-center">
-                        Tu cuenta a sido verficada! chequea el mail para mas detalles!
-                    </p>
+                    <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid"/>
+                    <p className="text-center">¡Tu cuenta a sido verficada!</p>
 
                 </Modal.Body>
                 <Modal.Footer>
