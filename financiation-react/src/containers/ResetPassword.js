@@ -51,7 +51,7 @@ const ResetPassword = ({reset_password}) => {
                             required
                         />
                         <div className='py-3'>
-                        <button className='btn btn-primary' type='submit'>Restablecer Contraseña</button>
+                        <button className='btn btn-primary' type='submit'>Enviar</button>
                             </div>
                     </Card.Body>
                 </Card>
