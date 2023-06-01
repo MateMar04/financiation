@@ -12,24 +12,27 @@ import {Provider} from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
 import AddVisit from './components/AddVisit';
+import GroupCard from './components/groupCard';
 
 const App = () => (
-    <Provider store={store}>
-        <Router>
-            <Layout>
-                <Routes>
-                    <Route exact path='/' element={<Landing/>}/>
-                    <Route path='/login' element={<LogIn/>}/>
-                    <Route exact path='/signup' element={<SignUp/>}/>
-                    <Route exact path='/reset-password' element={<ResetPassword/>}/>
-                    <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm/>}/>
-                    <Route exact path='/activate/:uid/:token' element={<Activate/>}/>
-                    <Route exact path='/successful' element={<MyModal/>}/>
+
+  <Provider store={store}>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route exact path='/' element={<Landing />} />
+          <Route path='/login' element={<LogIn />} />
+          <Route path='/CartaGrupo' element={<GroupCard />} />
+          <Route exact path='/signup' element={<SignUp />} />
+          <Route exact path='/reset-password' element={<ResetPassword />} />
+          <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
+          <Route exact path='/activate/:uid/:token' element={<Activate />} />
+          <Route exact path='/successful' element={<MyModal />} />
                     <Route exact path='/AddVisit' element={<AddVisit/>}/>
-                </Routes>
-            </Layout>
-        </Router>
-    </Provider>
+        </Routes>
+      </Layout>
+    </Router>
+  </Provider>
 );
 
 export default App;
