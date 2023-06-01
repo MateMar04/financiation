@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Landing from "./containers/Landing";
 import Activate from "./containers/Activate";
 import LogIn from "./containers/LogIn"
+import RegistroVisita from './containers/RegistroVisita';
 import SignUp from "./containers/SignUp";
 import ResetPassword from "./containers/ResetPassword";
 import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
@@ -15,7 +16,6 @@ import AddVisit from './components/AddVisit';
 import GroupCard from './components/groupCard';
 
 const App = () => (
-
   <Provider store={store}>
     <Router>
       <Layout>
@@ -28,7 +28,8 @@ const App = () => (
           <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
           <Route exact path='/activate/:uid/:token' element={<Activate />} />
           <Route exact path='/successful' element={<MyModal />} />
-                    <Route exact path='/AddVisit' element={<AddVisit/>}/>
+          <Route exact path='/AddVisit' element={<AddVisit/>}/>
+          <Route exact path='/registro-visita' element={<RegistroVisita/>}/>
         </Routes>
       </Layout>
     </Router>
