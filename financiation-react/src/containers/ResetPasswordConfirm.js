@@ -2,6 +2,12 @@ import React, {useState} from "react";
 import {Navigate, useParams} from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password_confirm} from "../actions/auth";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import {Card} from "react-bootstrap";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 
 const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
@@ -32,31 +38,49 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
     return (
         <div className='container mt-5'>
             <form onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='Confirm New Password'
-                        name='new_password'
-                        value={new_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <div className='form-group'>
-                    <input
-                        className='form-control'
-                        type='password'
-                        placeholder='New Password'
-                        name='re_new_password'
-                        value={re_new_password}
-                        onChange={e => onChange(e)}
-                        minLength='6'
-                        required
-                    />
-                </div>
-                <button className='btn btn-primary' type='submit'>Reset Password</button>
+                <Container>
+                    <Row className='justify-content-center'>
+                        <Col md='6'>
+                            <Card >
+                                <Card.Body>
+                                    <div className='py-2'>
+                                    <FloatingLabel controlId="floatingTextarea2" label="Introduzca su nueva contraseña">
+                                    <input
+                                        className='form-control'
+                                        type='password'
+                                        placeholder='Confirm New Password'
+                                        name='new_password'
+                                        value={new_password}
+                                        onChange={e => onChange(e)}
+                                        minLength='6'
+                                        required
+                                    />
+                                    </FloatingLabel>
+                                    </div>
+                                    <div className='py-2'>
+                                    <FloatingLabel controlId="floatingTextarea2" label="Repita su nueva contraseña">
+                                        <input
+                                            className='form-control'
+                                            type='password'
+                                            placeholder='Repita la contraseña'
+                                            name='re_new_password'
+                                            value={re_new_password}
+                                            onChange={e => onChange(e)}
+                                            minLength='6'
+                                            required
+                                        />
+                                    </FloatingLabel>
+                                    </div>
+                                        <div className='py-2'>
+                                        <button className='btn btn-primary' type='submit'>Cambiar Contraseña</button>
+                                        </div>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+
+
             </form>
         </div>
     );

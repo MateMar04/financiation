@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password} from "../actions/auth";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import '../assets/styles/resetPassword.css'
+import {Card} from "react-bootstrap";
 
 
 const ResetPassword = ({reset_password}) => {
@@ -30,31 +30,34 @@ const ResetPassword = ({reset_password}) => {
     }
 
     return (
-        <Container className='resetpswd'>
-            <h2>Restablecer contraseña:</h2>
+        <Container>
             <form onSubmit={e => onSubmit(e)}>
-                <Row className='justify-content-md-center'>
-                    <Col lg="5" className='input-required'>
-                        <a>Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.</a>
-                        <h6>Introduzca su email</h6>
-                    <input
-                        className='form-control'
-                        type='email'
-                        placeholder='Email'
-                        name='email'
-                        value={email}
-                        onChange={e => onChange(e)}
-                        required
-                    />
-
+                <Container>
+                    <Row className='justify-content-center'>
+                    <Col md='6'>
+                <Card >
+                    <Card.Header as="h5">Restablecer su contraseña</Card.Header>
+                    <Card.Body>
+                        <Card.Text>
+                            Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.
+                        </Card.Text>
+                        <input
+                            className='form-control'
+                            type='email'
+                            placeholder='Email'
+                            name='email'
+                            value={email}
+                            onChange={e => onChange(e)}
+                            required
+                        />
+                        <div className='py-3'>
+                        <button className='btn btn-primary' type='submit'>Restablecer Contraseña</button>
+                            </div>
+                    </Card.Body>
+                </Card>
                     </Col>
-
                 </Row>
-                <Row>
-                    <Col>
-                <button className='btn btn-primary' type='submit'>Restablecer Contraseña</button>
-                    </Col>
-                </Row>
+                </Container>
             </form>
             </Container>
 
