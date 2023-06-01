@@ -33,11 +33,9 @@ const Activate = ({verify}) => {
                     <Col md='6'>
                         <Card>
                             <Card.Body>
-                                <Row>
-                                    <Col>
+                                <Container fluid>
                                 <img src={verifyimg} alt="" className='verifyimg'/>
-                                    </Col>
-                                </Row>
+                                </Container>
                                 <Row>
                                 <h3>Verifique su cuenta</h3>
                                 </Row>
