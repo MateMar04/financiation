@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Card} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
+import keyy from '../assets/images/keyy.gif';
 
 
 const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
@@ -31,18 +31,22 @@ const ResetPasswordConfirm = ({match, reset_password_confirm}) => {
         setRequestSent(true);
     };
 
+
     if (requestSent) {
         return <Navigate to='/'/>
-    }
+    };
+
 
     return (
         <div className='container mt-5'>
             <form onSubmit={e => onSubmit(e)}>
-                <Container>
+                <Container fluid>
                     <Row className='justify-content-center'>
                         <Col md='6'>
-                            <Card >
+                            <Card>
+
                                 <Card.Body>
+                                    <img src={keyy} alt="" className='imgLogo'/>
                                     <div className='py-2'>
                                     <FloatingLabel controlId="floatingTextarea2" label="Introduzca su nueva contraseña">
                                     <input
