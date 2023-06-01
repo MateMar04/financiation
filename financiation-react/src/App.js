@@ -12,6 +12,7 @@ import Layout from "./hocs/Layout";
 import {Provider} from "react-redux";
 import store from "./store";
 import MyModal from './components/succesfull';
+import AddVisit from './components/AddVisit';
 import GroupCard from './components/groupCard';
 
 const App = () => (
@@ -27,6 +28,7 @@ const App = () => (
           <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
           <Route exact path='/activate/:uid/:token' element={<Activate />} />
           <Route exact path='/successful' element={<MyModal />} />
+          <Route exact path='/AddVisit' element={<AddVisit/>}/>
           <Route exact path='/registro-visita' element={<RegistroVisita/>}/>
         </Routes>
       </Layout>
