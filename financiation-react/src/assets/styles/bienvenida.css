@@ -30,6 +30,11 @@
     height:100px;
 }
 
+.verifyimg{
+    width:200px;
+    height:115px;
+}
+
 @media screen and (min-width: 1000px) {
     #carta {
         position: absolute;
