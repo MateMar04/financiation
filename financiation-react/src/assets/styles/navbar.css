@@ -15,11 +15,12 @@
 }
 
 #logoboton {
-    max-width: 200px;
-    max-height: fit-content;
+   width:150px;
+   height:60px;
     overflow-y: hidden;
 
 }
+
 
 .nav-link {
     color: white;

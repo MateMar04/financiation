@@ -17,10 +17,10 @@ const NavigationBar = ({logout, isAuthenticated}) => {
     const guestLinks = () => (
         <Fragment>
             <Nav.Item>
-                <Nav.Link to="/login/">Iniciar Sesion</Nav.Link>
+                <Button variant="outline-light" to="/login/" className='navlinks' href='/login'>Iniciar Sesion</Button>
             </Nav.Item>
             <Nav.Item>
-                <Nav.Link to="/signup/">Crear Cuenta</Nav.Link>
+                <Button variant="outline-light" to="/signup/" className='navlinks' href='/signup'>Crear Cuenta</Button>
             </Nav.Item>
         </Fragment>
     );
@@ -48,18 +48,12 @@ const NavigationBar = ({logout, isAuthenticated}) => {
                         {isAuthenticated ? authLinks() : guestLinks()}
 
                     </Nav>
-
-                    <Form className="d-flex">
-                        <Button variant="outline-light">Buscar</Button>{' '}
-                    </Form>
-
                 </Navbar.Collapse>
             </Container>
         </Navbar>
 
     );
 }
-
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
