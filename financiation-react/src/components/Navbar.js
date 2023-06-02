@@ -50,7 +50,6 @@ const NavigationBar = ({logout, isAuthenticated}) => {
                     </Nav>
 
                     <Form className="d-flex">
-                        <Form.Control type="search" placeholder="¿Que estas buscando?" className="me-2" id="buscador"/>
                         <Button variant="outline-light">Buscar</Button>{' '}
                     </Form>
 
