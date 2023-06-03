@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import ListAdvised from "../components/ListAdvised";
 
 const AdvisedListPage = () => {
@@ -10,15 +10,20 @@ const AdvisedListPage = () => {
     }, [])
 
     let getAdvised = async () => {
-        let response = await fetch('/api/advised/')
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT ", //add JWT access token
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advised/', {headers:headers})
         let data = await response.json()
         setAdvised(data)
     };
 
-    return(
+    return (
         <div>
             <div className='advised-list'>
-                { advised.map((advised, index) => (
+                {advised.map((advised, index) => (
                     <ListAdvised key={index} advised={advised}/>
                 ))}
             </div>
