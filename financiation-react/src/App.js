@@ -1,6 +1,6 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
-import Header from './components/Header'
+import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
 import AdvisedPage from "./pages/AdvisedPage";
 
@@ -8,7 +8,7 @@ import AdvisedPage from "./pages/AdvisedPage";
         return (
         <Router>
             <div className="App">
-                <Header/>
+                <Navbar/>
                 <Routes>
                     <Route path='/' exact element={<AdvisedListPage/>}/>
                     <Route path='/advised/:id' element={<AdvisedPage/>}/>
