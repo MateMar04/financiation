@@ -64,10 +64,23 @@ def getRoutes(request):
             'method': 'POST',
             'headers': {},
             'body': '',
-            'description': 'Activates an Account'
+            'description': 'Returns a new JWT'
+        },
+        {
+            'Endpoint': '/auth/users/reset_password/',
+            'method': 'POST',
+            'headers': {},
+            'body': '',
+            'description': 'Sends an email to reset password'
+        },
+        {
+            'Endpoint': 'auth/users/reset_password_confirm/',
+            'method': 'POST',
+            'headers': {},
+            'body': '',
+            'description': 'Resets account password'
         },
     ]
-
     return Response(routes)
 
 
