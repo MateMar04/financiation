@@ -14,11 +14,11 @@ const LoginPage = () => {
             </Container>
             <Form onSubmit=''>
                 <Container>
-                    <Form.Control placeholder="Username" type="text" name="username" value={username}
+                    <Form.Control placeholder="Username" type="text" name="username"
                                   onChange='' required/>
                 </Container>
                 <Container>
-                    <Form.Control placeholder="password" type="password" name="password" value={password}
+                    <Form.Control placeholder="password" type="password" name="password"
                                   onChange='' minLength='6' required/>
                 </Container>
                 <Container fluid>
