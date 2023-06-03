@@ -2,6 +2,34 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Advised
+from .models import *
 
 admin.site.register(Advised)
+admin.site.register(Agreement)
+admin.site.register(CityDepartment)
+admin.site.register(MinistryDepartment)
+admin.site.register(Address)
+admin.site.register(UserStatus)
+admin.site.register(VisitStatus)
+admin.site.register(Faq)
+admin.site.register(Mayor)
+admin.site.register(Locality)
+admin.site.register(Logo)
+admin.site.register(VehicleBrand)
+admin.site.register(VehicleModel)
+admin.site.register(PoliticParty)
+admin.site.register(VehiclePlate)
+admin.site.register(Role)
+admin.site.register(ContactedReferrer)
+admin.site.register(UserAccount)
+admin.site.register(Group)
+admin.site.register(Vehicles)
+admin.site.register(Visit)
+admin.site.register(RequestStatus)
+admin.site.register(Coordinator)
+admin.site.register(Advisor)
+admin.site.register(Request)
+admin.site.register(ContactedReferrerEmail)
+admin.site.register(MayorPhone)
+admin.site.register(MayorEmail)
+admin.site.register(ContactedReferrerPhone)
