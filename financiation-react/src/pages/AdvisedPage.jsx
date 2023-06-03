@@ -13,7 +13,12 @@ const AdvisedPage = () => {
     }, [advisedId])
 
     let getAdvised = async () => {
-        let response = await fetch(`/api/advised/${advisedId}/`)
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT ", //add JWT access token
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/api/advised/${advisedId}/`, {headers:headers})
         let data = await response.json()
         setAdvised(data)
     }
