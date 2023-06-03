@@ -3,6 +3,7 @@ import './App.css';
 import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
 import AdvisedPage from "./pages/AdvisedPage";
+import LoginPage from "./pages/LoginPage";
 
     function App() {
         return (
@@ -12,6 +13,7 @@ import AdvisedPage from "./pages/AdvisedPage";
                 <Routes>
                     <Route path='/' exact element={<AdvisedListPage/>}/>
                     <Route path='/advised/:id' element={<AdvisedPage/>}/>
+                    <Route path='/login' element={<LoginPage/>}/>
                 </Routes>
 
             </div>
