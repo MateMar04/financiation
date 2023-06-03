@@ -13,70 +13,110 @@ def getRoutes(request):
         {
             'Endpoint': '/api/advised/',
             'method': 'GET',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': None,
             'description': 'Returns an array of advised'
         },
         {
             'Endpoint': '/api/advised/id/',
             'method': 'GET',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': None,
             'description': 'Returns an advised'
         },
         {
             'Endpoint': '/auth/jwt/verify',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Authenticates the user account'
         },
         {
             'Endpoint': '/auth/users/me/',
             'method': 'GET',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Returns the user account'
         },
         {
             'Endpoint': '/auth/users/id/',
             'method': 'GET',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Returns an user account'
         },
         {
             'Endpoint': '/auth/users/',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Creates an Account'
         },
         {
             'Endpoint': '/auth/users/activation/uid/token/',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Activates an Account'
         },
         {
             'Endpoint': '/auth/jwt/create/',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Returns a new JWT'
         },
         {
             'Endpoint': '/auth/users/reset_password/',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Sends an email to reset password'
         },
         {
             'Endpoint': 'auth/users/reset_password_confirm/',
             'method': 'POST',
-            'headers': {},
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
             'body': '',
             'description': 'Resets account password'
         },
