@@ -41,10 +41,10 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "uid": "",
-                "token": "",
-                "new_password": "",
-                "re_new_password": ""
+                'uid': '',
+                'token': '',
+                'new_password': '',
+                're_new_password': ''
             },
             'description': 'Authenticates the user account'
         },
@@ -79,14 +79,14 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "first_name": "",
-                "last_name": "",
-                "email": "",
-                "ssn": "",
-                "username": "",
-                "phone_number": "",
-                "password": "",
-                "re_password": ""
+                'first_name': '',
+                'last_name': '',
+                'email': '',
+                'ssn': '',
+                'username': '',
+                'phone_number': '',
+                'password': '',
+                're_password': ''
             },
             'description': 'Creates an Account'
         },
@@ -99,8 +99,8 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "uid": "",
-                "token": ""
+                'uid': '',
+                'token': ''
             },
             'description': 'Activates an Account'
         },
@@ -113,9 +113,9 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "username": "",
-                "password": "",
-                "refresh": ""
+                'username': '',
+                'password': '',
+                'refresh': ''
             },
             'description': 'Returns a new JWT'
         },
@@ -128,8 +128,8 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "username": "",
-                "email": ""
+                'username': '',
+                'email': ''
             },
             'description': 'Sends an email to reset password'
         },
@@ -142,10 +142,10 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                "uid": "",
-                "token": "",
-                "new_password": "",
-                "re_new_password": ""
+                'uid': '',
+                'token': '',
+                'new_password': '',
+                're_new_password': ''
             },
             'description': 'Resets account password'
         },
