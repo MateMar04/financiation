@@ -40,7 +40,12 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "uid": "",
+                "token": "",
+                "new_password": "",
+                "re_new_password": ""
+            },
             'description': 'Authenticates the user account'
         },
         {
@@ -51,7 +56,7 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': None,
             'description': 'Returns the user account'
         },
         {
@@ -62,7 +67,7 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': None,
             'description': 'Returns an user account'
         },
         {
@@ -73,7 +78,16 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "first_name": "",
+                "last_name": "",
+                "email": "",
+                "ssn": "",
+                "username": "",
+                "phone_number": "",
+                "password": "",
+                "re_password": ""
+            },
             'description': 'Creates an Account'
         },
         {
@@ -84,7 +98,10 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "uid": "",
+                "token": ""
+            },
             'description': 'Activates an Account'
         },
         {
@@ -95,7 +112,11 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "username": "",
+                "password": "",
+                "refresh": ""
+            },
             'description': 'Returns a new JWT'
         },
         {
@@ -106,7 +127,10 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "username": "",
+                "email": ""
+            },
             'description': 'Sends an email to reset password'
         },
         {
@@ -117,7 +141,12 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': '',
+            'body': {
+                "uid": "",
+                "token": "",
+                "new_password": "",
+                "re_new_password": ""
+            },
             'description': 'Resets account password'
         },
     ]
