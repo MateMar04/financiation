@@ -11,11 +11,24 @@ from .serializers import AdvisedSerializer
 def getRoutes(request):
     routes = [
         {
-            'Endpoint': '/advised/',
+            'Endpoint': '/api/advised/',
             'method': 'GET',
             'body': None,
             'description': 'Returns an array of advised'
         },
+        {
+            'Endpoint': '/api/token/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns the access token'
+        },
+        {
+            'Endpoint': '/api/token/refresh/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns a new refresh token'
+        },
+
     ]
 
     return Response(routes)
