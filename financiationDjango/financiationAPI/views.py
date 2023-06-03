@@ -28,17 +28,44 @@ def getRoutes(request):
             'Endpoint': '/auth/jwt/verify',
             'method': 'POST',
             'headers': {},
-            'body': 'access',
-            'description': 'Authenticates the user'
+            'body': '',
+            'description': 'Authenticates the user account'
         },
         {
             'Endpoint': '/auth/users/me/',
             'method': 'GET',
             'headers': {},
-            'body': 'access',
-            'description': 'Loads the user'
+            'body': '',
+            'description': 'Returns the user account'
         },
-
+        {
+            'Endpoint': '/auth/users/id/',
+            'method': 'GET',
+            'headers': {},
+            'body': '',
+            'description': 'Returns an user account'
+        },
+        {
+            'Endpoint': '/auth/users/',
+            'method': 'POST',
+            'headers': {},
+            'body': '',
+            'description': 'Creates an Account'
+        },
+        {
+            'Endpoint': '/auth/users/activation/uid/token/',
+            'method': 'POST',
+            'headers': {},
+            'body': '',
+            'description': 'Activates an Account'
+        },
+        {
+            'Endpoint': '/auth/jwt/create/',
+            'method': 'POST',
+            'headers': {},
+            'body': '',
+            'description': 'Activates an Account'
+        },
     ]
 
     return Response(routes)
