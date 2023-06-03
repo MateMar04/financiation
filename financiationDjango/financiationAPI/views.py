@@ -13,20 +13,30 @@ def getRoutes(request):
         {
             'Endpoint': '/api/advised/',
             'method': 'GET',
+            'headers': {},
             'body': None,
             'description': 'Returns an array of advised'
         },
         {
-            'Endpoint': '/api/token/',
+            'Endpoint': '/api/advised/id/',
             'method': 'GET',
+            'headers': {},
             'body': None,
-            'description': 'Returns the access token'
+            'description': 'Returns an advised'
         },
         {
-            'Endpoint': '/api/token/refresh/',
+            'Endpoint': '/auth/jwt/verify',
+            'method': 'POST',
+            'headers': {},
+            'body': 'access',
+            'description': 'Authenticates the user'
+        },
+        {
+            'Endpoint': '/auth/users/me/',
             'method': 'GET',
-            'body': None,
-            'description': 'Returns a new refresh token'
+            'headers': {},
+            'body': 'access',
+            'description': 'Loads the user'
         },
 
     ]
