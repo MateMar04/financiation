@@ -1,38 +1,22 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Landing from "./containers/Landing";
-import Activate from "./containers/Activate";
-import LogIn from "./containers/LogIn"
-import SignUp from "./containers/SignUp";
-import ResetPassword from "./containers/ResetPassword";
-import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
-import Layout from "./hocs/Layout";
-import {Provider} from "react-redux";
-import store from "./store";
-import MyModal from './components/succesfull';
-import GroupCard from './components/groupCard';
+import Header from './components/Header'
+import AdvisedListPage from './pages/AdvisedListPage'
+import AdvisedPage from "./pages/AdvisedPage";
 
-const App = () => (
+    function App() {
+        return (
+        <Router>
+            <div className="App">
+                <Header/>
+                <Routes>
+                    <Route path='/' exact element={<AdvisedListPage/>}/>
+                    <Route path='/advised/:id' element={<AdvisedPage/>}/>
+                </Routes>
 
-  <Provider store={store}>
-    <Router>
-      <Layout>
-        <Routes>
-          <Route exact path='/' element={<Landing />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/CartaGrupo' element={<GroupCard />} />
-          <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/reset-password' element={<ResetPassword />} />
-          <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
-          <Route exact path='/activate/:uid/:token' element={<Activate />} />
-          <Route exact path='/successful' element={<MyModal />} />
-        </Routes>
-      </Layout>
-    </Router>
-  </Provider>
-);
+            </div>
+        </Router>
+    );
+}
 
 export default App;
-
-
