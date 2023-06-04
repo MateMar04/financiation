@@ -28,7 +28,7 @@ const ResetPasswordConfirmPage = () => {
                         required
                     />
                 </Form.Group>
-                <Button className='btn btn-primary' type='submit'>Reset Password</Button>
+                <Button type='submit'>Reset Password</Button>
             </Form>
         </Container>
     );
