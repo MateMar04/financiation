@@ -11,6 +11,7 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
 import VisitRegisterPage from "./pages/VisitRegisterPage";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
     return (
@@ -26,8 +27,8 @@ function App() {
                     <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
                     <Route path='/activate' element={<ActivateAccountPage/>}/>
 
-                    <Route path='/advised' exact element={<AdvisedListPage/>}/>
-                    <Route path='/advised/:id' element={<AdvisedPage/>}/>
+                    <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
+                    <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
 
                     <Route path='/visit/add' element={<AddVisitPage/>}/>
                     <Route path='/visit/register' element={<VisitRegisterPage/>}/>
