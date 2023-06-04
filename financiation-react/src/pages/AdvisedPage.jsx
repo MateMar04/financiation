@@ -8,7 +8,7 @@ const AdvisedPage = () => {
 
     let advisedId = id
     let [advised, setAdvised] = useState(null)
-    let {authTokens} = useContext(AuthContext)
+    let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
         getAdvised()
@@ -22,7 +22,11 @@ const AdvisedPage = () => {
         }
         let response = await fetch(`/api/advised/${advisedId}/`, {headers: headers})
         let data = await response.json()
-        setAdvised(data)
+        if (response.status === 200) {
+            setAdvised(data)
+        } else if (response.statusText === 'Unauthorized') {
+            logoutUser()
+        }
     }
 
     return (
