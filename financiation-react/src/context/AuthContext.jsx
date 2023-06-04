@@ -1,5 +1,6 @@
 import {createContext, useState} from "react";
 import jwt_decode from "jwt-decode";
+import {useNavigate} from 'react-router-dom'
 
 const AuthContext = createContext();
 
@@ -8,6 +9,8 @@ export const AuthProvider = ({children}) => {
 
     let [authTokens, setAuthTokens] = useState();
     let [user, setUser] = useState();
+
+    let history = useNavigate()
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -22,6 +25,8 @@ export const AuthProvider = ({children}) => {
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
+            localStorage.setItem('authTokens', JSON.stringify(data))
+            history('/advised')
         } else {
             alert('Something went wrong')
         }
