@@ -1,4 +1,5 @@
 import {createContext, useState} from "react";
+import jwt_decode from "jwt-decode";
 
 const AuthContext = createContext();
 
@@ -15,15 +16,20 @@ export const AuthProvider = ({children}) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body:JSON.stringify({'username': e.target.username.value, 'password': e.target.password.value})
+            body: JSON.stringify({'username': e.target.username.value, 'password': e.target.password.value})
         })
         let data = await response.json()
-        console.log('data', data)
-        console.log('response', response)
+        if (response.status === 200) {
+            setAuthTokens(data)
+            setUser(jwt_decode(data.access))
+        } else {
+            alert('Something went wrong')
+        }
     }
 
     let contextData = {
-        loginUser:loginUser
+        user:user,
+        loginUser: loginUser
     }
 
 
