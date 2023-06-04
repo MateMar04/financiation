@@ -58,12 +58,11 @@ const AddVisitPage = () => {
 
     return (
 
-        <Container className="container scrolling">
+        <Container className="scrolling">
             <Form>
                 <Form.Group>
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter Distance"
                         name="distance"
                         value={distance}
@@ -71,7 +70,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter Travel Time"
                         name="travel_time"
                         value={travel_time}
@@ -79,7 +77,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter visit date"
                         name="visit_date"
                         value={visit_date}
@@ -87,7 +84,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter registro civil"
                         name="civil_registration"
                         value={civil_registration}
@@ -95,7 +91,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter accommodation"
                         name="accommodation"
                         value={accommodation}
@@ -103,7 +98,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter modernization fund"
                         name="modernization_fund"
                         value={modernization_fund}
@@ -111,7 +105,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter start time"
                         name="start_time"
                         value={start_time}
@@ -119,7 +112,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter finish time"
                         name="finish_time"
                         value={finish_time}
@@ -127,17 +119,13 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter place_name"
                         name="place_name"
                         value={place_name}
                         onChange={(e) => setPlaceName(e.target.value)}
-
-
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_locality"
                         name="id_locality"
                         value={id_locality}
@@ -145,7 +133,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_group"
                         name="id_group"
                         value={id_group}
@@ -153,7 +140,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_visit_status"
                         name="id_visit_status"
                         value={id_visit_status}
@@ -161,7 +147,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_agreement"
                         name="id_agreement"
                         value={id_agreement}
@@ -169,7 +154,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_contacted_referrer"
                         name="id_contacted_referrer"
                         value={id_contacted_referrer}
@@ -177,7 +161,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control form-control-lg"
                         placeholder="Enter id_address"
                         name="id_address"
                         value={id_address}
@@ -185,7 +168,6 @@ const AddVisitPage = () => {
                     />
                     <Form.Control
                         type="text"
-                        className="form-control-lg"
                         placeholder="Enter id_logo"
                         name="id_logo"
                         value={id_logo}
@@ -194,7 +176,7 @@ const AddVisitPage = () => {
                 </Form.Group>
             </Form>
             <Form.Group>
-                <Button className='btn btn-success' onClick={AddVisitInfo}>Submit</Button>
+                <Button onClick={AddVisitInfo}>Submit</Button>
             </Form.Group>
         </Container>
     );
