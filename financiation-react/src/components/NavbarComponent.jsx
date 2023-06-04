@@ -13,7 +13,7 @@ import AuthContext from "../context/AuthContext";
 
 const NavbarComponent = () => {
 
-    let {user} = useContext(AuthContext)
+    let {user, logoutUser} = useContext(AuthContext)
 
     return (
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
@@ -30,7 +30,7 @@ const NavbarComponent = () => {
                     <Nav className="me-auto my-2 my-lg-0">
                         {user ? (
                             <Nav.Item>
-                                <Nav.Link>Logout</Nav.Link>
+                                <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
                             </Nav.Item>
                         ) : (
                             <Fragment>
