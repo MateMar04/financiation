@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const AdvisedPage = () => {
 
@@ -7,6 +8,7 @@ const AdvisedPage = () => {
 
     let advisedId = id
     let [advised, setAdvised] = useState(null)
+    let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
         getAdvised()
@@ -15,7 +17,7 @@ const AdvisedPage = () => {
     let getAdvised = async () => {
         let headers = {
             "Content-Type": "application/json",
-            "Authorization": "JWT ", //add JWT access token
+            "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
         let response = await fetch(`/api/advised/${advisedId}/`, {headers: headers})

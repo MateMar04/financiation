@@ -14,7 +14,7 @@ const AdvisedListPage = () => {
     let getAdvised = async () => {
         let headers = {
             "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access), //add JWT access token
+            "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
         let response = await fetch('/api/advised/', {headers: headers})
