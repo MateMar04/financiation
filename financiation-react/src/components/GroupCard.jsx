@@ -171,7 +171,7 @@ const GroupCard = () => {
                                 <Row xs={1} md={1}>
 
 
-                                    <Col className=''>Grupo asignado a la ciudad de santa maria
+                                    <Col>Grupo asignado a la ciudad de santa maria
                                         <p></p>Estado: Fallido, A fallecido una cordinadora</Col>
 
                                 </Row>
