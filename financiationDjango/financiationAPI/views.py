@@ -115,9 +115,21 @@ def getRoutes(request):
             'body': {
                 'username': '',
                 'password': '',
-                'refresh': ''
             },
             'description': 'Returns a new JWT'
+        },
+        {
+            'Endpoint': '/auth/jwt/refresh/',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'refresh': ''
+            },
+            'description': 'Returns a new access token'
         },
         {
             'Endpoint': '/auth/users/reset_password/',
