@@ -32,11 +32,17 @@ export const AuthProvider = ({children}) => {
         }
     }
 
-    let logout = () => {}
+    let logoutUser = () => {
+        setAuthTokens(null)
+        setUser(null)
+        localStorage.removeItem('authTokens')
+        history('/')
+    }
 
     let contextData = {
         user: user,
-        loginUser: loginUser
+        loginUser: loginUser,
+        logoutUser: logoutUser
     }
 
 
