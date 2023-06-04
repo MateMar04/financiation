@@ -1,9 +1,11 @@
 import React, {useContext, useEffect, useState} from "react";
 import ListAdvised from "../components/ListAdvised";
+import AuthContext from "../context/AuthContext";
 
 const AdvisedListPage = () => {
 
     let [advised, setAdvised] = useState([])
+    let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
         getAdvised()
@@ -12,7 +14,7 @@ const AdvisedListPage = () => {
     let getAdvised = async () => {
         let headers = {
             "Content-Type": "application/json",
-            "Authorization": "JWT ", //add JWT access token
+            "Authorization": "JWT " + String(authTokens.access), //add JWT access token
             "Accept": "application/json"
         }
         let response = await fetch('/api/advised/', {headers: headers})
