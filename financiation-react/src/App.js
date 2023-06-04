@@ -12,28 +12,30 @@ import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
 import VisitRegisterPage from "./pages/VisitRegisterPage";
 import PrivateRoute from "./utils/PrivateRoute";
+import {AuthProvider} from "./context/AuthContext";
 
 function App() {
     return (
         <Router>
             <div className="App">
-                <Navbar/>
-                <Routes>
-                    <Route path='/' exact element={<LandingPage/>}/>
+                <AuthProvider>
+                    <Navbar/>
+                    <Routes>
+                        <Route path='/' exact element={<LandingPage/>}/>
 
-                    <Route path='/login' element={<LoginPage/>}/>
-                    <Route path='/signin' element={<SigninPage/>}/>
-                    <Route path='/reset-password' element={<ResetPasswordPage/>}/>
-                    <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
-                    <Route path='/activate' element={<ActivateAccountPage/>}/>
+                        <Route path='/login' element={<LoginPage/>}/>
+                        <Route path='/signin' element={<SigninPage/>}/>
+                        <Route path='/reset-password' element={<ResetPasswordPage/>}/>
+                        <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
+                        <Route path='/activate' element={<ActivateAccountPage/>}/>
 
-                    <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
-                    <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
+                        <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
+                        <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
 
-                    <Route path='/visit/add' element={<AddVisitPage/>}/>
-                    <Route path='/visit/register' element={<VisitRegisterPage/>}/>
-                </Routes>
-
+                        <Route path='/visit/add' element={<AddVisitPage/>}/>
+                        <Route path='/visit/register' element={<VisitRegisterPage/>}/>
+                    </Routes>
+                </AuthProvider>
             </div>
         </Router>
     );
