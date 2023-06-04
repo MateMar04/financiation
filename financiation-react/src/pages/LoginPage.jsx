@@ -1,25 +1,25 @@
-import React from "react";
+import React, {useContext} from "react";
 import Container from "react-bootstrap/Container";
 import Logo from "../assets/images/PRUEBA.PNG";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import '../assets/styles/LoginPage.css'
 import {Link} from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const LoginPage = () => {
+    let {loginUser} = useContext(AuthContext)
     return (
         <Container fluid className="general">
             <Container fluid className="image-container">
                 <img src={Logo} alt="Logo del ministerio de finanzas"/>
             </Container>
-            <Form onSubmit=''>
+            <Form onSubmit={loginUser}>
                 <Container>
-                    <Form.Control placeholder="Username" type="text" name="username"
-                                  onChange='' required/>
+                    <Form.Control placeholder="Username" type="text" name="username" required/>
                 </Container>
                 <Container>
-                    <Form.Control placeholder="password" type="password" name="password"
-                                  onChange='' minLength='6' required/>
+                    <Form.Control placeholder="password" type="password" name="password" minLength='6' required/>
                 </Container>
                 <Container fluid>
                     <Button type="submit">LogIn</Button>
