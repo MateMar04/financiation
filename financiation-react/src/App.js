@@ -21,7 +21,7 @@ function App() {
                 <AuthProvider>
                     <Navbar/>
                     <Routes>
-                        <Route path='/' exact element={<LandingPage/>}/>
+                        <Route path='/' exact element={<PrivateRoute><LandingPage/></PrivateRoute>}/>
 
                         <Route path='/login' element={<LoginPage/>}/>
                         <Route path='/signin' element={<SigninPage/>}/>
