@@ -26,7 +26,7 @@ function MyModal() {
 
                 <Modal.Body>
                     <img src={Check} alt="CheckButton" id="CheckButton" class="mx-auto img-fluid"/>
-                    <p className="text-center">¡Tu cuenta a sido verficada!</p>
+                    <p className="text-center">¡Su cuenta ha sido verficada!</p>
 
                 </Modal.Body>
                 <Modal.Footer>

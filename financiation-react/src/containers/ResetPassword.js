@@ -2,10 +2,7 @@ import React, {useState} from "react";
 import {Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import {reset_password} from "../actions/auth";
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {Card} from "react-bootstrap";
+import {Container,FloatingLabel,Row,Col,Card} from 'react-bootstrap';
 
 
 const ResetPassword = ({reset_password}) => {
@@ -41,6 +38,7 @@ const ResetPassword = ({reset_password}) => {
                         <Card.Text>
                             Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el acceso a tu cuenta.
                         </Card.Text>
+                        <FloatingLabel className='floatingLabel' label="Correo electronico">
                         <input
                             className='form-control'
                             type='email'
@@ -50,6 +48,7 @@ const ResetPassword = ({reset_password}) => {
                             onChange={e => onChange(e)}
                             required
                         />
+                        </FloatingLabel>
                         <div className='py-3'>
                         <button className='btn btn-primary' type='submit'>Enviar</button>
                             </div>
