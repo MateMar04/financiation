@@ -20,19 +20,18 @@ const NavigationBar = ({ logout, isAuthenticated }) => {
                 <Row>
                     <Col className="d-flex justify-content-end">
                         <Nav.Item>
-
                             <Button variant="outline-light" className="navLinkSignup" href="/signup">
                                 Crear Cuenta
                             </Button>
 
                         </Nav.Item>
-
+                        <div className='mx-2'>
                         <Nav.Item>
                             <Button variant="outline-light" className="" href="/login">
                             Iniciar Sesión
                             </Button>
                         </Nav.Item>
-
+                        </div>
                     </Col>
                 </Row>
             </Container>
