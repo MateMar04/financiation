@@ -16,18 +16,26 @@ import Col from "react-bootstrap/Col";
 const NavigationBar = ({ logout, isAuthenticated }) => {
     const guestLinks = () => (
         <>
-            <Nav>
-                <Nav.Item>
-                <Button variant="outline-light" className="navLinkLogin" href="/login">
-                    Iniciar Sesión
-                </Button>
-                </Nav.Item>
-                <Nav.Item>
-                <Button variant="outline-light" className="navLinkSignup" href="/signup">
-                    Crear Cuenta
-                </Button>
-                </Nav.Item>
-            </Nav>
+            <Container fluid>
+                <Row>
+                    <Col className="d-flex justify-content-end">
+                        <Nav.Item>
+
+                            <Button variant="outline-light" className="navLinkSignup" href="/signup">
+                                Crear Cuenta
+                            </Button>
+
+                        </Nav.Item>
+
+                        <Nav.Item>
+                            <Button variant="outline-light" className="" href="/login">
+                            Iniciar Sesión
+                            </Button>
+                        </Nav.Item>
+
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 
@@ -49,9 +57,9 @@ const NavigationBar = ({ logout, isAuthenticated }) => {
                 </Link>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse>
-                    <Nav>
+
                         {isAuthenticated ? authLinks() : guestLinks()}
-                    </Nav>
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>

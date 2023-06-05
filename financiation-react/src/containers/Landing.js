@@ -23,7 +23,7 @@ const Home = () => (
             </Container>
             <hr/>
             <Container>
-                <p>Si todavia no tenes una cuenta puede crearte una</p>
+                <p>Si no tienes una cuenta puede crearte una</p>
                 <Link to='/signup/'><Button>Crea una Cuenta</Button></Link>
                 <div className='py-2'></div>
             </Container>
