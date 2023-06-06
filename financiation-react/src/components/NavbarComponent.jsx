@@ -2,9 +2,10 @@ import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-import {Button, Container, Form, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Form, Nav, Navbar, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+
 
 const NavbarComponent = () => {
 
@@ -28,23 +29,28 @@ const NavbarComponent = () => {
                                 <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
                             </Nav.Item>
                         ) : (
-                            <Fragment>
-                                <Nav.Item>
-                                    <Nav.Link to="/login/">Iniciar Sesion</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link to="/signup/">Crear Cuenta</Nav.Link>
-                                </Nav.Item>
-                            </Fragment>
+                                    <>
+                                        <Container fluid>
+                                            <Row>
+                                                <Col className="d-flex justify-content-end">
+                                                        <Button variant="outline-light" className="navLinkSignup" href="/signup">
+                                                            Crear Cuenta
+                                                        </Button>
+
+                                                    <div className='mx-2'>
+                                                            <Button variant="outline-light" className="" href="/login">
+                                                                Iniciar Sesión
+                                                            </Button>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                    </>
+
                         )
                         }
 
                     </Nav>
-
-                    <Form className="d-flex">
-                        <Form.Control type="search" placeholder="¿Que estas buscando?" className="me-2" id="buscador"/>
-                        <Button variant="outline-light">Buscar</Button>{' '}
-                    </Form>
 
                 </Navbar.Collapse>
             </Container>
@@ -52,6 +58,5 @@ const NavbarComponent = () => {
 
     );
 }
-
 
 export default NavbarComponent;
