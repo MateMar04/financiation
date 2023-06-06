@@ -1,26 +1,17 @@
 #navbarcs {
     background-color: #1fa4e6;
     max-height: 20%;
-    text-align: left;
-}
-
-#buscador {
-    border: 2px solid #1fa4e6;
-    max-width: 70%;
-}
-
-#navbar {
-    color: rgb(255, 255, 255);
-    padding: 30px;
 }
 
 #logoboton {
-    max-width: 200px;
-    max-height: fit-content;
+   width:160px;
+   height:60px;
     overflow-y: hidden;
+    padding-right:10px
 
 }
 
-.nav-link {
-    color: white;
+.navLinkLogin{
+    position:absolute;
+    right:20px;
 }

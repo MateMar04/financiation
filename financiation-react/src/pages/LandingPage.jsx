@@ -1,36 +1,33 @@
-import React from 'react';
-import '../assets/styles/LandingPage.css'
-import imagenPanal from '../assets/images/panal.jpg'
-import LOGOGOBIERNO from "../assets/images/LOGOGOBIERNO.png";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import React from "react";
+import Container from "react-bootstrap/Container";
+import imagenPanal from "../assets/images/panal.jpg";
+import {Card} from "react-bootstrap";
+import Logo from "../assets/images/LOGOGOBIERNO.png";
+import Button from "react-bootstrap/Button";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     return (
-        <Container fluid className='general'>
-            <Row className="contenedor-imagen">
-                <Col lg='6'>
-                    <img src={imagenPanal} alt="" className="imagen"/>
-                </Col>
-                <Col lg='6' className="informacion">
-                    <Container fluid className="carta">
-                        <Card>
-                            <Container>
-                                <img src={LOGOGOBIERNO} alt="React Logo" className="img-fluid"/>
-                            </Container>
-                            <hr/>
-                            <Container className="contenedor">
-                                <p>Si todavia no tenes una cuenta puede crearte una</p>
-                                <Button className='boton'>Crear</Button>
-                            </Container>
-                            <hr/>
-                            <Container className="contenedor">
-                                <p>Si ya tienes una cuenta accede</p>
-                                <Button className='boton'>Acceder</Button>
-                            </Container>
-                        </Card>
-                    </Container>
-                </Col>
-            </Row>
+        <Container fluid className="background">
+            <Container fluid>
+                <img src={imagenPanal} alt="" className="imagen"/>
+            </Container>
+            <Card id="carta">
+                <Container>
+                    <img src={Logo} alt="React Logo" className="img-fluid"/>
+                </Container>
+                <hr/>
+                <Container>
+                    <p>Si ya tienes una cuenta puedes iniciar sesion</p>
+                    <Link to='/login/'><Button>Iniciar Sesion</Button></Link>
+                </Container>
+                <hr/>
+                <Container>
+                    <p>Si no tienes una cuenta puede crearte una</p>
+                    <Link to='/signup/'><Button>Crea una Cuenta</Button></Link>
+                    <div className='py-2'></div>
+                </Container>
+            </Card>
         </Container>
     );
 }

@@ -1,11 +1,10 @@
 import React, {useContext} from "react";
-import Container from "react-bootstrap/Container";
 import Logo from "../assets/images/PRUEBA.PNG";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import '../assets/styles/LoginPage.css'
+import {Button, Container, FloatingLabel} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import '../assets/styles/LoginPage.css'
 
 const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)
@@ -16,20 +15,22 @@ const LoginPage = () => {
             </Container>
             <Form onSubmit={loginUser}>
                 <Container>
-                    <Form.Control placeholder="Username" type="text" name="username" required/>
+                    <FloatingLabel className='floatingLabel' label="Usuario">
+                        <Form.Control placeholder="Usuario" type="text" name="username" required/>
+                    </FloatingLabel>
                 </Container>
                 <Container>
-                    <Form.Control placeholder="password" type="password" name="password" minLength='6' required/>
+                    <FloatingLabel className='floatingLabel' label="Contraseña">
+                        <Form.Control placeholder="Contraseña" type="password" name="password" minLength='6' required/>
+                    </FloatingLabel>
                 </Container>
                 <Container fluid>
-                    <Button type="submit">LogIn</Button>
+                    <Button type="submit">Acceder</Button>
                 </Container>
             </Form>
-            <Link to="/signup/"><Button variant="link" className="link">Dont have an account yet? SignIn</Button></Link>
-            <Link to="/reset-password/"><Button variant="link" className="link">Forgot password</Button></Link>
+            <Link to="/signup/"><Button variant="link" className="link">No tengo una cuenta</Button></Link>
+            <Link to="/reset-password/"><Button variant="link" className="link">Me olvidé la contraseña</Button></Link>
         </Container>
     )
 };
-
-
 export default LoginPage;

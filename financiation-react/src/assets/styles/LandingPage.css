@@ -1,4 +1,4 @@
-* {
+.background{
     overflow: hidden;
 }
 
@@ -23,8 +23,19 @@
 
 .card {
     text-align: center;
+    box-shadow: rgba(17, 12, 46, 0.1) 5px 5px 10px 0;
+    border-radius: 20px;
 }
 
+.imgLogo{
+    width:100px;
+    height:100px;
+}
+
+.verifyimg{
+    width:200px;
+    height:115px;
+}
 
 @media screen and (min-width: 1000px) {
     #carta {
@@ -61,3 +72,5 @@
 
     }
 }
+
+

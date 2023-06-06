@@ -2,14 +2,13 @@ import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-
+import {Form} from "react-bootstrap";
 
 const NavbarComponent = () => {
 
@@ -56,6 +55,7 @@ const NavbarComponent = () => {
         </Navbar>
 
     );
-};
+}
+
 
 export default NavbarComponent;

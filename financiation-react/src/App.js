@@ -13,6 +13,8 @@ import AddVisitPage from "./pages/AddVisitPage";
 import VisitRegisterPage from "./pages/VisitRegisterPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
+import Successful from "./components/Successful";
+import GroupCard from "./components/GroupCard";
 
 function App() {
     return (
@@ -28,9 +30,12 @@ function App() {
                         <Route path='/reset-password' element={<ResetPasswordPage/>}/>
                         <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
                         <Route path='/activate' element={<ActivateAccountPage/>}/>
+                        <Route exact path='/successful' element={<Successful/>}/>
 
                         <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
                         <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
+
+                        <Route path='/CartaGrupo' element={<GroupCard/>}/>
 
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
                         <Route path='/visit/register' element={<VisitRegisterPage/>}/>

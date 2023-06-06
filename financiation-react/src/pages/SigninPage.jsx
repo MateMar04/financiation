@@ -2,65 +2,84 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
-import {Col, Row} from "react-bootstrap";
+import {Col, FloatingLabel, Row} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Logo from "../assets/images/PRUEBA.PNG";
 
 const SigninPage = () => {
     return (
         <Container fluid className="general">
-            <Container fluid className="image-container">
-                <img src={Logo} alt="Logo del ministerio de finanzas"/>
+            <img src={Logo} alt="Logo ministerio de finanzas"/>
+            <Container>
+                <Form>
+                    <Row className='justify-content-md-center'>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Nombre">
+                                <Form.Control placeholder="Nombre" type="text" className='input-required'
+                                              name='first_name' required/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Apellido">
+                                <Form.Control placeholder="Apellido" type="text" name='last_name' required/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+
+                    <Row className='justify-content-md-center'>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Usuario">
+                                <Form.Control placeholder="Usuario" type="text" name='username' required/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="DNI">
+                                <Form.Control placeholder="DNI" type="number" name='ssn' required/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+
+                    <Row className='justify-content-md-center'>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Correo Electrónico">
+                                <Form.Control placeholder="Correo electronico" type="email" name='email' required/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Telefono">
+                                <Form.Control placeholder="Telefono" type="tel" name='phone' required/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+
+                    <Row className='justify-content-md-center'>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Contraseña">
+                                <Form.Control placeholder="Contraseña" type="password" name="password" required/>
+                            </FloatingLabel>
+                        </Col>
+                        <Col lg="5" className='input-required'>
+                            <FloatingLabel className='floatingLabel' label="Repita la contraseña">
+                                <Form.Control placeholder="Repita Contraseña" type="password" name="re_password"
+                                              required/>
+                            </FloatingLabel>
+                        </Col>
+                    </Row>
+
+                    <Container>
+                        <Row>
+                            <Col>
+                                <Button className="create" type="submit">Crear Cuenta</Button>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Link to="/login/"><Button variant="link" className="link">Ya tengo una
+                                cuenta</Button></Link>
+                        </Row>
+                    </Container>
+
+                </Form>
             </Container>
-            <Form onSubmit=''>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="First name" type="text" name='first_name' value=''
-                                      onChange='' required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="Last name" type="text" name='last_name' value=''
-                                      onChange='' required/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="Username" type="text" name='username' value=''
-                                      onChange='' required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="SSN" type="number" name='ssn' value=''
-                                      onChange='' required/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="e-mail" type="email" name='email' value=''
-                                      onChange='' required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="phone" type="tel" name='phone' value=''
-                                      onChange='' required/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg="6">
-                        <Form.Control placeholder="password" type="password" name="password" value=''
-                                      onChange='' required/>
-                    </Col>
-                    <Col lg="6">
-                        <Form.Control placeholder="re password" type="password" name="re_password" value=''
-                                      onChange='' required/>
-                    </Col>
-                </Row>
-                <Container>
-                    <Button className="create" type="submit">Create Account</Button>
-                </Container>
-                <Container>
-                    <Link to="/login/"><Button variant="link" className="link">Already have an account?
-                        LogIn</Button></Link>
-                </Container>
-            </Form>
         </Container>
     );
 }
