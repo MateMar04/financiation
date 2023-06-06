@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import "../assets/styles/FormPage.css";
+import {Container, Row, Col, Button} from 'react-bootstrap';
 import {Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, CiDi, Otros} from "../components/Areas";
-import Button from "react-bootstrap/Button";
 
 
 const FormPage = () => {

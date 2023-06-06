@@ -1,56 +1,57 @@
-import React, { useState } from 'react';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Container from "react-bootstrap/Container";
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React from 'react';
+import {FloatingLabel, Container, Row, Col, Form} from 'react-bootstrap';
 
 
-export function Rentas(){
+export function Rentas() {
     const selectStyle = {
         padding: '15px',
     };
-    return(
+    return (
         <Container>
             <Row>
                 <h3>El ciudadano consulta por</h3>
             </Row>
             <Container>
-            <div className='py-3'>
-            <Row>
-
-                <Col>
-                    <Form.Check aria-label="option 1" label={`Impresión Cedulón 2023`} className='formschecks'/>
-                    <Form.Check aria-label="option 1" label={`Consulta y regularización de deuda`} className='formschecks'/>
-                    <Form.Check aria-label="option 1" label={`Adhesión a débito automático`} className='formschecks'/>
-                </Col>
-                <Col>
-                    <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
-                    <Form.Check aria-label="option 1" label={`Pago online con tarjetas de débito y crédito`} className='formschecks'/>
-                    <Form.Check aria-label="option 1" label={'Consulta de exenciones impositivas'} className='formschecks'/>
-                </Col>
-            </Row>
                 <div className='py-3'>
-                <Row className="justify-content-center align-items-center">
-                    <Col md={8}>
-                    <FloatingLabel controlId="floatingTextarea2" label="Otros">
-                        <Form.Control
-                            as="textarea"
-                            placeholder="Consulta del cliente"
-                            style={{ height: '100px'}}
-                        />
-                    </FloatingLabel>
-                    </Col>
-                </Row>
+                    <Row>
+
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Impresión Cedulón 2023`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Consulta y regularización de deuda`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Adhesión a débito automático`}
+                                        className='formschecks'/>
+                        </Col>
+                        <Col>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Pago online con tarjetas de débito y crédito`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={'Consulta de exenciones impositivas'}
+                                        className='formschecks'/>
+                        </Col>
+                    </Row>
+                    <div className='py-3'>
+                        <Row className="justify-content-center align-items-center">
+                            <Col md={8}>
+                                <FloatingLabel controlId="floatingTextarea2" label="Otros">
+                                    <Form.Control
+                                        as="textarea"
+                                        placeholder="Consulta del cliente"
+                                        style={{height: '100px'}}
+                                    />
+                                </FloatingLabel>
+                            </Col>
+                        </Row>
+                    </div>
                 </div>
-            </div>
             </Container>
         </Container>
     );
 }
-export function Registro_Civil(){
-    return(
+
+export function Registro_Civil() {
+    return (
         <Container>
             <Row>
                 <h3>El ciudadano consulta por</h3>
@@ -59,9 +60,13 @@ export function Registro_Civil(){
                 <div className='py-3'>
                     <Row>
                         <Col>
-                            <Form.Check aria-label="option 1" label={`Asesoramiento en gestiones online`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={`Trámite de DNI y Pasaporte`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={`Inicio de trámite de partidas de nacimiento y matrimonio`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento en gestiones online`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Trámite de DNI y Pasaporte`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1"
+                                        label={`Inicio de trámite de partidas de nacimiento y matrimonio`}
+                                        className='formschecks'/>
                         </Col>
                     </Row>
 
@@ -72,7 +77,7 @@ export function Registro_Civil(){
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Consulta del cliente"
-                                        style={{ height: '100px'}}
+                                        style={{height: '100px'}}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -86,8 +91,8 @@ export function Registro_Civil(){
     );
 }
 
-export function Catastro(){
-    return(
+export function Catastro() {
+    return (
         <Container>
             <Row>
                 <h3>El ciudadano consulta por</h3>
@@ -96,7 +101,8 @@ export function Catastro(){
                 <div className='py-3'>
                     <Row>
                         <Col>
-                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`}
+                                        className='formschecks'/>
                         </Col>
                     </Row>
 
@@ -107,7 +113,7 @@ export function Catastro(){
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Otros"
-                                        style={{ height: '100px'}}
+                                        style={{height: '100px'}}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -120,8 +126,8 @@ export function Catastro(){
     );
 }
 
-export function Caja_de_Jubilados(){
-    return(
+export function Caja_de_Jubilados() {
+    return (
         <Container>
             <Row>
                 <h3>El ciudadano consulta por</h3>
@@ -130,10 +136,13 @@ export function Caja_de_Jubilados(){
                 <div className='py-3'>
                     <Row>
                         <Col>
-                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={`Jubilaciones o pensiones`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Jubilaciones o pensiones`}
+                                        className='formschecks'/>
                             <Form.Check aria-label="option 1" label={`Futuros beneficiarios`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={'Subsidios por fallecimiento o seguros'} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={'Subsidios por fallecimiento o seguros'}
+                                        className='formschecks'/>
                             <Form.Check aria-label="option 1" label={`Historia Laboral`} className='formschecks'/>
                         </Col>
                     </Row>
@@ -145,7 +154,7 @@ export function Caja_de_Jubilados(){
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Otros"
-                                        style={{ height: '100px'}}
+                                        style={{height: '100px'}}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -158,8 +167,8 @@ export function Caja_de_Jubilados(){
     );
 }
 
-export function CiDi(){
-    return(
+export function CiDi() {
+    return (
 
         <Container>
             <Row>
@@ -169,8 +178,10 @@ export function CiDi(){
                 <div className='py-3'>
                     <Row>
                         <Col>
-                            <Form.Check aria-label="option 1" label={`Creación de cuentas de Ciudadano Digital Nivel 2`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={`Recuperación de cuentas`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Creación de cuentas de Ciudadano Digital Nivel 2`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Recuperación de cuentas`}
+                                        className='formschecks'/>
                             <Form.Check aria-label="option 1" label={`Actualización de mails`} className='formschecks'/>
 
                         </Col>
@@ -183,7 +194,7 @@ export function CiDi(){
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Otros"
-                                        style={{ height: '100px'}}
+                                        style={{height: '100px'}}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -196,8 +207,8 @@ export function CiDi(){
     );
 }
 
-export function IPJ(){
-    return(
+export function IPJ() {
+    return (
         <Container>
             <Row>
                 <h3>El ciudadano consulta por</h3>
@@ -206,8 +217,10 @@ export function IPJ(){
                 <div className='py-3'>
                     <Row>
                         <Col>
-                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`} className='formschecks'/>
-                            <Form.Check aria-label="option 1" label={`Sociedades, Asociaciones Civiles y Fundaciones.`} className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Asesoramiento de gestiones online`}
+                                        className='formschecks'/>
+                            <Form.Check aria-label="option 1" label={`Sociedades, Asociaciones Civiles y Fundaciones.`}
+                                        className='formschecks'/>
                         </Col>
                     </Row>
 
@@ -218,7 +231,7 @@ export function IPJ(){
                                     <Form.Control
                                         as="textarea"
                                         placeholder="Otros"
-                                        style={{ height: '100px'}}
+                                        style={{height: '100px'}}
                                     />
                                 </FloatingLabel>
                             </Col>
@@ -268,6 +281,7 @@ export function Registro_Propiedad() {
         </Container>
     );
 }
+
 export function Otros() {
     return (
         <div className='py-3'>

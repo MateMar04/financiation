@@ -1,6 +1,6 @@
 import React from 'react';
-import {Accordion, Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
+import {Accordion, Card, Col, Container, Row} from 'react-bootstrap';
 
 
 const GroupCard = () => {

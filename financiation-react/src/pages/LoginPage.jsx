@@ -1,10 +1,9 @@
 import React, {useContext} from "react";
+import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
-import Form from "react-bootstrap/Form";
-import {Button, Container, FloatingLabel} from "react-bootstrap";
+import {Button, Container, FloatingLabel, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import '../assets/styles/LoginPage.css'
 
 const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)

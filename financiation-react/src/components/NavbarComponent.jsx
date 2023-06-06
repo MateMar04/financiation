@@ -1,14 +1,10 @@
 import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
+import {Form, Button, Container, Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import {Form} from "react-bootstrap";
 
 const NavbarComponent = () => {
 

@@ -1,11 +1,9 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import imagenPanal from "../assets/images/panal.jpg";
-import {Card} from "react-bootstrap";
-import Logo from "../assets/images/LOGOGOBIERNO.png";
-import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
 import '../assets/styles/LandingPage.css'
+import imagenPanal from "../assets/images/panal.jpg";
+import Logo from "../assets/images/LOGOGOBIERNO.png";
+import {Button, Card, Container} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 const LandingPage = () => {
     return (

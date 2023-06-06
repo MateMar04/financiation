@@ -1,10 +1,5 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Button from "react-bootstrap/Button";
-import '../assets/styles/LoginPage.css'
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import {Card} from "react-bootstrap";
+import {Card, Container, Button, Row, Col} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 
 const ActivateAccountPage = () => {

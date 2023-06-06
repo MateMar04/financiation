@@ -1,6 +1,5 @@
 import React from "react";
-import {Card, Col, Container, FloatingLabel, Row} from "react-bootstrap";
-import Form from "react-bootstrap/Form";
+import {Card, Col, Container, FloatingLabel, Row, Form} from "react-bootstrap";
 
 const ResetPasswordPage = () => {
     return (
