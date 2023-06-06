@@ -1,4 +1,4 @@
-.background{
+.background {
     overflow: hidden;
 }
 
@@ -27,14 +27,14 @@
     border-radius: 20px;
 }
 
-.imgLogo{
-    width:100px;
-    height:100px;
+.imgLogo {
+    width: 100px;
+    height: 100px;
 }
 
-.verifyimg{
-    width:200px;
-    height:115px;
+.verifyimg {
+    width: 200px;
+    height: 115px;
 }
 
 @media screen and (min-width: 1000px) {

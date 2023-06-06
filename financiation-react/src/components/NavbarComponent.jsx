@@ -2,7 +2,7 @@ import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-import {Form, Button, Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Form, Nav, Navbar} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 

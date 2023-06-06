@@ -1,43 +1,43 @@
-#tittle{
-  color: #1fa4e6;
-  margin-bottom: 30px;
+#tittle {
+    color: #1fa4e6;
+    margin-bottom: 30px;
 }
 
 #RegistroVisita {
-  overflow-y: auto; 
-  height: 100vh; 
-  padding: 4vw;
- 
+    overflow-y: auto;
+    height: 100vh;
+    padding: 4vw;
+
 }
 
 #Rowcontent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
-  background: #fff;
-  max-width: 1200px;
-  padding: 3vw;
-  height:130vh;
-  -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    max-width: 1200px;
+    padding: 3vw;
+    height: 130vh;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
 }
 
 #inputt {
-  color: grey;
-  height: 57px;
-  font-size: 15px;
-  margin-bottom: 10px;
+    color: grey;
+    height: 57px;
+    font-size: 15px;
+    margin-bottom: 10px;
 }
 
-#bt1{ 
-  height: 57px;
-  font-size: 15px; 
+#bt1 {
+    height: 57px;
+    font-size: 15px;
 }
 
 
 @media screen and (min-width: 500px) {
-  #inputt {
-      font-size: 1rem;
-  }
+    #inputt {
+        font-size: 1rem;
+    }
 }
 
 

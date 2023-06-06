@@ -1,5 +1,5 @@
 import React from 'react';
-import {FloatingLabel, Container, Row, Col, Form} from 'react-bootstrap';
+import {Col, Container, FloatingLabel, Form, Row} from 'react-bootstrap';
 
 
 export function Rentas() {

@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Container, Button, Row, Col} from "react-bootstrap";
+import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 
 const ActivateAccountPage = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import keyy from "../assets/images/keyy.gif";
-import {Card, Container, Form, Row, Col, FloatingLabel} from "react-bootstrap";
+import {Card, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 
 const ResetPasswordConfirmPage = () => {
     return (

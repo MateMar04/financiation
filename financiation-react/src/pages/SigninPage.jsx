@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../assets/images/PRUEBA.PNG";
-import {Container, Form, Col, FloatingLabel, Row, Button} from "react-bootstrap";
+import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const SigninPage = () => {
