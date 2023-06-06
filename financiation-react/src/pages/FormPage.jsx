@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import "../assets/styles/formulario.css";
+import "../assets/styles/FormPage.css";
 import {Rentas, Caja_de_Jubilados, IPJ, Registro_Civil,Registro_Propiedad, Catastro, CiDi, Otros} from "../components/Areas";
 import Button from "react-bootstrap/Button";
 
