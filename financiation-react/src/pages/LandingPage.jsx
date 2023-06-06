@@ -5,6 +5,7 @@ import {Card} from "react-bootstrap";
 import Logo from "../assets/images/LOGOGOBIERNO.png";
 import Button from "react-bootstrap/Button";
 import {Link} from "react-router-dom";
+import '../assets/styles/LandingPage.css'
 
 const LandingPage = () => {
     return (
