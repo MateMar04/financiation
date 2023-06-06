@@ -1,41 +1,51 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Landing from "./containers/Landing";
-import Activate from "./containers/Activate";
-import LogIn from "./containers/LogIn"
-import RegistroVisita from './containers/RegistroVisita';
-import SignUp from "./containers/SignUp";
-import ResetPassword from "./containers/ResetPassword";
-import ResetPasswordConfirm from "./containers/ResetPasswordConfirm";
-import Layout from "./hocs/Layout";
-import {Provider} from "react-redux";
-import store from "./store";
-import MyModal from './components/succesfull';
-import AddVisit from './components/AddVisit';
-import GroupCard from './components/groupCard';
+import Navbar from './components/NavbarComponent'
+import AdvisedListPage from './pages/AdvisedListPage'
+import AdvisedPage from "./pages/AdvisedPage";
+import LoginPage from "./pages/LoginPage";
+import SigninPage from "./pages/SigninPage";
+import LandingPage from "./pages/LandingPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage";
+import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
+import ActivateAccountPage from "./pages/ActivateAccountPage";
+import AddVisitPage from "./pages/AddVisitPage";
+import VisitRegisterPage from "./pages/VisitRegisterPage";
+import PrivateRoute from "./utils/PrivateRoute";
+import {AuthProvider} from "./context/AuthContext";
+import Successful from "./components/Successful";
+import GroupCard from "./components/GroupCard";
+import FormPage from "./pages/FormPage";
 
-const App = () => (
-  <Provider store={store}>
-    <Router>
-      <Layout>
-        <Routes>
-          <Route exact path='/' element={<Landing />} />
-          <Route path='/login' element={<LogIn />} />
-          <Route path='/CartaGrupo' element={<GroupCard />} />
-          <Route exact path='/signup' element={<SignUp />} />
-          <Route exact path='/reset-password' element={<ResetPassword />} />
-          <Route exact path='/password/reset/confirm/:uid/:token' element={<ResetPasswordConfirm />} />
-          <Route exact path='/activate/:uid/:token' element={<Activate />} />
-          <Route exact path='/successful' element={<MyModal />} />
-          <Route exact path='/AddVisit' element={<AddVisit/>}/>
-          <Route exact path='/registro-visita' element={<RegistroVisita/>}/>
-        </Routes>
-      </Layout>
-    </Router>
-  </Provider>
-);
+function App() {
+    return (
+        <Router>
+            <div className="App">
+                <AuthProvider>
+                    <Navbar/>
+                    <Routes>
+                        <Route path='/' exact element={<PrivateRoute><LandingPage/></PrivateRoute>}/>
+
+                        <Route path='/login' element={<LoginPage/>}/>
+                        <Route path='/signin' element={<SigninPage/>}/>
+                        <Route path='/reset-password' element={<ResetPasswordPage/>}/>
+                        <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
+                        <Route path='/activate' element={<ActivateAccountPage/>}/>
+                        <Route exact path='/successful' element={<Successful/>}/>
+
+                        <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
+                        <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
+
+                        <Route path='/groups' element={<GroupCard/>}/>
+                        <Route path='/form' element={<FormPage/>}></Route>
+
+                        <Route path='/visit/add' element={<AddVisitPage/>}/>
+                        <Route path='/visit/register' element={<VisitRegisterPage/>}/>
+                    </Routes>
+                </AuthProvider>
+            </div>
+        </Router>
+    );
+}
 
 export default App;
-
-

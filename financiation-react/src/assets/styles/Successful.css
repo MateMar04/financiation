@@ -1,0 +1,23 @@
+#CheckButton {
+    max-width: 80px;
+    border: none;
+    justify-self: center;
+    display: flex;
+    border-bottom: 5px
+}
+
+.block {
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+
+}
+
+#a {
+    margin-bottom: 20px;
+}
+
+#titulo {
+    text-align: center;
+}
+

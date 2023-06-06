@@ -7,7 +7,7 @@
     background-color: #f1f1f1;
     border: none;
 
-    
+
     box-shadow: rgba(42, 20, 165, 0.1) 10px 10px 10px 0;
 
     max-width: 65%;
@@ -21,8 +21,8 @@
 }
 
 .cont1 {
-    
-    
+
+
     font-weight: bold;
     text-align: center;
 }
@@ -32,7 +32,7 @@
     display: flex;
     flex-wrap: wrap;
     margin: 5px 0;
-    
+
 }
 
 .colgroupcard {
@@ -51,8 +51,9 @@
     font-size: medium;
     font-family: sans-serif;
 }
-.PrimeraColumna{
-    
+
+.PrimeraColumna {
+
     text-align: center;
     font-size: medium;
     font-family: Arial, Helvetica, sans-serif;
@@ -64,23 +65,24 @@
     font-weight: bold;
 
 }
-.cont2{
+
+.cont2 {
     border-color: #333333;
     border-top: 2px solid #d4c8ff;
 }
 
 
-.rowgroupcard2{
+.rowgroupcard2 {
     background-color: #f1f1f1;
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
     margin: 10px 0;
-    
+
 
 }
 
-.colgroupcard2{
+.colgroupcard2 {
     background-color: #f1f1f1;
     padding: 5px;
     font-size: medium;
@@ -88,8 +90,9 @@
     flex: 1;
     margin: 0 10px;
 }
-.PrimeraColumna2{
-    
+
+.PrimeraColumna2 {
+
     text-align: right;
     font-size: right;
     font-family: Arial, Helvetica, sans-serif;
@@ -101,16 +104,20 @@
     font-weight: bold;
 
 }
+
 * {
     overflow-y: auto;
 }
-.colgroupcard{
-  font-size: 0.7rem;
+
+.colgroupcard {
+    font-size: 0.7rem;
 }
-.RowDescripcion{
-    
+
+.RowDescripcion {
+
 }
-.ContDescripcion{
-    
+
+.ContDescripcion {
+
     margin-top: 1.5%;
 }
