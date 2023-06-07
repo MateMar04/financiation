@@ -23,11 +23,19 @@ const NavbarComponent = () => {
                 <Navbar.Toggle aria-controls="navbarScroll"/>
 
                 <Navbar.Collapse>
-
                         {user ? (
-                            <Nav.Item>
-                                <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
-                            </Nav.Item>
+                                <Container fluid>
+                                    <Row>
+                                        <Col className="d-flex justify-content-end">
+                                            <Nav.Link>
+                                            <Button variant="outline-light"  onClick={logoutUser}>
+                                                Cerrar Sesión
+                                            </Button>
+                                            </Nav.Link>
+                                        </Col>
+                                    </Row>
+                                </Container>
+
                         ) : (
                                     <Fragment>
                                         <Container fluid>

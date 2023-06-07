@@ -104,9 +104,8 @@
     font-weight: bold;
 
 }
-
-* {
-    overflow-y: auto;
+.GeneralGroupCard{
+    overflow-y: visible;
 }
 
 .colgroupcard {
