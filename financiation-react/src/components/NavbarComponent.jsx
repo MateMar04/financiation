@@ -23,34 +23,34 @@ const NavbarComponent = () => {
                 <Navbar.Toggle aria-controls="navbarScroll"/>
 
                 <Navbar.Collapse>
-                    <Nav className="me-auto my-2 my-lg-0">
+
                         {user ? (
                             <Nav.Item>
                                 <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
                             </Nav.Item>
                         ) : (
-                                    <>
+                                    <Fragment>
                                         <Container fluid>
                                             <Row>
                                                 <Col className="d-flex justify-content-end">
-                                                        <Button variant="outline-light" className="navLinkSignup" href="/signup">
+                                                        <Button variant="outline-light"  href="/signup">
                                                             Crear Cuenta
                                                         </Button>
 
                                                     <div className='mx-2'>
-                                                            <Button variant="outline-light" className="" href="/login">
+                                                            <Button variant="outline-light" href="/login">
                                                                 Iniciar Sesión
                                                             </Button>
                                                     </div>
                                                 </Col>
                                             </Row>
                                         </Container>
-                                    </>
+                                    </Fragment>
 
                         )
                         }
 
-                    </Nav>
+
 
                 </Navbar.Collapse>
             </Container>
