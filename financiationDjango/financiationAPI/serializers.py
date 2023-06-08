@@ -15,6 +15,12 @@ class VisitSerializer(ModelSerializer):
         model = Visit
         fields = '__all__'
 
+class GroupSerializer(ModelSerializer):
+    class Meta:
+        model = Visit
+        fields = '__all__'
+
+
 
 User = get_user_model()
 
