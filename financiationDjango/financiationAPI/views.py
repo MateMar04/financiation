@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Advised
-from .serializers import AdvisedSerializer
+from .serializers import *
 
 
 # Create your views here.
@@ -161,6 +161,17 @@ def getRoutes(request):
             },
             'description': 'Resets account password'
         },
+        {
+            'Endpoint': '/api/visit/add',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': None,
+            'description': 'Adds a visit'
+        },
     ]
     return Response(routes)
 
@@ -176,4 +187,10 @@ def getAdvised(request):
 def getOneAdvised(request, pk):
     advised = Advised.objects.get(id=pk)
     serializer = AdvisedSerializer(advised, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def PostVisit(request, pk):
+    Visit = Advised.objects.get(id=pk)
+    serializer = VisitSerializer(Visit, many=False)
     return Response(serializer.data)

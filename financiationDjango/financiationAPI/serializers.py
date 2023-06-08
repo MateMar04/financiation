@@ -17,7 +17,7 @@ class VisitSerializer(ModelSerializer):
 
 class GroupSerializer(ModelSerializer):
     class Meta:
-        model = Visit
+        model = Group
         fields = '__all__'
 
 
