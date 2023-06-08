@@ -23,8 +23,10 @@
 
 .card {
     text-align: center;
-    box-shadow: rgba(17, 12, 46, 0.1) 5px 5px 10px 0;
     border-radius: 20px;
+    -webkit-box-shadow: -1px 2px 42px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 2px 42px -7px rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 42px -7px rgba(0,0,0,0.75);
 }
 
 .imgLogo {
