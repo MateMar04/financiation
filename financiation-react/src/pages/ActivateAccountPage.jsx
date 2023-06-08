@@ -2,6 +2,9 @@ import React from "react";
 import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
+import Logo from "../assets/images/LOGOGOBIERNO.png";
+import {Link} from "react-router-dom";
+import '../assets/styles/ActivateAccountPAge.css'
 
 const ActivateAccountPage = () => {
 
@@ -9,49 +12,40 @@ const ActivateAccountPage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     return (
-        <div className='container mt-5'>
 
+        <Container fluid className="fondo">
             <Container fluid>
                 <Row className='justify-content-center'>
-                    <Col md='6'>
-                        <Card>
-                            <Card.Body>
-                                <Container fluid>
-                                    <img src={verifyimg} alt="" className='verifyimg'/>
-                                </Container>
-                                <Row>
-                                    <h3>Verifique su cuenta</h3>
-                                </Row>
-                                <div className='py-2'>
-                                    <Row>
-                                        <Col>
-                                            <Button onClick={handleShow}>Verificar</Button>
-                                        </Col>
-                                    </Row>
-                                </div>
-
-                                <Modal show={show} onHide={handleClose}>
-                                    <Modal.Header closeButton>
-                                        <Modal.Title id="Titulo">Verificacion de cuenta</Modal.Title>
-                                    </Modal.Header>
-
-                                    <Modal.Body>
-                                        <img src={Check} alt="CheckButton" id="CheckButton" className="mx-auto img-fluid"/>
-                                        <p className="text-center">¡Su cuenta ha sido verficada!</p>
-
-                                    </Modal.Body>
-                                    <Modal.Footer>
-                                        <Button variant="success" onClick={handleClose}>
-                                            OK
-                                        </Button>
-                                    </Modal.Footer>
-                                </Modal>
-                            </Card.Body>
+                    <Col xs={6}>
+                        <Card id="carta">
+                            <hr/>
+                            <Container>
+                                <img src={Logo} alt="React Logo" className="img-fluid"/>
+                            </Container>
+                            <hr/>
+                            <Container>
+                                <h5>Verifique su cuenta</h5>
+                                <Button onClick={handleShow}>Verificar</Button>
+                            </Container>
+                            <hr/>
                         </Card>
                     </Col>
                 </Row>
+                <div className="text-center">
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Body>
+                            <img src={Check} alt="CheckButton" id="CheckButton"/>
+                            <p className="text-center">¡Su cuenta ha sido verficada!</p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="success" onClick={handleClose}>
+                                OK
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
             </Container>
-        </div>
+        </Container>
     );
 }
 
