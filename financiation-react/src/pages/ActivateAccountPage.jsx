@@ -18,16 +18,14 @@ const ActivateAccountPage = () => {
                 <Row className='justify-content-center'>
                     <Col xs={6}>
                         <Card id="carta">
-                            <hr/>
                             <Container>
-                                <img src={Logo} alt="React Logo" className="img-fluid"/>
-                            </Container>
-                            <hr/>
-                            <Container>
+                                <img src={verifyimg} className='imgVerify'/>
                                 <h5>Verifique su cuenta</h5>
+                                <div className='py-3'>
                                 <Button onClick={handleShow}>Verificar</Button>
+                                </div>
                             </Container>
-                            <hr/>
+
                         </Card>
                     </Col>
                 </Row>
