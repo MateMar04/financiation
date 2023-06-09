@@ -1,7 +1,5 @@
 import React from "react";
-import {Button, Card, Col, Container, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
-import verifyimg from "../assets/images/verifyimg.gif";
-import Check from "../assets/images/checked.gif";
+import {Button, Card, Col, Container, FloatingLabel , Row} from "react-bootstrap";
 
 const ResetPasswordPage = () => {
     return (
@@ -9,7 +7,7 @@ const ResetPasswordPage = () => {
         <Container fluid className="fondo">
                 <Container>
                     <Row className='justify-content-center'>
-                        <Col md='6'>
+                        <Col md={6}>
                             <Card id="carta">
                                 <Card.Header as="h5">Restablecer su contraseña</Card.Header>
                                 <Card.Body>
@@ -27,17 +25,14 @@ const ResetPasswordPage = () => {
                                         />
                                     </FloatingLabel>
                                     <div className='py-3'>
-                                        <button className='btn btn-primary' type='submit'>Enviar</button>
+                                        <Button className='btn btn-primary' type='submit'>Enviar</Button>
                                     </div>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </Row>
                 </Container>
-
-
     </Container>
-
     );
 }
 
