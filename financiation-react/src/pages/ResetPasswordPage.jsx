@@ -1,14 +1,16 @@
 import React from "react";
-import {Card, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
+import verifyimg from "../assets/images/verifyimg.gif";
+import Check from "../assets/images/checked.gif";
 
 const ResetPasswordPage = () => {
     return (
-        <Container>
-            <Form>
+
+        <Container fluid className="fondo">
                 <Container>
                     <Row className='justify-content-center'>
                         <Col md='6'>
-                            <Card>
+                            <Card id="carta">
                                 <Card.Header as="h5">Restablecer su contraseña</Card.Header>
                                 <Card.Body>
                                     <Card.Text>
@@ -32,8 +34,10 @@ const ResetPasswordPage = () => {
                         </Col>
                     </Row>
                 </Container>
-            </Form>
-        </Container>
+
+
+    </Container>
+
     );
 }
 
