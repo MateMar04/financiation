@@ -169,7 +169,25 @@ def getRoutes(request):
                 'Authorization': 'JWT accessToken',
                 'Accept': 'application/json'
             },
-            'body': None,
+            'body': {
+                'flyer': '',
+                'distance': '',
+                'travel_time': '',
+                'visit_date': '',
+                'civil_registration': '',
+                'accommodation': '',
+                'modernization_fund': '',
+                'start_time': '',
+                'finish_time': '',
+                'place_name': '',
+                'id_locality': '',
+                'id_group': '',
+                'id_visit_status': '',
+                'id_agreement': '',
+                'id_contacted_referrer': '',
+                'id_address': '',
+                'id_logo': ''
+            },
             'description': 'Adds a visit'
         },
     ]
