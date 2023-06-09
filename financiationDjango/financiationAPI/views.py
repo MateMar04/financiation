@@ -190,6 +190,19 @@ def getRoutes(request):
             },
             'description': 'Adds a visit'
         },
+        {
+            'Endpoint': '/api/group/add',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'name': ''
+            },
+            'description': 'Adds a visit'
+        },
     ]
     return Response(routes)
 
@@ -207,8 +220,15 @@ def getOneAdvised(request, pk):
     serializer = AdvisedSerializer(advised, many=False)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
-def PostVisit(request, pk):
-    Visit = Advised.objects.get(id=pk)
-    serializer = VisitSerializer(Visit, many=False)
+def postVisit():
+    visit = Visit.objects.create(serializer.data)
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def postGroup():
+    group = Group.objects.create(serializer.data)
+    serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
