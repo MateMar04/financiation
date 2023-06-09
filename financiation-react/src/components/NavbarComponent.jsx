@@ -2,7 +2,7 @@ import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-import {Button, Container, Form, Nav, Navbar, Row, Col} from "react-bootstrap";
+import {Button, Container, Nav, Navbar, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
@@ -12,6 +12,7 @@ const NavbarComponent = () => {
     let {user, logoutUser} = useContext(AuthContext)
 
     return (
+
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
             <Container fluid>
                 <Link to="/">

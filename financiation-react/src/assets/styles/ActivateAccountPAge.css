@@ -14,6 +14,12 @@
 }
 
 .imgVerify{
-    height: 150px;
-    width: 250px;
+    max-height: 150px;
+    max-width: 250px;
+}
+
+.imgCheck{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
