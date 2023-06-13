@@ -4,13 +4,9 @@ import {Card, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 
 const ResetPasswordConfirmPage = () => {
     return (
-        <div className='container mt-5'>
-            <Form>
-                <Container fluid>
-                    <Row className='justify-content-center'>
-                        <Col md='6'>
-                            <Card>
-
+                <Container fluid className='fondo'>
+                    <Container>
+                            <Card id='carta'>
                                 <Card.Body>
                                     <img src={keyy} alt="" className='imgLogo'/>
                                     <div className='py-2'>
@@ -43,13 +39,13 @@ const ResetPasswordConfirmPage = () => {
                                     </div>
                                 </Card.Body>
                             </Card>
-                        </Col>
-                    </Row>
+
+                </Container>
                 </Container>
 
 
-            </Form>
-        </div>
+
+
     );
 }
 

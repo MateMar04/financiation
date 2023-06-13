@@ -3,9 +3,6 @@ import {Col, Container, FloatingLabel, Form, Row} from 'react-bootstrap';
 
 
 export function Rentas() {
-    const selectStyle = {
-        padding: '15px',
-    };
     return (
         <Container>
             <Row>

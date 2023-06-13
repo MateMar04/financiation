@@ -2,15 +2,17 @@ import React, {Fragment, useContext} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
 import logofinanzas from '../assets/images/logofinanzas.png';
-import {Button, Container, Form, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+
 
 const NavbarComponent = () => {
 
     let {user, logoutUser} = useContext(AuthContext)
 
     return (
+
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
             <Container fluid>
                 <Link to="/">
@@ -22,29 +24,42 @@ const NavbarComponent = () => {
                 <Navbar.Toggle aria-controls="navbarScroll"/>
 
                 <Navbar.Collapse>
-                    <Nav className="me-auto my-2 my-lg-0">
                         {user ? (
-                            <Nav.Item>
-                                <Nav.Link onClick={logoutUser}>Logout</Nav.Link>
-                            </Nav.Item>
+                                <Container fluid>
+                                    <Row>
+                                        <Col className="d-flex justify-content-end">
+                                            <Nav.Link>
+                                            <Button variant="outline-light"  onClick={logoutUser}>
+                                                Cerrar Sesión
+                                            </Button>
+                                            </Nav.Link>
+                                        </Col>
+                                    </Row>
+                                </Container>
+
                         ) : (
-                            <Fragment>
-                                <Nav.Item>
-                                    <Nav.Link to="/login/">Iniciar Sesion</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link to="/signup/">Crear Cuenta</Nav.Link>
-                                </Nav.Item>
-                            </Fragment>
+                                    <Fragment>
+                                        <Container fluid>
+                                            <Row>
+                                                <Col className="d-flex justify-content-end">
+                                                        <Button variant="outline-light"  href="/signup">
+                                                            Crear Cuenta
+                                                        </Button>
+
+                                                    <div className='mx-2'>
+                                                            <Button variant="outline-light" href="/login">
+                                                                Iniciar Sesión
+                                                            </Button>
+                                                    </div>
+                                                </Col>
+                                            </Row>
+                                        </Container>
+                                    </Fragment>
+
                         )
                         }
 
-                    </Nav>
 
-                    <Form className="d-flex">
-                        <Form.Control type="search" placeholder="¿Que estas buscando?" className="me-2" id="buscador"/>
-                        <Button variant="outline-light">Buscar</Button>{' '}
-                    </Form>
 
                 </Navbar.Collapse>
             </Container>
@@ -52,6 +67,5 @@ const NavbarComponent = () => {
 
     );
 }
-
 
 export default NavbarComponent;
