@@ -14,7 +14,7 @@ export const ProfileModifyForm = () => {
                         </FloatingLabel>
                     </Col>
                     <Col lg={6} className="profile-form-col button-container">
-                        <Button className="form-button change-password">
+                        <Button className="change-password">
                             Cambiar contraseña
                         </Button>
                     </Col>
@@ -44,7 +44,7 @@ export const ProfileModifyForm = () => {
                     </Col>
                 </Row>
                 <Container>
-                    <Button className="form-button sumbit-button" type="submit">Guardar</Button>
+                    <Button className="sumbit-button" type="submit">Guardar</Button>
                 </Container>
             </Form>
         </Container>
