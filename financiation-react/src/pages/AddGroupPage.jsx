@@ -36,9 +36,11 @@ const AddGroupPage = () => {
         fetch(' /api/group/add/', {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
             },
-            body: JSON.stringify(group)
+            body: JSON.stringify('1')
         })
     }
 

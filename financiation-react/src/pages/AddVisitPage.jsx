@@ -27,32 +27,20 @@ const AddVisitPage = () => {
 
     let visitId = id
     let [visit, setVisit] = useState(null)
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    let { authTokens, logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
-        getVisit()
+        setVisit()
     }, [visitId])
 
-    let getVisit = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/visit/add/${visitId}/`, { headers: headers })
-        let data = await response.json()
-        if (response.status === 200) {
-            setVisit(data)
-        } else if (response.statusText === 'Unauthorized') {
-            logoutUser()
-        }
-    }
 
     let postVisit = async () => {
         fetch(' /api/visit/add/', {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
             },
             body: JSON.stringify(visit)
         })
