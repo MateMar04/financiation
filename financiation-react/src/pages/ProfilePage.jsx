@@ -13,6 +13,7 @@ const ProfilePage = () => {
                 <Row>
                     <Col lg={4}>
                         <ProfilePicture profileImg={tut} username={"Mateo"}/>
+                        {/* Falta añadir icono para editar imagen */}
                     </Col>
                     <Col lg={8}>
                         <ProfileData username={"MateMar"} firstName={"Mateo"} lastName={"Marchisone"}
