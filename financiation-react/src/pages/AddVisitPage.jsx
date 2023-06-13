@@ -4,10 +4,6 @@ import "../assets/styles/AddVisitPage.css"
 import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
-
-const navigate = useNavigate;
-
-
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
     const [distance, setDistance] = useState("");
@@ -28,7 +24,6 @@ const AddVisitPage = () => {
     const [id_logo, setLogo] = useState("");
 
     const { id } = useParams()
-
 
     let visitId = id
     let [visit, setVisit] = useState(null)
