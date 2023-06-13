@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Container, Form} from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
+import AuthContext from "../context/AuthContext";
+
 
 const navigate = useNavigate;
+
 
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
@@ -23,6 +26,42 @@ const AddVisitPage = () => {
     const [id_contacted_referrer, setContactedReferrer] = useState("");
     const [id_address, setAddress] = useState("");
     const [id_logo, setLogo] = useState("");
+
+    const { id } = useParams()
+
+
+    let visitId = id
+    let [visit, setVisit] = useState(null)
+    let {authTokens, logoutUser} = useContext(AuthContext)
+
+    useEffect(() => {
+        getVisit()
+    }, [visitId])
+
+    let getVisit = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/api/visit/add/${visitId}/`, { headers: headers })
+        let data = await response.json()
+        if (response.status === 200) {
+            setVisit(data)
+        } else if (response.statusText === 'Unauthorized') {
+            logoutUser()
+        }
+    }
+
+    let postVisit = async () => {
+        fetch(' /api/visit/add/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(visit)
+        })
+    }
 
     const AddVisitInfo = async () => {
         let formField = new FormData()
@@ -175,7 +214,7 @@ const AddVisitPage = () => {
                 </Form.Group>
             </Form>
             <Form.Group>
-                <Button onClick={AddVisitInfo}>Submit</Button>
+                <Button onClick={postVisit}>Submit</Button>
             </Form.Group>
         </Container>
     );

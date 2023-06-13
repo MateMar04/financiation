@@ -222,8 +222,11 @@ def getOneAdvised(request, pk):
 
 
 @api_view(['POST'])
-def postVisit():
-    visit = Visit.objects.create(serializer.data)
+def postVisit(request):
+    data = request.data
+    visit = Visit.objects.create(
+        body = data['body']
+    )
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
 
