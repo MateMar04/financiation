@@ -63,37 +63,6 @@ const AddVisitPage = () => {
         })
     }
 
-    const AddVisitInfo = async () => {
-        let formField = new FormData()
-
-        formField.append('distance', distance)
-        formField.append('travel_time', travel_time)
-        formField.append('visit_date', visit_date)
-        formField.append('civil_registration', civil_registration)
-        formField.append('accommodation', accommodation)
-        formField.append('modernization_fund', modernization_fund)
-        formField.append('start_time', start_time)
-        formField.append('finish_time', finish_time)
-        formField.append('place_name', place_name)
-        formField.append('id_locality', id_locality)
-        formField.append('id_group', id_group)
-        formField.append('id_visit_status', id_visit_status)
-        formField.append('id_agreement', id_agreement)
-        formField.append('id_contacted_referrer', id_contacted_referrer)
-        formField.append('id_address', id_address)
-        formField.append('id_logo', id_logo)
-
-        await fetch('http://localhost:8000/api', {
-            method: 'POST',
-            data: formField
-
-        }).then((response) => {
-            console.log(response.data);
-            navigate.push('/')
-
-        })
-    };
-
     return (
 
         <Container className="scrolling">
