@@ -14,23 +14,8 @@ const AddGroupPage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
-        getGroup()
+        setGroup()
     }, [groupId])
-
-    let getGroup = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/group/add/${getGroup}/`, { headers: headers })
-        let data = await response.json()
-        if (response.status === 200) {
-            setGroup(data)
-        } else if (response.statusText === 'Unauthorized') {
-            logoutUser()
-        }
-    }
 
     let postGroup = async () => {
         fetch(' /api/group/add/', {

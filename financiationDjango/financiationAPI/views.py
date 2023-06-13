@@ -223,6 +223,15 @@ def getOneAdvised(request, pk):
 @api_view(['POST'])
 def postVisit(request):
     data = request.data
+
+    locality = Locality.objects.get(id=data['id_locality'])
+    group = Group.objects.get(id=data['id_group'])
+    visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
+    agreement = Agreement.objects.get(id=data['id_agreement'])
+    contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
+    address = Address.objects.get(id=data['id_address'])
+    logo = Logo.objects.get(id=data['id_logo'])
+
     visit = Visit.objects.create(
         flyer=data['flyer'],
         distance=data['distance'],
@@ -234,13 +243,13 @@ def postVisit(request):
         start_time=data['start_time'],
         finish_time=data['finish_time'],
         place_name=data['place_name'],
-        id_locality=data['id_locality'],
-        id_group=data['id_group'],
-        id_visit_status=data['start_time'],
-        id_agreement=data['id_agreement'],
-        id_contacted_referrer=data['id_contacted_referrer'],
-        id_address=data['id_address'],
-        id_logo=data['id_logo']
+        id_locality=locality,
+        id_group=group,
+        id_visit_status=visit_status,
+        id_agreement=agreement,
+        id_contacted_referrer=contacted_referrer,
+        id_address=address,
+        id_logo=logo
     )
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)

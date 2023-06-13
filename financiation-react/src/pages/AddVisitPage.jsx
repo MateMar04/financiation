@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import { Button, Container, Form } from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
 const AddVisitPage = () => {
@@ -23,16 +22,27 @@ const AddVisitPage = () => {
     const [id_address, setAddress] = useState("");
     const [id_logo, setLogo] = useState("");
 
-    const { id } = useParams()
-
-    let visitId = id
+    let [localities, setLocalities] = useState([])
     let [visit, setVisit] = useState(null)
-    let { authTokens, logoutUser } = useContext(AuthContext)
+    let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
         setVisit()
-    }, [visitId])
+    })
 
+
+    let getLocalities = async () => {
+        let response = await fetch('/api/locality/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            }
+        })
+        let data = await response.json()
+        setLocalities(data)
+    }
 
     let postVisit = async () => {
         fetch(' /api/visit/add/', {
