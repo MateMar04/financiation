@@ -1,7 +1,6 @@
-from django.http import JsonResponse
-from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Advised
+from rest_framework.response import Response
+
 from .serializers import *
 
 
@@ -225,10 +224,27 @@ def getOneAdvised(request, pk):
 def postVisit(request):
     data = request.data
     visit = Visit.objects.create(
-        body = data['body']
+        flyer=data['flyer'],
+        distance=data['distance'],
+        travel_time=data['travel_time'],
+        visit_date=data['visit_date'],
+        civil_registration=data['civil_registration'],
+        accommodation=data['accommodation'],
+        modernization_fund=data['modernization_fund'],
+        start_time=data['start_time'],
+        finish_time=data['finish_time'],
+        place_name=data['place_name'],
+        id_locality=data['id_locality'],
+        id_group=data['id_group'],
+        id_visit_status=data['start_time'],
+        id_agreement=data['id_agreement'],
+        id_contacted_referrer=data['id_contacted_referrer'],
+        id_address=data['id_address'],
+        id_logo=data['id_logo']
     )
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 def postGroup():
