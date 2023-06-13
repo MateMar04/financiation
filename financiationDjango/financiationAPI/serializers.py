@@ -23,6 +23,42 @@ class GroupSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class LocalitySerializer(ModelSerializer):
+    class Meta:
+        model = Locality
+        fields = '__all__'
+
+
+class VisitStatusSerializer(ModelSerializer):
+    class Meta:
+        model = VisitStatus
+        fields = '__all__'
+
+class AgreementSerializer(ModelSerializer):
+    class Meta:
+        model = Agreement
+        fields = '__all__'
+
+
+class ContactedReferrerSerializer(ModelSerializer):
+    class Meta:
+        model = ContactedReferrer
+        fields = '__all__'
+
+
+class AddressSerializer(ModelSerializer):
+    class Meta:
+        model = Address
+        fields = '__all__'
+
+
+class LogoSerializer(ModelSerializer):
+    class Meta:
+        model = Logo
+        fields = '__all__'
+
+
+
 User = get_user_model()
 
 
