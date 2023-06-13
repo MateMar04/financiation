@@ -249,8 +249,8 @@ def postVisit(request):
 @api_view(['POST'])
 def postGroup(request):
     data = request.data
-    visit = Visit.objects.create(
+    group = Group.objects.create(
         name=data['name']
     )
-    serializer = GroupSerializer(visit, many=False)
+    serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
