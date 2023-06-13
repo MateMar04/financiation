@@ -254,3 +254,52 @@ def postGroup(request):
     )
     serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLocalities(request):
+    localities = Locality.objects.all()
+    serializer = LocalitySerializer(localities, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroups(request):
+    groups = Group.objects.all()
+    serializer = GroupSerializer(groups, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getVisitSatuses(request):
+    visit_statuses = VisitStatus.objects.all()
+    serializer = VisitStatusSerializer(visit_statuses, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAgreements(request):
+    agreements = Agreement.objects.all()
+    serializer = AgreementSerializer(agreements, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getContactedReferrers(request):
+    contacted_referrers = ContactedReferrer.objects.all()
+    serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAddresses(request):
+    addresses = Address.objects.all()
+    serializer = AddressSerializer(addresses, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLogos(request):
+    logos = Logo.objects.all()
+    serializer = LogoSerializer(logos, many=True)
+    return Response(serializer.data)
