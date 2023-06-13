@@ -16,6 +16,7 @@ import {AuthProvider} from "./context/AuthContext";
 import Successful from "./components/Successful";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
     return (
@@ -32,6 +33,8 @@ function App() {
                         <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
                         <Route path='/activate' element={<ActivateAccountPage/>}/>
                         <Route exact path='/successful' element={<Successful/>}/>
+
+                        <Route exact path='/me' element={<ProfilePage/>}/>
 
                         <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
                         <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
