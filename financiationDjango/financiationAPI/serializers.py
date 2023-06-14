@@ -34,6 +34,7 @@ class VisitStatusSerializer(ModelSerializer):
         model = VisitStatus
         fields = '__all__'
 
+
 class AgreementSerializer(ModelSerializer):
     class Meta:
         model = Agreement

@@ -227,10 +227,8 @@ def postVisit(request):
     locality = Locality.objects.get(id=data['id_locality'])
     group = Group.objects.get(id=data['id_group'])
     visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
-    agreement = Agreement.objects.get(id=data['id_agreement'])
     contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
     address = Address.objects.get(id=data['id_address'])
-    logo = Logo.objects.get(id=data['id_logo'])
 
     visit = Visit.objects.create(
         flyer=data['flyer'],
@@ -246,11 +244,18 @@ def postVisit(request):
         id_locality=locality,
         id_group=group,
         id_visit_status=visit_status,
-        id_agreement=agreement,
         id_contacted_referrer=contacted_referrer,
         id_address=address,
-        id_logo=logo
     )
+
+    for i in data['id_agreement']:
+        agreement = Agreement.objects.get(id=i)
+        visit.id_agreement.add(agreement)
+
+    for j in data['id_logo']:
+        logo = Logo.objects.get(id=j)
+        visit.id_logo.add(logo)
+
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
 
@@ -311,4 +316,11 @@ def getAddresses(request):
 def getLogos(request):
     logos = Logo.objects.all()
     serializer = LogoSerializer(logos, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getVisits(request):
+    visits = Visit.objects.all()
+    serializer = VisitSerializer(visits, many=True)
     return Response(serializer.data)
