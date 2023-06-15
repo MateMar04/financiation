@@ -13,82 +13,77 @@ const FormRequestPage=()=>{
     const [id_faq, setFaq] = useState('');
     const [id_status, setStatus] = useState('');
 
+    let [request, setRequest] = useState(null)
+    let {authTokens, logoutUser} = useContext(AuthContext)
 
-    const navigate = useNavigate;
+    useEffect(() => {
+        setRequest()
+    })
 
-
-    const AddFormInfo = async () => {
-        let formField = new FormData()
-
-        formField.append('id_visit',id_visit)
-        formField.append('id_advised',id_advised)
-        formField.append('id_advisor',id_advisor)
-        formField.append('id_ministry_deparment',id_ministry_department)
-        formField.append('id_faq',id_faq)
-        formField.append('id_status',id_status)
-
-        await fetch('http://localhost:8000/api', {
-            method: 'POST',
-            data: formField
-
-        }).then((response) => {
-            console.log(response.data);
-            navigate.push('/')
-
+    let postRequest = async () => {
+        fetch(' /api/request/add/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(request)
         })
-    };
+    }
+    
     return( 
         <Container className="scrolling">
             <Form>
                 <Form.Group>     
                          <Form.Control
-            type="text"
-            placeholder="Select id_visit"
-            name="id_visit"
-            value={id_visit}
-            onChange={(e) => setVisit(e.target.value)}
-            />
-            <Form.Control
-            type="text"
-            placeholder="Select id_advised"
-            name="id_advised"
-            value={id_advised}
-            onChange={(e) => setAdvised(e.target.value)}
-            />
-            <Form.Control
-            type="text"
-            placeholder="Select id_advisor"
-            name="id_advisor"
-            value={id_advisor}
-            onChange={(e) => setAdvisor(e.target.value)}
-            />
-            <Form.Control
-            type="text"
-            placeholder="Select id_ministry_department"
-            name="id_ministry_department"
-            value={id_ministry_department}
-            onChange={(e) => setMinistryDepartment(e.target.value)}
-            />
-            <Form.Control
-            type="text"
-            placeholder="Select id_faq"
-            name="id_faq"
-            value={id_faq}
-            onChange={(e) => setFaq(e.target.value)}
-            />
-            <Form.Control
-            type="text"
-            placeholder="Select id_status"
-            name="id_status"
-            value={id_status}
-            onChange={(e) => setStatus(e.target.value)}
-            />
-                    
-                </Form.Group>
-            </Form>
-            <Form.Group>
-                <Button onClick={AddFormInfo}>Submit</Button>
-            </Form.Group>
+                    type="text"
+                    placeholder="Select id_visit"
+                    name="id_visit"
+                    value={id_visit}
+                    onChange={(e) => setVisit(e.target.value)}
+                    />
+                    <Form.Control
+                    type="text"
+                    placeholder="Select id_advised"
+                    name="id_advised"
+                    value={id_advised}
+                    onChange={(e) => setAdvised(e.target.value)}
+                    />
+                    <Form.Control
+                    type="text"
+                    placeholder="Select id_advisor"
+                    name="id_advisor"
+                    value={id_advisor}
+                    onChange={(e) => setAdvisor(e.target.value)}
+                    />
+                    <Form.Control
+                    type="text"
+                    placeholder="Select id_ministry_department"
+                    name="id_ministry_department"
+                    value={id_ministry_department}
+                    onChange={(e) => setMinistryDepartment(e.target.value)}
+                    />
+                    <Form.Control
+                    type="text"
+                    placeholder="Select id_faq"
+                    name="id_faq"
+                    value={id_faq}
+                    onChange={(e) => setFaq(e.target.value)}
+                    />
+                    <Form.Control
+                    type="text"
+                    placeholder="Select id_status"
+                    name="id_status"
+                    value={id_status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    />
+                            
+                        </Form.Group>
+                    </Form>
+                    <Form.Group>
+                        <Button onClick={postRequest}>Submit</Button>
+                    </Form.Group>
         </Container>
     );
 };
