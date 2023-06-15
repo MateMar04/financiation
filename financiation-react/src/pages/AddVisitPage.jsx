@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Container, Form, FloatingLabel} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
 const AddVisitPage = () => {
@@ -61,62 +61,79 @@ const AddVisitPage = () => {
         <Container className="scrolling">
             <Form>
                 <Form.Group>
+
+                    <FloatingLabel controlId="floatingTextarea2" label="Distancia [km]">
                     <Form.Control
-                        type="text"
-                        placeholder="Enter Distance"
+                        type="number"
+                        placeholder="Distancia"
                         name="distance"
                         value={distance}
                         onChange={(e) => setDistance(e.target.value)}
+
                     />
+                    </FloatingLabel>
+                    <FloatingLabel controlId="floatingTextarea2" label="Tiempo de viaje">
                     <Form.Control
-                        type="text"
-                        placeholder="Enter Travel Time"
+                        type="time"
+                        placeholder="Tiempo de viaje"
                         name="travel_time"
                         value={travel_time}
                         onChange={(e) => setTravelTime(e.target.value)}
                     />
+                    </FloatingLabel>
+                    <FloatingLabel controlId="floatingTextarea2" label="Fecha de visita">
                     <Form.Control
-                        type="text"
-                        placeholder="Enter visit date"
+                        type="date"
+                        placeholder="Fecha de visita"
                         name="visit_date"
                         value={visit_date}
                         onChange={(e) => setVisitDate(e.target.value)}
                     />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter registro civil"
-                        name="civil_registration"
+                    </FloatingLabel>
+
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input" id="exampleCheck1" name="civil_registration"
                         value={civil_registration}
-                        onChange={(e) => setCivilRegistration(e.target.value)}
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter accommodation"
-                        name="accommodation"
+                        onChange={(e) => setCivilRegistration(e.target.value)}/>
+                        <label className="form-check-label" htmlFor="exampleCheck1">Necesito Registro civil</label>
+                    </div>
+                    <div className="form-check">
+                        <input type="checkbox" className="form-check-input" id="exampleCheck1" name="civil_registration"
                         value={accommodation}
-                        onChange={(e) => setAccommodation(e.target.value)}
-                    />
-                    <Form.Control
+                        onChange={(e) => setAccommodation(e.target.value)}/>
+                        <label className="form-check-label" htmlFor="exampleCheck1">Hay hospedaje en la localidad</label>
+                    </div>
+
+
+                    <select className='form-select'
                         type="text"
                         placeholder="Enter modernization fund"
                         name="modernization_fund"
                         value={modernization_fund}
-                        onChange={(e) => setModernizationFund(e.target.value)}
-                    />
+                        onChange={(e) => setModernizationFund(e.target.value)}>
+                        <option>Fondo de modernizacion</option>
+                        <option>Depositado</option>
+                        <option>No aprobado a la espera de nuevo proyecto</option>
+                    </select>
+                    <FloatingLabel controlId="floatingTextarea2" label="Hora de inicio de la jornada">
                     <Form.Control
-                        type="text"
-                        placeholder="Enter start time"
+                        type="time"
+                        placeholder="Hora de inicio de la jornada"
                         name="start_time"
                         value={start_time}
                         onChange={(e) => setStartTime(e.target.value)}
                     />
+                    </FloatingLabel>
+                    <FloatingLabel controlId="floatingTextarea2" label="Hora de fin de la jornada">
                     <Form.Control
-                        type="text"
-                        placeholder="Enter finish time"
+                        type="time"
+                        placeholder="Hora de fin de la jornada"
                         name="finish_time"
                         value={finish_time}
                         onChange={(e) => setFinishTime(e.target.value)}
                     />
+                    </FloatingLabel>
+                    <FloatingLabel controlId="floatingTextarea2" label="Nombre del Lugar">
                     <Form.Control
                         type="text"
                         placeholder="Enter place_name"
@@ -124,6 +141,7 @@ const AddVisitPage = () => {
                         value={place_name}
                         onChange={(e) => setPlaceName(e.target.value)}
                     />
+                        </FloatingLabel>
                     <Form.Control
                         type="text"
                         placeholder="Enter id_locality"
