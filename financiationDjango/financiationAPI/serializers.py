@@ -16,6 +16,11 @@ class VisitSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class RequestSerializer(ModelSerializer):
+    class Meta:
+        model=Request
+        fields = '__all__'
+
 User = get_user_model()
 
 
