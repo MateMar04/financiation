@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Advised
+from .models import *
 from .serializers import AdvisedSerializer
+from .serializers import RequestSerializer
 
 
 # Create your views here.
@@ -161,9 +162,49 @@ def getRoutes(request):
             },
             'description': 'Resets account password'
         },
+        {
+            'Endpoint': 'api/request/add/',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'id_visit':'',
+                'id_advised':'',
+                'id_advisor':'',
+                'id_ministry_department':'',
+                'id_faq':'',
+                'id_status':''
+            },
+            'description': 'Sends a request'
+        },
     ]
     return Response(routes)
 
+@api_view(['POST'])
+def postRequest(request):
+    data = request.data
+
+    visit = Visit.objects.get(id=data['id_visit'])
+    advised = Advised.objects.get(id=data['id_advised'])
+    advisor = Advisor.objects.get(id=data['id_advisor'])
+    ministryDepartment = MinistryDepartment.objects.get(id=data['id_ministry_department'])
+    faq = Faq.objects.get(id=data['id_faq'])
+    requestStatus = RequestStatus.objects.get(id=data['id_status'])
+
+    visit = Visit.objects.create(
+        id_visit=visit,
+        id_advised=advised,
+        id_advisor=advisor,
+        id_ministry_department=ministryDepartment,
+        id_faq=faq,
+        id_status=requestStatus,
+    )
+
+    serializer = RequestSerializer(visit, many=False)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getAdvised(request):

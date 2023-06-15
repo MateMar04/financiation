@@ -43,7 +43,7 @@ function App() {
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
                         <Route path='/visit/register' element={<VisitRegisterPage/>}/>
 
-                        <Route path='/consulta/add' element={<FormularioConsultaPage/>}/>
+                        <Route path='/request/add' element={<FormularioConsultaPage/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
