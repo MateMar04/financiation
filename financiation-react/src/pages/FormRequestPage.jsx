@@ -5,7 +5,7 @@ import {Button, Container, Form} from "react-bootstrap";
 
 
 
-const FormularioConsultaPage=()=>{
+const FormRequestPage=()=>{
     const [id_visit, setVisit] = useState('');
     const [id_advised, setAdvised] = useState('');
     const [id_advisor, setAdvisor] = useState('');
@@ -93,4 +93,4 @@ const FormularioConsultaPage=()=>{
     );
 };
 
-export default FormularioConsultaPage;
+export default FormRequestPage;

@@ -16,7 +16,7 @@ import {AuthProvider} from "./context/AuthContext";
 import Successful from "./components/Successful";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
-import FormularioConsultaPage from "./pages/FormularioConsultaPage";
+import FormRequestPage from "./pages/FormRequestPage";
 
 function App() {
     return (
@@ -43,7 +43,7 @@ function App() {
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
                         <Route path='/visit/register' element={<VisitRegisterPage/>}/>
 
-                        <Route path='/request/add' element={<FormularioConsultaPage/>}/>
+                        <Route path='/request/add' element={<FormRequestPage/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
