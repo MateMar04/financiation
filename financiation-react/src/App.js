@@ -41,7 +41,6 @@ function App() {
                         <Route path='/form' element={<FormPage/>}></Route>
 
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
-                        <Route path='/visit/register' element={<VisitRegisterPage/>}/>
 
                         <Route path='/request/add' element={<FormRequestPage/>}/>
                         <Route path='/group/add' element={<AddGroupPage/>}/>
