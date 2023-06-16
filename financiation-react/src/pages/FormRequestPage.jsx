@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import {Button, Container, Form} from "react-bootstrap";
+import AuthContext from "../context/AuthContext";
 
 
 
@@ -78,12 +78,11 @@ const FormRequestPage=()=>{
                     value={id_status}
                     onChange={(e) => setStatus(e.target.value)}
                     />
-                            
-                        </Form.Group>
-                    </Form>
-                    <Form.Group>
-                        <Button onClick={postRequest}>Submit</Button>
-                    </Form.Group>
+                </Form.Group>
+            </Form>
+            <Form.Group>
+                    <Button onClick={postRequest}>Submit</Button>
+                </Form.Group>
         </Container>
     );
 };
