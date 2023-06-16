@@ -10,7 +10,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
-import VisitRegisterPage from "./pages/VisitRegisterPage";
+import AddGroupPage from "./pages/AddGroupPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
 import Successful from "./components/Successful";
@@ -44,6 +44,7 @@ function App() {
                         <Route path='/visit/register' element={<VisitRegisterPage/>}/>
 
                         <Route path='/request/add' element={<FormRequestPage/>}/>
+                        <Route path='/group/add' element={<AddGroupPage/>}/>
                     </Routes>
                 </AuthProvider>
             </div>

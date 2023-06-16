@@ -1,8 +1,8 @@
-from django.http import JsonResponse
-from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import *
 from .serializers import *
+
+from rest_framework.response import Response
 
 
 
@@ -163,6 +163,48 @@ def getRoutes(request):
             'description': 'Resets account password'
         },
         {
+            'Endpoint': '/api/visit/add',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'flyer': '',
+                'distance': '',
+                'travel_time': '',
+                'visit_date': '',
+                'civil_registration': '',
+                'accommodation': '',
+                'modernization_fund': '',
+                'start_time': '',
+                'finish_time': '',
+                'place_name': '',
+                'id_locality': '',
+                'id_group': '',
+                'id_visit_status': '',
+                'id_agreement': '',
+                'id_contacted_referrer': '',
+                'id_address': '',
+                'id_logo': ''
+            },
+            'description': 'Adds a visit'
+        },
+        {
+            'Endpoint': '/api/group/add',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'name': ''
+            },
+            'description': 'Adds a visit'
+        },
+        {
             'Endpoint': 'api/request/add/',
             'method': 'POST',
             'headers': {
@@ -217,6 +259,112 @@ def getAdvised(request):
 def getOneAdvised(request, pk):
     advised = Advised.objects.get(id=pk)
     serializer = AdvisedSerializer(advised, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def postVisit(request):
+    data = request.data
+
+    locality = Locality.objects.get(id=data['id_locality'])
+    group = Group.objects.get(id=data['id_group'])
+    visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
+    contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
+    address = Address.objects.get(id=data['id_address'])
+
+    visit = Visit.objects.create(
+        flyer=data['flyer'],
+        distance=data['distance'],
+        travel_time=data['travel_time'],
+        visit_date=data['visit_date'],
+        civil_registration=data['civil_registration'],
+        accommodation=data['accommodation'],
+        modernization_fund=data['modernization_fund'],
+        start_time=data['start_time'],
+        finish_time=data['finish_time'],
+        place_name=data['place_name'],
+        id_locality=locality,
+        id_group=group,
+        id_visit_status=visit_status,
+        id_contacted_referrer=contacted_referrer,
+        id_address=address,
+    )
+
+    for i in data['id_agreement']:
+        agreement = Agreement.objects.get(id=i)
+        visit.id_agreement.add(agreement)
+
+    for j in data['id_logo']:
+        logo = Logo.objects.get(id=j)
+        visit.id_logo.add(logo)
+
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def postGroup(request):
+    data = request.data
+    group = Group.objects.create(
+        name=data['name']
+    )
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLocalities(request):
+    localities = Locality.objects.all()
+    serializer = LocalitySerializer(localities, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroups(request):
+    groups = Group.objects.all()
+    serializer = GroupSerializer(groups, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getVisitSatuses(request):
+    visit_statuses = VisitStatus.objects.all()
+    serializer = VisitStatusSerializer(visit_statuses, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAgreements(request):
+    agreements = Agreement.objects.all()
+    serializer = AgreementSerializer(agreements, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getContactedReferrers(request):
+    contacted_referrers = ContactedReferrer.objects.all()
+    serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAddresses(request):
+    addresses = Address.objects.all()
+    serializer = AddressSerializer(addresses, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLogos(request):
+    logos = Logo.objects.all()
+    serializer = LogoSerializer(logos, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getVisits(request):
+    visits = Visit.objects.all()
+    serializer = VisitSerializer(visits, many=True)
     return Response(serializer.data)
 
 
