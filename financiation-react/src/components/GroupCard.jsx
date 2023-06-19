@@ -5,7 +5,7 @@ import {Accordion, Card, Col, Container, Row} from 'react-bootstrap';
 
 const GroupCard = () => {
     return (
-
+        <div className='GeneralGroupCard'>
         <Container fluid className="background">
             <Card className="CartaGroupcard">
                 <Container fluid className='cont1'>
@@ -186,6 +186,7 @@ const GroupCard = () => {
             </Card>
 
         </Container>
+        </div>
     );
 
 }
