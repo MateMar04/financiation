@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import {Button, Container, Form} from "react-bootstrap";
-
-const navigate = useNavigate;
+import AuthContext from "../context/AuthContext";
 
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
@@ -24,36 +22,39 @@ const AddVisitPage = () => {
     const [id_address, setAddress] = useState("");
     const [id_logo, setLogo] = useState("");
 
-    const AddVisitInfo = async () => {
-        let formField = new FormData()
+    let [localities, setLocalities] = useState([])
+    let [visit, setVisit] = useState(null)
+    let {authTokens, logoutUser} = useContext(AuthContext)
 
-        formField.append('distance', distance)
-        formField.append('travel_time', travel_time)
-        formField.append('visit_date', visit_date)
-        formField.append('civil_registration', civil_registration)
-        formField.append('accommodation', accommodation)
-        formField.append('modernization_fund', modernization_fund)
-        formField.append('start_time', start_time)
-        formField.append('finish_time', finish_time)
-        formField.append('place_name', place_name)
-        formField.append('id_locality', id_locality)
-        formField.append('id_group', id_group)
-        formField.append('id_visit_status', id_visit_status)
-        formField.append('id_agreement', id_agreement)
-        formField.append('id_contacted_referrer', id_contacted_referrer)
-        formField.append('id_address', id_address)
-        formField.append('id_logo', id_logo)
+    useEffect(() => {
+        setVisit()
+    })
 
-        await fetch('http://localhost:8000/api', {
-            method: 'POST',
-            data: formField
 
-        }).then((response) => {
-            console.log(response.data);
-            navigate.push('/')
-
+    let getLocalities = async () => {
+        let response = await fetch('/api/locality/', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            }
         })
-    };
+        let data = await response.json()
+        setLocalities(data)
+    }
+
+    let postVisit = async () => {
+        fetch(' /api/visit/add/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(visit)
+        })
+    }
 
     return (
 
@@ -175,7 +176,7 @@ const AddVisitPage = () => {
                 </Form.Group>
             </Form>
             <Form.Group>
-                <Button onClick={AddVisitInfo}>Submit</Button>
+                <Button onClick={postVisit}>Submit</Button>
             </Form.Group>
         </Container>
     );
