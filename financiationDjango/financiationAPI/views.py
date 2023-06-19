@@ -1,9 +1,7 @@
 from rest_framework.decorators import api_view
-from .models import *
-from .serializers import *
-
 from rest_framework.response import Response
 
+from .serializers import *
 
 
 # Create your views here.
@@ -213,17 +211,18 @@ def getRoutes(request):
                 'Accept': 'application/json'
             },
             'body': {
-                'id_visit':'',
-                'id_advised':'',
-                'id_advisor':'',
-                'id_ministry_department':'',
-                'id_faq':'',
-                'id_status':''
+                'id_visit': '',
+                'id_advised': '',
+                'id_advisor': '',
+                'id_ministry_department': '',
+                'id_faq': '',
+                'id_status': ''
             },
             'description': 'Sends a request'
         },
     ]
     return Response(routes)
+
 
 @api_view(['POST'])
 def postRequest(request):
@@ -236,7 +235,7 @@ def postRequest(request):
     faq = Faq.objects.get(id=data['id_faq'])
     requestStatus = RequestStatus.objects.get(id=data['id_status'])
 
-    visit = Visit.objects.create(
+    request = Request.objects.create(
         id_visit=visit,
         id_advised=advised,
         id_advisor=advisor,
@@ -245,8 +244,9 @@ def postRequest(request):
         id_status=requestStatus,
     )
 
-    serializer = RequestSerializer(visit, many=False)
+    serializer = RequestSerializer(request, many=False)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getAdvised(request):
