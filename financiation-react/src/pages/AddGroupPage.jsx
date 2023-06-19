@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import "../assets/styles/AddVisit.css"
+import "../assets/styles/AddVisitPage.css"
 import { Button, Container, Form } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
