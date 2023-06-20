@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Col, Container, Form, Row} from "react-bootstrap";
+import {Card, Col, Container, Form, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import BarChart from "../components/BarChart";
 import {UserData} from "../components/Data";
@@ -39,7 +39,7 @@ export const ReportsPage = () => {
         <Container fluid>
             <Row>
                 <Col lg='4'>
-                    <Container className='red'>
+                    <Container className='localities-scroll'>
                         <h1 className='title'>Selecciona Localidad</h1>
                         <Form>
                             {rows}
@@ -50,24 +50,24 @@ export const ReportsPage = () => {
                     <Container className='green'>
                         <Row>
                             <Col lg={6}>
-                                <BarChart chartData={data}>
-                                </BarChart>
+                                <Card>
+                                    <BarChart chartData={data}>
+                                    </BarChart>
+                                </Card>
+                                <Card>
+                                    <PieChart chartData={data}>
+                                    </PieChart>
+                                </Card>
                             </Col>
                             <Col lg={6}>
-                                <PolarAreaChart chartData={data}>
-                                </PolarAreaChart>
-                            </Col>
-                        </Row>
-                    </Container>
-                    <Container className='yellow'>
-                        <Row>
-                            <Col lg={6}>
-                                <PieChart chartData={data}>
-                                </PieChart>
-                            </Col>
-                            <Col lg={6}>
-                                <LineChart chartData={data}>
-                                </LineChart>
+                                <Card>
+                                    <PolarAreaChart chartData={data}>
+                                    </PolarAreaChart>
+                                </Card>
+                                <Card>
+                                    <LineChart chartData={data}>
+                                    </LineChart>
+                                </Card>
                             </Col>
                         </Row>
                     </Container>

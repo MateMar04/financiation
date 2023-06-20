@@ -1,22 +1,8 @@
-.red {
+.localities-scroll {
     overflow-y: scroll;
-    max-height: 100%;
-}
-
-.blue {
-    background-color: blue;
-}
-
-.green {
-    max-height: 50%;
-
-}
-
-.yellow {
-    max-height: 70%;
-    overflow-y: hidden;
+    max-height:  90vh;
 }
 
 .charts {
-    justify-content: space-around;
+    max-height:  90vh;
 }
