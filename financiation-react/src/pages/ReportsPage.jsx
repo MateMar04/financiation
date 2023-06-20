@@ -8,14 +8,54 @@ import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
 
 
-const rows = []
+const localities = []
 for (let i = 0; i <= 30; i++) {
-    rows.push(
+    localities.push(
         <Row key={i}>
-            <Col lg={6}>
+            <Col>
                 <Form.Label>Ciudad {i}</Form.Label>
             </Col>
-            <Col lg={6}>
+            <Col>
+                <Form.Check></Form.Check>
+            </Col>
+        </Row>)
+}
+
+const ministryDepartments = []
+for (let i = 0; i <= 6; i++) {
+    ministryDepartments.push(
+        <Row key={i}>
+            <Col>
+                <Form.Label>Departamento {i}</Form.Label>
+            </Col>
+            <Col>
+                <Form.Check></Form.Check>
+            </Col>
+        </Row>)
+}
+
+
+const motivos = []
+for (let i = 0; i <= 10; i++) {
+    motivos.push(
+        <Row key={i}>
+            <Col>
+                <Form.Label>Motivo {i}</Form.Label>
+            </Col>
+            <Col>
+                <Form.Check></Form.Check>
+            </Col>
+        </Row>)
+}
+
+const visitas = []
+for (let i = 0; i <= 10; i++) {
+    visitas.push(
+        <Row key={i}>
+            <Col>
+                <Form.Label>Visita {i}</Form.Label>
+            </Col>
+            <Col>
                 <Form.Check></Form.Check>
             </Col>
         </Row>)
@@ -38,11 +78,32 @@ export const ReportsPage = () => {
     return (
         <Container fluid>
             <Row>
-                <Col lg='4'>
-                    <Container className='localities-scroll'>
-                        <h1 className='title'>Selecciona Localidad</h1>
+                <Col lg='4' className='localities-scroll'>
+                    <Container className='scroll'>
+                        <h5 className='title'>Selecciona Localidades</h5>
                         <Form>
-                            {rows}
+                            {localities}
+                        </Form>
+                    </Container>
+                    <hr/>
+                    <Container className='scroll'>
+                        <Form>
+                            <h5>Departamentos</h5>
+                            {ministryDepartments}
+                        </Form>
+                    </Container>
+                    <hr/>
+                    <Container className='scroll'>
+                        <Form>
+                            <h5>Motivos</h5>
+                            {motivos}
+                        </Form>
+                    </Container>
+                    <hr/>
+                    <Container className='scroll'>
+                        <Form>
+                            <h5>Visitas</h5>
+                            {visitas}
                         </Form>
                     </Container>
                 </Col>

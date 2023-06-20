@@ -1,22 +1,29 @@
 .localities-scroll {
+    max-height:  92vh;
+}
+
+.scroll {
     overflow-y: scroll;
-    max-height:  90vh;
+    height: 22%;
+    max-height: 22%;
+    padding: 1vh;
+    overflow-x: hidden;
 }
 
 .charts-column {
-    max-height:  90vh;
+    max-height:  92vh;
 }
 .charts-container {
-    max-height: 90vh;
+    max-height: 92vh;
     padding: 0;
 }
 
 .charts-row {
-    max-height: 90vh;
+    max-height: 92vh;
 }
 
 .inner-charts-column {
-    max-height: 90vh;
+    max-height: 92vh;
     padding: 1vh;
 }
 
