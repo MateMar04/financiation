@@ -6,3 +6,4 @@ financiationDjango/djangoapp/__pycache__
 /financiationDjango/build/*
 /financiationDjango/db.sqlite3
 /financiationDjango/build/
+/financiationDjango/financiationAPI/images/
