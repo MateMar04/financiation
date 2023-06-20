@@ -1,11 +1,18 @@
-.localities-scroll {
-    max-height:  92vh;
+.filters {
+    max-height:  60vh;
+    overflow-x: hidden;
+    padding: 3vh;
+    overflow-y: hidden;
+}
+
+.filter-card {
+    height: 43%;
+    max-height: 43%;
+    margin: 2vh;
 }
 
 .scroll {
     overflow-y: scroll;
-    height: 22%;
-    max-height: 22%;
     padding: 1vh;
     overflow-x: hidden;
 }

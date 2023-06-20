@@ -77,62 +77,61 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Row>
-                <Col lg='4' className='localities-scroll'>
-                    <Container className='scroll'>
-                        <h5 className='title'>Selecciona Localidades</h5>
-                        <Form>
+            <Row className='filters'>
+                <Col lg={6} className='filters'>
+                    <Card className='filter-card'>
+                        <h5>Selecciona Localidades</h5>
+                        <Form className='scroll'>
                             {localities}
                         </Form>
-                    </Container>
-                    <hr/>
-                    <Container className='scroll'>
-                        <Form>
-                            <h5>Departamentos</h5>
+                    </Card>
+                    <Card className='filter-card'>
+                        <h5>Departamentos</h5>
+                        <Form className='scroll'>
                             {ministryDepartments}
                         </Form>
-                    </Container>
-                    <hr/>
-                    <Container className='scroll'>
-                        <Form>
-                            <h5>Motivos</h5>
+                    </Card>
+                </Col>
+                <Col lg={6} className='filters'>
+                    <Card className='filter-card'>
+                        <h5>Motivos</h5>
+                        <Form className='scroll'>
                             {motivos}
                         </Form>
-                    </Container>
-                    <hr/>
-                    <Container className='scroll'>
-                        <Form>
-                            <h5>Visitas</h5>
+                    </Card>
+                    <Card className='filter-card'>
+                        <h5>Visitas</h5>
+                        <Form className='scroll'>
                             {visitas}
                         </Form>
-                    </Container>
+                    </Card>
                 </Col>
-                <Col lg='8' className='charts-column'>
-                    <Container className='charts-container'>
-                        <Row className='charts-row'>
-                            <Col lg={6} className='inner-charts-column'>
-                                <Card className='chart-card'>
-                                    <BarChart chartData={data}>
-                                    </BarChart>
-                                </Card>
-                                <Card className='chart-card'>
-                                    <PieChart chartData={data}>
-                                    </PieChart>
-                                </Card>
-                            </Col>
-                            <Col lg={6} className='inner-charts-column'>
-                                <Card className='chart-card'>
-                                    <PolarAreaChart chartData={data}>
-                                    </PolarAreaChart>
-                                </Card>
-                                <Card className='chart-card'>
-                                    <LineChart chartData={data}>
-                                    </LineChart>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Col>
+            </Row>
+            <Row>
+                <Container className='charts-container'>
+                    <Row className='charts-row'>
+                        <Col lg={6} className='inner-charts-column'>
+                            <Card className='chart-card'>
+                                <BarChart chartData={data}>
+                                </BarChart>
+                            </Card>
+                            <Card className='chart-card'>
+                                <PieChart chartData={data}>
+                                </PieChart>
+                            </Card>
+                        </Col>
+                        <Col lg={6} className='inner-charts-column'>
+                            <Card className='chart-card'>
+                                <PolarAreaChart chartData={data}>
+                                </PolarAreaChart>
+                            </Card>
+                            <Card className='chart-card'>
+                                <LineChart chartData={data}>
+                                </LineChart>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
             </Row>
         </Container>
     )
