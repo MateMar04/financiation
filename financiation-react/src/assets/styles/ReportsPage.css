@@ -1,6 +1,6 @@
 .red {
     overflow-y: scroll;
-    max-height: 90vh;
+    max-height: 100%;
 }
 
 .blue {
@@ -8,9 +8,15 @@
 }
 
 .green {
-    background-color: green;
+    max-height: 50%;
+
 }
 
 .yellow {
-    background-color: yellow;
+    max-height: 70%;
+    overflow-y: hidden;
+}
+
+.charts {
+    justify-content: space-around;
 }
