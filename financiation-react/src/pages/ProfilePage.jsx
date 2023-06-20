@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import ProfilePicture from "../components/ProfilePicture";
-import tut from "../assets/images/Tute.jpg";
 import ProfileData from "../components/ProfileData";
 import "../assets/styles/ProfilePage.css"
 import ProfileModifyForm from "../components/ProfileModifyForm";
