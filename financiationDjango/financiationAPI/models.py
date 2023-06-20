@@ -150,14 +150,15 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, password=None, is_staff=True,
-                         is_superuser=True):
+    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, profile_picture,
+                         password=None, is_staff=True, is_superuser=True):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
         user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
-                          is_staff=is_staff, phone_number=phone_number, is_superuser=is_superuser)
+                          is_staff=is_staff, phone_number=phone_number, is_superuser=is_superuser,
+                          profile_picture=profile_picture)
 
         user.set_password(password)
         user.save()
@@ -175,14 +176,14 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
-    profile_picture = models.ImageField(upload_to='financiationAPI/images/profile_pictures/', default=None)
+    profile_picture = models.ImageField(upload_to='financiationAPI/images/', default=None)
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn', 'phone_number']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'ssn', 'phone_number', 'profile_picture']
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
