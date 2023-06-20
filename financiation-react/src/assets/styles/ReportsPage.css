@@ -1,5 +1,6 @@
 .red {
-    background-color: red;
+    overflow-y: scroll;
+    max-height: 90vh;
 }
 
 .blue {
