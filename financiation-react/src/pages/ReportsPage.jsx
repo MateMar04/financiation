@@ -1,25 +1,12 @@
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {Card, Col, Container, Form, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
-import {PolarArea} from "react-chartjs-2";
 import PolarAreaChart from "../components/PolarAreaChart";
+import AuthContext from "../context/AuthContext";
 
-
-const localities = []
-for (let i = 0; i <= 30; i++) {
-    localities.push(
-        <Row key={i}>
-            <Col>
-                <Form.Label>Ciudad {i}</Form.Label>
-            </Col>
-            <Col>
-                <Form.Check></Form.Check>
-            </Col>
-        </Row>)
-}
 
 const ministryDepartments = []
 for (let i = 0; i <= 6; i++) {
@@ -74,6 +61,25 @@ export const ReportsPage = () => {
         }]
     })
 
+    let [localities, setLocalities] = useState([])
+    let {authTokens} = useContext(AuthContext)
+
+
+    useEffect(() => {
+        getLocalities()
+    }, [])
+    let getLocalities = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/locality/', {headers: headers})
+        let data = await response.json()
+        console.log(data)
+        setLocalities(data)
+    };
+
 
     return (
         <Container fluid>
@@ -84,7 +90,16 @@ export const ReportsPage = () => {
                             <h1>Localidades</h1>
                             <Container className='card-scroll'>
                                 <Form>
-                                    {localities}
+                                    {localities.map((locality) => (
+                                        <Row key={locality.id}>
+                                            <Col>
+                                                <Form.Label>{locality.name}</Form.Label>
+                                            </Col>
+                                            <Col>
+                                                <Form.Check value={locality.id}></Form.Check>
+                                            </Col>
+                                        </Row>
+                                    ))}
                                 </Form>
                             </Container>
                         </Card>
