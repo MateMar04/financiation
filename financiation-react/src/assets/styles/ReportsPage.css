@@ -3,6 +3,23 @@
     max-height:  90vh;
 }
 
-.charts {
+.charts-column {
     max-height:  90vh;
+}
+.charts-container {
+    max-height: 90vh;
+    padding: 0;
+}
+
+.charts-row {
+    max-height: 90vh;
+}
+
+.inner-charts-column {
+    max-height: 90vh;
+    padding: 1vh;
+}
+
+.chart-card {
+    padding: 2vh;
 }

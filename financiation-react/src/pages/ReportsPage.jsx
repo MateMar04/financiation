@@ -46,25 +46,25 @@ export const ReportsPage = () => {
                         </Form>
                     </Container>
                 </Col>
-                <Col lg='8' className='charts'>
-                    <Container className='green'>
-                        <Row>
-                            <Col lg={6}>
-                                <Card>
+                <Col lg='8' className='charts-column'>
+                    <Container className='charts-container'>
+                        <Row className='charts-row'>
+                            <Col lg={6} className='inner-charts-column'>
+                                <Card className='chart-card'>
                                     <BarChart chartData={data}>
                                     </BarChart>
                                 </Card>
-                                <Card>
+                                <Card className='chart-card'>
                                     <PieChart chartData={data}>
                                     </PieChart>
                                 </Card>
                             </Col>
-                            <Col lg={6}>
-                                <Card>
+                            <Col lg={6} className='inner-charts-column'>
+                                <Card className='chart-card'>
                                     <PolarAreaChart chartData={data}>
                                     </PolarAreaChart>
                                 </Card>
-                                <Card>
+                                <Card className='chart-card'>
                                     <LineChart chartData={data}>
                                     </LineChart>
                                 </Card>
