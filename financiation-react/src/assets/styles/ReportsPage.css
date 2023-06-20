@@ -1,40 +1,19 @@
-.filters {
-    max-height:  60vh;
-    overflow-x: hidden;
+.filters-column {
     padding: 3vh;
-    overflow-y: hidden;
 }
 
 .filter-card {
-    height: 43%;
-    max-height: 43%;
-    margin: 2vh;
+    max-height: 40vh;
+    height: 40vh;
+    margin: 0;
 }
 
-.scroll {
+.card-scroll {
     overflow-y: scroll;
-    padding: 1vh;
-    overflow-x: hidden;
 }
 
-.charts-column {
-    max-height:  92vh;
-}
-.charts-container {
-    max-height: 92vh;
-    padding: 0;
-}
-
-.charts-row {
-    max-height: 92vh;
-}
-
-.inner-charts-column {
-    max-height: 92vh;
-    padding: 1vh;
-}
 
 .chart-card {
-    padding: 2vh;
+    padding: 1vh;
     align-items: center;
 }

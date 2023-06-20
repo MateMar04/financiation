@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import {Card, Col, Container, Form, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
-import BarChart from "../components/BarChart";
 import {UserData} from "../components/Data";
-import LineChart from "../components/LineChart";
+import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
+import {PolarArea} from "react-chartjs-2";
 import PolarAreaChart from "../components/PolarAreaChart";
 
 
@@ -77,63 +77,87 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Row className='filters'>
-                <Col lg={6} className='filters'>
-                    <Card className='filter-card'>
-                        <h5>Selecciona Localidades</h5>
-                        <Form className='scroll'>
-                            {localities}
-                        </Form>
-                    </Card>
-                    <Card className='filter-card'>
-                        <h5>Departamentos</h5>
-                        <Form className='scroll'>
-                            {ministryDepartments}
-                        </Form>
-                    </Card>
-                </Col>
-                <Col lg={6} className='filters'>
-                    <Card className='filter-card'>
-                        <h5>Motivos</h5>
-                        <Form className='scroll'>
-                            {motivos}
-                        </Form>
-                    </Card>
-                    <Card className='filter-card'>
-                        <h5>Visitas</h5>
-                        <Form className='scroll'>
-                            {visitas}
-                        </Form>
-                    </Card>
-                </Col>
-            </Row>
-            <Row>
-                <Container className='charts-container'>
-                    <Row className='charts-row'>
-                        <Col lg={6} className='inner-charts-column'>
-                            <Card className='chart-card'>
-                                <BarChart chartData={data}>
-                                </BarChart>
-                            </Card>
-                            <Card className='chart-card'>
-                                <PieChart chartData={data}>
-                                </PieChart>
-                            </Card>
-                        </Col>
-                        <Col lg={6} className='inner-charts-column'>
-                            <Card className='chart-card'>
-                                <PolarAreaChart chartData={data}>
-                                </PolarAreaChart>
-                            </Card>
-                            <Card className='chart-card'>
-                                <LineChart chartData={data}>
-                                </LineChart>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </Row>
+            <Container fluid className='filters'>
+                <Row>
+                    <Col lg={6} className='filters-column'>
+                        <Card className='filter-card'>
+                            <h1>Localidades</h1>
+                            <Container className='card-scroll'>
+                                <Form>
+                                    {localities}
+                                </Form>
+                            </Container>
+                        </Card>
+                    </Col>
+                    <Col lg={6} className='filters-column'>
+                        <Card className='filter-card'>
+                            <h1>Departamentos</h1>
+                            <Container className='card-scroll'>
+                                <Form>
+                                    {ministryDepartments}
+                                </Form>
+                            </Container>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={6} className='filters-column'>
+                        <Card className='filter-card'>
+                            <h1>Motivos</h1>
+                            <Container className='card-scroll'>
+                                <Form>
+                                    {motivos}
+                                </Form>
+                            </Container>
+                        </Card>
+                    </Col>
+                    <Col lg={6} className='filters-column'>
+                        <Card className='filter-card'>
+                            <h1>Visitas</h1>
+                            <Container className='card-scroll'>
+                                <Form>
+                                    {visitas}
+                                </Form>
+                            </Container>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+
+            <hr/>
+
+            <Container fluid>
+                <Row>
+                    <Col lg={6} className='chart-column'>
+                        <Card className='chart-card'>
+                            <h1>Ciudades</h1>
+                            <BarChart chartData={data}/>
+                        </Card>
+                    </Col>
+                    <Col lg={6} className='chart-column'>
+                        <Card className='chart-card'>
+                            <h1>Organismos</h1>
+                            <BarChart chartData={data}/>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={6} className='chart-column'>
+                        <Card className='chart-card'>
+                            <h1>Motivos</h1>
+                            <PieChart chartData={data}/>
+                        </Card>
+                    </Col>
+                    <Col lg={6} className='chart-column'>
+                        <Card>
+                            <h1>Asesores</h1>
+                            <PolarAreaChart chartData={data}/>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
         </Container>
+
     )
 }
 
