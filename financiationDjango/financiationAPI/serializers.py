@@ -7,7 +7,7 @@ from .models import *
 
 class RequestSerializer(ModelSerializer):
     class Meta:
-        model=Request
+        model = Request
         fields = '__all__'
 
 
@@ -65,6 +65,11 @@ class LogoSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class MinistryDepartmentSerializer(ModelSerializer):
+    class Meta:
+        model = MinistryDepartment
+        fields = '__all__'
+
 
 User = get_user_model()
 
@@ -73,4 +78,3 @@ class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
-

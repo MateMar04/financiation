@@ -10,12 +10,13 @@ urlpatterns = [
     path('advised/<str:pk>/', views.getOneAdvised, name='oneAdvised'),
     path('locality/', views.getLocalities, name='getLocalities'),
     path('group/', views.getGroups, name='getGroups'),
-    path('visit-status/', views.getVisitSatuses, name='getVisitSatuses'),
+    path('visit-status/', views.getVisitSatuses, name='getVisitStatuses'),
     path('agreement/', views.getAgreements, name='getAgreements'),
     path('contacted-referrer/', views.getContactedReferrers, name='getContactedReferrers'),
     path('address/', views.getAddresses, name='getAddresses'),
     path('logo/', views.getLogos, name='getLogos'),
     path('visit/', views.getVisits, name='getVisits'),
+    path('ministry-department/', views.getMinistryDepartments, name='getMinistryDepartments'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

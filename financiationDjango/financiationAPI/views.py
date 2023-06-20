@@ -320,6 +320,13 @@ def getLocalities(request):
 
 
 @api_view(['GET'])
+def getMinistryDepartments(request):
+    departments = MinistryDepartment.objects.all()
+    serializer = MinistryDepartmentSerializer(departments, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def getGroups(request):
     groups = Group.objects.all()
     serializer = GroupSerializer(groups, many=True)
