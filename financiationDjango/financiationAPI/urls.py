@@ -20,10 +20,14 @@ urlpatterns = [
     path('faq/', views.getFaqs, name='getFaqs'),
     path('coordinator/', views.getCoordinators, name='getCoordinators'),
     path('coordinator/<str:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
+    path('advisor/', views.getAdvisors, name='getAdvisors'),
+    path('advisor/<str:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
+    
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
     path('group/add/', views.postGroup, name='postGroup'),
     path('request/add/', views.postRequest, name='postRequest'),
-    path('coordinator/add/', views.postCoordinator, name='postCoordinator')
+    path('coordinator/add/', views.postCoordinator, name='postCoordinator'),
+    path('advisor/add/', views.postAdvisor, name='postAdvisor'),
 ]
