@@ -134,3 +134,8 @@ class RoleSerializer(ModelSerializer):
     class Meta:
         model = Role
         fields = '__all__'
+
+class RequestStatusSerializer(ModelSerializer):
+    class Meta:
+        model = RequestStatus
+        fields = '__all__'

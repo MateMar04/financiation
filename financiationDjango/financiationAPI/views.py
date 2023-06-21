@@ -495,3 +495,9 @@ def getRoles(request):
     role = Role.objects.all()
     serializer = RoleSerializer(role, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatuses(request):
+    requestStatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requestStatus, many=True)
+    return Response(serializer.data)
