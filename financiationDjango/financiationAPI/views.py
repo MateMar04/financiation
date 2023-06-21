@@ -447,3 +447,9 @@ def getOneAdvisor(request, pk):
     advisor = Advisor.objects.get(id=pk)
     serializer = AdvisorSerializer(advisor, many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getCityDepartments(request):
+    cityDepartment = CityDepartment.objects.all()
+    serializer = AdvisorCityDepartment(cityDepartment, many=True)
+    return Response(serializer.data)

@@ -22,7 +22,7 @@ urlpatterns = [
     path('coordinator/<int:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
     path('advisor/', views.getAdvisors, name='getAdvisors'),
     path('advisor/<int:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
-    
+    path('CityDepartment/', views.getCityDepartments, name='getCityDepartment'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
