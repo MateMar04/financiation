@@ -453,3 +453,9 @@ def getCityDepartments(request):
     cityDepartment = CityDepartment.objects.all()
     serializer = AdvisorCityDepartment(cityDepartment, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserStatuses(request):
+    userStatus = UserStatus.objects.all()
+    serializer = AdvisorUserStatus(userStatus, many=True)
+    return Response(serializer.data)

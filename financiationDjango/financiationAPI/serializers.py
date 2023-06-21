@@ -99,3 +99,8 @@ class AdvisorCityDepartment(ModelSerializer):
     class Meta:
         model = CityDepartment
         fields = '__all__'
+
+class AdvisorUserStatus(ModelSerializer):
+    class Meta:
+        model = UserStatus
+        fields = '__all__'
