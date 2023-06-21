@@ -17,6 +17,7 @@ import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
 import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
+import {ReportsPage} from "./pages/ReportsPage";
 
 
 function App() {
@@ -46,6 +47,8 @@ function App() {
 
                         <Route path='/request/add' element={<FormRequestPage/>}/>
                         <Route path='/group/add' element={<AddGroupPage/>}/>
+
+                        <Route path='/reports' element={<ReportsPage/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
