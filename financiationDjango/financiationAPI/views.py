@@ -483,3 +483,9 @@ def getPoliticParties(request):
     politicParty = PoliticParty.objects.all()
     serializer = AdvisorPoliticParty(politicParty, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehiclePlates(request):
+    vehiclePlate = VehiclePlate.objects.all()
+    serializer = AdvisorVehiclePlate(vehiclePlate, many=True)
+    return Response(serializer.data)
