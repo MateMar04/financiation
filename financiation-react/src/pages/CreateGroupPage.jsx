@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import RowWithCheck from "../components/RowWithCheck";
 import RowWithRadio from "../components/RowWithRadio";
@@ -75,6 +75,7 @@ export const CreateGroupPage = () => {
                         </Container>
                     </Col>
                 </Row>
+                <Button>Crear</Button>
             </Card>
         </Container>
     )
