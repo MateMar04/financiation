@@ -408,3 +408,9 @@ def getCoordinators(request):
     coordinators = Coordinator.objects.all()
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getOneCoordinator(request, pk):
+    coordinator = Coordinator.objects.get(id=pk)
+    serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
