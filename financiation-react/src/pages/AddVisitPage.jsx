@@ -199,69 +199,30 @@ const AddVisitPage = () => {
                 >
                     <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
                                onChange={(e) => setPlaceName(e.target.value)}/>
-                    <TextField id="outlined-basic" label="Nombre del Lugar" variant="outlined"/>
+                    <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
+                               value={id_group}
+                               onChange={(e) => setGroup(e.target.value)}/>
+                    <TextField id="standard-basic" label="estado de visita" variant="standard" name="id_visit_status"
+                               value={id_visit_status}
+                               onChange={(e) => setVisitStatus(e.target.value)}/>
+                    <TextField id="standard-basic" label="Acuerdo" variant="standard" name="id_agreement"
+                               value={id_agreement}
+                               onChange={(e) => setAgreement(e.target.value)}/>
+                    <TextField id="standard-basic" label="referente contactado" variant="standard"
+                               name="id_contacted_referrer"
+                               value={id_contacted_referrer}
+                               onChange={(e) => setContactedReferrer(e.target.value)}/>
+                    <TextField id="standard-basic" label="Direccion" variant="standard" name="id_address"
+                               value={id_address}
+                               onChange={(e) => setAddress(e.target.value)}/>
+                    <TextField id="standard-basic" label="Logo(?" variant="standard" name="id_logo"
+                               value={id_logo}
+                               onChange={(e) => setLogo(e.target.value)}/>
+                    <TextField id="standard-basic" label="Standard" variant="standard"/>
+                    <TextField id="standard-basic" label="Standard" variant="standard"/>
+
                 </Box>
             </Container>
-
-
-            <FloatingLabel controlId="floatingTextarea2" label="ID del Grupo">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_group"
-                    name="id_group"
-                    value={id_group}
-                    onChange={(e) => setGroup(e.target.value)}
-                />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingTextarea2" label="ID del estado de visita">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_visit_status"
-                    name="id_visit_status"
-                    value={id_visit_status}
-                    onChange={(e) => setVisitStatus(e.target.value)}
-                />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingTextarea2" label="ID del acuerdo">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_agreement"
-                    name="id_agreement"
-                    value={id_agreement}
-                    onChange={(e) => setAgreement(e.target.value)}
-                />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingTextarea2" label="ID del referente contactado">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_contacted_referrer"
-                    name="id_contacted_referrer"
-                    value={id_contacted_referrer}
-                    onChange={(e) => setContactedReferrer(e.target.value)}
-                />
-            </FloatingLabel>
-            <FloatingLabel controlId="floatingTextarea2" label="ID de la direccion">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_address"
-                    name="id_address"
-                    value={id_address}
-                    onChange={(e) => setAddress(e.target.value)}
-                />
-            </FloatingLabel>
-
-            <FloatingLabel controlId="floatingTextarea2" label="ID del logo">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_logo"
-                    name="id_logo"
-                    value={id_logo}
-                    onChange={(e) => setLogo(e.target.value)}
-                />
-            </FloatingLabel>
 
             <Box sx={{minWidth: 120}}>
                 <FormControl fullWidth>
