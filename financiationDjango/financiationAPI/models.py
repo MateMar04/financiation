@@ -60,10 +60,10 @@ class VisitStatus(models.Model):
 
 
 class Faq(models.Model):
-    faq = models.TextField()
+    name = models.TextField()
 
     def __str__(self):
-        return f"{self.faq}"
+        return f"{self.name}"
 
 
 class Mayor(models.Model):
@@ -176,7 +176,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
-    profile_picture = models.ImageField(upload_to='financiationAPI/images/', default=None)
+    profile_picture = models.ImageField(default=None)
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
