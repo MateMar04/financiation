@@ -477,3 +477,9 @@ def getVehicleModels(request):
     vehicleModel = VehicleModel.objects.all()
     serializer = AdvisorVehicleModel(vehicleModel, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getPoliticParties(request):
+    politicParty = PoliticParty.objects.all()
+    serializer = AdvisorPoliticParty(politicParty, many=True)
+    return Response(serializer.data)

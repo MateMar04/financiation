@@ -119,3 +119,8 @@ class AdvisorVehicleModel(ModelSerializer):
     class Meta:
         model = VehicleModel
         fields = '__all__'
+
+class AdvisorPoliticParty(ModelSerializer):
+    class Meta:
+        model = PoliticParty
+        fields = '__all__'
