@@ -17,7 +17,7 @@ export const CreateGroupPage = () => {
     return (
         <Container fluid>
             <Card className='create-group-card'>
-                <Row>
+                <Row className='upper-row'>
                     <Col>
                         <h3>Nombre del Grupo</h3>
                         <Form.Control placeholder='Nombre' type='text'></Form.Control>

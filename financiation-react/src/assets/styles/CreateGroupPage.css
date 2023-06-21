@@ -1,8 +1,9 @@
-.create-group-card {
+.upper-row {
+    padding: 3vh;
 }
 
 .create-group-column {
-    padding: 3vh;
+    padding: 2vh;
     max-height: 55vh;
     overflow: hidden;
 }
