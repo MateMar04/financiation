@@ -19,6 +19,8 @@ urlpatterns = [
     path('useraccount/', views.getUserAccount, name='getUserAccount'),
     path('vehicles/', views.getVehicles, name='getVehicles'),
     path('requeststatus/', views.getRequestStatus, name='getRequestStatus'),
+    path('contactedreferreremail/', views.getContactedReferrerEmail, name='getContactedReferrerEmail'),
+
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

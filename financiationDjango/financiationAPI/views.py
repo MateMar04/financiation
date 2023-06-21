@@ -391,3 +391,9 @@ def getRequestStatus(request):
     requeststatus = RequestStatus.objects.all()
     serializer = RequestStatusSerializer(requeststatus, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerEmail(request):
+    contactedreferreremail = ContactedReferrerEmail.objects.all()
+    serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
+    return Response(serializer.data)

@@ -88,3 +88,8 @@ class RequestStatusSerializer(ModelSerializer):
     class Meta:
         model = RequestStatus
         fields = '__all__'
+
+class ContactedReferrerEmailSerializer(ModelSerializer):
+    class Meta:
+        model = ContactedReferrerEmail
+        fields = '__all__'
