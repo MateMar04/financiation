@@ -8,20 +8,6 @@ import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
 import RowWithCheck from "../components/RowWithCheck";
 
-const visitas = []
-for (let i = 0; i <= 10; i++) {
-    visitas.push(
-        <Row key={i}>
-            <Col>
-                <Form.Label>Visita {i}</Form.Label>
-            </Col>
-            <Col>
-                <Form.Check></Form.Check>
-            </Col>
-        </Row>)
-}
-
-
 export const ReportsPage = () => {
 
 
@@ -37,6 +23,7 @@ export const ReportsPage = () => {
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
+    let [visits, setVisits] = useState([])
     let {authTokens} = useContext(AuthContext)
 
 
@@ -44,6 +31,7 @@ export const ReportsPage = () => {
         getLocalities()
         getMinistryDepartments()
         getFaqs()
+        getVisits()
     }, [])
     let getLocalities = async () => {
         let headers = {
@@ -79,6 +67,19 @@ export const ReportsPage = () => {
         let data = await response.json()
         console.log(data)
         setFaqs(data)
+    };
+
+
+    let getVisits = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/visit/', {headers: headers})
+        let data = await response.json()
+        console.log(data)
+        setVisits(data)
     };
 
 
@@ -136,7 +137,16 @@ export const ReportsPage = () => {
                             <h1>Visitas</h1>
                             <Container className='card-scroll'>
                                 <Form>
-                                    {visitas}
+                                    {visits.map((visit) => (
+                                        <Row key={visit.id}>
+                                            <Col>
+                                                <Form.Label>{visit.id_locality} {visit.visit_date}</Form.Label>
+                                            </Col>
+                                            <Col>
+                                                <Form.Check value={visit.id}></Form.Check>
+                                            </Col>
+                                        </Row>
+                                    ))}
                                 </Form>
                             </Container>
                         </Card>
