@@ -120,14 +120,7 @@ export const ReportsPage = () => {
                             <Container className='card-scroll'>
                                 <Form>
                                     {faqs.map((faq) => (
-                                        <Row key={faq.id}>
-                                            <Col className='row-label'>
-                                                <Form.Label>{faq.faq}</Form.Label>
-                                            </Col>
-                                            <Col className='row-check'>
-                                                <Form.Check value={faq.id}></Form.Check>
-                                            </Col>
-                                        </Row>
+                                        <RowWithCheck item={faq}></RowWithCheck>
                                     ))}
                                 </Form>
                             </Container>
