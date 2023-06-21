@@ -42,7 +42,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/locality/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setLocalities(data)
     };
 
@@ -54,7 +53,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/ministry-department/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setMinistryDepartments(data)
     };
 
@@ -66,7 +64,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/faq/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setFaqs(data)
     };
 
@@ -79,7 +76,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/visit/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setVisits(data)
     };
 
