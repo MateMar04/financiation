@@ -402,3 +402,9 @@ def postCoordinator(request):
 
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def postCoordinator(request):
+    coordinators = Coordinator.objects.all()
+    serializer = VisitSerializer(coordinators, many=True)
+    return Response(serializer.data)
