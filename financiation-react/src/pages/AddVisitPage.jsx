@@ -44,8 +44,9 @@ const AddVisitPage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext);
 
     useEffect(() => {
-        setVisit();
-    });
+        setVisit()
+        getLocalities();
+    }, []);
 
     let getLocalities = async () => {
         let headers = {
@@ -88,14 +89,7 @@ const AddVisitPage = () => {
 
     return (
         <Container>
-            <Container>
-                <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={top100Films}
-                    renderInput={(params) => <TextField{...params} label="Movie"/>}
-                />
-            </Container>
+
             <Container>
                 <a>Tiempo de viaje</a>
                 <Form.Control
@@ -218,9 +212,6 @@ const AddVisitPage = () => {
                     <TextField id="standard-basic" label="Logo(?" variant="standard" name="id_logo"
                                value={id_logo}
                                onChange={(e) => setLogo(e.target.value)}/>
-                    <TextField id="standard-basic" label="Standard" variant="standard"/>
-                    <TextField id="standard-basic" label="Standard" variant="standard"/>
-
                 </Box>
             </Container>
 
@@ -235,11 +226,9 @@ const AddVisitPage = () => {
                         value={id_locality}
                         onChange={(e) => setLocality(e.target.value)}
                     >
-                        <MenuItem value={10}>Ten</MenuItem>
-                        {localities?.map((locality) => (
-                            <MenuItem item={locality}>{locality}</MenuItem>
+                        {localities.map((locality) => (
+                            <MenuItem>{locality.name}</MenuItem>
                         ))}
-
                     </Select>
                 </FormControl>
             </Box>
