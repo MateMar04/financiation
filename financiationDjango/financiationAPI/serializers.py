@@ -114,3 +114,8 @@ class AdvisorVehicleBrand(ModelSerializer):
     class Meta:
         model = VehicleBrand
         fields = '__all__'
+
+class AdvisorVehicleModel(ModelSerializer):
+    class Meta:
+        model = VehicleModel
+        fields = '__all__'

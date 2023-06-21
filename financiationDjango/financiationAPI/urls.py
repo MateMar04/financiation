@@ -26,6 +26,7 @@ urlpatterns = [
     path('userstatuses/', views.getUserStatuses, name='getUserStatuses'),
     path('mayors/', views.getMayors, name='getMayors'),
     path('vehiclebrand/', views.getVehicleBrands, name='getVehicleBrand'),
+    path('vehiclemodel/', views.getVehicleModels, name='getVehicleModels'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

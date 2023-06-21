@@ -471,3 +471,9 @@ def getVehicleBrands(request):
     vehicleBrand = VehicleBrand.objects.all()
     serializer = AdvisorVehicleBrand(vehicleBrand, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleModels(request):
+    vehicleModel = VehicleModel.objects.all()
+    serializer = AdvisorVehicleModel(vehicleModel, many=True)
+    return Response(serializer.data)
