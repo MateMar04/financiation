@@ -109,3 +109,8 @@ class AdvisorMayor(ModelSerializer):
     class Meta:
         model = Mayor
         fields = '__all__'
+
+class AdvisorVehicleBrand(ModelSerializer):
+    class Meta:
+        model = VehicleBrand
+        fields = '__all__'

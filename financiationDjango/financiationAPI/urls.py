@@ -25,6 +25,7 @@ urlpatterns = [
     path('cityDepartment/', views.getCityDepartments, name='getCityDepartment'),
     path('userstatuses/', views.getUserStatuses, name='getUserStatuses'),
     path('mayors/', views.getMayors, name='getMayors'),
+    path('vehiclebrand/', views.getVehicleBrands, name='getVehicleBrand'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
@@ -32,4 +33,5 @@ urlpatterns = [
     path('request/add/', views.postRequest, name='postRequest'),
     path('coordinator/add/', views.postCoordinator, name='postCoordinator'),
     path('advisor/add/', views.postAdvisor, name='postAdvisor'),
+
 ]

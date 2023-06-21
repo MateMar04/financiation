@@ -465,3 +465,9 @@ def getMayors(request):
     mayor = Mayor.objects.all()
     serializer = AdvisorMayor(mayor, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleBrands(request):
+    vehicleBrand = VehicleBrand.objects.all()
+    serializer = AdvisorVehicleBrand(vehicleBrand, many=True)
+    return Response(serializer.data)
