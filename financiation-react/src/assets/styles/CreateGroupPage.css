@@ -1,0 +1,13 @@
+.create-group-card {
+}
+
+.create-group-column {
+    padding: 3vh;
+    max-height: 55vh;
+    overflow: hidden;
+}
+
+.create-group-card-scroll {
+    max-height: 100%;
+    overflow-y: scroll;
+}
