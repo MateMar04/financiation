@@ -19,9 +19,9 @@ urlpatterns = [
     path('ministry-department/', views.getMinistryDepartments, name='getMinistryDepartments'),
     path('faq/', views.getFaqs, name='getFaqs'),
     path('coordinator/', views.getCoordinators, name='getCoordinators'),
-    path('coordinator/<str:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
+    path('coordinator/<int:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
     path('advisor/', views.getAdvisors, name='getAdvisors'),
-    path('advisor/<str:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
+    path('advisor/<int:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
     
 
     # POSTs

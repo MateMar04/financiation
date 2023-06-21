@@ -388,6 +388,7 @@ def getRequests(request):
     serializer = VisitSerializer(requests, many=True)
     return Response(serializer.data)
 
+
 @api_view(['POST'])
 def postCoordinator(request):
     data = request.data
@@ -397,11 +398,12 @@ def postCoordinator(request):
 
     coordinator = Coordinator.objects.create(
         id_user=user,
-        id_group=group,
+        id_group=group
     )
 
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getCoordinators(request):
@@ -409,11 +411,13 @@ def getCoordinators(request):
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getOneCoordinator(request, pk):
     coordinator = Coordinator.objects.get(id=pk)
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
+
 
 @api_view(['POST'])
 def postAdvisor(request):
@@ -430,11 +434,13 @@ def postAdvisor(request):
     serializer = AdvisorSerializer(advisor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getAdvisors(request):
     advisors = Advisor.objects.all()
     serializer = AdvisorSerializer(advisors, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getOneAdvisor(request, pk):
