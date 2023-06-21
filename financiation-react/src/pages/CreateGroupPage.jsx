@@ -5,15 +5,6 @@ import RowWithCheck from "../components/RowWithCheck";
 import RowWithRadio from "../components/RowWithRadio";
 import AuthContext from "../context/AuthContext";
 
-
-const asesores = []
-const coordinadores = []
-for (let i = 0; i <= 30; i++) {
-    asesores.push(<p>Asesor {i}</p>)
-    coordinadores.push(<p>Coordinador {i}</p>)
-}
-
-
 export const CreateGroupPage = () => {
 
     let {authTokens} = useContext(AuthContext)
