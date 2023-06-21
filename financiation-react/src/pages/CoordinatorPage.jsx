@@ -12,7 +12,8 @@ const CoordinatorPage = () => {
 
     useEffect(() => {
         setCoordinator()
-    })
+        getCoordinator()
+    },[coordinatorId])
 
     let postCoordinator = async () => {
         fetch(' /api/coordinator/add/', {
@@ -24,6 +25,21 @@ const CoordinatorPage = () => {
             },
             body: JSON.stringify(coordinator)
         })
+    }
+
+    let getCoordinator = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/api/coordinator/${coordinatorId}/`, {headers: headers})
+        let data = await response.json()
+        if (response.status === 200) {
+            setCoordinator(data)
+        } else if (response.statusText === 'Unauthorized') {
+            logoutUser()
+        }
     }
     return (
 
@@ -53,7 +69,10 @@ const CoordinatorPage = () => {
             <Form.Group>
                 <Button onClick={postCoordinator}>Submit</Button>
             </Form.Group>
-        </Container>
+        <div>
+            <h1>{coordinator?.id_group} {coordinator?.id_user}</h1>
+        </div>               
+        </Container>       
     );
 
 };
