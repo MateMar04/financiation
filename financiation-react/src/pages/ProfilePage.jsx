@@ -21,14 +21,9 @@ const ProfilePage = () => {
             "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
-        let response = await fetch(`/auth/users/me`, {headers: headers})
+        let response = await fetch(`/auth/users/me/`, {headers: headers})
         let data = await response.json()
-        console.log(data)
-        if (response.status === 200) {
-            setUser(data)
-        } else if (response.statusText === 'Unauthorized') {
-            logoutUser()
-        }
+        setUser(data)
     }
 
     return (

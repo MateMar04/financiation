@@ -42,7 +42,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/locality/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setLocalities(data)
     };
 
@@ -54,7 +53,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/ministry-department/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setMinistryDepartments(data)
     };
 
@@ -66,7 +64,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/faq/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setFaqs(data)
     };
 
@@ -79,7 +76,6 @@ export const ReportsPage = () => {
         }
         let response = await fetch('/api/visit/', {headers: headers})
         let data = await response.json()
-        console.log(data)
         setVisits(data)
     };
 
@@ -120,14 +116,7 @@ export const ReportsPage = () => {
                             <Container className='card-scroll'>
                                 <Form>
                                     {faqs.map((faq) => (
-                                        <Row key={faq.id}>
-                                            <Col className='row-label'>
-                                                <Form.Label>{faq.faq}</Form.Label>
-                                            </Col>
-                                            <Col className='row-check'>
-                                                <Form.Check value={faq.id}></Form.Check>
-                                            </Col>
-                                        </Row>
+                                        <RowWithCheck item={faq}></RowWithCheck>
                                     ))}
                                 </Form>
                             </Container>
