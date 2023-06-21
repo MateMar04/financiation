@@ -6,14 +6,16 @@ import AuthContext from "../context/AuthContext";
 const CoordinatorPage = () => {
     const [id_user ,setUser] = useState("");
     const [id_group ,setGroup] = useState("");
+    const {id} = useParams()
 
+    let coordinatorId = id
     let [coordinator, setCoordinator] = useState(null)
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
         setCoordinator()
         getCoordinator()
-    },[coordinatorId])
+    }, [coordinatorId])
 
     let postCoordinator = async () => {
         fetch(' /api/coordinator/add/', {

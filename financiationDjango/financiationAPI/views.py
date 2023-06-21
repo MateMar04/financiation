@@ -389,7 +389,7 @@ def getRequests(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def postCoordinators(request):
+def postCoordinator(request):
     data = request.data
 
     user = UserAccount.objects.get(id=data['id_user'])
@@ -401,4 +401,10 @@ def postCoordinators(request):
     )
 
     serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getCoordinators(request):
+    coordinators = Coordinator.objects.all()
+    serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
