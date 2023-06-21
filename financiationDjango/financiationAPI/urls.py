@@ -19,6 +19,7 @@ urlpatterns = [
     path('ministry-department/', views.getMinistryDepartments, name='getMinistryDepartments'),
     path('faq/', views.getFaqs, name='getFaqs'),
     path('coordinator/', views.getCoordinators, name='getCoordinators'),
+    path('coordinator/<str:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
