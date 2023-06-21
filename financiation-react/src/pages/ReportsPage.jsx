@@ -8,20 +8,6 @@ import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
 import RowWithCheck from "../components/RowWithCheck";
 
-
-const motivos = []
-for (let i = 0; i <= 10; i++) {
-    motivos.push(
-        <Row key={i}>
-            <Col>
-                <Form.Label>Motivo {i}</Form.Label>
-            </Col>
-            <Col>
-                <Form.Check></Form.Check>
-            </Col>
-        </Row>)
-}
-
 const visitas = []
 for (let i = 0; i <= 10; i++) {
     visitas.push(
@@ -50,12 +36,14 @@ export const ReportsPage = () => {
 
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
+    let [faqs, setFaqs] = useState([])
     let {authTokens} = useContext(AuthContext)
 
 
     useEffect(() => {
         getLocalities()
         getMinistryDepartments()
+        getFaqs()
     }, [])
     let getLocalities = async () => {
         let headers = {
@@ -79,6 +67,18 @@ export const ReportsPage = () => {
         let data = await response.json()
         console.log(data)
         setMinistryDepartments(data)
+    };
+
+    let getFaqs = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/faq/', {headers: headers})
+        let data = await response.json()
+        console.log(data)
+        setFaqs(data)
     };
 
 
@@ -117,7 +117,16 @@ export const ReportsPage = () => {
                             <h1>Motivos</h1>
                             <Container className='card-scroll'>
                                 <Form>
-                                    {motivos}
+                                    {faqs.map((faq) => (
+                                        <Row key={faq.id}>
+                                            <Col>
+                                                <Form.Label>{faq.faq}</Form.Label>
+                                            </Col>
+                                            <Col>
+                                                <Form.Check value={faq.id}></Form.Check>
+                                            </Col>
+                                        </Row>
+                                    ))}
                                 </Form>
                             </Container>
                         </Card>
