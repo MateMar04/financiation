@@ -15,6 +15,10 @@ import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
@@ -44,16 +48,14 @@ const AddVisitPage = () => {
     });
 
     let getLocalities = async () => {
-        let response = await fetch('/api/locality/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'JWT ' + String(authTokens.access),
-                Accept: 'application/json',
-            },
-        });
-        let data = await response.json();
-        setLocalities(data);
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/locality/', {headers: headers})
+        let data = await response.json()
+        setLocalities(data)
     };
 
     let postVisit = async () => {
@@ -195,20 +197,12 @@ const AddVisitPage = () => {
                     noValidate
                     autoComplete="off"
                 >
-                    <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name} onChange={(e) => setPlaceName(e.target.value)}/>
-                    <TextField id="outlined-basic" label="Nombre del Lugar" variant="outlined" />
+                    <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
+                               onChange={(e) => setPlaceName(e.target.value)}/>
+                    <TextField id="outlined-basic" label="Nombre del Lugar" variant="outlined"/>
                 </Box>
             </Container>
 
-            <FloatingLabel controlId="floatingTextarea2" label="ID de la Localidad">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter id_locality"
-                    name="id_locality"
-                    value={id_locality}
-                    onChange={(e) => setLocality(e.target.value)}
-                />
-            </FloatingLabel>
 
             <FloatingLabel controlId="floatingTextarea2" label="ID del Grupo">
                 <Form.Control
@@ -268,6 +262,26 @@ const AddVisitPage = () => {
                     onChange={(e) => setLogo(e.target.value)}
                 />
             </FloatingLabel>
+
+            <Box sx={{minWidth: 120}}>
+                <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">Localidades</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Localidad"
+                        name="id_locality"
+                        value={id_locality}
+                        onChange={(e) => setLocality(e.target.value)}
+                    >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        {localities?.map((locality) => (
+                            <MenuItem item={locality}>{locality}</MenuItem>
+                        ))}
+
+                    </Select>
+                </FormControl>
+            </Box>
 
             <Container>
                 <Button onClick={postVisit}>Guardar Visita</Button>
