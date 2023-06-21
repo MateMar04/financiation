@@ -20,6 +20,8 @@ urlpatterns = [
     path('vehicles/', views.getVehicles, name='getVehicles'),
     path('requeststatus/', views.getRequestStatus, name='getRequestStatus'),
     path('contactedreferreremail/', views.getContactedReferrerEmail, name='getContactedReferrerEmail'),
+    path('contactedreferrerphone/', views.getContactedReferrerPhone, name='getContactedReferrerPhone'),
+
 
 
     # POSTs

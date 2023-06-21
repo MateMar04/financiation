@@ -397,3 +397,9 @@ def getContactedReferrerEmail(request):
     contactedreferreremail = ContactedReferrerEmail.objects.all()
     serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerPhone(request):
+    contactedreferrerphone = ContactedReferrerPhone.objects.all()
+    serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
+    return Response(serializer.data)

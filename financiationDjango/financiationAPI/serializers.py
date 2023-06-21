@@ -93,3 +93,8 @@ class ContactedReferrerEmailSerializer(ModelSerializer):
     class Meta:
         model = ContactedReferrerEmail
         fields = '__all__'
+
+class ContactedReferrerPhoneSerializer(ModelSerializer):
+    class Meta:
+        model = ContactedReferrerPhone
+        fields = '__all__'
