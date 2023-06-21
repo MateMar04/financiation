@@ -10,12 +10,15 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
-import VisitRegisterPage from "./pages/VisitRegisterPage";
+import AddGroupPage from "./pages/AddGroupPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
-import Successful from "./components/Successful";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
+import FormRequestPage from "./pages/FormRequestPage";
+import ProfilePage from "./pages/ProfilePage";
+import {ReportsPage} from "./pages/ReportsPage";
+
 
 function App() {
     return (
@@ -31,7 +34,8 @@ function App() {
                         <Route path='/reset-password' element={<ResetPasswordPage/>}/>
                         <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
                         <Route path='/activate' element={<ActivateAccountPage/>}/>
-                        <Route exact path='/successful' element={<Successful/>}/>
+
+                        <Route exact path='/me' element={<ProfilePage/>}/>
 
                         <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
                         <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
@@ -40,7 +44,11 @@ function App() {
                         <Route path='/form' element={<FormPage/>}></Route>
 
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
-                        <Route path='/visit/register' element={<VisitRegisterPage/>}/>
+
+                        <Route path='/request/add' element={<FormRequestPage/>}/>
+                        <Route path='/group/add' element={<AddGroupPage/>}/>
+
+                        <Route path='/reports' element={<ReportsPage/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
