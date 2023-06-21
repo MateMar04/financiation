@@ -387,3 +387,63 @@ def getRequests(request):
     requests = Request.objects.all()
     serializer = VisitSerializer(requests, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def postCoordinator(request):
+    data = request.data
+
+    user = UserAccount.objects.get(id=data['id_user'])
+    group = Group.objects.get(id=data['id_group'])
+
+    coordinator = Coordinator.objects.create(
+        id_user=user,
+        id_group=group
+    )
+
+    serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getCoordinators(request):
+    coordinators = Coordinator.objects.all()
+    serializer = CoordinatorSerializer(coordinators, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getOneCoordinator(request, pk):
+    coordinator = Coordinator.objects.get(id=pk)
+    serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def postAdvisor(request):
+    data = request.data
+
+    user = UserAccount.objects.get(id=data['id_user'])
+    group = Group.objects.get(id=data['id_group'])
+
+    advisor = Advisor.objects.create(
+        id_user=user,
+        id_group=group,
+    )
+
+    serializer = AdvisorSerializer(advisor, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAdvisors(request):
+    advisors = Advisor.objects.all()
+    serializer = AdvisorSerializer(advisors, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getOneAdvisor(request, pk):
+    advisor = Advisor.objects.get(id=pk)
+    serializer = AdvisorSerializer(advisor, many=False)
+    return Response(serializer.data)
