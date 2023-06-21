@@ -4,6 +4,7 @@ import '../assets/styles/CreateGroupPage.css'
 import RowWithCheck from "../components/RowWithCheck";
 import RowWithRadio from "../components/RowWithRadio";
 import AuthContext from "../context/AuthContext";
+import {UserRowWithRadio} from "../components/UserRowWithRadio";
 
 export const CreateGroupPage = () => {
 
@@ -53,7 +54,7 @@ export const CreateGroupPage = () => {
                         <h3>Coordinador</h3>
                         <Container className='create-group-card-scroll'>
                             {coordinators?.map((coordinator) => (
-                                <RowWithRadio item={coordinator}></RowWithRadio>
+                                <UserRowWithRadio userId={coordinator.id_user}/>
                             ))}
                         </Container>
                     </Col>
