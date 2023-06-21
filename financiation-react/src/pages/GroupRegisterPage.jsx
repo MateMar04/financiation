@@ -4,7 +4,7 @@ import "../assets/styles/AddVisitPage.css"
 import {Button, Container, Form} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
-const AddGroupPage = () => {
+const GroupRegisterPage = () => {
     const [name, setName] = useState(null);
 
     const {id} = useParams()
@@ -49,4 +49,4 @@ const AddGroupPage = () => {
         </Container>
     );
 };
-export default AddGroupPage;
+export default GroupRegisterPage;
