@@ -60,10 +60,10 @@ class VisitStatus(models.Model):
 
 
 class Faq(models.Model):
-    faq = models.TextField()
+    name = models.TextField()
 
     def __str__(self):
-        return f"{self.faq}"
+        return f"{self.name}"
 
 
 class Mayor(models.Model):
