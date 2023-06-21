@@ -84,3 +84,13 @@ class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
+
+class CoordinatorSerializer(ModelSerializer):
+    class Meta:
+        model = Coordinator
+        fields = '__all__'
+
+class AdvisorSerializer(ModelSerializer):
+    class Meta:
+        model = Advisor
+        fields = '__all__'
