@@ -83,3 +83,8 @@ class VehiclesSerializer(ModelSerializer):
     class Meta:
         model = Vehicles
         fields = '__all__'
+
+class RequestStatusSerializer(ModelSerializer):
+    class Meta:
+        model = RequestStatus
+        fields = '__all__'

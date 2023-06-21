@@ -385,3 +385,9 @@ def getVehicles(request):
     vehicles = Vehicles.objects.all()
     serializer = VehiclesSerializer(vehicles, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatus(request):
+    requeststatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requeststatus, many=True)
+    return Response(serializer.data)
