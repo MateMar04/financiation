@@ -384,8 +384,8 @@ def getVisits(request):
 
 @api_view(['GET'])
 def getRequests(request):
-    requests = Request.objects.all()
-    serializer = VisitSerializer(requests, many=True)
+    request = Request.objects.all()
+    serializer = RequestSerializer(request, many=True)
     return Response(serializer.data)
 
 
