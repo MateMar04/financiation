@@ -7,6 +7,7 @@ import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
 import RowWithCheck from "../components/RowWithCheck";
+import '../assets/styles/RowWithCheck.css'
 
 export const ReportsPage = () => {
 
@@ -120,10 +121,10 @@ export const ReportsPage = () => {
                                 <Form>
                                     {faqs.map((faq) => (
                                         <Row key={faq.id}>
-                                            <Col>
+                                            <Col className='row-label'>
                                                 <Form.Label>{faq.faq}</Form.Label>
                                             </Col>
-                                            <Col>
+                                            <Col className='row-check'>
                                                 <Form.Check value={faq.id}></Form.Check>
                                             </Col>
                                         </Row>
@@ -139,10 +140,10 @@ export const ReportsPage = () => {
                                 <Form>
                                     {visits.map((visit) => (
                                         <Row key={visit.id}>
-                                            <Col>
+                                            <Col className='row-label'>
                                                 <Form.Label>{visit.id_locality} {visit.visit_date}</Form.Label>
                                             </Col>
-                                            <Col>
+                                            <Col className='row-check'>
                                                 <Form.Check value={visit.id}></Form.Check>
                                             </Col>
                                         </Row>
