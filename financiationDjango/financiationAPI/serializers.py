@@ -71,6 +71,12 @@ class MinistryDepartmentSerializer(ModelSerializer):
         fields = '__all__'
 
 
+class FaqSerializer(ModelSerializer):
+    class Meta:
+        model = Faq
+        fields = '__all__'
+
+
 User = get_user_model()
 
 

@@ -327,6 +327,13 @@ def getMinistryDepartments(request):
 
 
 @api_view(['GET'])
+def getFaqs(request):
+    faqs = Faq.objects.all()
+    serializer = FaqSerializer(faqs, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def getGroups(request):
     groups = Group.objects.all()
     serializer = GroupSerializer(groups, many=True)
