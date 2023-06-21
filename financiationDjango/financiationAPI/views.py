@@ -451,41 +451,47 @@ def getOneAdvisor(request, pk):
 @api_view(['GET'])
 def getCityDepartments(request):
     cityDepartment = CityDepartment.objects.all()
-    serializer = AdvisorCityDepartment(cityDepartment, many=True)
+    serializer = CityDepartmentSerializer(cityDepartment, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getUserStatuses(request):
     userStatus = UserStatus.objects.all()
-    serializer = AdvisorUserStatus(userStatus, many=True)
+    serializer = UserStatusSerializer(userStatus, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getMayors(request):
     mayor = Mayor.objects.all()
-    serializer = AdvisorMayor(mayor, many=True)
+    serializer = MayorSerializer(mayor, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getVehicleBrands(request):
     vehicleBrand = VehicleBrand.objects.all()
-    serializer = AdvisorVehicleBrand(vehicleBrand, many=True)
+    serializer = VehicleBrandSerializer(vehicleBrand, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getVehicleModels(request):
     vehicleModel = VehicleModel.objects.all()
-    serializer = AdvisorVehicleModel(vehicleModel, many=True)
+    serializer = VehicleModelSerializer(vehicleModel, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getPoliticParties(request):
     politicParty = PoliticParty.objects.all()
-    serializer = AdvisorPoliticParty(politicParty, many=True)
+    serializer = PoliticPartySerializer(politicParty, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
 def getVehiclePlates(request):
     vehiclePlate = VehiclePlate.objects.all()
-    serializer = AdvisorVehiclePlate(vehiclePlate, many=True)
+    serializer = VehiclePlateSerializer(vehiclePlate, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRoles(request):
+    role = Role.objects.all()
+    serializer = RoleSerializer(role, many=True)
     return Response(serializer.data)

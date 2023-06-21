@@ -29,6 +29,7 @@ urlpatterns = [
     path('vehiclemodel/', views.getVehicleModels, name='getVehicleModels'),
     path('politicparty/', views.getPoliticParties, name='getPoliticParties'),
     path('vehicleplate/', views.getVehiclePlates, name='getVehiclePlates'),
+    path('role/', views.getRoles, name='getRoles'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

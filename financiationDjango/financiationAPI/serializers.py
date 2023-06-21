@@ -95,37 +95,42 @@ class AdvisorSerializer(ModelSerializer):
         model = Advisor
         fields = '__all__'
 
-class AdvisorCityDepartment(ModelSerializer):
+class CityDepartmentSerializer(ModelSerializer):
     class Meta:
         model = CityDepartment
         fields = '__all__'
 
-class AdvisorUserStatus(ModelSerializer):
+class UserStatusSerializer(ModelSerializer):
     class Meta:
         model = UserStatus
         fields = '__all__'
 
-class AdvisorMayor(ModelSerializer):
+class MayorSerializer(ModelSerializer):
     class Meta:
         model = Mayor
         fields = '__all__'
 
-class AdvisorVehicleBrand(ModelSerializer):
+class VehicleBrandSerializer(ModelSerializer):
     class Meta:
         model = VehicleBrand
         fields = '__all__'
 
-class AdvisorVehicleModel(ModelSerializer):
+class VehicleModelSerializer(ModelSerializer):
     class Meta:
         model = VehicleModel
         fields = '__all__'
 
-class AdvisorPoliticParty(ModelSerializer):
+class PoliticPartySerializer(ModelSerializer):
     class Meta:
         model = PoliticParty
         fields = '__all__'
     
-class AdvisorVehiclePlate(ModelSerializer):
+class VehiclePlateSerializer(ModelSerializer):
     class Meta:
         model = VehiclePlate
+        fields = '__all__'
+
+class RoleSerializer(ModelSerializer):
+    class Meta:
+        model = Role
         fields = '__all__'
