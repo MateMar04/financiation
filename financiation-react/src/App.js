@@ -17,10 +17,16 @@ import Successful from "./components/Successful";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
 
-function App() {
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs'
+
+function App({children}) {
     return (
         <Router>
             <div className="App">
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {children}
+                </LocalizationProvider>
                 <AuthProvider>
                     <Navbar/>
                     <Routes>

@@ -1,3 +1,16 @@
-* {
-    overflow: auto;
+.scrolling {
+    overflow-y: hidden;
+}
+
+.dropdownns{
+    position: relative;
+}
+
+.my-select .my-select__control {
+  z-index: 1; /* Asegura que el control del Select esté por encima de las floating labels */
+}
+
+.floating-label {
+  position: relative;
+  z-index: 2;
 }
