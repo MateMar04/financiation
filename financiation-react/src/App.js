@@ -18,6 +18,7 @@ import FormPage from "./pages/FormPage";
 import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
+import {CreateGroupPage} from "./pages/CreateGroupPage";
 
 
 function App() {
@@ -46,7 +47,7 @@ function App() {
                         <Route path='/visit/add' element={<AddVisitPage/>}/>
 
                         <Route path='/request/add' element={<FormRequestPage/>}/>
-                        <Route path='/group/add' element={<AddGroupPage/>}/>
+                        <Route path='/group/add' element={<CreateGroupPage/>}/>
 
                         <Route path='/reports' element={<ReportsPage/>}/>
                     </Routes>
