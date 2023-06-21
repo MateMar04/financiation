@@ -24,6 +24,7 @@ urlpatterns = [
     path('advisor/<int:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
     path('cityDepartment/', views.getCityDepartments, name='getCityDepartment'),
     path('userstatuses/', views.getUserStatuses, name='getUserStatuses'),
+    path('mayors/', views.getMayors, name='getMayors'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

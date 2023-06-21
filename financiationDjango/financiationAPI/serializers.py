@@ -104,3 +104,8 @@ class AdvisorUserStatus(ModelSerializer):
     class Meta:
         model = UserStatus
         fields = '__all__'
+
+class AdvisorMayor(ModelSerializer):
+    class Meta:
+        model = Mayor
+        fields = '__all__'

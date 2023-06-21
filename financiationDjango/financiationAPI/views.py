@@ -459,3 +459,9 @@ def getUserStatuses(request):
     userStatus = UserStatus.objects.all()
     serializer = AdvisorUserStatus(userStatus, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayors(request):
+    mayor = Mayor.objects.all()
+    serializer = AdvisorMayor(mayor, many=True)
+    return Response(serializer.data)
