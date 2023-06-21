@@ -387,3 +387,18 @@ def getRequests(request):
     requests = Request.objects.all()
     serializer = VisitSerializer(requests, many=True)
     return Response(serializer.data)
+
+@api_view(['POST'])
+def postCoordinators(request):
+    data = request.data
+
+    user = UserAccount.objects.get(id=data['id_user'])
+    group = Group.objects.get(id=data['id_group'])
+
+    coordinator = Coordinator.objects.create(
+        id_user=user,
+        id_group=group,
+    )
+
+    serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
