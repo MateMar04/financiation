@@ -373,3 +373,9 @@ def getRequests(request):
     requests = Request.objects.all()
     serializer = VisitSerializer(requests, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserAccount(request):
+    useraccount = UserAccount.objects.all()
+    serializer = UserAccountSerializer(useraccount, many=True)
+    return Response(serializer.data)

@@ -74,3 +74,7 @@ class UserCreateSerializer(UserCreateSerializer):
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
 
+class UserAccountSerializer(ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = '__all__'
