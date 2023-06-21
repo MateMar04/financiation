@@ -6,20 +6,7 @@ import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
-
-
-const ministryDepartments = []
-for (let i = 0; i <= 6; i++) {
-    ministryDepartments.push(
-        <Row key={i}>
-            <Col>
-                <Form.Label>Departamento {i}</Form.Label>
-            </Col>
-            <Col>
-                <Form.Check></Form.Check>
-            </Col>
-        </Row>)
-}
+import RowWithCheck from "../components/RowWithCheck";
 
 
 const motivos = []
@@ -62,11 +49,13 @@ export const ReportsPage = () => {
     })
 
     let [localities, setLocalities] = useState([])
+    let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
 
 
     useEffect(() => {
         getLocalities()
+        getMinistryDepartments()
     }, [])
     let getLocalities = async () => {
         let headers = {
@@ -80,6 +69,18 @@ export const ReportsPage = () => {
         setLocalities(data)
     };
 
+    let getMinistryDepartments = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/ministry-department/', {headers: headers})
+        let data = await response.json()
+        console.log(data)
+        setMinistryDepartments(data)
+    };
+
 
     return (
         <Container fluid>
@@ -91,14 +92,7 @@ export const ReportsPage = () => {
                             <Container className='card-scroll'>
                                 <Form>
                                     {localities.map((locality) => (
-                                        <Row key={locality.id}>
-                                            <Col>
-                                                <Form.Label>{locality.name}</Form.Label>
-                                            </Col>
-                                            <Col>
-                                                <Form.Check value={locality.id}></Form.Check>
-                                            </Col>
-                                        </Row>
+                                        <RowWithCheck item={locality}></RowWithCheck>
                                     ))}
                                 </Form>
                             </Container>
@@ -109,7 +103,9 @@ export const ReportsPage = () => {
                             <h1>Departamentos</h1>
                             <Container className='card-scroll'>
                                 <Form>
-                                    {ministryDepartments}
+                                    {ministryDepartments.map((ministryDepartment) => (
+                                        <RowWithCheck item={ministryDepartment}></RowWithCheck>
+                                    ))}
                                 </Form>
                             </Container>
                         </Card>
