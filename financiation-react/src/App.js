@@ -10,7 +10,7 @@ import ResetPasswordPage from "./pages/ResetPasswordPage";
 import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
-import AddGroupPage from "./pages/AddGroupPage";
+import AddGroupPage from "./pages/GroupRegisterPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
 import GroupCard from "./components/GroupCard";
