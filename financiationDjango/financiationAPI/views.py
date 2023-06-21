@@ -403,3 +403,9 @@ def getContactedReferrerPhone(request):
     contactedreferrerphone = ContactedReferrerPhone.objects.all()
     serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorEmail(request):
+    mayoremail = MayorEmail.objects.all()
+    serializer = MayorEmailSerializer(mayoremail, many=True)
+    return Response(serializer.data)
