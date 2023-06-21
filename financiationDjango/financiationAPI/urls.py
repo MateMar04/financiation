@@ -22,6 +22,7 @@ urlpatterns = [
     path('contactedreferreremail/', views.getContactedReferrerEmail, name='getContactedReferrerEmail'),
     path('contactedreferrerphone/', views.getContactedReferrerPhone, name='getContactedReferrerPhone'),
     path('mayoremail/', views.getMayorEmail, name='getMayorEmail'),
+    path('mayorphone/', views.getMayorPhone, name='getMayorPhone'),
 
 
 

@@ -103,3 +103,8 @@ class MayorEmailSerializer(ModelSerializer):
     class Meta:
         model = MayorEmail
         fields = '__all__'
+
+class MayorPhoneSerializer(ModelSerializer):
+    class Meta:
+        model = MayorPhone
+        fields = '__all__'

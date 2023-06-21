@@ -409,3 +409,9 @@ def getMayorEmail(request):
     mayoremail = MayorEmail.objects.all()
     serializer = MayorEmailSerializer(mayoremail, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorPhone(request):
+    mayorphone = MayorPhone.objects.all()
+    serializer = MayorPhoneSerializer(mayorphone, many=True)
+    return Response(serializer.data)
