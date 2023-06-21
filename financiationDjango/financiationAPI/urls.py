@@ -17,6 +17,7 @@ urlpatterns = [
     path('logo/', views.getLogos, name='getLogos'),
     path('visit/', views.getVisits, name='getVisits'),
     path('useraccount/', views.getUserAccount, name='getUserAccount'),
+    path('vehicles/', views.getVehicles, name='getVehicles'),
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),

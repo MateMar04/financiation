@@ -78,3 +78,8 @@ class UserAccountSerializer(ModelSerializer):
     class Meta:
         model = UserAccount
         fields = '__all__'
+
+class VehiclesSerializer(ModelSerializer):
+    class Meta:
+        model = Vehicles
+        fields = '__all__'

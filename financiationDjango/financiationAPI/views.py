@@ -379,3 +379,9 @@ def getUserAccount(request):
     useraccount = UserAccount.objects.all()
     serializer = UserAccountSerializer(useraccount, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicles(request):
+    vehicles = Vehicles.objects.all()
+    serializer = VehiclesSerializer(vehicles, many=True)
+    return Response(serializer.data)
