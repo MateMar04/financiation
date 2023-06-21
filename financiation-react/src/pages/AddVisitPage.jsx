@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import '../assets/styles/AddVisitPage.css';
-import {Button, Container, Form, FloatingLabel, Dropdown, Row, Col} from 'react-bootstrap';
+import {Button, Container, Form, FloatingLabel, Row, Col} from 'react-bootstrap';
 import AuthContext from '../context/AuthContext';
-import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -10,14 +9,11 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
+import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-
-import {styled} from '@mui/material/styles';
-import Checkbox from '@mui/material/Checkbox'
+import Checkbox from '@mui/material/Checkbox';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 
 
 const AddVisitPage = () => {
@@ -112,31 +108,34 @@ const AddVisitPage = () => {
 
             <Container className='justify-content-center'>
                 <Row>
-                    <Col>
-                        <a>Fecha de visita</a>
+                    <Col className='d-flex align-items-center justify-content-center'>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
+                                label='Fecha de visita'
                                 name="visit_date"
                                 value={visit_date}
                                 onChange={(date) => setVisitDate(date)}
                                 renderInput={(params) => <TextField {...params} />}
+                                format='DD/MM/YYYY'
 
                             />
                         </LocalizationProvider>
                     </Col>
+
                     <Col className='d-flex align-items-center justify-content-center'>
-                        <FormControl>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                name="radio-buttons-group"
-                            >
-                                <FormControlLabel value={civil_registration} control={<Radio/>} label="Necesita registro civil" onChange={(e) => setCivilRegistration(e.target.value)}/>
-                                <FormControlLabel value={accommodation} control={<Radio/>} label="Hay hospedaje en la localidad" onChange={(e) => setAccommodation(e.target.value)}/>
-                            </RadioGroup>
-                        </FormControl>
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked value={civil_registration}
+                                                                 onChange={(e) => setCivilRegistration(e.target.value)}/>}
+                                              label="Necesita registro civil"/>
+                        </FormGroup>
+                    </Col>
 
-
-
+                    <Col className='d-flex align-items-center justify-content-center'>
+                        <FormGroup>
+                            <FormControlLabel required control={<Checkbox value={accommodation}
+                                                                          onChange={(e) => setAccommodation(e.target.value)}/>}
+                                              label="Hay hospedaje en la localidad"/>
+                        </FormGroup>
                     </Col>
                 </Row>
             </Container>
@@ -147,23 +146,21 @@ const AddVisitPage = () => {
                     disablePortal
                     id="combo-box-demo"
                     options={modernizationFounds}
-                    renderInput={(params) => <TextField{...params} label="Fondo de modernizacion"
+                    renderInput={(params) => <TextField{...params}
+                                                       label="Fondo de modernizacion"
                                                        value={modernization_fund}
                                                        onChange={(e) => setModernizationFund(e.target.value)}
-
                     />}
                 />
             </Container>
 
             <Container>
-                <Row className='justify-content-center'>
-
-                    <Col className='justify-content-center'>
-                        <a>Hora de inicio de la jornada</a>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['TimePicker']}>
                                 <TimePicker
-                                    label="Inicio de la jornada"
+                                    label='Hora de inicio de la jornada'
                                     name="start_time"
                                     value={start_time}
                                     onChange={(e) => setStartTime(e.target.value)}
@@ -172,12 +169,12 @@ const AddVisitPage = () => {
                         </LocalizationProvider>
                     </Col>
 
-                    <Col className='justify-content-center'>
-                        <a>Hora de fin de la jornada</a>
+                    <Col className='d-flex justify-content-center'>
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DemoContainer components={['TimePicker']}>
                                 <TimePicker
-                                    label="Fin de la jornada"
+                                    label='Hora de fin de la jornada'
                                     name="finish_time"
                                     value={finish_time}
                                     onChange={(e) => setFinishTime(e.target.value)}
@@ -188,16 +185,20 @@ const AddVisitPage = () => {
                 </Row>
             </Container>
 
+            <Container>
 
-            <FloatingLabel controlId="floatingTextarea2" label="Nombre del Lugar">
-                <Form.Control
-                    type="text"
-                    placeholder="Enter place_name"
-                    name="place_name"
-                    value={place_name}
-                    onChange={(e) => setPlaceName(e.target.value)}
-                />
-            </FloatingLabel>
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': {m: 1, width: '80ch'},
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name} onChange={(e) => setPlaceName(e.target.value)}/>
+                    <TextField id="outlined-basic" label="Nombre del Lugar" variant="outlined" />
+                </Box>
+            </Container>
 
             <FloatingLabel controlId="floatingTextarea2" label="ID de la Localidad">
                 <Form.Control
