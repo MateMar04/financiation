@@ -22,5 +22,6 @@ urlpatterns = [
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
     path('group/add/', views.postGroup, name='postGroup'),
-    path('request/add/', views.postRequest, name='postRequest')
+    path('request/add/', views.postRequest, name='postRequest'),
+    path('coordinator/add/', views.postCoordinator, name='postCoordinator')
 ]

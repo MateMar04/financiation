@@ -389,7 +389,7 @@ def getRequests(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def postCoordinators(request):
+def postCoordinator(request):
     data = request.data
 
     user = UserAccount.objects.get(id=data['id_user'])
