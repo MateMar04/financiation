@@ -9,7 +9,7 @@ export const RowWithRadio = ({item}) => {
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check value={item.id}></Form.Check>
+                <Form.Check type="radio" value={item.id}></Form.Check>
             </Col>
         </Row>
     )
