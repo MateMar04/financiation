@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('financiationAPI', '0007_rename_faq_faq_name'),
     ]

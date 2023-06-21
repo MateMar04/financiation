@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('financiationAPI', '0006_alter_useraccount_profile_picture'),
     ]
