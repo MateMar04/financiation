@@ -8,7 +8,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
-
+import {Select, CreatableSelect} from 'react-select';
 import {
     Autocomplete,
     FormGroup,
@@ -18,9 +18,10 @@ import {
     TextField,
     InputLabel,
     MenuItem,
-    FormControl,
-    Select
+    FormControl
 } from '@mui/material';
+
+
 
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
@@ -39,7 +40,8 @@ const AddVisitPage = () => {
     const [id_agreement, setAgreement] = useState('');
     const [id_contacted_referrer, setContactedReferrer] = useState('');
     const [id_address, setAddress] = useState('');
-    const [id_logo, setLogo] = useState('');
+    const [isClearable, setIsClearable] = useState(true);
+
 
     let [localities, setLocalities] = useState([]);
     let [visit, setVisit] = useState(null);
@@ -73,32 +75,44 @@ const AddVisitPage = () => {
         });
     };
 
-    const top100Films = [
-        {label: 'The Shawshank Redemption', year: 1994},
-        {label: 'The Godfather', year: 1972},
-        {label: 'The Godfather: Part II', year: 1974},
-        {label: 'The Dark Knight', year: 2008},
-        {label: '12 Angry Men', year: 1957},
-        {label: "Schindler's List", year: 1993},
-        {label: 'Pulp Fiction', year: 1994},
-        {label: 'The Lord of the Rings: The Return of the King', year: 2003},
-    ];
-
-    const localitiesArray = localities?.map((locality) => ({
-        label: locality.name,
-        value: locality.id,
-    }));
 
     const modernizationFounds = [
         {label: 'Depositado'},
         {label: 'No aprobado a la espera de nuevo proyecto'}
     ]
-    const label = {inputProps: {'aria-label': 'Checkbox demo'}};
+
+// Filtrar las localidades para eliminar duplicados
+    const uniqueLocalities = localities
+        ? localities.reduce((accumulator, locality) => {
+            if (!accumulator.find((item) => item.id === locality.id)) {
+                accumulator.push(locality);
+            }
+            return accumulator;
+        }, [])
+        : [];
+
+// Crear el array de opciones sin duplicados
+    const options = uniqueLocalities.map((locality) => ({
+        value: locality.id,
+        label: locality.name,
+    }));
+
+    options.sort((a, b) => a.label.localeCompare(b.label));
+
+// Declara el estado para almacenar la opción seleccionada
+    const [selectedOption, setSelectedOption] = useState(null);
+
+// Función para manejar el cambio de selección
+    const handleSelectChange = (selectedOption) => {
+        setSelectedOption(selectedOption);
+    };
+
+
 
     return (
         <Container>
-
             <Container>
+
                 <a>Tiempo de viaje</a>
                 <Form.Control
                     type="time"
@@ -156,6 +170,7 @@ const AddVisitPage = () => {
                                                        onChange={(e) => setModernizationFund(e.target.value)}
                     />}
                 />
+
             </Container>
 
             <Container>
@@ -203,44 +218,35 @@ const AddVisitPage = () => {
                                onChange={(e) => setPlaceName(e.target.value)}/>
                     <FormControl fullWidth>
 
-                        <Autocomplete
-                            disablePortal
-                            options={localitiesArray.sort((a, b) =>
-                                a.label.localeCompare(b.label)
-                            )}
-                            value={localitiesArray.find((option) => option.value === id_locality) || null}
-                            onChange={(event, newValue) => {
-                                setLocality(newValue?.value || '');
-                            }}
-                            filterOptions={(options, {inputValue}) => {
-                                const inputValueLowerCase = inputValue.toLowerCase();
-                                return options.filter(
-                                    (option) => option.label.toLowerCase().includes(inputValueLowerCase)
-                                );
-                            }}
-                            getOptionLabel={(option) => option.label}
-                            renderInput={(params) => <TextField {...params} label="Localidades"/>}
-                        />
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Localidad"
+                            placeholder="Localidad"
+                            name="id_locality"
+                            value={selectedOption}
+                            onChange={handleSelectChange}
+                            options={options}
+                            isClearable={isClearable}/>
+
                     </FormControl>
                     <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
                                value={id_group}
                                onChange={(e) => setGroup(e.target.value)}/>
-                    <TextField id="standard-basic" label="estado de visita" variant="standard" name="id_visit_status"
+                    <TextField id="standard-basic" label="estado de visita" variant="standard"
+                               name="id_visit_status"
                                value={id_visit_status}
                                onChange={(e) => setVisitStatus(e.target.value)}/>
-                    <TextField id="standard-basic" label="Acuerdo" variant="standard" name="id_agreement"
+                    <TextField id="standard-basic" label="Convenios" variant="standard" name="id_agreement"
                                value={id_agreement}
                                onChange={(e) => setAgreement(e.target.value)}/>
-                    <TextField id="standard-basic" label="referente contactado" variant="standard"
+                    <TextField id="standard-basic" label="referente local" variant="standard"
                                name="id_contacted_referrer"
                                value={id_contacted_referrer}
                                onChange={(e) => setContactedReferrer(e.target.value)}/>
                     <TextField id="standard-basic" label="Direccion" variant="standard" name="id_address"
                                value={id_address}
                                onChange={(e) => setAddress(e.target.value)}/>
-                    <TextField id="standard-basic" label="Logo(?" variant="standard" name="id_logo"
-                               value={id_logo}
-                               onChange={(e) => setLogo(e.target.value)}/>
                 </Box>
             </Container>
 
@@ -250,5 +256,4 @@ const AddVisitPage = () => {
         </Container>
     );
 };
-
 export default AddVisitPage;
