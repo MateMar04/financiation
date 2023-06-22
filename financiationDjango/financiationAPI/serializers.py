@@ -85,6 +85,41 @@ class UserCreateSerializer(UserCreateSerializer):
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
 
+
+class UserAccountSerializer(ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = '__all__'
+
+class VehiclesSerializer(ModelSerializer):
+    class Meta:
+        model = Vehicles
+        fields = '__all__'
+
+class RequestStatusSerializer(ModelSerializer):
+    class Meta:
+        model = RequestStatus
+        fields = '__all__'
+
+class ContactedReferrerEmailSerializer(ModelSerializer):
+    class Meta:
+        model = ContactedReferrerEmail
+        fields = '__all__'
+
+class ContactedReferrerPhoneSerializer(ModelSerializer):
+    class Meta:
+        model = ContactedReferrerPhone
+        fields = '__all__'
+
+class MayorEmailSerializer(ModelSerializer):
+    class Meta:
+        model = MayorEmail
+        fields = '__all__'
+
+class MayorPhoneSerializer(ModelSerializer):
+    class Meta:
+        model = MayorPhone
+
 class CoordinatorSerializer(ModelSerializer):
     class Meta:
         model = Coordinator
