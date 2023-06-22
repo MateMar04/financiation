@@ -10,7 +10,7 @@ urlpatterns = [
     path('advised/<str:pk>/', views.getOneAdvised, name='oneAdvised'),
     path('locality/', views.getLocalities, name='getLocalities'),
     path('group/', views.getGroups, name='getGroups'),
-    path('visit-status/', views.getVisitSatuses, name='getVisitSatuses'),
+    path('visit-status/', views.getVisitSatuses, name='getVisitStatuses'),
     path('agreement/', views.getAgreements, name='getAgreements'),
     path('contacted-referrer/', views.getContactedReferrers, name='getContactedReferrers'),
     path('address/', views.getAddresses, name='getAddresses'),
@@ -23,12 +23,18 @@ urlpatterns = [
     path('contactedreferrerphone/', views.getContactedReferrerPhone, name='getContactedReferrerPhone'),
     path('mayoremail/', views.getMayorEmail, name='getMayorEmail'),
     path('mayorphone/', views.getMayorPhone, name='getMayorPhone'),
-
-
-
+    path('ministry-department/', views.getMinistryDepartments, name='getMinistryDepartments'),
+    path('faq/', views.getFaqs, name='getFaqs'),
+    path('coordinator/', views.getCoordinators, name='getCoordinators'),
+    path('coordinator/<int:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
+    path('advisor/', views.getAdvisors, name='getAdvisors'),
+    path('advisor/<int:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
+    
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
     path('group/add/', views.postGroup, name='postGroup'),
-    path('request/add/', views.postRequest, name='postRequest')
+    path('request/add/', views.postRequest, name='postRequest'),
+    path('coordinator/add/', views.postCoordinator, name='postCoordinator'),
+    path('advisor/add/', views.postAdvisor, name='postAdvisor'),
 ]

@@ -12,37 +12,37 @@ const ActivateAccountPage = () => {
 
         <Container fluid className="fondo">
             <Container>
-                        <Card id="carta">
-                            <Container>
-                                <Row className='justify-content-center'>
-                                <img src={verifyimg} className='imgVerify' alt=''/>
-                                <h5>Verifique su cuenta</h5>
-                                <div className='py-3'>
+                <Card id="carta">
+                    <Container>
+                        <Row className='justify-content-center'>
+                            <img src={verifyimg} className='imgVerify' alt=''/>
+                            <h5>Verifique su cuenta</h5>
+                            <div className='py-3'>
                                 <Button onClick={handleShow}>Verificar</Button>
-                                </div>
-                                </Row>
-                            </Container>
+                            </div>
+                        </Row>
+                    </Container>
 
-                        </Card>
+                </Card>
 
 
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Body>
-                            <Container className='justify-content-center'>
-                                <Row className='justify-content-center'>
-                            <Col md={5}>
-                            <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                            <p className="text-center">¡Su cuenta ha sido verficada!</p>
-                            </Col>
-                                </Row>
-                            </Container>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="success" onClick={handleClose}>
-                                OK
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Body>
+                        <Container className='justify-content-center'>
+                            <Row className='justify-content-center'>
+                                <Col md={5}>
+                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                    <p className="text-center">¡Su cuenta ha sido verficada!</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="success" onClick={handleClose}>
+                            OK
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         </Container>
     );

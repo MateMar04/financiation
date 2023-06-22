@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, {useContext, useEffect, useState} from 'react';
+import {useParams} from 'react-router-dom';
 import "../assets/styles/AddVisitPage.css"
-import { Button, Container, Form } from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
-const AddGroupPage = () => {
+const GroupRegisterPage = () => {
     const [name, setName] = useState(null);
 
-    const { id } = useParams()
+    const {id} = useParams()
 
     let groupId = id
     let [group, setGroup] = useState(null)
@@ -49,4 +49,4 @@ const AddGroupPage = () => {
         </Container>
     );
 };
-export default AddGroupPage;
+export default GroupRegisterPage;

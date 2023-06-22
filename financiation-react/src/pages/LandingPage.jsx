@@ -2,7 +2,7 @@ import React from "react";
 import '../assets/styles/LandingPage.css'
 import imagenPanal from "../assets/images/panal.jpg";
 import Logo from "../assets/images/LOGOGOBIERNO.png";
-import {Button, Card, Col, Container} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
 const LandingPage = () => {

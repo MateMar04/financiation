@@ -4,8 +4,7 @@ import {Button, Container, Form} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 
 
-
-const FormRequestPage=()=>{
+const FormRequestPage = () => {
     const [id_visit, setVisit] = useState('');
     const [id_advised, setAdvised] = useState('');
     const [id_advisor, setAdvisor] = useState('');
@@ -31,58 +30,58 @@ const FormRequestPage=()=>{
             body: JSON.stringify(request)
         })
     }
-    
-    return( 
+
+    return (
         <Container className="scrolling">
             <Form>
-                <Form.Group>     
-                         <Form.Control
-                    type="text"
-                    placeholder="Select id_visit"
-                    name="id_visit"
-                    value={id_visit}
-                    onChange={(e) => setVisit(e.target.value)}
+                <Form.Group>
+                    <Form.Control
+                        type="text"
+                        placeholder="Select id_visit"
+                        name="id_visit"
+                        value={id_visit}
+                        onChange={(e) => setVisit(e.target.value)}
                     />
                     <Form.Control
-                    type="text"
-                    placeholder="Select id_advised"
-                    name="id_advised"
-                    value={id_advised}
-                    onChange={(e) => setAdvised(e.target.value)}
+                        type="text"
+                        placeholder="Select id_advised"
+                        name="id_advised"
+                        value={id_advised}
+                        onChange={(e) => setAdvised(e.target.value)}
                     />
                     <Form.Control
-                    type="text"
-                    placeholder="Select id_advisor"
-                    name="id_advisor"
-                    value={id_advisor}
-                    onChange={(e) => setAdvisor(e.target.value)}
+                        type="text"
+                        placeholder="Select id_advisor"
+                        name="id_advisor"
+                        value={id_advisor}
+                        onChange={(e) => setAdvisor(e.target.value)}
                     />
                     <Form.Control
-                    type="text"
-                    placeholder="Select id_ministry_department"
-                    name="id_ministry_department"
-                    value={id_ministry_department}
-                    onChange={(e) => setMinistryDepartment(e.target.value)}
+                        type="text"
+                        placeholder="Select id_ministry_department"
+                        name="id_ministry_department"
+                        value={id_ministry_department}
+                        onChange={(e) => setMinistryDepartment(e.target.value)}
                     />
                     <Form.Control
-                    type="text"
-                    placeholder="Select id_faq"
-                    name="id_faq"
-                    value={id_faq}
-                    onChange={(e) => setFaq(e.target.value)}
+                        type="text"
+                        placeholder="Select id_faq"
+                        name="id_faq"
+                        value={id_faq}
+                        onChange={(e) => setFaq(e.target.value)}
                     />
                     <Form.Control
-                    type="text"
-                    placeholder="Select id_status"
-                    name="id_status"
-                    value={id_status}
-                    onChange={(e) => setStatus(e.target.value)}
+                        type="text"
+                        placeholder="Select id_status"
+                        name="id_status"
+                        value={id_status}
+                        onChange={(e) => setStatus(e.target.value)}
                     />
                 </Form.Group>
             </Form>
             <Form.Group>
-                    <Button onClick={postRequest}>Submit</Button>
-                </Form.Group>
+                <Button onClick={postRequest}>Submit</Button>
+            </Form.Group>
         </Container>
     );
 };

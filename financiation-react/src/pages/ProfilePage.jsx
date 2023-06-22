@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import ProfilePicture from "../components/ProfilePicture";
-import tut from "../assets/images/Tute.jpg";
 import ProfileData from "../components/ProfileData";
 import "../assets/styles/ProfilePage.css"
 import ProfileModifyForm from "../components/ProfileModifyForm";
@@ -22,14 +21,9 @@ const ProfilePage = () => {
             "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
-        let response = await fetch(`/auth/users/me`, {headers: headers})
+        let response = await fetch(`/auth/users/me/`, {headers: headers})
         let data = await response.json()
-        console.log(data)
-        if (response.status === 200) {
-            setUser(data)
-        } else if (response.statusText === 'Unauthorized') {
-            logoutUser()
-        }
+        setUser(data)
     }
 
     return (
