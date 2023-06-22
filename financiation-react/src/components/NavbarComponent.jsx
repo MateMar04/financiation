@@ -32,6 +32,7 @@ const NavbarComponent = () => {
                                         <Button variant="outline-light" onClick={logoutUser}>
                                             Cerrar Sesión
                                         </Button>
+
                                     </Nav.Link>
                                 </Col>
                             </Row>
@@ -42,14 +43,19 @@ const NavbarComponent = () => {
                             <Container fluid>
                                 <Row>
                                     <Col className="d-flex justify-content-end">
-                                        <Button variant="outline-light" href="/signup">
-                                            Crear Cuenta
-                                        </Button>
+                                        <Link to='/signin/'>
+                                            <Button variant="outline-light">
+                                                Crear Cuenta
+                                            </Button>
+                                        </Link>
+
 
                                         <div className='mx-2'>
-                                            <Button variant="outline-light" href="/login">
-                                                Iniciar Sesión
-                                            </Button>
+                                            <Link to='/login/'>
+                                                <Button variant="outline-light">
+                                                    Iniciar Sesión
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </Col>
                                 </Row>
