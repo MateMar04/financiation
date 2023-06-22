@@ -82,12 +82,12 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Container fluid className='filters'>
+            <Container fluid>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Localidades</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
                                     {localities?.map((locality) => (
                                         <RowWithCheck item={locality}></RowWithCheck>
@@ -99,7 +99,7 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Departamentos</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
                                     {ministryDepartments?.map((ministryDepartment) => (
                                         <RowWithCheck item={ministryDepartment}></RowWithCheck>
@@ -113,7 +113,7 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Motivos</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
                                     {faqs?.map((faq) => (
                                         <RowWithCheck item={faq}></RowWithCheck>
@@ -125,7 +125,7 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Visitas</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
                                     {visits?.map((visit) => (
                                         <Row key={visit.id}>

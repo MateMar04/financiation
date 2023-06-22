@@ -1,49 +1,75 @@
-import React, {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import "../assets/styles/"
-import {Button, Container, Form} from "react-bootstrap";
+import React, {useContext, useEffect, useState} from "react";
+import {Button, Card, Col, Container, Form, Row} from "react-bootstrap";
+import '../assets/styles/CreateGroupPage.css'
+import RowWithCheck from "../components/RowWithCheck";
+import RowWithRadio from "../components/RowWithRadio";
+import AuthContext from "../context/AuthContext";
+import {UserRowWithRadio} from "../components/UserRowWithRadio";
+import {UserRowWithCheck} from "../components/UserRowWithCheck";
 
-const navigate = useNavigate;
+export const CreateGroupPage = () => {
 
-const CreateGroupPage = () => {
-    const [name,setGroup]=useState("");
+    let {authTokens} = useContext(AuthContext)
+    let [advisors, setAdvisors] = useState([])
+    let [coordinators, setCoordinators] = useState([])
 
-    CreateGroupInfo = async () => {
-        let formField = new FormData()
+    useEffect(() => {
+        getAdvisors()
+        getCoordinators()
+    }, [])
 
-        formField.append('name',name)
-        
-        await fetch('http://localhost:8000/api', {
-            method: 'POST',
-            data: formField
-
-        }).then((response) => {
-            console.log(response.data);
-            navigate.push('/')
-
-        })
-
-
+    let getAdvisors = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advisor/', {headers: headers})
+        let data = await response.json()
+        setAdvisors(data)
     };
-    return(
-        <Container className="scrolling">
-            <Form>
-                <Form.Group>     
-                    <Form.Control
-                        type="text"
-                        placeholder="Select name"
-                        name="name"
-                        value={name}
-                        onChange={(e) => setGroup(e.target.value)}
-                    />
-                    
-                </Form.Group>
-            </Form>
-            <Form.Group>
-                <Button onClick={CreateGroupInfo}>Create</Button>
-            </Form.Group>
-        </Container>
-    );
 
-} 
-export default CreateGroupPage;
+    let getCoordinators = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/coordinator/', {headers: headers})
+        let data = await response.json()
+        setCoordinators(data)
+    };
+
+
+    return (
+        <Container fluid>
+            <Card className='create-group-card'>
+                <Row className='upper-row'>
+                    <Col>
+                        <h3>Nombre del Grupo</h3>
+                        <Form.Control placeholder='Nombre' type='text'></Form.Control>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={6} className='create-group-column'>
+                        <h3>Coordinador</h3>
+                        <Container className='create-group-card-scroll'>
+                            {coordinators?.map((coordinator) => (
+                                <UserRowWithRadio userId={coordinator.id_user}/>
+                            ))}
+                        </Container>
+                    </Col>
+                    <Col lg={6} className='create-group-column'>
+                        <h3>Asesores</h3>
+                        <Container className='create-group-card-scroll'>
+                            {advisors?.map((advisor) => (
+                                <UserRowWithCheck userId={advisor.id_user}></UserRowWithCheck>
+                            ))}
+                        </Container>
+                    </Col>
+                </Row>
+                <Button>Crear</Button>
+            </Card>
+        </Container>
+    )
+}
