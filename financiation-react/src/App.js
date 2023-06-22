@@ -40,7 +40,7 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
                         <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
 
-                        <Route path='/groups' element={<GroupCard id={1} cityName='Carlos Paz' advisors={['Pepe', 'Jose','Lauti','Retrasado']} coordinators={['Pepito','Tadeo']} state='Progress'/>} />
+                        <Route path='/group' element={<GroupCard group={{id:1, name:'Pepe'}}/>} />
                         <Route path='/form' element={<FormPage/>}></Route>
 
                         <Route path='/visit/add' element={<AddVisitPage/>}/>

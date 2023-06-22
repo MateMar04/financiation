@@ -1,8 +1,32 @@
 import React from 'react';
-import { Container, Row, Col, Card, Button, Accordion } from 'react-bootstrap';
+import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 
 
+export const GroupCard = ({group, advisors, coordinators}) => {
+    return (
+        <Container fluid>
+            <Card>
+                <h1>Grupo {group.name}</h1>
+                <Row>
+                    <Col>
+                        <h1>Asesores</h1>
+                        {advisors?.map((advisor) => (
+                          <p>{advisor.id_user}</p>
+                        ))}
+                    </Col>
+                    <Col>
+                        <h1>Coordinadores</h1>
+                    </Col>
+                </Row>
+            </Card>
+
+        </Container>
+    )
+}
+
+
+/*
 function GroupCard(props) {
   const {id, cityName, advisors, coordinators, state}=props;
   const renderAdvisors = () => {
@@ -13,7 +37,7 @@ function GroupCard(props) {
         </Col>
       </Row>
     ));
-  
+
     return render;
   };
 
@@ -102,7 +126,7 @@ function GroupCard(props) {
             </Accordion.Body>
           </Accordion.Item>
 
-          {/* <Accordion.Item eventKey="1">
+          {/!* <Accordion.Item eventKey="1">
             <Accordion.Header>Grupo Numero 2</Accordion.Header>
             <Accordion.Body>
               <Container fluid className='cont1'>
@@ -197,7 +221,7 @@ function GroupCard(props) {
 
 
             </Accordion.Body>
-          </Accordion.Item> */}
+          </Accordion.Item> *!/}
 
         </Accordion>
 
@@ -207,5 +231,6 @@ function GroupCard(props) {
   );
 
 }
+*/
 
 export default GroupCard;
