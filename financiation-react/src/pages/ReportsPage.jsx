@@ -82,14 +82,14 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Container fluid className='filters'>
+            <Container fluid>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Localidades</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
-                                    {localities.map((locality) => (
+                                    {localities?.map((locality) => (
                                         <RowWithCheck item={locality}></RowWithCheck>
                                     ))}
                                 </Form>
@@ -99,9 +99,9 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Departamentos</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
-                                    {ministryDepartments.map((ministryDepartment) => (
+                                    {ministryDepartments?.map((ministryDepartment) => (
                                         <RowWithCheck item={ministryDepartment}></RowWithCheck>
                                     ))}
                                 </Form>
@@ -113,9 +113,9 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Motivos</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
-                                    {faqs.map((faq) => (
+                                    {faqs?.map((faq) => (
                                         <RowWithCheck item={faq}></RowWithCheck>
                                     ))}
                                 </Form>
@@ -125,9 +125,9 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <Card className='filter-card'>
                             <h1>Visitas</h1>
-                            <Container className='card-scroll'>
+                            <Container className='filter-card-scroll'>
                                 <Form>
-                                    {visits.map((visit) => (
+                                    {visits?.map((visit) => (
                                         <Row key={visit.id}>
                                             <Col className='row-label'>
                                                 <Form.Label>{visit.id_locality} {visit.visit_date}</Form.Label>
