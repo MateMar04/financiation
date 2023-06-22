@@ -113,14 +113,20 @@ const AddVisitPage = () => {
         value: label.toLowerCase().replace(/\W/g, ''),
     });
 
-    const defaultOptions = [
-        createOption('One'),
-        createOption('Two'),
-        createOption('Three'),
+    const defaultOptionsReferents = [
+        createOption('Marcela Gonzalez'),
+        createOption('Romina Bardazo'),
+        createOption('Nora Nacul'),
+        createOption('Valeria'),
+        createOption('Gisele Cesar'),
+        createOption('Nadia Gallardo'),
+        createOption('Tati'),
+        createOption('Soledad'),
+
     ];
 
         const [isLoading, setIsLoading] = useState(false);
-        const [options, setOptions] = useState(defaultOptions);
+        const [referents, setReferents] = useState(defaultOptionsReferents);
         const [value, setValue] = useState(null);
 
         const handleCreate = (inputValue) => {
@@ -128,7 +134,7 @@ const AddVisitPage = () => {
             setTimeout(() => {
                 const newOption = createOption(inputValue);
                 setIsLoading(false);
-                setOptions((prev) => [...prev, newOption]);
+                setReferents((prev) => [...prev, newOption]);
                 setValue(newOption);
             }, 1000);
         };
@@ -251,7 +257,8 @@ const AddVisitPage = () => {
                                     value={selectedOption}
                                     onChange={handleSelectChange}
                                     options={optionsWithoutDuplicates}
-                                    isClearable={isClearable}/>
+                                    isClearable={isClearable}
+                                />
 
                             </FormControl>
                             <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
@@ -264,10 +271,7 @@ const AddVisitPage = () => {
                             <TextField id="standard-basic" label="Convenios" variant="standard" name="id_agreement"
                                        value={id_agreement}
                                        onChange={(e) => setAgreement(e.target.value)}/>
-                            <TextField id="standard-basic" label="referente local" variant="standard"
-                                       name="id_contacted_referrer"
-                                       value={id_contacted_referrer}
-                                       onChange={(e) => setContactedReferrer(e.target.value)}/>
+
 
                             <CreatableSelect
                                 isClearable
@@ -275,8 +279,10 @@ const AddVisitPage = () => {
                                 isLoading={isLoading}
                                 onChange={(newValue) => setValue(newValue)}
                                 onCreateOption={handleCreate}
-                                options={options}
+                                options={referents}
                                 value={value}
+
+                                placeholder="Referente local"
                             />
                             <TextField id="standard-basic" label="Direccion" variant="standard" name="id_address"
                                        value={id_address}
