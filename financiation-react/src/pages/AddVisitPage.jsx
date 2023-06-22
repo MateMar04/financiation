@@ -38,7 +38,7 @@ const AddVisitPage = () => {
     const [id_locality, setLocality] = useState('');
     const [id_group, setGroup] = useState('');
     const [id_visit_status, setVisitStatus] = useState('');
-    const [id_agreement, setAgreement] = useState('');
+    const [id_agreement, setAgreement] = useState(null);
     const [id_contacted_referrer, setContactedReferrer] = useState('');
     const [id_address, setAddress] = useState('');
     const [isClearable, setIsClearable] = useState(true);
@@ -100,6 +100,21 @@ const AddVisitPage = () => {
 
     optionsWithoutDuplicates.sort((a, b) => a.label.localeCompare(b.label));
 
+    const agreementsOptions = [
+        {label: 'MUC', value: 'muc'},
+        {label: 'IAU', value: 'iau'},
+        {label: 'IAU-MUC-INMOBILIARIO', value: 'iau-muc-inmobiliario'},
+        {label: 'IAU - MUC', value: 'iau-muc'},
+        {label: 'MUC-IAU', value: 'muc-iau'},
+    ];
+
+
+    const [selectedAgreement, setSelectedAgreement] = useState(null);
+
+    const handleAgreementChange = (selectedOption) => {
+        setSelectedAgreement(selectedOption);
+    };
+
 // Declara el estado para almacenar la opción seleccionada
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -125,175 +140,180 @@ const AddVisitPage = () => {
 
     ];
 
-        const [isLoading, setIsLoading] = useState(false);
-        const [referents, setReferents] = useState(defaultOptionsReferents);
-        const [value, setValue] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [referents, setReferents] = useState(defaultOptionsReferents);
+    const [value, setValue] = useState(null);
 
-        const handleCreate = (inputValue) => {
-            setIsLoading(true);
-            setTimeout(() => {
-                const newOption = createOption(inputValue);
-                setIsLoading(false);
-                setReferents((prev) => [...prev, newOption]);
-                setValue(newOption);
-            }, 1000);
-        };
-
-
-            return (
-                <Container>
-                    <Container>
-                        <a>Tiempo de viaje</a>
-                        <Form.Control
-                            type="time"
-                            placeholder="Tiempo de viaje"
-                            name="travel_time"
-                            value={travel_time}
-                            onChange={(e) => setTravelTime(e.target.value)}
-                            className="scrolling"
-                        />
-                    </Container>
-
-                    <Container className='justify-content-center'>
-                        <Row>
-                            <Col className='d-flex align-items-center justify-content-center'>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        label='Fecha de visita'
-                                        name="visit_date"
-                                        value={visit_date}
-                                        onChange={(date) => setVisitDate(date)}
-                                        renderInput={(params) => <TextField {...params} />}
-                                        format='DD/MM/YYYY'
-
-                                    />
-                                </LocalizationProvider>
-                            </Col>
-
-                            <Col className='d-flex align-items-center justify-content-center'>
-                                <FormGroup>
-                                    <FormControlLabel control={<Checkbox defaultChecked value={civil_registration}
-                                                                         onChange={(e) => setCivilRegistration(e.target.value)}/>}
-                                                      label="Necesita registro civil"/>
-                                </FormGroup>
-                            </Col>
-
-                            <Col className='d-flex align-items-center justify-content-center'>
-                                <FormGroup>
-                                    <FormControlLabel required control={<Checkbox value={accommodation}
-                                                                                  onChange={(e) => setAccommodation(e.target.value)}/>}
-                                                      label="Hay hospedaje en la localidad"/>
-                                </FormGroup>
-                            </Col>
-                        </Row>
-                    </Container>
+    const handleCreate = (inputValue) => {
+        setIsLoading(true);
+        setTimeout(() => {
+            const newOption = createOption(inputValue);
+            setIsLoading(false);
+            setReferents((prev) => [...prev, newOption]);
+            setValue(newOption);
+        }, 1000);
+    };
 
 
-                    <Container>
-                        <Autocomplete
-                            disablePortal
-                            id="combo-box-demo"
-                            options={modernizationFounds}
-                            renderInput={(params) => <TextField{...params}
-                                                               label="Fondo de modernizacion"
-                                                               value={modernization_fund}
-                                                               onChange={(e) => setModernizationFund(e.target.value)}
-                            />}
-                        />
+    return (
+        <Container>
+            <Container>
+                <a>Tiempo de viaje</a>
+                <Form.Control
+                    type="time"
+                    placeholder="Tiempo de viaje"
+                    name="travel_time"
+                    value={travel_time}
+                    onChange={(e) => setTravelTime(e.target.value)}
+                    className="scrolling"
+                />
+            </Container>
 
-                    </Container>
+            <Container className='justify-content-center'>
+                <Row>
+                    <Col className='d-flex align-items-center justify-content-center'>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                label='Fecha de visita'
+                                name="visit_date"
+                                value={visit_date}
+                                onChange={(date) => setVisitDate(date)}
+                                renderInput={(params) => <TextField {...params} />}
+                                format='DD/MM/YYYY'
 
-                    <Container>
-                        <Row>
-                            <Col className='d-flex justify-content-center'>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DemoContainer components={['TimePicker']}>
-                                        <TimePicker
-                                            label='Hora de inicio de la jornada'
-                                            name="start_time"
-                                            value={start_time}
-                                            onChange={(e) => setStartTime(e.target.value)}
-                                        />
-                                    </DemoContainer>
-                                </LocalizationProvider>
-                            </Col>
-
-                            <Col className='d-flex justify-content-center'>
-
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DemoContainer components={['TimePicker']}>
-                                        <TimePicker
-                                            label='Hora de fin de la jornada'
-                                            name="finish_time"
-                                            value={finish_time}
-                                            onChange={(e) => setFinishTime(e.target.value)}
-                                        />
-                                    </DemoContainer>
-                                </LocalizationProvider>
-                            </Col>
-                        </Row>
-                    </Container>
-
-                    <Container>
-
-                        <Box
-                            component="form"
-                            sx={{
-                                '& > :not(style)': {m: 1, width: '80ch'},
-                            }}
-                            noValidate
-                            autoComplete="off"
-                        >
-                            <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
-                                       onChange={(e) => setPlaceName(e.target.value)}/>
-                            <FormControl fullWidth>
-
-                                <Select
-                                    labelId="demo-simple-select-label"
-                                    id="demo-simple-select"
-                                    label="Localidad"
-                                    placeholder="Localidad"
-                                    name="id_locality"
-                                    value={selectedOption}
-                                    onChange={handleSelectChange}
-                                    options={optionsWithoutDuplicates}
-                                    isClearable={isClearable}
-                                />
-
-                            </FormControl>
-                            <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
-                                       value={id_group}
-                                       onChange={(e) => setGroup(e.target.value)}/>
-                            <TextField id="standard-basic" label="estado de visita" variant="standard"
-                                       name="id_visit_status"
-                                       value={id_visit_status}
-                                       onChange={(e) => setVisitStatus(e.target.value)}/>
-                            <TextField id="standard-basic" label="Convenios" variant="standard" name="id_agreement"
-                                       value={id_agreement}
-                                       onChange={(e) => setAgreement(e.target.value)}/>
-
-
-                            <CreatableSelect
-                                isClearable
-                                isDisabled={isLoading}
-                                isLoading={isLoading}
-                                onChange={(newValue) => setValue(newValue)}
-                                onCreateOption={handleCreate}
-                                options={referents}
-                                value={value}
-
-                                placeholder="Referente local"
                             />
-                            <TextField id="standard-basic" label="Direccion" variant="standard" name="id_address"
-                                       value={id_address}
-                                       onChange={(e) => setAddress(e.target.value)}/>
-                        </Box>
-                    </Container>
+                        </LocalizationProvider>
+                    </Col>
 
-                    <Container>
-                        <Button onClick={postVisit}>Guardar Visita</Button>
-                    </Container>
-                </Container>
-            );
-        };
-        export default AddVisitPage;
+                    <Col className='d-flex align-items-center justify-content-center'>
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked value={civil_registration}
+                                                                 onChange={(e) => setCivilRegistration(e.target.value)}/>}
+                                              label="Necesita registro civil"/>
+                        </FormGroup>
+                    </Col>
+
+                    <Col className='d-flex align-items-center justify-content-center'>
+                        <FormGroup>
+                            <FormControlLabel required control={<Checkbox value={accommodation}
+                                                                          onChange={(e) => setAccommodation(e.target.value)}/>}
+                                              label="Hay hospedaje en la localidad"/>
+                        </FormGroup>
+                    </Col>
+                </Row>
+            </Container>
+
+
+            <Container>
+                <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={modernizationFounds}
+                    renderInput={(params) => <TextField{...params}
+                                                       label="Fondo de modernizacion"
+                                                       value={modernization_fund}
+                                                       onChange={(e) => setModernizationFund(e.target.value)}
+                    />}
+                />
+
+            </Container>
+
+            <Container>
+                <Row>
+                    <Col className='d-flex justify-content-center'>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={['TimePicker']}>
+                                <TimePicker
+                                    label='Hora de inicio de la jornada'
+                                    name="start_time"
+                                    value={start_time}
+                                    onChange={(e) => setStartTime(e.target.value)}
+                                />
+                            </DemoContainer>
+                        </LocalizationProvider>
+                    </Col>
+
+                    <Col className='d-flex justify-content-center'>
+
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DemoContainer components={['TimePicker']}>
+                                <TimePicker
+                                    label='Hora de fin de la jornada'
+                                    name="finish_time"
+                                    value={finish_time}
+                                    onChange={(e) => setFinishTime(e.target.value)}
+                                />
+                            </DemoContainer>
+                        </LocalizationProvider>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container>
+
+                <Box
+                    component="form"
+                    sx={{
+                        '& > :not(style)': {m: 1, width: '80ch'},
+                    }}
+                    noValidate
+                    autoComplete="off"
+                >
+                    <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
+                               onChange={(e) => setPlaceName(e.target.value)}/>
+                    <FormControl fullWidth>
+
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Localidad"
+                            placeholder="Localidad"
+                            name="id_locality"
+                            value={selectedOption}
+                            onChange={handleSelectChange}
+                            options={optionsWithoutDuplicates}
+                            isClearable={isClearable}
+                        />
+
+                    </FormControl>
+                    <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
+                               value={id_group}
+                               onChange={(e) => setGroup(e.target.value)}/>
+                    <TextField id="standard-basic" label="estado de visita" variant="standard"
+                               name="id_visit_status"
+                               value={id_visit_status}
+                               onChange={(e) => setVisitStatus(e.target.value)}/>
+
+                    <Select
+                        label="Convenios Firmados"
+                        placeholder="Convenios Firmados"
+                        value={selectedAgreement}
+                        onChange={handleAgreementChange}
+                        options={agreementsOptions}
+                    />
+
+
+                    <CreatableSelect
+                        isClearable
+                        isDisabled={isLoading}
+                        isLoading={isLoading}
+                        onChange={(newValue) => setValue(newValue)}
+                        onCreateOption={handleCreate}
+                        options={referents}
+                        value={value}
+
+                        placeholder="Referente local"
+                    />
+                    <TextField id="standard-basic" label="Direccion" variant="standard" name="id_address"
+                               value={id_address}
+                               onChange={(e) => setAddress(e.target.value)}/>
+                </Box>
+            </Container>
+
+            <Container>
+                <Button onClick={postVisit}>Guardar Visita</Button>
+            </Container>
+        </Container>
+    );
+};
+export default AddVisitPage;
