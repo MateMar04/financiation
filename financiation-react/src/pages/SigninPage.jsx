@@ -6,12 +6,12 @@ import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const SigninPage = () => {
-    let {signin} = useContext(AuthContext)
+    let {signIn} = useContext(AuthContext)
     return (
         <Container fluid className="general">
             <img src={Logo} alt="Logo ministerio de finanzas"/>
             <Container>
-                <Form onSubmit={signin}>
+                <Form onSubmit={signIn}>
                     <Row className='justify-content-md-center'>
                         <Col lg="5" className='input-required'>
                             <FloatingLabel className='floatingLabel' label="Nombre">
