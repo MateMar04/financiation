@@ -18,6 +18,7 @@ import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
+import React from "react";
 
 
 function App() {
@@ -40,7 +41,40 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
                         <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
 
-                        <Route path='/group' element={<GroupCard group={{id:1, name:'Pepe'}}/>} />
+                        <Route path='/group' element={<GroupCard group={{id: 1, name: 'Pepe'}} advisors={[
+            {
+                "id": 1,
+                "id_user": "Mateo Marchisone",
+                "id_group": 1
+            },
+            {
+                "id": 2,
+                "id_user": "Elvio Marchisone",
+                "id_group": 2
+            },
+            {
+                "id": 3,
+                "id_user": "Tadeo Funes",
+                "id_group": 3
+            }
+        ]}
+                   coordinators={[
+                       {
+                           "id": 1,
+                           "id_user": "Mateo Marchisone",
+                           "id_group": 1
+                       },
+                       {
+                           "id": 2,
+                           "id_user": "Elvio Marchisone",
+                           "id_group": 2
+                       },
+                       {
+                           "id": 3,
+                           "id_user": "Tadeo Funes",
+                           "id_group": 3
+                       }
+                   ]}/>}/>
                         <Route path='/form' element={<FormPage/>}></Route>
 
                         <Route path='/visit/add' element={<AddVisitPage/>}/>

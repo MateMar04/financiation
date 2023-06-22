@@ -3,7 +3,7 @@ import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 
 
-export const GroupCard = ({group, advisors, coordinators}) => {
+export const GroupCard = ({group, advisors, coordinators, visita}) => {
     return (
         <Container fluid>
             <Card>
@@ -17,6 +17,9 @@ export const GroupCard = ({group, advisors, coordinators}) => {
                     </Col>
                     <Col>
                         <h1>Coordinadores</h1>
+                        {coordinators?.map((coordinator) => (
+                          <p>{coordinator.id_user}</p>
+                        ))}
                     </Col>
                 </Row>
             </Card>
