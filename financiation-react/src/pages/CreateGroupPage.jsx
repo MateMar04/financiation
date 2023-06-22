@@ -5,6 +5,7 @@ import RowWithCheck from "../components/RowWithCheck";
 import RowWithRadio from "../components/RowWithRadio";
 import AuthContext from "../context/AuthContext";
 import {UserRowWithRadio} from "../components/UserRowWithRadio";
+import {UserRowWithCheck} from "../components/UserRowWithCheck";
 
 export const CreateGroupPage = () => {
 
@@ -62,7 +63,7 @@ export const CreateGroupPage = () => {
                         <h3>Asesores</h3>
                         <Container className='create-group-card-scroll'>
                             {advisors?.map((advisor) => (
-                                <RowWithCheck item={advisor}></RowWithCheck>
+                                <UserRowWithCheck userId={advisor.id_user}></UserRowWithCheck>
                             ))}
                         </Container>
                     </Col>
