@@ -389,6 +389,49 @@ def getRequests(request):
     return Response(serializer.data)
 
 
+@api_view(['GET'])
+def getUserAccount(request):
+    useraccount = UserAccount.objects.all()
+    serializer = UserAccountSerializer(useraccount, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicles(request):
+    vehicles = Vehicles.objects.all()
+    serializer = VehiclesSerializer(vehicles, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatus(request):
+    requeststatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requeststatus, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerEmail(request):
+    contactedreferreremail = ContactedReferrerEmail.objects.all()
+    serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerPhone(request):
+    contactedreferrerphone = ContactedReferrerPhone.objects.all()
+    serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorEmail(request):
+    mayoremail = MayorEmail.objects.all()
+    serializer = MayorEmailSerializer(mayoremail, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorPhone(request):
+    mayorphone = MayorPhone.objects.all()
+    serializer = MayorPhoneSerializer(mayorphone, many=True)
+    return Response(serializer.data)
+
+
 @api_view(['POST'])
 def postCoordinator(request):
     data = request.data
@@ -447,3 +490,4 @@ def getOneAdvisor(request, pk):
     advisor = Advisor.objects.get(id=pk)
     serializer = AdvisorSerializer(advisor, many=False)
     return Response(serializer.data)
+
