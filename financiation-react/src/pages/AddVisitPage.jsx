@@ -202,15 +202,26 @@ const AddVisitPage = () => {
                     <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
                                onChange={(e) => setPlaceName(e.target.value)}/>
                     <FormControl fullWidth>
-                    <Autocomplete
-                        disablePortal
-                        options={localitiesArray}
-                        value={id_locality}
-                        onChange={(e) => setLocality(e.target.value)}
-                        getOptionLabel={(option) => option.label}
-                        renderInput={(params) => <TextField {...params} label="Localidades"/>}
-                    />
-                </FormControl>
+
+                        <Autocomplete
+                            disablePortal
+                            options={localitiesArray.sort((a, b) =>
+                                a.label.localeCompare(b.label)
+                            )}
+                            value={localitiesArray.find((option) => option.value === id_locality) || null}
+                            onChange={(event, newValue) => {
+                                setLocality(newValue?.value || '');
+                            }}
+                            filterOptions={(options, {inputValue}) => {
+                                const inputValueLowerCase = inputValue.toLowerCase();
+                                return options.filter(
+                                    (option) => option.label.toLowerCase().includes(inputValueLowerCase)
+                                );
+                            }}
+                            getOptionLabel={(option) => option.label}
+                            renderInput={(params) => <TextField {...params} label="Localidades"/>}
+                        />
+                    </FormControl>
                     <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
                                value={id_group}
                                onChange={(e) => setGroup(e.target.value)}/>
