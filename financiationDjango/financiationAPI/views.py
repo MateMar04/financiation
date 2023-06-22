@@ -384,8 +384,8 @@ def getVisits(request):
 
 @api_view(['GET'])
 def getRequests(request):
-    requests = Request.objects.all()
-    serializer = VisitSerializer(requests, many=True)
+    request = Request.objects.all()
+    serializer = RequestSerializer(request, many=True)
     return Response(serializer.data)
 
 
@@ -491,3 +491,57 @@ def getOneAdvisor(request, pk):
     serializer = AdvisorSerializer(advisor, many=False)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def getCityDepartments(request):
+    cityDepartment = CityDepartment.objects.all()
+    serializer = CityDepartmentSerializer(cityDepartment, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserStatuses(request):
+    userStatus = UserStatus.objects.all()
+    serializer = UserStatusSerializer(userStatus, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayors(request):
+    mayor = Mayor.objects.all()
+    serializer = MayorSerializer(mayor, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleBrands(request):
+    vehicleBrand = VehicleBrand.objects.all()
+    serializer = VehicleBrandSerializer(vehicleBrand, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleModels(request):
+    vehicleModel = VehicleModel.objects.all()
+    serializer = VehicleModelSerializer(vehicleModel, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPoliticParties(request):
+    politicParty = PoliticParty.objects.all()
+    serializer = PoliticPartySerializer(politicParty, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehiclePlates(request):
+    vehiclePlate = VehiclePlate.objects.all()
+    serializer = VehiclePlateSerializer(vehiclePlate, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRoles(request):
+    role = Role.objects.all()
+    serializer = RoleSerializer(role, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatuses(request):
+    requestStatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requestStatus, many=True)
+    return Response(serializer.data)
