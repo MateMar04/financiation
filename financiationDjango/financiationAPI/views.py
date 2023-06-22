@@ -384,8 +384,51 @@ def getVisits(request):
 
 @api_view(['GET'])
 def getRequests(request):
-    requests = Request.objects.all()
-    serializer = VisitSerializer(requests, many=True)
+    request = Request.objects.all()
+    serializer = RequestSerializer(request, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getUserAccount(request):
+    useraccount = UserAccount.objects.all()
+    serializer = UserAccountSerializer(useraccount, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicles(request):
+    vehicles = Vehicles.objects.all()
+    serializer = VehiclesSerializer(vehicles, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatus(request):
+    requeststatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requeststatus, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerEmail(request):
+    contactedreferreremail = ContactedReferrerEmail.objects.all()
+    serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getContactedReferrerPhone(request):
+    contactedreferrerphone = ContactedReferrerPhone.objects.all()
+    serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorEmail(request):
+    mayoremail = MayorEmail.objects.all()
+    serializer = MayorEmailSerializer(mayoremail, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorPhone(request):
+    mayorphone = MayorPhone.objects.all()
+    serializer = MayorPhoneSerializer(mayorphone, many=True)
     return Response(serializer.data)
 
 
@@ -446,4 +489,59 @@ def getAdvisors(request):
 def getOneAdvisor(request, pk):
     advisor = Advisor.objects.get(id=pk)
     serializer = AdvisorSerializer(advisor, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getCityDepartments(request):
+    cityDepartment = CityDepartment.objects.all()
+    serializer = CityDepartmentSerializer(cityDepartment, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getUserStatuses(request):
+    userStatus = UserStatus.objects.all()
+    serializer = UserStatusSerializer(userStatus, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayors(request):
+    mayor = Mayor.objects.all()
+    serializer = MayorSerializer(mayor, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleBrands(request):
+    vehicleBrand = VehicleBrand.objects.all()
+    serializer = VehicleBrandSerializer(vehicleBrand, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehicleModels(request):
+    vehicleModel = VehicleModel.objects.all()
+    serializer = VehicleModelSerializer(vehicleModel, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getPoliticParties(request):
+    politicParty = PoliticParty.objects.all()
+    serializer = PoliticPartySerializer(politicParty, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getVehiclePlates(request):
+    vehiclePlate = VehiclePlate.objects.all()
+    serializer = VehiclePlateSerializer(vehiclePlate, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRoles(request):
+    role = Role.objects.all()
+    serializer = RoleSerializer(role, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRequestStatuses(request):
+    requestStatus = RequestStatus.objects.all()
+    serializer = RequestStatusSerializer(requestStatus, many=True)
     return Response(serializer.data)
