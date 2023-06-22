@@ -1,24 +1,26 @@
 import React, {useContext, useEffect, useState} from 'react';
 import '../assets/styles/AddVisitPage.css';
-import {Button, Container, Form, FloatingLabel, Row, Col} from 'react-bootstrap';
+import {Button, Container, Form, Row, Col} from 'react-bootstrap';
 import AuthContext from '../context/AuthContext';
-import Autocomplete from '@mui/material/Autocomplete';
+
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {TimePicker} from '@mui/x-date-pickers/TimePicker';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import {
+    Autocomplete,
+    FormGroup,
+    FormControlLabel,
+    Checkbox,
+    Box,
+    TextField,
+    InputLabel,
+    MenuItem,
+    FormControl,
+    Select
+} from '@mui/material';
 
 const AddVisitPage = () => {
     const [flyer, setImage] = useState(null);
@@ -81,6 +83,12 @@ const AddVisitPage = () => {
         {label: 'Pulp Fiction', year: 1994},
         {label: 'The Lord of the Rings: The Return of the King', year: 2003},
     ];
+
+    const localitiesArray = localities?.map((locality) => ({
+        label: locality.name,
+        value: locality.id,
+    }));
+
     const modernizationFounds = [
         {label: 'Depositado'},
         {label: 'No aprobado a la espera de nuevo proyecto'}
@@ -193,6 +201,16 @@ const AddVisitPage = () => {
                 >
                     <TextField name="place_name" label="Nombre del Lugar" variant="standard" value={place_name}
                                onChange={(e) => setPlaceName(e.target.value)}/>
+                    <FormControl fullWidth>
+                    <Autocomplete
+                        disablePortal
+                        options={localitiesArray}
+                        value={id_locality}
+                        onChange={(e) => setLocality(e.target.value)}
+                        getOptionLabel={(option) => option.label}
+                        renderInput={(params) => <TextField {...params} label="Localidades"/>}
+                    />
+                </FormControl>
                     <TextField id="standard-basic" label="Grupo N°" variant="standard" name="id_group"
                                value={id_group}
                                onChange={(e) => setGroup(e.target.value)}/>
@@ -214,24 +232,6 @@ const AddVisitPage = () => {
                                onChange={(e) => setLogo(e.target.value)}/>
                 </Box>
             </Container>
-
-            <Box sx={{minWidth: 120}}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Localidades</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Localidad"
-                        name="id_locality"
-                        value={id_locality}
-                        onChange={(e) => setLocality(e.target.value)}
-                    >
-                        {localities.map((locality) => (
-                            <MenuItem>{locality.name}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-            </Box>
 
             <Container>
                 <Button onClick={postVisit}>Guardar Visita</Button>
