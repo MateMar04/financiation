@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from djoser.serializers import UserCreateSerializer
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from .models import *
 
@@ -18,9 +18,15 @@ class AdvisedSerializer(ModelSerializer):
 
 
 class VisitSerializer(ModelSerializer):
+
+    title = SerializerMethodField()
     class Meta:
         model = Visit
         fields = '__all__'
+
+    def get_title(self, obj):
+        return f"{obj.id_locality.name} {obj.visit_date}"
+
 
 
 class GroupSerializer(ModelSerializer):

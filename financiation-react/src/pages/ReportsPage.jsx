@@ -130,7 +130,7 @@ export const ReportsPage = () => {
                                     {visits?.map((visit) => (
                                         <Row key={visit.id}>
                                             <Col className='row-label'>
-                                                <Form.Label>{visit.id_locality} {visit.visit_date}</Form.Label>
+                                                <Form.Label>{visit.title}</Form.Label>
                                             </Col>
                                             <Col className='row-check'>
                                                 <Form.Check value={visit.id}></Form.Check>
