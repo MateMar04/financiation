@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
+import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
-import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
+import {Button, Container, FloatingLabel, Form, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const SigninPage = () => {
+    let {signIn} = useContext(AuthContext)
     return (
         <Container fluid className="general">
             <img src={Logo} alt="Logo ministerio de finanzas"/>
             <Container>
-                <Form>
+                <Form onSubmit={signIn}>
                     <Row className='justify-content-md-center'>
                         <Col lg="5" className='input-required'>
                             <FloatingLabel className='floatingLabel' label="Nombre">

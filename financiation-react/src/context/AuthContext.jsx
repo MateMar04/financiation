@@ -2,6 +2,7 @@ import {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 
+
 const AuthContext = createContext();
 
 export default AuthContext
@@ -12,6 +13,32 @@ export const AuthProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     let history = useNavigate()
+
+    let signIn = async (e) => {
+        e.preventDefault()
+        let response = await fetch('/auth/users/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "first_name": e.target.first_name.value,
+                "last_name": e.target.last_name.value,
+                "username": e.target.username.value,
+                "ssn": e.target.ssn.value,
+                "email": e.target.email.value,
+                "phone_number": e.target.phone.value,
+                "password": e.target.password.value,
+                "re_password": e.target.re_password.value
+            })
+        })
+        if (response.status === 201) {
+            history('/activate')
+        } else {
+            alert('Something went wrong')
+        }
+    }
+
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -67,6 +94,7 @@ export const AuthProvider = ({children}) => {
     let contextData = {
         user: user,
         authTokens: authTokens,
+        signIn: signIn,
         loginUser: loginUser,
         logoutUser: logoutUser
     }
