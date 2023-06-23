@@ -43,14 +43,17 @@ const AddVisitPage = () => {
     const [id_address, setAddress] = useState('');
     const [isClearable, setIsClearable] = useState(true);
 
-
     let [localities, setLocalities] = useState([]);
+
+    let [group, setGroups] = useState([]);
+
     let [visit, setVisit] = useState(null);
     let {authTokens, logoutUser} = useContext(AuthContext);
 
     useEffect(() => {
         setVisit()
-        getLocalities();
+        getLocalities()
+        getGroups();
     }, []);
 
     let getLocalities = async () => {
@@ -62,6 +65,17 @@ const AddVisitPage = () => {
         let response = await fetch('/api/locality/', {headers: headers})
         let data = await response.json()
         setLocalities(data)
+    };
+
+    let getGroups = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/locality/', {headers: headers})
+        let data = await response.json()
+        setGroups(data)
     };
 
     let postVisit = async () => {
