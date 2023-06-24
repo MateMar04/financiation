@@ -2,9 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button,Container, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
+import {useNavigate} from 'react-router-dom'
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
+    let history = useNavigate()
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -19,7 +21,7 @@ const CoordinatorPage = () => {
                                   "id_group": e.target.id_group.value})
         })
         if (response.status === 200) {
-            alert('cheto mal')
+            history('/')
         } else {
             alert('Something went wrong')
         }

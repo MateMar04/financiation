@@ -4,12 +4,14 @@ import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
+import {useNavigate} from 'react-router-dom'
 
 export const CreateGroupPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
+    let history = useNavigate()
 
     useEffect(() => {
         getAdvisors()
@@ -50,7 +52,7 @@ export const CreateGroupPage = () => {
             body: JSON.stringify({"name": e.target.name.value})
         })
         if (response.status === 200) {
-            alert('cheto mal')
+            history('/')
         } else {
             alert('Something went wrong')
         }
@@ -63,7 +65,7 @@ export const CreateGroupPage = () => {
                     <Row className='upper-row'>
                         <Col>
                             <h3>Nombre del Grupo</h3>
-                            <Form.Control placeholder='Nombre' type='text'></Form.Control>
+                            <Form.Control name="name" placeholder='Nombre' type='text'></Form.Control>
                         </Col>
                     </Row>
                     <Row>
