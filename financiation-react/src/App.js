@@ -18,6 +18,7 @@ import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
+import {PublicRoute} from "./utils/PublicRoute";
 
 
 function App() {
@@ -27,28 +28,28 @@ function App() {
                 <AuthProvider>
                     <Navbar/>
                     <Routes>
-                        <Route path='/' exact element={<PrivateRoute><LandingPage/></PrivateRoute>}/>
+                        <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
-                        <Route path='/login' element={<LoginPage/>}/>
-                        <Route path='/signin' element={<SigninPage/>}/>
-                        <Route path='/reset-password' element={<ResetPasswordPage/>}/>
-                        <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
-                        <Route path='/activate' element={<ActivateAccountPage/>}/>
+                        <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
+                        <Route path='/signin' element={<PublicRoute children={<SigninPage/>}/>}/>
+                        <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
+                        <Route path='/reset-password/confirm' element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
+                        <Route path='/activate' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
-                        <Route exact path='/me' element={<ProfilePage/>}/>
+                        <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
-                        <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
-                        <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
+                        <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
+                        <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/groups' element={<GroupCard/>}/>
-                        <Route path='/form' element={<FormPage/>}></Route>
+                        <Route path='/groups' element={<PrivateRoute children={<GroupCard/>}/>}/>
+                        <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
-                        <Route path='/visit/add' element={<AddVisitPage/>}/>
+                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
 
-                        <Route path='/request/add' element={<FormRequestPage/>}/>
-                        <Route path='/group/add' element={<CreateGroupPage/>}/>
+                        <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
+                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
 
-                        <Route path='/reports' element={<ReportsPage/>}/>
+                        <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
                     </Routes>
                 </AuthProvider>
