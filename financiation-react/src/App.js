@@ -19,6 +19,7 @@ import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
 import AdvisorPage from './pages/AdvisorPage';
+import CoordinatorPage from './pages/CoordinatorPage';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
                         <Route path='/request/add' element={<FormRequestPage/>}/>
                         <Route path='/group/add' element={<CreateGroupPage/>}/>
                         <Route path='/advisor/add' element={<AdvisorPage/>}/>
+                        <Route path='/coordinator/add' element={<CoordinatorPage/>}/>
 
                         <Route path='/reports' element={<ReportsPage/>}/>
 

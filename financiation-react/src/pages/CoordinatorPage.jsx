@@ -3,12 +3,12 @@ import {Button,Container, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 
-const AdvisorPage = () => {
+const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
 
-    let postAdvisor = async (e) => {
+    let postCoordinator = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/advisor/add/', {
+        let response = await fetch('/api/coordinator/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const AdvisorPage = () => {
     return (
 
         <Container className="scrolling">
-            <Form onSubmit={postAdvisor}>
+            <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control
                         type="number"
@@ -50,4 +50,4 @@ const AdvisorPage = () => {
     );
 }
 
-export default AdvisorPage;
+export default CoordinatorPage;
