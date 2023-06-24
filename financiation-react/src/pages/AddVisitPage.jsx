@@ -22,9 +22,9 @@ const AddVisitPage = () => {
     const [id_address, setAddress] = useState("");
     const [id_logo, setLogo] = useState("");
 
-    let [localities, setLocalities] = useState([])
+    let [setLocalities] = useState([])
     let [visit, setVisit] = useState(null)
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
         setVisit()
