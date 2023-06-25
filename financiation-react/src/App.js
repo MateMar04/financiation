@@ -14,7 +14,6 @@ import PrivateRoute from "./utils/PrivateRoute";
 import {AuthProvider} from "./context/AuthContext";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
-import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
@@ -47,20 +46,11 @@ function App() {
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
-
-
-                        <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
-                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
-
-                        <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
                         <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>} />}/>
                         <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>} />}/>
 
-
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
-
-
 
                     </Routes>
                 </AuthProvider>
