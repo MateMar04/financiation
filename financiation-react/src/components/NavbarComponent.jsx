@@ -96,8 +96,6 @@ const NavbarComponent = () => {
 
                     )
                     }
-
-
                 </Navbar.Collapse>
             </Container>
         </Navbar>

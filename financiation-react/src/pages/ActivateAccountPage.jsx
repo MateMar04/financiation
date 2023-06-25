@@ -1,10 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
 import '../assets/styles/ActivateAccountPAge.css'
 import {Link, useNavigate, useParams} from "react-router-dom";
-import AuthContext from "../context/AuthContext";
 
 const ActivateAccountPage = () => {
     const {uid, token} = useParams()
