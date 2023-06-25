@@ -4,7 +4,7 @@ import "../assets/styles/GroupCard.css"
 import {UserParagraph} from "./UserParagraph";
 
 
-export const GroupCard = ({group, advisors, coordinator}) => {
+export const GroupCard = ({group, advisors, coordinators}) => {
     return (
         <Container fluid className='CompletlyContainer'>
             <Card className='groupcard'>
@@ -23,11 +23,12 @@ export const GroupCard = ({group, advisors, coordinator}) => {
 
                     </Col>
                     <Col>
-
                         <Container>
                             <h3 className='a'>Coordinadores</h3>
                         </Container>
-                        <UserParagraph userId={coordinator.id_user}/>
+                        {coordinators?.map((coordinator) => (
+                            <UserParagraph userId={coordinator.id_user}/>
+                        ))}
                     </Col>
                 </Row>
             </Card>

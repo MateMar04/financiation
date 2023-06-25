@@ -54,7 +54,7 @@ export const GroupsPage = () => {
     return (
         <Container>
             {groups?.map((group) => (
-                <GroupCard group={group} coordinator={coordinators} advisors={advisors}/>
+                <GroupCard group={group} coordinators={coordinators} advisors={advisors}/>
             ))}
         </Container>
 
