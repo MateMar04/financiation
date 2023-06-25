@@ -20,7 +20,7 @@ const FormRequestPage = () => {
     })
 
     let postRequest = async () => {
-        fetch(' /api/request/add/', {
+        fetch('/api/request/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
