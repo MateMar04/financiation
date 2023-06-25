@@ -3,6 +3,7 @@ import "../assets/styles/FormPage.css";
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import AuthContext from "../context/AuthContext";
 import {UserOption} from "../components/UserOption";
+import {useNavigate} from "react-router-dom";
 
 
 const FormPage = () => {
@@ -21,6 +22,8 @@ const FormPage = () => {
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
+    let [advised, setAdvised] = useState([])
+    let history = useNavigate()
 
 
     useEffect(() => {
@@ -28,6 +31,7 @@ const FormPage = () => {
         getMinistryDepartments()
         getFaqs()
         getAdvisors()
+        getAdvised()
     }, [])
 
     let getLocalities = async () => {
@@ -99,10 +103,20 @@ const FormPage = () => {
         }
     }
 
+    let getAdvised = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advised/', {headers: headers})
+        let data = await response.json()
+        setAdvised(data)
+    };
 
     return (
         <div>
-            <Form onSubmit={}>
+            <Form onSubmit={postRequest}>
                 <Container>
                     <Container>
                         <Container>
@@ -137,8 +151,20 @@ const FormPage = () => {
                             <Row className='justify-content-md-center'>
                                 <Col xs={12} md={10}>
                                     <select
-                                        value={selectedOption}
-                                        onChange={handleDropdownChange}
+                                        placeholder="Area"
+                                        className='form-select'
+                                        style={selectStyle}>
+
+                                        {advised?.map((advi) => (
+                                            <option value={advi.id}>{advi.first_name} {advi.last_name}</option>
+                                        ))}
+
+                                    </select>
+                                </Col>
+                            </Row>
+                            <Row className='justify-content-md-center'>
+                                <Col xs={12} md={10}>
+                                    <select
                                         placeholder="Area"
                                         className='form-select'
                                         style={selectStyle}>
