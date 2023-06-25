@@ -33,7 +33,7 @@ export const AuthProvider = ({children}) => {
             })
         })
         if (response.status === 201) {
-            history('/activate')
+            history('/')
         } else {
             alert('Something went wrong')
         }

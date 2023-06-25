@@ -7,7 +7,6 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const ActivateAccountPage = () => {
-    let {authTokens} = useContext(AuthContext)
     const {uid, token} = useParams()
     let history = useNavigate()
 
