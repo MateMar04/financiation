@@ -3,7 +3,7 @@ import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
 import '../assets/styles/ActivateAccountPAge.css'
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const ActivateAccountPage = () => {
@@ -30,12 +30,18 @@ const ActivateAccountPage = () => {
                 "token": activationToken
             })
         })
-        if (response.status === 200) {
+        if (response.status === 204) {
             history('/')
         } else {
             alert('Something went wrong')
         }
     }
+
+    let pressedVerifyButton = async () => {
+        handleShow()
+        await activateAccount()
+    }
+
     return (
 
         <Container fluid className="fondo">
@@ -46,7 +52,7 @@ const ActivateAccountPage = () => {
                             <img src={verifyimg} className='imgVerify' alt=''/>
                             <h5>Verifique su cuenta</h5>
                             <div className='py-3'>
-                                <Button onClick={handleShow}>Verificar</Button>
+                                <Button onClick={pressedVerifyButton}>Verificar</Button>
                             </div>
                         </Row>
                     </Container>
@@ -66,9 +72,12 @@ const ActivateAccountPage = () => {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="success" onClick={activateAccount}>
-                            OK
-                        </Button>
+                        <Link to={'/login'}>
+                            <Button variant="success">
+                                OK
+                            </Button>
+                        </Link>
+
                     </Modal.Footer>
                 </Modal>
             </Container>
