@@ -16,9 +16,11 @@ import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
 import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
-import { ReportsPage } from "./pages/ReportsPage";
-import { CreateGroupPage } from "./pages/CreateGroupPage";
-import React from "react";
+import {ReportsPage} from "./pages/ReportsPage";
+import {CreateGroupPage} from "./pages/CreateGroupPage";
+import {PublicRoute} from "./utils/PublicRoute";
+import AdvisorPage from './pages/AdvisorPage';
+import CoordinatorPage from './pages/CoordinatorPage';
 
 
 function App() {
@@ -28,78 +30,36 @@ function App() {
                 <AuthProvider>
                     <Navbar />
                     <Routes>
-                        <Route path='/' exact element={<PrivateRoute><LandingPage /></PrivateRoute>} />
 
-                        <Route path='/login' element={<LoginPage />} />
-                        <Route path='/signin' element={<SigninPage />} />
-                        <Route path='/reset-password' element={<ResetPasswordPage />} />
-                        <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage />} />
-                        <Route path='/activate' element={<ActivateAccountPage />} />
+                        <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
-                        <Route exact path='/me' element={<ProfilePage />} />
+                        <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
+                        <Route path='/signin' element={<PublicRoute children={<SigninPage/>}/>}/>
+                        <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
+                        <Route path='/password/reset/confirm/:uid/:token' element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
+                        <Route path='/activate/:uid/:token' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
-                        <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage /></PrivateRoute>} />
-                        <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage /></PrivateRoute>} />
+                        <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
-                        <Route path='/group' element={<GroupCard group={{ id: 1, name: '15 de jorge' }} advisors={[
-                            {
-                                "id": 1,
-                                "id_user": "Mateo Marchisone",
-                                "id_group": 1
-                            },
-                            {
-                                "id": 2,
-                                "id_user": "Elvio Marchisone",
-                                "id_group": 2
-                            },
-                            {
-                                "id": 3,
-                                "id_user": "Tadeo Funes",
-                                "id_group": 3
-                            },
-                            {
-                                "id": 3,
-                                "id_user": "Tadeo Funes",
-                                "id_group": 3
-                            },
-                            {
-                                "id": 3,
-                                "id_user": "Tadeo Funes",
-                                "id_group": 3
-                            }
+                        <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
+                        <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        ]}
-                            coordinators={[
-                                {
-                                    "id": 1,
-                                    "id_user": "Mateo Marchisone",
-                                    "id_group": 1
-                                },
-                                {
-                                    "id": 2,
-                                    "id_user": "Elvio Marchisone",
-                                    "id_group": 2
-                                },
-                                {
-                                    "id": 3,
-                                    "id_user": "Tadeo Funes",
-                                    "id_group": 3
-                                },
+                        <Route path='/groups' element={<PrivateRoute children={<GroupCard/>}/>}/>
+                        <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
-                                {
-                                    "id": 2,
-                                    "id_user": "Elvio Marchisone",
-                                    "id_group": 2
-                                }
-                            ]} />} />
-                        <Route path='/form' element={<FormPage />}></Route>
+                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
 
-                        <Route path='/visit/add' element={<AddVisitPage />} />
 
-                        <Route path='/request/add' element={<FormRequestPage />} />
-                        <Route path='/group/add' element={<CreateGroupPage />} />
+                        <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
+                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
 
-                        <Route path='/reports' element={<ReportsPage />} />
+                        <Route path='/request/add' element={<FormRequestPage/>}/>
+                        <Route path='/group/add' element={<CreateGroupPage/>}/>
+                        <Route path='/advisor/add' element={<AdvisorPage/>}/>
+                        <Route path='/coordinator/add' element={<CoordinatorPage/>}/>
+
+
+                        <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
                     </Routes>
                 </AuthProvider>

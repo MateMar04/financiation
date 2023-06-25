@@ -27,7 +27,7 @@ const LoginPage = () => {
                     <Button type="submit">Acceder</Button>
                 </Container>
             </Form>
-            <Link to="/signup/"><Button variant="link" className="link">No tengo una cuenta</Button></Link>
+            <Link to="/signin/"><Button variant="link" className="link">No tengo una cuenta</Button></Link>
             <Link to="/reset-password/"><Button variant="link" className="link">Me olvidé la contraseña</Button></Link>
         </Container>
     )
