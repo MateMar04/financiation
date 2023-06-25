@@ -1,16 +1,8 @@
-import React, {useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/FormPage.css";
 import {Button, Col, Container, Row} from 'react-bootstrap';
-import {
-    Caja_de_Jubilados,
-    Catastro,
-    CiDi,
-    IPJ,
-    Otros,
-    Registro_Civil,
-    Registro_Propiedad,
-    Rentas
-} from "../components/Areas";
+import AuthContext from "../context/AuthContext";
+import {UserOption} from "../components/UserOption";
 
 
 const FormPage = () => {
@@ -24,6 +16,65 @@ const FormPage = () => {
         padding: '15px',
     };
 
+    let {authTokens} = useContext(AuthContext)
+    let [localities, setLocalities] = useState([])
+    let [ministryDepartments, setMinistryDepartments] = useState([])
+    let [faqs, setFaqs] = useState([])
+    let [advisors, setAdvisors] = useState([])
+
+
+    useEffect(() => {
+        getLocalities()
+        getMinistryDepartments()
+        getFaqs()
+        getAdvisors()
+    }, [])
+
+    let getLocalities = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/locality/', {headers: headers})
+        let data = await response.json()
+        setLocalities(data)
+    };
+
+    let getMinistryDepartments = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/ministry-department/', {headers: headers})
+        let data = await response.json()
+        setMinistryDepartments(data)
+    };
+
+    let getFaqs = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/faq/', {headers: headers})
+        let data = await response.json()
+        setFaqs(data)
+    };
+
+    let getAdvisors = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advisor/', {headers: headers})
+        let data = await response.json()
+        setAdvisors(data)
+    };
+
+
     return (
         <div>
             <Container>
@@ -33,9 +84,12 @@ const FormPage = () => {
                             <Col>
                                 <select
                                     placeholder="Localidad"
-                                    className='form-select'
-                                >
-                                    <option>Localidad</option>
+                                    className='form-select'>
+
+                                    {localities?.map((locality) => (
+                                        <option>{locality.name}</option>
+                                    ))}
+
                                 </select>
                             </Col>
                             <Col>
@@ -43,7 +97,9 @@ const FormPage = () => {
                                     placeholder="Localidad"
                                     className='form-select'
                                 >
-                                    <option>Asesor que atendió</option>
+                                    {advisors?.map((advisor) => (
+                                        <UserOption userId={advisor.id_user}/>
+                                    ))}
                                 </select>
                             </Col>
                             <Col>
@@ -59,31 +115,17 @@ const FormPage = () => {
                                     onChange={handleDropdownChange}
                                     placeholder="Area"
                                     className='form-select'
-                                    style={selectStyle}
-                                >
-                                    <option>Areas</option>
-                                    <option value="rentas">Rentas</option>
-                                    <option value="registro_civil">Registro Civil</option>
-                                    <option value="catastro">Catastro</option>
-                                    <option value="caja_de_jubilados">Caja de Jubilaciones</option>
-                                    <option value="CiDi">CiDi</option>
-                                    <option value="ipj">Inspeccion de Personas Juridicas</option>
-                                    <option value="registro_propiedad">Registro de la propiedad</option>
+                                    style={selectStyle}>
+
+                                    {ministryDepartments?.map((ministryDepartment) => (
+                                        <option>{ministryDepartment.name}</option>
+                                    ))}
+
                                 </select>
                             </Col>
                         </Row>
                     </div>
                 </Container>
-
-                {selectedOption === "rentas" && <Rentas/>}
-                {selectedOption === "registro_civil" && <Registro_Civil/>}
-                {selectedOption === "catastro" && <Catastro/>}
-                {selectedOption === "caja_de_jubilados" && <Caja_de_Jubilados/>}
-                {selectedOption === "CiDi" && <CiDi/>}
-                {selectedOption === "ipj" && <IPJ/>}
-                {selectedOption === "registro_propiedad" && <Registro_Propiedad/>}
-
-
                 <Container>
 
                     <Row className='justify-content-md-center'>
@@ -91,18 +133,13 @@ const FormPage = () => {
                             <select
                                 placeholder="Por que vino?"
                                 className='form-select'
-                                style={selectStyle}
-                            >
-                                <option>¿Por que vino?</option>
-                                <option>No conoce los canales de atención habilitados</option>
-                                <option>No logró realizar la gestión vía web/online</option>
-                                <option>No dispone de acceso a tecnología/internet</option>
-                                <option>Prefiere atención presencial</option>
-                                <option value="otros">Otros</option>
+                                style={selectStyle}>
+
+                                {faqs?.map((faq) => (
+                                        <option>{faq.name}</option>
+                                    ))}
 
                             </select>
-                            {selectedOption === "otros" && <Otros/>}
-
                             <div className="py-3">
                                 <Row className='justify-content-md-center'>
                                     <Col xs={3} md={2}>
