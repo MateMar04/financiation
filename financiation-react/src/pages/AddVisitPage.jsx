@@ -10,13 +10,9 @@ const AddVisitPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
 
-    useEffect(() => {
-        postVisit()
-    })
-
     let postVisit = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/visit/add/', {
+        let response = await fetch('/api/visit/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -53,8 +49,13 @@ const AddVisitPage = () => {
     return (
 
         <Container className="scrolling">
-            <Form>
+            <Form onSubmit={postVisit}>
                 <Form.Group>
+                    <Form.Control
+                        type="number"
+                        placeholder="Enter Flyer"
+                        name="flyer"
+                    />
                     <Form.Control
                         type="text"
                         placeholder="Enter Distance"
@@ -136,10 +137,10 @@ const AddVisitPage = () => {
                         name="id_logo"
                     />
                 </Form.Group>
+                <Form.Group>
+                    <Button type="submit">Submit</Button>
+                </Form.Group>
             </Form>
-            <Form.Group>
-                <Button onClick={postVisit}>Submit</Button>
-            </Form.Group>
         </Container>
     );
 
