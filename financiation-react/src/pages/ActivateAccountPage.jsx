@@ -1,13 +1,46 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
 import '../assets/styles/ActivateAccountPAge.css'
+import {Link, useNavigate, useParams} from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 const ActivateAccountPage = () => {
+    const {uid, token} = useParams()
+    let history = useNavigate()
+
+
+    let uidToken = uid
+    let activationToken = token
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    let activateAccount = async () => {
+        let response = await fetch('/auth/users/activation/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "uid": uidToken,
+                "token": activationToken
+            })
+        })
+        if (response.status === 204) {
+            history('/')
+        } else {
+            alert('Something went wrong')
+        }
+    }
+
+    let pressedVerifyButton = async () => {
+        handleShow()
+        await activateAccount()
+    }
+
     return (
 
         <Container fluid className="fondo">
@@ -18,7 +51,7 @@ const ActivateAccountPage = () => {
                             <img src={verifyimg} className='imgVerify' alt=''/>
                             <h5>Verifique su cuenta</h5>
                             <div className='py-3'>
-                                <Button onClick={handleShow}>Verificar</Button>
+                                <Button onClick={pressedVerifyButton}>Verificar</Button>
                             </div>
                         </Row>
                     </Container>
@@ -38,9 +71,12 @@ const ActivateAccountPage = () => {
                         </Container>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="success" onClick={handleClose}>
-                            OK
-                        </Button>
+                        <Link to={'/login'}>
+                            <Button variant="success">
+                                OK
+                            </Button>
+                        </Link>
+
                     </Modal.Footer>
                 </Modal>
             </Container>

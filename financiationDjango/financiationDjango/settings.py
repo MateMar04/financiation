@@ -62,6 +62,9 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 }
 
+DOMAIN = ('localhost:3000')
+SITE_NAME = ('Dragoncitos Financieros Moviles')
+
 DJOSER = {
     'LOGIN_FIELD': 'username',
     'USER_CREATE_PASSWORD_RETYPE': True,

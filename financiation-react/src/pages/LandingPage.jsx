@@ -23,7 +23,7 @@ const LandingPage = () => {
                 <hr/>
                 <Container>
                     <p>Si no tienes una cuenta puede crearte una</p>
-                    <Link to='/signup/'><Button>Crea una Cuenta</Button></Link>
+                    <Link to='/signin/'><Button>Crea una Cuenta</Button></Link>
                     <div className='py-2'></div>
                 </Container>
             </Card>

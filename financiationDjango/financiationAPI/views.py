@@ -395,11 +395,13 @@ def getUserAccount(request):
     serializer = UserAccountSerializer(useraccount, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getVehicles(request):
     vehicles = Vehicles.objects.all()
     serializer = VehiclesSerializer(vehicles, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getRequestStatus(request):
@@ -407,11 +409,13 @@ def getRequestStatus(request):
     serializer = RequestStatusSerializer(requeststatus, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getContactedReferrerEmail(request):
     contactedreferreremail = ContactedReferrerEmail.objects.all()
     serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getContactedReferrerPhone(request):
@@ -419,11 +423,13 @@ def getContactedReferrerPhone(request):
     serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getMayorEmail(request):
     mayoremail = MayorEmail.objects.all()
     serializer = MayorEmailSerializer(mayoremail, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getMayorPhone(request):
@@ -498,11 +504,13 @@ def getCityDepartments(request):
     serializer = CityDepartmentSerializer(cityDepartment, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getUserStatuses(request):
     userStatus = UserStatus.objects.all()
     serializer = UserStatusSerializer(userStatus, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getMayors(request):
@@ -510,11 +518,13 @@ def getMayors(request):
     serializer = MayorSerializer(mayor, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getVehicleBrands(request):
     vehicleBrand = VehicleBrand.objects.all()
     serializer = VehicleBrandSerializer(vehicleBrand, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getVehicleModels(request):
@@ -522,11 +532,13 @@ def getVehicleModels(request):
     serializer = VehicleModelSerializer(vehicleModel, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getPoliticParties(request):
     politicParty = PoliticParty.objects.all()
     serializer = PoliticPartySerializer(politicParty, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getVehiclePlates(request):
@@ -534,14 +546,28 @@ def getVehiclePlates(request):
     serializer = VehiclePlateSerializer(vehiclePlate, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getRoles(request):
     role = Role.objects.all()
     serializer = RoleSerializer(role, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getRequestStatuses(request):
     requestStatus = RequestStatus.objects.all()
     serializer = RequestStatusSerializer(requestStatus, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def postAdvised(request):
+    data = request.data
+    advised = Advised.objects.create(
+        first_name=data['first_name'],
+        last_name=data['last_name'],
+        ssn=data['ssn']
+        )
+    serializer = AdvisedSerializer(advised, many=False)
     return Response(serializer.data)

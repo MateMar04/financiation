@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
@@ -11,13 +11,16 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
 import PrivateRoute from "./utils/PrivateRoute";
-import {AuthProvider} from "./context/AuthContext";
-import GroupCard from "./components/GroupCard";
+import { AuthProvider } from "./context/AuthContext";
 import FormPage from "./pages/FormPage";
-import FormRequestPage from "./pages/FormRequestPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
+import {PublicRoute} from "./utils/PublicRoute";
+import AdvisorPage from './pages/AdvisorPage';
+import CoordinatorPage from './pages/CoordinatorPage';
+import {AddAdvisedPage} from "./pages/AddAdvisedPage";
+import {GroupsPage} from "./pages/GroupsPage";
 
 
 function App() {
@@ -25,30 +28,33 @@ function App() {
         <Router>
             <div className="App">
                 <AuthProvider>
-                    <Navbar/>
+                    <Navbar />
                     <Routes>
-                        <Route path='/' exact element={<PrivateRoute><LandingPage/></PrivateRoute>}/>
 
-                        <Route path='/login' element={<LoginPage/>}/>
-                        <Route path='/signin' element={<SigninPage/>}/>
-                        <Route path='/reset-password' element={<ResetPasswordPage/>}/>
-                        <Route path='/reset-password/confirm' element={<ResetPasswordConfirmPage/>}/>
-                        <Route path='/activate' element={<ActivateAccountPage/>}/>
+                        <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
-                        <Route exact path='/me' element={<ProfilePage/>}/>
+                        <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
+                        <Route path='/signin' element={<PublicRoute children={<SigninPage/>}/>}/>
+                        <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
+                        <Route path='/password/reset/confirm/:uid/:token'
+                               element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
+                        <Route path='/activate/:uid/:token' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
-                        <Route path='/advised' exact element={<PrivateRoute><AdvisedListPage/></PrivateRoute>}/>
-                        <Route path='/advised/:id' element={<PrivateRoute><AdvisedPage/></PrivateRoute>}/>
+                        <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
-                        <Route path='/groups' element={<GroupCard/>}/>
-                        <Route path='/form' element={<FormPage/>}></Route>
+                        <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
+                        <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/visit/add' element={<AddVisitPage/>}/>
+                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
+                        <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
-                        <Route path='/request/add' element={<FormRequestPage/>}/>
-                        <Route path='/group/add' element={<CreateGroupPage/>}/>
+                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
+                        <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>}/>}/>
+                        <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>}/>}/>
+                        <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
-                        <Route path='/reports' element={<ReportsPage/>}/>
+                        <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
                     </Routes>
                 </AuthProvider>
