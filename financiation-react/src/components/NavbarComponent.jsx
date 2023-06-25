@@ -28,33 +28,44 @@ const NavbarComponent = () => {
                         <Container fluid>
                             <Row>
                                 <Col className="d-flex justify-content-start">
-                                    <Link to="/reports/">
-                                        <Button variant="outline-light">
-                                            Reportes
-                                        </Button>
-                                    </Link>
-                                    <Link to="/group/">
-                                        <Button variant="outline-light">
-                                            Grupos
-                                        </Button>
-                                    </Link>
-                                    <Link to="/form/">
-                                        <Button variant="outline-light">
-                                            Consulta
-                                        </Button>
-                                    </Link>
+                                    <div className="mx-2">
+                                        <Link to="/reports/">
+                                            <Button variant="outline-light">
+                                                Reportes
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                    <div className="mx-2">
+                                        <Link to="/group/">
+                                            <Button variant="outline-light">
+                                                Grupos
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                    <div className="mx-2">
+                                        <Link to="/form/">
+                                            <Button variant="outline-light">
+                                                Consulta
+                                            </Button>
+                                        </Link>
+                                    </div>
                                 </Col>
                                 <Col className="d-flex justify-content-end">
-                                    <Link to="/me/">
-                                        <Button variant="outline-light">
-                                            Mi Cuenta
-                                        </Button>
-                                    </Link>
-                                    <Nav.Link>
-                                        <Button variant="outline-light" onClick={logoutUser}>
-                                            Cerrar Sesión
-                                        </Button>
-                                    </Nav.Link>
+                                    <div className="mx-2">
+                                        <Link to="/me/">
+                                            <Button variant="outline-light">
+                                                Mi Cuenta
+                                            </Button>
+                                        </Link>
+                                    </div>
+                                    <div className="mx-2">
+                                        <Nav.Link>
+                                            <Button variant="outline-light" onClick={logoutUser}>
+                                                Cerrar Sesión
+                                            </Button>
+                                        </Nav.Link>
+                                    </div>
+
                                 </Col>
                             </Row>
                         </Container>
@@ -64,12 +75,13 @@ const NavbarComponent = () => {
                             <Container fluid>
                                 <Row>
                                     <Col className="d-flex justify-content-end">
-
-                                        <Link to='/signin/'>
-                                            <Button variant="outline-light">
-                                                Crear Cuenta
-                                            </Button>
-                                        </Link>
+                                        <div className="mx-2">
+                                            <Link to='/signin/'>
+                                                <Button variant="outline-light">
+                                                    Crear Cuenta
+                                                </Button>
+                                            </Link>
+                                        </div>
                                         <div className='mx-2'>
                                             <Link to='/login/'>
                                                 <Button variant="outline-light">
