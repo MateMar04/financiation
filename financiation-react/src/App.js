@@ -20,6 +20,7 @@ import {CreateGroupPage} from "./pages/CreateGroupPage";
 import {PublicRoute} from "./utils/PublicRoute";
 import AdvisorPage from './pages/AdvisorPage';
 import CoordinatorPage from './pages/CoordinatorPage';
+import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
                         <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
                         <Route path='/signin' element={<PublicRoute children={<SigninPage/>}/>}/>
                         <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
-                        <Route path='/password/reset/confirm/:uid/:token' element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
+                        <Route path='/password/reset/confirm/:uid/:token'
+                               element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
                         <Route path='/activate/:uid/:token' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
@@ -47,8 +49,9 @@ function App() {
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
-                        <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>} />}/>
-                        <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>} />}/>
+                        <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>}/>}/>
+                        <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>}/>}/>
+                        <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
