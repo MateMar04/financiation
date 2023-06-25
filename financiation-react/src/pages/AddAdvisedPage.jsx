@@ -2,7 +2,7 @@ import {Button, Form} from "react-bootstrap";
 import React, {useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from "react-router-dom";
-export const AddAdvised = () => {
+export const AddAdvisedPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
