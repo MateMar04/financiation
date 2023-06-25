@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 
-export const UserOption = ({userId}) => {
+export const UserOption = ({userId, advisorValue}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [user, setUser] = useState([])
@@ -23,6 +23,6 @@ export const UserOption = ({userId}) => {
 
 
     return (
-        <option value={user.id}>{user.first_name} {user.last_name}</option>
+        <option value={advisorValue}>{user.first_name} {user.last_name}</option>
     )
 }

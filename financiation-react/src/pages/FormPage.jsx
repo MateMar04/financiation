@@ -78,18 +78,16 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "id_visit": 1,
-                "id_advised": 1,
-                "id_advisor": 1,
-                "id_ministry_department": 1,
-                "id_faq": 1,
+                "id_visit": e.target.visit.value,
+                "id_advised": e.target.advised.value,
+                "id_advisor": e.target.advisor.value,
+                "id_ministry_department": e.target.ministryDepartment.value,
+                "id_faq": e.target.faq.value,
                 "id_status": 1
             })
         })
         if (response.status === 200) {
             history('/')
-        } else {
-            alert('Something went wrong')
         }
     }
 
@@ -141,7 +139,7 @@ const FormPage = () => {
                                         name="advisor"
                                     >
                                         {advisors?.map((advisor) => (
-                                            <UserOption userId={advisor.id_user}/>
+                                            <UserOption userId={advisor.id_user} advisorValue={advisor.id}/>
                                         ))}
                                     </select>
                                 </Col>
