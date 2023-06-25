@@ -12,7 +12,6 @@ import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
 import PrivateRoute from "./utils/PrivateRoute";
 import { AuthProvider } from "./context/AuthContext";
-import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
 import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
@@ -21,6 +20,7 @@ import {PublicRoute} from "./utils/PublicRoute";
 import AdvisorPage from './pages/AdvisorPage';
 import CoordinatorPage from './pages/CoordinatorPage';
 import {AddAdvisedPage} from "./pages/AddAdvisedPage";
+import {GroupsPage} from "./pages/GroupsPage";
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                         <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/groups' element={<PrivateRoute children={<GroupCard/>}/>}/>
+                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
