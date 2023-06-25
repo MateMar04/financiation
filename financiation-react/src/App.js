@@ -45,7 +45,7 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                         <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
+                        <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
