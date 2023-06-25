@@ -18,32 +18,22 @@ const FormPage = () => {
     };
 
     let {authTokens} = useContext(AuthContext)
-    let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
     let [advised, setAdvised] = useState([])
+    let [visits, setVisits] = useState([])
     let history = useNavigate()
 
 
     useEffect(() => {
-        getLocalities()
         getMinistryDepartments()
         getFaqs()
         getAdvisors()
         getAdvised()
+        getVisits()
     }, [])
 
-    let getLocalities = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/locality/', {headers: headers})
-        let data = await response.json()
-        setLocalities(data)
-    };
 
     let getMinistryDepartments = async () => {
         let headers = {
@@ -114,6 +104,17 @@ const FormPage = () => {
         setAdvised(data)
     };
 
+    let getVisits = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/visit/', {headers: headers})
+        let data = await response.json()
+        setVisits(data)
+    };
+
     return (
         <div>
             <Form onSubmit={postRequest}>
@@ -126,8 +127,8 @@ const FormPage = () => {
                                         placeholder="Localidad"
                                         className='form-select'>
 
-                                        {localities?.map((locality) => (
-                                            <option value={locality.id}>{locality.name}</option>
+                                        {visits?.map((visit) => (
+                                            <option value={visit.id}>{visit.title}</option>
                                         ))}
 
                                     </select>
