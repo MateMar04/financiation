@@ -8,22 +8,6 @@ const FormRequestPage = () => {
 
     let {authTokens, logoutUser} = useContext(AuthContext)
 
-    useEffect(() => {
-        setRequest()
-    })
-
-    let postRequest = async () => {
-        fetch('/api/request/add/', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(request)
-        })
-    }
-
     return (
         <Container className="scrolling">
             <Form>
