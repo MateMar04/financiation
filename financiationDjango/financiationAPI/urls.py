@@ -39,6 +39,9 @@ urlpatterns = [
     path('role/', views.getRoles, name='getRoles'),
     path('requeststatus/', views.getRequestStatuses, name='getRequestStatuses'),
     path('request/', views.getRequests, name='getRequests'),
+    path('groups/<int:id_group>/advisors', views.getGroupAdvisors, name='getGroupAdvisors'),
+    path('groups/<int:id_group>/coordinators', views.getGroupCoordinators, name='getGroupCoordinators'),
+
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
