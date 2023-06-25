@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
@@ -12,7 +12,7 @@ const ActivateAccountPage = () => {
 
     let uidToken = uid
     let activationToken = token
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
