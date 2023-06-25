@@ -1,44 +1,58 @@
 import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import "../assets/styles/HomePage.css"
+import {Link} from "react-router-dom";
 
 export const HomePage = () => {
     return (
         <Container fluid>
             <Row>
                 <Col lg={4}>
-                    <Card>
+                    <Card className="menu-card">
                         <Card.Header>Visitas</Card.Header>
-                        <Card.Body>
+                        <Card.Body className="menu-card-body">
                             <Row>
-                                <Button>Ver Visitas</Button>
+                                <Link>
+                                    <Button>Ver Visitas</Button>
+                                </Link>
                             </Row>
                             <Row>
-                                <Button>Crear Visita</Button>
+                                <Link to="/visit/add/">
+                                    <Button>Crear Visita</Button>
+                                </Link>
                             </Row>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col lg={4}>
-                    <Card>
+                    <Card className="menu-card">
                         <Card.Header>Grupos</Card.Header>
-                        <Card.Body>
+                        <Card.Body className="menu-card-body">
                             <Row>
-                                <Button>Ver Grupos</Button>
+                                <Link to="/group/">
+                                    <Button>Ver Grupos</Button>
+                                </Link>
                             </Row>
                             <Row>
-                                <Button>Crear Grupo</Button>
+                                <Link to="/group/add/">
+                                    <Button>Crear Grupo</Button>
+                                </Link>
                             </Row>
                         </Card.Body>
                     </Card>
                 </Col>
                 <Col lg={4}>
-                    <Card>
+                    <Card className="menu-card">
                         <Card.Header>Asesores</Card.Header>
-                        <Card.Body>
+                        <Card.Body className="menu-card-body">
                             <Row>
-                                <Button>Ver Asesores</Button>
+                                <Link>
+                                    <Button>Ver Asesores</Button>
+                                </Link>
                             </Row>
                             <Row>
-                                <Button>Crear Asesor</Button>
+                                <Link>
+                                    <Button>Crear Asesor</Button>
+                                </Link>
                             </Row>
                         </Card.Body>
                     </Card>
@@ -46,17 +60,20 @@ export const HomePage = () => {
             </Row>
 
 
-
             <Row>
                 <Col lg={4}>
-                    <Card>
+                    <Card className="menu-card">
                         <Card.Header>Coordinadores</Card.Header>
-                        <Card.Body>
+                        <Card.Body className="menu-card-body">
                             <Row>
-                                <Button>Ver Coordinadores</Button>
+                                <Link>
+                                    <Button>Ver Coordinadores</Button>
+                                </Link>
                             </Row>
                             <Row>
-                                <Button>Crear Coordinador</Button>
+                                <Link>
+                                    <Button>Crear Coordinador</Button>
+                                </Link>
                             </Row>
                         </Card.Body>
                     </Card>
