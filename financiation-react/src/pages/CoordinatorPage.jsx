@@ -1,5 +1,5 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button,Container, Form} from "react-bootstrap";
+import React, {useContext} from "react";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom'
@@ -17,8 +17,10 @@ const CoordinatorPage = () => {
                 "Authorization": "JWT " + String(authTokens.access),
                 "Accept": "application/json"
             },
-            body: JSON.stringify({"id_user": e.target.id_user.value,
-                                  "id_group": e.target.id_group.value})
+            body: JSON.stringify({
+                "id_user": e.target.id_user.value,
+                "id_group": e.target.id_group.value
+            })
         })
         if (response.status === 200) {
             history('/')
@@ -44,9 +46,9 @@ const CoordinatorPage = () => {
                         name="id_group"
                     />
                 </Form.Group>
-            <Form.Group>
-                <Button type="submit">Submit</Button>
-            </Form.Group>
+                <Form.Group>
+                    <Button type="submit">Submit</Button>
+                </Form.Group>
             </Form>
         </Container>
     );

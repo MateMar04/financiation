@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
-import {Button, Container, FloatingLabel, Form, Col, Row} from "react-bootstrap";
+import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
