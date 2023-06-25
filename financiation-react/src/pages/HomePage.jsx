@@ -50,7 +50,7 @@ export const HomePage = () => {
                                 </Link>
                             </Row>
                             <Row>
-                                <Link>
+                                <Link to={"/advisor/add/"}>
                                     <Button>Crear Asesor</Button>
                                 </Link>
                             </Row>
@@ -71,7 +71,7 @@ export const HomePage = () => {
                                 </Link>
                             </Row>
                             <Row>
-                                <Link>
+                                <Link to={'/coordinator/add'}>
                                     <Button>Crear Coordinador</Button>
                                 </Link>
                             </Row>
