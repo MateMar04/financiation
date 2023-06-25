@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
@@ -11,7 +11,7 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage";
 import ActivateAccountPage from "./pages/ActivateAccountPage";
 import AddVisitPage from "./pages/AddVisitPage";
 import PrivateRoute from "./utils/PrivateRoute";
-import {AuthProvider} from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import GroupCard from "./components/GroupCard";
 import FormPage from "./pages/FormPage";
 import FormRequestPage from "./pages/FormRequestPage";
@@ -28,8 +28,9 @@ function App() {
         <Router>
             <div className="App">
                 <AuthProvider>
-                    <Navbar/>
+                    <Navbar />
                     <Routes>
+
                         <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
                         <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
@@ -59,8 +60,6 @@ function App() {
 
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
-
-
 
                     </Routes>
                 </AuthProvider>
