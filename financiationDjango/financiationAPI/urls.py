@@ -7,7 +7,7 @@ urlpatterns = [
 
     # GETs
     path('advised/', views.getAdvised, name='advised'),
-    path('advised/<str:pk>/', views.getOneAdvised, name='oneAdvised'),
+    path('advised/<int:pk>/', views.getOneAdvised, name='oneAdvised'),
     path('locality/', views.getLocalities, name='getLocalities'),
     path('group/', views.getGroups, name='getGroups'),
     path('visit-status/', views.getVisitSatuses, name='getVisitStatuses'),
@@ -46,5 +46,5 @@ urlpatterns = [
     path('request/add/', views.postRequest, name='postRequest'),
     path('coordinator/add/', views.postCoordinator, name='postCoordinator'),
     path('advisor/add/', views.postAdvisor, name='postAdvisor'),
-
+    path('advised/add/', views.postAdvised, name='postAdvised'),
 ]
