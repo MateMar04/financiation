@@ -125,7 +125,8 @@ const FormPage = () => {
                                 <Col>
                                     <select
                                         placeholder="Localidad"
-                                        className='form-select'>
+                                        className='form-select'
+                                        name="visit">
 
                                         {visits?.map((visit) => (
                                             <option value={visit.id}>{visit.title}</option>
@@ -137,6 +138,7 @@ const FormPage = () => {
                                     <select
                                         placeholder="Localidad"
                                         className='form-select'
+                                        name="advisor"
                                     >
                                         {advisors?.map((advisor) => (
                                             <UserOption userId={advisor.id_user}/>
@@ -144,7 +146,7 @@ const FormPage = () => {
                                     </select>
                                 </Col>
                                 <Col>
-                                    <input type="date" className='input-group-text'></input>
+                                    <input type="date" className='input-group-text' name="date"></input>
                                 </Col>
                             </Row>
                         </Container>
@@ -154,7 +156,9 @@ const FormPage = () => {
                                     <select
                                         placeholder="Area"
                                         className='form-select'
-                                        style={selectStyle}>
+                                        style={selectStyle}
+                                        name="advised">
+
 
                                         {advised?.map((advi) => (
                                             <option value={advi.id}>{advi.first_name} {advi.last_name}</option>
@@ -168,7 +172,8 @@ const FormPage = () => {
                                     <select
                                         placeholder="Area"
                                         className='form-select'
-                                        style={selectStyle}>
+                                        style={selectStyle}
+                                        name="ministryDepartment">
 
                                         {ministryDepartments?.map((ministryDepartment) => (
                                             <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
@@ -186,7 +191,8 @@ const FormPage = () => {
                                 <select
                                     placeholder="Por que vino?"
                                     className='form-select'
-                                    style={selectStyle}>
+                                    style={selectStyle}
+                                    name="faq">
 
                                     {faqs?.map((faq) => (
                                         <option value={faq.id}>{faq.name}</option>
