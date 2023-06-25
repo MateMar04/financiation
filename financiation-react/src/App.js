@@ -52,10 +52,10 @@ function App() {
                         <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
 
-                        <Route path='/request/add' element={<FormRequestPage/>}/>
-                        <Route path='/group/add' element={<CreateGroupPage/>}/>
-                        <Route path='/advisor/add' element={<AdvisorPage/>}/>
-                        <Route path='/coordinator/add' element={<CoordinatorPage/>}/>
+                        <Route path='/request/add' element={<PrivateRoute children={<FormRequestPage/>}/>}/>
+                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
+                        <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>} />}/>
+                        <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>} />}/>
 
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
