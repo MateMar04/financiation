@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Row} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import AuthContext from "../context/AuthContext";
 import {UserOption} from "../components/UserOption";
 
@@ -74,85 +74,112 @@ const FormPage = () => {
         setAdvisors(data)
     };
 
+    let postRequest = async (e) => {
+        e.preventDefault()
+        let response = await fetch(' /api/request/add/', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "id_visit": 1,
+                "id_advised": 1,
+                "id_advisor": 1,
+                "id_ministry_department": 1,
+                "id_faq": 1,
+                "id_status": 1
+            })
+        })
+        if (response.status === 200) {
+            history('/')
+        } else {
+            alert('Something went wrong')
+        }
+    }
+
 
     return (
         <div>
-            <Container>
+            <Form onSubmit={}>
                 <Container>
                     <Container>
-                        <Row>
-                            <Col>
-                                <select
-                                    placeholder="Localidad"
-                                    className='form-select'>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <select
+                                        placeholder="Localidad"
+                                        className='form-select'>
 
-                                    {localities?.map((locality) => (
-                                        <option>{locality.name}</option>
-                                    ))}
+                                        {localities?.map((locality) => (
+                                            <option value={locality.id}>{locality.name}</option>
+                                        ))}
 
-                                </select>
-                            </Col>
-                            <Col>
-                                <select
-                                    placeholder="Localidad"
-                                    className='form-select'
-                                >
-                                    {advisors?.map((advisor) => (
-                                        <UserOption userId={advisor.id_user}/>
-                                    ))}
-                                </select>
-                            </Col>
-                            <Col>
-                                <input type="date" className='input-group-text'></input>
-                            </Col>
-                        </Row>
+                                    </select>
+                                </Col>
+                                <Col>
+                                    <select
+                                        placeholder="Localidad"
+                                        className='form-select'
+                                    >
+                                        {advisors?.map((advisor) => (
+                                            <UserOption userId={advisor.id_user}/>
+                                        ))}
+                                    </select>
+                                </Col>
+                                <Col>
+                                    <input type="date" className='input-group-text'></input>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <div className="py-3">
+                            <Row className='justify-content-md-center'>
+                                <Col xs={12} md={10}>
+                                    <select
+                                        value={selectedOption}
+                                        onChange={handleDropdownChange}
+                                        placeholder="Area"
+                                        className='form-select'
+                                        style={selectStyle}>
+
+                                        {ministryDepartments?.map((ministryDepartment) => (
+                                            <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                                        ))}
+
+                                    </select>
+                                </Col>
+                            </Row>
+                        </div>
                     </Container>
-                    <div className="py-3">
+                    <Container>
+
                         <Row className='justify-content-md-center'>
                             <Col xs={12} md={10}>
                                 <select
-                                    value={selectedOption}
-                                    onChange={handleDropdownChange}
-                                    placeholder="Area"
+                                    placeholder="Por que vino?"
                                     className='form-select'
                                     style={selectStyle}>
 
-                                    {ministryDepartments?.map((ministryDepartment) => (
-                                        <option>{ministryDepartment.name}</option>
+                                    {faqs?.map((faq) => (
+                                        <option value={faq.id}>{faq.name}</option>
                                     ))}
 
                                 </select>
+                                <div className="py-3">
+                                    <Row className='justify-content-md-center'>
+                                        <Col xs={3} md={2}>
+                                            <Button type='submit' variant="primary" size="md"
+                                                    className='buttonconsulta'>Enviar
+                                                Consulta</Button>
+                                        </Col>
+                                    </Row>
+                                </div>
                             </Col>
                         </Row>
-                    </div>
+                    </Container>
                 </Container>
-                <Container>
-
-                    <Row className='justify-content-md-center'>
-                        <Col xs={12} md={10}>
-                            <select
-                                placeholder="Por que vino?"
-                                className='form-select'
-                                style={selectStyle}>
-
-                                {faqs?.map((faq) => (
-                                        <option>{faq.name}</option>
-                                    ))}
-
-                            </select>
-                            <div className="py-3">
-                                <Row className='justify-content-md-center'>
-                                    <Col xs={3} md={2}>
-                                        <Button variant="primary" size="md" className='buttonconsulta'>Enviar
-                                            Consulta</Button>
-                                    </Col>
-                                </Row>
-                            </div>
-                        </Col>
-                    </Row>
-
-                </Container>
-            </Container>
+            </Form>
         </div>
 
     );
