@@ -21,7 +21,7 @@ import AdvisorPage from './pages/AdvisorPage';
 import CoordinatorPage from './pages/CoordinatorPage';
 import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 import {GroupsPage} from "./pages/GroupsPage";
-import {HomePage} from "./pages/HomePage";
+import {MainMenuPage} from "./pages/MainMenuPage";
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
 
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
-                        <Route path="/home" element={<PrivateRoute children={<HomePage/>}/>}/>
+                        <Route path="/menu" element={<PrivateRoute children={<MainMenuPage/>}/>}/>
 
                         <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                         <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>

@@ -2,7 +2,7 @@ import {Button, Card, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/HomePage.css"
 import {Link} from "react-router-dom";
 
-export const HomePage = () => {
+export const MainMenuPage = () => {
     return (
         <Container fluid>
             <Row>
