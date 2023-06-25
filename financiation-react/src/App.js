@@ -36,7 +36,7 @@ function App() {
                         <Route path='/signin' element={<PublicRoute children={<SigninPage/>}/>}/>
                         <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
                         <Route path='/reset-password/confirm' element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
-                        <Route path='/activate' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
+                        <Route path='/activate/:uid/:token' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
