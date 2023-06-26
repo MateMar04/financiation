@@ -6,8 +6,8 @@ import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
-import RowWithCheck from "../components/RowWithCheck";
 import '../assets/styles/RowWithCheck.css'
+import {ReportFilterCard} from "../components/ReportFilterCard";
 
 export const ReportsPage = () => {
 
@@ -85,61 +85,19 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Localidades</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {localities?.map((locality) => (
-                                        <RowWithCheck item={locality}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Localidades" items={localities}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Departamentos</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {ministryDepartments?.map((ministryDepartment) => (
-                                        <RowWithCheck item={ministryDepartment}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Departamentos" items={ministryDepartments}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Motivos</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {faqs?.map((faq) => (
-                                        <RowWithCheck item={faq}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Motivos" items={faqs}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Visitas</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {visits?.map((visit) => (
-                                        <Row key={visit.id}>
-                                            <Col className='row-label'>
-                                                <Form.Label>{visit.title}</Form.Label>
-                                            </Col>
-                                            <Col className='row-check'>
-                                                <Form.Check value={visit.id}></Form.Check>
-                                            </Col>
-                                        </Row>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Visitas" items={visits}/>
+
                     </Col>
                 </Row>
             </Container>
