@@ -18,13 +18,13 @@ class AdvisedSerializer(ModelSerializer):
 
 
 class VisitSerializer(ModelSerializer):
-    title = SerializerMethodField()
+    name = SerializerMethodField()
 
     class Meta:
         model = Visit
         fields = '__all__'
 
-    def get_title(self, obj):
+    def get_name(self, obj):
         return f"{obj.id_locality.name} {obj.visit_date}"
 
 
