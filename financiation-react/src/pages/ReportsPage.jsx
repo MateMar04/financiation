@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Card, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
@@ -8,6 +8,7 @@ import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
 import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
+import {ReportChartCard} from "../components/ReportChartCard";
 
 export const ReportsPage = () => {
 
@@ -97,7 +98,6 @@ export const ReportsPage = () => {
                     </Col>
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Visitas" items={visits}/>
-
                     </Col>
                 </Row>
             </Container>
@@ -107,30 +107,18 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Ciudades</h1>
-                            <BarChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Organismos</h1>
-                            <BarChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Motivos</h1>
-                            <PieChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Motivos" chart={<PieChart chartData={data}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <Card>
-                            <h1>Asesores</h1>
-                            <PolarAreaChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
                     </Col>
                 </Row>
             </Container>
