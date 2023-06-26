@@ -1,5 +1,9 @@
 .menu-card {
+    margin: 4vh;
+}
 
+.menu-card-row {
+    padding: 1vh;
 }
 
 .menu-card-body {
