@@ -1,82 +1,29 @@
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/HomePage.css"
-import {Link} from "react-router-dom";
+import {MenuCard} from "../components/MenuCard";
 
 export const MainMenuPage = () => {
     return (
         <Container fluid>
             <Row>
                 <Col lg={4}>
-                    <Card className="menu-card">
-                        <Card.Header>Visitas</Card.Header>
-                        <Card.Body className="menu-card-body">
-                            <Row>
-                                <Link>
-                                    <Button>Ver Visitas</Button>
-                                </Link>
-                            </Row>
-                            <Row>
-                                <Link to="/visit/add/">
-                                    <Button>Crear Visita</Button>
-                                </Link>
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                    <MenuCard title="Visitas" button1="Ver Visitas" button2="Crear Visita"/>
                 </Col>
                 <Col lg={4}>
-                    <Card className="menu-card">
-                        <Card.Header>Grupos</Card.Header>
-                        <Card.Body className="menu-card-body">
-                            <Row>
-                                <Link to="/group/">
-                                    <Button>Ver Grupos</Button>
-                                </Link>
-                            </Row>
-                            <Row>
-                                <Link to="/group/add/">
-                                    <Button>Crear Grupo</Button>
-                                </Link>
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                    <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/group/"
+                              link2="/group/add/"/>
                 </Col>
                 <Col lg={4}>
-                    <Card className="menu-card">
-                        <Card.Header>Asesores</Card.Header>
-                        <Card.Body className="menu-card-body">
-                            <Row>
-                                <Link>
-                                    <Button>Ver Asesores</Button>
-                                </Link>
-                            </Row>
-                            <Row>
-                                <Link to={"/advisor/add/"}>
-                                    <Button>Crear Asesor</Button>
-                                </Link>
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                    <MenuCard title="Asesores" button1="Ver Asesores" button2="Crear Asesor" link1=""
+                              link2="/advisor/add/"/>
                 </Col>
             </Row>
 
 
             <Row>
                 <Col lg={4}>
-                    <Card className="menu-card">
-                        <Card.Header>Coordinadores</Card.Header>
-                        <Card.Body className="menu-card-body">
-                            <Row>
-                                <Link>
-                                    <Button>Ver Coordinadores</Button>
-                                </Link>
-                            </Row>
-                            <Row>
-                                <Link to={'/coordinator/add'}>
-                                    <Button>Crear Coordinador</Button>
-                                </Link>
-                            </Row>
-                        </Card.Body>
-                    </Card>
+                    <MenuCard title="Coordinadores" button1="Ver Coordinadores" button2="Crear Coordinador" link1=""
+                              link2="/coordinator/add/"/>
                 </Col>
                 <Col lg={4}>
                 </Col>
