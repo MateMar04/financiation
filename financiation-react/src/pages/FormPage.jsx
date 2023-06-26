@@ -1,9 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Form, Row} from 'react-bootstrap';
+import {Button,  Col, Container, Modal, Row, Form} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
+import Check from "../assets/images/checked.gif";
 import {UserOption} from "../components/UserOption";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, Link} from "react-router-dom";
 
 
 const FormPage = () => {
@@ -24,6 +25,9 @@ const FormPage = () => {
     let [advised, setAdvised] = useState([])
     let [visits, setVisits] = useState([])
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
 
     useEffect(() => {
@@ -87,7 +91,10 @@ const FormPage = () => {
             })
         })
         if (response.status === 200) {
-            history('/')
+            handleShow()
+            await postRequest()
+        } else {
+            alert('Something went wrong')
         }
     }
 
@@ -211,6 +218,25 @@ const FormPage = () => {
                     </Container>
                 </Container>
             </Form>
+            <Modal show={show} onHide={handleClose}>
+                    <Modal.Body>
+                        <Container className='justify-content-center'>
+                            <Row className='justify-content-center'>
+                                <Col md={5}>
+                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                    <p className="text-center">¡Se a registrado el asesor correctamente!</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={'/login'}>
+                            <Button variant="success">
+                                OK
+                            </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
         </div>
 
     );
