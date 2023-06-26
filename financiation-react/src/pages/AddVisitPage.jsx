@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Container, Form, FloatingLabel} from "react-bootstrap";
+import {Button, Container, Form, FloatingLabel, Row, Col} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom'
 
@@ -207,9 +207,15 @@ const AddVisitPage = () => {
     </Container>
 </Form.Group>
     <Container>
+        <Container>
+            <Row className='justify-content-center'>
+                <Col md={2} xs={4}>
         <Form.Group>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" variant="outline-primary">Añadir Visita</Button>
         </Form.Group>
+                    </Col>
+                </Row>
+            </Container>
     </Container>
 </Form>
 </Container>
