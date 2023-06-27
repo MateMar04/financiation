@@ -4,7 +4,7 @@ import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom'
 
-const AdvisorPage = () => {
+const CreateAdvisorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
 
@@ -54,4 +54,4 @@ const AdvisorPage = () => {
     );
 }
 
-export default AdvisorPage;
+export default CreateAdvisorPage;
