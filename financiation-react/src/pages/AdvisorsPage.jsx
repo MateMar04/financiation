@@ -4,7 +4,7 @@ import {VisitCard} from "../components/VisitCard";
 import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
 
-export const AdvisorPage = () => {
+export const AdvisorsPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])

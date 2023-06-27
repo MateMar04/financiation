@@ -23,7 +23,7 @@ import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 import {GroupsPage} from "./pages/GroupsPage";
 import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
-import {AdvisorPage} from "./pages/AdvisorPage";
+import {AdvisorsPage} from "./pages/AdvisorsPage";
 
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
                         <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
-                        <Route path='/advisors' element={<PrivateRoute children={<AdvisorPage/>}/>}></Route>
+                        <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
 
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
