@@ -1,8 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Container, Form, Row, Col, Button} from "react-bootstrap";
+import {Container, Form, Row, Modal ,Col, Button} from "react-bootstrap";
+import Check from "../assets/images/checked.gif";
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -22,10 +23,14 @@ import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 
 
+
 const AddVisitPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -57,7 +62,8 @@ const AddVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            history('/')
+            handleShow()
+            await postVisit()
         } else {
             alert('Something went wrong')
         }
@@ -269,6 +275,25 @@ const AddVisitPage = () => {
                     </Container>
                 </Container>
             </Form>
+            <Modal show={show} onHide={handleClose}>
+                    <Modal.Body>
+                        <Container className='justify-content-center'>
+                            <Row className='justify-content-center'>
+                                <Col md={5}>
+                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                    <p className="text-center">¡Se a registrado la visita correctamente!</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={'/login'}>
+                            <Button variant="success">
+                                OK
+                            </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
         </Container>
     )
         ;
