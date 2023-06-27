@@ -1,0 +1,17 @@
+#navbarcs {
+    background-color: #1fa4e6;
+    max-height: 20%;
+}
+
+#logoboton {
+    width: 160px;
+    height: 60px;
+    overflow-y: hidden;
+    padding-right: 10px
+
+}
+
+.navLinkLogin {
+    position: absolute;
+    right: 20px;
+}

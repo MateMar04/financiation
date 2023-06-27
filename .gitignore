@@ -1,7 +1,12 @@
 # Virtual Envs
 /venv
 /.idea
+financiationDjango/financiationAPI/__pycache__
 financiationDjango/djangoapp/__pycache__
+financiationDjango/financiationAPI/migrations/__pycache__
+financiationDjango/financiationDjango/__pycache__
 /node_modules
 /financiationDjango/build/*
 /financiationDjango/db.sqlite3
+/financiationDjango/build/
+/financiationDjango/financiationAPI/images/

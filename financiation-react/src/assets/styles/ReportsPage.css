@@ -1,0 +1,19 @@
+.filters-column {
+    padding: 3vh;
+}
+
+.filter-card {
+    max-height: 40vh;
+    height: 40vh;
+    margin: 0;
+}
+
+.filter-card-scroll {
+    overflow-y: scroll;
+}
+
+
+.chart-card {
+    padding: 1vh;
+    align-items: center;
+}
