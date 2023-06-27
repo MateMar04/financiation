@@ -568,6 +568,20 @@ def postAdvised(request):
         first_name=data['first_name'],
         last_name=data['last_name'],
         ssn=data['ssn']
-        )
+    )
     serializer = AdvisedSerializer(advised, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroupAdvisors(request, id_group):
+    advisors = Advisor.objects.filter(id_group__id=id_group)
+    serializer = AdvisorSerializer(advisors, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroupCoordinators(request, id_group):
+    coordinators = Coordinator.objects.filter(id_group__id=id_group)
+    serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)

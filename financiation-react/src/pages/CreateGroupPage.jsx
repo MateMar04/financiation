@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Container, Form, Row, Modal} from "react-bootstrap";
+import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
-import {useNavigate, Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
 
 
@@ -96,24 +96,24 @@ export const CreateGroupPage = () => {
                 </Card>
             </Form>
             <Modal show={show} onHide={handleClose}>
-                    <Modal.Body>
-                        <Container className='justify-content-center'>
-                            <Row className='justify-content-center'>
-                                <Col md={5}>
-                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                    <p className="text-center">¡Se a registrado el grupo correctamente!</p>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Link to={'/login'}>
-                            <Button variant="success">
-                                OK
-                            </Button>
-                        </Link>
-                    </Modal.Footer>
-                </Modal>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡Se a registrado el grupo correctamente!</p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={'/login'}>
+                        <Button variant="success">
+                            OK
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
         </Container>
     )
 }

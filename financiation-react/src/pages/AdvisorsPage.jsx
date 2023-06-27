@@ -1,37 +1,33 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from "react-router-dom";
-import GroupCard from "../components/GroupCard";
 import {Container} from "react-bootstrap";
+import {UserParagraph} from "../components/UserParagraph";
 
-export const GroupsPage = () => {
+export const AdvisorsPage = () => {
 
     let {authTokens} = useContext(AuthContext)
-    let [groups, setGroups] = useState([])
-    let history = useNavigate()
+    let [advisors, setAdvisors] = useState([])
 
     useEffect(() => {
-        getGroups()
+        getAdvisors()
     }, [])
 
-    let getGroups = async () => {
+    let getAdvisors = async () => {
         let headers = {
             "Content-Type": "application/json",
             "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
-        let response = await fetch('/api/group/', {headers: headers})
+        let response = await fetch(`/api/advisor`, {headers: headers})
         let data = await response.json()
-        setGroups(data)
+        setAdvisors(data)
     };
-
     return (
-        <Container>
-            {groups?.map((group) => (
-                <GroupCard group={group}/>
+        <Container fluid>
+            {advisors?.map((advisor) => (
+                <UserParagraph userId={advisor.id_user}/>
             ))}
         </Container>
-
 
     )
 }

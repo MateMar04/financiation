@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import {Button,  Col, Container, Modal, Row, Form} from "react-bootstrap";
+import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
 import {UserOption} from "../components/UserOption";
-import {useNavigate, Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const FormPage = () => {
@@ -219,24 +219,24 @@ const FormPage = () => {
                 </Container>
             </Form>
             <Modal show={show} onHide={handleClose}>
-                    <Modal.Body>
-                        <Container className='justify-content-center'>
-                            <Row className='justify-content-center'>
-                                <Col md={5}>
-                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                    <p className="text-center">¡Se a registrado el asesor correctamente!</p>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Link to={'/login'}>
-                            <Button variant="success">
-                                OK
-                            </Button>
-                        </Link>
-                    </Modal.Footer>
-                </Modal>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡Se a registrado el asesor correctamente!</p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={'/login'}>
+                        <Button variant="success">
+                            OK
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
         </div>
 
     );

@@ -1,8 +1,8 @@
 import React from "react";
 import keyy from "../assets/images/keyy.gif";
-import {Card, Container, FloatingLabel, Form, Modal, Col, Row, Button} from "react-bootstrap";
+import {Button, Card, Col, Container, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
 import Check from "../assets/images/checked.gif";
-import {useNavigate, useParams, Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 
 const ResetPasswordConfirmPage = () => {
 
@@ -84,24 +84,24 @@ const ResetPasswordConfirmPage = () => {
 
             </Container>
             <Modal show={show} onHide={handleClose}>
-                    <Modal.Body>
-                        <Container className='justify-content-center'>
-                            <Row className='justify-content-center'>
-                                <Col md={5}>
-                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                    <p className="text-center">¡Se a cambiado la contraseña correctamente!</p>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Link to={'/login'}>
-                            <Button variant="success">
-                                OK
-                            </Button>
-                        </Link>
-                    </Modal.Footer>
-                </Modal>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡Se a cambiado la contraseña correctamente!</p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={'/login'}>
+                        <Button variant="success">
+                            OK
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
         </Container>
 
 

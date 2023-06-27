@@ -1,37 +1,34 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from "react-router-dom";
-import GroupCard from "../components/GroupCard";
 import {Container} from "react-bootstrap";
+import {VisitCard} from "../components/VisitCard";
 
-export const GroupsPage = () => {
+export const VisitsPage = () => {
 
     let {authTokens} = useContext(AuthContext)
-    let [groups, setGroups] = useState([])
-    let history = useNavigate()
+    let [visits, setVisits] = useState([])
+
 
     useEffect(() => {
-        getGroups()
+        getVisits()
     }, [])
 
-    let getGroups = async () => {
+    let getVisits = async () => {
         let headers = {
             "Content-Type": "application/json",
             "Authorization": "JWT " + String(authTokens.access),
             "Accept": "application/json"
         }
-        let response = await fetch('/api/group/', {headers: headers})
+        let response = await fetch('/api/visit/', {headers: headers})
         let data = await response.json()
-        setGroups(data)
+        setVisits(data)
     };
 
     return (
-        <Container>
-            {groups?.map((group) => (
-                <GroupCard group={group}/>
+        <Container fluid>
+            {visits?.map((visit) => (
+                <VisitCard visit={visit}/>
             ))}
         </Container>
-
-
     )
 }

@@ -1,13 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Card, Col, Container, Form, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
 import AuthContext from "../context/AuthContext";
-import RowWithCheck from "../components/RowWithCheck";
 import '../assets/styles/RowWithCheck.css'
+import {ReportFilterCard} from "../components/ReportFilterCard";
+import {ReportChartCard} from "../components/ReportChartCard";
 
 export const ReportsPage = () => {
 
@@ -85,61 +86,18 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Localidades</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {localities?.map((locality) => (
-                                        <RowWithCheck item={locality}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Localidades" items={localities}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Departamentos</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {ministryDepartments?.map((ministryDepartment) => (
-                                        <RowWithCheck item={ministryDepartment}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Departamentos" items={ministryDepartments}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Motivos</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {faqs?.map((faq) => (
-                                        <RowWithCheck item={faq}></RowWithCheck>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Motivos" items={faqs}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <Card className='filter-card'>
-                            <h1>Visitas</h1>
-                            <Container className='filter-card-scroll'>
-                                <Form>
-                                    {visits?.map((visit) => (
-                                        <Row key={visit.id}>
-                                            <Col className='row-label'>
-                                                <Form.Label>{visit.title}</Form.Label>
-                                            </Col>
-                                            <Col className='row-check'>
-                                                <Form.Check value={visit.id}></Form.Check>
-                                            </Col>
-                                        </Row>
-                                    ))}
-                                </Form>
-                            </Container>
-                        </Card>
+                        <ReportFilterCard title="Visitas" items={visits}/>
                     </Col>
                 </Row>
             </Container>
@@ -149,30 +107,18 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Ciudades</h1>
-                            <BarChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Organismos</h1>
-                            <BarChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <Card className='chart-card'>
-                            <h1>Motivos</h1>
-                            <PieChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Motivos" chart={<PieChart chartData={data}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <Card>
-                            <h1>Asesores</h1>
-                            <PolarAreaChart chartData={data}/>
-                        </Card>
+                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
                     </Col>
                 </Row>
             </Container>

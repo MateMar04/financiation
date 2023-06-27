@@ -61,6 +61,7 @@ class VisitStatus(models.Model):
 
 class Faq(models.Model):
     name = models.TextField()
+    id_ministry_department = models.ManyToManyField(MinistryDepartment)
 
     def __str__(self):
         return f"{self.name}"
