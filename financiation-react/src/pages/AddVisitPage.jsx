@@ -1,14 +1,36 @@
 import React, {useContext} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Container, Form} from "react-bootstrap";
+import {Container, Form, Row, Modal ,Col, Button} from "react-bootstrap";
+import Check from "../assets/images/checked.gif";
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import DriveEtaIcon from '@mui/icons-material/DriveEta';
+import ImageIcon from '@mui/icons-material/Image';
+import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import HotelIcon from '@mui/icons-material/Hotel';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import GroupIcon from '@mui/icons-material/Group';
+import TourIcon from '@mui/icons-material/Tour';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
+
+
 
 const AddVisitPage = () => {
 
-
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -40,109 +62,241 @@ const AddVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            history('/')
+            handleShow()
+            await postVisit()
         } else {
             alert('Something went wrong')
         }
     }
 
     return (
-
         <Container className="scrolling">
+
             <Form onSubmit={postVisit}>
-                <Form.Group>
-                    <Form.Control
-                        type="number"
-                        placeholder="Enter Flyer"
-                        name="flyer"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter Distance"
-                        name="distance"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter Travel Time"
-                        name="travel_time"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter visit date"
-                        name="visit_date"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter registro civil"
-                        name="civil_registration"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter accommodation"
-                        name="accommodation"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter modernization fund"
-                        name="modernization_fund"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter start time"
-                        name="start_time"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter finish time"
-                        name="finish_time"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter place_name"
-                        name="place_name"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_locality"
-                        name="id_locality"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_group"
-                        name="id_group"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_visit_status"
-                        name="id_visit_status"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_agreement"
-                        name="id_agreement"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_contacted_referrer"
-                        name="id_contacted_referrer"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_address"
-                        name="id_address"
-                    />
-                    <Form.Control
-                        type="text"
-                        placeholder="Enter id_logo"
-                        name="id_logo"
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Button type="submit">Submit</Button>
-                </Form.Group>
+                <Box sx={{width: '100%', bgcolor: 'background.paper'}}>
+                    <Form.Group>
+                        <Container>
+                            <Row className='justify-content-center'>
+                                <Col className='justify-content-center'>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <ImageIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Inserte el ID del Flyer" variant="standard"
+                                                   name="flyer"
+                                                   type="number"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <BrandingWatermarkIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID del logo" variant="standard"
+                                                   name="id_logo"
+                                                   type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <DriveEtaIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Distancia int" variant="standard"
+                                                   name="distance" type="number"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <QueryBuilderIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Tiempo de viaje int" variant="standard"
+                                                   name="travel_time" type="number"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <CalendarMonthIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Fecha de visita YYYY-MM-DD"
+                                                   variant="standard"
+                                                   name="visit_date" type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <AssignmentIndIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Registro Civil int" variant="standard"
+                                                   name="civil_registration" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <HotelIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Introducir hospedaje int"
+                                                   variant="standard"
+                                                   name="accommodation" type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <LocalAtmIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Fondo de modernizacion int"
+                                                   variant="standard"
+                                                   name="modernization_fund" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <a>Hora de inicio de la jornada</a>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
+                                                   variant="standard" name="start_time" type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <a>Hora de fin de la jornada</a>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
+                                                   variant="standard" name="finish_time" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="Nombre del lugar txt" variant="standard"
+                                                   name="place_name" type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <LocationOnIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID de la Localidad" variant="standard"
+                                                   name="id_locality" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+
+
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <GroupIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID del grupo" variant="standard"
+                                                   name="id_group"
+                                                   type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <TourIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID del Estado de visita" variant="standard"
+                                                   name="id_visit_status" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                        <HandshakeIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID del acuerdo" variant="standard"
+                                                   name="id_agreement"
+                                                   type="text"/>
+                                    </Box>
+                                </Col>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <DirectionsIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID de la Direccion" variant="standard"
+                                                   name="id_address" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                        <Container>
+                            <Row>
+                                <Col>
+                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+
+                                        <ContactMailIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
+                                        <TextField id="input-with-sx" label="ID del contacto del referido"
+                                                   variant="standard"
+                                                   name="id_contacted_referrer" type="text"/>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </Container>
+                        <hr/>
+                    </Form.Group>
+                </Box>
+                <Container>
+                    <Container>
+                        <Row className='justify-content-center'>
+                            <Col md={2} xs={4}>
+                                <Form.Group>
+                                    <Button type="submit" size="medium" variant="outline-primary">Añadir
+                                        Visita</Button>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Container>
             </Form>
+            <Modal show={show} onHide={handleClose}>
+                    <Modal.Body>
+                        <Container className='justify-content-center'>
+                            <Row className='justify-content-center'>
+                                <Col md={5}>
+                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                    <p className="text-center">¡Se a registrado la visita correctamente!</p>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Link to={'/login'}>
+                            <Button variant="success">
+                                OK
+                            </Button>
+                        </Link>
+                    </Modal.Footer>
+                </Modal>
         </Container>
-    );
+    )
+        ;
 
 };
 export default AddVisitPage;
