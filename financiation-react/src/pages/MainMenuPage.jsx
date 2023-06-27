@@ -7,7 +7,8 @@ export const MainMenuPage = () => {
         <Container fluid>
             <Row>
                 <Col lg={4}>
-                    <MenuCard title="Visitas" button1="Ver Visitas" button2="Crear Visita" link1="/visits/" link2="/visit/add/"/>
+                    <MenuCard title="Visitas" button1="Ver Visitas" button2="Crear Visita" link1="/visits/"
+                              link2="/visit/add/"/>
                 </Col>
                 <Col lg={4}>
                     <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/group/"
@@ -22,7 +23,8 @@ export const MainMenuPage = () => {
 
             <Row>
                 <Col lg={4}>
-                    <MenuCard title="Coordinadores" button1="Ver Coordinadores" button2="Crear Coordinador" link1="/coordinators/"
+                    <MenuCard title="Coordinadores" button1="Ver Coordinadores" button2="Crear Coordinador"
+                              link1="/coordinators/"
                               link2="/coordinator/add/"/>
                 </Col>
                 <Col lg={4}>

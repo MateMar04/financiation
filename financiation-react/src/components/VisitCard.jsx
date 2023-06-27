@@ -1,6 +1,4 @@
 import {Card, Col, Container, Row} from "react-bootstrap";
-import {useContext, useState} from "react";
-import AuthContext from "../context/AuthContext";
 
 export const VisitCard = ({visit}) => {
     return (
@@ -9,60 +7,60 @@ export const VisitCard = ({visit}) => {
             <Card.Body>
                 <Container>
                     <Row>
-                       <Col>
-                           <h5>Localidad:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.id_locality}</p>
-                       </Col>
+                        <Col>
+                            <h5>Localidad:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.id_locality}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Tiempo de Viaje:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.travel_time}</p>
-                       </Col>
+                            <h5>Tiempo de Viaje:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.travel_time}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Distancia:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.distance}</p>
-                       </Col>
+                            <h5>Distancia:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.distance}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Fecha de Visita:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.visit_date}</p>
-                       </Col>
+                            <h5>Fecha de Visita:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.visit_date}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Nombre del Lugar:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.place_name}</p>
-                       </Col>
+                            <h5>Nombre del Lugar:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.place_name}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Grupo:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.id_group}</p>
-                       </Col>
+                            <h5>Grupo:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.id_group}</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
-                           <h5>Status:</h5>
-                       </Col>
-                       <Col>
-                           <p>{visit.id_visit_status}</p>
-                       </Col>
+                            <h5>Status:</h5>
+                        </Col>
+                        <Col>
+                            <p>{visit.id_visit_status}</p>
+                        </Col>
                     </Row>
                 </Container>
             </Card.Body>

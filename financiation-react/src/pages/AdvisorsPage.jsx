@@ -1,6 +1,5 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
-import {VisitCard} from "../components/VisitCard";
 import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
 

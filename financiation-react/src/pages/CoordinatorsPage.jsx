@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
 
 export const CoordinatorsPage = () => {
-        let {authTokens} = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
 
     useEffect(() => {

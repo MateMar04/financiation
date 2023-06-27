@@ -5,14 +5,11 @@ import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 
 
-
-
 export const GroupCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
-
 
 
     useEffect(() => {

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Card, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
