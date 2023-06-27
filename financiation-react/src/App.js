@@ -22,6 +22,7 @@ import CoordinatorPage from './pages/CoordinatorPage';
 import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 import {GroupsPage} from "./pages/GroupsPage";
 import {MainMenuPage} from "./pages/MainMenuPage";
+import {VisitsPage} from "./pages/VisitsPage";
 
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
 
                         <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
+                        <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
+
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
