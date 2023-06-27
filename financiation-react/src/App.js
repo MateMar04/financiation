@@ -17,12 +17,13 @@ import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
 import {PublicRoute} from "./utils/PublicRoute";
-import AdvisorPage from './pages/AdvisorPage';
+import CreateAdvisorPage from './pages/CreateAdvisorPage';
 import CoordinatorPage from './pages/CoordinatorPage';
 import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 import {GroupsPage} from "./pages/GroupsPage";
 import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
+import {AdvisorPage} from "./pages/AdvisorPage";
 
 
 function App() {
@@ -52,11 +53,12 @@ function App() {
                         <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
+                        <Route path='/advisors' element={<PrivateRoute children={<AdvisorPage/>}/>}></Route>
 
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
-                        <Route path='/advisor/add' element={<PrivateRoute children={<AdvisorPage/>}/>}/>
+                        <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
                         <Route path='/coordinator/add' element={<PrivateRoute children={<CoordinatorPage/>}/>}/>
                         <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
