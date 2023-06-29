@@ -5,9 +5,11 @@ import {Link} from "react-router-dom";
 import {Button, Col,Container, Modal, Row} from "react-bootstrap";
 
 
-export const SucceedModal = ({message}) => {
+export const SucceedModal = (props, {message}) => {
 
-
+    if (!props.show) {
+        return null
+    }
     return (
         <Modal>
                 <Modal.Body>
@@ -22,7 +24,7 @@ export const SucceedModal = ({message}) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Link to={'/login'}>
-                        <Button variant="success">
+                        <Button onClick={props.onClose} variant="success">
                             OK
                         </Button>
                     </Link>

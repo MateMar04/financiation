@@ -53,10 +53,11 @@ const CoordinatorPage = () => {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit" onClick={setShow(true)}>Submit</Button>
+                    <Button type="submit" onClick={setShow(true)}>Submit</Button> 
                 </Form.Group>
+                <SucceedModal message="el coordinador" onclose = {setShow(false)} show ={show}/>
             </Form>
-           <SucceedModal message="el coordinador" onclose = {setShow(false)} show ={show}/>
+           
         </Container>
     );
 }
