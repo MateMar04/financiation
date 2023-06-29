@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import '../assets/styles/RowWithCheck.css'
 import Check from "../assets/images/checked.gif";
 import {Link} from "react-router-dom";
@@ -6,11 +6,10 @@ import {Button, Col,Container, Modal, Row} from "react-bootstrap";
 
 
 export const SucceedModal = ({message}) => {
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+
 
     return (
-        <Modal show={show} onHide={handleClose}>
+        <Modal>
                 <Modal.Body>
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
