@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import UserCard from "../components/UserCard";
 
 
 export const GroupCard = ({group}) => {
@@ -57,43 +58,15 @@ export const GroupCard = ({group}) => {
                     >
                         <Typography>{group.name}</Typography>
                     </AccordionSummary>
+
                     <AccordionDetails>
-
-                        <Container>
-                            <Row>
-                            <Col>
-                            <Row>
-                                <Col>
-                                    <Avatar alt="Remy Sharp" src="" />
-                                </Col>
-                                <Col>
-                                    <Typography>
-                                    {advisors?.map((advisor) => (
-                                <UserParagraph userId={advisor.id_user}/>
-                                        ))}
-                                    </Typography>
-                                </Col>
-
-                            </Row>
-                            <Divider orientation="vertical" flexItem />
-                            </Col>
-                            <Col>
-                                <Row>
-                                    <b>Coordinador</b>
-                                    {coordinators?.map((coordinator) => (
-                                <UserParagraph userId={coordinator.id_user}/>
-                            ))}
-
-                                </Row>
-                            </Col>
-                                </Row>
-                        </Container>
+                            <UserCard group={group}/>
                     </AccordionDetails>
                 </Accordion>
-                </div>
+            </div>
         </Container>
 
-)
+    )
 }
 
 export default GroupCard;

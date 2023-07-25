@@ -1,15 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Card, Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
+import Box from '@mui/material/Box';
 
 
 export const UserCard = ({group}) => {
@@ -51,32 +47,24 @@ export const UserCard = ({group}) => {
             <div>
 
                 <Container>
-                    <Row>
-                        <Col>
-                            <Row>
-                                <Col>
-                                    <Avatar alt="Remy Sharp" src=""/>
-                                </Col>
-                                <Col>
+                    <Box component="span" sx={{p: 2, border: '1px dashed grey'}}>
+                        <Row>
+                            <Col xs="1" md="3">
+                                <Avatar alt="Remy Sharp" src=""/>
+                            </Col>
+                            <Col>
+                                <Row>
                                     <Typography>
                                         {advisors?.map((advisor) => (
-                                            <h3 userId={advisor.id_user}/>
+                                            <UserParagraph userId={advisor.id_user}/>
                                         ))}
                                     </Typography>
-                                </Col>
+                                    <a><b>Asesor</b></a>
+                                </Row>
+                            </Col>
+                        </Row>
 
-                            </Row>
-                        </Col>
-                        <Col>
-                            <Row>
-                                <b>Coordinador</b>
-                                {coordinators?.map((coordinator) => (
-                                    <UserParagraph userId={coordinator.id_user}/>
-                                ))}
-
-                            </Row>
-                        </Col>
-                    </Row>
+                    </Box>
                 </Container>
 
             </div>
@@ -85,4 +73,4 @@ export const UserCard = ({group}) => {
     )
 }
 
-export default GroupCard;
+export default UserCard;
