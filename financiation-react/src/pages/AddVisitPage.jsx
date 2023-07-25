@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import Check from "../assets/images/checked.gif";
+import Fail from "../assets/images/failed.gif";
 import AuthContext from "../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
@@ -21,7 +22,8 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
-
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
 
 const AddVisitPage = () => {
 
@@ -63,8 +65,9 @@ const AddVisitPage = () => {
         if (response.status === 200) {
             handleShow()
             await postVisit()
-        } else {
-            alert('Something went wrong')
+        } else if(response.status == 500){
+            handleShow()
+            await postVisit()
         }
     }
 
@@ -274,7 +277,9 @@ const AddVisitPage = () => {
                     </Container>
                 </Container>
             </Form>
-            <Modal show={show} onHide={handleClose}>
+            <SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            <FailedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            {/*<Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
@@ -292,7 +297,24 @@ const AddVisitPage = () => {
                         </Button>
                     </Link>
                 </Modal.Footer>
-            </Modal>
+            </Modal>*/}
+            {/*<Modal show={show} onHide={handleClose}>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡No se a registrado la visita correctamente! </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                        <Button type="submit" variant="failed">
+                            OK
+                        </Button>
+                </Modal.Footer>
+            </Modal>*/}
         </Container>
     )
         ;
