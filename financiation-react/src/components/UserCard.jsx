@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 
 
-export const GroupCard = ({group}) => {
+export const UserCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -49,51 +49,40 @@ export const GroupCard = ({group}) => {
     return (
         <Container fluid className='CompletlyContainer'>
             <div>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>{group.name}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
 
-                        <Container>
-                            <Row>
-                            <Col>
+                <Container>
+                    <Row>
+                        <Col>
                             <Row>
                                 <Col>
-                                    <Avatar alt="Remy Sharp" src="" />
+                                    <Avatar alt="Remy Sharp" src=""/>
                                 </Col>
                                 <Col>
                                     <Typography>
-                                    {advisors?.map((advisor) => (
-                                <UserParagraph userId={advisor.id_user}/>
+                                        {advisors?.map((advisor) => (
+                                            <h3 userId={advisor.id_user}/>
                                         ))}
                                     </Typography>
                                 </Col>
 
                             </Row>
-                            <Divider orientation="vertical" flexItem />
-                            </Col>
-                            <Col>
-                                <Row>
-                                    <b>Coordinador</b>
-                                    {coordinators?.map((coordinator) => (
-                                <UserParagraph userId={coordinator.id_user}/>
-                            ))}
+                        </Col>
+                        <Col>
+                            <Row>
+                                <b>Coordinador</b>
+                                {coordinators?.map((coordinator) => (
+                                    <UserParagraph userId={coordinator.id_user}/>
+                                ))}
 
-                                </Row>
-                            </Col>
-                                </Row>
-                        </Container>
-                    </AccordionDetails>
-                </Accordion>
-                </div>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Container>
+
+            </div>
         </Container>
 
-)
+    )
 }
 
 export default GroupCard;
