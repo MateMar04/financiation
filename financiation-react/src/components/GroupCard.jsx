@@ -8,6 +8,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Avatar from '@mui/material/Avatar';
+import Divider from '@mui/material/Divider';
 
 
 export const GroupCard = ({group}) => {
@@ -56,39 +58,35 @@ export const GroupCard = ({group}) => {
                         <Typography>{group.name}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
+                        <Avatar alt="Remy Sharp" src="" />
+                        <Container>
+                            <Row>
+                            <Col>
+                            <Row>
+                                <b>Asesor</b>
+                                <Typography>
+                                    {advisors?.map((advisor) => (
+                                <UserParagraph userId={advisor.id_user}/>
+                                        ))}
+                                    </Typography>
+
+                            </Row>
+                            <Divider orientation="vertical" flexItem />
+                            </Col>
+                            <Col>
+                                <Row>
+                                    <b>Coordinador</b>
+                                    {coordinators?.map((coordinator) => (
+                                <UserParagraph userId={coordinator.id_user}/>
+                            ))}
+
+                                </Row>
+                            </Col>
+                                </Row>
+                        </Container>
                     </AccordionDetails>
                 </Accordion>
                 </div>
-                <Card className='groupcard'>
-                    <Container fluid className='ContainerNameGroup'>
-                        <h2 className='b'>{group.name}</h2>
-                    </Container>
-                    <Row className='Columna1'>
-
-                        <Col>
-                            <Container>
-                                <h3 className='a'>Asesores</h3>
-                            </Container>
-                            {advisors?.map((advisor) => (
-                                <UserParagraph userId={advisor.id_user}/>
-                            ))}
-
-                        </Col>
-                        <Col>
-                            <Container>
-                                <h3 className='a'>Coordinadores</h3>
-                            </Container>
-                            {coordinators?.map((coordinator) => (
-                                <UserParagraph userId={coordinator.id_user}/>
-                            ))}
-                        </Col>
-                    </Row>
-                </Card>
-
         </Container>
 
 )
