@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import "../assets/styles/GroupCard.css"
+import "../assets/styles/AdvisorMiniCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Stack from 'react-bootstrap/Stack';
 
 
 export const UserCard = ({group}) => {
@@ -43,32 +44,33 @@ export const UserCard = ({group}) => {
 
 
     return (
-        <Container fluid className='CompletlyContainer'>
-            <div>
+        <>
+            {advisors.map((advisor) => (
+                <Container key={advisor.id_user}>
+                    <Row className='AdvisorBorder'>
+                        <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
+                            <Avatar alt="Remy Sharp" src="" className='AvatarImg'/>
+                        </Col>
+                        <Col>
+                            <Row>
+                                <div className="d-flex align-items-center">
 
-                <Container>
-                    <Box component="span" sx={{p: 2, border: '1px dashed grey'}}>
-                        <Row>
-                            <Col xs="1" md="3">
-                                <Avatar alt="Remy Sharp" src=""/>
-                            </Col>
-                            <Col>
-                                <Row>
-                                    <Typography>
-                                        {advisors?.map((advisor) => (
-                                            <UserParagraph userId={advisor.id_user}/>
-                                        ))}
-                                    </Typography>
-                                    <a><b>Asesor</b></a>
-                                </Row>
-                            </Col>
-                        </Row>
+                                <b>
+                                    <UserParagraph userId={advisor.id_user}/>
+                                </b>
+                                    </div>
 
-                    </Box>
+                                    <a>Asesor</a>
+
+                            </Row>
+
+
+                        </Col>
+                    </Row>
                 </Container>
+            ))}
+        </>
 
-            </div>
-        </Container>
 
     )
 }

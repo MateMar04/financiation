@@ -30,6 +30,7 @@ export const GroupsPage = () => {
             {groups?.map((group) => (
                 <GroupCard group={group}/>
             ))}
+            <hr/>
         </Container>
 
 
