@@ -7,6 +7,8 @@ const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
+    const [error, setError] = useState('');
+
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
@@ -56,8 +58,14 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             history('/menu')
         } else {
-            alert('Something went wrong')
+            if (response.status === 401) {
+                setError('Error: Credenciales inválidas');
+
+            } 
+            
+            
         }
+
     }
 
     let logoutUser = () => {
