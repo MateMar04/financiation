@@ -3,16 +3,16 @@
 }
 
 .menu-card-row {
-    padding: 1vh;
+    padding: 0.5vh;
 }
 
 .menu-card-body {
-    padding: 1vh;
+    padding: 0.5vh;
 }
 
 .menu-card-link {
     width: auto;
-    margin: 1vh;
+    margin: 0.5vh;
 }
 
 .menu-card-button {
