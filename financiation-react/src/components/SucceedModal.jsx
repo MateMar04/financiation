@@ -6,10 +6,10 @@ import {Button, Col,Container, Modal, Row} from "react-bootstrap";
 
 
 export const SucceedModal = (props, {message}) => {
-
-    if (!props.show) {
+    if (!props.show){
         return null
     }
+    
     return (
         <Modal>
                 <Modal.Body>
