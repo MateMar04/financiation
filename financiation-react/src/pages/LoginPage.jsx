@@ -5,6 +5,9 @@ import {Button, Container, FloatingLabel, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)
     return (
@@ -32,4 +35,5 @@ const LoginPage = () => {
         </Container>
     )
 };
+
 export default LoginPage;

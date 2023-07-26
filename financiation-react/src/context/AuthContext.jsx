@@ -1,13 +1,14 @@
 import {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
-    const [error, setError] = useState('');
 
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
@@ -58,12 +59,9 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             history('/menu')
         } else {
-            if (response.status === 401) {
-                setError('Error: Credenciales inválidas');
-
-            } 
-            
-            
+            toast.error('Error Notification !', {
+                position: toast.POSITION.TOP_CENTER
+            });            
         }
 
     }
