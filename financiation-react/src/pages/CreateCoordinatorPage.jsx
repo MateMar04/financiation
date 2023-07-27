@@ -28,8 +28,21 @@ const CoordinatorPage = () => {
         })
         if (response.status === 200) {
             await postCoordinator()  
-        } else {
-            alert('Something went wrong')
+        } else if(response.status == 500){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if(response.status == 401){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if(response.status == 400){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
@@ -43,6 +56,7 @@ const CoordinatorPage = () => {
                         type="number"
                         placeholder="Enter user id"
                         name="id_user"
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -50,12 +64,12 @@ const CoordinatorPage = () => {
                         type="number"
                         placeholder="Enter group id"
                         name="id_group"
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit" onClick={setShow(true)}>Submit</Button> 
+                    <Button type="submit">Submit</Button> 
                 </Form.Group>
-                <SucceedModal message="el coordinador" onclose = {setShow(false)} show ={show}/>
             </Form>
            
         </Container>
