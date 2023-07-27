@@ -585,3 +585,10 @@ def getGroupCoordinators(request, id_group):
     coordinators = Coordinator.objects.filter(id_group__id=id_group)
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getAdvisorUsers(request):
+    users = User.objects.filter(advisor__isnull=False)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
+
