@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import Check from "../assets/images/checked.gif";
+import Fail from "../assets/images/failed.gif";
 import AuthContext from "../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
@@ -21,7 +22,8 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
-
+import SucceedModal from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
 
 const AddVisitPage = () => {
 
@@ -61,16 +63,30 @@ const AddVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            handleShow()
-            await postVisit()
-        } else {
-            alert('Something went wrong')
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('se registro la visita correctamente')
+        } else if(response.status == 500){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if(response.status == 401){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if(response.status == 400){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
     return (
         <Container className="scrolling">
-
             <Form onSubmit={postVisit}>
                 <Box sx={{width: '100%', bgcolor: 'background.paper'}}>
                     <Form.Group>
@@ -81,7 +97,7 @@ const AddVisitPage = () => {
                                         <ImageIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Inserte el ID del Flyer" variant="standard"
                                                    name="flyer"
-                                                   type="number"/>
+                                                   type="number" required/>
                                     </Box>
                                 </Col>
                                 <Col>
@@ -90,7 +106,7 @@ const AddVisitPage = () => {
                                         <BrandingWatermarkIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID del logo" variant="standard"
                                                    name="id_logo"
-                                                   type="text"/>
+                                                   type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -102,14 +118,14 @@ const AddVisitPage = () => {
                                     <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                                         <DriveEtaIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Distancia int" variant="standard"
-                                                   name="distance" type="number"/>
+                                                   name="distance" type="number" required/>
                                     </Box>
                                 </Col>
                                 <Col>
                                     <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                                         <QueryBuilderIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Tiempo de viaje int" variant="standard"
-                                                   name="travel_time" type="number"/>
+                                                   name="travel_time" type="number" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -122,14 +138,14 @@ const AddVisitPage = () => {
                                         <CalendarMonthIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Fecha de visita YYYY-MM-DD"
                                                    variant="standard"
-                                                   name="visit_date" type="text"/>
+                                                   name="visit_date" type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
                                     <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                                         <AssignmentIndIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Registro Civil int" variant="standard"
-                                                   name="civil_registration" type="text"/>
+                                                   name="civil_registration" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -142,7 +158,7 @@ const AddVisitPage = () => {
                                         <HotelIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Introducir hospedaje int"
                                                    variant="standard"
-                                                   name="accommodation" type="text"/>
+                                                   name="accommodation" type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
@@ -150,7 +166,7 @@ const AddVisitPage = () => {
                                         <LocalAtmIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Fondo de modernizacion int"
                                                    variant="standard"
-                                                   name="modernization_fund" type="text"/>
+                                                   name="modernization_fund" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -164,7 +180,7 @@ const AddVisitPage = () => {
 
                                         <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
-                                                   variant="standard" name="start_time" type="text"/>
+                                                   variant="standard" name="start_time" type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
@@ -173,7 +189,7 @@ const AddVisitPage = () => {
 
                                         <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
-                                                   variant="standard" name="finish_time" type="text"/>
+                                                   variant="standard" name="finish_time" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -186,7 +202,7 @@ const AddVisitPage = () => {
 
                                         <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="Nombre del lugar txt" variant="standard"
-                                                   name="place_name" type="text"/>
+                                                   name="place_name" type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
@@ -194,7 +210,7 @@ const AddVisitPage = () => {
 
                                         <LocationOnIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID de la Localidad" variant="standard"
-                                                   name="id_locality" type="text"/>
+                                                   name="id_locality" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -210,14 +226,14 @@ const AddVisitPage = () => {
                                         <GroupIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID del grupo" variant="standard"
                                                    name="id_group"
-                                                   type="text"/>
+                                                   type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
                                     <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
                                         <TourIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID del Estado de visita" variant="standard"
-                                                   name="id_visit_status" type="text"/>
+                                                   name="id_visit_status" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -231,7 +247,7 @@ const AddVisitPage = () => {
                                         <HandshakeIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID del acuerdo" variant="standard"
                                                    name="id_agreement"
-                                                   type="text"/>
+                                                   type="text" required/>
                                     </Box>
                                 </Col>
                                 <Col>
@@ -239,7 +255,7 @@ const AddVisitPage = () => {
 
                                         <DirectionsIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID de la Direccion" variant="standard"
-                                                   name="id_address" type="text"/>
+                                                   name="id_address" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -253,7 +269,7 @@ const AddVisitPage = () => {
                                         <ContactMailIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
                                         <TextField id="input-with-sx" label="ID del contacto del referido"
                                                    variant="standard"
-                                                   name="id_contacted_referrer" type="text"/>
+                                                   name="id_contacted_referrer" type="text" required/>
                                     </Box>
                                 </Col>
                             </Row>
@@ -266,7 +282,7 @@ const AddVisitPage = () => {
                         <Row className='justify-content-center'>
                             <Col md={2} xs={4}>
                                 <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary">Añadir
+                                    <Button type="submit" size="medium" variant="outline-primary" onClick={( )=> setShow(true)}>Añadir
                                         Visita</Button>
                                 </Form.Group>
                             </Col>
@@ -274,7 +290,8 @@ const AddVisitPage = () => {
                     </Container>
                 </Container>
             </Form>
-            <Modal show={show} onHide={handleClose}>
+    
+            {/* <Modal show={show} onHide={handleClose}> 
                 <Modal.Body>
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
@@ -287,12 +304,29 @@ const AddVisitPage = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Link to={'/login'}>
-                        <Button variant="success">
+                        <Button variant="success" onClick={handleClose}>
                             OK
                         </Button>
                     </Link>
                 </Modal.Footer>
             </Modal>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡No se a registrado la visita correctamente! </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                        <Button type="submit" variant="success" onClick={handleClose}>
+                            OK
+                        </Button>
+                </Modal.Footer>
+            </Modal>*/}
         </Container>
     )
         ;

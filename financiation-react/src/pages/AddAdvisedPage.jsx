@@ -24,16 +24,29 @@ export const AddAdvisedPage = () => {
         })
         if (response.status === 200) {
             history('/')
-        } else {
-            alert('Something went wrong')
+        } else if(response.status == 500){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if(response.status == 401){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if(response.status == 400){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
     return (
         <Form onSubmit={postAdvised}>
-            <Form.Control placeholder='Nombre del Asesorado' name="first_name" type="text"></Form.Control>
-            <Form.Control placeholder='Apellido del Asesorado' name="last_name" type="text"></Form.Control>
-            <Form.Control placeholder='CUIL del Asesorado' name="ssn" type="number"></Form.Control>
+            <Form.Control placeholder='Nombre del Asesorado' name="first_name" type="text" required></Form.Control>
+            <Form.Control placeholder='Apellido del Asesorado' name="last_name" type="text" required></Form.Control>
+            <Form.Control placeholder='CUIL del Asesorado' name="ssn" type="number" required></Form.Control>
             <Button type="submit">Registrar</Button>
         </Form>
     )
