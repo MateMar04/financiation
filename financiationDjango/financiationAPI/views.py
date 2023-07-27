@@ -592,3 +592,9 @@ def getAdvisorUsers(request):
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def getCoordinatorUsers(request):
+    users = User.objects.filter(coordinator__isnull=False)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
