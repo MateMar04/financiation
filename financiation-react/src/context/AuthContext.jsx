@@ -64,8 +64,13 @@ export const AuthProvider = ({children}) => {
         } else {
             if (response.status === 401) {
                 alert("Revisa las credenciales ingresadas")
+
             } if (response.status === 400) {
                 alert("Ocurrio un error inesperado")
+            }
+            else{
+                alert("Ocurrio un error inesperado")
+
             }
         }
 
