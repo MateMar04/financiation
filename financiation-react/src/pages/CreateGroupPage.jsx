@@ -59,8 +59,21 @@ export const CreateGroupPage = () => {
         if (response.status === 200) {
             handleShow()
             await postGroup()
-        } else {
-            alert('Something went wrong')
+        } else if(response.status == 500){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if(response.status == 401){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if(response.status == 400){
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
@@ -71,7 +84,7 @@ export const CreateGroupPage = () => {
                     <Row className='upper-row'>
                         <Col>
                             <h3>Nombre del Grupo</h3>
-                            <Form.Control name="name" placeholder='Nombre' type='text'></Form.Control>
+                            <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
                         </Col>
                     </Row>
                     <Row>
