@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Stack from 'react-bootstrap/Stack';
 
 
-export const UserCard = ({group}) => {
+export const UserCard = ({group, profileImg}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -47,26 +47,23 @@ export const UserCard = ({group}) => {
         <>
             {advisors.map((advisor) => (
                 <Container key={advisor.id_user}>
-                    <Row className='AdvisorBorder'>
+
+                    <Row  className='AdvisorBorder'>
                         <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" src="" className='AvatarImg'/>
+                            <Avatar alt="Remy Sharp" src={profileImg} className='AvatarImg'/>
                         </Col>
                         <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
-
-                                <b>
-                                    <UserParagraph userId={advisor.id_user}/>
-                                </b>
+                                <strong>
+                                    <UserParagraph userId={advisor.id_user} className='PrimaryText'/>
+                                </strong>
                                     </div>
-
-                                    <a>Asesor</a>
-
+                                    <sub className='SecondaryText'>Asesor</sub>
                             </Row>
-
-
                         </Col>
                     </Row>
+                    <hr/>
                 </Container>
             ))}
         </>

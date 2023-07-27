@@ -1,8 +1,17 @@
 .AdvisorBorder{
-    border: 1px solid grey;
     max-height: 70px;
+
 }
 
 .AvatarImg{
     align-items:center;
+}
+
+.PrimaryText{
+    padding: 0;
+    margin: 0;
+}
+
+.SecondaryText{
+    margin-top: -12px;
 }
