@@ -26,13 +26,13 @@ export const GroupsPage = () => {
     };
 
     return (
-        <Container>
-            {groups?.map((group) => (
+        <>
+        {groups?.map((group) => (
+            <Container>
                 <GroupCard group={group}/>
-            ))}
-            <hr/>
-        </Container>
+            </Container>
+        ))}
+        </>
 
-
-    )
+)
 }

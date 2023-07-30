@@ -28,3 +28,9 @@
 .a {
     font-size: 125%
 }
+
+.verticalLine{
+    border-left:1px solid #000;
+    height:500px;
+}
+

@@ -10,11 +10,13 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
-import UserCard from "../components/UserCard";
+import AdvisorMiniCard from "../components/AdvisorMiniCard";
+import CoordinatorMiniCard from "./CoordinatorMiniCard";
+import {styled} from '@mui/material/styles';
+import MuiGrid from '@mui/material/Grid';
 
 
 export const GroupCard = ({group}) => {
-
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -46,6 +48,13 @@ export const GroupCard = ({group}) => {
         setAdvisors(data)
     };
 
+    const Grid = styled(MuiGrid)(({theme}) => ({
+        width: '100%',
+        ...theme.typography.body2,
+        '& [role="separator"]': {
+            margin: theme.spacing(0, 2),
+        },
+    }));
 
     return (
         <Container fluid className='CompletlyContainer'>
@@ -60,7 +69,25 @@ export const GroupCard = ({group}) => {
                     </AccordionSummary>
 
                     <AccordionDetails>
-                            <UserCard group={group}/>
+                        <Container>
+                            <Row>
+                                <Grid container>
+                                    <Grid item>
+
+                                        <Col>
+                                            <AdvisorMiniCard group={group}/>
+                                        </Col>
+                                    </Grid>
+                                    <Divider orientation="vertical" flexItem='true' style={{width:'100%'}}/>
+
+                                    <Grid item>
+                                        <Col>
+                                            <CoordinatorMiniCard group={group}/>
+                                        </Col>
+                                    </Grid>
+                                </Grid>
+                            </Row>
+                        </Container>
                     </AccordionDetails>
                 </Accordion>
             </div>
