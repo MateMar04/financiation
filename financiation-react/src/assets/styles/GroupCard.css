@@ -29,8 +29,10 @@
     font-size: 125%
 }
 
-.verticalLine{
-    border-left:1px solid #000;
-    height:500px;
+.vl {
+  border-left: 2px solid grey;
+  height: 100%;
 }
-
+.Divisor{
+    color:black;
+}

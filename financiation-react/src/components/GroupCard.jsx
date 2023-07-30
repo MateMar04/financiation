@@ -71,21 +71,15 @@ export const GroupCard = ({group}) => {
                     <AccordionDetails>
                         <Container>
                             <Row>
-                                <Grid container>
-                                    <Grid item>
-
-                                        <Col>
-                                            <AdvisorMiniCard group={group}/>
-                                        </Col>
-                                    </Grid>
-                                    <Divider orientation="vertical" flexItem='true' style={{width:'100%'}}/>
-
-                                    <Grid item>
-                                        <Col>
-                                            <CoordinatorMiniCard group={group}/>
-                                        </Col>
-                                    </Grid>
-                                </Grid>
+                                <Col>
+                                    <AdvisorMiniCard group={group}/>
+                                </Col>
+                                <Col md={1}>
+                                    <div className="vl"></div>
+                                </Col>
+                                <Col>
+                                    <CoordinatorMiniCard group={group}/>
+                                </Col>
                             </Row>
                         </Container>
                     </AccordionDetails>

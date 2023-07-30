@@ -62,6 +62,7 @@ export const AdvisorMiniCard = ({group, profileImg}) => {
                             </Row>
                         </Col>
                     </Row>
+                    <hr/>
                 </Container>
             ))}
         </>

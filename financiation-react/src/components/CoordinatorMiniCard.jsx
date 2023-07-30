@@ -48,6 +48,7 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
                             </Row>
                         </Col>
                     </Row>
+                    <hr/>
                 </Container>
             ))}
         </>
