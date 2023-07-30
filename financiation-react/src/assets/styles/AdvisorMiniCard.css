@@ -8,12 +8,15 @@
 }
 
 .PrimaryText{
-    text-transform: uppercase !important;
+    text-transform: capitalize !important;
     padding: 0;
     margin: 0;
 }
 
 .SecondaryText{
     margin-top: -12px;
+}
+.UserParagraph{
+    text-transform: capitalize;
 }
 

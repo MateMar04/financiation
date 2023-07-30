@@ -1,38 +1,16 @@
-.groupcard {
-    max-height: 150vh;
-    margin-top: 2%;
-    margin: 5%;
-    width: 150vh;
-    padding-left: 5%;
-    padding-right: 5%;
-
-}
-
 .CompletlyContainer {
-    display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
-
-.ContainerNameGroup {
-    margin-top: 1.5%;
-    margin-bottom: 1%;
-}
-
-.b {
-    font-size: 150%;
-}
-
-.a {
-    font-size: 125%
-}
-
 .vl {
-  border-left: 2px solid grey;
+    border-left: 1px solid grey;
+    position: relative;
+    right: 0;
+    left: 15px;
   height: 100%;
-}
-.Divisor{
-    color:black;
+
+
+
 }

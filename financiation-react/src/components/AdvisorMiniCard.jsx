@@ -3,10 +3,7 @@ import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
-import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Stack from 'react-bootstrap/Stack';
 
 
 export const AdvisorMiniCard = ({group, profileImg}) => {
@@ -54,8 +51,8 @@ export const AdvisorMiniCard = ({group, profileImg}) => {
                         <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
-                                    <strong>
-                                        <UserParagraph className='PrimaryText' userId={advisor.id_user}/>
+                                    <strong className='PrimaryText'>
+                                        <UserParagraph userId={advisor.id_user}/>
                                     </strong>
                                 </div>
                                 <sub className='SecondaryText'>Asesor</sub>
