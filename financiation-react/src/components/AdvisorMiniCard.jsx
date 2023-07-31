@@ -8,7 +8,6 @@ import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
 
 
-
 export const AdvisorMiniCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
@@ -19,6 +18,7 @@ export const AdvisorMiniCard = ({group}) => {
     useEffect(() => {
         getGroupAdvisors()
         getGroupCoordinators()
+        getUser()
     }, [])
     let getGroupCoordinators = async () => {
         let headers = {
@@ -42,21 +42,26 @@ export const AdvisorMiniCard = ({group}) => {
         setAdvisors(data)
     };
 
-
+    let getUser = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/auth/users/me/`, {headers: headers})
+        let data = await response.json()
+        setUser(data)
+    }
     return (
         <>
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
-                    <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
                     <Row className='AdvisorBorder'>
                         <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg'>
-
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={user?.profile_picture} username={user?.username}>
                                 <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
-
                             </Avatar>
-
-                        </Col>
+                            </Col>
                         <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
@@ -70,7 +75,7 @@ export const AdvisorMiniCard = ({group}) => {
                     </Row>
                     <hr/>
                 </Container>
-            ))}
+                ))}
         </>
 
 
