@@ -4,14 +4,17 @@ import "../assets/styles/AdvisorMiniCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
+import ProfilePicture from "../components/ProfilePicture";
+import ProfileData from "../components/ProfileData";
 
 
-export const AdvisorMiniCard = ({group, profileImg}) => {
+
+export const AdvisorMiniCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
-
+    let [user, setUser] = useState()
 
     useEffect(() => {
         getGroupAdvisors()
@@ -44,9 +47,15 @@ export const AdvisorMiniCard = ({group, profileImg}) => {
         <>
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
+                    <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
                     <Row className='AdvisorBorder'>
                         <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" src={profileImg} className='AvatarImg'/>
+                            <Avatar alt="Remy Sharp" className='AvatarImg'>
+
+                                <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
+
+                            </Avatar>
+
                         </Col>
                         <Col>
                             <Row>
