@@ -7,15 +7,21 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Stack from 'react-bootstrap/Stack';
+import ProfilePicture from "../components/ProfilePicture";
+import ProfileData from "../components/ProfileData";
 
 
 export const CoordinatorMiniCard = ({group, profileImg}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
+    let [user, setUser] = useState()
+
 
     useEffect(() => {
         getGroupCoordinators()
+        getUser()
+
     }, [])
     let getGroupCoordinators = async () => {
         let headers = {
@@ -28,6 +34,16 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
         setCoordinators(data)
     };
 
+    let getUser = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/auth/users/me/`, {headers: headers})
+        let data = await response.json()
+        setUser(data)
+    }
 
     return (
         <>
@@ -35,7 +51,7 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
                 <Container key={coordinator.id_user}>
                     <Row className='AdvisorBorder'>
                         <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" src={profileImg} className='AvatarImg'/>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={user?.profile_picture} username={user?.username}/>
                         </Col>
                         <Col>
                             <Row>
@@ -50,7 +66,7 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
                     </Row>
                     <hr/>
                 </Container>
-            ))}
+                ))}
         </>
 
     )
