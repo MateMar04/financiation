@@ -50,7 +50,7 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
             {coordinators?.map((coordinator) => (
                 <Container key={coordinator.id_user}>
                     <Row className='AdvisorBorder'>
-                        <Col xs="3" md="3" className='"d-flex align-items-center justify-content-center'>
+                        <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={user?.profile_picture} username={user?.username}/>
                         </Col>
                         <Col>
