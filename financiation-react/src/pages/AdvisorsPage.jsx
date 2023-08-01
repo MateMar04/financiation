@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
-import {getAdvisors} from "../services/AdvisorServices";
+import {getAdvisors, getAdvisorUsers} from "../services/AdvisorServices";
 
 export const AdvisorsPage = () => {
 
@@ -10,13 +10,13 @@ export const AdvisorsPage = () => {
     let [advisors, setAdvisors] = useState([])
 
     useEffect(() => {
-        getAdvisors(authTokens.access).then(data => setAdvisors(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
     }, [])
 
     return (
         <Container fluid>
             {advisors?.map((advisor) => (
-                <UserParagraph userId={advisor.id_user}/>
+                <UserParagraph user={advisor}/>
             ))}
         </Container>
 

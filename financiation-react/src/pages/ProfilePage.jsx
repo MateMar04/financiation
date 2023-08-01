@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {Card, Col, Container, Row} from "react-bootstrap";
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
