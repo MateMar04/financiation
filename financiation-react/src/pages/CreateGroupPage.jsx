@@ -2,12 +2,12 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {UserRowWithRadio} from "../components/UserRowWithRadio";
-import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
-import {getAdvisors} from "../services/AdvisorServices";
-import {getCoordinators} from "../services/CoordinatorServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {UserRowWithRadio} from "../components/UserRowWithRadio";
+import {UserRowWithCheck} from "../components/UserRowWithCheck";
 
 
 export const CreateGroupPage = () => {
@@ -21,13 +21,13 @@ export const CreateGroupPage = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        getAdvisors(authTokens.access).then(data => setAdvisors(data))
-        getCoordinators(authTokens.access).then(data => setCoordinators(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
     }, [])
 
     let postGroup = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/group/add/', {
+        let response = await fetch('/api/group/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export const CreateGroupPage = () => {
                             <h3>Coordinador</h3>
                             <Container className='create-group-card-scroll'>
                                 {coordinators?.map((coordinator) => (
-                                    <UserRowWithRadio userId={coordinator.id_user}/>
+                                    <UserRowWithRadio user={coordinator}/>
                                 ))}
                             </Container>
                         </Col>
@@ -67,7 +67,7 @@ export const CreateGroupPage = () => {
                             <h3>Asesores</h3>
                             <Container className='create-group-card-scroll'>
                                 {advisors?.map((advisor) => (
-                                    <UserRowWithCheck userId={advisor.id_user}></UserRowWithCheck>
+                                    <UserRowWithCheck user={advisor}></UserRowWithCheck>
                                 ))}
                             </Container>
                         </Col>

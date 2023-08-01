@@ -3,14 +3,7 @@ import {Col, Form, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import {getUserById} from "../services/UserServices";
 
-export const UserRowWithCheck = ({userId}) => {
-
-    let {authTokens} = useContext(AuthContext)
-    let [user, setUser] = useState([])
-
-    useEffect(() => {
-        getUserById(authTokens.access, userId)
-    }, [])
+export const UserRowWithCheck = ({user}) => {
 
     return (
         <Row key={user.id}>
