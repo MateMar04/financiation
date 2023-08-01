@@ -40,8 +40,8 @@ export const AuthProvider = ({children}) => {
         })
         if (response.status === 201) {
             history('/')
-        } else {
-            alert('Something went wrong')
+        } else if (response.status === 400) {
+            alert('Los datos ingresados no son validos')
         }
     }
 
