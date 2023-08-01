@@ -43,6 +43,7 @@ urlpatterns = [
     path('groups/<int:id_group>/coordinators', views.getGroupCoordinators, name='getGroupCoordinators'),
     path('advisor-users/', views.getAdvisorUsers, name='getAdvisorUsers'),
     path('coordinator-users/', views.getCoordinatorUsers, name='getCoordinatorUsers'),
+    path('group/<int:id_group>/coordinator/users/', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
 
 
     # POSTs
