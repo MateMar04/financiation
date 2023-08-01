@@ -6,6 +6,8 @@ import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
+import {getAdvisors} from "../services/AdvisorServices";
+import {getCoordinators} from "../services/CoordinatorServices";
 
 
 export const CreateGroupPage = () => {
@@ -19,31 +21,9 @@ export const CreateGroupPage = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        getAdvisors()
-        getCoordinators()
+        getAdvisors(authTokens.access).then(data => setAdvisors(data))
+        getCoordinators(authTokens.access).then(data => setCoordinators(data))
     }, [])
-
-    let getAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advisor/', {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
-
-    let getCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/coordinator/', {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
 
     let postGroup = async (e) => {
         e.preventDefault()

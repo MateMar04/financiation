@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import getAdvised from "../services/AdvisedServices";
 
 const AdvisedPage = () => {
 
@@ -11,23 +12,8 @@ const AdvisedPage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
-        getAdvised()
+        getAdvised(authTokens.access).then(data => setAdvised(data))
     }, [advisedId])
-
-    let getAdvised = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/advised/${advisedId}/`, {headers: headers})
-        let data = await response.json()
-        if (response.status === 200) {
-            setAdvised(data)
-        } else if (response.statusText === 'Unauthorized') {
-            logoutUser()
-        }
-    }
 
     return (
         <div>

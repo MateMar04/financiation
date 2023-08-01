@@ -2,6 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
+import {getAdvisors} from "../services/AdvisorServices";
 
 export const AdvisorsPage = () => {
 
@@ -9,19 +10,9 @@ export const AdvisorsPage = () => {
     let [advisors, setAdvisors] = useState([])
 
     useEffect(() => {
-        getAdvisors()
+        getAdvisors(authTokens.access).then(data => setAdvisors(data))
     }, [])
 
-    let getAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/advisor`, {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
     return (
         <Container fluid>
             {advisors?.map((advisor) => (

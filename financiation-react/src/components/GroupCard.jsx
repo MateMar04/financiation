@@ -3,6 +3,7 @@ import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
+import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 
 
 export const GroupCard = ({group}) => {
@@ -13,30 +14,9 @@ export const GroupCard = ({group}) => {
 
 
     useEffect(() => {
-        getGroupAdvisors()
-        getGroupCoordinators()
+        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
-    let getGroupCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/coordinators`, {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
-
-    let getGroupAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/advisors`, {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
 
 
     return (
@@ -50,19 +30,20 @@ export const GroupCard = ({group}) => {
                     <Col>
                         <Container>
                             <h3 className='a'>Asesores</h3>
+                            {advisors?.map((advisor) => (
+                                <p>{advisor.first_name} {advisor.last_name}</p>
+                            ))}
                         </Container>
-                        {advisors?.map((advisor) => (
-                            <UserParagraph userId={advisor.id_user}/>
-                        ))}
 
                     </Col>
                     <Col>
                         <Container>
                             <h3 className='a'>Coordinadores</h3>
+                            {coordinators?.map((coordinator) => (
+                                <p>{coordinator.first_name} {coordinator.last_name}</p>
+                            ))}
                         </Container>
-                        {coordinators?.map((coordinator) => (
-                            <UserParagraph userId={coordinator.id_user}/>
-                        ))}
+
                     </Col>
                 </Row>
             </Card>

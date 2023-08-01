@@ -1,24 +1,16 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
+import {getUserById} from "../services/UserServices";
 
 export const UserParagraph = ({userId}) => {
     let {authTokens} = useContext(AuthContext)
     let [user, setUser] = useState([])
 
     useEffect(() => {
-        getUser()
+        getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/${userId}/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    };
+
 
 
     return (

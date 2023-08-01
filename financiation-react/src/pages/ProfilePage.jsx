@@ -5,6 +5,7 @@ import ProfileData from "../components/ProfileData";
 import "../assets/styles/ProfilePage.css"
 import ProfileModifyForm from "../components/ProfileModifyForm";
 import AuthContext from "../context/AuthContext";
+import {getUser} from "../services/UserServices";
 
 const ProfilePage = () => {
 
@@ -12,19 +13,8 @@ const ProfilePage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
-        getUser()
+        getUser(authTokens.access).then(data => setUser(data))
     })
-
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/me/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    }
 
     return (
         <Container fluid>
