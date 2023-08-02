@@ -244,7 +244,7 @@ class RequestStatus(models.Model):
 
 
 class Coordinator(models.Model):
-    id_user = models.OneToOneField(UserAccount, models.DO_NOTHING)
+    id_user = models.ForeignKey(UserAccount, models.DO_NOTHING)
     id_group = models.ForeignKey(Group, models.DO_NOTHING)
 
     def __str__(self):

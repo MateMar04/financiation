@@ -1,5 +1,6 @@
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
+import {getUserById} from "../services/UserServices";
 
 export const UserOption = ({userId, advisorValue}) => {
 
@@ -7,22 +8,10 @@ export const UserOption = ({userId, advisorValue}) => {
     let [user, setUser] = useState([])
 
     useEffect(() => {
-        getUser()
+        getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/${userId}/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    };
-
-
     return (
-        <option value={advisorValue}>{user.first_name} {user.last_name}</option>
+        <option key={user.id} value={advisorValue}>{user.ssn}</option>
     )
 }

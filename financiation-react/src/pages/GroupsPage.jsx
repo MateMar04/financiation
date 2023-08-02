@@ -3,6 +3,7 @@ import AuthContext from "../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import GroupCard from "../components/GroupCard";
 import {Container} from "react-bootstrap";
+import {getGroups} from "../services/GroupServices"
 
 export const GroupsPage = () => {
 
@@ -11,19 +12,9 @@ export const GroupsPage = () => {
     let history = useNavigate()
 
     useEffect(() => {
-        getGroups()
+        getGroups(authTokens.access).then(data => setGroups(data))
     }, [])
 
-    let getGroups = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/group/', {headers: headers})
-        let data = await response.json()
-        setGroups(data)
-    };
 
     return (
         <Container>

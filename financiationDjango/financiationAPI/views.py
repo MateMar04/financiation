@@ -585,3 +585,30 @@ def getGroupCoordinators(request, id_group):
     coordinators = Coordinator.objects.filter(id_group__id=id_group)
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getAdvisorUsers(request):
+    users = User.objects.filter(advisor__isnull=False)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getCoordinatorUsers(request):
+    users = User.objects.filter(coordinator__isnull=False)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroupCoordinatorUsers(request, id_group):
+    users = User.objects.filter(coordinator__id_group__id=id_group)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getGroupAdvisorUsers(request, id_group):
+    users = User.objects.filter(advisor__id_group__id=id_group)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
