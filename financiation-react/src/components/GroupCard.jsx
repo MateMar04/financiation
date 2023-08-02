@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
-import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 

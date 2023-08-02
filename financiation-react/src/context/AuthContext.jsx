@@ -1,9 +1,6 @@
-import {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import React from 'react';
 
 const AuthContext = createContext();
 
@@ -65,10 +62,10 @@ export const AuthProvider = ({children}) => {
             if (response.status === 401) {
                 alert("Revisa las credenciales ingresadas")
 
-            } if (response.status === 400) {
-                alert("Ocurrio un error inesperado")
             }
-            else{
+            if (response.status === 400) {
+                alert("Ocurrio un error inesperado")
+            } else {
                 alert("Ocurrio un error inesperado")
 
             }

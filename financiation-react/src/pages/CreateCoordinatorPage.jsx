@@ -1,16 +1,15 @@
 import React, {useContext, useState} from "react";
-import {Button,Container,Form} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import {SucceedModal} from "../components/SucceedModal"
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    
+
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -27,18 +26,18 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
-            await postCoordinator()  
-        } else if(response.status == 500){
+            await postCoordinator()
+        } else if (response.status == 500) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
             alert('no se a registrado la visita (Hay un campo vacio)')
-        } else if(response.status == 401){
+        } else if (response.status == 401) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
             alert('no se a registrado la visita (Desautorizado)')
-        } else if(response.status == 400){
+        } else if (response.status == 400) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
@@ -68,10 +67,10 @@ const CoordinatorPage = () => {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit">Submit</Button> 
+                    <Button type="submit">Submit</Button>
                 </Form.Group>
             </Form>
-           
+
         </Container>
     );
 }

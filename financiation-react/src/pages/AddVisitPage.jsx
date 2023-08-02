@@ -1,10 +1,8 @@
 import React, {useContext} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
-import Check from "../assets/images/checked.gif";
-import Fail from "../assets/images/failed.gif";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -22,8 +20,6 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
-import SucceedModal from "../components/SucceedModal"
-import {FailedModal} from "../components/FailedModal"
 
 const AddVisitPage = () => {
 
@@ -67,17 +63,17 @@ const AddVisitPage = () => {
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
             alert('se registro la visita correctamente')
-        } else if(response.status == 500){
+        } else if (response.status == 500) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
             alert('no se a registrado la visita (Hay un campo vacio)')
-        } else if(response.status == 401){
+        } else if (response.status == 401) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
             alert('no se a registrado la visita (Desautorizado)')
-        } else if(response.status == 400){
+        } else if (response.status == 400) {
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
@@ -282,7 +278,8 @@ const AddVisitPage = () => {
                         <Row className='justify-content-center'>
                             <Col md={2} xs={4}>
                                 <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary" onClick={( )=> setShow(true)}>Añadir
+                                    <Button type="submit" size="medium" variant="outline-primary"
+                                            onClick={() => setShow(true)}>Añadir
                                         Visita</Button>
                                 </Form.Group>
                             </Col>
@@ -290,7 +287,7 @@ const AddVisitPage = () => {
                     </Container>
                 </Container>
             </Form>
-    
+
             {/* <Modal show={show} onHide={handleClose}> 
                 <Modal.Body>
                     <Container className='justify-content-center'>

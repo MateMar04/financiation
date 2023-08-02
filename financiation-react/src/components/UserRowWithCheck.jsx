@@ -1,7 +1,5 @@
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import AuthContext from "../context/AuthContext";
-import {getUserById} from "../services/UserServices";
 
 export const UserRowWithCheck = ({user}) => {
 

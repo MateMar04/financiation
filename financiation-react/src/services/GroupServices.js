@@ -9,7 +9,7 @@ export const getGroups = async (tokens) => {
     return data
 }
 
-export const  getGroupCoordinators = async (tokens, group) => {
+export const getGroupCoordinators = async (tokens, group) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),
@@ -20,7 +20,7 @@ export const  getGroupCoordinators = async (tokens, group) => {
     return data
 };
 
-export const  getGroupAdvisors = async (tokens, group) => {
+export const getGroupAdvisors = async (tokens, group) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),

@@ -2,7 +2,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Container} from "react-bootstrap";
 import {UserParagraph} from "../components/UserParagraph";
-import {getAdvisors, getAdvisorUsers} from "../services/AdvisorServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
 
 export const AdvisorsPage = () => {
 
