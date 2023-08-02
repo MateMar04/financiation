@@ -1,13 +1,24 @@
 .menu-card {
-    margin: 4vh;
+    margin: 4.5vh;
+    transition: box-shadow 0.3s ease;
 }
 
+.tit {
+    color: rgba(13, 110, 253, 0.3);
+    text-align: center;
+}
+
+.card:hover {
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.2); 
+  }
+  
 .menu-card-row {
     padding: 0.5vh;
 }
 
 .menu-card-body {
-    padding: 0.5vh;
+    padding: 2vh;
+    
 }
 
 .menu-card-link {
@@ -17,5 +28,4 @@
 
 .menu-card-button {
     box-shadow: rgba(13, 110, 253, 0.3) 0px 7px 29px 0px;
-
 }
