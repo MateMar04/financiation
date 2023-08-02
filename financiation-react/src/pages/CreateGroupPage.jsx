@@ -127,40 +127,32 @@ export const CreateGroupPage = () => {
     );
 
     return (
-        <Container fluid>
+        <Container>
             <Form onSubmit={postGroup}>
 
-                <Row className='upper-row'>
-                    <Col>
-                        <Form.Control name="name" placeholder='Nombre' type='text'></Form.Control>
-                    </Col>
-                </Row>
                 <Row>
-                    <Col lg={6} className='create-group-column'>
-                        <h3>Coordinador</h3>
+                    <h3>Coordinadores</h3>
                         <Container className='create-group-card-scroll'>
                             {coordinators?.map((coordinator) => (
                                 <UserRowWithRadio userId={coordinator.id_user}/>
                             ))}
                         </Container>
-                    </Col>
-                    <Col lg={6} className='create-group-column'>
+
                         <h3>Asesores</h3>
                         <Container className='create-group-card-scroll'>
                             {advisors?.map((advisor) => (
                                 <UserRowWithCheck userId={advisor.id_user}></UserRowWithCheck>
                             ))}
                         </Container>
-                    </Col>
-                </Row>
-                <Button type="submit">Crear</Button>
 
+                <Button type="submit">Crear</Button>
+                </Row>
             </Form>
 
             <div>
                 {['right'].map((anchor) => (
                     <React.Fragment key={anchor}>
-                        <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                        <Button onClick={toggleDrawer(anchor, true)}>Añadir</Button>
                         <Drawer
                             anchor={anchor}
                             open={state[anchor]}
