@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
-import {getGroupAdvisorUsers} from "../services/UserServices";
+import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
 
 
 
@@ -18,6 +18,7 @@ export const AdvisorMiniCard = ({group}) => {
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+        getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
     return (
