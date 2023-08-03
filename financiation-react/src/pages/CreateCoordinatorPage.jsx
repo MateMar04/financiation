@@ -1,16 +1,15 @@
-import React, {useContext} from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
-import Check from "../assets/images/checked.gif";
+import React, {useContext, useState} from "react";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
-    const [show, setShow] = React.useState(false);
+    const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -27,10 +26,22 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
-            handleShow()
             await postCoordinator()
-        } else {
-            alert('Something went wrong')
+        } else if (response.status == 500) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if (response.status == 401) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if (response.status == 400) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
@@ -44,6 +55,7 @@ const CoordinatorPage = () => {
                         type="number"
                         placeholder="Enter user id"
                         name="id_user"
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -51,31 +63,14 @@ const CoordinatorPage = () => {
                         type="number"
                         placeholder="Enter group id"
                         name="id_group"
+                        required
                     />
                 </Form.Group>
                 <Form.Group>
                     <Button type="submit">Submit</Button>
                 </Form.Group>
             </Form>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a registrado el coordinador correctamente!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
+
         </Container>
     );
 }

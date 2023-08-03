@@ -3,8 +3,12 @@ import "../assets/styles/FormPage.css";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import {UserOption} from "../components/UserOption";
 import {Link, useNavigate} from "react-router-dom";
+import getVisits from "../services/VisitServices";
+import getAdvised from "../services/AdvisedServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import getFaqs from "../services/FaqServices";
+import getMinistryDepartments from "../services/MinistryDepartmentServices";
 
 
 const FormPage = () => {
@@ -31,46 +35,12 @@ const FormPage = () => {
 
 
     useEffect(() => {
-        getMinistryDepartments()
-        getFaqs()
-        getAdvisors()
-        getAdvised()
-        getVisits()
+        getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
+        getFaqs(authTokens.access).then(data => setFaqs(data))
+        getAdvised(authTokens.access).then(data => setAdvised(data))
+        getVisits(authTokens.access).then(data => setVisits(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
     }, [])
-
-
-    let getMinistryDepartments = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/ministry-department/', {headers: headers})
-        let data = await response.json()
-        setMinistryDepartments(data)
-    };
-
-    let getFaqs = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/faq/', {headers: headers})
-        let data = await response.json()
-        setFaqs(data)
-    };
-
-    let getAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advisor/', {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
 
     let postRequest = async (e) => {
         e.preventDefault()
@@ -98,27 +68,6 @@ const FormPage = () => {
         }
     }
 
-    let getAdvised = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advised/', {headers: headers})
-        let data = await response.json()
-        setAdvised(data)
-    };
-
-    let getVisits = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/visit/', {headers: headers})
-        let data = await response.json()
-        setVisits(data)
-    };
 
     return (
         <div>
@@ -134,7 +83,7 @@ const FormPage = () => {
                                         name="visit">
 
                                         {visits?.map((visit) => (
-                                            <option value={visit.id}>{visit.title}</option>
+                                            <option value={visit.id}>{visit.name}</option>
                                         ))}
 
                                     </select>
@@ -143,10 +92,9 @@ const FormPage = () => {
                                     <select
                                         placeholder="Localidad"
                                         className='form-select'
-                                        name="advisor"
-                                    >
+                                        name="advisor">
                                         {advisors?.map((advisor) => (
-                                            <UserOption userId={advisor.id_user} advisorValue={advisor.id}/>
+                                            <option value={advisor.id}>{advisor.first_name} {advisor.last_name}</option>
                                         ))}
                                     </select>
                                 </Col>

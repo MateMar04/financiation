@@ -2,10 +2,12 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {UserRowWithRadio} from "../components/UserRowWithRadio";
-import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {UserRowWithRadio} from "../components/UserRowWithRadio";
+import {UserRowWithCheck} from "../components/UserRowWithCheck";
 
 
 export const CreateGroupPage = () => {
@@ -19,35 +21,13 @@ export const CreateGroupPage = () => {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        getAdvisors()
-        getCoordinators()
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
     }, [])
-
-    let getAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advisor/', {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
-
-    let getCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/coordinator/', {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
 
     let postGroup = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/group/add/', {
+        let response = await fetch('/api/group/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -59,8 +39,21 @@ export const CreateGroupPage = () => {
         if (response.status === 200) {
             handleShow()
             await postGroup()
-        } else {
-            alert('Something went wrong')
+        } else if (response.status == 500) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if (response.status == 401) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if (response.status == 400) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
@@ -71,7 +64,7 @@ export const CreateGroupPage = () => {
                     <Row className='upper-row'>
                         <Col>
                             <h3>Nombre del Grupo</h3>
-                            <Form.Control name="name" placeholder='Nombre' type='text'></Form.Control>
+                            <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
                         </Col>
                     </Row>
                     <Row>
@@ -79,7 +72,7 @@ export const CreateGroupPage = () => {
                             <h3>Coordinador</h3>
                             <Container className='create-group-card-scroll'>
                                 {coordinators?.map((coordinator) => (
-                                    <UserRowWithRadio userId={coordinator.id_user}/>
+                                    <UserRowWithRadio user={coordinator}/>
                                 ))}
                             </Container>
                         </Col>
@@ -87,7 +80,7 @@ export const CreateGroupPage = () => {
                             <h3>Asesores</h3>
                             <Container className='create-group-card-scroll'>
                                 {advisors?.map((advisor) => (
-                                    <UserRowWithCheck userId={advisor.id_user}></UserRowWithCheck>
+                                    <UserRowWithCheck user={advisor}></UserRowWithCheck>
                                 ))}
                             </Container>
                         </Col>

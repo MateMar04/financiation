@@ -41,6 +41,12 @@ urlpatterns = [
     path('request/', views.getRequests, name='getRequests'),
     path('groups/<int:id_group>/advisors', views.getGroupAdvisors, name='getGroupAdvisors'),
     path('groups/<int:id_group>/coordinators', views.getGroupCoordinators, name='getGroupCoordinators'),
+    path('advisor-users/', views.getAdvisorUsers, name='getAdvisorUsers'),
+    path('coordinator-users/', views.getCoordinatorUsers, name='getCoordinatorUsers'),
+    path('group/<int:id_group>/coordinator/users/', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
+    path('group/<int:id_group>/advisor/users/', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
+
+
 
     # POSTs
     path('visit/add/', views.postVisit, name='postVisit'),
