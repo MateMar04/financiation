@@ -1,16 +1,17 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import Check from "../assets/images/checked.gif";
 import '../assets/styles/ActivateAccountPAge.css'
 import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import {SucceedModal} from "../components/SucceedModal"
 
 const AdvisorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
-    const [show, setShow] = React.useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [show, setShow] = useState(false);
+    const toggleModal = () => setShow(!show);
+
 
     let postAdvisor = async (e) => {
         e.preventDefault()
@@ -27,8 +28,8 @@ const AdvisorPage = () => {
             })
         })
         if (response.status === 200) {
-            handleShow()
-            await postAdvisor()
+            toggleModal(); 
+            await postAdvisor() 
         } else if(response.status == 500){
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
@@ -49,6 +50,7 @@ const AdvisorPage = () => {
     return (
 
         <Container className="scrolling">
+            <SucceedModal message="la visita" show ={show}/>
             <Form onSubmit={postAdvisor}>
                 <Form.Group>
                     <Form.Control
@@ -70,25 +72,6 @@ const AdvisorPage = () => {
                     <Button type="submit">Submit</Button>
                 </Form.Group>
             </Form>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a registrado el asesor correctamente!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
         </Container>
     );
 }
