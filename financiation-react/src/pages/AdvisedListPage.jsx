@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import ListAdvised from "../components/ListAdvised";
 import AuthContext from "../context/AuthContext";
+import getAdvised from "../services/AdvisedServices";
 
 const AdvisedListPage = () => {
 
@@ -8,19 +9,9 @@ const AdvisedListPage = () => {
     let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
-        getAdvised()
+        getAdvised(authTokens.access).then(data => setAdvised(data))
     }, [])
 
-    let getAdvised = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advised/', {headers: headers})
-        let data = await response.json()
-        setAdvised(data)
-    };
 
     return (
         <div>

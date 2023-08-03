@@ -57,7 +57,7 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
-                                        <UserParagraph userId={coordinator.id_user}/>
+                                        <p>{coordinator.first_name} {coordinator.last_name}</p>
                                     </strong>
                                 </div>
                                 <sub className='SecondaryText'>Coordinador</sub>

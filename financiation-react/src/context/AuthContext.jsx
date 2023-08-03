@@ -1,18 +1,21 @@
-import {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
-
 
 const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
 
+
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     let [loading, setLoading] = useState(true)
 
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let signIn = async (e) => {
         e.preventDefault()
@@ -34,8 +37,8 @@ export const AuthProvider = ({children}) => {
         })
         if (response.status === 201) {
             history('/')
-        } else {
-            alert('Something went wrong')
+        } else if (response.status === 400) {
+            alert('Los datos ingresados no son validos')
         }
     }
 
@@ -56,8 +59,18 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             history('/menu')
         } else {
-            alert('Something went wrong')
+            if (response.status === 401) {
+                alert("Revisa las credenciales ingresadas")
+
+            }
+            if (response.status === 400) {
+                alert("Ocurrio un error inesperado")
+            } else {
+                alert("Ocurrio un error inesperado")
+
+            }
         }
+
     }
 
     let logoutUser = () => {

@@ -1,26 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React from "react";
 import {Col, Form, Row} from "react-bootstrap";
-import AuthContext from "../context/AuthContext";
 
-export const UserRowWithRadio = ({userId}) => {
-
-    let {authTokens} = useContext(AuthContext)
-    let [user, setUser] = useState([])
-
-    useEffect(() => {
-        getUser()
-    }, [])
-
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/${userId}/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    };
+export const UserRowWithRadio = ({user}) => {
 
     return (
         <Row key={user.id}>

@@ -65,7 +65,7 @@ export const AdvisorMiniCard = ({group}) => {
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
-                                        <UserParagraph userId={advisor.id_user}/>
+                                         <p>{advisor.first_name} {advisor.last_name}</p>
                                     </strong>
                                 </div>
                                 <sub className='SecondaryText'>Asesor</sub>

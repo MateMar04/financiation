@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
-import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -14,39 +13,20 @@ import AdvisorMiniCard from "../components/AdvisorMiniCard";
 import CoordinatorMiniCard from "./CoordinatorMiniCard";
 import {styled} from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
+import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 
 
 export const GroupCard = ({group}) => {
+
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
 
 
     useEffect(() => {
-        getGroupAdvisors()
-        getGroupCoordinators()
+        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
-    let getGroupCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/coordinators`, {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
-
-    let getGroupAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/advisors`, {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
 
     const Grid = styled(MuiGrid)(({theme}) => ({
         width: '100%',
