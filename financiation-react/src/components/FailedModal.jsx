@@ -11,7 +11,7 @@ export const FailedModal = (props, {message}) => {
                 <Modal.Body>
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
-                            <Col md={5}>
+                            <Col ls={5}>
                                 <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
                                 <p className="text-center">¡No se a registrado! {message}</p>
                             </Col>
