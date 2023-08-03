@@ -4,13 +4,13 @@ import '../assets/styles/ActivateAccountPAge.css'
 import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import {SucceedModal} from "../components/SucceedModal"
+import FailedModal from "../components/FailedModal";
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
-    let history = useNavigate()
-    const [show, setShow] = useState(false);
-    const toggleModal = () => setShow(!show);
-    
+    const [showsuccess, showfailture, setShow] = useState(false);
+    const toggleModalsucceed = () => setShow(!showsuccess);
+    const toggleModalfailed = () => setShow(!showfailture);
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -27,30 +27,28 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModal(); 
+            toggleModalsucceed(); 
             await postCoordinator()  
         } else if(response.status == 500){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Hay un campo vacio)')
+            toggleModalfailed(); 
+            alert('no se a registrado la visita (Ya existe)')
+            await postCoordinator()
         } else if(response.status == 401){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
+            toggleModalfailed();
             alert('no se a registrado la visita (Desautorizado)')
+            await postCoordinator()
         } else if(response.status == 400){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
+            toggleModalfailed();
             alert('no se a registrado la visita (Bad request)')
+            await postCoordinator()
         }
     }
 
 
     return (
         <Container className="scrolling">
-            <SucceedModal message="la visita" show ={show}/>
+            <SucceedModal message="la visita" show ={showsuccess}/>
+            <FailedModal message="la visita" show ={showfailture}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control
@@ -72,7 +70,6 @@ const CoordinatorPage = () => {
                     <Button type="submit">Submit</Button> 
                 </Form.Group>
             </Form>
-           
         </Container>
     );
 }
