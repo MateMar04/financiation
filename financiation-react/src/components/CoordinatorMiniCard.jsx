@@ -9,9 +9,10 @@ import Box from '@mui/material/Box';
 import Stack from 'react-bootstrap/Stack';
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
+import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 
 
-export const CoordinatorMiniCard = ({group, profileImg}) => {
+export const CoordinatorMiniCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -19,31 +20,9 @@ export const CoordinatorMiniCard = ({group, profileImg}) => {
 
 
     useEffect(() => {
-        getGroupCoordinators()
-        getUser()
-
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
-    let getGroupCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/coordinators`, {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
 
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/me/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    }
 
     return (
         <>
