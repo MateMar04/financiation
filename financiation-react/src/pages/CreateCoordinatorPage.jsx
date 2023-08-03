@@ -9,7 +9,7 @@ const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const toggleModal = () => setShow(!show);
     
 
     let postCoordinator = async (e) => {
@@ -27,6 +27,7 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
+            toggleModal(); 
             await postCoordinator()  
         } else if(response.status == 500){
             //handleShow()
@@ -48,8 +49,8 @@ const CoordinatorPage = () => {
 
 
     return (
-
         <Container className="scrolling">
+            <SucceedModal message="la visita" show ={show}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control
