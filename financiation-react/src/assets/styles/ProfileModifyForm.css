@@ -1,30 +1,57 @@
 .profile-form-col {
     margin-top: 2vh;
     margin-bottom: 2vh;
-}
+    display: flex;
+   
 
+  align-items: center; /* Centrar verticalmente */
+
+}
+.profile-form-col1 {
+    margin-top: 0vh;
+    margin-bottom: 0vh;
+    display: flex;
+   
+
+  align-items: center; /* Centrar verticalmente */
+
+}
+.profile-form-col2 {
+    margin-top: 0vh;
+    margin-bottom: 2vh;
+    display: flex;
+   
+
+  align-items: center; 
+
+}
 .profile-fc {
-    border: none;
+    
     box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    align-self: center;
+    
+    
 }
 
 .button-container {
     display: flex;
     justify-content: start;
     align-items: center;
+
 }
 
 .change-password {
     background-color: rgb(40, 201, 48);
     align-self: center;
-    width: auto;
-    height: auto;
+    width: 25vh;
+    height: 7.5vh;
     border-color: rgb(40, 201, 48);
     box-shadow: rgba(40, 201, 48, 0.5) 0px 7px 29px 0px;
+    text-align: center;
 }
 
 .change-password:hover {
-    background-color: rgb(32, 168, 39);
+    background-color: rgb(32, 64, 168);
     border-color: rgb(32, 168, 39);
     box-shadow: rgba(40, 201, 48, 0.5) 0px 7px 29px 0px;
 }
@@ -35,3 +62,13 @@
     box-shadow: rgba(13, 110, 253, 0.5) 0px 7px 29px 0px;
 }
 
+.a{
+    align-items: center; 
+    border: none;
+}
+
+.ab{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
