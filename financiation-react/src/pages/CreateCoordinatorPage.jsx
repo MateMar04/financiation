@@ -1,16 +1,16 @@
 import React, {useContext, useState} from "react";
 import {Button,Container,Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import {SucceedModal} from "../components/SucceedModal"
 import FailedModal from "../components/FailedModal";
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
-    const [showsuccess, showfailture, setShow] = useState(false);
+    const [showfail, setShow] = useState(false);
+    const [showsuccess] = useState(false);
     const toggleModalsucceed = () => setShow(!showsuccess);
-    const toggleModalfailed = () => setShow(!showfailture);
+    const toggleModalfailed = () => setShow(!showfail);
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -31,7 +31,6 @@ const CoordinatorPage = () => {
             await postCoordinator()  
         } else if(response.status == 500){
             toggleModalfailed(); 
-            alert('no se a registrado la visita (Ya existe)')
             await postCoordinator()
         } else if(response.status == 401){
             toggleModalfailed();
@@ -48,7 +47,7 @@ const CoordinatorPage = () => {
     return (
         <Container className="scrolling">
             <SucceedModal message="la visita" show ={showsuccess}/>
-            <FailedModal message="la visita" show ={showfailture}/>
+            <FailedModal message="la visita" show ={showfail}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control
@@ -70,6 +69,7 @@ const CoordinatorPage = () => {
                     <Button type="submit">Submit</Button> 
                 </Form.Group>
             </Form>
+
         </Container>
     );
 }

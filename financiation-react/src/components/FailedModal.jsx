@@ -3,6 +3,7 @@ import '../assets/styles/RowWithCheck.css'
 import Fail from "../assets/images/failed.gif";
 import {Link} from "react-router-dom";
 import {Button, Col,Container, Modal, Row} from "react-bootstrap";
+const refresh = () => window.location.reload(true)
 
 
 export const FailedModal = (props, {message}) => {
@@ -19,8 +20,8 @@ export const FailedModal = (props, {message}) => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                <Link to={''}>
-                        <Button onClick={props.onClose} variant="failed">
+                    <Link to={''}>
+                        <Button onClick={refresh} variant="failed">
                             OK
                         </Button>
                     </Link>
