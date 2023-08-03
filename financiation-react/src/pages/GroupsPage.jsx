@@ -11,19 +11,21 @@ export const GroupsPage = () => {
     let [groups, setGroups] = useState([])
     let history = useNavigate()
 
+    console.log(groups)
+
     useEffect(() => {
         getGroups(authTokens.access).then(data => setGroups(data))
     }, [])
 
 
     return (
-        <>
+        <fragment>
         {groups?.map((group) => (
             <Container>
                 <GroupCard group={group}/>
             </Container>
         ))}
-        </>
+        </fragment>
 
 )
 }
