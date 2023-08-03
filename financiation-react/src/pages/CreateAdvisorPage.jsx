@@ -5,12 +5,14 @@ import '../assets/styles/ActivateAccountPAge.css'
 import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
 
 const AdvisorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
     const [show, setShow] = useState(false);
     const toggleModal = () => setShow(!show);
+
 
 
     let postAdvisor = async (e) => {
@@ -30,26 +32,22 @@ const AdvisorPage = () => {
         if (response.status === 200) {
             toggleModal(); 
             await postAdvisor() 
+            
         } else if(response.status == 500){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Hay un campo vacio)')
-        } else if(response.status == 401){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
             alert('no se a registrado la visita (Desautorizado)')
+     
+        } else if(response.status == 401){
+          
+            alert('no se a registrado la visita (Desautorizado)')
+
         } else if(response.status == 400){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
+          
             alert('no se a registrado la visita (Bad request)')
         }
     }
     return (
-
         <Container className="scrolling">
+
             <SucceedModal message="la visita" show ={show}/>
             <Form onSubmit={postAdvisor}>
                 <Form.Group>
