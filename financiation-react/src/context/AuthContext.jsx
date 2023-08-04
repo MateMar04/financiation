@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import React from 'react';
 import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 
 const AuthContext = createContext();
@@ -42,9 +43,10 @@ export const AuthProvider = ({children}) => {
             })
         })
         if (response.status === 201) {
-            history('/')
-        } else {
-            alert('Something went wrong')
+            await signIn()
+        } else  if(response.status === 400) {
+            toggleModalfailed();
+            await signIn()
         }
     }
 
