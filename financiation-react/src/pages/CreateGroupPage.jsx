@@ -14,7 +14,8 @@ export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
-    const [show, setShow] = React.useState(false);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
@@ -57,23 +58,24 @@ export const CreateGroupPage = () => {
             body: JSON.stringify({"name": e.target.name.value})
         })
         if (response.status === 200) {
-            toggleModal();
+            toggleModalsucceed();
             await postGroup()
         } else if(response.status == 500){
             toggleModalfailed(); 
-            await postCoordinator() 
+            await postGroup() 
         } else if(response.status == 401){
             toggleModalfailed();
-            await postCoordinator() 
+            await postGroup() 
         } else if(response.status == 400){
             toggleModalfailed();
-            await postCoordinator() 
+            await postGroup() 
         }
     }
 
     return (
         <Container fluid>
-            <SucceedModal message="la visita" show ={show}/>
+            <SucceedModal message="el coordinador" show ={showsuccess}/>
+            <FailedModal message="el coordinador" show ={showfail}/>
             <Form onSubmit={postGroup}>
                 <Card className='create-group-card'>
                     <Row className='upper-row'>
