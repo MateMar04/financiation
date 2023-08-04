@@ -2,11 +2,16 @@ import {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import React from 'react';
+import FailedModal from "../components/FailedModal";
+
 
 const AuthContext = createContext();
 
+
 export default AuthContext
 export const AuthProvider = ({children}) => {
+    const [showfail, setShowfailture] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
@@ -61,14 +66,15 @@ export const AuthProvider = ({children}) => {
             history('/menu')
         } else {
             if (response.status === 401) {
-                alert("Revisa las credenciales ingresadas")
-
+                toggleModalfailed();
+                await loginUser()
             } if (response.status === 400) {
-                alert("Ocurrio un error inesperado")
-            }
+                toggleModalfailed();
+                await loginUser()            }
             else{
-                alert("Ocurrio un error inesperado")
-
+                
+                toggleModalfailed();
+                await loginUser()
             }
         }
 
@@ -129,7 +135,10 @@ export const AuthProvider = ({children}) => {
 
 
     return (
+
         <AuthContext.Provider value={contextData}>
+                        <FailedModal message="la visita" show ={showfail}/>
+
             {loading ? null : children}
         </AuthContext.Provider>
     );
