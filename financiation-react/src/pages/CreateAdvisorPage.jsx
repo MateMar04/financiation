@@ -10,8 +10,10 @@ import {FailedModal} from "../components/FailedModal"
 const AdvisorPage = () => {
     let {authTokens} = useContext(AuthContext)
     let history = useNavigate()
-    const [show, setShow] = useState(false);
-    const toggleModal = () => setShow(!show);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
 
 
@@ -30,25 +32,30 @@ const AdvisorPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModal(); 
-            await postAdvisor() 
+            toggleModalsucceed(); 
+            await postAdvisor()  
             
         } else if(response.status == 500){
-            alert('no se a registrado la visita (Desautorizado)')
+            toggleModalfailed();
+
+            await postAdvisor()
      
         } else if(response.status == 401){
-          
-            alert('no se a registrado la visita (Desautorizado)')
+            toggleModalfailed();
+
+            await postAdvisor()
 
         } else if(response.status == 400){
-          
-            alert('no se a registrado la visita (Bad request)')
+            toggleModalfailed();
+
+            await postAdvisor()
         }
     }
     return (
         <Container className="scrolling">
 
-            <SucceedModal message="la visita" show ={show}/>
+            <SucceedModal message="el asesor" show ={showsuccess    }/>
+            <FailedModal message="el asesor" show ={showfail}/>
             <Form onSubmit={postAdvisor}>
                 <Form.Group>
                     <Form.Control
