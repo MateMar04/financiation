@@ -7,10 +7,10 @@ import FailedModal from "../components/FailedModal";
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
-    const [showfail, setShow] = useState(false);
-    const [showsuccess] = useState(false);
-    const toggleModalsucceed = () => setShow(!showsuccess);
-    const toggleModalfailed = () => setShow(!showfail);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -31,14 +31,15 @@ const CoordinatorPage = () => {
             await postCoordinator()  
         } else if(response.status == 500){
             toggleModalfailed(); 
+            //alert('no se a registrado la visita (Ya existe una visita con uno de esos datos)')
             await postCoordinator()
         } else if(response.status == 401){
             toggleModalfailed();
-            alert('no se a registrado la visita (Desautorizado)')
+            //alert('no se a registrado la visita (Desautorizado)')
             await postCoordinator()
         } else if(response.status == 400){
             toggleModalfailed();
-            alert('no se a registrado la visita (Bad request)')
+            //alert('no se a registrado la visita (Bad request)')
             await postCoordinator()
         }
     }
