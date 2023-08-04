@@ -6,17 +6,16 @@ import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
-
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
 
 export const CreateGroupPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
-    let history = useNavigate()
     const [show, setShow] = React.useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const toggleModal = () => setShow(!show);
 
     useEffect(() => {
         getAdvisors()
@@ -57,13 +56,12 @@ export const CreateGroupPage = () => {
             body: JSON.stringify({"name": e.target.name.value})
         })
         if (response.status === 200) {
-            handleShow()
+            toggleModal();
             await postGroup()
         } else if(response.status == 500){
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
             //await postVisit()
-            alert('no se a registrado la visita (Hay un campo vacio)')
         } else if(response.status == 401){
             //handleShow()
             //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
@@ -79,6 +77,7 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
+            <SucceedModal message="la visita" show ={show}/>
             <Form onSubmit={postGroup}>
                 <Card className='create-group-card'>
                     <Row className='upper-row'>
@@ -108,25 +107,7 @@ export const CreateGroupPage = () => {
                     <Button type="submit">Crear</Button>
                 </Card>
             </Form>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a registrado el grupo correctamente!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
+                                    
         </Container>
     )
 }
