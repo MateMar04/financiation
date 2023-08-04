@@ -31,7 +31,7 @@ const CoordinatorPage = () => {
             await postCoordinator()  
         } else if(response.status == 500){
             toggleModalfailed(); 
-            //alert('no se a registrado la visita (Ya existe una visita con uno de esos datos)')
+            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
             await postCoordinator()
         } else if(response.status == 401){
             toggleModalfailed();
@@ -47,8 +47,8 @@ const CoordinatorPage = () => {
 
     return (
         <Container className="scrolling">
-            <SucceedModal message="la visita" show ={showsuccess}/>
-            <FailedModal message="la visita" show ={showfail}/>
+            <SucceedModal message="el coordinador" show ={showsuccess}/>
+            <FailedModal message="el coordinador" show ={showfail}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control

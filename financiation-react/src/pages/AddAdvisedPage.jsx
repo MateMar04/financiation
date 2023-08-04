@@ -34,7 +34,7 @@ export const AddAdvisedPage = () => {
             await postAdvised()
         } else if(response.status == 500){
             toggleModalfailed(); 
-            //alert('no se a registrado la visita (Hay un campo vacio)')
+            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
             await postAdvised()
         } else if(response.status == 401){
             toggleModalfailed(); 
