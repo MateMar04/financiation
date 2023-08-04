@@ -6,6 +6,7 @@ import {Button, Col,Container, Modal, Row} from "react-bootstrap";
 const refresh = () => window.location.reload(true)
 
 
+
 export const FailedModal = (props, {message}) => {
     return (
         <Modal show={props.show}>

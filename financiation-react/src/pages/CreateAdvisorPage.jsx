@@ -32,6 +32,7 @@ const AdvisorPage = () => {
             })
         })
         if (response.status === 200) {
+
             toggleModalsucceed(); 
             await postAdvisor()  
             

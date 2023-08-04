@@ -2,7 +2,7 @@ import React from "react";
 import '../assets/styles/RowWithCheck.css'
 import Check from "../assets/images/checked.gif";
 import {Link} from "react-router-dom";
-import {Button, Col,Container, Modal, Row} from "react-bootstrap";
+import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 
 
 export const SucceedModal = (props, {message}) => {

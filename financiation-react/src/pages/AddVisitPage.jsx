@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -20,8 +20,6 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
-import SucceedModal from "../components/SucceedModal"
-import {FailedModal} from "../components/FailedModal"
 
 const AddVisitPage = () => {
 

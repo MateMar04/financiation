@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Button,Container,Form} from "react-bootstrap";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
 import AuthContext from "../context/AuthContext";
 import {SucceedModal} from "../components/SucceedModal"
@@ -11,6 +11,7 @@ const CoordinatorPage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+
 
     let postCoordinator = async (e) => {
         e.preventDefault()
@@ -67,7 +68,7 @@ const CoordinatorPage = () => {
                     />
                 </Form.Group>
                 <Form.Group>
-                    <Button type="submit">Submit</Button> 
+                    <Button type="submit">Submit</Button>
                 </Form.Group>
             </Form>
 

@@ -1,10 +1,9 @@
-import {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import React from 'react';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-
 
 const AuthContext = createContext();
 
