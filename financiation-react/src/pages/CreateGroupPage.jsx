@@ -15,7 +15,8 @@ export const CreateGroupPage = () => {
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
     const [show, setShow] = React.useState(false);
-    const toggleModal = () => setShow(!show);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
         getAdvisors()
@@ -59,19 +60,14 @@ export const CreateGroupPage = () => {
             toggleModal();
             await postGroup()
         } else if(response.status == 500){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
+            toggleModalfailed(); 
+            await postCoordinator() 
         } else if(response.status == 401){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Desautorizado)')
+            toggleModalfailed();
+            await postCoordinator() 
         } else if(response.status == 400){
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Bad request)')
+            toggleModalfailed();
+            await postCoordinator() 
         }
     }
 
