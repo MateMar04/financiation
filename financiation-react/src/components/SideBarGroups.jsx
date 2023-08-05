@@ -3,21 +3,22 @@ import MenuIcon from '@mui/icons-material/Menu';
 import React, {useContext, useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import {Form} from "react-bootstrap";
-import AdvisorMiniCard from "./AdvisorMiniCard";
-import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
+import {UserRowWithRadio} from "./UserRowWithRadio";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import AuthContext from "../context/AuthContext";
+import {AllAdvisorsMinisCards} from "./AllAdvisorsMinisCards";
 
 
-export const SideBarGroups = ({group}) => {
-    let {authTokens} = useContext(AuthContext)
+export const SideBarGroups = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-    let [coordinators, setCoordinators] = useState([])
+    let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
-
+    let [coordinators, setCoordinators] = useState([])
 
     useEffect(() => {
-        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
     }, [])
 
     return (
@@ -32,9 +33,7 @@ export const SideBarGroups = ({group}) => {
                     <hr/>
                     <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
                     <Typography variant={'h7'}>Asesores</Typography>
-                    <AdvisorMiniCard group={group}/>
-
-
+                    <AllAdvisorsMinisCards/>
                 </Box>
             </Drawer>
         </>
