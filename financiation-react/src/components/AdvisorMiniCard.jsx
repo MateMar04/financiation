@@ -9,7 +9,6 @@ import ProfileData from "../components/ProfileData";
 import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
 
 
-
 export const AdvisorMiniCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
@@ -27,7 +26,7 @@ export const AdvisorMiniCard = ({group}) => {
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={user?.profile_picture}
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}
                                     username={user?.username}>
                             </Avatar>
                         </Col>

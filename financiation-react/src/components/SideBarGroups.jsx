@@ -8,6 +8,8 @@ import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import AuthContext from "../context/AuthContext";
 import {AllAdvisorsMinisCards} from "./AllAdvisorsMinisCards";
+import {Col, Container, Row} from 'react-bootstrap';
+import TextField from '@mui/material/TextField';
 
 
 export const SideBarGroups = () => {
@@ -28,12 +30,14 @@ export const SideBarGroups = () => {
                 AÑADIR
             </Button>
             <Drawer anchor='right' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-                <Box p={2} width={'250px'} textAlign={'center'} role={'presentation'}>
-                    <Typography variant={'h6'} component={'div'}>Grupo de</Typography>
-                    <hr/>
-                    <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
-                    <Typography variant={'h7'}>Asesores</Typography>
-                    <AllAdvisorsMinisCards/>
+                <Box width={'250px'} textAlign={'center'}>
+                    <Container fluid>
+
+                        <Row className={'justify-content-md-center'} style={{ paddingTop:'25px'}}>
+                            <TextField label="Nombre del grupo" variant="standard" name={'name'} style={{maxWidth: '180px'}}/>
+                        </Row>
+                        <AllAdvisorsMinisCards/>
+                    </Container>
                 </Box>
             </Drawer>
         </>

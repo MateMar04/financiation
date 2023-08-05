@@ -20,3 +20,9 @@
     text-transform: capitalize;
 }
 
+.AllAdvisorMiniCard{
+    max-height: 100px;
+    max-width: auto;
+
+
+}
