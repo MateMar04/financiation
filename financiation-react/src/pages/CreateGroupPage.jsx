@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
@@ -8,7 +8,8 @@ import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
-
+import Button from '@mui/material/Button';
+import {SideBarGroups} from "../components/SideBarGroups";
 
 export const CreateGroupPage = () => {
 
@@ -88,6 +89,9 @@ export const CreateGroupPage = () => {
                     <Button type="submit">Crear</Button>
                 </Card>
             </Form>
+
+            <SideBarGroups/>
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                     <Container className='justify-content-center'>
