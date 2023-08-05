@@ -19,18 +19,20 @@ export const AllAdvisorsMinisCards = ({group}) => {
         <>
             {advisors?.map((advisor) => (
                 <Container className={'AllAdvisorMiniCard'}>
-                        <Row>
-                            <Col md={{ span: 4, offset: 4 }} className="mx-auto">
-                                <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}>
-                                </Avatar>
-                            </Col>
-                        </Row>
-                        <Row className={'justify-content-center'}>
-                                <strong className='PrimaryText'>
-                                    <p>{advisor.first_name} {advisor.last_name}</p>
-                                </strong>
-                            <sub className='SecondaryText'>Asesor</sub>
-                        </Row>
+                    <Row>
+                        <Col className="mx-auto" md={1} xs={1}>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}/>
+                        </Col>
+                        <Col>
+                            <strong className='PrimaryText'>
+                                <sub>{advisor.first_name} {advisor.last_name}</sub>
+                            </strong>
+                        </Col>
+                    </Row>
+                    <Row className={'justify-content-center'}>
+
+                        <sub className='SecondaryText'>Asesor</sub>
+                    </Row>
 
                 </Container>
             ))}
