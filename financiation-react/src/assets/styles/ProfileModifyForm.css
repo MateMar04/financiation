@@ -41,18 +41,18 @@
 }
 
 .change-password {
-    background-color: rgb(40, 201, 48);
+    background-color: rgb(32, 64, 168);
     align-self: center;
     width: 25vh;
     height: 7.5vh;
-    border-color: rgb(40, 201, 48);
+    border-color: rgb(32, 64, 168);
     box-shadow: rgba(40, 201, 48, 0.5) 0px 7px 29px 0px;
     text-align: center;
 }
 
 .change-password:hover {
     background-color: rgb(32, 64, 168);
-    border-color: rgb(32, 168, 39);
+    border-color: rgb(32, 64, 168);
     box-shadow: rgba(40, 201, 48, 0.5) 0px 7px 29px 0px;
 }
 
