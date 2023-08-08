@@ -411,28 +411,28 @@ def getRequestStatus(request):
 
 
 @api_view(['GET'])
-def getContactedReferrerEmails(request):
+def getContactedReferrersEmails(request):
     contactedreferreremail = ContactedReferrerEmail.objects.all()
     serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getContactedReferrerPhones(request):
+def getContactedReferrersPhones(request):
     contactedreferrerphone = ContactedReferrerPhone.objects.all()
     serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMayorEmails(request):
+def getMayorsEmails(request):
     mayoremail = MayorEmail.objects.all()
     serializer = MayorEmailSerializer(mayoremail, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMayorPhones(request):
+def getMayorsPhones(request):
     mayorphone = MayorPhone.objects.all()
     serializer = MayorPhoneSerializer(mayorphone, many=True)
     return Response(serializer.data)
@@ -462,7 +462,7 @@ def getCoordinators(request):
 
 
 @api_view(['GET'])
-def getOneCoordinator(request, id):
+def getCoordinator(request, id):
     coordinator = Coordinator.objects.get(id=id)
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
@@ -562,7 +562,7 @@ def getRequestStatuses(request):
 
 
 @api_view(['POST'])
-def postAdvised(request):
+def postAdvisee(request):
     data = request.data
     advised = Advised.objects.create(
         first_name=data['first_name'],
