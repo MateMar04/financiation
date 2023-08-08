@@ -8,7 +8,7 @@ urlpatterns = [
     # Advisees
     path('advisees', views.getAdvisees, name='advisees'),
     path('advisees/<int:id>', views.getAdvisee, name='advisee'),
-    path('advisees', views.postAdvised, name='postAdvisee'),
+    path('advisees', views.postAdvisee, name='postAdvisee'),
 
     # Locations
     path('locations', views.getLocations, name='locations'),
@@ -25,8 +25,8 @@ urlpatterns = [
 
     # Contacted Referrers
     path('contacted-referrers', views.getContactedReferrers, name='contactedReferrers'),
-    path('contacted-referrers-emails', views.getContactedReferrerEmails, name='contactedReferrerEmails'),
-    path('contacted-referrers-phones', views.getContactedReferrerPhones, name='contactedReferrerPhones'),
+    path('contacted-referrers-emails', views.getContactedReferrersEmails, name='contactedReferrerEmails'),
+    path('contacted-referrers-phones', views.getContactedReferrersPhones, name='contactedReferrerPhones'),
 
     # Addresses
     path('addresses', views.getAddresses, name='addresses'),
@@ -56,8 +56,8 @@ urlpatterns = [
 
     # Mayors
     path('mayors', views.getMayors, name='mayors'),
-    path('mayors-emails', views.getMayorEmails, name='mayorEmails'),
-    path('mayors-phones', views.getMayorPhones, name='getMayorPhones'),
+    path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
+    path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
 
     # Ministry Departments
     path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
@@ -67,14 +67,14 @@ urlpatterns = [
 
     # Coordinators
     path('coordinators', views.getCoordinators, name='coordinators'),
-    path('coordinators/<int:id>', views.getOneCoordinator, name='coordinator'),
-    path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='getGroupCoordinators'),
+    path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
+    path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
     path('coordinators', views.postCoordinator, name='postCoordinator'),
 
     # Advisors
     path('advisors', views.getAdvisors, name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
-    path('groups/<int:id>/advisors', views.getGroupAdvisors, name='getGroupAdvisors'),
+    path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
     path('advisors', views.postAdvisor, name='postAdvisor'),
 
     # Roles
