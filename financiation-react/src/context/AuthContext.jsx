@@ -1,11 +1,16 @@
 import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
+
+    const [showfail, setShowfailture] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
@@ -13,9 +18,6 @@ export const AuthProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     let history = useNavigate()
-    const [show, setShow] = React.useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     let signIn = async (e) => {
         e.preventDefault()
@@ -37,8 +39,10 @@ export const AuthProvider = ({children}) => {
         })
         if (response.status === 201) {
             history('/')
-        } else if (response.status === 400) {
-            alert('Los datos ingresados no son validos')
+            await signIn()
+        } else  if(response.status === 400) {
+            toggleModalfailed();
+            await signIn()
         }
     }
 
@@ -60,14 +64,15 @@ export const AuthProvider = ({children}) => {
             history('/menu')
         } else {
             if (response.status === 401) {
-                alert("Revisa las credenciales ingresadas")
-
-            }
-            if (response.status === 400) {
-                alert("Ocurrio un error inesperado")
-            } else {
-                alert("Ocurrio un error inesperado")
-
+                toggleModalfailed();
+                await loginUser()
+            } if (response.status === 400) {
+                toggleModalfailed();
+                await loginUser()            }
+            else{
+                
+                toggleModalfailed();
+                await loginUser()
             }
         }
 
@@ -128,7 +133,10 @@ export const AuthProvider = ({children}) => {
 
 
     return (
+
         <AuthContext.Provider value={contextData}>
+                        <FailedModal message="la visita" show ={showfail}/>
+
             {loading ? null : children}
         </AuthContext.Provider>
     );

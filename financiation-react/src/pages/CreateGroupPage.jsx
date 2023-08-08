@@ -2,8 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 import {Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
+import {UserRowWithRadio} from "../components/UserRowWithRadio"
+import {UserRowWithCheck} from "../components/UserRowWithCheck"
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
+
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import {UserRowWithRadio} from "../components/UserRowWithRadio";
@@ -26,6 +29,9 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
+
 
 export const CreateGroupPage = () => {
     const [showPassword, setShowPassword] = React.useState(false);
@@ -34,10 +40,10 @@ export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
-    let history = useNavigate()
-    const [show, setShow] = React.useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -46,10 +52,32 @@ export const CreateGroupPage = () => {
         event.preventDefault();
     };
     useEffect(() => {
-        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
-        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
+        getAdvisor()
+        getCoordinator()
     }, [])
 
+    let getAdvisor = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advisor/', {headers: headers})
+        let data = await response.json()
+        setAdvisors(data)
+    };
+
+    let getCoordinator = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/coordinator/', {headers: headers})
+        let data = await response.json()
+        setCoordinators(data)
+    };
+    
     let postGroup = async (e) => {
         e.preventDefault()
         let response = await fetch('/api/group/add/', {
@@ -62,29 +90,27 @@ export const CreateGroupPage = () => {
             body: JSON.stringify({"name": e.target.name.value})
         })
         if (response.status === 200) {
-            handleShow()
+            toggleModalsucceed();
             await postGroup()
-        } else if (response.status === 500) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Hay un campo vacio)')
-        } else if (response.status === 401) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Desautorizado)')
-        } else if (response.status === 400) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
-            alert('no se a registrado la visita (Bad request)')
+
+        } else if(response.status == 500){
+            toggleModalfailed(); 
+            await postGroup() 
+        } else if(response.status == 401){
+            toggleModalfailed();
+            await postGroup() 
+        } else if(response.status == 400){
+            toggleModalfailed();
+            await postGroup() 
+
         }
     }
 
 
     return (
         <Container fluid>
+            <SucceedModal message="el coordinador" show ={showsuccess}/>
+            <FailedModal message="el coordinador" show ={showfail}/>
             <Form onSubmit={postGroup}>
                 <Container>
 
@@ -125,6 +151,7 @@ export const CreateGroupPage = () => {
             </Form>
 
 
+
             <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                     <Container className='justify-content-center'>
@@ -144,6 +171,7 @@ export const CreateGroupPage = () => {
                     </Link>
                 </Modal.Footer>
             </Modal>
+
         </Container>
     )
 }
