@@ -249,15 +249,15 @@ def postRequest(request):
 
 
 @api_view(['GET'])
-def getAdvised(request):
+def getAdvisees(request):
     advised = Advised.objects.all()
     serializer = AdvisedSerializer(advised, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getOneAdvised(request, pk):
-    advised = Advised.objects.get(id=pk)
+def getAdvisee(request, id):
+    advised = Advised.objects.get(id=id)
     serializer = AdvisedSerializer(advised, many=False)
     return Response(serializer.data)
 
@@ -313,7 +313,7 @@ def postGroup(request):
 
 
 @api_view(['GET'])
-def getLocalities(request):
+def getLocations(request):
     localities = Locality.objects.all()
     serializer = LocalitySerializer(localities, many=True)
     return Response(serializer.data)
@@ -390,7 +390,7 @@ def getRequests(request):
 
 
 @api_view(['GET'])
-def getUserAccount(request):
+def getUsers(request):
     useraccount = UserAccount.objects.all()
     serializer = UserAccountSerializer(useraccount, many=True)
     return Response(serializer.data)
@@ -411,28 +411,28 @@ def getRequestStatus(request):
 
 
 @api_view(['GET'])
-def getContactedReferrerEmail(request):
+def getContactedReferrerEmails(request):
     contactedreferreremail = ContactedReferrerEmail.objects.all()
     serializer = ContactedReferrerEmailSerializer(contactedreferreremail, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getContactedReferrerPhone(request):
+def getContactedReferrerPhones(request):
     contactedreferrerphone = ContactedReferrerPhone.objects.all()
     serializer = ContactedReferrerPhoneSerializer(contactedreferrerphone, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMayorEmail(request):
+def getMayorEmails(request):
     mayoremail = MayorEmail.objects.all()
     serializer = MayorEmailSerializer(mayoremail, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMayorPhone(request):
+def getMayorPhones(request):
     mayorphone = MayorPhone.objects.all()
     serializer = MayorPhoneSerializer(mayorphone, many=True)
     return Response(serializer.data)
@@ -462,8 +462,8 @@ def getCoordinators(request):
 
 
 @api_view(['GET'])
-def getOneCoordinator(request, pk):
-    coordinator = Coordinator.objects.get(id=pk)
+def getOneCoordinator(request, id):
+    coordinator = Coordinator.objects.get(id=id)
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
 
@@ -492,8 +492,8 @@ def getAdvisors(request):
 
 
 @api_view(['GET'])
-def getOneAdvisor(request, pk):
-    advisor = Advisor.objects.get(id=pk)
+def getAdvisor(request, id):
+    advisor = Advisor.objects.get(id=id)
     serializer = AdvisorSerializer(advisor, many=False)
     return Response(serializer.data)
 
@@ -574,15 +574,15 @@ def postAdvised(request):
 
 
 @api_view(['GET'])
-def getGroupAdvisors(request, id_group):
-    advisors = Advisor.objects.filter(id_group__id=id_group)
+def getGroupAdvisors(request, id):
+    advisors = Advisor.objects.filter(id_group__id=id)
     serializer = AdvisorSerializer(advisors, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getGroupCoordinators(request, id_group):
-    coordinators = Coordinator.objects.filter(id_group__id=id_group)
+def getGroupCoordinators(request, id):
+    coordinators = Coordinator.objects.filter(id_group__id=id)
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
 
@@ -602,13 +602,13 @@ def getCoordinatorUsers(request):
 
 
 @api_view(['GET'])
-def getGroupCoordinatorUsers(request, id_group):
-    users = User.objects.filter(coordinator__id_group__id=id_group)
+def getGroupCoordinatorUsers(request, id):
+    users = User.objects.filter(coordinator__id_group__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getGroupAdvisorUsers(request, id_group):
-    users = User.objects.filter(advisor__id_group__id=id_group)
+def getGroupAdvisorUsers(request, id):
+    users = User.objects.filter(advisor__id_group__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
