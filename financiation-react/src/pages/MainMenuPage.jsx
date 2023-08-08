@@ -11,7 +11,7 @@ export const MainMenuPage = () => {
                               link2="/visit/add/"/>
                 </Col>
                 <Col lg={4}>
-                    <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/group/"
+                    <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/groups/"
                               link2="/group/add/"/>
                 </Col>
                 <Col lg={4}>
