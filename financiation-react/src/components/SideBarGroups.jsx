@@ -31,7 +31,7 @@ export const SideBarGroups = () => {
                             <Row className={'justify-content-center'}>
                                 <hr/>
                                 <Button variant="outlined" name={'name'} style={{maxWidth: '180px'}}
-                                        InputProps={{sx: {borderRadius: '25px'}}}>Crear Grupo</Button>
+                                        InputProps={{sx: {borderRadius: '25px'}}} type="submit">Crear Grupo</Button>
                             </Row>
                         </div>
 

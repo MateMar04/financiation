@@ -10,8 +10,26 @@ import {UserRowWithRadio} from "../components/UserRowWithRadio";
 import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import Button from '@mui/material/Button';
 import {SideBarGroups} from "../components/SideBarGroups";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import Box, {BoxProps} from '@mui/material/Box';
+
+
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
 
 export const CreateGroupPage = () => {
+    const [showPassword, setShowPassword] = React.useState(false);
+
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -21,6 +39,12 @@ export const CreateGroupPage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
     useEffect(() => {
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
@@ -58,39 +82,48 @@ export const CreateGroupPage = () => {
         }
     }
 
+
     return (
         <Container fluid>
             <Form onSubmit={postGroup}>
-                <Card className='create-group-card'>
-                    <Row className='upper-row'>
-                        <Col>
-                            <h3>Nombre del Grupo</h3>
-                            <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col lg={6} className='create-group-column'>
-                            <h3>Coordinador</h3>
-                            <Container className='create-group-card-scroll'>
-                                {coordinators?.map((coordinator) => (
-                                    <UserRowWithRadio user={coordinator}/>
-                                ))}
-                            </Container>
-                        </Col>
-                        <Col lg={6} className='create-group-column'>
-                            <h3>Asesores</h3>
-                            <Container className='create-group-card-scroll'>
-                                {advisors?.map((advisor) => (
-                                    <UserRowWithCheck user={advisor}></UserRowWithCheck>
-                                ))}
-                            </Container>
-                        </Col>
-                    </Row>
-                    <Button type="submit">Crear</Button>
-                </Card>
+                <Container>
+
+                    <TextField type="search" id="search" label="Buscar persona"
+
+                               sx={{m: 1, width: '25ch'}}
+                               InputProps={{
+                                   startAdornment: <InputAdornment position="start">kg</InputAdornment>,
+                               }}/>
+                    <IconButton type="submit" aria-label="search">
+                        <SearchIcon style={{fill: "grey"}}/>
+                    </IconButton>
+
+                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
+                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                    >
+                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+
+                    <SideBarGroups/>
+                </Container>
+
+
             </Form>
 
-            <SideBarGroups/>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
