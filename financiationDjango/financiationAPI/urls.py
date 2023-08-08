@@ -43,7 +43,7 @@ urlpatterns = [
     path('advisor-users', views.getAdvisorUsers, name='advisorUsers'),
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
     path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
-    path('group/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
+    path('groups/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
 
     # Vehicles
     path('vehicles', views.getVehicles, name='vehicles'),
