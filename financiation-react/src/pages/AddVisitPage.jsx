@@ -20,6 +20,8 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 const AddVisitPage = () => {
 

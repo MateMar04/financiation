@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from "react";
 import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
+import {UserRowWithRadio} from "../components/UserRowWithRadio"
+import {UserRowWithCheck} from "../components/UserRowWithCheck"
 import {Link, useNavigate} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
 import {SucceedModal} from "../components/SucceedModal"
@@ -18,10 +20,32 @@ export const CreateGroupPage = () => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
-        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
+        getAdvisor()
+        getCoordinator()
     }, [])
 
+    let getAdvisor = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/advisor/', {headers: headers})
+        let data = await response.json()
+        setAdvisors(data)
+    };
+
+    let getCoordinator = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/coordinator/', {headers: headers})
+        let data = await response.json()
+        setCoordinators(data)
+    };
+    
     let postGroup = async (e) => {
         e.preventDefault()
         let response = await fetch('/api/group/add/', {
