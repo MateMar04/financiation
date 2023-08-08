@@ -33,6 +33,17 @@ export const MainMenuPage = () => {
                               link1="/coordinators/"
                               link2="/coordinator/add/"/>
                 </Col>
+<<<<<<< HEAD
+=======
+                <Col lg={4}>
+                    <MenuCard title="Asesorados" button1="Ver Asesorados" button2="Crear Asesorado" link1="/advised/"
+                              link2="/advised/add/"/>
+                </Col>
+                <Col lg={4}>
+                </Col>
+                <Col lg={4}>
+                </Col>
+>>>>>>> e95ec53a64d20bbbe5b4305fbecfa43c70adc4cf
             </Row>
 
         </Container>
