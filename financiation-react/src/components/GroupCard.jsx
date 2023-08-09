@@ -17,6 +17,7 @@ import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserSe
 import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
+import {Link} from "react-router-dom";
 
 export const GroupCard = ({group}) => {
 
@@ -53,9 +54,11 @@ export const GroupCard = ({group}) => {
                     </AccordionSummary>
 
                     <AccordionDetails>
-                         <IconButton type="submit" aria-label="search" href='/group/modify'>
-                        <CreateIcon/>
-                         </IconButton>
+                        <Link to={`/group/modify/${group.id}/`}>   
+                            <IconButton type="submit" aria-label="search">
+                                <CreateIcon/>
+                            </IconButton>
+                         </Link>
                         <Container>
                             <Row>
                                 <Col>
