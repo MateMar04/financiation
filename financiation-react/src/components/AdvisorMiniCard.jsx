@@ -1,11 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
-import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
-import ProfilePicture from "../components/ProfilePicture";
-import ProfileData from "../components/ProfileData";
 import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
 
 

@@ -1,9 +1,9 @@
-import {Drawer, Box} from '@mui/material';
+import {Box, Drawer} from '@mui/material';
 import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import {AllAdvisorsMinisCards} from "./AllAdvisorsMinisCards";
 import {AllCoordinatorsMinisCards} from "./AllCoordinatorsMinisCards";
-import {Col, Container, Row} from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import "../assets/styles/AdvisorMiniCard.css";
 

@@ -1,4 +1,4 @@
-import React, {useContext,useState} from "react";
+import React, {useContext, useState} from "react";
 import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
 import {Button, Container, FloatingLabel, Form} from "react-bootstrap";
@@ -16,7 +16,7 @@ const LoginPage = () => {
             <Container fluid className="image-container">
                 <img src={Logo} alt="Logo del ministerio de finanzas"/>
             </Container>
-            <FailedModal message="la visita" show ={showfail}/>
+            <FailedModal message="la visita" show={showfail}/>
 
             <Form onSubmit={loginUser}>
                 <Container>

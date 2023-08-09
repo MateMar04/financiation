@@ -1,30 +1,19 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {UserRowWithRadio} from "../components/UserRowWithRadio"
-import {UserRowWithCheck} from "../components/UserRowWithCheck"
-import {Link, useNavigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import Check from "../assets/images/checked.gif";
-
-import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {UserRowWithRadio} from "../components/UserRowWithRadio";
-import {UserRowWithCheck} from "../components/UserRowWithCheck";
 import Button from '@mui/material/Button';
 import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import Box, {BoxProps} from '@mui/material/Box';
 
 
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -77,7 +66,7 @@ export const CreateGroupPage = () => {
         let data = await response.json()
         setCoordinators(data)
     };
-    
+
     let postGroup = async (e) => {
         e.preventDefault()
         let response = await fetch('/api/group/add/', {
@@ -93,15 +82,15 @@ export const CreateGroupPage = () => {
             toggleModalsucceed();
             await postGroup()
 
-        } else if(response.status == 500){
-            toggleModalfailed(); 
-            await postGroup() 
-        } else if(response.status == 401){
+        } else if (response.status == 500) {
             toggleModalfailed();
-            await postGroup() 
-        } else if(response.status == 400){
+            await postGroup()
+        } else if (response.status == 401) {
             toggleModalfailed();
-            await postGroup() 
+            await postGroup()
+        } else if (response.status == 400) {
+            toggleModalfailed();
+            await postGroup()
 
         }
     }
@@ -109,8 +98,8 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
-            <SucceedModal message="el coordinador" show ={showsuccess}/>
-            <FailedModal message="el coordinador" show ={showfail}/>
+            <SucceedModal message="el coordinador" show={showsuccess}/>
+            <FailedModal message="el coordinador" show={showfail}/>
             <Form onSubmit={postGroup}>
                 <Container>
 
@@ -149,7 +138,6 @@ export const CreateGroupPage = () => {
 
 
             </Form>
-
 
 
             <Modal show={show} onHide={handleClose}>
