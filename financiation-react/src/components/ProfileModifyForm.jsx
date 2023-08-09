@@ -8,29 +8,35 @@ export const ProfileModifyForm = () => {
             <h2>Cuenta</h2>
 
             <Form>
-                <Row >
+                <Row >     
+                
+                    <Container fluid>
 
                     <Col lg={4} className="profile-form-col1 ">
                         <p className="ab">Modificar nombre de usuario</p>
                     </Col>
-                </Row>
-                <Row>
-
+                    {/* Texto Hardcoded modificar perfil usuario */}
+                
+                   
                     <Col lg={4} className="profile-form-col2 ">
                         <FloatingLabel className='floatingLabel' label="Usuario">
 
                             <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
                                 required />
                         </FloatingLabel>
-
-                    </Col>
+                        
+{/* Boton input  usuario */}
+</Col>       </Container>
+                 
+                    
                     <Col lg={3} className="profile-form-col button-container"></Col>
-                    <Col lg={5} className="profile-form-col button-container">
-
+                    <Col lg={5} className="profile-form-col">
                         <Button className="change-password">
                             Aplicar
                         </Button>
                     </Col>
+
+                    
 
 
                 </Row>
