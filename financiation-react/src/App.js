@@ -63,7 +63,7 @@ function App() {
                         <Route path='/coordinator/add' element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
                         <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
-                        <Route path='/group/modify/:id' element={<PrivateRoute children={<ModifyGroupPage/>}/>}/>
+                        <Route path='/groups/modify/:id' element={<PrivateRoute children={<ModifyGroupPage/>}/>}/>
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 

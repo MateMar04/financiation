@@ -604,3 +604,10 @@ def getGroupAdvisorUsers(request, id):
     users = User.objects.filter(advisor__id_group__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getGroupById(request, id):
+    group = Group.objects.get(id = id)
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)

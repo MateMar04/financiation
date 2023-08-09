@@ -4,23 +4,23 @@ import {useParams} from "react-router-dom";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import GroupCard from "../components/GroupCard";
-import {getGroups} from "../services/GroupServices"
+import {getGroupById} from "../services/GroupServices"
 
 export const ModifyGroupPage = () => {
 
     const {id} = useParams()
 
     let GroupId = id
-    let [groups, setGroup] = useState(null)
+    let [group, setGroup] = useState(null)
     let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
-        getGroups(authTokens.access).then(data => setGroup(data))
+        getGroupById(authTokens.access).then(data => setGroup(data))
     }, [GroupId])
 
     return (
         <div>
-            {groups?.map((group) => (
+            {group?.map((group) => (
             <Container>
                 <GroupCard group={group}/>
             </Container>
