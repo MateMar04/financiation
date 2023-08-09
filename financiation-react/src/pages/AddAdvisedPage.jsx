@@ -30,18 +30,18 @@ export const AddAdvisedPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed(); 
+            toggleModalsucceed();
             await postAdvised()
-        } else if(response.status == 500){
-            toggleModalfailed(); 
+        } else if (response.status == 500) {
+            toggleModalfailed();
             //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
             await postAdvised()
-        } else if(response.status == 401){
-            toggleModalfailed(); 
+        } else if (response.status == 401) {
+            toggleModalfailed();
             //alert('no se a registrado la visita (Desautorizado)')
             await postAdvised()
-        } else if(response.status == 400){
-            toggleModalfailed(); 
+        } else if (response.status == 400) {
+            toggleModalfailed();
             //alert('no se a registrado la visita (Bad request)')
             await postAdvised()
         }
@@ -49,8 +49,8 @@ export const AddAdvisedPage = () => {
 
     return (
         <Form onSubmit={postAdvised}>
-            <SucceedModal message="la visita" show ={showsuccess}/>
-            <FailedModal message="la visita" show ={showfail}/>
+            <SucceedModal message="la visita" show={showsuccess}/>
+            <FailedModal message="la visita" show={showfail}/>
             <Form.Control placeholder='Nombre del Asesorado' name="first_name" type="text" required></Form.Control>
             <Form.Control placeholder='Apellido del Asesorado' name="last_name" type="text" required></Form.Control>
             <Form.Control placeholder='CUIL del Asesorado' name="ssn" type="number" required></Form.Control>

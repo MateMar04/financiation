@@ -2,7 +2,6 @@ import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
 
 const AuthContext = createContext();
 
@@ -40,7 +39,7 @@ export const AuthProvider = ({children}) => {
         if (response.status === 201) {
             history('/')
             await signIn()
-        } else  if(response.status === 400) {
+        } else if (response.status === 400) {
             toggleModalfailed();
             await signIn()
         }
@@ -66,11 +65,12 @@ export const AuthProvider = ({children}) => {
             if (response.status === 401) {
                 toggleModalfailed();
                 await loginUser()
-            } if (response.status === 400) {
+            }
+            if (response.status === 400) {
                 toggleModalfailed();
-                await loginUser()            }
-            else{
-                
+                await loginUser()
+            } else {
+
                 toggleModalfailed();
                 await loginUser()
             }
@@ -135,7 +135,7 @@ export const AuthProvider = ({children}) => {
     return (
 
         <AuthContext.Provider value={contextData}>
-                        <FailedModal message="la visita" show ={showfail}/>
+            <FailedModal message="la visita" show={showfail}/>
 
             {loading ? null : children}
         </AuthContext.Provider>

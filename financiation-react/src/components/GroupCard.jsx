@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Card, Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import AuthContext from "../context/AuthContext";
 import Accordion from '@mui/material/Accordion';
@@ -7,17 +7,15 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
 import AdvisorMiniCard from "../components/AdvisorMiniCard";
 import CoordinatorMiniCard from "./CoordinatorMiniCard";
 import {styled} from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
-import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
 import {Link} from "react-router-dom";
+
 
 export const GroupCard = ({group}) => {
 

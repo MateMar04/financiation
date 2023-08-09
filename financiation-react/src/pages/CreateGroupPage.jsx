@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Col, Container, Form, Modal, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import {Link, useNavigate} from 'react-router-dom'
@@ -17,7 +17,6 @@ import Box, {BoxProps} from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -70,7 +69,7 @@ export const CreateGroupPage = () => {
         let data = await response.json()
         setCoordinators(data)
     };
-    
+
     let postGroup = async (e) => {
         e.preventDefault()
         let response = await fetch('/api/group/add/', {
@@ -86,15 +85,15 @@ export const CreateGroupPage = () => {
             toggleModalsucceed();
             await postGroup()
 
-        } else if(response.status == 500){
-            toggleModalfailed(); 
-            await postGroup() 
-        } else if(response.status == 401){
+        } else if (response.status == 500) {
             toggleModalfailed();
-            await postGroup() 
-        } else if(response.status == 400){
+            await postGroup()
+        } else if (response.status == 401) {
             toggleModalfailed();
-            await postGroup() 
+            await postGroup()
+        } else if (response.status == 400) {
+            toggleModalfailed();
+            await postGroup()
 
         }
     }
@@ -102,8 +101,8 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
-            <SucceedModal message="el coordinador" show ={showsuccess}/>
-            <FailedModal message="el coordinador" show ={showfail}/>
+            <SucceedModal message="el coordinador" show={showsuccess}/>
+            <FailedModal message="el coordinador" show={showfail}/>
             <Form onSubmit={postGroup}>
                 <Container>
 

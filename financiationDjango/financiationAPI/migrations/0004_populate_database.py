@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_visitstatus\" (name, description) VALUES ('No Confirmada', 'La visita no se confirmo todavia'), ('Pendiente', 'La visita esta confirmada pero todavia no se realizo'), ('En proceso', 'La visita esta siendo realizada'), ('Finalizada', 'La visita se realizo')"),
         migrations.RunSQL(
-            "INSERT INTO \"financiationAPI_requeststatus\" (name, description) VALUES ('Resuelta', 'La consulta ha sido resuelta'), ('No resuelta', 'La consulta ni ha sido resuelta')"),
+            "INSERT INTO \"financiationAPI_requeststatus\" (name, description)  VALUES ('Resuelta', 'La consulta ha sido resuelta'), ('No resuelta', 'La consulta ni ha sido resuelta'), ('Pendiente', 'La consulta esta en proceso')"),
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_userstatus\" (name, description) VALUES ('Disponible', 'El usuario esta disponile para una visita'), ('Ocupado', 'El usuario no esta disponible')")
 

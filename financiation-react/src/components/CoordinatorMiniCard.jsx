@@ -1,15 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
-import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
-import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Stack from 'react-bootstrap/Stack';
-import ProfilePicture from "../components/ProfilePicture";
-import ProfileData from "../components/ProfileData";
-import {getGroupAdvisorUsers, getGroupCoordinatorUsers, getUser} from "../services/UserServices";
+import {getGroupCoordinatorUsers, getUser} from "../services/UserServices";
 
 
 export const CoordinatorMiniCard = ({group}) => {
