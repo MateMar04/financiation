@@ -6,9 +6,8 @@ urlpatterns = [
     path('', views.getRoutes, name='routes'),
 
     # Advisees
-    path('advisees', views.getAdvisees, name='advisees'),
+    path('advisees', views.AdiviseeApiView.as_view(), name='advisees'),
     path('advisees/<int:id>', views.getAdvisee, name='advisee'),
-    path('advisees', views.postAdvisee, name='postAdvisee'),
 
     # Locations
     path('locations', views.getLocations, name='locations'),
@@ -17,8 +16,7 @@ urlpatterns = [
     path('city-departments', views.getCityDepartments, name='cityDepartments'),
 
     # Groups
-    path('groups', views.getGroups, name='groups'),
-    path('groups', views.postGroup, name='postGroup'),
+    path('groups', views.GroupApiView.as_view(), name='groups'),
 
     # Agreements
     path('agreements', views.getAgreements, name='agreements'),
@@ -35,8 +33,7 @@ urlpatterns = [
     path('logos', views.getLogos, name='logos'),
 
     # Visits
-    path('visits', views.getVisits, name='visits'),
-    path('visits', views.postVisit, name='postVisit'),
+    path('visits', views.VisitApiView.as_view(), name='visits'),
 
     # Users
     path('users', views.getUsers, name='users'),
@@ -66,23 +63,20 @@ urlpatterns = [
     path('faqs', views.getFaqs, name='faqs'),
 
     # Coordinators
-    path('coordinators', views.getCoordinators, name='coordinators'),
+    path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
     path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
     path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
-    path('coordinators', views.postCoordinator, name='postCoordinator'),
 
     # Advisors
-    path('advisors', views.getAdvisors, name='advisors'),
+    path('advisors', views.AdiviseeApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
-    path('advisors', views.postAdvisor, name='postAdvisor'),
 
     # Roles
     path('roles', views.getRoles, name='roles'),
 
     # Requests
-    path('requests', views.getRequests, name='requests'),
-    path('requests', views.postRequest, name='postRequest'),
+    path('requests', views.RequestApiView.as_view(), name='requests'),
 
     # Statuses
     path('visit-statuses', views.getVisitSatuses, name='visitStatuses'),

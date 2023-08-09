@@ -1,10 +1,161 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .serializers import *
 
 
 # Create your views here.
+
+class RequestApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        requests = Request.objects.all()
+        serializer = RequestSerializer(requests, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        visit = Visit.objects.get(id=data['id_visit'])
+        advised = Advised.objects.get(id=data['id_advised'])
+        advisor = Advisor.objects.get(id=data['id_advisor'])
+        ministryDepartment = MinistryDepartment.objects.get(id=data['id_ministry_department'])
+        faq = Faq.objects.get(id=data['id_faq'])
+        requestStatus = RequestStatus.objects.get(id=data['id_status'])
+
+        request = Request.objects.create(
+            id_visit=visit,
+            id_advised=advised,
+            id_advisor=advisor,
+            id_ministry_department=ministryDepartment,
+            id_faq=faq,
+            id_status=requestStatus,
+        )
+
+        serializer = RequestSerializer(request, many=False)
+        return Response(serializer.data)
+
+
+class VisitApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        visits = Visit.objects.all()
+        serializer = VisitSerializer(visits, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        locality = Locality.objects.get(id=data['id_locality'])
+        group = Group.objects.get(id=data['id_group'])
+        visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
+        contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
+        address = Address.objects.get(id=data['id_address'])
+
+        visit = Visit.objects.create(
+            flyer=data['flyer'],
+            distance=data['distance'],
+            travel_time=data['travel_time'],
+            visit_date=data['visit_date'],
+            civil_registration=data['civil_registration'],
+            accommodation=data['accommodation'],
+            modernization_fund=data['modernization_fund'],
+            start_time=data['start_time'],
+            finish_time=data['finish_time'],
+            place_name=data['place_name'],
+            id_locality=locality,
+            id_group=group,
+            id_visit_status=visit_status,
+            id_contacted_referrer=contacted_referrer,
+            id_address=address,
+        )
+
+        for i in data['id_agreement']:
+            agreement = Agreement.objects.get(id=i)
+            visit.id_agreement.add(agreement)
+
+        for j in data['id_logo']:
+            logo = Logo.objects.get(id=j)
+            visit.id_logo.add(logo)
+
+        serializer = VisitSerializer(visit, many=False)
+        return Response(serializer.data)
+
+
+class AdiviseeApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        advised = Advised.objects.all()
+        serializer = AdvisedSerializer(advised, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        advised = Advised.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            ssn=data['ssn']
+        )
+        serializer = AdvisedSerializer(advised, many=False)
+        return Response(serializer.data)
+
+
+class GroupApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        groups = Group.objects.all()
+        serializer = GroupSerializer(groups, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        group = Group.objects.create(
+            name=data['name']
+        )
+        serializer = GroupSerializer(group, many=False)
+        return Response(serializer.data)
+
+
+class CoordinatorApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        coordinators = Coordinator.objects.all()
+        serializer = CoordinatorSerializer(coordinators, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        user = UserAccount.objects.get(id=data['id_user'])
+        group = Group.objects.get(id=data['id_group'])
+
+        coordinator = Coordinator.objects.create(
+            id_user=user,
+            id_group=group
+        )
+
+        serializer = CoordinatorSerializer(coordinator, many=False)
+        return Response(serializer.data)
+
+
+class AdvisorApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        advisors = Advisor.objects.all()
+        serializer = AdvisorSerializer(advisors, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        user = UserAccount.objects.get(id=data['id_user'])
+        group = Group.objects.get(id=data['id_group'])
+
+        advisor = Advisor.objects.create(
+            id_user=user,
+            id_group=group,
+        )
+
+        serializer = AdvisorSerializer(advisor, many=False)
+        return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -224,91 +375,10 @@ def getRoutes(request):
     return Response(routes)
 
 
-@api_view(['POST'])
-def postRequest(request):
-    data = request.data
-
-    visit = Visit.objects.get(id=data['id_visit'])
-    advised = Advised.objects.get(id=data['id_advised'])
-    advisor = Advisor.objects.get(id=data['id_advisor'])
-    ministryDepartment = MinistryDepartment.objects.get(id=data['id_ministry_department'])
-    faq = Faq.objects.get(id=data['id_faq'])
-    requestStatus = RequestStatus.objects.get(id=data['id_status'])
-
-    request = Request.objects.create(
-        id_visit=visit,
-        id_advised=advised,
-        id_advisor=advisor,
-        id_ministry_department=ministryDepartment,
-        id_faq=faq,
-        id_status=requestStatus,
-    )
-
-    serializer = RequestSerializer(request, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getAdvisees(request):
-    advised = Advised.objects.all()
-    serializer = AdvisedSerializer(advised, many=True)
-    return Response(serializer.data)
-
-
 @api_view(['GET'])
 def getAdvisee(request, id):
     advised = Advised.objects.get(id=id)
     serializer = AdvisedSerializer(advised, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def postVisit(request):
-    data = request.data
-
-    locality = Locality.objects.get(id=data['id_locality'])
-    group = Group.objects.get(id=data['id_group'])
-    visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
-    contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
-    address = Address.objects.get(id=data['id_address'])
-
-    visit = Visit.objects.create(
-        flyer=data['flyer'],
-        distance=data['distance'],
-        travel_time=data['travel_time'],
-        visit_date=data['visit_date'],
-        civil_registration=data['civil_registration'],
-        accommodation=data['accommodation'],
-        modernization_fund=data['modernization_fund'],
-        start_time=data['start_time'],
-        finish_time=data['finish_time'],
-        place_name=data['place_name'],
-        id_locality=locality,
-        id_group=group,
-        id_visit_status=visit_status,
-        id_contacted_referrer=contacted_referrer,
-        id_address=address,
-    )
-
-    for i in data['id_agreement']:
-        agreement = Agreement.objects.get(id=i)
-        visit.id_agreement.add(agreement)
-
-    for j in data['id_logo']:
-        logo = Logo.objects.get(id=j)
-        visit.id_logo.add(logo)
-
-    serializer = VisitSerializer(visit, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def postGroup(request):
-    data = request.data
-    group = Group.objects.create(
-        name=data['name']
-    )
-    serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
 
 
@@ -330,13 +400,6 @@ def getMinistryDepartments(request):
 def getFaqs(request):
     faqs = Faq.objects.all()
     serializer = FaqSerializer(faqs, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getGroups(request):
-    groups = Group.objects.all()
-    serializer = GroupSerializer(groups, many=True)
     return Response(serializer.data)
 
 
@@ -372,20 +435,6 @@ def getAddresses(request):
 def getLogos(request):
     logos = Logo.objects.all()
     serializer = LogoSerializer(logos, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getVisits(request):
-    visits = Visit.objects.all()
-    serializer = VisitSerializer(visits, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getRequests(request):
-    request = Request.objects.all()
-    serializer = RequestSerializer(request, many=True)
     return Response(serializer.data)
 
 
@@ -438,56 +487,10 @@ def getMayorsPhones(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
-def postCoordinator(request):
-    data = request.data
-
-    user = UserAccount.objects.get(id=data['id_user'])
-    group = Group.objects.get(id=data['id_group'])
-
-    coordinator = Coordinator.objects.create(
-        id_user=user,
-        id_group=group
-    )
-
-    serializer = CoordinatorSerializer(coordinator, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getCoordinators(request):
-    coordinators = Coordinator.objects.all()
-    serializer = CoordinatorSerializer(coordinators, many=True)
-    return Response(serializer.data)
-
-
 @api_view(['GET'])
 def getCoordinator(request, id):
     coordinator = Coordinator.objects.get(id=id)
     serializer = CoordinatorSerializer(coordinator, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['POST'])
-def postAdvisor(request):
-    data = request.data
-
-    user = UserAccount.objects.get(id=data['id_user'])
-    group = Group.objects.get(id=data['id_group'])
-
-    advisor = Advisor.objects.create(
-        id_user=user,
-        id_group=group,
-    )
-
-    serializer = AdvisorSerializer(advisor, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getAdvisors(request):
-    advisors = Advisor.objects.all()
-    serializer = AdvisorSerializer(advisors, many=True)
     return Response(serializer.data)
 
 
@@ -561,18 +564,6 @@ def getRequestStatuses(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
-def postAdvisee(request):
-    data = request.data
-    advised = Advised.objects.create(
-        first_name=data['first_name'],
-        last_name=data['last_name'],
-        ssn=data['ssn']
-    )
-    serializer = AdvisedSerializer(advised, many=False)
-    return Response(serializer.data)
-
-
 @api_view(['GET'])
 def getGroupAdvisors(request, id):
     advisors = Advisor.objects.filter(id_group__id=id)
@@ -606,6 +597,7 @@ def getGroupCoordinatorUsers(request, id):
     users = User.objects.filter(coordinator__id_group__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getGroupAdvisorUsers(request, id):
