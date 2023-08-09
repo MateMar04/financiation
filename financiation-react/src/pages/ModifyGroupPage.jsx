@@ -20,7 +20,11 @@ export const ModifyGroupPage = () => {
 
     return (
         <div>
-            
+            {groups?.map((group) => (
+            <Container>
+                <GroupCard group={group}/>
+            </Container>
+        ))}
         </div>
     )
 }
