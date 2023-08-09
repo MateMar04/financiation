@@ -7,14 +7,12 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Avatar from '@mui/material/Avatar';
-import Divider from '@mui/material/Divider';
-import AdvisorMiniCard from "../components/AdvisorMiniCard";
-import CoordinatorMiniCard from "./CoordinatorMiniCard";
+
+import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
+import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
 import {styled} from '@mui/material/styles';
 import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
-import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
 
@@ -63,13 +61,13 @@ export const GroupCard = ({group}) => {
                         <Container>
                             <Row>
                                 <Col>
-                                    <AdvisorMiniCard group={group}/>
+                                    <AdvisorMiniCardGroup group={group}/>
                                 </Col>
                                 <Col md={1}>
                                     <div className="vl"></div>
                                 </Col>
                                 <Col>
-                                    <CoordinatorMiniCard group={group}/>
+                                    <CoordinatorMiniCardGroup group={group}/>
                                 </Col>
                             </Row>
                         </Container>

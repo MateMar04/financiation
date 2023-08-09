@@ -3,44 +3,41 @@ import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import {UserParagraph} from "./UserParagraph";
 import AuthContext from "../context/AuthContext";
-import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Stack from 'react-bootstrap/Stack';
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
-import {getGroupAdvisorUsers, getGroupCoordinatorUsers, getUser} from "../services/UserServices";
+import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
 
 
-export const CoordinatorMiniCard = ({group}) => {
+export const AdvisorMiniCardGroup = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let [coordinators, setCoordinators] = useState([])
+    let [advisors, setAdvisors] = useState([])
     let [user, setUser] = useState()
 
     useEffect(() => {
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
         getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
-
     return (
         <>
-            {coordinators?.map((coordinator) => (
-                <Container key={coordinator.id_user}>
+            {advisors?.map((advisor) => (
+                <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}
-                                    username={user?.username}/>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}
+                                    username={user?.username}>
+                            </Avatar>
                         </Col>
                         <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
-                                        <p>{coordinator.first_name} {coordinator.last_name}</p>
+                                        <p>{advisor.first_name} {advisor.last_name}</p>
                                     </strong>
                                 </div>
-                                <sub className='SecondaryText'>Coordinador</sub>
+                                <sub className='SecondaryText'>Asesor</sub>
                             </Row>
                         </Col>
                     </Row>
@@ -49,7 +46,8 @@ export const CoordinatorMiniCard = ({group}) => {
             ))}
         </>
 
+
     )
 }
 
-export default CoordinatorMiniCard;
+export default AdvisorMiniCardGroup;

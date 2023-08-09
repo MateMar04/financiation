@@ -1,8 +1,8 @@
 import {Drawer, Box} from '@mui/material';
 import React, {useState} from 'react';
 import Button from '@mui/material/Button';
-import {AllAdvisorsMinisCards} from "./AllAdvisorsMinisCards";
-import {AllCoordinatorsMinisCards} from "./AllCoordinatorsMinisCards";
+import {AdvisorMiniCardForming} from "./AdvisorMiniCardForming";
+import {CoordinatorMiniCardForming} from "./CoordinatorMiniCardForming";
 import {Col, Container, Row} from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import "../assets/styles/AdvisorMiniCard.css";
@@ -25,8 +25,8 @@ export const SideBarGroups = () => {
                                        style={{maxWidth: '180px'}} InputProps={{sx: {borderRadius: '25px'}}}/>
                         </Row>
                         <hr/>
-                        <AllAdvisorsMinisCards/>
-                        <AllCoordinatorsMinisCards/>
+                        <AdvisorMiniCardForming/>
+                        <CoordinatorMiniCardForming/>
                         <div className={'btn-flotante'}>
                             <Row className={'justify-content-center'}>
                                 <hr/>

@@ -14,16 +14,9 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import Box, {BoxProps} from '@mui/material/Box';
-
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import CoordinatorCard from "../components/CoordinatorCard";
+import AdvisorCard from "../components/AdvisorCard";
 
 
 export const CreateGroupPage = () => {
@@ -88,24 +81,33 @@ export const CreateGroupPage = () => {
                 <Container>
                     <Row className={'justify-content-center'}>
                         <Col md={8}>
-                        <TextField
-                            fullWidth
-                            id="standard-bare"
-                            variant="outlined"
-                            label={'Buscar Persona'}
-                            InputProps={{
-                                endAdornment: (
-                                    <IconButton>
-                                        <SearchIcon/>
-                                    </IconButton>
-                                ),
-                            }}
-                        />
-                            </Col>
+                            <TextField
+                                fullWidth
+                                id="standard-bare"
+                                variant="outlined"
+                                label={'Buscar Persona'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton>
+                                            <SearchIcon/>
+                                        </IconButton>
+                                    ),
+                                }}
+                            />
+                        </Col>
                     </Row>
-
-                    <SideBarGroups/>
                 </Container>
+
+                <Container>
+
+                        <CoordinatorCard/>
+
+
+
+                        <AdvisorCard/>
+
+                </Container>
+                <SideBarGroups/>
 
 
             </Form>

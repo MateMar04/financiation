@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
-export const AllAdvisorsMinisCards = ({group}) => {
+export const AdvisorMiniCardForming = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -42,4 +42,4 @@ export const AllAdvisorsMinisCards = ({group}) => {
     )
 }
 
-export default AllAdvisorsMinisCards;
+export default AdvisorMiniCardForming;
