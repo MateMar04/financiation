@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
@@ -25,16 +25,35 @@ import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
-
+import React, { useState, useEffect } from 'react';
+import { PacmanLoader, PropagateLoader, PuffLoader, SyncLoader } from 'react-spinners';
 
 function App() {
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 8000);
+    }, []);
+
     return (
         <Router>
             <div className="App">
-                <AuthProvider>
-                    <Navbar/>
-                    <Routes>
+                {loading ? (
+                <div className="loader-container">
+                    <SyncLoader
+                        color={'#ADD8E6'}
+                        loading={loading}
+                        size={80}
+                        
+                    />
+                </div>
 
+                ) : (
+                    <AuthProvider>
+                        <Navbar />
+                        <Routes>
                         <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
                         <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
@@ -66,11 +85,11 @@ function App() {
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
-                    </Routes>
-                </AuthProvider>
+                        </Routes>
+                    </AuthProvider>
+                )}
             </div>
         </Router>
     );
 }
-
 export default App;
