@@ -1,10 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Container, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {Link} from 'react-router-dom'
-import Check from "../assets/images/checked.gif";
-import Button from '@mui/material/Button';
 import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,10 +17,12 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
 
 export const CreateGroupPage = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
 
     let {authTokens} = useContext(AuthContext)
@@ -41,35 +40,13 @@ export const CreateGroupPage = () => {
         event.preventDefault();
     };
     useEffect(() => {
-        getAdvisor()
-        getCoordinator()
+        getAdvisorUsers().then(r => setAdvisors(r))
+        getCoordinatorUsers().then(r => setCoordinators(r))
     }, [])
-
-    let getAdvisor = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advisor/', {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
-
-    let getCoordinator = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/coordinator/', {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
 
     let postGroup = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/group/add/', {
+        let response = await fetch('/api/groups', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -131,34 +108,9 @@ export const CreateGroupPage = () => {
                             }
                         />
                     </FormControl>
-
-
                     <SideBarGroups/>
                 </Container>
-
-
             </Form>
-
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a registrado el grupo correctamente!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
 
         </Container>
     )

@@ -17,7 +17,7 @@ const AdvisorPage = () => {
 
     let postAdvisor = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/advisor/add/', {
+        let response = await fetch('/api/advisors', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

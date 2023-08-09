@@ -15,7 +15,7 @@ const CoordinatorPage = () => {
 
     let postCoordinator = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/coordinator/add/', {
+        let response = await fetch('/api/coordinators', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
