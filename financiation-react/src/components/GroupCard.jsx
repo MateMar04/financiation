@@ -18,10 +18,6 @@ import Button from '@mui/material/Button';
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
 
-
-
-
-
 export const GroupCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
@@ -57,7 +53,7 @@ export const GroupCard = ({group}) => {
                     </AccordionSummary>
 
                     <AccordionDetails>
-                         <IconButton type="submit" aria-label="search">
+                         <IconButton type="submit" aria-label="search" href='/group/modify'>
                         <CreateIcon/>
                          </IconButton>
                         <Container>

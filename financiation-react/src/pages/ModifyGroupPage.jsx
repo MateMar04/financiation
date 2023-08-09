@@ -9,7 +9,7 @@ import Check from "../assets/images/checked.gif";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 
-export const CreateGroupPage = () => {
+export const ModifyGroupPage = () => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
