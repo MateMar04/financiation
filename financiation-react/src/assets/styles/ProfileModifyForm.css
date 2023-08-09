@@ -11,10 +11,8 @@
     margin-top: 0vh;
     margin-bottom: 0vh;
     display: flex;
-   
-
-  align-items: center; /* Centrar verticalmente */
-
+    align-items: center; /* Centrar verticalmente */
+    
 }
 .profile-form-col2 {
     margin-top: 0vh;
@@ -37,14 +35,15 @@
     display: flex;
     justify-content: start;
     align-items: center;
+    
 
 }
 
 .change-password {
     background-color: rgb(32, 64, 168);
-    align-self: center;
-    width: 25vh;
-    height: 7.5vh;
+    align-self: start;
+    width: 23vh;
+    height: 6.5vh;
     border-color: rgb(32, 64, 168);
     box-shadow: rgba(40, 201, 48, 0.5) 0px 7px 29px 0px;
     text-align: center;
