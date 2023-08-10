@@ -14,7 +14,8 @@ export const SideBarGroups = () => {
     return (
         <>
             <Button variant={'outlined'}
-                    onClick={() => setIsDrawerOpen(true)}>
+                    onClick={() => setIsDrawerOpen(true)}
+            className={'AñadirButton'}>
                 AÑADIR
             </Button>
             <Drawer anchor='right' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>

@@ -1,17 +1,22 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Form, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getUserById} from "../services/UserServices";
 
-export const AdvisorCard = () => {
+export const AdvisorCard = (userId) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
+    let [user, setUser] = useState([])
+
 
     useEffect(() => {
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getUserById(authTokens.access, userId).then(data => setUser(data))
+
     }, [])
 
     return (
@@ -25,12 +30,25 @@ export const AdvisorCard = () => {
                             </Col>
                             <Col>
                                 <Row>
-                                    <strong>
-                                        <a>{advisor.first_name} {advisor.last_name}</a>
-                                    </strong>
+                                    <Col>
+                                        <strong>
+                                            <a>{advisor.first_name} {advisor.last_name}</a>
+                                        </strong>
+                                    </Col>
+                                    <Col>
+                                        <small>Asesor</small>
+                                    </Col>
+                                    <Col key={user.id}>
+                                        <Form.Check name="radio" type="radio" value={user.id}></Form.Check>
+
+                                    </Col>
                                 </Row>
                                 <Row>
-                                    <sub>Asesor</sub>
+
+                                </Row>
+                                <Row className={'TextEmailCard'}>
+                                    <small>{advisor.email}</small>
+
                                 </Row>
                             </Col>
                         </Row>

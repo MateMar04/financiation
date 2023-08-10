@@ -41,3 +41,7 @@
     transform: translateY(-7px);
 }
 
+.AñadirButton{
+    max-width: 250px;
+    vertical-align: center;
+}
