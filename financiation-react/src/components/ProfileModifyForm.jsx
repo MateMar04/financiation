@@ -5,43 +5,35 @@ import "../assets/styles/ProfileModifyForm.css"
 export const ProfileModifyForm = () => {
     return (
         <Container fluid>
-            <h2>Cuenta</h2>
+        <h2>Cuenta</h2>
 
-            <Form>
-                <Row >     
-                
-                    <Container fluid className="ModificarPerfil">
+        <Form>
+            <Row >
 
-                    <Col lg={4} className="profile-form-col1 ">
-                        <p className="ab">Modificar nombre de usuario</p>
-                    </Col>
-                    {/* Texto Hardcoded modificar perfil usuario */}
-                
-                   
-                    <Col lg={4} className="profile-form-col2 ">
-                        <FloatingLabel className='floatingLabel' label="Usuario">
+                <Col lg={4} className="profile-form-col1 ">
+                    <p className="ab">Modificar nombre de usuario</p>
+                </Col>
+            </Row>
+            <Row>
 
-                            <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
-                                required />
-                        </FloatingLabel>
-                        
-                        
-{/* Boton input  usuario */}
-</Col>       </Container>
+                <Col lg={4} className="profile-form-col2 ">
+                    <FloatingLabel className='floatingLabel' label="Usuario">
 
-                 
-                    
-                    
-                    <Col lg={5} className="profile-form-col1">
-                        <Button className="change-password">
-                            Aplicar
-                        </Button>
-                    </Col>
+                        <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
+                            required />
+                    </FloatingLabel>
 
-                    
+                </Col>
+                <Col lg={3} className="profile-form-col button-container"></Col>
+                <Col lg={5} className="profile-form-col button-container">
+
+                    <Button className="change-password">
+                        Aplicar
+                    </Button>
+                </Col>
 
 
-                </Row>
+            </Row>
                 <Row className="profile-form-row">
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="Nombre">
