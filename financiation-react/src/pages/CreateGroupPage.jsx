@@ -17,6 +17,8 @@ import Box, {BoxProps} from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import CoordinatorCard from "../components/CoordinatorCard";
 import AdvisorCard from "../components/AdvisorCard";
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
 
 
 export const CreateGroupPage = () => {
