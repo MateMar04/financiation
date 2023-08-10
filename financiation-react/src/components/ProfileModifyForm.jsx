@@ -5,18 +5,16 @@ import "../assets/styles/ProfileModifyForm.css"
 export const ProfileModifyForm = () => {
     return (
         <Container fluid>
-        <h2>Cuenta</h2>
+
+        <h2 className="Titulo">Modificar Datos Personales</h2>
 
         <Form>
-            <Row >
+            
 
-                <Col lg={4} className="profile-form-col1 ">
-                    <p className="ab">Modificar nombre de usuario</p>
-                </Col>
-            </Row>
+                
             <Row>
 
-                <Col lg={4} className="profile-form-col2 ">
+                <Col lg={6} className="profile-form-col2 ">
                     <FloatingLabel className='floatingLabel' label="Usuario">
 
                         <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
@@ -24,14 +22,18 @@ export const ProfileModifyForm = () => {
                     </FloatingLabel>
 
                 </Col>
-                <Col lg={3} className="profile-form-col button-container"></Col>
-                <Col lg={5} className="profile-form-col button-container">
+                <Col lg={6} className="profile-form-col2 ">
+                    <FloatingLabel className='floatingLabel' label="Email">
 
-                    <Button className="change-password">
-                        Aplicar
-                    </Button>
+                        <Form.Control className="profile-fc" placeholder="Email" type="text" name="username"
+                            required />
+                    </FloatingLabel>
+
                 </Col>
+               
+                
 
+                   
 
             </Row>
                 <Row className="profile-form-row">
