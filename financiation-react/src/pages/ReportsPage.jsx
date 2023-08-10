@@ -12,7 +12,7 @@ import {ReportChartCard} from "../components/ReportChartCard";
 import getMinistryDepartments from "../services/MinistryDepartmentServices";
 import getFaqs from "../services/FaqServices";
 import getVisits from "../services/VisitServices";
-import {getLocalities} from "../services/LocalityServices";
+import {getLocations} from "../services/LocationServices";
 
 export const ReportsPage = () => {
 
@@ -34,7 +34,7 @@ export const ReportsPage = () => {
 
 
     useEffect(() => {
-        getLocalities(authTokens.access).then(r => setLocalities(r))
+        getLocations(authTokens.access).then(r => setLocalities(r))
         getMinistryDepartments(authTokens.access).then(r => setMinistryDepartments(r))
         getFaqs(authTokens.access).then(r => setFaqs(r))
         getVisits(authTokens.access).then(r => setVisits(r))

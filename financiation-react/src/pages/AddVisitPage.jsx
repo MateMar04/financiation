@@ -32,7 +32,7 @@ const AddVisitPage = () => {
 
     let postVisit = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/visit/add/', {
+        let response = await fetch('/api/visits', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

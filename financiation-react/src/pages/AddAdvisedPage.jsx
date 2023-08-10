@@ -16,7 +16,7 @@ export const AddAdvisedPage = () => {
 
     let postAdvised = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/advised/add/', {
+        let response = await fetch(' /api/advisees', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
