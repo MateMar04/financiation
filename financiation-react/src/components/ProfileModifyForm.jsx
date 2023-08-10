@@ -10,7 +10,7 @@ export const ProfileModifyForm = () => {
             <Form>
                 <Row >     
                 
-                    <Container fluid>
+                    <Container fluid className="ModificarPerfil">
 
                     <Col lg={4} className="profile-form-col1 ">
                         <p className="ab">Modificar nombre de usuario</p>
@@ -25,12 +25,14 @@ export const ProfileModifyForm = () => {
                                 required />
                         </FloatingLabel>
                         
+                        
 {/* Boton input  usuario */}
 </Col>       </Container>
+
                  
                     
-                    <Col lg={3} className="profile-form-col button-container"></Col>
-                    <Col lg={5} className="profile-form-col">
+                    
+                    <Col lg={5} className="profile-form-col1">
                         <Button className="change-password">
                             Aplicar
                         </Button>
