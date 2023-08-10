@@ -1,8 +1,7 @@
 import React, {useContext, useState} from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
-import Check from "../assets/images/checked.gif";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
@@ -16,10 +15,9 @@ const AdvisorPage = () => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
 
-
     let postAdvisor = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/advisor/add/', {
+        let response = await fetch('/api/advisors', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -33,20 +31,20 @@ const AdvisorPage = () => {
         })
         if (response.status === 200) {
 
-            toggleModalsucceed(); 
-            await postAdvisor()  
-            
-        } else if(response.status == 500){
-            toggleModalfailed();
-
+            toggleModalsucceed();
             await postAdvisor()
-     
-        } else if(response.status == 401){
+
+        } else if (response.status == 500) {
             toggleModalfailed();
 
             await postAdvisor()
 
-        } else if(response.status == 400){
+        } else if (response.status == 401) {
+            toggleModalfailed();
+
+            await postAdvisor()
+
+        } else if (response.status == 400) {
             toggleModalfailed();
 
             await postAdvisor()
@@ -55,8 +53,8 @@ const AdvisorPage = () => {
     return (
         <Container className="scrolling">
 
-            <SucceedModal message="el asesor" show ={showsuccess    }/>
-            <FailedModal message="el asesor" show ={showfail}/>
+            <SucceedModal message="el asesor" show={showsuccess}/>
+            <FailedModal message="el asesor" show={showfail}/>
             <Form onSubmit={postAdvisor}>
                 <Form.Group>
                     <Form.Control

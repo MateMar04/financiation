@@ -4,7 +4,6 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
 export const AdvisorMiniCardForming = ({group}) => {
 

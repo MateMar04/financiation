@@ -9,6 +9,10 @@ import AuthContext from "../context/AuthContext";
 import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
+import getMinistryDepartments from "../services/MinistryDepartmentServices";
+import getFaqs from "../services/FaqServices";
+import getVisits from "../services/VisitServices";
+import {getLocations} from "../services/LocationServices";
 
 export const ReportsPage = () => {
 
@@ -30,56 +34,11 @@ export const ReportsPage = () => {
 
 
     useEffect(() => {
-        getLocalities()
-        getMinistryDepartments()
-        getFaqs()
-        getVisits()
+        getLocations(authTokens.access).then(r => setLocalities(r))
+        getMinistryDepartments(authTokens.access).then(r => setMinistryDepartments(r))
+        getFaqs(authTokens.access).then(r => setFaqs(r))
+        getVisits(authTokens.access).then(r => setVisits(r))
     }, [])
-    let getLocalities = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/locality/', {headers: headers})
-        let data = await response.json()
-        setLocalities(data)
-    };
-
-    let getMinistryDepartments = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/ministry-department/', {headers: headers})
-        let data = await response.json()
-        setMinistryDepartments(data)
-    };
-
-    let getFaqs = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/faq/', {headers: headers})
-        let data = await response.json()
-        setFaqs(data)
-    };
-
-
-    let getVisits = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/visit/', {headers: headers})
-        let data = await response.json()
-        setVisits(data)
-    };
-
 
     return (
         <Container fluid>

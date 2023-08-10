@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import ListAdvised from "../components/ListAdvised";
 import AuthContext from "../context/AuthContext";
-import getAdvised from "../services/AdvisedServices";
+import getAdvisees from "../services/AdvisedServices";
 
 const AdvisedListPage = () => {
 
@@ -9,7 +9,7 @@ const AdvisedListPage = () => {
     let {authTokens} = useContext(AuthContext)
 
     useEffect(() => {
-        getAdvised(authTokens.access).then(data => setAdvised(data))
+        getAdvisees(authTokens.access).then(data => setAdvised(data))
     }, [])
 
 

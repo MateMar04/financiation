@@ -15,7 +15,7 @@ const CoordinatorPage = () => {
 
     let postCoordinator = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/coordinator/add/', {
+        let response = await fetch('/api/coordinators', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -28,17 +28,17 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed(); 
-            await postCoordinator()  
-        } else if(response.status == 500){
-            toggleModalfailed(); 
+            toggleModalsucceed();
+            await postCoordinator()
+        } else if (response.status == 500) {
+            toggleModalfailed();
             //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
             await postCoordinator()
-        } else if(response.status == 401){
+        } else if (response.status == 401) {
             toggleModalfailed();
             //alert('no se a registrado la visita (Desautorizado)')
             await postCoordinator()
-        } else if(response.status == 400){
+        } else if (response.status == 400) {
             toggleModalfailed();
             //alert('no se a registrado la visita (Bad request)')
             await postCoordinator()
@@ -48,8 +48,8 @@ const CoordinatorPage = () => {
 
     return (
         <Container className="scrolling">
-            <SucceedModal message="el coordinador" show ={showsuccess}/>
-            <FailedModal message="el coordinador" show ={showfail}/>
+            <SucceedModal message="el coordinador" show={showsuccess}/>
+            <FailedModal message="el coordinador" show={showfail}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control

@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Card, Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import AuthContext from "../context/AuthContext";
 import Accordion from '@mui/material/Accordion';
@@ -15,9 +15,6 @@ import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
-
-
-
 
 
 export const GroupCard = ({group}) => {
@@ -55,9 +52,9 @@ export const GroupCard = ({group}) => {
                     </AccordionSummary>
 
                     <AccordionDetails>
-                         <IconButton type="submit" aria-label="search">
-                        <CreateIcon/>
-                         </IconButton>
+                        <IconButton type="submit" aria-label="search">
+                            <CreateIcon/>
+                        </IconButton>
                         <Container>
                             <Row>
                                 <Col>

@@ -24,12 +24,12 @@ export const GroupsPage = () => {
 
     return (
         <fragment>
-        {groups?.map((group) => (
-            <Container>
-                <GroupCard group={group}/>
-            </Container>
-        ))}
+            {groups?.map((group) => (
+                <Container>
+                    <GroupCard group={group}/>
+                </Container>
+            ))}
         </fragment>
 
-)
+    )
 }
