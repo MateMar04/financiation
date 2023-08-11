@@ -51,12 +51,10 @@ export const GroupCard = ({group}) => {
 
                     </AccordionSummary>
 
-                    <AccordionDetails>
-                        <Link to={`/group/modify/${group.id}/`}>   
+                    <AccordionDetails> 
                             <IconButton type="submit" aria-label="search">
                                 <CreateIcon/>
                             </IconButton>
-                         </Link>
                         <Container>
                             <Row>
                                 <Col>

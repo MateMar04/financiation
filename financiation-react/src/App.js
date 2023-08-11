@@ -25,7 +25,6 @@ import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
-import {ModifyGroupPage} from "./pages/ModifyGroupPage"
 
 function App() {
     return (
@@ -62,8 +61,6 @@ function App() {
                         <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
                         <Route path='/coordinator/add' element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
                         <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
-
-                        <Route path='/groups/modify/:id' element={<PrivateRoute children={<ModifyGroupPage/>}/>}/>
 
                         <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
