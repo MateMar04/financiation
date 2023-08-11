@@ -1,6 +1,7 @@
 import {Col, Form, Row} from "react-bootstrap";
 import React from "react";
 import '../assets/styles/RowWithCheck.css'
+import {dataHandler} from "../services/ReportServices";
 
 export const RowWithCheck = ({item}) => {
     return (
@@ -9,7 +10,7 @@ export const RowWithCheck = ({item}) => {
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check value={item.id}></Form.Check>
+                <Form.Check value={item.id} onChange={()=>dataHandler(item)}></Form.Check>
             </Col>
         </Row>
     )
