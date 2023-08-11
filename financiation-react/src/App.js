@@ -35,16 +35,16 @@ function App() {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 2000);
+        }, 500);
     }, []);
 
     return (
         <Router>
             <div className="App">
                 {loading ? (
-                <div className="loader-text">
-                        <p className='loading-message'>
-                            Loading...
+                <div className="loader-container">
+                        <p className='loader-text'>
+                            Cargando
                         </p>
                         <SyncLoader
                             color={'#1fa4e6'}
