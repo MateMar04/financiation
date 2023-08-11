@@ -26,7 +26,6 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 
-
 function App() {
     return (
         <Router>
@@ -51,12 +50,11 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                         <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
+                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
                         <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
                         <Route path='/coordinators' element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
-
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
                         <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
