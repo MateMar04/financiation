@@ -29,7 +29,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                                     username={user?.username}>
                             </Avatar>
                         </Col>
-                        <Col>
+                        <Col md={5} xs={5}>
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
@@ -39,8 +39,10 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                                 <sub className='SecondaryText'>Asesor</sub>
                             </Row>
                         </Col>
-                        <Col>
-                            {showButton && <IconButton><ClearIcon/></IconButton>}
+                        <Col md={5} xs={5}>
+                            <Row className={'justify-content-end'}>
+                                {showButton && <IconButton><ClearIcon/></IconButton>}
+                            </Row>
                         </Col>
                     </Row>
                     <hr/>

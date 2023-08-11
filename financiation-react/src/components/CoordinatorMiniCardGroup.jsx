@@ -7,6 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers, getUser} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
 export const CoordinatorMiniCardGroup = ({group, showButton}) => {
 
@@ -15,7 +16,8 @@ export const CoordinatorMiniCardGroup = ({group, showButton}) => {
     let [user, setUser] = useState()
 
     useEffect(() => {
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
+
         getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
@@ -29,7 +31,7 @@ export const CoordinatorMiniCardGroup = ({group, showButton}) => {
                                     username={coordinator?.username}>
                             </Avatar>
                         </Col>
-                        <Col>
+                        <Col md={5} xs={5}>
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
@@ -39,8 +41,10 @@ export const CoordinatorMiniCardGroup = ({group, showButton}) => {
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
-                        <Col>
-                            {showButton && <IconButton><ClearIcon/></IconButton>}
+                        <Col md={5} xs={5}>
+                            <Row className={'justify-content-end'}>
+                                {showButton && <IconButton><ClearIcon/></IconButton>}
+                            </Row>
                         </Col>
                     </Row>
                     <hr/>
