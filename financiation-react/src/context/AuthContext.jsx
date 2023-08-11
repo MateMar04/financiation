@@ -3,6 +3,7 @@ import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
+import LoadingModal from "../components/LoadingModal";
 
 const AuthContext = createContext();
 
@@ -10,8 +11,10 @@ export default AuthContext
 export const AuthProvider = ({children}) => {
 
     const [showfail, setShowfailture] = useState(false);
+    const [showloading, setShowloading] = useState(false);
     const toggleModalfailed = () => setShowfailture(!showfail);
-
+    const toggleLoad = () => setShowloading(!showloading);
+    const toggleLoadClose = () => setShowloading(false);
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
@@ -39,6 +42,7 @@ export const AuthProvider = ({children}) => {
         })
         if (response.status === 201) {
             history('/')
+            toggleLoad();
             await signIn()
         } else  if(response.status === 400) {
             toggleModalfailed();
@@ -136,6 +140,7 @@ export const AuthProvider = ({children}) => {
 
         <AuthContext.Provider value={contextData}>
                         <FailedModal message="la visita" show ={showfail}/>
+                        <LoadingModal message="la visita" show ={showloading}/>
 
             {loading ? null : children}
         </AuthContext.Provider>
