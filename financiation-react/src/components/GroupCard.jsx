@@ -7,15 +7,12 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import Button from '@mui/material/Button';
 import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
 import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
-import {styled} from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
-import {Link} from "react-router-dom";
 
 
 export const GroupCard = ({group}) => {
@@ -24,25 +21,23 @@ export const GroupCard = ({group}) => {
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
 
+    const [showButton, setShowButton] = useState(false);
+
+    const handleAddButton = () => {
+        setShowButton(!showButton);
+    };
+
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
 
-    const Grid = styled(MuiGrid)(({theme}) => ({
-        width: '100%',
-        ...theme.typography.body2,
-        '& [role="separator"]': {
-            margin: theme.spacing(0, 2),
-        },
-    }));
 
     return (
         <Container fluid className='CompletlyContainer'>
             <div>
                 <Accordion>
-
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon/>}
                         aria-controls="panel1a-content"
@@ -52,20 +47,20 @@ export const GroupCard = ({group}) => {
 
                     </AccordionSummary>
 
-                    <AccordionDetails> 
-                            <IconButton type="submit" aria-label="search">
-                                <CreateIcon/>
-                            </IconButton>
+                    <AccordionDetails>
+                        <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
+                            <CreateIcon/>
+                        </IconButton>
                         <Container>
                             <Row>
                                 <Col>
-                                    <AdvisorMiniCardGroup group={group}/>
+                                    <AdvisorMiniCardGroup group={group} showButton={showButton}/>
                                 </Col>
                                 <Col md={1}>
                                     <div className="vl"></div>
                                 </Col>
                                 <Col>
-                                    <CoordinatorMiniCardGroup group={group}/>
+                                    <CoordinatorMiniCardGroup group={group} showButton={showButton}/>
                                 </Col>
                             </Row>
                         </Container>

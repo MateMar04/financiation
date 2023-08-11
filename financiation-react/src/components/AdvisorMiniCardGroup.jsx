@@ -2,11 +2,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
+import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from '@mui/icons-material/Clear';
 
-
-export const AdvisorMiniCardGroup = ({group}) => {
+export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -37,6 +39,9 @@ export const AdvisorMiniCardGroup = ({group}) => {
                                 <sub className='SecondaryText'>Asesor</sub>
                             </Row>
                         </Col>
+                        <Col>
+                            {showButton && <IconButton><ClearIcon/></IconButton>}
+                        </Col>
                     </Row>
                     <hr/>
                 </Container>
@@ -46,5 +51,6 @@ export const AdvisorMiniCardGroup = ({group}) => {
 
     )
 }
+
 
 export default AdvisorMiniCardGroup;

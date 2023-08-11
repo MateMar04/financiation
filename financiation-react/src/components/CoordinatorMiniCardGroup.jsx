@@ -2,11 +2,13 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
+import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import {getGroupCoordinatorUsers, getUser} from "../services/UserServices";
+import {getGroupAdvisorUsers, getGroupCoordinatorUsers, getUser} from "../services/UserServices";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from '@mui/icons-material/Clear';
 
-
-export const CoordinatorMiniCardGroup = ({group}) => {
+export const CoordinatorMiniCardGroup = ({group, showButton}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -17,7 +19,6 @@ export const CoordinatorMiniCardGroup = ({group}) => {
         getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
-
     return (
         <>
             {coordinators?.map((coordinator) => (
@@ -25,7 +26,8 @@ export const CoordinatorMiniCardGroup = ({group}) => {
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}
-                                    username={user?.username}/>
+                                    username={coordinator?.username}>
+                            </Avatar>
                         </Col>
                         <Col>
                             <Row>
@@ -37,13 +39,18 @@ export const CoordinatorMiniCardGroup = ({group}) => {
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
+                        <Col>
+                            {showButton && <IconButton><ClearIcon/></IconButton>}
+                        </Col>
                     </Row>
                     <hr/>
                 </Container>
             ))}
         </>
 
+
     )
 }
+
 
 export default CoordinatorMiniCardGroup;

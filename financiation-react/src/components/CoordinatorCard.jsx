@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Col, Container, Form, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {getUserById} from "../services/UserServices";
 
 export const CoordinatorCard = (userId) => {
 
