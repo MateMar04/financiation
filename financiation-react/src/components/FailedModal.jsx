@@ -21,8 +21,8 @@ export const FailedModal = (props, {message}) => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Link to={''}>
-                        <Button onClick={refresh} variant="failed">
+                    <Link to={'/login'}>
+                        <Button onClick={refresh} modal variant="failed">
                             OK
                         </Button>
                     </Link>
