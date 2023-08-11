@@ -24,7 +24,6 @@ import {FailedModal} from "../components/FailedModal"
 export const CreateGroupPage = () => {
     const [showPassword, setShowPassword] = useState(false);
 
-
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
     let [coordinators, setCoordinators] = useState([])
@@ -34,11 +33,6 @@ export const CreateGroupPage = () => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
     useEffect(() => {
         getAdvisorUsers().then(r => setAdvisors(r))
         getCoordinatorUsers().then(r => setCoordinators(r))
@@ -59,13 +53,13 @@ export const CreateGroupPage = () => {
             toggleModalsucceed();
             await postGroup()
 
-        } else if (response.status == 500) {
+        } else if (response.status === 500) {
             toggleModalfailed();
             await postGroup()
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
             toggleModalfailed();
             await postGroup()
-        } else if (response.status == 400) {
+        } else if (response.status === 400) {
             toggleModalfailed();
             await postGroup()
 
