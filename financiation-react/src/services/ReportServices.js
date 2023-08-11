@@ -1,10 +1,10 @@
 export const dataHandler = (item) => {
-    if (Object.keys(item).length == 3) {
-        if (item.id_ministry_department != undefined) {
+    if (Object.keys(item).length === 3) {
+        if (item.id_ministry_department !== undefined) {
             faqsHandler(item)
             console.log("IS FAQ")
         } else {
-            if (item.id_department != undefined) {
+            if (item.id_department !== undefined) {
                 locationsHandler(item)
                 console.log("IS LOCATION")
             } else {
