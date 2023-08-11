@@ -1,20 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import {Card, Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import AuthContext from "../context/AuthContext";
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AdvisorMiniCard from "../components/AdvisorMiniCard";
-import CoordinatorMiniCard from "./CoordinatorMiniCard";
-import {styled} from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
-import CreateIcon from '@mui/icons-material/Create';
-import IconButton from "@mui/material/IconButton";
-import {Link} from "react-router-dom";
 
 
 export const GroupCard = ({group}) => {
@@ -29,48 +17,36 @@ export const GroupCard = ({group}) => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
 
-    const Grid = styled(MuiGrid)(({theme}) => ({
-        width: '100%',
-        ...theme.typography.body2,
-        '& [role="separator"]': {
-            margin: theme.spacing(0, 2),
-        },
-    }));
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <div>
-                <Accordion>
+            <Card className='groupcard'>
+                <Container fluid className='ContainerNameGroup'>
+                    <h2 className='b'>{group.name}</h2>
+                </Container>
+                <Row className='Columna1'>
 
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>{group.name}</Typography>
-
-                    </AccordionSummary>
-
-                    <AccordionDetails> 
-                            <IconButton type="submit" aria-label="search">
-                                <CreateIcon/>
-                            </IconButton>
+                    <Col>
                         <Container>
-                            <Row>
-                                <Col>
-                                    <AdvisorMiniCard group={group}/>
-                                </Col>
-                                <Col md={1}>
-                                    <div className="vl"></div>
-                                </Col>
-                                <Col>
-                                    <CoordinatorMiniCard group={group}/>
-                                </Col>
-                            </Row>
+                            <h3 className='a'>Asesores</h3>
+                            {advisors?.map((advisor) => (
+                                <p>{advisor.first_name} {advisor.last_name}</p>
+                            ))}
                         </Container>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
+
+                    </Col>
+                    <Col>
+                        <Container>
+                            <h3 className='a'>Coordinadores</h3>
+                            {coordinators?.map((coordinator) => (
+                                <p>{coordinator.first_name} {coordinator.last_name}</p>
+                            ))}
+                        </Container>
+
+                    </Col>
+                </Row>
+            </Card>
+
         </Container>
 
     )

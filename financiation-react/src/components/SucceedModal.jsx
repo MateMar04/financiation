@@ -6,12 +6,16 @@ import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 
 
 export const SucceedModal = (props, {message}) => {
+    if (!props.show) {
+        return null
+    }
+
     return (
-        <Modal show={props.show}>
+        <Modal>
             <Modal.Body>
                 <Container className='justify-content-center'>
                     <Row className='justify-content-center'>
-                        <Col lg={5}>
+                        <Col md={5}>
                             <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
                             <p className="text-center">¡Se a registrado {message} correctamente!</p>
                         </Col>

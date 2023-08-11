@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import getAdvisees from "../services/AdvisedServices";
+import getAdvised from "../services/AdvisedServices";
 
 const AdvisedPage = () => {
 
@@ -12,7 +12,7 @@ const AdvisedPage = () => {
     let {authTokens, logoutUser} = useContext(AuthContext)
 
     useEffect(() => {
-        getAdvisees(authTokens.access).then(data => setAdvised(data))
+        getAdvised(authTokens.access).then(data => setAdvised(data))
     }, [advisedId])
 
     return (
