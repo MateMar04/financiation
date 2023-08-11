@@ -4,9 +4,9 @@ import "../assets/styles/ProfileModifyForm.css"
 
 export const ProfileModifyForm = () => {
     return (
-        <Container fluid>
+        <Container fluid className="ProfileDataModifier">
 
-        <h2 className="Titulo">Modificar Datos Personales</h2>
+        <h2 className="ProfileTitle">Modificar Datos Personales</h2>
 
         <Form>
             
@@ -23,11 +23,9 @@ export const ProfileModifyForm = () => {
 
                 </Col>
                 <Col lg={6} className="profile-form-col2 ">
-                    <FloatingLabel className='floatingLabel' label="Email">
-
-                        <Form.Control className="profile-fc" placeholder="Email" type="text" name="username"
-                            required />
-                    </FloatingLabel>
+                <Button className="change-password">
+                            Cambiar contraseña
+                        </Button>
 
                 </Col>
                

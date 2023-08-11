@@ -34,6 +34,7 @@ const ProfilePage = () => {
                     <Col lg={4}>
                         <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
                         {/* Falta añadir icono para editar imagen */}
+
                     </Col>
                     <Col lg={8}>
                         <ProfileData username={user?.username} firstName={user?.first_name} lastName={user?.last_name}
@@ -44,17 +45,7 @@ const ProfilePage = () => {
                 <ProfileModifyForm/>
             </Card>
 
-            <Container fluid>
-            <Card className="ProfileCard">
-            <Row >
-                    <Col lg={6} className="profile-form-col button-container">
-                        <Button className="change-password">
-                            Cambiar contraseña
-                        </Button>
-                    </Col>
-                    </Row>
-            </Card>
-            </Container>
+           
         </Container>
     );
 }
