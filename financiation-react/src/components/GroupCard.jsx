@@ -14,6 +14,7 @@ import MuiGrid from '@mui/material/Grid';
 import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
+import {Link} from "react-router-dom";
 
 
 export const GroupCard = ({group}) => {
@@ -50,10 +51,10 @@ export const GroupCard = ({group}) => {
 
                     </AccordionSummary>
 
-                    <AccordionDetails>
-                        <IconButton type="submit" aria-label="search">
-                            <CreateIcon/>
-                        </IconButton>
+                    <AccordionDetails> 
+                            <IconButton type="submit" aria-label="search">
+                                <CreateIcon/>
+                            </IconButton>
                         <Container>
                             <Row>
                                 <Col>
