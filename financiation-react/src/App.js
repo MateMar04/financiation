@@ -26,7 +26,8 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React, { useState, useEffect } from 'react';
-import { PacmanLoader, PropagateLoader, PuffLoader, SyncLoader } from 'react-spinners';
+import { PacmanLoader, PropagateLoader, PuffLoader, SyncLoader} from 'react-spinners';
+import {Col} from 'react-bootstrap';
 
 function App() {
     const [loading, setLoading] = useState(false);
@@ -34,20 +35,22 @@ function App() {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 8000);
+        }, 2000);
     }, []);
 
     return (
         <Router>
             <div className="App">
                 {loading ? (
-                <div className="loader-container">
-                    <SyncLoader
-                        color={'#ADD8E6'}
-                        loading={loading}
-                        size={80}
-                        
-                    />
+                <div className="loader-text">
+                        <p className='loading-message'>
+                            Loading...
+                        </p>
+                        <SyncLoader
+                            color={'#1fa4e6'}
+                            loading={loading}
+                            size={100} 
+                        /> 
                 </div>
 
                 ) : (
