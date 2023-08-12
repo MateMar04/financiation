@@ -2,46 +2,29 @@ import React, {useContext, useEffect, useState} from "react";
 import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {Link, useNavigate} from 'react-router-dom'
-import Check from "../assets/images/checked.gif";
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {UserRowWithRadio} from "../components/UserRowWithRadio";
-import {UserRowWithCheck} from "../components/UserRowWithCheck";
-import Button from '@mui/material/Button';
 import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import Box, {BoxProps} from '@mui/material/Box';
-import Input from '@mui/material/Input';
 import CoordinatorCard from "../components/CoordinatorCard";
 import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
+import {Collapse, Fade, Grow, Slide, Zoom} from "@mui/material";
 
 
 export const CreateGroupPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-
     let {authTokens} = useContext(AuthContext)
-    let [advisors, setAdvisors] = useState([])
-    let [coordinators, setCoordinators] = useState([])
-    const [show, setShow] = useState([false])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-
-    useEffect(() => {
-        getAdvisorUsers().then(r => setAdvisors(r))
-        getCoordinatorUsers().then(r => setCoordinators(r))
-    }, [])
 
     let postGroup = async (e) => {
         e.preventDefault()
@@ -79,6 +62,8 @@ export const CreateGroupPage = () => {
         <Container fluid>
             <SucceedModal message="el coordinador" show={showsuccess}/>
             <FailedModal message="el coordinador" show={showfail}/>
+
+
             <Form onSubmit={postGroup}>
                 <Container>
                     <Row className={'justify-content-center'}>
@@ -99,15 +84,22 @@ export const CreateGroupPage = () => {
                         </Col>
                     </Row>
                 </Container>
+                <Zoom in>
+                    <Container>
+                        <CoordinatorCard addToGroup={handdlerOpenDrawer}/>
+                    </Container>
+                </Zoom>
+                <Zoom in>
+                    <Container>
+                        <AdvisorCard addToGroup={handdlerOpenDrawer}/>
+                    </Container>
+                </Zoom>
 
-                <Container>
-                    <CoordinatorCard addToGroup={handdlerOpenDrawer}/>
-                </Container>
-                <Container>
-                    <AdvisorCard addToGroup={handdlerOpenDrawer}/>
-                </Container>
+                {isDrawerOpen && <Slide direction={'left'} in>
 
-                {isDrawerOpen && <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>}
+                    <div><SideBarGroups OpenDrawer={handdlerOpenDrawer}/></div>
+                </Slide>}
+
             </Form>
         </Container>
     )

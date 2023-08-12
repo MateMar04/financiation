@@ -1,4 +1,4 @@
-import {Box, Drawer} from '@mui/material';
+import {Box, Drawer, Fade} from '@mui/material';
 import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import {AdvisorMiniCardForming} from "./AdvisorMiniCardForming";
@@ -21,7 +21,9 @@ export const SideBarGroups = ({OpenDrawer}) => {
                                        style={{maxWidth: '180px'}} InputProps={{sx: {borderRadius: '25px'}}}/>
                         </Row>
                         <hr/>
+                        <Fade>
                         <AdvisorMiniCardForming/>
+                            </Fade>
                         <CoordinatorMiniCardForming/>
                         <div className={'btn-flotante'}>
                             <Row className={'justify-content-center'}>
