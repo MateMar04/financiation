@@ -24,7 +24,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
-                        <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
+                        <Col xs={2} md={2} className='"d-flex align-items-center justify-content-center'>
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}
                                     username={user?.username}>
                             </Avatar>

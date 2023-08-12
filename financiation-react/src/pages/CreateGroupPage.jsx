@@ -95,8 +95,12 @@ export const CreateGroupPage = () => {
 
                 <Container>
                     <CoordinatorCard/>
+                </Container>
+                <Container>
                     <AdvisorCard/>
                 </Container>
+
+
                 <SideBarGroups/>
             </Form>
         </Container>

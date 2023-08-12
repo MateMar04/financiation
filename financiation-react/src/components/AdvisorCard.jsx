@@ -5,6 +5,10 @@ import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getUserById} from "../services/UserServices";
+import Card from '@mui/material/Card';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import IconButton from "@mui/material/IconButton";
+
 
 export const AdvisorCard = (userId) => {
 
@@ -22,38 +26,37 @@ export const AdvisorCard = (userId) => {
     return (
         <>
             {advisors?.map((advisor) => (
-                <div className={'my-1'}>
+                <div className={'mt-3'}>
+                <Card>
                     <Container className={'OutlineCard'}>
                         <Row>
-                            <Col md={1} xs={1} lg={1}>
-                                <Avatar alt="Remy Sharp" src={advisor?.profile_picture} sx={{width: 56, height: 56}}/>
+                            <Col md={2} xs={3} lg={2}>
+                                <Avatar alt="Remy Sharp" src={advisor?.profile_picture}
+                                        sx={{width: 56, height: 56}}/>
                             </Col>
                             <Col>
-                                <Row>
-                                    <Col>
+                                <Row key={user.id}>
+                                    <Col md={3} xs={3}>
                                         <strong>
                                             <a>{advisor.first_name} {advisor.last_name}</a>
                                         </strong>
                                     </Col>
-                                    <Col>
-                                        <small>Asesor</small>
+                                <Col>
+                                    <a>{user.state}</a>
+                                </Col>
+                                    <Col md={9}>
+                                        <IconButton value={user.id}><ArrowForwardIcon/></IconButton>
                                     </Col>
-                                    <Col key={user.id}>
-                                        <Form.Check name="radio" type="radio" value={user.id}></Form.Check>
-
-                                    </Col>
-                                </Row>
-                                <Row>
-
                                 </Row>
                                 <Row className={'TextEmailCard'}>
-                                    <small>{advisor.email}</small>
-
+                                    <small>Asesor</small>
                                 </Row>
                             </Col>
                         </Row>
+
                     </Container>
-                </div>
+                </Card>
+                    </div>
             ))}
         </>
 

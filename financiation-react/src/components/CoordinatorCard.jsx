@@ -4,56 +4,64 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import Card from "@mui/material/Card";
+import IconButton from "@mui/material/IconButton";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {getUserById, getUserStatus} from "../services/UserServices";
+import {getLocations} from "../services/LocationServices";
 
 export const CoordinatorCard = (userId) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
+    let [user, setUser] = useState([])
 
 
     useEffect(() => {
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-
+        getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
-    return (
-        <>
-            {coordinators?.map((coordinator) => (
-                <div className={'my-1'}>
-                    <Container className={'OutlineCard'}>
-                        <Row>
-                            <Col md={1} xs={1} lg={1}>
-                                <Avatar alt="Remy Sharp" src={coordinator?.profile_picture}
-                                        sx={{width: 56, height: 56}}/>
-                            </Col>
-                            <Col>
+
+        return (
+            <>
+                {coordinators?.map((coordinator) => (
+                    <div className={'mt-3'}>
+                        <Card>
+                            <Container className={'OutlineCard'}>
                                 <Row>
-                                    <Col>
-                                        <strong>
-                                            <a>{coordinator.first_name} {coordinator.last_name}</a>
-                                        </strong>
-                                    </Col>
-                                    <Col className={'align-items-center'}>
-                                        <small>Coordinador</small>
+                                    <Col md={2} xs={3} lg={2}>
+                                        <Avatar alt="Remy Sharp" src={coordinator?.profile_picture}
+                                                sx={{width: 56, height: 56}}/>
                                     </Col>
                                     <Col>
+                                        <Row key={user.id}>
+                                            <Col md={3} xs={3}>
+                                                <strong>
+                                                    <a>{coordinator.first_name} {coordinator.last_name}</a>
+                                                </strong>
+                                            </Col>
+                                            <Col>
+                                                <IconButton value={user.id}><ArrowForwardIcon/></IconButton>
+                                            </Col>
+                                            <Col>
+                                                <a>{user.status}</a>
+                                            </Col>
+                                        </Row>
+                                        <Row className={'TextEmailCard'}>
+                                            <small>Coordinador!</small>
+                                        </Row>
                                     </Col>
                                 </Row>
 
-                                <Row className={'TextEmailCard'}>
-                                    <small>{coordinator.email}</small>
-
-                                </Row>
-                            </Col>
-                        </Row>
-
-                    </Container>
-                </div>
-            ))}
-        </>
+                            </Container>
+                        </Card>
+                    </div>
+                ))}
+            </>
 
 
-    )
-}
+        )
+    }
 
-export default CoordinatorCard;
+    export default CoordinatorCard;
