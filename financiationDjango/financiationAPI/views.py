@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -608,10 +609,21 @@ def getGroupAdvisorUsers(request, id):
 
 @api_view(['GET'])
 def getReport(request):
-    locations_ids = request.GET.getlist('locs')
-    ministry_departments_ids = request.GET.getlist('deps')
-    faqs_ids = request.GET.getlist('faqs')
-    visits_ids = request.GET.getlist('visits')
+    locations_ids = parse_and_convert(request.GET.getlist('locs'))
+    ministry_departments_ids = parse_and_convert(request.GET.getlist('deps'))
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
 
-    return Response()
+    data = list(Locality.objects.raw('SELECT * FROM "financiationAPI_locality" WHERE id IN %s', [locations_ids]))
+    print(data)
+    return JsonResponse("data", safe=False)
 
+
+def parse_and_convert(input_list):
+    if len(input_list) == 1 and isinstance(input_list[0], str):
+        numbers_str = input_list[0]
+        numbers_list = numbers_str.split(',')
+        numbers_tuple = tuple(map(int, numbers_list))
+        return numbers_tuple
+    else:
+        raise ValueError("Invalid input format")
