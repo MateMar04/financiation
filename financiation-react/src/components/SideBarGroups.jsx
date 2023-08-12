@@ -6,19 +6,14 @@ import {CoordinatorMiniCardForming} from "./CoordinatorMiniCardForming";
 import {Col, Container, Row} from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import "../assets/styles/AdvisorMiniCard.css";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import IconButton from "@mui/material/IconButton";
 
 
-export const SideBarGroups = () => {
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
+export const SideBarGroups = ({OpenDrawer}) => {
     return (
         <>
-            <Button variant={'outlined'}
-                    onClick={() => setIsDrawerOpen(true)}
-            className={'AñadirButton'}>
-                AÑADIR
-            </Button>
-            <Drawer anchor='right' open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
+            <Drawer anchor='right' open={OpenDrawer} onClose={() => OpenDrawer(false)}>
                 <Box width={'250px'} textAlign={'center'}>
                     <Container fluid>
                         <Row className={'justify-content-center'} style={{paddingTop: '25px'}}>

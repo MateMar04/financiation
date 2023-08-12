@@ -30,6 +30,10 @@ export const CreateGroupPage = () => {
     const [show, setShow] = useState([false])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
+
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
@@ -67,6 +71,9 @@ export const CreateGroupPage = () => {
         }
     }
 
+    const handdlerOpenDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
 
     return (
         <Container fluid>
@@ -94,14 +101,13 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <Container>
-                    <CoordinatorCard/>
+                    <CoordinatorCard addToGroup={handdlerOpenDrawer}/>
                 </Container>
                 <Container>
-                    <AdvisorCard/>
+                    <AdvisorCard addToGroup={handdlerOpenDrawer}/>
                 </Container>
 
-
-                <SideBarGroups/>
+                {isDrawerOpen && <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>}
             </Form>
         </Container>
     )
