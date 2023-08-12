@@ -7,8 +7,7 @@ import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import {getUserById, getUserStatus} from "../services/UserServices";
-import {getLocations} from "../services/LocationServices";
+import {getUserById} from "../services/UserServices";
 
 export const CoordinatorCard = (userId) => {
 
@@ -42,10 +41,10 @@ export const CoordinatorCard = (userId) => {
                                                 </strong>
                                             </Col>
                                             <Col>
-                                                <IconButton value={user.id}><ArrowForwardIcon/></IconButton>
+                                                <a>Disponible</a>
                                             </Col>
                                             <Col>
-                                                <a>{user.status}</a>
+                                                <IconButton value={user.id}><ArrowForwardIcon/></IconButton>
                                             </Col>
                                         </Row>
                                         <Row className={'TextEmailCard'}>

@@ -41,10 +41,10 @@ export const AdvisorCard = (userId) => {
                                             <a>{advisor.first_name} {advisor.last_name}</a>
                                         </strong>
                                     </Col>
-                                <Col>
-                                    <a>{user.state}</a>
-                                </Col>
-                                    <Col md={9}>
+                                    <Col>
+                                        <a>En Visita</a>
+                                    </Col>
+                                    <Col>
                                         <IconButton value={user.id}><ArrowForwardIcon/></IconButton>
                                     </Col>
                                 </Row>
