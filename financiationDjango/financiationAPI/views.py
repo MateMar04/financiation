@@ -39,7 +39,14 @@ class RequestApiView(APIView):
 
 class VisitApiView(APIView):
     def get(self, request, *args, **kwargs):
-        visits = Visit.objects.all()
+
+        locations_ids = parse_and_convert(request.GET.getlist('locs'))
+
+        if len(locations_ids) == 0:
+            visits = Visit.objects.all()
+        else:
+            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id IN %s', [locations_ids])
+
         serializer = VisitSerializer(visits, many=True)
         return Response(serializer.data)
 
@@ -601,13 +608,6 @@ def getGroupCoordinatorUsers(request, id):
 
 
 @api_view(['GET'])
-def getGroupAdvisorUsers(request, id):
-    users = User.objects.filter(advisor__id_group__id=id)
-    serializer = UserAccountSerializer(users, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
 def getReport(request):
     locations_ids = parse_and_convert(request.GET.getlist('locs'))
     ministry_departments_ids = parse_and_convert(request.GET.getlist('deps'))
@@ -617,6 +617,13 @@ def getReport(request):
     data = list(Locality.objects.raw('SELECT * FROM "financiationAPI_locality" WHERE id IN %s', [locations_ids]))
     print(data)
     return JsonResponse("data", safe=False)
+
+
+@api_view(['GET'])
+def getGroupAdvisorUsers(request, id):
+    users = User.objects.filter(advisor__id_group__id=id)
+    serializer = UserAccountSerializer(users, many=True)
+    return Response(serializer.data)
 
 
 def parse_and_convert(input_list):

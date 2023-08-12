@@ -83,6 +83,6 @@ urlpatterns = [
     path('request-statuses', views.getRequestStatuses, name='requestStatuses'),
     path('user-statuses', views.getUserStatuses, name='userStatuses'),
 
-    #Reports
+    # Reports
     re_path(r'reports$', views.getReport, name='report')
 ]

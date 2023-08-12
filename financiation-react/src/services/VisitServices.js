@@ -1,4 +1,4 @@
-let getVisits = async (tokens) => {
+export const getVisits = async (tokens) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),
@@ -9,4 +9,11 @@ let getVisits = async (tokens) => {
     return data
 };
 
-export default getVisits
+export const getVisitFromLocations = async (tokens) => {
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+    let response = await fetch()
+}
