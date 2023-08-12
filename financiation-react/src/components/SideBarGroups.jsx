@@ -25,7 +25,7 @@ export const SideBarGroups = ({OpenDrawer}) => {
                         <AdvisorMiniCardForming/>
                             </Fade>
                         <CoordinatorMiniCardForming/>
-                        <div className={'btn-flotante'}>
+                        <div className={'BtnCreateGroup'}>
                             <Row className={'justify-content-center'}>
                                 <hr/>
                                 <Button variant="outlined" name={'name'} style={{maxWidth: '180px'}}

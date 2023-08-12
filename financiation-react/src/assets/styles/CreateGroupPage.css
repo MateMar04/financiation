@@ -1,18 +1,5 @@
-.create-group-card {
-    padding: 2vh;
-}
-
-.upper-row {
-    padding: 3vh;
-}
-
-.create-group-column {
-    padding: 2vh;
-    max-height: 55vh;
-    overflow: hidden;
-}
-
-.create-group-card-scroll {
-    max-height: 100%;
-    overflow-y: scroll;
+.BtnSeeGroup{
+	position: absolute;
+	right: 0;
+	top: 0;
 }

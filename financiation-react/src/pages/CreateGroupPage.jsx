@@ -13,6 +13,7 @@ import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 import {Collapse, Fade, Grow, Slide, Zoom} from "@mui/material";
+import Button from "@mui/material/Button";
 
 
 export const CreateGroupPage = () => {
@@ -94,6 +95,10 @@ export const CreateGroupPage = () => {
                         <AdvisorCard addToGroup={handdlerOpenDrawer}/>
                     </Container>
                 </Zoom>
+
+
+                    <Button onClick={handdlerOpenDrawer} className={'BtnSeeGroup'}>Ver Grupo</Button>
+
 
                 {isDrawerOpen && <Slide direction={'left'} in>
 

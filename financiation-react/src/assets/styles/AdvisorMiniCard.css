@@ -28,7 +28,7 @@
     transform: translateY(-2px);
 }
 
-.btn-flotante {
+.BtnCreateGroup {
     position: fixed;
     bottom: 20px;
     right: 50px;
@@ -36,7 +36,7 @@
     z-index: 99;
 }
 
-.btn-flotante:hover {
+.BtnCreateGroup:hover {
     box-shadow: 0px 60px 20px rgba(0, 0, 0, 0.3);
     transform: translateY(-7px);
 }
