@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
@@ -82,4 +82,7 @@ urlpatterns = [
     path('visit-statuses', views.getVisitSatuses, name='visitStatuses'),
     path('request-statuses', views.getRequestStatuses, name='requestStatuses'),
     path('user-statuses', views.getUserStatuses, name='userStatuses'),
+
+    #Reports
+    re_path(r'reports$', views.getReport, name='report')
 ]
