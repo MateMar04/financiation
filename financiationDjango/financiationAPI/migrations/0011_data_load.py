@@ -26,6 +26,4 @@ class Migration(migrations.Migration):
 
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_faq_id_ministry_department\" (ministrydepartment_id, faq_id) VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (2, 2), (2, 7), (2, 8), (3, 2), (4, 2), (4, 9), (4, 10), (4, 11), (4, 12), (5, 13), (5, 14), (5, 15), (6, 2), (6, 21), (7, 16), (7, 2)")
-
-
     ]
