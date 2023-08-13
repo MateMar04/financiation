@@ -11,7 +11,7 @@ import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import getMinistryDepartments from "../services/MinistryDepartmentServices";
 import getFaqs from "../services/FaqServices";
-import getVisits from "../services/VisitServices";
+import {getVisits} from "../services/VisitServices";
 import {getLocations} from "../services/LocationServices";
 
 export const ReportsPage = () => {
