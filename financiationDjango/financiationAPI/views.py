@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -640,3 +639,10 @@ def parse_and_convert(input_list):
         numbers_list = numbers_str.split(',')
         numbers_tuple = tuple(map(int, numbers_list))
         return numbers_tuple
+
+
+@api_view(['GET'])
+def getGroupById(request, id):
+    group = Group.objects.get(id = id)
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
