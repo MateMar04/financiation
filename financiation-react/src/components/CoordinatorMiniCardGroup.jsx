@@ -2,23 +2,17 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
-import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import {getGroupAdvisorUsers, getGroupCoordinatorUsers, getUser} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
-export const CoordinatorMiniCardGroup = ({group, showButton}) => {
-
+export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator}) => {
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
-    let [user, setUser] = useState()
 
     useEffect(() => {
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-
-        getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
     return (
@@ -27,8 +21,7 @@ export const CoordinatorMiniCardGroup = ({group, showButton}) => {
                 <Container key={coordinator.id_user}>
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}
-                                    username={coordinator?.username}>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}>
                             </Avatar>
                         </Col>
                         <Col md={5} xs={5}>
@@ -41,9 +34,9 @@ export const CoordinatorMiniCardGroup = ({group, showButton}) => {
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
-                        <Col md={5} xs={5}>
+                        <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={DeleteCoordinator}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>

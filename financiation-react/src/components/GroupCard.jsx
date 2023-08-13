@@ -33,6 +33,13 @@ export const GroupCard = ({group}) => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
 
+    const handleDeleteCoordinator = () => {
+        console.log('Coordinador eliminado brother')
+    };
+
+    const handleDeleteAdvisor = () => {
+        console.log('Asesor eliminado brother')
+    };
 
     return (
         <Container fluid className='CompletlyContainer'>
@@ -54,13 +61,13 @@ export const GroupCard = ({group}) => {
                         <Container>
                             <Row>
                                 <Col>
-                                    <AdvisorMiniCardGroup group={group} showButton={showButton}/>
+                                    <AdvisorMiniCardGroup group={group} showButton={showButton} DeleteAdvisor={handleDeleteAdvisor}/>
                                 </Col>
                                 <Col md={1}>
                                     <div className="vl"></div>
                                 </Col>
                                 <Col>
-                                    <CoordinatorMiniCardGroup group={group} showButton={showButton}/>
+                                    <CoordinatorMiniCardGroup group={group} showButton={showButton} DeleteCoordinator={handleDeleteCoordinator}/>
                                 </Col>
                             </Row>
                         </Container>
