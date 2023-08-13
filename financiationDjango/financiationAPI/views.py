@@ -42,10 +42,10 @@ class VisitApiView(APIView):
 
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
-        if len(locations_ids) == 0:
+        if isinstance(locations_ids, type(None)):
             visits = Visit.objects.all()
         else:
-            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id IN %s', [locations_ids])
+            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id_locality_id IN %s', [locations_ids])
 
         serializer = VisitSerializer(visits, many=True)
         return Response(serializer.data)
@@ -408,7 +408,7 @@ def getMinistryDepartments(request):
 def getFaqs(request):
     ministry_ids = parse_and_convert(request.GET.getlist('deps'))
 
-    if len(ministry_ids) == 0:
+    if isinstance(ministry_ids, type(None)):
         faqs = Faq.objects.all()
     else:
         faqs = Faq.objects.raw(
@@ -622,7 +622,7 @@ def getReport(request):
     faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
     visits_ids = parse_and_convert(request.GET.getlist('visits'))
 
-    data = list(Locality.objects.raw('SELECT * FROM "financiationAPI_locality" WHERE id IN %s', [locations_ids]))
+    data = list(Request.objects.raw('SELECT * FROM "financiationAPI_locality" WHERE id IN %s', [locations_ids]))
     print(data)
     return JsonResponse("data", safe=False)
 
@@ -640,5 +640,3 @@ def parse_and_convert(input_list):
         numbers_list = numbers_str.split(',')
         numbers_tuple = tuple(map(int, numbers_list))
         return numbers_tuple
-    else:
-        raise ValueError("Invalid input format")
