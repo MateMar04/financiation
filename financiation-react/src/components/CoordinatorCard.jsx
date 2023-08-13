@@ -8,6 +8,8 @@ import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {getUserById} from "../services/UserServices";
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+
 
 export const CoordinatorCard = ({ addToGroup, userId }) => {
 
@@ -25,7 +27,7 @@ export const CoordinatorCard = ({ addToGroup, userId }) => {
     return (
         <>
             {coordinators?.map((coordinator) => (
-                <div className={'mt-3'}>
+
                     <Card>
                         <Container className={'OutlineCard'}>
                             <Row>
@@ -35,7 +37,7 @@ export const CoordinatorCard = ({ addToGroup, userId }) => {
                                 </Col>
                                 <Col>
                                     <Row key={user.id}>
-                                        <Col md={3} xs={3}>
+                                        <Col>
                                             <strong>
                                                 <a>{coordinator.first_name} {coordinator.last_name}</a>
                                             </strong>
@@ -43,9 +45,9 @@ export const CoordinatorCard = ({ addToGroup, userId }) => {
                                         <Col>
                                             <a>Disponible</a>
                                         </Col>
-                                        <Col>
+                                        <Col md={1}>
                                             <IconButton value={user.id} onClick={addToGroup}>
-                                                <ArrowForwardIcon/>
+                                                <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
                                     </Row>
@@ -57,7 +59,7 @@ export const CoordinatorCard = ({ addToGroup, userId }) => {
 
                         </Container>
                     </Card>
-                </div>
+
             ))}
         </>
 

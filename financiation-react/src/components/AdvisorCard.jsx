@@ -8,6 +8,7 @@ import {getUserById} from "../services/UserServices";
 import Card from '@mui/material/Card';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from "@mui/material/IconButton";
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 
 export const AdvisorCard = ({addToGroup, userId}) => {
@@ -36,7 +37,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                 </Col>
                                 <Col>
                                     <Row key={user.id}>
-                                        <Col md={3} xs={3}>
+                                        <Col>
                                             <strong>
                                                 <a>{advisor.first_name} {advisor.last_name}</a>
                                             </strong>
@@ -44,10 +45,11 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                         <Col>
                                             <a>En Visita</a>
                                         </Col>
-                                        <Col>
+                                        <Col md={1}>
                                             <IconButton value={user.id} onClick={addToGroup}>
-                                                <ArrowForwardIcon/>
-                                            </IconButton> </Col>
+                                                <GroupAddIcon/>
+                                            </IconButton>
+                                        </Col>
                                     </Row>
                                     <Row className={'TextEmailCard'}>
                                         <small>Asesor</small>

@@ -14,6 +14,7 @@ import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 import {Collapse, Fade, Grow, Slide, Zoom} from "@mui/material";
 import Button from "@mui/material/Button";
+import GroupsIcon from '@mui/icons-material/Groups';
 
 
 export const CreateGroupPage = () => {
@@ -83,6 +84,10 @@ export const CreateGroupPage = () => {
                                 }}
                             />
                         </Col>
+                        <Col md={1} xs={1} lg={1}>
+                            <IconButton onClick={handdlerOpenDrawer} sx={{width: 56, height: 56}}
+                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                        </Col>
                     </Row>
                 </Container>
                 <Zoom in>
@@ -96,15 +101,10 @@ export const CreateGroupPage = () => {
                     </Container>
                 </Zoom>
 
-
-                    <Button onClick={handdlerOpenDrawer} className={'BtnSeeGroup'}>Ver Grupo</Button>
-
-
                 {isDrawerOpen && <Slide direction={'left'} in>
 
                     <div><SideBarGroups OpenDrawer={handdlerOpenDrawer}/></div>
                 </Slide>}
-
             </Form>
         </Container>
     )
