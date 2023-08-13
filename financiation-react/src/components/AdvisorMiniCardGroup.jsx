@@ -25,7 +25,7 @@ export const AdvisorMiniCardGroup = ({group, showButton, DeleteAdvisor}) => {
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}>
                             </Avatar>
                         </Col>
-                        <Col md={5} xs={5}>
+                        <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>

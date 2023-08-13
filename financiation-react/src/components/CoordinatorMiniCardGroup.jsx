@@ -24,7 +24,7 @@ export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator})
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}>
                             </Avatar>
                         </Col>
-                        <Col md={5} xs={5}>
+                        <Col>
                             <Row>
                                 <div className="d-flex align-items-center">
                                     <strong className='PrimaryText'>
@@ -34,7 +34,7 @@ export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator})
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
-                        <Col md={1} xs={1}>
+                        <Col  md={1} xs={1}>
                             <Row className={'justify-content-end'}>
                                 {showButton && <IconButton onClick={DeleteCoordinator}><ClearIcon/></IconButton>}
                             </Row>
