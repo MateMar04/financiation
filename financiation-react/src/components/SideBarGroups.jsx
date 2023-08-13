@@ -1,13 +1,11 @@
-import {Box, Drawer, Fade} from '@mui/material';
-import React, {useState} from 'react';
+import {Box, Drawer} from '@mui/material';
+import React from 'react';
 import Button from '@mui/material/Button';
 import {AdvisorMiniCardForming} from "./AdvisorMiniCardForming";
 import {CoordinatorMiniCardForming} from "./CoordinatorMiniCardForming";
-import {Col, Container, Row} from 'react-bootstrap';
+import {Container, Row} from 'react-bootstrap';
 import TextField from '@mui/material/TextField';
 import "../assets/styles/AdvisorMiniCard.css";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import IconButton from "@mui/material/IconButton";
 
 
 export const SideBarGroups = ({OpenDrawer}) => {
@@ -21,9 +19,9 @@ export const SideBarGroups = ({OpenDrawer}) => {
                                        style={{maxWidth: '180px'}} InputProps={{sx: {borderRadius: '25px'}}}/>
                         </Row>
                         <hr/>
-                        <Fade>
+
                         <AdvisorMiniCardForming/>
-                            </Fade>
+
                         <CoordinatorMiniCardForming/>
                         <div className={'BtnCreateGroup'}>
                             <Row className={'justify-content-center'}>
@@ -36,6 +34,7 @@ export const SideBarGroups = ({OpenDrawer}) => {
                     </Container>
                 </Box>
             </Drawer>
+
         </>
     )
 }

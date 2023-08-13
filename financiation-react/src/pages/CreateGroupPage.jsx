@@ -1,9 +1,8 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
+
 import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,8 +11,7 @@ import CoordinatorCard from "../components/CoordinatorCard";
 import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-import {Collapse, Fade, Grow, Slide, Zoom} from "@mui/material";
-import Button from "@mui/material/Button";
+
 import GroupsIcon from '@mui/icons-material/Groups';
 
 
@@ -59,7 +57,6 @@ export const CreateGroupPage = () => {
     const handdlerOpenDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
-
     return (
         <Container fluid>
             <SucceedModal message="el coordinador" show={showsuccess}/>
@@ -69,7 +66,7 @@ export const CreateGroupPage = () => {
             <Form onSubmit={postGroup}>
                 <Container>
                     <Row className={'justify-content-center'}>
-                        <Col md={8}>
+                        <Col md={8} xs={9}>
                             <TextField
                                 fullWidth
                                 id="standard-bare"
@@ -90,21 +87,19 @@ export const CreateGroupPage = () => {
                         </Col>
                     </Row>
                 </Container>
-                <Zoom in>
-                    <Container>
-                        <CoordinatorCard addToGroup={handdlerOpenDrawer}/>
-                    </Container>
-                </Zoom>
-                <Zoom in>
-                    <Container>
-                        <AdvisorCard addToGroup={handdlerOpenDrawer}/>
-                    </Container>
-                </Zoom>
 
-                {isDrawerOpen && <Slide direction={'left'} in>
+                <Container>
+                    <CoordinatorCard addToGroup={handdlerOpenDrawer}/>
+                </Container>
 
-                    <div><SideBarGroups OpenDrawer={handdlerOpenDrawer}/></div>
-                </Slide>}
+
+                <Container>
+                    <AdvisorCard addToGroup={handdlerOpenDrawer}/>
+                </Container>
+
+                {isDrawerOpen &&
+                  <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
+                }
             </Form>
         </Container>
     )

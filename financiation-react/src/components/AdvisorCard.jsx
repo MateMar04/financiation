@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import {Zoom} from "@mui/material";
 
 
 export const AdvisorCard = ({addToGroup, userId}) => {
@@ -27,6 +28,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
     return (
         <>
             {advisors?.map((advisor) => (
+                <Zoom in style={{ transitionDelay: '300ms'}}>
                 <div className={'mt-3'}>
                     <Card>
                         <Container className={'OutlineCard'}>
@@ -37,15 +39,15 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                 </Col>
                                 <Col>
                                     <Row key={user.id}>
-                                        <Col>
+                                        <Col xs={9} md={6}>
                                             <strong>
                                                 <a>{advisor.first_name} {advisor.last_name}</a>
                                             </strong>
                                         </Col>
-                                        <Col>
+                                        <Col xs={9} md={5}>
                                             <a>En Visita</a>
                                         </Col>
-                                        <Col md={1}>
+                                        <Col xs={1} md={1}>
                                             <IconButton value={user.id} onClick={addToGroup}>
                                                 <GroupAddIcon/>
                                             </IconButton>
@@ -60,6 +62,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                         </Container>
                     </Card>
                 </div>
+                </Zoom>
             ))}
         </>
 

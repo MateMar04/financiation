@@ -9,9 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {getUserById} from "../services/UserServices";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import {Zoom} from "@mui/material";
 
 
-export const CoordinatorCard = ({ addToGroup, userId }) => {
+export const CoordinatorCard = ({addToGroup, userId}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -27,40 +28,44 @@ export const CoordinatorCard = ({ addToGroup, userId }) => {
     return (
         <>
             {coordinators?.map((coordinator) => (
+                <Zoom in>
+                    <div className={'mt-3'}>
 
-                    <Card>
-                        <Container className={'OutlineCard'}>
-                            <Row>
-                                <Col md={2} xs={3} lg={2}>
-                                    <Avatar alt="Remy Sharp" src={coordinator?.profile_picture}
-                                            sx={{width: 56, height: 56}}/>
-                                </Col>
-                                <Col>
-                                    <Row key={user.id}>
-                                        <Col>
-                                            <strong>
-                                                <a>{coordinator.first_name} {coordinator.last_name}</a>
-                                            </strong>
-                                        </Col>
-                                        <Col>
-                                            <a>Disponible</a>
-                                        </Col>
-                                        <Col md={1}>
-                                            <IconButton value={user.id} onClick={addToGroup}>
-                                                <GroupAddIcon/>
-                                            </IconButton>
-                                        </Col>
-                                    </Row>
-                                    <Row className={'TextEmailCard'}>
-                                        <small>Coordinador</small>
-                                    </Row>
-                                </Col>
-                            </Row>
+                        <Card>
+                            <Container className={'OutlineCard'}>
+                                <Row>
+                                    <Col md={2} xs={3} lg={2}>
+                                        <Avatar alt="Remy Sharp" src={coordinator?.profile_picture}
+                                                sx={{width: 56, height: 56}}/>
+                                    </Col>
+                                    <Col>
+                                        <Row key={user.id}>
+                                            <Col xs={9} md={6}>
+                                                <strong>
+                                                    <a>{coordinator.first_name} {coordinator.last_name}</a>
+                                                </strong>
+                                            </Col>
+                                            <Col xs={9} md={5}>
+                                                <a>Disponible</a>
+                                            </Col>
+                                            <Col xs={1} md={1}>
+                                                <IconButton value={user.id} onClick={addToGroup}>
+                                                    <GroupAddIcon/>
+                                                </IconButton>
+                                            </Col>
+                                        </Row>
+                                        <Row className={'TextEmailCard'}>
+                                            <small>Coordinador</small>
 
-                        </Container>
-                    </Card>
-
+                                        </Row>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </Card>
+                    </div>
+                </Zoom>
             ))}
+
         </>
 
 

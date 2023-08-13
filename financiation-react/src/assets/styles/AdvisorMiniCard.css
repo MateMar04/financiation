@@ -29,8 +29,7 @@
 }
 
 .BtnCreateGroup {
-    position: fixed;
-    bottom: 20px;
+    bottom: 30px;
     right: 50px;
     transition: all 300ms ease 0ms;
     z-index: 99;
