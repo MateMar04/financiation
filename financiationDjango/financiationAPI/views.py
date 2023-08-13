@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -44,7 +45,8 @@ class VisitApiView(APIView):
         if isinstance(locations_ids, type(None)):
             visits = Visit.objects.all()
         else:
-            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id_locality_id IN %s', [locations_ids])
+            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id_locality_id IN %s',
+                                       [locations_ids])
 
         serializer = VisitSerializer(visits, many=True)
         return Response(serializer.data)
@@ -616,14 +618,16 @@ def getGroupCoordinatorUsers(request, id):
 
 @api_view(['GET'])
 def getReport(request):
-    locations_ids = parse_and_convert(request.GET.getlist('locs'))
     ministry_departments_ids = parse_and_convert(request.GET.getlist('deps'))
     faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
     visits_ids = parse_and_convert(request.GET.getlist('visits'))
 
-    data = list(Request.objects.raw('SELECT * FROM "financiationAPI_locality" WHERE id IN %s', [locations_ids]))
-    print(data)
-    return JsonResponse("data", safe=False)
+    requests = Request.objects.raw(
+        'SELECT * FROM "financiationAPI_request" WHERE id_visit_id IN %s AND id_ministry_department_id IN %s AND id_faq_id IN %s',
+        [visits_ids, ministry_departments_ids, faqs_ids])
+    print(requests)
+    serializer = RequestSerializer(requests, many=True)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -643,6 +647,6 @@ def parse_and_convert(input_list):
 
 @api_view(['GET'])
 def getGroupById(request, id):
-    group = Group.objects.get(id = id)
+    group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
