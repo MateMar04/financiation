@@ -20,14 +20,16 @@ export const AdvisorMiniCardForming = ({group}) => {
                 <div className={'my-1'}>
                     <Container className={'AllAdvisorMiniCard'}>
                         <Row>
-                            <Col md={1} xs={1} lg={1}>
+                            <Col md={2}>
                                 <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}/>
                             </Col>
-                            <Col>
+
+                            <Col md={9}>
                                 <strong className='PrimaryText'>
                                     <sub>{advisor.first_name} {advisor.last_name}</sub>
                                 </strong>
                             </Col>
+
                         </Row>
                         <Row>
                             <sub className='SecondaryText'>Asesor</sub>

@@ -8,10 +8,12 @@
 
 .PrimaryText {
     text-transform: capitalize !important;
+
 }
 
 .SecondaryText {
-    margin-top: -10px;
+    padding-bottom: 8px;
+    padding-top: 3px;
 }
 
 .AllAdvisorMiniCard {
@@ -40,7 +42,8 @@
     transform: translateY(-7px);
 }
 
-.AñadirButton{
+.AñadirButton {
     max-width: 250px;
     vertical-align: center;
 }
+

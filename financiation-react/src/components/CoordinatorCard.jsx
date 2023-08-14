@@ -1,12 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
-import "../assets/styles/AdvisorCard.css";
+import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import {getUserById} from "../services/UserServices";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
@@ -30,7 +29,6 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
             {coordinators?.map((coordinator) => (
                 <Zoom in>
                     <div className={'mt-3'}>
-
                         <Card>
                             <Container className={'OutlineCard'}>
                                 <Row>
@@ -41,7 +39,7 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
                                     <Col>
                                         <Row key={user.id}>
                                             <Col xs={9} md={6}>
-                                                <strong>
+                                                <strong className={'PrimaryText'}>
                                                     <a>{coordinator.first_name} {coordinator.last_name}</a>
                                                 </strong>
                                             </Col>
@@ -56,8 +54,8 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
                                         </Row>
                                         <Row className={'TextEmailCard'}>
                                             <small>Coordinador</small>
-
                                         </Row>
+
                                     </Col>
                                 </Row>
                             </Container>
