@@ -4,6 +4,7 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
+import {Zoom} from "@mui/material";
 
 export const AdvisorMiniCardForming = ({group}) => {
 
@@ -17,6 +18,7 @@ export const AdvisorMiniCardForming = ({group}) => {
     return (
         <>
             {advisors?.map((advisor) => (
+                <Zoom in>
                 <div className={'my-1'}>
                     <Container className={'AllAdvisorMiniCard'}>
                         <Row>
@@ -24,17 +26,18 @@ export const AdvisorMiniCardForming = ({group}) => {
                                 <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}/>
                             </Col>
 
-                            <Col md={9} xs={9}>
+                            <Col md={9} xs={9} className={'justify-content-center'}>
                                 <strong className='PrimaryText'>
                                     <sub>{advisor.first_name} {advisor.last_name}</sub>
                                 </strong>
                             </Col>
                         </Row>
                         <Row className={'justify-content-center'}>
-                                <sub className='SecondaryText'>Asesor</sub>
+                            <sub className='SecondaryText'>Asesor</sub>
                         </Row>
                     </Container>
                 </div>
+                </Zoom>
             ))}
         </>
 
