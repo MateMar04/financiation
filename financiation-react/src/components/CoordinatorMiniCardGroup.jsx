@@ -3,20 +3,17 @@ import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
-import {getGroupCoordinatorUsers, getUser} from "../services/UserServices";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from '@mui/icons-material/Clear';
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
 
-
-export const CoordinatorMiniCard = ({group}) => {
-
+export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator}) => {
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
-    let [user, setUser] = useState()
 
     useEffect(() => {
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
-        getUser(authTokens.access).then(data => setUser(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
     }, [])
-
 
     return (
         <>
@@ -24,8 +21,8 @@ export const CoordinatorMiniCard = ({group}) => {
                 <Container key={coordinator.id_user}>
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}
-                                    username={user?.username}/>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}>
+                            </Avatar>
                         </Col>
                         <Col>
                             <Row>
@@ -37,13 +34,20 @@ export const CoordinatorMiniCard = ({group}) => {
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
+                        <Col  md={1} xs={1}>
+                            <Row className={'justify-content-end'}>
+                                {showButton && <IconButton onClick={DeleteCoordinator}><ClearIcon/></IconButton>}
+                            </Row>
+                        </Col>
                     </Row>
                     <hr/>
                 </Container>
             ))}
         </>
 
+
     )
 }
 
-export default CoordinatorMiniCard;
+
+export default CoordinatorMiniCardGroup;
