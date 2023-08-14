@@ -10,7 +10,7 @@ import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
 import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
-import {Fade} from "@mui/material";
+import {Zoom} from "@mui/material";
 
 
 
@@ -32,7 +32,7 @@ export const GroupCard = ({group}) => {
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <Fade in>
+            <Zoom in style={{ transitionDelay: '100ms'}}>
 
                 <div>
                     <Accordion>
@@ -67,7 +67,7 @@ export const GroupCard = ({group}) => {
                         </AccordionDetails>
                     </Accordion>
                 </div>
-            </Fade>
+            </Zoom>
         </Container>
 
     )
