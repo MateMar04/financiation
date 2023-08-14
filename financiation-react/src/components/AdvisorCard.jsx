@@ -1,12 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Col, Container, Form, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getUserById} from "../services/UserServices";
 import Card from '@mui/material/Card';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
@@ -53,7 +52,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                             </IconButton>
                                         </Col>
                                     </Row>
-                                    <Row className={'TextEmailCard'}>
+                                    <Row>
                                         <small>Asesor</small>
                                     </Row>
                                 </Col>

@@ -4,8 +4,10 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
+import ClearIcon from "@mui/icons-material/Clear";
+import IconButton from "@mui/material/IconButton";
 
-export const AdvisorMiniCardForming = ({group}) => {
+export const AdvisorMiniCardForming = ({group, DeleteAdvisor}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -20,17 +22,18 @@ export const AdvisorMiniCardForming = ({group}) => {
                 <div className={'my-1'}>
                     <Container className={'AllAdvisorMiniCard'}>
                         <Row>
-                            <Col md={1} xs={1} lg={1}>
+                            <Col md={2} xs={3}>
                                 <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}/>
                             </Col>
-                            <Col>
+
+                            <Col md={9} xs={9}>
                                 <strong className='PrimaryText'>
                                     <sub>{advisor.first_name} {advisor.last_name}</sub>
                                 </strong>
                             </Col>
                         </Row>
-                        <Row>
-                            <sub className='SecondaryText'>Asesor</sub>
+                        <Row className={'justify-content-center'}>
+                                <sub className='SecondaryText'>Asesor</sub>
                         </Row>
                     </Container>
                 </div>

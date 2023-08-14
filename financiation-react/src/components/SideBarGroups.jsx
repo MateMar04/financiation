@@ -26,8 +26,9 @@ export const SideBarGroups = ({OpenDrawer}) => {
                         <div className={'BtnCreateGroup'}>
                             <Row className={'justify-content-center'}>
                                 <hr/>
-                                <Button variant="outlined" name={'name'} style={{maxWidth: '180px'}}
-                                        InputProps={{sx: {borderRadius: '25px'}}} type="submit">Crear Grupo</Button>
+                                    <Button variant="outlined" name={'name'} style={{maxWidth: '180px'}}
+                                            InputProps={{sx: {borderRadius: '25px'}}} type="submit">Crear Grupo</Button>
+
                             </Row>
                         </div>
 
