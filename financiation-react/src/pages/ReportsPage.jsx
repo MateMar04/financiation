@@ -10,8 +10,6 @@ import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import getMinistryDepartments from "../services/MinistryDepartmentServices";
-import getFaqs from "../services/FaqServices";
-import {getVisits} from "../services/VisitServices";
 import {getLocations} from "../services/LocationServices";
 
 export const ReportsPage = () => {
@@ -36,8 +34,6 @@ export const ReportsPage = () => {
     useEffect(() => {
         getLocations(authTokens.access).then(r => setLocalities(r))
         getMinistryDepartments(authTokens.access).then(r => setMinistryDepartments(r))
-        getFaqs(authTokens.access).then(r => setFaqs(r))
-        getVisits(authTokens.access).then(r => setVisits(r))
     }, [])
 
     return (
@@ -45,18 +41,18 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Localidades" items={localities}/>
+                        <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Departamentos" items={ministryDepartments}/>
+                        <ReportFilterCard title="Departamentos" items={ministryDepartments} tokens={authTokens.access}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Motivos" items={faqs}/>
+                        <ReportFilterCard title="Visitas" items={visits} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Visitas" items={visits}/>
+                        <ReportFilterCard title="Motivos" items={faqs} tokens={authTokens.access}/>
                     </Col>
                 </Row>
             </Container>
