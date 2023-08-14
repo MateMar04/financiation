@@ -10,7 +10,7 @@ export const RowWithCheck = ({item, tokens}) => {
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check value={item.id} onChange={() => dataHandler(item, tokens}></Form.Check>
+                <Form.Check value={item.id} onChange={() => dataHandler(item, tokens)}></Form.Check>
             </Col>
         </Row>
     )
