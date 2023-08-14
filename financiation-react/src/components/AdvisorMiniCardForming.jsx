@@ -4,10 +4,8 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import ClearIcon from "@mui/icons-material/Clear";
-import IconButton from "@mui/material/IconButton";
 
-export const AdvisorMiniCardForming = ({group, DeleteAdvisor}) => {
+export const AdvisorMiniCardForming = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])

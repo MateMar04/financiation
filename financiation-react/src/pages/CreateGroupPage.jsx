@@ -58,13 +58,6 @@ export const CreateGroupPage = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
-    const handleDeleteCoordinator = () => {
-        console.log('Coordinador eliminado brother')
-    };
-
-    const handleDeleteAdvisor = () => {
-        console.log('Asesor eliminado brother')
-    };
 
     return (
         <Container fluid>
@@ -98,12 +91,12 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <Container>
-                    <CoordinatorCard addToGroup={handdlerOpenDrawer} DeleteCoordinator={handleDeleteCoordinator}/>
+                    <CoordinatorCard addToGroup={handdlerOpenDrawer} />
                 </Container>
 
 
                 <Container>
-                    <AdvisorCard addToGroup={handdlerOpenDrawer} DeleteAdvisor={handleDeleteAdvisor}/>
+                    <AdvisorCard addToGroup={handdlerOpenDrawer} />
                 </Container>
 
                 {isDrawerOpen &&

@@ -4,10 +4,8 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import ClearIcon from "@mui/icons-material/Clear";
-import IconButton from "@mui/material/IconButton";
 
-export const CoordinatorMiniCardForming = ({group, DeleteCoordinator}) => {
+export const CoordinatorMiniCardForming = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -31,7 +29,6 @@ export const CoordinatorMiniCardForming = ({group, DeleteCoordinator}) => {
                                 </strong>
                             </Col>
                         </Row>
-
                         <Row>
                             <sub className='SecondaryText'>Coordinador</sub>
                         </Row>
