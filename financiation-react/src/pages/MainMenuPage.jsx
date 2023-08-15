@@ -28,10 +28,6 @@ export const MainMenuPage = () => {
                               link2="/coordinator/add/"/>
                 </Col>
                 <Col lg={4}>
-                    <MenuCard title="Asesorados" button1="Ver Asesorados" button2="Crear Asesorado" link1="/advised/"
-                              link2="/advised/add/"/>
-                </Col>
-                <Col lg={4}>
                 </Col>
                 <Col lg={4}>
                 </Col>

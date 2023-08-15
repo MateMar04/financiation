@@ -2,12 +2,14 @@ import React from "react";
 import '../assets/styles/RowWithCheck.css'
 import Fail from "../assets/images/failed.gif";
 import {Link} from "react-router-dom";
-import {Button, Col,Container, Modal, Row} from "react-bootstrap";
-const refresh = () => window.location.reload(true)
-
+import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 
 
 export const FailedModal = (props, {message}) => {
+
+    if (!props.show) {
+        return null
+    }
     return (
         <Modal show={props.show}>
                 <Modal.Body>
@@ -28,6 +30,7 @@ export const FailedModal = (props, {message}) => {
                     </Link>
                 </Modal.Footer>
             </Modal>
+
     )
 }
 

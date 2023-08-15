@@ -1,6 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
@@ -20,16 +20,14 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
 
 const AddVisitPage = () => {
 
     let {authTokens} = useContext(AuthContext)
-    const [showfail, setShowfailture] = useState(false);
-    const [showsuccess, setShowsuccese] = useState(false);
-    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
-    const toggleModalfailed = () => setShowfailture(!showfail);
+    let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -61,28 +59,30 @@ const AddVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed(); 
-            await postVisit()
-            //alert('se registro la visita correctamente')
-        } else if(response.status == 500){
-            toggleModalfailed(); 
-            await postVisit()
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
-        } else if(response.status == 401){
-            toggleModalfailed(); 
-            await postVisit()
-            //alert('no se a registrado la visita (Desautorizado)')
-        } else if(response.status == 400){
-            toggleModalfailed(); 
-            await postVisit()
-            //alert('no se a registrado la visita (Bad request)')
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('se registro la visita correctamente')
+        } else if (response.status == 500) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
+        } else if (response.status == 401) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
+        } else if (response.status == 400) {
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
     return (
         <Container className="scrolling">
-            <SucceedModal message="la visita" show ={showsuccess}/>
-            <FailedModal message="la visita" show ={showfail}/>
             <Form onSubmit={postVisit}>
                 <Box sx={{width: '100%', bgcolor: 'background.paper'}}>
                     <Form.Group>
@@ -278,7 +278,8 @@ const AddVisitPage = () => {
                         <Row className='justify-content-center'>
                             <Col md={2} xs={4}>
                                 <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary">Añadir
+                                    <Button type="submit" size="medium" variant="outline-primary"
+                                            onClick={() => setShow(true)}>Añadir
                                         Visita</Button>
                                 </Form.Group>
                             </Col>
@@ -286,6 +287,43 @@ const AddVisitPage = () => {
                     </Container>
                 </Container>
             </Form>
+
+            {/* <Modal show={show} onHide={handleClose}> 
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡Se a registrado la visita correctamente!</p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={'/login'}>
+                        <Button variant="success" onClick={handleClose}>
+                            OK
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col md={5}>
+                                <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡No se a registrado la visita correctamente! </p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                        <Button type="submit" variant="success" onClick={handleClose}>
+                            OK
+                        </Button>
+                </Modal.Footer>
+            </Modal>*/}
         </Container>
     )
         ;
