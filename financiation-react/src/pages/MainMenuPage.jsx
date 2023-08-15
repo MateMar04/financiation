@@ -1,4 +1,4 @@
-import { Col, Container, Row, DropdownButton, Dropdown } from "react-bootstrap";
+import { Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import { MenuCard } from "../components/MenuCard";
 import finance from "../assets/images/financepic.jpg";
@@ -11,8 +11,9 @@ import intendentes from "../assets/images/intendentespic.jpeg";
 
 export const MainMenuPage = () => {
     return (
+
         <Container fluid className="menuback full-height">
-            <img src={finance} alt="" className="imagen" />
+           
 
             <Row className="justify-content-center">
                 <Col lg={3} md={6} className="cardd">
@@ -87,5 +88,6 @@ export const MainMenuPage = () => {
                 </Col>
             </Row>
         </Container>
+        
     );
 };
