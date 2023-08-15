@@ -2,7 +2,6 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import {Container} from "react-bootstrap";
 import {VisitCard} from "../components/VisitCard";
-import getVisits from "../services/VisitServices";
 
 export const VisitsPage = () => {
 
@@ -11,8 +10,19 @@ export const VisitsPage = () => {
 
 
     useEffect(() => {
-        getVisits(authTokens.access).then(r => setVisits(r))
+        getVisits()
     }, [])
+
+    let getVisits = async () => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(authTokens.access),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/visit/', {headers: headers})
+        let data = await response.json()
+        setVisits(data)
+    };
 
     return (
         <Container fluid>
