@@ -1,37 +1,50 @@
-import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
+import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
 import React from "react";
 import "../assets/styles/ProfileModifyForm.css"
 
 export const ProfileModifyForm = () => {
     return (
-        <Container fluid>
-            <h1>Modificar Datos Personales</h1>
+        <Container fluid className="ProfileDataModifier">
 
-            <Form>
-                <Row className="profile-form-row">
-                    <Col lg={6} className="profile-form-col">
-                        <FloatingLabel className='floatingLabel' label="Usuario">
-                            <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
-                                          required/>
-                        </FloatingLabel>
-                    </Col>
-                    <Col lg={6} className="profile-form-col button-container">
-                        <Button className="change-password">
+        <h2 className="ProfileTitle">Modificar Datos Personales</h2>
+
+        <Form>
+            
+
+                
+            <Row>
+
+                <Col lg={6} className="profile-form-col2 ">
+                    <FloatingLabel className='floatingLabel' label="Usuario">
+
+                        <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
+                            required />
+                    </FloatingLabel>
+
+                </Col>
+                <Col lg={6} className="profile-form-col2 ">
+                <Button className="change-password">
                             Cambiar contraseña
                         </Button>
-                    </Col>
-                </Row>
+
+                </Col>
+               
+                
+
+                   
+
+            </Row>
                 <Row className="profile-form-row">
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="Nombre">
                             <Form.Control className="profile-fc" placeholder="Nombre" type="text" name="username"
-                                          required/>
+                                required />
                         </FloatingLabel>
                     </Col>
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="Apellido">
                             <Form.Control className="profile-fc" placeholder="Apellido" type="text" name="username"
-                                          required/>
+                                required />
                         </FloatingLabel>
                     </Col>
                 </Row>
@@ -39,13 +52,13 @@ export const ProfileModifyForm = () => {
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="CUIL">
                             <Form.Control className="profile-fc" placeholder="CUIL" type="text" name="username"
-                                          required/>
+                                required />
                         </FloatingLabel>
                     </Col>
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="Número de Teléfono">
                             <Form.Control className="profile-fc" placeholder="Número de Teléfono" type="text"
-                                          name="username" required/>
+                                name="username" required />
                         </FloatingLabel>
                     </Col>
                 </Row>

@@ -36,7 +36,7 @@ const NavbarComponent = () => {
                                         </Link>
                                     </div>
                                     <div className="mx-2">
-                                        <Link to="/groups/">
+                                        <Link to="/group/">
                                             <Button variant="outline-light">
                                                 Grupos
                                             </Button>

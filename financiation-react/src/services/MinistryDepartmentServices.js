@@ -1,4 +1,4 @@
-let getMinistryDepartments = async (tokens) => {
+export const getMinistryDepartments = async (tokens) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),
@@ -9,4 +9,3 @@ let getMinistryDepartments = async (tokens) => {
     return data
 };
 
-export default getMinistryDepartments

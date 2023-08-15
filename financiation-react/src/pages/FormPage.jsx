@@ -4,11 +4,11 @@ import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
 import {Link, useNavigate} from "react-router-dom";
-import getVisits from "../services/VisitServices";
+import {getVisits} from "../services/VisitServices";
 import getAdvisees from "../services/AdvisedServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import getFaqs from "../services/FaqServices";
-import getMinistryDepartments from "../services/MinistryDepartmentServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 
 
 const FormPage = () => {

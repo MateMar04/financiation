@@ -130,7 +130,6 @@ class MayorEmailSerializer(ModelSerializer):
 class MayorPhoneSerializer(ModelSerializer):
     class Meta:
         model = MayorPhone
-        fields = '__all__'
 
 
 class CoordinatorSerializer(ModelSerializer):

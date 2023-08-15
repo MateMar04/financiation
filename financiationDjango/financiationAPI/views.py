@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -38,7 +39,15 @@ class RequestApiView(APIView):
 
 class VisitApiView(APIView):
     def get(self, request, *args, **kwargs):
-        visits = Visit.objects.all()
+
+        locations_ids = parse_and_convert(request.GET.getlist('locs'))
+
+        if isinstance(locations_ids, type(None)):
+            visits = Visit.objects.all()
+        else:
+            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id_locality_id IN %s',
+                                       [locations_ids])
+
         serializer = VisitSerializer(visits, many=True)
         return Response(serializer.data)
 
@@ -398,7 +407,15 @@ def getMinistryDepartments(request):
 
 @api_view(['GET'])
 def getFaqs(request):
-    faqs = Faq.objects.all()
+    ministry_ids = parse_and_convert(request.GET.getlist('deps'))
+
+    if isinstance(ministry_ids, type(None)):
+        faqs = Faq.objects.all()
+    else:
+        faqs = Faq.objects.raw(
+            'SELECT * FROM "financiationAPI_faq" AS F INNER JOIN "financiationAPI_faq_id_ministry_department" AS FM ON F.id = FM.faq_id INNER JOIN "financiationAPI_ministrydepartment" MD on FM.ministrydepartment_id = MD.id WHERE FM.ministrydepartment_id IN %s',
+            [ministry_ids])
+
     serializer = FaqSerializer(faqs, many=True)
     return Response(serializer.data)
 
@@ -600,14 +617,36 @@ def getGroupCoordinatorUsers(request, id):
 
 
 @api_view(['GET'])
+def getReport(request):
+    ministry_departments_ids = parse_and_convert(request.GET.getlist('deps'))
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
+
+    requests = Request.objects.raw(
+        'SELECT * FROM "financiationAPI_request" WHERE id_visit_id IN %s AND id_ministry_department_id IN %s AND id_faq_id IN %s',
+        [visits_ids, ministry_departments_ids, faqs_ids])
+    print(requests)
+    serializer = RequestSerializer(requests, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def getGroupAdvisorUsers(request, id):
     users = User.objects.filter(advisor__id_group__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
 
 
+def parse_and_convert(input_list):
+    if len(input_list) == 1 and isinstance(input_list[0], str):
+        numbers_str = input_list[0]
+        numbers_list = numbers_str.split(',')
+        numbers_tuple = tuple(map(int, numbers_list))
+        return numbers_tuple
+
+
 @api_view(['GET'])
 def getGroupById(request, id):
-    group = Group.objects.get(id = id)
+    group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
