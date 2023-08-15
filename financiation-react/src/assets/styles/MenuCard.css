@@ -10,8 +10,15 @@
     border-radius: 0; 
   }
 
-.menuback.full-height {
-    min-height: 127%;
+.menuback::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: lightblue;
+    z-index: -1;
 }
 
 .menuback {
@@ -20,12 +27,7 @@
     background-color: lightblue;
     position: absolute;
     width: 100vw;
-    height: 90vh;
-}
-
-.tit {
-    color: rgba(13, 110, 253, 0.3);
-    text-align: center;
+    min-height: 100vh;
 }
 
 .card:hover {
@@ -41,16 +43,12 @@
     
 }
 
-.menu-card-link {
-    width: auto;
-    margin: 0.5vh;
+
+@media screen and (max-width: 768px) {
+    .menuback {
+        
+        background-color: lightgray;
+    }
 }
-
-.menu-card-button {
-    box-shadow: rgba(13, 110, 253, 0.3) 0px 7px 29px 0px;
-}
-
-
-
 
 
