@@ -1,11 +1,10 @@
-export const getMinistryDepartments = async (tokens) => {
+export const getLocations = async (tokens) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),
         "Accept": "application/json"
     }
-    let response = await fetch('/api/ministry-department/', {headers: headers})
+    let response = await fetch('/api/locations', {headers: headers})
     let data = await response.json()
     return data
 };
-
