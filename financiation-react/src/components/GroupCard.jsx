@@ -1,76 +1,73 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
-import AuthContext from "../context/AuthContext";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AdvisorMiniCard from "../components/AdvisorMiniCard";
-import CoordinatorMiniCard from "./CoordinatorMiniCard";
-import {styled} from '@mui/material/styles';
-import MuiGrid from '@mui/material/Grid';
-import {getGroupAdvisorUsers, getGroupCoordinatorUsers} from "../services/UserServices";
+import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
+import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
-import {Link} from "react-router-dom";
+import {Zoom} from "@mui/material";
+
 
 
 export const GroupCard = ({group}) => {
 
-    let {authTokens} = useContext(AuthContext)
-    let [coordinators, setCoordinators] = useState([])
-    let [advisors, setAdvisors] = useState([])
+    const [showButton, setShowButton] = useState(false);
 
+    const handleAddButton = () => {
+        setShowButton(!showButton);
+    };
 
-    useEffect(() => {
-        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
-    }, [])
+    const handleDeleteCoordinator = () => {
+        console.log('Coordinador eliminado brother')
+    };
 
-    const Grid = styled(MuiGrid)(({theme}) => ({
-        width: '100%',
-        ...theme.typography.body2,
-        '& [role="separator"]': {
-            margin: theme.spacing(0, 2),
-        },
-    }));
+    const handleDeleteAdvisor = () => {
+        console.log('Asesor eliminado brother')
+    };
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <div>
-                <Accordion>
+            <Zoom in style={{ transitionDelay: '100ms'}}>
 
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon/>}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                    >
-                        <Typography>{group.name}</Typography>
+                <div>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>{group.name}</Typography>
 
-                    </AccordionSummary>
+                        </AccordionSummary>
 
-                    <AccordionDetails> 
-                            <IconButton type="submit" aria-label="search">
+                        <AccordionDetails>
+                            <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
                                 <CreateIcon/>
                             </IconButton>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <AdvisorMiniCard group={group}/>
-                                </Col>
-                                <Col md={1}>
-                                    <div className="vl"></div>
-                                </Col>
-                                <Col>
-                                    <CoordinatorMiniCard group={group}/>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
+                            <Container>
+                                <Row>
+                                    <Col>
+                                        <AdvisorMiniCardGroup group={group} showButton={showButton}
+                                                              DeleteAdvisor={handleDeleteAdvisor}/>
+                                    </Col>
+                                    <Col md={1}>
+                                        <div className="vl"></div>
+                                    </Col>
+                                    <Col>
+                                        <CoordinatorMiniCardGroup group={group} showButton={showButton}
+                                                                  DeleteCoordinator={handleDeleteCoordinator}/>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
+            </Zoom>
         </Container>
 
     )

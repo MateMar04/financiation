@@ -3,18 +3,17 @@ import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
-import {getGroupAdvisorUsers, getUser} from "../services/UserServices";
+import {getGroupAdvisorUsers} from "../services/UserServices";
+import IconButton from "@mui/material/IconButton";
+import ClearIcon from '@mui/icons-material/Clear';
 
-
-export const AdvisorMiniCard = ({group}) => {
+export const AdvisorMiniCardGroup = ({group, showButton, DeleteAdvisor}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
-    let [user, setUser] = useState()
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-        getUser(authTokens.access).then(data => setUser(data))
     }, [])
 
     return (
@@ -22,9 +21,8 @@ export const AdvisorMiniCard = ({group}) => {
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
-                        <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}
-                                    username={user?.username}>
+                        <Col xs={2} md={2} className='"d-flex align-items-center justify-content-center'>
+                            <Avatar alt="Remy Sharp" className='AvatarImg' src={advisor?.profile_picture}>
                             </Avatar>
                         </Col>
                         <Col>
@@ -37,6 +35,11 @@ export const AdvisorMiniCard = ({group}) => {
                                 <sub className='SecondaryText'>Asesor</sub>
                             </Row>
                         </Col>
+                        <Col md={1} xs={1}>
+                            <Row className={'justify-content-end'}>
+                                {showButton && <IconButton onClick={DeleteAdvisor}><ClearIcon/></IconButton>}
+                            </Row>
+                        </Col>
                     </Row>
                     <hr/>
                 </Container>
@@ -47,4 +50,5 @@ export const AdvisorMiniCard = ({group}) => {
     )
 }
 
-export default AdvisorMiniCard;
+
+export default AdvisorMiniCardGroup;
