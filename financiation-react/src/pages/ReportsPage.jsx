@@ -9,8 +9,8 @@ import AuthContext from "../context/AuthContext";
 import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
-import getMinistryDepartments from "../services/MinistryDepartmentServices";
 import {getLocations} from "../services/LocationServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 
 export const ReportsPage = () => {
 
@@ -26,8 +26,6 @@ export const ReportsPage = () => {
 
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
-    let [faqs, setFaqs] = useState([])
-    let [visits, setVisits] = useState([])
     let {authTokens} = useContext(AuthContext)
 
 
@@ -49,10 +47,10 @@ export const ReportsPage = () => {
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Visitas" items={visits} tokens={authTokens.access}/>
+                        <ReportFilterCard title="Visitas"  tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Motivos" items={faqs} tokens={authTokens.access}/>
+                        <ReportFilterCard title="Motivos"  tokens={authTokens.access}/>
                     </Col>
                 </Row>
             </Container>
