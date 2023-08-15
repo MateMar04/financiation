@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import getAdvised from "../services/AdvisedServices";
+import getAdvised from "../services/AdviseeServices";
 
 const AdvisedPage = () => {
 

@@ -4,7 +4,7 @@ let getAdvised = async (tokens) => {
         "Authorization": "JWT " + String(tokens),
         "Accept": "application/json"
     }
-    let response = await fetch('/api/advised/', {headers: headers})
+    let response = await fetch('/api/advisees', {headers: headers})
     let data = await response.json()
     return data
 };
