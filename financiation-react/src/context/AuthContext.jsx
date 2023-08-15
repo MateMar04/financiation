@@ -13,8 +13,7 @@ export const AuthProvider = ({children}) => {
     const [showfail, setShowfailture] = useState(false);
     const [showloading, setShowloading] = useState(false);
     const toggleModalfailed = () => setShowfailture(!showfail);
-    const toggleLoad = () => setShowloading(!showloading);
-    const toggleLoadClose = () => setShowloading(false);
+ 
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
@@ -24,6 +23,7 @@ export const AuthProvider = ({children}) => {
 
     let signIn = async (e) => {
         e.preventDefault()
+        setShowloading(true)
         let response = await fetch('/auth/users/', {
             method: 'POST',
             headers: {
@@ -40,13 +40,11 @@ export const AuthProvider = ({children}) => {
                 "re_password": e.target.re_password.value
             })
         })
+        setShowloading(false)
         if (response.status === 201) {
             history('/')
-            toggleLoad();
-            await signIn()
         } else  if(response.status === 400) {
             toggleModalfailed();
-            await signIn()
         }
     }
 

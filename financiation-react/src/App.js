@@ -26,34 +26,11 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React, { useState, useEffect } from 'react';
-import { PacmanLoader, PropagateLoader, PuffLoader, SyncLoader} from 'react-spinners';
-import {Col} from 'react-bootstrap';
 
 function App() {
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
-    }, []);
-
     return (
         <Router>
             <div className="App">
-                {loading ? (
-                <div className="loader-container">
-                        <p className='loader-text'>
-                            Cargando
-                        </p>
-                        <SyncLoader
-                            color={'#1fa4e6'}
-                            loading={loading}
-                            size={100} 
-                        /> 
-                </div>
-
-                ) : (
                     <AuthProvider>
                         <Navbar />
                         <Routes>
@@ -90,7 +67,6 @@ function App() {
 
                         </Routes>
                     </AuthProvider>
-                )}
             </div>
         </Router>
     );
