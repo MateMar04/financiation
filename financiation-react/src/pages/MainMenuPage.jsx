@@ -1,7 +1,6 @@
 import { Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import { MenuCard } from "../components/MenuCard";
-import finance from "../assets/images/financepic.jpg";
 import visitas from "../assets/images/visitaspic.jpeg";
 import grupos from "../assets/images/grupospic.jpeg";
 import asesores from "../assets/images/asesorespic.jpeg";
@@ -81,7 +80,7 @@ export const MainMenuPage = () => {
                         link1="/advised/"
                         link2="/advised/add/"
                         image={intendentes}
-                        customText="Proporciona una lista completa de todas las personas que están siendo asesoradas en tu plataforma."
+                        customText="Proporciona una lista completa de los Intendentes en cada localidad en tu sistema."
                         title1="Ver Intendentes"
                         title2="Crear Intendentes"
                     />
