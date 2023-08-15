@@ -34,6 +34,7 @@ const ProfilePage = () => {
                     <Col lg={4}>
                         <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
                         {/* Falta añadir icono para editar imagen */}
+                        {/* Deberia cambiarse el img por un avatar */}
 
                     </Col>
                     <Col lg={8}>
