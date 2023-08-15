@@ -1,5 +1,4 @@
-import { Button, Card, Row, DropdownButton, Dropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Row, DropdownButton, Dropdown } from "react-bootstrap";
 import "../assets/styles/MenuCard.css"
 
 export const MenuCard = ({ title, title1, title2, link1, link2, image, customText }) => {
