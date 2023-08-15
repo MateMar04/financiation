@@ -4,18 +4,7 @@ export const getGroups = async (tokens) => {
         "Authorization": "JWT " + String(tokens),
         "Accept": "application/json"
     }
-    let response = await fetch('/api/groups', {headers: headers})
-    let data = await response.json()
-    return data
-}
-
-export const getGroupById = async (tokens, id) => {
-    let headers = {
-        "Content-Type": "application/json",
-        "Authorization": "JWT " + String(tokens),
-        "Accept": "application/json"
-    }
-    let response = await fetch(`/api/groups/${id}`, {headers: headers})
+    let response = await fetch('/api/group/', {headers: headers})
     let data = await response.json()
     return data
 }

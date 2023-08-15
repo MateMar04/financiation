@@ -1,10 +1,11 @@
-export const dataHandler = (item, tokens) => {
+export const dataHandler = async (item, tokens) => {
     if (Object.keys(item).length === 3) {
         if (item.id_ministry_department !== undefined) {
             toggle(faqs, item)
         } else {
             if (item.id_department !== undefined) {
                 toggle(locations, item)
+                await getVisitFromLocations(tokens, locations)
             } else {
                 toggle(ministryDepartments, item)
             }

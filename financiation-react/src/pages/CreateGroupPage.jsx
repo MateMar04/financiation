@@ -1,49 +1,30 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Container, Form} from "react-bootstrap";
+import React, {useContext, useState} from "react";
+import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
+
 import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-
-
-import Input from '@mui/material/Input';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import CoordinatorCard from "../components/CoordinatorCard";
+import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
+
+import GroupsIcon from '@mui/icons-material/Groups';
 
 
 export const CreateGroupPage = () => {
-    const [showPassword, setShowPassword] = useState(false);
-
-
     let {authTokens} = useContext(AuthContext)
-    let [advisors, setAdvisors] = useState([])
-    let [coordinators, setCoordinators] = useState([])
-    const [show, setShow] = useState([false])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-    useEffect(() => {
-        getAdvisorUsers().then(r => setAdvisors(r))
-        getCoordinatorUsers().then(r => setCoordinators(r))
-    }, [])
 
     let postGroup = async (e) => {
         e.preventDefault()
@@ -60,59 +41,68 @@ export const CreateGroupPage = () => {
             toggleModalsucceed();
             await postGroup()
 
-        } else if (response.status == 500) {
+        } else if (response.status === 500) {
             toggleModalfailed();
             await postGroup()
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
             toggleModalfailed();
             await postGroup()
-        } else if (response.status == 400) {
+        } else if (response.status === 400) {
             toggleModalfailed();
             await postGroup()
 
         }
     }
 
+    const handdlerOpenDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
 
     return (
         <Container fluid>
             <SucceedModal message="el coordinador" show={showsuccess}/>
             <FailedModal message="el coordinador" show={showfail}/>
+
+
             <Form onSubmit={postGroup}>
                 <Container>
-
-                    <TextField type="search" id="search" label="Buscar persona"
-
-                               sx={{m: 1, width: '25ch'}}
-                               InputProps={{
-                                   startAdornment: <InputAdornment position="start">kg</InputAdornment>,
-                               }}/>
-                    <IconButton type="submit" aria-label="search">
-                        <SearchIcon style={{fill: "grey"}}/>
-                    </IconButton>
-
-                    <FormControl sx={{m: 1, width: '25ch'}} variant="standard">
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-                        <Input
-                            id="standard-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                    >
-                                        {showPassword ? <VisibilityOff/> : <Visibility/>}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                        />
-                    </FormControl>
-                    <SideBarGroups/>
+                    <Row className={'justify-content-center'}>
+                        <Col md={8} xs={9}>
+                            <TextField
+                                fullWidth
+                                id="standard-bare"
+                                variant="outlined"
+                                label={'Buscar Persona'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton>
+                                            <SearchIcon/>
+                                        </IconButton>
+                                    ),
+                                }}
+                            />
+                        </Col>
+                        <Col md={1} xs={1} lg={1}>
+                            <IconButton onClick={handdlerOpenDrawer} sx={{width: 56, height: 56}}
+                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                        </Col>
+                    </Row>
                 </Container>
-            </Form>
 
+                <Container>
+                    <CoordinatorCard addToGroup={handdlerOpenDrawer} />
+                </Container>
+
+
+                <Container>
+                    <AdvisorCard addToGroup={handdlerOpenDrawer} />
+                </Container>
+
+                {isDrawerOpen &&
+                  <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
+                }
+            </Form>
         </Container>
     )
 }

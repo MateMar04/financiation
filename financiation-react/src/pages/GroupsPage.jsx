@@ -8,13 +8,9 @@ import {getUser} from "../services/UserServices";
 
 
 export const GroupsPage = () => {
-
     let {authTokens} = useContext(AuthContext)
     let [groups, setGroups] = useState([])
-    let history = useNavigate()
     let [user, setUser] = useState()
-
-    console.log(groups)
 
     useEffect(() => {
         getGroups(authTokens.access).then(data => setGroups(data))
