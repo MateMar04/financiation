@@ -50,8 +50,8 @@
     border-color: rgb(32, 64, 168);
     box-shadow: rgba(10, 41, 134, 0.5) 0px 7px 29px 0px;
     text-align: center;
-    padding-left: 1vh;
-    margin-left: 3vh;
+    padding-left: 0vh;
+    margin-left: 0vh;
 }
 
 .change-password:hover {
