@@ -7,8 +7,8 @@ import {getCoordinatorUsers} from "../services/CoordinatorServices";
 import {Zoom} from "@mui/material";
 
 
-export const CoordinatorMiniCardForming = ({group}) => {
-
+export const CoordinatorMiniCardForming = ({coordinator}) => {
+    
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
 
@@ -16,30 +16,28 @@ export const CoordinatorMiniCardForming = ({group}) => {
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
     }, [])
 
-    return (
-        <>
-            {coordinators?.map((coordinator) => (
-                <Zoom in>
-                <div className={'my-1'}>
-                    <Container className={'AllAdvisorMiniCard'}>
-                        <Row>
-                            <Col md={2}  xs={3}>
-                                <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}/>
-                            </Col>
-                            <Col md={9} xs={9}>
-                                <strong className='PrimaryText'>
-                                    <sub>{coordinator.first_name} {coordinator.last_name}</sub>
-                                </strong>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <sub className='SecondaryText'>Coordinador</sub>
-                        </Row>
-                    </Container>
-                </div>
-                </Zoom>
-            ))}
-        </>
+        return (
+            <>  
+                    <Zoom in>
+                    <div className={'my-1'}>
+                        <Container className={'AllAdvisorMiniCard'}>
+                            <Row>
+                                <Col md={2}  xs={3}>
+                                    <Avatar alt="Remy Sharp" className='AvatarImg' src={coordinator?.profile_picture}/>
+                                </Col>
+                                <Col md={9} xs={9}>
+                                    <strong className='PrimaryText'>
+                                        <sub>{coordinator.first_name} {coordinator.last_name}</sub>
+                                    </strong>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <sub className='SecondaryText'>Coordinador</sub>
+                            </Row>
+                        </Container>
+                    </div>
+                    </Zoom>
+            </>
 
 
     )

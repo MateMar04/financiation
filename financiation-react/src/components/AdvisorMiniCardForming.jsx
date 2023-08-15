@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {Zoom} from "@mui/material";
 
-export const AdvisorMiniCardForming = ({group}) => {
+export const AdvisorMiniCardForming = ({advisor}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -17,7 +17,6 @@ export const AdvisorMiniCardForming = ({group}) => {
 
     return (
         <>
-            {advisors?.map((advisor) => (
                 <Zoom in>
                 <div className={'my-1'}>
                     <Container className={'AllAdvisorMiniCard'}>
@@ -38,7 +37,6 @@ export const AdvisorMiniCardForming = ({group}) => {
                     </Container>
                 </div>
                 </Zoom>
-            ))}
         </>
 
 
