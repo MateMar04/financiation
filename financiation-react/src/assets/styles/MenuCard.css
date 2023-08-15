@@ -1,6 +1,26 @@
 .menu-card {
     margin: 4.5vh;
     transition: box-shadow 0.3s ease;
+    border-radius: 0; 
+    max-height: 500px;
+}
+
+.card-image {
+    max-height: 140px;
+    border-radius: 0; 
+  }
+
+.menuback.full-height {
+    min-height: 127%;
+}
+
+.menuback {
+    margin: 0;
+    padding: 0;
+    background-color: lightblue;
+    position: absolute;
+    width: 100vw;
+    height: 90vh;
 }
 
 .tit {
@@ -29,3 +49,8 @@
 .menu-card-button {
     box-shadow: rgba(13, 110, 253, 0.3) 0px 7px 29px 0px;
 }
+
+
+
+
+
