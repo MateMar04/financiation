@@ -1,0 +1,13 @@
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.loader-text {
+    margin-bottom: -180px; /* Espacio entre el texto y el loader */
+    font-size: 30px;
+    color: #1fa4e6;
+}

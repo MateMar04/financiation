@@ -11,25 +11,26 @@ export const FailedModal = (props, {message}) => {
         return null
     }
     return (
-        <Modal>
-            <Modal.Body>
-                <Container className='justify-content-center'>
-                    <Row className='justify-content-center'>
-                        <Col md={5}>
-                            <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
-                            <p className="text-center">¡No se a registrado {message} correctamente!</p>
-                        </Col>
-                    </Row>
-                </Container>
-            </Modal.Body>
-            <Modal.Footer>
-                <Link to={''}>
-                    <Button onClick={props.onClose} variant="failed">
-                        OK
-                    </Button>
-                </Link>
-            </Modal.Footer>
-        </Modal>
+        <Modal show={props.show}>
+                <Modal.Body>
+                    <Container className='justify-content-center'>
+                        <Row className='justify-content-center'>
+                            <Col ls={5}>
+                                <img src={Fail} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <p className="text-center">¡No se a registrado! {message}</p>
+                            </Col>
+                        </Row>
+                    </Container>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link to={'/login'}>
+                        <Button onClick={refresh} modal variant="failed">
+                            OK
+                        </Button>
+                    </Link>
+                </Modal.Footer>
+            </Modal>
+
     )
 }
 
