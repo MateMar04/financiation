@@ -18,10 +18,10 @@ export const AdvisorCard = ({addToGroup, userId}) => {
     let [user, setUser] = useState([])
     let [advisorsSelected, setAdvisorsSelected] = useState([])
 
-    const buttonclicked = () => {
-        console.log('a')
-        // setAdvisorsSelected(advisor)
-     };
+    // const buttonclicked = (advisor) => {
+    //     console.log(advisor.id)
+    //     localStorage.setItem('advisorsList', advisor.id)
+    // };
 
     useEffect(() => {
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
@@ -31,7 +31,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
     useEffect(() => {
         console.log(advisorsSelected)
         localStorage.setItem('advisorsList', advisorsSelected)
-    }, [advisorsSelected])
+    }, [setAdvisorsSelected])
 
     return (
         <>
@@ -56,7 +56,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                             <a>En Visita</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={user.id} onClick={buttonclicked}>
+                                            <IconButton value={user.id} onClick={setAdvisorsSelected(advisor)}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
