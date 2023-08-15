@@ -4,44 +4,36 @@ import "../assets/styles/ProfileModifyForm.css"
 
 export const ProfileModifyForm = () => {
     return (
-        <Container fluid>
-            <h2>Cuenta</h2>
+        <Container fluid className="ProfileDataModifier">
 
-            <Form>
-                <Row >     
+        <h2 className="ProfileTitle">Modificar Datos Personales</h2>
+
+        <Form>
+            
+
                 
-                    <Container fluid className="ModificarPerfil">
+            <Row>
 
-                    <Col lg={4} className="profile-form-col1 ">
-                        <p className="ab">Modificar nombre de usuario</p>
-                    </Col>
-                    {/* Texto Hardcoded modificar perfil usuario */}
-                
-                   
-                    <Col lg={4} className="profile-form-col2 ">
-                        <FloatingLabel className='floatingLabel' label="Usuario">
+                <Col lg={6} className="profile-form-col2 ">
+                    <FloatingLabel className='floatingLabel' label="Usuario">
 
-                            <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
-                                required />
-                        </FloatingLabel>
-                        
-                        
-{/* Boton input  usuario */}
-</Col>       </Container>
+                        <Form.Control className="profile-fc" placeholder="Usuario" type="text" name="username"
+                            required />
+                    </FloatingLabel>
 
-                 
-                    
-                    
-                    <Col lg={5} className="profile-form-col1">
-                        <Button className="change-password">
-                            Aplicar
+                </Col>
+                <Col lg={6} className="profile-form-col2 ">
+                <Button className="change-password">
+                            Cambiar contraseña
                         </Button>
-                    </Col>
 
-                    
+                </Col>
+               
+                
 
+                   
 
-                </Row>
+            </Row>
                 <Row className="profile-form-row">
                     <Col lg={6} className="profile-form-col">
                         <FloatingLabel className='floatingLabel' label="Nombre">

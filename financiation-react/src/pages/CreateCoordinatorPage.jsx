@@ -1,21 +1,19 @@
 import React, {useContext, useState} from "react";
 import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import {SucceedModal} from "../components/SucceedModal"
-import FailedModal from "../components/FailedModal";
 
 const CoordinatorPage = () => {
     let {authTokens} = useContext(AuthContext)
-    const [showfail, setShowfailture] = useState(false);
-    const [showsuccess, setShowsuccese] = useState(false);
-    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
-    const toggleModalfailed = () => setShowfailture(!showfail);
+    let history = useNavigate()
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
 
 
     let postCoordinator = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/coordinators', {
+        let response = await fetch('/api/coordinator/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -28,28 +26,29 @@ const CoordinatorPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed();
             await postCoordinator()
         } else if (response.status == 500) {
-            toggleModalfailed();
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
-            await postCoordinator()
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Hay un campo vacio)')
         } else if (response.status == 401) {
-            toggleModalfailed();
-            //alert('no se a registrado la visita (Desautorizado)')
-            await postCoordinator()
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Desautorizado)')
         } else if (response.status == 400) {
-            toggleModalfailed();
-            //alert('no se a registrado la visita (Bad request)')
-            await postCoordinator()
+            //handleShow()
+            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
+            //await postVisit()
+            alert('no se a registrado la visita (Bad request)')
         }
     }
 
 
     return (
+
         <Container className="scrolling">
-            <SucceedModal message="el coordinador" show={showsuccess}/>
-            <FailedModal message="el coordinador" show={showfail}/>
             <Form onSubmit={postCoordinator}>
                 <Form.Group>
                     <Form.Control
