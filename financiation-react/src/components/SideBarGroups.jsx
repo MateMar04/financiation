@@ -15,7 +15,7 @@ export const SideBarGroups = ({OpenDrawer}) => {
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
     let [advisors, setAdvisors] = useState([])
-    
+
     useEffect(() => {
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
@@ -31,11 +31,11 @@ export const SideBarGroups = ({OpenDrawer}) => {
                                        style={{maxWidth: '180px'}} InputProps={{sx: {borderRadius: '25px'}}}/>
                         </Row>
                         <hr/>
-                        {advisors?.map(() => (
+                        {advisors?.map((advisor) => (
                             <AdvisorMiniCardForming/>
                             ))}
 
-                        {coordinators?.map(() => (
+                        {coordinators?.map((coordinator) => (
                             <CoordinatorMiniCardForming/>
                             ))}
 
