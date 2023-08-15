@@ -1,11 +1,20 @@
 import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
+import LoadingModal from "../components/LoadingModal";
+
 
 const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
+
+
+    const [showfail, setShowfailture] = useState(false);
+    const [showloading, setShowloading] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
@@ -19,6 +28,7 @@ export const AuthProvider = ({children}) => {
 
     let signIn = async (e) => {
         e.preventDefault()
+        setShowloading(true)
         let response = await fetch('/auth/users/', {
             method: 'POST',
             headers: {
@@ -35,10 +45,12 @@ export const AuthProvider = ({children}) => {
                 "re_password": e.target.re_password.value
             })
         })
+        setShowloading(false)
         if (response.status === 201) {
             history('/')
-        } else if (response.status === 400) {
-            alert('Los datos ingresados no son validos')
+
+        } else  if(response.status === 400) {
+            toggleModalfailed();
         }
     }
 
@@ -129,6 +141,10 @@ export const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={contextData}>
+
+                        <FailedModal message="la visita" show ={showfail}/>
+                        <LoadingModal message="la visita" show ={showloading}/>
+
             {loading ? null : children}
         </AuthContext.Provider>
     );
