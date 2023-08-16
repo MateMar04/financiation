@@ -3,13 +3,17 @@ import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
+import LoadingModal from "../components/LoadingModal";
+
 
 const AuthContext = createContext();
 
 export default AuthContext
 export const AuthProvider = ({children}) => {
 
+
     const [showfail, setShowfailture] = useState(false);
+    const [showloading, setShowloading] = useState(false);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
 
@@ -18,9 +22,13 @@ export const AuthProvider = ({children}) => {
     let [loading, setLoading] = useState(true)
 
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let signIn = async (e) => {
         e.preventDefault()
+        setShowloading(true)
         let response = await fetch('/auth/users/', {
             method: 'POST',
             headers: {
@@ -37,12 +45,12 @@ export const AuthProvider = ({children}) => {
                 "re_password": e.target.re_password.value
             })
         })
+        setShowloading(false)
         if (response.status === 201) {
             history('/')
-            await signIn()
+
         } else  if(response.status === 400) {
             toggleModalfailed();
-            await signIn()
         }
     }
 
@@ -64,15 +72,14 @@ export const AuthProvider = ({children}) => {
             history('/menu')
         } else {
             if (response.status === 401) {
-                toggleModalfailed();
-                await loginUser()
-            } if (response.status === 400) {
-                toggleModalfailed();
-                await loginUser()            }
-            else{
-                
-                toggleModalfailed();
-                await loginUser()
+                alert("Revisa las credenciales ingresadas")
+
+            }
+            if (response.status === 400) {
+                alert("Ocurrio un error inesperado")
+            } else {
+                alert("Ocurrio un error inesperado")
+
             }
         }
 
@@ -133,9 +140,10 @@ export const AuthProvider = ({children}) => {
 
 
     return (
-
         <AuthContext.Provider value={contextData}>
+
                         <FailedModal message="la visita" show ={showfail}/>
+                        <LoadingModal message="la visita" show ={showloading}/>
 
             {loading ? null : children}
         </AuthContext.Provider>

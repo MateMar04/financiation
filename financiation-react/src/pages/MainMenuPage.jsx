@@ -30,7 +30,7 @@ export const MainMenuPage = () => {
                 <Col lg={3} md={6} className="cardd">
                     <MenuCard
                         title="Grupos"
-                        link1="/group/"
+                        link1="/groups/"
                         link2="/group/add/"
                         image={grupos}
                         customText="Proporciona una vista general de todos los grupos existentes en tu sistema."
@@ -87,6 +87,5 @@ export const MainMenuPage = () => {
                 </Col>
             </Row>
         </Container>
-        
-    );
-};
+    )
+}

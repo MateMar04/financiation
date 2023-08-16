@@ -4,11 +4,11 @@ import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
 import {Link, useNavigate} from "react-router-dom";
-import getVisits from "../services/VisitServices";
-import getAdvised from "../services/AdvisedServices";
+import {getVisits} from "../services/VisitServices";
+import getAdvisees from "../services/AdviseeServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import getFaqs from "../services/FaqServices";
-import getMinistryDepartments from "../services/MinistryDepartmentServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 
 
 const FormPage = () => {
@@ -37,7 +37,7 @@ const FormPage = () => {
     useEffect(() => {
         getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
         getFaqs(authTokens.access).then(data => setFaqs(data))
-        getAdvised(authTokens.access).then(data => setAdvised(data))
+        getAdvisees(authTokens.access).then(data => setAdvised(data))
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
     }, [])

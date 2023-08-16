@@ -1,8 +1,7 @@
 import React, {useContext, useState} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from 'react-router-dom'
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import DriveEtaIcon from '@mui/icons-material/DriveEta';
@@ -33,7 +32,7 @@ const AddVisitPage = () => {
 
     let postVisit = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/visit/add/', {
+        let response = await fetch('/api/visits', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -61,19 +60,19 @@ const AddVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed(); 
+            toggleModalsucceed();
             await postVisit()
             //alert('se registro la visita correctamente')
-        } else if(response.status == 500){
-            toggleModalfailed(); 
+        } else if (response.status == 500) {
+            toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
-        } else if(response.status == 401){
-            toggleModalfailed(); 
+        } else if (response.status == 401) {
+            toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Desautorizado)')
-        } else if(response.status == 400){
-            toggleModalfailed(); 
+        } else if (response.status == 400) {
+            toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Bad request)')
         }
@@ -81,8 +80,8 @@ const AddVisitPage = () => {
 
     return (
         <Container className="scrolling">
-            <SucceedModal message="la visita" show ={showsuccess}/>
-            <FailedModal message="la visita" show ={showfail}/>
+            <SucceedModal message="la visita" show={showsuccess}/>
+            <FailedModal message="la visita" show={showfail}/>
             <Form onSubmit={postVisit}>
                 <Box sx={{width: '100%', bgcolor: 'background.paper'}}>
                     <Form.Group>

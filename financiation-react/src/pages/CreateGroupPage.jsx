@@ -1,54 +1,34 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import React, {useContext, useState} from "react";
+import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import {UserRowWithRadio} from "../components/UserRowWithRadio"
-import {UserRowWithCheck} from "../components/UserRowWithCheck"
-import {Link, useNavigate} from 'react-router-dom'
-import Check from "../assets/images/checked.gif";
+
+import {SideBarGroups} from "../components/SideBarGroups";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import TextField from "@mui/material/TextField";
+import CoordinatorCard from "../components/CoordinatorCard";
+import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 
-export const CreateGroupPage = () => {
+import GroupsIcon from '@mui/icons-material/Groups';
 
+
+export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
-    let [advisors, setAdvisors] = useState([])
-    let [coordinators, setCoordinators] = useState([])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-    useEffect(() => {
-        getAdvisor()
-        getCoordinator()
-    }, [])
 
-    let getAdvisor = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/advisor/', {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
-    };
-
-    let getCoordinator = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/coordinator/', {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
-    };
-    
     let postGroup = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/group/add/', {
+        let response = await fetch('/api/groups', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -60,52 +40,69 @@ export const CreateGroupPage = () => {
         if (response.status === 200) {
             toggleModalsucceed();
             await postGroup()
-        } else if(response.status == 500){
-            toggleModalfailed(); 
-            await postGroup() 
-        } else if(response.status == 401){
+
+        } else if (response.status === 500) {
             toggleModalfailed();
-            await postGroup() 
-        } else if(response.status == 400){
+            await postGroup()
+        } else if (response.status === 401) {
             toggleModalfailed();
-            await postGroup() 
+            await postGroup()
+        } else if (response.status === 400) {
+            toggleModalfailed();
+            await postGroup()
+
         }
     }
 
+    const handdlerOpenDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
+
     return (
         <Container fluid>
-            <SucceedModal message="el coordinador" show ={showsuccess}/>
-            <FailedModal message="el coordinador" show ={showfail}/>
+            <SucceedModal message="el coordinador" show={showsuccess}/>
+            <FailedModal message="el coordinador" show={showfail}/>
+
+
             <Form onSubmit={postGroup}>
-                <Card className='create-group-card'>
-                    <Row className='upper-row'>
-                        <Col>
-                            <h3>Nombre del Grupo</h3>
-                            <Form.Control name="name" placeholder='Nombre' type='text' required></Form.Control>
+                <Container>
+                    <Row className={'justify-content-center'}>
+                        <Col md={8} xs={9}>
+                            <TextField
+                                fullWidth
+                                id="standard-bare"
+                                variant="outlined"
+                                label={'Buscar Persona'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton>
+                                            <SearchIcon/>
+                                        </IconButton>
+                                    ),
+                                }}
+                            />
+                        </Col>
+                        <Col md={1} xs={1} lg={1}>
+                            <IconButton onClick={handdlerOpenDrawer} sx={{width: 56, height: 56}}
+                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={6} className='create-group-column'>
-                            <h3>Coordinador</h3>
-                            <Container className='create-group-card-scroll'>
-                                {coordinators?.map((coordinator) => (
-                                    <UserRowWithRadio user={coordinator}/>
-                                ))}
-                            </Container>
-                        </Col>
-                        <Col lg={6} className='create-group-column'>
-                            <h3>Asesores</h3>
-                            <Container className='create-group-card-scroll'>
-                                {advisors?.map((advisor) => (
-                                    <UserRowWithCheck user={advisor}></UserRowWithCheck>
-                                ))}
-                            </Container>
-                        </Col>
-                    </Row>
-                    <Button type="submit">Crear</Button>
-                </Card>
+                </Container>
+
+                <Container>
+                    <CoordinatorCard addToGroup={handdlerOpenDrawer} />
+                </Container>
+
+
+                <Container>
+                    <AdvisorCard addToGroup={handdlerOpenDrawer} />
+                </Container>
+
+                {isDrawerOpen &&
+                  <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
+                }
             </Form>
-                                    
         </Container>
     )
 }

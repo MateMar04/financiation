@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import ListAdvised from "../components/ListAdvised";
 import AuthContext from "../context/AuthContext";
-import getAdvised from "../services/AdvisedServices";
+import getAdvised from "../services/AdviseeServices";
 
 const AdvisedListPage = () => {
 

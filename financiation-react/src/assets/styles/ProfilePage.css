@@ -1,8 +1,10 @@
-.card {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    margin-right: 3vw;
-    margin-left: 3vw;
+.ProfileCard {
+    margin-top: 4vh;
+    margin-bottom: 8vh;
+    margin-right: 13vw;
+    margin-left: 13vw;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 7px 29px 0px;
+   
+    
 }
+

@@ -1,0 +1,49 @@
+.AdvisorBorder {
+    max-height: 70px;
+}
+
+.AvatarImg {
+    align-items: center;
+}
+
+.PrimaryText {
+    text-transform: capitalize !important;
+
+}
+
+.SecondaryText {
+    padding-bottom: 8px;
+    padding-top: 3px;
+}
+
+.AllAdvisorMiniCard {
+    max-height: 100px;
+    max-width: auto;
+    border: solid lightgrey 1px;
+    border-radius: 25px;
+    transition: all 300ms ease 0ms;
+
+}
+
+.AllAdvisorMiniCard:hover {
+    box-shadow: 0px 20px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.BtnCreateGroup {
+    bottom: 30px;
+    right: 50px;
+    transition: all 300ms ease 0ms;
+    z-index: 99;
+}
+
+.BtnCreateGroup:hover {
+    box-shadow: 0px 60px 20px rgba(0, 0, 0, 0.3);
+    transform: translateY(-7px);
+}
+
+.AñadirButton {
+    max-width: 250px;
+    vertical-align: center;
+}
+
