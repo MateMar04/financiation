@@ -1,9 +1,12 @@
 import {Col, Form, Row} from "react-bootstrap";
 import React, {useContext} from "react";
 import '../assets/styles/RowWithCheck.css'
-import {dataHandler} from "../services/RequestServices";
+import ReportsContext from "../context/ReportsContext";
 
 export const RowWithCheck = ({item, tokens}) => {
+
+    let {dataHandler} = useContext(ReportsContext)
+
     return (
         <Row key={item.id}>
             <Col className='row-label'>

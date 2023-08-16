@@ -11,6 +11,7 @@ import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import {getLocations} from "../services/LocationServices";
 import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
+import ReportsContext from "../context/ReportsContext";
 
 export const ReportsPage = () => {
 
@@ -27,6 +28,8 @@ export const ReportsPage = () => {
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
+
+    let {visits, faqs} = useContext(ReportsContext)
 
 
     useEffect(() => {
@@ -47,10 +50,10 @@ export const ReportsPage = () => {
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Visitas"  tokens={authTokens.access}/>
+                        <ReportFilterCard title="Visitas" items={visits} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Motivos"  tokens={authTokens.access}/>
+                        <ReportFilterCard title="Motivos" items={faqs} tokens={authTokens.access}/>
                     </Col>
                 </Row>
             </Container>
