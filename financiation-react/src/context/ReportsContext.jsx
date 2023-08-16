@@ -19,10 +19,18 @@ export const ReportsProvider = ({children}) => {
             } else {
                 if (item.id_department !== undefined) {
                     toggle(locations, item)
-                    await getVisitFromLocations(tokens).then(r => setVisits(r))
+                    if (Object.keys(locations).length !== 0) {
+                        await getVisitFromLocations(tokens).then(r => setVisits(r))
+                    } else {
+                        setVisits({})
+                    }
                 } else {
                     toggle(ministryDepartments, item)
-                    await getFaqFromMinistry(tokens).then(r => setFaqs(r))
+                    if (Object.keys(ministryDepartments).length !== 0) {
+                        await getFaqFromMinistry(tokens).then(r => setFaqs(r))
+                    } else {
+                        setFaqs({})
+                    }
                 }
             }
         } else {
