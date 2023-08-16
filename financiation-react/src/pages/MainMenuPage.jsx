@@ -12,7 +12,7 @@ export const MainMenuPage = () => {
                 </Col>
                 <Col lg={4}>
                     <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/groups/"
-                              link2="/group/add/"/>
+                              link2="/groups/add/"/>
                 </Col>
                 <Col lg={4}>
                     <MenuCard title="Asesores" button1="Ver Asesores" button2="Crear Asesor" link1="/advisors/"

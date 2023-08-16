@@ -19,13 +19,13 @@ export const GroupsPage = () => {
 
 
     return (
-        <fragment>
+        <div>
             {groups?.map((group) => (
                 <Container>
                     <GroupCard group={group}/>
                 </Container>
             ))}
-        </fragment>
+        </div>
 
     )
 }
