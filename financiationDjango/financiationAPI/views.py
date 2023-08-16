@@ -406,14 +406,14 @@ def getMinistryDepartments(request):
 
 
 @api_view(['GET'])
-def getFaqs(request):
+def getMinistryDepartmentFaqs(request):
     ministry_ids = parse_and_convert(request.GET.getlist('deps'))
 
     if isinstance(ministry_ids, type(None)):
         faqs = Faq.objects.all()
     else:
         faqs = Faq.objects.raw(
-            'SELECT * FROM "financiationAPI_faq" AS F INNER JOIN "financiationAPI_faq_id_ministry_department" AS FM ON F.id = FM.faq_id INNER JOIN "financiationAPI_ministrydepartment" MD on FM.ministrydepartment_id = MD.id WHERE FM.ministrydepartment_id IN %s',
+            'SELECT F.id FROM "financiationAPI_faq" as F INNER JOIN "financiationAPI_faq_id_ministry_department" FMD on F.id = FMD.faq_id WHERE ministrydepartment_id in %s group by F.id',
             [ministry_ids])
 
     serializer = FaqSerializer(faqs, many=True)
