@@ -61,7 +61,7 @@ urlpatterns = [
     path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
 
     # FAQs
-    path('faqs', views.getFaqs, name='faqs'),
+    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
 
     # Coordinators
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
