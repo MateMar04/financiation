@@ -50,7 +50,7 @@ function App() {
                         <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                         <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/group' element={<PrivateRoute children={<GroupsPage/>}/>}/>
+                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
                         <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
