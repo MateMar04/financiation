@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
 import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
@@ -29,7 +29,7 @@ export const ReportsPage = () => {
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
 
-    let {visits, faqs} = useContext(ReportsContext)
+    let {visits, faqs, getRequestsFromVisitDepsFaqs} = useContext(ReportsContext)
 
 
     useEffect(() => {
@@ -57,6 +57,7 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
             </Container>
+                <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}></Button>
 
             <hr/>
 

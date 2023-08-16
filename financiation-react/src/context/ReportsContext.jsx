@@ -11,6 +11,7 @@ export const ReportsProvider = ({children}) => {
     const [visits, setVisits] = useState({});
     const [ministryDepartments, setMinistryDepartments] = useState({});
     const [faqs, setFaqs] = useState({});
+    const [requests, setRequests] = useState();
 
     let dataHandler = async (item, tokens) => {
         if (Object.keys(item).length === 3) {
@@ -66,7 +67,6 @@ export const ReportsProvider = ({children}) => {
     let getFaqFromMinistry = async (tokens) => {
 
         let text = Object.keys(ministryDepartments).join()
-        console.log(text)
 
         let headers = {
             "Content-Type": "application/json",
@@ -75,8 +75,31 @@ export const ReportsProvider = ({children}) => {
         }
         let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
         let data = await response.json()
-        console.log(data)
         return data
+    }
+
+    let getRequestsFromVisitDepsFaqs = async (tokens) => {
+
+        let deps = Object.keys(ministryDepartments).join()
+        let faqs = Object.keys(ministryDepartments).join()
+        let visits = Object.keys(ministryDepartments).join()
+
+        console.log(deps)
+        console.log(faqs)
+        console.log(visits)
+
+
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(tokens),
+            "Accept": "application/json"
+        }
+
+        let response = await fetch(`/api/reports?deps=${deps}&faqs=${faqs}&visits=${visits}`, {headers: headers})
+        let data = await response.json()
+        setRequests(data)
+        console.log(requests)
+
     }
 
 
@@ -85,7 +108,8 @@ export const ReportsProvider = ({children}) => {
         locations: locations,
         ministryDepartments: ministryDepartments,
         faqs: faqs,
-        dataHandler: dataHandler
+        dataHandler: dataHandler,
+        getRequestsFromVisitDepsFaqs: getRequestsFromVisitDepsFaqs
     }
 
     return (
