@@ -18,6 +18,7 @@ export const CoordinatorMiniCardForming = ({coordinator}) => {
 
         return (
             <>  
+                {coordinators?.map((coordinator) => (
                     <Zoom in>
                     <div className={'my-1'}>
                         <Container className={'AllAdvisorMiniCard'}>
@@ -37,6 +38,7 @@ export const CoordinatorMiniCardForming = ({coordinator}) => {
                         </Container>
                     </div>
                     </Zoom>
+                ))}
             </>
 
 

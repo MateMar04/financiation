@@ -58,7 +58,6 @@ export const CreateGroupPage = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
 
-
     return (
         <Container fluid>
             <SucceedModal message="el coordinador" show={showsuccess}/>

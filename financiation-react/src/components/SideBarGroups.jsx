@@ -31,13 +31,13 @@ export const SideBarGroups = ({OpenDrawer}) => {
                                        style={{maxWidth: '180px'}} InputProps={{sx: {borderRadius: '25px'}}}/>
                         </Row>
                         <hr/>
-                        {advisors?.map((advisor) => (
+                        
                             <AdvisorMiniCardForming/>
-                            ))}
+                            
 
-                        {coordinators?.map((coordinator) => (
+                        
                             <CoordinatorMiniCardForming/>
-                            ))}
+
 
                         <div className={'BtnCreateGroup'}>
                             <Row className={'justify-content-center'}>

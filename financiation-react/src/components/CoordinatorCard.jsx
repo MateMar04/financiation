@@ -20,7 +20,7 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
 
     useEffect(() => {
         getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-        getUserById(authTokens.access, userId).then(data => setUser(data))
+        // getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
 
@@ -31,13 +31,13 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
                     <div className={'mt-3'}>
                         <Card>
                             <Container className={'OutlineCard'}>
-                                <Row>
+                                <Row key={coordinator.id}>
                                     <Col md={2} xs={3} lg={2}>
                                         <Avatar alt="Remy Sharp" src={coordinator?.profile_picture}
                                                 sx={{width: 56, height: 56}}/>
                                     </Col>
                                     <Col>
-                                        <Row key={user.id}>
+                                        <Row >
                                             <Col xs={9} md={6}>
                                                 <strong className={'PrimaryText'}>
                                                     <a>{coordinator.first_name} {coordinator.last_name}</a>
@@ -47,7 +47,7 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
                                                 <a>Disponible</a>
                                             </Col>
                                             <Col xs={1} md={1}>
-                                                <IconButton value={user.id} onClick={addToGroup}>
+                                                <IconButton value={coordinator.id} onClick={addToGroup}>
                                                     <GroupAddIcon/>
                                                 </IconButton>
                                             </Col>

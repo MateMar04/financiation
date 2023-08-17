@@ -19,7 +19,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
 
     useEffect(() => {
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
-        getUserById(authTokens.access, userId).then(data => setUser(data))
+        // getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
     return (
@@ -29,13 +29,13 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                 <div className={'mt-3'}>
                     <Card>
                         <Container className={'OutlineCard'}>
-                            <Row>
+                            <Row key={advisor.id}>
                                 <Col md={2} xs={3} lg={2}>
                                     <Avatar alt="Remy Sharp" src={advisor?.profile_picture}
                                             sx={{width: 56, height: 56}}/>
                                 </Col>
                                 <Col>
-                                    <Row key={user.id}>
+                                    <Row>
                                         <Col xs={9} md={6}>
                                             <strong>
                                                 <a>{advisor.first_name} {advisor.last_name}</a>
@@ -45,7 +45,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                             <a>En Visita</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={user.id} onClick={addToGroup}>
+                                            <IconButton value={advisor.id} onClick={addToGroup}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
