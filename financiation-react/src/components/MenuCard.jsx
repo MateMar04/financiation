@@ -1,24 +1,24 @@
-import {Button, Card, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Card, Row, DropdownButton, Dropdown } from "react-bootstrap";
 import "../assets/styles/MenuCard.css"
 
-export const MenuCard = ({title, button1, button2, link1, link2}) => {
+export const MenuCard = ({ title, title1, title2, link1, link2, image, customText }) => {
     return (
         <Card className="menu-card">
+            <Card.Img variant="top" src={image} alt="" className="card-image" />
             <Card.Header><h3>{title}</h3></Card.Header>
             <Card.Body className="menu-card-body">
                 <Row className="menu-card-row">
-                    <Link to={link1} className="menu-card-link">
-                        <Button className="menu-card-button">{button1}</Button>
-                    </Link>
+                    <p>{customText}</p>
                 </Row>
-                <hr/>
+                <hr />
                 <Row className="menu-card-row">
-                    <Link to={link2} className="menu-card-link">
-                        <Button className="menu-card-button">{button2}</Button>
-                    </Link>
+                    <DropdownButton id={`dropdown-${title}`} title="Opciones">
+                        <Dropdown.Item href={link1}>{title1}</Dropdown.Item>
+                        <Dropdown.Item href={link2}>{title2}</Dropdown.Item>
+                    </DropdownButton>
                 </Row>
             </Card.Body>
         </Card>
-    )
-}
+    );
+};
+
