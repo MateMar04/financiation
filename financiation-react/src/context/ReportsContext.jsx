@@ -10,47 +10,41 @@ export const ReportsProvider = ({children}) => {
 
     let {authTokens} = useContext(AuthContext)
 
-    const [locations, setLocations] = useState({});
-    const [visits, setVisits] = useState({});
-    const [ministryDepartments, setMinistryDepartments] = useState({});
-    const [faqs, setFaqs] = useState({});
+    const [selectedLocations, setSelectedLocations] = useState({});
+    const [selectedMinistryDepartments, setSelectedMinistryDepartments] = useState({});
 
-    const [selectedVisits, setSelectedVisits] = useState({});
-    const [selectedFaqs, setSelectedFaqs] = useState({});
+    const [visits, setVisits] = useState({});
+    const [faqs, setFaqs] = useState({});
 
     const [requests, setRequests] = useState({});
 
     let dataHandler = async (title, e) => {
         switch (title) {
             case 'Departamentos':
-                toggle('Departamentos', ministryDepartments, selectedFaqs, e)
+                toggle('Departamentos', selectedMinistryDepartments, e)
                 await getFaqFromMinistryForFilters(authTokens.access).then(r => setFaqs(r))
                 break
             case 'Localidades':
-                toggle('Localidades', locations, selectedVisits, e)
+                toggle('Localidades', selectedLocations, e)
                 await getVisitFromLocationsForFilters(authTokens.access).then(r => setVisits(r))
                 break
             case 'Visitas':
-                toggle('Visitas', selectedVisits, null, e)
+                let locality_id = visits.filter(v => v.id == e.target.value)[0].id_locality
+                toggle('Visitas', selectedLocations[locality_id], e)
                 break
             case 'Motivos':
-                toggle('Motivos', selectedFaqs, null, e)
+                let ministryDepartment_id = faqs.filter(f => f.id == e.target.value)[0].id_ministry_department
+                toggle('Motivos', selectedMinistryDepartments[ministryDepartment_id], e)
                 break
         }
     }
 
-    let toggle = (type, dict, dependantDict, e) => {
+    let toggle = (type, dict, e) => {
         let checkbox = e.target
         if (checkbox.checked) {
-            dict[checkbox.value] = checkbox.value
+            dict[checkbox.value] = {}
         } else {
             delete dict[checkbox.value]
-            // Object.keys(dependantDict).forEach(x => {
-            //         if (checkbox.value === x.value) {
-            //             delete dependantDict[checkbox.value]
-            //         }
-            //     }
-            // )
         }
         console.log(type, dict)
     }
@@ -68,6 +62,8 @@ export const ReportsProvider = ({children}) => {
             element.type = 'ministryDepartment'
             element.checked = false
         })
+
+        setFaqs(data)
 
         return data
     };
@@ -92,8 +88,7 @@ export const ReportsProvider = ({children}) => {
 
     let getVisitFromLocationsForFilters = async (tokens) => {
 
-        let text = Object.keys(locations).join()
-        console.log(text)
+        let text = Object.keys(selectedLocations).join()
 
         let headers = {
             "Content-Type": "application/json",
@@ -108,13 +103,14 @@ export const ReportsProvider = ({children}) => {
             element.checked = false
         })
 
-        console.log(data)
+        setVisits(data)
+
         return data
     }
 
     let getFaqFromMinistryForFilters = async (tokens) => {
 
-        let text = Object.keys(ministryDepartments).join()
+        let text = Object.keys(selectedMinistryDepartments).join()
 
         let headers = {
             "Content-Type": "application/json",
@@ -134,14 +130,7 @@ export const ReportsProvider = ({children}) => {
 
     let getRequestsFromVisitDepsFaqs = async (tokens) => {
 
-        let deps = Object.keys(ministryDepartments).join()
-        let faqs = Object.keys(selectedFaqs).join()
-        let visits = Object.keys(selectedVisits).join()
-
-        console.log(deps)
-        console.log(faqs)
-        console.log(visits)
-
+        let deps = Object.keys(selectedMinistryDepartments).join()
 
         let headers = {
             "Content-Type": "application/json",
@@ -152,7 +141,6 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch(`/api/reports?deps=${deps}&faqs=${faqs}&visits=${visits}`, {headers: headers})
         let data = await response.json()
         setRequests(data)
-        console.log(requests)
         return data
 
     }
@@ -160,8 +148,8 @@ export const ReportsProvider = ({children}) => {
 
     let contextData = {
         visits: visits,
-        locations: locations,
-        ministryDepartments: ministryDepartments,
+        locations: selectedLocations,
+        ministryDepartments: selectedMinistryDepartments,
         faqs: faqs,
         dataHandler: dataHandler,
         getRequestsFromVisitDepsFaqs: getRequestsFromVisitDepsFaqs,
