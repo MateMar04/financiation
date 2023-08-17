@@ -21,14 +21,14 @@ export const ReportsProvider = ({children}) => {
                 if (item.id_department !== undefined) {
                     toggle(locations, item)
                     if (Object.keys(locations).length !== 0) {
-                        await getVisitFromLocations(tokens).then(r => setVisits(r))
+                        await getVisitFromLocationsForFilters(tokens).then(r => setVisits(r))
                     } else {
                         setVisits({})
                     }
                 } else {
                     toggle(ministryDepartments, item)
                     if (Object.keys(ministryDepartments).length !== 0) {
-                        await getFaqFromMinistry(tokens).then(r => setFaqs(r))
+                        await getFaqFromMinistryForFilters(tokens).then(r => setFaqs(r))
                     } else {
                         setFaqs({})
                     }
@@ -48,7 +48,45 @@ export const ReportsProvider = ({children}) => {
         console.log(dict)
     }
 
-    let getVisitFromLocations = async (tokens) => {
+    let getMinistryDepartmentsForFilters = async (tokens) => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(tokens),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/ministry-departments', {headers: headers})
+        let data = await response.json()
+
+        data.forEach((element) => {
+            element.type = 'ministryDepartment'
+            element.checked = false
+        })
+
+        console.log(data)
+        return data
+    };
+
+
+    let getLocationsForFilters = async (tokens) => {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(tokens),
+            "Accept": "application/json"
+        }
+        let response = await fetch('/api/locations', {headers: headers})
+        let data = await response.json()
+
+        data.forEach((element) => {
+            element.type = 'location'
+            element.checked = false
+        })
+
+        console.log(data)
+
+        return data
+    };
+
+    let getVisitFromLocationsForFilters = async (tokens) => {
 
         let text = Object.keys(locations).join()
         console.log(text)
@@ -60,11 +98,17 @@ export const ReportsProvider = ({children}) => {
         }
         let response = await fetch(`/api/visits?locs=${text}`, {headers: headers})
         let data = await response.json()
+
+        data.forEach((element) => {
+            element.type = 'visit'
+            element.checked = false
+        })
+
         console.log(data)
         return data
     }
 
-    let getFaqFromMinistry = async (tokens) => {
+    let getFaqFromMinistryForFilters = async (tokens) => {
 
         let text = Object.keys(ministryDepartments).join()
 
@@ -75,6 +119,14 @@ export const ReportsProvider = ({children}) => {
         }
         let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
         let data = await response.json()
+
+        data.forEach((element) => {
+            element.type = 'faq'
+            element.checked = false
+        })
+
+        console.log(data)
+
         return data
     }
 
@@ -109,7 +161,9 @@ export const ReportsProvider = ({children}) => {
         ministryDepartments: ministryDepartments,
         faqs: faqs,
         dataHandler: dataHandler,
-        getRequestsFromVisitDepsFaqs: getRequestsFromVisitDepsFaqs
+        getRequestsFromVisitDepsFaqs: getRequestsFromVisitDepsFaqs,
+        getMinistryDepartmentsForFilter: getMinistryDepartmentsForFilters,
+        getLocationsForFilter: getLocationsForFilters
     }
 
     return (
