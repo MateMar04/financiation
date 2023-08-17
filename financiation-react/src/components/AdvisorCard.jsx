@@ -45,7 +45,7 @@ export const AdvisorCard = ({addToGroup, userId, advisor}) => {
                                             <a>En Visita</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={console.log('advisor.id')} onClick={addToGroup}>
+                                            <IconButton value={console.log(advisor.id)} onClick={addToGroup}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>

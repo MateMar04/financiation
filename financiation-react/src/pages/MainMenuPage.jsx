@@ -26,9 +26,17 @@ export const MainMenuPage = () => {
                         title2="Crear Visitas"
                     />
                 </Col>
-                <Col lg={4}>
-                    <MenuCard title="Grupos" button1="Ver Grupos" button2="Crear Grupo" link1="/groups/"
-                              link2="/groups/add/"/>
+                <Col lg={3} md={6} className="cardd">
+                    <MenuCard 
+                    title="Grupos" 
+                    link1="/groups/"
+                    link2="/groups/add/"
+                    image={grupos}
+                    customText="Proporciona una vista general de todos los grupos existentes en tu sistema."
+                    title1="Ver Grupos" 
+                    title2="Crear Grupo" 
+                    
+                    />
                 </Col>
 
                 <Col lg={3} md={6} className="cardd">

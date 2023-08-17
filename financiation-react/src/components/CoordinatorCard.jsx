@@ -46,7 +46,7 @@ export const CoordinatorCard = ({addToGroup, userId, coordinator}) => {
                                                 <a>Disponible</a>
                                             </Col>
                                             <Col xs={1} md={1}>
-                                                <IconButton value={coordinator.id} onClick={addToGroup}>
+                                                <IconButton value={console.log(coordinator.id)} onClick={addToGroup}>
                                                     <GroupAddIcon/>
                                                 </IconButton>
                                             </Col>
