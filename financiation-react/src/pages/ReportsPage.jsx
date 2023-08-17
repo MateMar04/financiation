@@ -9,8 +9,6 @@ import AuthContext from "../context/AuthContext";
 import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
-import {getLocations} from "../services/LocationServices";
-import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import ReportsContext from "../context/ReportsContext";
 
 export const ReportsPage = () => {
@@ -29,12 +27,18 @@ export const ReportsPage = () => {
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
 
-    let {visits, faqs, getRequestsFromVisitDepsFaqs} = useContext(ReportsContext)
+    let {
+        visits,
+        faqs,
+        getRequestsFromVisitDepsFaqs,
+        getMinistryDepartmentsForFilter,
+        getLocationsForFilter
+    } = useContext(ReportsContext)
 
 
     useEffect(() => {
-        getLocations(authTokens.access).then(r => setLocalities(r))
-        getMinistryDepartments(authTokens.access).then(r => setMinistryDepartments(r))
+        getLocationsForFilter(authTokens.access).then(r => setLocalities(r))
+        getMinistryDepartmentsForFilter(authTokens.access).then(r => setMinistryDepartments(r))
     }, [])
 
     return (
@@ -57,7 +61,7 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
             </Container>
-                <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}></Button>
+            <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}></Button>
 
             <hr/>
 
