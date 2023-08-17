@@ -1,4 +1,5 @@
-import {createContext, useState} from "react";
+import {createContext, useContext, useState} from "react";
+import AuthContext from "./AuthContext";
 
 const ReportsContext = createContext();
 
@@ -7,43 +8,39 @@ export default ReportsContext;
 export const ReportsProvider = ({children}) => {
 
 
+    let {authTokens} = useContext(AuthContext)
+
     const [locations, setLocations] = useState({});
     const [visits, setVisits] = useState({});
     const [ministryDepartments, setMinistryDepartments] = useState({});
     const [faqs, setFaqs] = useState({});
     const [requests, setRequests] = useState();
 
-    let dataHandler = async (item, tokens) => {
-        if (Object.keys(item).length === 3) {
-            if (item.id_ministry_department !== undefined) {
-                toggle(faqs, item)
-            } else {
-                if (item.id_department !== undefined) {
-                    toggle(locations, item)
-                    if (Object.keys(locations).length !== 0) {
-                        await getVisitFromLocationsForFilters(tokens).then(r => setVisits(r))
-                    } else {
-                        setVisits({})
-                    }
-                } else {
-                    toggle(ministryDepartments, item)
-                    if (Object.keys(ministryDepartments).length !== 0) {
-                        await getFaqFromMinistryForFilters(tokens).then(r => setFaqs(r))
-                    } else {
-                        setFaqs({})
-                    }
-                }
-            }
-        } else {
-            toggle(visits, item)
+    let dataHandler = async (title, e) => {
+        switch (title) {
+            case 'Departamentos':
+                toggle(ministryDepartments, e)
+                await getFaqFromMinistryForFilters(authTokens.access).then(r => setFaqs(r))
+                break
+            case 'Localidades':
+                toggle(locations, e)
+                await getVisitFromLocationsForFilters(authTokens.access).then(r => setVisits(r))
+                break
+            case 'Visitas':
+                toggle(visits, e)
+                break
+            case 'Motivos':
+                toggle(faqs, e)
+                break
         }
     }
 
-    let toggle = (dict, item) => {
-        if (item.id in dict) {
-            delete dict[item.id]
+    let toggle = (dict, e) => {
+        let checkbox = e.target
+        if (checkbox.checked) {
+            dict[checkbox.value] = checkbox.value
         } else {
-            dict[item.id] = item.id
+            delete dict[checkbox.value]
         }
         console.log(dict)
     }
@@ -62,7 +59,6 @@ export const ReportsProvider = ({children}) => {
             element.checked = false
         })
 
-        console.log(data)
         return data
     };
 
@@ -80,8 +76,6 @@ export const ReportsProvider = ({children}) => {
             element.type = 'location'
             element.checked = false
         })
-
-        console.log(data)
 
         return data
     };
@@ -124,8 +118,6 @@ export const ReportsProvider = ({children}) => {
             element.type = 'faq'
             element.checked = false
         })
-
-        console.log(data)
 
         return data
     }
