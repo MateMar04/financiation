@@ -3,9 +3,8 @@ import React, {useContext} from "react";
 import '../assets/styles/RowWithCheck.css'
 import ReportsContext from "../context/ReportsContext";
 
-export const RowWithCheck = ({item, tokens}) => {
+export const RowWithCheck = ({item}) => {
 
-    let {dataHandler} = useContext(ReportsContext)
 
     return (
         <Row key={item.id}>
@@ -13,7 +12,7 @@ export const RowWithCheck = ({item, tokens}) => {
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check value={item.id} onChange={() => dataHandler(item, tokens)}></Form.Check>
+                <Form.Check value={item.id}></Form.Check>
             </Col>
         </Row>
     )
