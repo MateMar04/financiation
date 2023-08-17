@@ -17,7 +17,6 @@ export const AdvisorMiniCardForming = ({advisor}) => {
 
     return (
         <>
-            {advisors?.map((advisor) => (
                 <Zoom in>
                 <div className={'my-1'}>
                     <Container className={'AllAdvisorMiniCard'}>
@@ -38,7 +37,6 @@ export const AdvisorMiniCardForming = ({advisor}) => {
                     </Container>
                 </div>
                 </Zoom>
-            ))}
         </>
 
 

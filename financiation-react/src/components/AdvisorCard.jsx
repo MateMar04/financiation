@@ -59,10 +59,7 @@ export const AdvisorCard = ({addToGroup, userId, advisor}) => {
                     </Card>
                 </div>
                 </Zoom>
-            
         </>
-
-
     )
 }
 
