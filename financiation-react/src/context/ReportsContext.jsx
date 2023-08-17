@@ -14,7 +14,9 @@ export const ReportsProvider = ({children}) => {
     const [visits, setVisits] = useState({});
     const [ministryDepartments, setMinistryDepartments] = useState({});
     const [faqs, setFaqs] = useState({});
-    const [requests, setRequests] = useState();
+    const [selectedVisits, setSelectedVisits] = useState({});
+    const [selectedFaqs, setSelectedFaqs] = useState({});
+    const [requests, setRequests] = useState({});
 
     let dataHandler = async (title, e) => {
         switch (title) {
@@ -27,10 +29,10 @@ export const ReportsProvider = ({children}) => {
                 await getVisitFromLocationsForFilters(authTokens.access).then(r => setVisits(r))
                 break
             case 'Visitas':
-                toggle(visits, e)
+                toggle(selectedVisits, e)
                 break
             case 'Motivos':
-                toggle(faqs, e)
+                toggle(selectedFaqs, e)
                 break
         }
     }
@@ -125,8 +127,8 @@ export const ReportsProvider = ({children}) => {
     let getRequestsFromVisitDepsFaqs = async (tokens) => {
 
         let deps = Object.keys(ministryDepartments).join()
-        let faqs = Object.keys(ministryDepartments).join()
-        let visits = Object.keys(ministryDepartments).join()
+        let faqs = Object.keys(selectedFaqs).join()
+        let visits = Object.keys(selectedVisits).join()
 
         console.log(deps)
         console.log(faqs)
@@ -143,6 +145,7 @@ export const ReportsProvider = ({children}) => {
         let data = await response.json()
         setRequests(data)
         console.log(requests)
+        return data
 
     }
 

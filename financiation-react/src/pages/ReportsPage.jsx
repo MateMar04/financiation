@@ -61,7 +61,7 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}></Button>
+            <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}>Generar</Button>
 
             <hr/>
 
