@@ -2,17 +2,13 @@ import React, {useContext, useState, useEffect} from "react";
 import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-
-import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import CoordinatorCard from "../components/CoordinatorCard";
-import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getUsers} from "../services/UserServices";
 
 import GroupsIcon from '@mui/icons-material/Groups';
 
@@ -20,16 +16,13 @@ export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-    let [coordinators, setCoordinators] = useState([])
-    let [advisors, setAdvisors] = useState([])
+    let [users, setUsers] = useState([])
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getUsers(authTokens.access).then(data => setUsers(data))
     }, [])
 
     let postGroup = async (e) => {
@@ -60,10 +53,6 @@ export const CreateGroupPage = () => {
         }
     }
 
-    const handdlerOpenDrawer = () => {
-        setIsDrawerOpen(!isDrawerOpen);
-    };
-
     return (
         <Container fluid>
             <SucceedModal message="el coordinador" show={showsuccess}/>
@@ -89,31 +78,20 @@ export const CreateGroupPage = () => {
                             />
                         </Col>
                         <Col md={1} xs={1} lg={1}>
-                            <IconButton onClick={handdlerOpenDrawer} sx={{width: 56, height: 56}}
+                            <IconButton  sx={{width: 56, height: 56}}
                                         className={'GroupsIcon'}><GroupsIcon/></IconButton>
                         </Col>
                     </Row>
                 </Container>
 
                 <div>
-                    {coordinators?.map((coordinator) => (
+                    {users?.map((user) => (
                         <Container>
-                            <CoordinatorCard coordinator={coordinator} addToGroup={handdlerOpenDrawer} />
+                            <CoordinatorCard user={user} />
                         </Container>
                     ))}
                 </div>
-                    
-                <div>
-                    {advisors?.map((advisor) => (
-                        <Container>
-                            <AdvisorCard advisor={advisor} addToGroup={handdlerOpenDrawer} />
-                        </Container>
-                    ))}
-                </div>  
 
-                {isDrawerOpen &&
-                  <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
-                }
             </Form>
         </Container>
     )

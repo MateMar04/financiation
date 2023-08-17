@@ -1,4 +1,4 @@
-export const getUser = async (tokens) => {
+export const getUsers = async (tokens) => {
 
     let headers = {
         "Content-Type": "application/json",
