@@ -12,12 +12,13 @@ const CoordinatorPage = () => {
 
     let postCoordinator = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/coordinator/add/', {
+        let response = await fetch('/api/coordinators', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"},
+                "Accept": "application/json"
+            },
             body: JSON.stringify({
                 "id_user": e.target.id_user.value,
                 "id_group": e.target.id_group.value
