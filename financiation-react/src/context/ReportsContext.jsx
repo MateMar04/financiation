@@ -45,6 +45,12 @@ export const ReportsProvider = ({children}) => {
             dict[checkbox.value] = checkbox.value
         } else {
             delete dict[checkbox.value]
+            // Object.keys(dependantDict).forEach(x => {
+            //         if (checkbox.value === x.value) {
+            //             delete dependantDict[checkbox.value]
+            //         }
+            //     }
+            // )
         }
         console.log(type, dict)
     }
