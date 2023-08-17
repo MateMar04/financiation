@@ -14,37 +14,39 @@ export const ReportsProvider = ({children}) => {
     const [visits, setVisits] = useState({});
     const [ministryDepartments, setMinistryDepartments] = useState({});
     const [faqs, setFaqs] = useState({});
+
     const [selectedVisits, setSelectedVisits] = useState({});
     const [selectedFaqs, setSelectedFaqs] = useState({});
+
     const [requests, setRequests] = useState({});
 
     let dataHandler = async (title, e) => {
         switch (title) {
             case 'Departamentos':
-                toggle(ministryDepartments, e)
+                toggle('Departamentos', ministryDepartments, selectedFaqs, e)
                 await getFaqFromMinistryForFilters(authTokens.access).then(r => setFaqs(r))
                 break
             case 'Localidades':
-                toggle(locations, e)
+                toggle('Localidades', locations, selectedVisits, e)
                 await getVisitFromLocationsForFilters(authTokens.access).then(r => setVisits(r))
                 break
             case 'Visitas':
-                toggle(selectedVisits, e)
+                toggle('Visitas', selectedVisits, null, e)
                 break
             case 'Motivos':
-                toggle(selectedFaqs, e)
+                toggle('Motivos', selectedFaqs, null, e)
                 break
         }
     }
 
-    let toggle = (dict, e) => {
+    let toggle = (type, dict, dependantDict, e) => {
         let checkbox = e.target
         if (checkbox.checked) {
             dict[checkbox.value] = checkbox.value
         } else {
             delete dict[checkbox.value]
         }
-        console.log(dict)
+        console.log(type, dict)
     }
 
     let getMinistryDepartmentsForFilters = async (tokens) => {
