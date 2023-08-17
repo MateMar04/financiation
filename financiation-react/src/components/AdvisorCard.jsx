@@ -11,7 +11,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
 
 
-export const AdvisorCard = ({addToGroup, userId}) => {
+export const AdvisorCard = ({addToGroup, userId, advisor}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -24,7 +24,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
 
     return (
         <>
-            {advisors?.map((advisor) => (
+            
                 <Zoom in style={{ transitionDelay: '300ms'}}>
                 <div className={'mt-3'}>
                     <Card>
@@ -45,7 +45,7 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                             <a>En Visita</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={advisor.id} onClick={addToGroup}>
+                                            <IconButton value={console.log('advisor.id')} onClick={addToGroup}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
@@ -55,12 +55,11 @@ export const AdvisorCard = ({addToGroup, userId}) => {
                                     </Row>
                                 </Col>
                             </Row>
-
                         </Container>
                     </Card>
                 </div>
                 </Zoom>
-            ))}
+            
         </>
 
 

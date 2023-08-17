@@ -11,7 +11,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
 
 
-export const CoordinatorCard = ({addToGroup, userId}) => {
+export const CoordinatorCard = ({addToGroup, userId, coordinator}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
@@ -23,10 +23,9 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
         // getUserById(authTokens.access, userId).then(data => setUser(data))
     }, [])
 
-
     return (
         <>
-            {coordinators?.map((coordinator) => (
+            
                 <Zoom in>
                     <div className={'mt-3'}>
                         <Card>
@@ -62,11 +61,7 @@ export const CoordinatorCard = ({addToGroup, userId}) => {
                         </Card>
                     </div>
                 </Zoom>
-            ))}
-
         </>
-
-
     )
 }
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
@@ -11,20 +11,26 @@ import CoordinatorCard from "../components/CoordinatorCard";
 import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
 
 import GroupsIcon from '@mui/icons-material/Groups';
-
 
 export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
+    let [coordinators, setCoordinators] = useState([])
+    let [advisors, setAdvisors] = useState([])
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
+    useEffect(() => {
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+    }, [])
 
     let postGroup = async (e) => {
         e.preventDefault()
@@ -89,14 +95,21 @@ export const CreateGroupPage = () => {
                     </Row>
                 </Container>
 
-                <Container>
-                    <CoordinatorCard addToGroup={handdlerOpenDrawer} />
-                </Container>
-
-
-                <Container>
-                    <AdvisorCard addToGroup={handdlerOpenDrawer} />
-                </Container>
+                <div>
+                    {coordinators?.map((coordinator) => (
+                        <Container>
+                            <CoordinatorCard coordinator={coordinator} addToGroup={handdlerOpenDrawer} />
+                        </Container>
+                    ))}
+                </div>
+                    
+                <div>
+                    {advisors?.map((advisor) => (
+                        <Container>
+                            <AdvisorCard advisor={advisor} addToGroup={handdlerOpenDrawer} />
+                        </Container>
+                    ))}
+                </div>  
 
                 {isDrawerOpen &&
                   <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
