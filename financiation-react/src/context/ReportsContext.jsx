@@ -49,6 +49,13 @@ export const ReportsProvider = ({children}) => {
         console.log(type, dict)
     }
 
+    let decorateData = (data, type, ) => {
+        data.forEach((element) => {
+            element.type = type
+            element.checked = false
+        })
+    }
+
     let getMinistryDepartmentsForFilters = async (tokens) => {
         let headers = {
             "Content-Type": "application/json",
@@ -58,12 +65,8 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch('/api/ministry-departments', {headers: headers})
         let data = await response.json()
 
-        data.forEach((element) => {
-            element.type = 'ministryDepartment'
-            element.checked = false
-        })
+        decorateData(data, 'ministryDepartment');
 
-        setFaqs(data)
 
         return data
     };
@@ -78,10 +81,7 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch('/api/locations', {headers: headers})
         let data = await response.json()
 
-        data.forEach((element) => {
-            element.type = 'location'
-            element.checked = false
-        })
+        decorateData(data, 'locations');
 
         return data
     };
@@ -120,10 +120,9 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
         let data = await response.json()
 
-        data.forEach((element) => {
-            element.type = 'faq'
-            element.checked = false
-        })
+        decorateData(data, 'faq');
+
+        setFaqs(data)
 
         return data
     }
