@@ -55,6 +55,14 @@ export const ReportsProvider = ({children}) => {
         })
     }
 
+        let extractData = (dict) => {
+        let arr = []
+        for (const [key, value] of Object.entries(dict)) {
+            arr.push(Object.keys(value).join())
+        }
+        return arr.join()
+    }
+
     let getMinistryDepartmentsForFilters = async (tokens) => {
         let headers = {
             "Content-Type": "application/json",
@@ -130,17 +138,9 @@ export const ReportsProvider = ({children}) => {
 
         let deps_ = Object.keys(selectedMinistryDepartments).join()
 
-        let preFaqs = []
-        for (const [key, value] of Object.entries(selectedMinistryDepartments)) {
-            preFaqs.push(Object.keys(value).join())
-        }
-        let faqs_ = preFaqs.join()
+        let faqs_ = extractData(selectedMinistryDepartments)
 
-        let preVisits = []
-        for (const [key, value] of Object.entries(selectedLocations)) {
-            preVisits.push(Object.keys(value).join())
-        }
-        let visits_ = preVisits.join()
+        let visits_ = extractData(selectedLocations)
 
         console.log(deps_)
         console.log(faqs_)
