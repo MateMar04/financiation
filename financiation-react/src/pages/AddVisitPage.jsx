@@ -82,11 +82,14 @@ const AddVisitPage = () => {
     }
 
 
-    const renderIconAndInput = (IconComponent, label, name, type, required) => (
+    const renderIconAndInput = (IconComponent, label, name, type, required, linkText) => (
         <Card sx={{maxWidth: 200}}>
             <Container>
                 <Row className="justify-content-center">
-                    <IconComponent sx={{ fontSize: 65 }} />
+                    <IconComponent sx={{fontSize: 65}}/>
+                </Row>
+                <Row className="justify-content-center">
+                    <a>{linkText}</a>
                 </Row>
                 <Row>
                     {type === 'select' ? (
@@ -119,15 +122,34 @@ const AddVisitPage = () => {
             <Form onSubmit={postVisit}>
 
                 <Form.Group>
-                    {renderIconAndInput(CalendarMonthIcon, 'Fecha de visita YYYY-MM-DD', 'visit_date', 'text', true)}
-                    {renderIconAndInput(LocationOnIcon, 'Ciudad', 'id_locality', 'select', true)}
-                    {renderIconAndInput(HourglassBottomIcon, 'Hora de inicio de la jornada', 'start_time', 'text', true)}
-                    {renderIconAndInput(HourglassBottomIcon, 'Hora de fin de la jornada', 'finish_time', 'text', true)}
-                    {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true)}
-                    {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true)}
-                    {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true)}
-                    {renderIconAndInput(HotelIcon, 'Introducir hospedaje int', 'accommodation', 'text', true)}
-                    {/* Add more icon and input pairs here */}
+                    <Row>
+                        <Col>
+                            {renderIconAndInput(CalendarMonthIcon, 'Fecha de visita YYYY-MM-DD', 'visit_date', 'text', true, 'Día')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(LocationOnIcon, 'Ciudad', 'id_locality', 'select', true, 'Ciudad')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(HourglassBottomIcon, 'Hora de inicio de la jornada', 'start_time', 'text', true, 'Horario de la jornada')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(HourglassBottomIcon, 'Hora de fin de la jornada', 'finish_time', 'text', true)}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true, 'Distancia con cba')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true, 'Hs de viaje')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true, 'Registro Civil?')}
+                        </Col>
+                        <Col>
+                            {renderIconAndInput(HotelIcon, 'Introducir hospedaje int', 'accommodation', 'text', true)}
+                        </Col>
+                    </Row>
                 </Form.Group>
 
                 <Container>
@@ -145,6 +167,7 @@ const AddVisitPage = () => {
             </Form>
 
         </Container>
-    );
+    )
+        ;
 };
 export default AddVisitPage;
