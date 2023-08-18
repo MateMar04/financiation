@@ -128,20 +128,16 @@ export const ReportsProvider = ({children}) => {
         let faqs_ = extractData(selectedMinistryDepartments)
         let visits_ = extractData(selectedLocations)
 
-        console.log(deps_)
-        console.log(faqs_)
-        console.log(visits_)
-
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(tokens),
-            "Accept": "application/json"
+        if (deps_ === '' || faqs_ === '' || visits === '') {
+            alert("Por favor seleccione algo en todos los campos")
+        } else {
+            let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
+            let data = await response.json()
+            setRequests(data)
+            console.log(data)
+            return data
         }
 
-        let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
-        let data = await response.json()
-        setRequests(data)
-        return data
 
     }
 
