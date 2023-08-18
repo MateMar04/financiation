@@ -46,7 +46,6 @@ export const ReportsProvider = ({children}) => {
         } else {
             delete dict[checkbox.value]
         }
-        console.log(type, dict)
     }
 
     let decorateData = (data, type, ) => {
