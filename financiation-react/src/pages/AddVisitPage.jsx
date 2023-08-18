@@ -81,9 +81,8 @@ const AddVisitPage = () => {
         }
     }
 
-
     const renderIconAndInput = (IconComponent, label, name, type, required, linkText) => (
-        <Card sx={{maxWidth: 200}}>
+        <Card sx={{maxWidth: '200px', maxHeight: '150px'}} >
             <Container>
                 <Row className="justify-content-center">
                     <IconComponent sx={{fontSize: 65}}/>
@@ -120,7 +119,6 @@ const AddVisitPage = () => {
             <SucceedModal message="la visita" show={showsuccess}/>
             <FailedModal message="la visita" show={showfail}/>
             <Form onSubmit={postVisit}>
-
                 <Form.Group>
                     <Row>
                         <Col>
@@ -138,17 +136,25 @@ const AddVisitPage = () => {
                     </Row>
                     <Row>
                         <Col>
-                            {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true, 'Distancia con cba')}
+                            <div className={'my-4'}>
+                                {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true, 'Distancia con cba')}
+                            </div>
                         </Col>
                         <Col>
+                            <div className={'my-4'}>
                             {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true, 'Hs de viaje')}
-                        </Col>
+                            </div>
+                            </Col>
                         <Col>
+                            <div className={'my-4'}>
                             {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true, 'Registro Civil?')}
-                        </Col>
+                            </div>
+                            </Col>
                         <Col>
+                            <div className={'my-4'}>
                             {renderIconAndInput(HotelIcon, 'Introducir hospedaje int', 'accommodation', 'text', true)}
-                        </Col>
+                            </div>
+                            </Col>
                     </Row>
                 </Form.Group>
 
