@@ -100,7 +100,7 @@ export const ReportsProvider = ({children}) => {
 
         data.forEach((element) => {
             element.type = 'visit'
-            element.checked = false
+            element.checked = selectedLocations[element.id_locality].hasOwnProperty(element.id)
         })
 
         setVisits(data)
