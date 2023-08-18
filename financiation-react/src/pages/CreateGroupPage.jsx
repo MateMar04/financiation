@@ -57,7 +57,6 @@ export const CreateGroupPage = () => {
             <SucceedModal message="el coordinador" show={showsuccess}/>
             <FailedModal message="el coordinador" show={showfail}/>
 
-
             <Form onSubmit={postGroup}>
                 <Container>
                     <Row className={'justify-content-center'}>
