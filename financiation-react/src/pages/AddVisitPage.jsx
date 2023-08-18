@@ -87,7 +87,7 @@ const AddVisitPage = () => {
                 <Row className="justify-content-center">
                     <IconComponent sx={{fontSize: 65}}/>
                 </Row>
-                <Row className='justify-content-center'>
+                <Row className='justify-content-center text-center'>
                     <a>{linkText}</a>
                 </Row>
                 <Row className='justify-content-center'>
@@ -167,8 +167,8 @@ const AddVisitPage = () => {
                         <Row className='justify-content-center'>
                             <Col md={2} xs={4}>
                                 <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary">Añadir
-                                        Visita</Button>
+                                    <Button type="submit" size="medium" variant="outline-primary">
+                                        Siguiente</Button>
                                 </Form.Group>
                             </Col>
                         </Row>
