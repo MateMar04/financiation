@@ -3,8 +3,6 @@ import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
-import {getUsers} from "../services/UserServices";
-import {getUserById} from "../services/UserServices";
 import Card from '@mui/material/Card';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -14,11 +12,6 @@ import {Zoom} from "@mui/material";
 export const UserCard = ({user}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let [users, setUsers] = useState([])
-
-    useEffect(() => {
-        getUsers(authTokens.access).then(data => setUsers(data))
-    }, [])
 
     return (
         <>
@@ -40,16 +33,16 @@ export const UserCard = ({user}) => {
                                             </strong>
                                         </Col>
                                         <Col xs={9} md={5}>
-                                            <a>En Visita</a>
+                                            <a>{user.id_role}</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={console.log(user.id)} onClick={addToGroup}>
+                                            <IconButton value={console.log(user.id)}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <small>Asesor</small>
+                                        <small>{user.id_user_status}</small>
                                     </Row>
                                 </Col>
                             </Row>
@@ -61,4 +54,4 @@ export const UserCard = ({user}) => {
     )
 }
 
-export default AdvisorCard;
+export default UserCard;

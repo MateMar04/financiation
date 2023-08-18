@@ -42,6 +42,7 @@ urlpatterns = [
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
     path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
     path('groups/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
+    path('user-roles-status', views.getUsersStatusRole, name='user-roles-status'),
 
     # Vehicles
     path('vehicles', views.getVehicles, name='vehicles'),

@@ -1,4 +1,4 @@
-export const getUsers = async (tokens) => {
+export const getUser = async (tokens) => {
 
     let headers = {
         "Content-Type": "application/json",
@@ -7,6 +7,32 @@ export const getUsers = async (tokens) => {
     }
 
     let response = await fetch(`/auth/users/me/`, {headers: headers})
+    let data = await response.json()
+    return data
+}
+
+export const getUsers = async (tokens) => {
+
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+
+    let response = await fetch(`/auth/users/`, {headers: headers})
+    let data = await response.json()
+    return data
+}
+
+export const getUserRoleStatus = async (tokens) => {
+
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+
+    let response = await fetch(`/api/user-roles-status`, {headers: headers})
     let data = await response.json()
     return data
 }
