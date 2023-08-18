@@ -82,15 +82,15 @@ const AddVisitPage = () => {
     }
 
     const renderIconAndInput = (IconComponent, label, name, type, required, linkText) => (
-        <Card sx={{maxWidth: '200px', maxHeight: '150px'}} >
+        <Card sx={{width: '200px', height: '150px', my: 5}}>
             <Container>
                 <Row className="justify-content-center">
                     <IconComponent sx={{fontSize: 65}}/>
                 </Row>
-                <Row className="justify-content-center">
+                <Row className='justify-content-center'>
                     <a>{linkText}</a>
                 </Row>
-                <Row>
+                <Row className='justify-content-center'>
                     {type === 'select' ? (
                         <Select
                             id={`input-${name}`}
@@ -98,6 +98,7 @@ const AddVisitPage = () => {
                             variant="standard"
                             name={name}
                             required={required}
+                            sx={{width: '100px'}}
                         />
                     ) : (
                         <TextField
@@ -107,6 +108,7 @@ const AddVisitPage = () => {
                             name={name}
                             type={type}
                             required={required}
+                            sx={{width: '100px'}}
                         />
                     )}
                 </Row>
@@ -120,9 +122,10 @@ const AddVisitPage = () => {
             <FailedModal message="la visita" show={showfail}/>
             <Form onSubmit={postVisit}>
                 <Form.Group>
-                    <Row>
+
+                    <Row className='justify-content-center'>
                         <Col>
-                            {renderIconAndInput(CalendarMonthIcon, 'Fecha de visita YYYY-MM-DD', 'visit_date', 'text', true, 'Día')}
+                            {renderIconAndInput(CalendarMonthIcon, '', 'visit_date', 'date', true, 'Día')}
                         </Col>
                         <Col>
                             {renderIconAndInput(LocationOnIcon, 'Ciudad', 'id_locality', 'select', true, 'Ciudad')}
@@ -134,29 +137,30 @@ const AddVisitPage = () => {
                             {renderIconAndInput(HourglassBottomIcon, 'Hora de fin de la jornada', 'finish_time', 'text', true)}
                         </Col>
                     </Row>
-                    <Row>
+                    <Row className='justify-content-center'>
                         <Col>
-                            <div className={'my-4'}>
+
                                 {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true, 'Distancia con cba')}
-                            </div>
+
                         </Col>
                         <Col>
-                            <div className={'my-4'}>
-                            {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true, 'Hs de viaje')}
-                            </div>
-                            </Col>
+
+                                {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true, 'Hs de viaje')}
+
+                        </Col>
                         <Col>
-                            <div className={'my-4'}>
-                            {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true, 'Registro Civil?')}
-                            </div>
-                            </Col>
+
+                                {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true, 'Registro Civil?')}
+
+                        </Col>
                         <Col>
-                            <div className={'my-4'}>
-                            {renderIconAndInput(HotelIcon, 'Introducir hospedaje int', 'accommodation', 'text', true)}
-                            </div>
-                            </Col>
+
+                                {renderIconAndInput(HotelIcon, ' int', 'accommodation', 'text', true, 'Necesito hospedaje')}
+
+                        </Col>
                     </Row>
                 </Form.Group>
+
 
                 <Container>
                     <Container>
