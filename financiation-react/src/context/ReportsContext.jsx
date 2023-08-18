@@ -55,10 +55,11 @@ export const ReportsProvider = ({children}) => {
         })
     }
 
-        let extractData = (dict) => {
+    let extractData = (dict) => {
         let arr = []
         for (const [key, value] of Object.entries(dict)) {
-            arr.push(Object.keys(value).join())
+            if (Object.keys(value).join() !== '')
+                arr.push(Object.keys(value).join())
         }
         return arr.join()
     }
