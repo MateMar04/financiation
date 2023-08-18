@@ -48,7 +48,7 @@ export const ReportsProvider = ({children}) => {
         }
     }
 
-    let decorateData = (data, type, ) => {
+    let decorateData = (data, type) => {
         data.forEach((element) => {
             element.type = type
             element.checked = false
@@ -128,7 +128,23 @@ export const ReportsProvider = ({children}) => {
 
     let getRequestsFromVisitDepsFaqs = async (tokens) => {
 
-        let deps = Object.keys(selectedMinistryDepartments).join()
+        let deps_ = Object.keys(selectedMinistryDepartments).join()
+
+        let preFaqs = []
+        for (const [key, value] of Object.entries(selectedMinistryDepartments)) {
+            preFaqs.push(Object.keys(value).join())
+        }
+        let faqs_ = preFaqs.join()
+
+        let preVisits = []
+        for (const [key, value] of Object.entries(selectedLocations)) {
+            preVisits.push(Object.keys(value).join())
+        }
+        let visits_ = preVisits.join()
+
+        console.log(deps_)
+        console.log(faqs_)
+        console.log(visits_)
 
         let headers = {
             "Content-Type": "application/json",
@@ -136,7 +152,7 @@ export const ReportsProvider = ({children}) => {
             "Accept": "application/json"
         }
 
-        let response = await fetch(`/api/reports?deps=${deps}&faqs=${faqs}&visits=${visits}`, {headers: headers})
+        let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
         let data = await response.json()
         setRequests(data)
         return data
