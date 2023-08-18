@@ -39,6 +39,12 @@ export const ReportsProvider = ({children}) => {
         }
     }
 
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(authTokens.access),
+        "Accept": "application/json"
+    }
+
     let toggle = (type, dict, e) => {
         let checkbox = e.target
         if (checkbox.checked) {
@@ -64,12 +70,8 @@ export const ReportsProvider = ({children}) => {
         return arr.join()
     }
 
-    let getMinistryDepartmentsForFilters = async (tokens) => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(tokens),
-            "Accept": "application/json"
-        }
+    let getMinistryDepartmentsForFilters = async () => {
+
         let response = await fetch('/api/ministry-departments', {headers: headers})
         let data = await response.json()
 
@@ -80,12 +82,7 @@ export const ReportsProvider = ({children}) => {
     };
 
 
-    let getLocationsForFilters = async (tokens) => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(tokens),
-            "Accept": "application/json"
-        }
+    let getLocationsForFilters = async () => {
         let response = await fetch('/api/locations', {headers: headers})
         let data = await response.json()
 
@@ -94,15 +91,10 @@ export const ReportsProvider = ({children}) => {
         return data
     };
 
-    let getVisitFromLocationsForFilters = async (tokens) => {
+    let getVisitFromLocationsForFilters = async () => {
 
         let text = Object.keys(selectedLocations).join()
 
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(tokens),
-            "Accept": "application/json"
-        }
         let response = await fetch(`/api/visits?locs=${text}`, {headers: headers})
         let data = await response.json()
 
@@ -116,15 +108,10 @@ export const ReportsProvider = ({children}) => {
         return data
     }
 
-    let getFaqFromMinistryForFilters = async (tokens) => {
+    let getFaqFromMinistryForFilters = async () => {
 
         let text = Object.keys(selectedMinistryDepartments).join()
 
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(tokens),
-            "Accept": "application/json"
-        }
         let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
         let data = await response.json()
 
@@ -135,12 +122,10 @@ export const ReportsProvider = ({children}) => {
         return data
     }
 
-    let getRequestsFromVisitDepsFaqs = async (tokens) => {
+    let getRequestsFromVisitDepsFaqs = async () => {
 
         let deps_ = Object.keys(selectedMinistryDepartments).join()
-
         let faqs_ = extractData(selectedMinistryDepartments)
-
         let visits_ = extractData(selectedLocations)
 
         console.log(deps_)
