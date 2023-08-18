@@ -70,6 +70,10 @@ export const ReportsProvider = ({children}) => {
         return arr.join()
     }
 
+    let checkText = (text) => {
+        return text !== '';
+    }
+
     let getMinistryDepartmentsForFilters = async () => {
 
         let response = await fetch('/api/ministry-departments', {headers: headers})
@@ -77,12 +81,12 @@ export const ReportsProvider = ({children}) => {
 
         decorateData(data, 'ministryDepartment');
 
-
         return data
     };
 
 
     let getLocationsForFilters = async () => {
+
         let response = await fetch('/api/locations', {headers: headers})
         let data = await response.json()
 
@@ -95,31 +99,38 @@ export const ReportsProvider = ({children}) => {
 
         let text = Object.keys(selectedLocations).join()
 
-        let response = await fetch(`/api/visits?locs=${text}`, {headers: headers})
-        let data = await response.json()
+        if (checkText(text)) {
+            let response = await fetch(`/api/visits?locs=${text}`, {headers: headers})
+            let data = await response.json()
 
-        data.forEach((element) => {
-            element.type = 'visit'
-            element.checked = selectedLocations[element.id_locality].hasOwnProperty(element.id)
-        })
+            data.forEach((element) => {
+                element.type = 'visit'
+                element.checked = selectedLocations[element.id_locality].hasOwnProperty(element.id)
+            })
 
-        setVisits(data)
+            setVisits(data)
+            return data
+        }
+        return []
 
-        return data
     }
 
     let getFaqFromMinistryForFilters = async () => {
 
         let text = Object.keys(selectedMinistryDepartments).join()
 
-        let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
-        let data = await response.json()
+        if (checkText(text)) {
 
-        decorateData(data, 'faq');
+            let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
+            let data = await response.json()
 
-        setFaqs(data)
+            decorateData(data, 'faq');
 
-        return data
+            setFaqs(data)
+
+            return data
+        }
+        return []
     }
 
     let getRequestsFromVisitDepsFaqs = async () => {
@@ -128,13 +139,12 @@ export const ReportsProvider = ({children}) => {
         let faqs_ = extractData(selectedMinistryDepartments)
         let visits_ = extractData(selectedLocations)
 
-        if (deps_ === '' || faqs_ === '' || visits === '') {
+        if (!checkText(deps_) || !checkText(faqs_) || !checkText(visits_)) {
             alert("Por favor seleccione algo en todos los campos")
         } else {
             let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
             let data = await response.json()
             setRequests(data)
-            console.log(data)
             return data
         }
 
