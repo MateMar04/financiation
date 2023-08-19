@@ -11,12 +11,6 @@ class RequestSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class AdvisedSerializer(ModelSerializer):
-    class Meta:
-        model = Advised
-        fields = '__all__'
-
-
 class VisitSerializer(ModelSerializer):
     name = SerializerMethodField()
 
@@ -24,7 +18,8 @@ class VisitSerializer(ModelSerializer):
         model = Visit
         fields = '__all__'
 
-    def get_name(self, obj):
+    @staticmethod
+    def get_name(obj):
         return f"{obj.id_locality.name} {obj.visit_date}"
 
 
@@ -36,7 +31,7 @@ class GroupSerializer(ModelSerializer):
 
 class LocalitySerializer(ModelSerializer):
     class Meta:
-        model = Locality
+        model = Location
         fields = '__all__'
 
 
@@ -88,7 +83,7 @@ User = get_user_model()
 class UserCreateSerializer(UserCreateSerializer):
     class Meta(UserCreateSerializer.Meta):
         model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
+        fields = ('id', 'email', 'first_name', 'last_name', 'ssn', 'phone_number', 'profile_picture')
 
 
 class UserAccountSerializer(ModelSerializer):
@@ -197,4 +192,3 @@ class RequestStatusSerializer(ModelSerializer):
     class Meta:
         model = RequestStatus
         fields = '__all__'
-        
