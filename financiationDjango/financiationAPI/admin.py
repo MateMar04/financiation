@@ -4,7 +4,6 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Advised)
 admin.site.register(Agreement)
 admin.site.register(CityDepartment)
 admin.site.register(MinistryDepartment)
@@ -13,7 +12,7 @@ admin.site.register(UserStatus)
 admin.site.register(VisitStatus)
 admin.site.register(Faq)
 admin.site.register(Mayor)
-admin.site.register(Locality)
+admin.site.register(Location)
 admin.site.register(Logo)
 admin.site.register(VehicleBrand)
 admin.site.register(VehicleModel)
