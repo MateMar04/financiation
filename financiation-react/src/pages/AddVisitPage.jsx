@@ -16,14 +16,14 @@ import GroupIcon from '@mui/icons-material/Group';
 import TourIcon from '@mui/icons-material/Tour';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
-import DirectionsIcon from '@mui/icons-material/Directions';
 import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import Card from '@mui/material/Card';
 import Select from "@mui/material/Select";
-import {CardContent} from "@mui/material";
-
+import {CardContent, Switch} from "@mui/material";
+import HomeWorkIcon from '@mui/icons-material/HomeWork';
+import DirectionsIcon from '@mui/icons-material/Directions';
 
 const AddVisitPage = () => {
 
@@ -116,6 +116,9 @@ const AddVisitPage = () => {
         </Card>
     );
 
+    const label = {inputProps: {'aria-label': 'Switch demo'}};
+
+
     return (
         <Container className="scrolling">
             <SucceedModal message="la visita" show={showsuccess}/>
@@ -127,36 +130,114 @@ const AddVisitPage = () => {
                         <Col>
                             {renderIconAndInput(CalendarMonthIcon, '', 'visit_date', 'date', true, 'Día')}
                         </Col>
+
                         <Col>
                             {renderIconAndInput(LocationOnIcon, 'Ciudad', 'id_locality', 'select', true, 'Ciudad')}
                         </Col>
                         <Col>
-                            {renderIconAndInput(HourglassBottomIcon, 'Hora de inicio de la jornada', 'start_time', 'text', true, 'Horario de la jornada')}
+                            {renderIconAndInput(HomeWorkIcon, '', 'place_name', 'text', true, 'Nombre del lugar')}
                         </Col>
                         <Col>
-                            {renderIconAndInput(HourglassBottomIcon, 'Hora de fin de la jornada', 'finish_time', 'text', true)}
+                            {renderIconAndInput(DirectionsIcon, '', 'direction', 'text', true, 'Direccion del lugar')}
                         </Col>
                     </Row>
                     <Row className='justify-content-center'>
                         <Col>
+                            <Card sx={{width: '200px', height: '150px', my: 5}}>
+                                <Container>
+                                    <Row className="justify-content-center">
+                                        <HourglassBottomIcon sx={{fontSize: 65}}/>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <a>{'Horario de la jornada'}</a>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <Col>
+                                            <TextField
+                                                id={'start_time'}
+                                                name={'start_time'}
+                                                required
+                                                sx={{width: '50px'}}
+                                            />
+                                        </Col>
+                                        <Col>
+                                            <a>a</a>
+                                        </Col>
+                                        <Col>
+                                            <TextField
+                                                id={'finish_time'}
+                                                name={'finish_time'}
+                                                required
+                                                sx={{width: '50px'}}
 
-                                {renderIconAndInput(DriveEtaIcon, 'Distancia int', 'distance', 'number', true, 'Distancia con cba')}
+                                            />
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Card>
+                        </Col>
+                        <Col>
+
+                            {renderIconAndInput(DriveEtaIcon, '', 'distance', 'number', true, 'Distancia con cba')}
 
                         </Col>
                         <Col>
 
-                                {renderIconAndInput(QueryBuilderIcon, 'Tiempo de viaje int', 'travel_time', 'number', true, 'Hs de viaje')}
+                            {renderIconAndInput(QueryBuilderIcon, '', 'travel_time', 'number', true, 'Hs de viaje')}
 
                         </Col>
                         <Col>
 
-                                {renderIconAndInput(AssignmentIndIcon, 'Registro Civil int', 'civil_registration', 'text', true, 'Registro Civil?')}
+                            <Card sx={{width: '200px', height: '150px', my: 5}}>
+                                <Container>
+                                    <Row className="justify-content-center">
+                                        <AssignmentIndIcon sx={{fontSize: 65}}/>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <a>{'Necesita registro civil'}</a>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <Col>
+                                            <a>No</a>
+                                        </Col>
+                                        <Col>
+                                             <Switch {...label} defaultChecked name={'civil_registration'}/>
+                                        </Col>
+                                        <Col>
+                                            <a>Si</a>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Card>
+
 
                         </Col>
+                    </Row>
+
+                    <Row className='justify-content-center'>
+
                         <Col>
-
-                                {renderIconAndInput(HotelIcon, ' int', 'accommodation', 'text', true, 'Necesito hospedaje')}
-
+                            <Card sx={{width: '200px', height: '150px', my: 5}}>
+                                <Container>
+                                    <Row className="justify-content-center">
+                                        <HotelIcon sx={{fontSize: 65}}/>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <a>{'Necesita hospedaje'}</a>
+                                    </Row>
+                                    <Row className='justify-content-center text-center'>
+                                        <Col>
+                                            <a>No</a>
+                                        </Col>
+                                        <Col>
+                                             <Switch {...label}  name={'accommodation'}/>
+                                        </Col>
+                                        <Col>
+                                            <a>Si</a>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </Card>
                         </Col>
                     </Row>
                 </Form.Group>
