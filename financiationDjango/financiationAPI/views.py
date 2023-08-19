@@ -54,7 +54,7 @@ class VisitApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        locality = Locality.objects.get(id=data['id_locality'])
+        locality = Location.objects.get(id=data['id_locality'])
         group = Group.objects.get(id=data['id_group'])
         visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
         contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
@@ -393,7 +393,7 @@ def getAdvisee(request, id):
 
 @api_view(['GET'])
 def getLocations(request):
-    localities = Locality.objects.all()
+    localities = Location.objects.all()
     serializer = LocalitySerializer(localities, many=True)
     return Response(serializer.data)
 
