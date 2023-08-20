@@ -10,6 +10,8 @@ import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import ReportsContext from "../context/ReportsContext";
+import {ReportsProvider} from "../context/ReportsContext";
+
 
 export const ReportsPage = () => {
 
@@ -42,49 +44,51 @@ export const ReportsPage = () => {
     }, [])
 
     return (
-        <Container fluid>
+        <ReportsProvider>
             <Container fluid>
-                <Row>
-                    <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
-                    </Col>
-                    <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Departamentos" items={ministryDepartments} tokens={authTokens.access}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Visitas" items={Object.values(visits)} tokens={authTokens.access}/>
-                    </Col>
-                    <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
-                    </Col>
-                </Row>
+                <Container fluid>
+                    <Row>
+                        <Col lg={6} className='filters-column'>
+                            <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
+                        </Col>
+                        <Col lg={6} className='filters-column'>
+                            <ReportFilterCard title="Departamentos" items={ministryDepartments}
+                                              tokens={authTokens.access}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={6} className='filters-column'>
+                            <ReportFilterCard title="Visitas" items={Object.values(visits)} tokens={authTokens.access}/>
+                        </Col>
+                        <Col lg={6} className='filters-column'>
+                            <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
+                        </Col>
+                    </Row>
+                </Container>
+                <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}>Generar</Button>
+
+                <hr/>
+
+                <Container fluid>
+                    <Row>
+                        <Col lg={6} className='chart-column'>
+                            <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
+                        </Col>
+                        <Col lg={6} className='chart-column'>
+                            <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={6} className='chart-column'>
+                            <ReportChartCard title="Motivos" chart={<PieChart chartData={data}/>}/>
+                        </Col>
+                        <Col lg={6} className='chart-column'>
+                            <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
+                        </Col>
+                    </Row>
+                </Container>
             </Container>
-            <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}>Generar</Button>
-
-            <hr/>
-
-            <Container fluid>
-                <Row>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
-                    </Col>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Motivos" chart={<PieChart chartData={data}/>}/>
-                    </Col>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
-                    </Col>
-                </Row>
-            </Container>
-        </Container>
-
+        </ReportsProvider>
     )
 }
 
