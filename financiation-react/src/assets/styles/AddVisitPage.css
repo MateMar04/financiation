@@ -8,15 +8,12 @@
     border-radius: 25px;
 }
 
-body {
-    font-family: "Poppins";
-}
 
 .CardVisit{
-    width: 220px;
-    height: 200px;
-    background-color: #f4f4f4;
-    border-radius: 40px;
+    width: 220px !important;
+    height: 200px !important;
+    background-color: #f4f4f4 !important;
+    border-radius: 40px !important;
 }
 
 .h1NuevaVisita{

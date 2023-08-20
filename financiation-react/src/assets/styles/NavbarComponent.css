@@ -1,5 +1,5 @@
 #navbarcs {
-    background-color: #1fa4e6;
+    background-color: #ebf1f4;
     max-height: 20%;
 }
 
@@ -14,4 +14,15 @@
 .navLinkLogin {
     position: absolute;
     right: 20px;
+}
+
+.BtnNavBar{
+    color: #53A6DC;
+}
+.aNavBar{
+    color: #53A6DC;
+}
+
+* {
+    font-family: "Poppins";
 }
