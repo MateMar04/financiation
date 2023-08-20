@@ -66,7 +66,7 @@ DOMAIN = ('localhost:3000')
 SITE_NAME = ('Dragoncitos Financieros Moviles')
 
 DJOSER = {
-    'LOGIN_FIELD': 'username',
+    'LOGIN_FIELD': 'ssn',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,

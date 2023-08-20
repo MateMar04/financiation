@@ -129,12 +129,12 @@ class ContactedReferrer(models.Model):
 
 
 class UserAccountManager(BaseUserManager):
-    def create_user(self, username, email, first_name, last_name, ssn, phone_number, password=None):
+    def create_user(self, email, first_name, last_name, ssn, phone_number, password=None):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
+        user = self.model(email=email, first_name=first_name, last_name=last_name, ssn=ssn,
                           phone_number=phone_number)
 
         user.set_password(password)
@@ -142,13 +142,13 @@ class UserAccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, username, email, first_name, last_name, ssn, phone_number, profile_picture,
+    def create_superuser(self, email, first_name, last_name, ssn, phone_number, profile_picture,
                          password=None, is_staff=True, is_superuser=True):
         if not email:
             raise ValueError("Users must have an email address")
 
         email = self.normalize_email(email)
-        user = self.model(username=username, email=email, first_name=first_name, last_name=last_name, ssn=ssn,
+        user = self.model(email=email, first_name=first_name, last_name=last_name, ssn=ssn,
                           is_staff=is_staff, phone_number=phone_number, is_superuser=is_superuser,
                           profile_picture=profile_picture)
 
