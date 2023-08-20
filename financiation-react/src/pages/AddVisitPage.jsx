@@ -13,9 +13,9 @@ import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import DistanceLogo from '../assets/images/distance.png';
-import TimeIcon from '../assets/images/timeicon.png';
 import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
+import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
+import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
 
 const AddVisitPage = () => {
 
@@ -198,7 +198,7 @@ const AddVisitPage = () => {
                                     <CardContent>
                                     <Container>
                                         <Row className="justify-content-center">
-                                            <img src={DistanceLogo} style={{width: 80}}/>
+                                            <SocialDistanceOutlinedIcon sx={{fontSize: 65}}/>
                                         </Row>
                                         <Row className='justify-content-center text-center'>
                                             <a>{'Distancia'}</a>
@@ -217,7 +217,7 @@ const AddVisitPage = () => {
                                     <CardContent>
                                     <Container>
                                         <Row className="justify-content-center">
-                                            <img src={TimeIcon} style={{width: 60}}/>
+                                            <HistoryToggleOffOutlinedIcon sx={{fontSize: 65}}/>
                                         </Row>
                                         <Row className='justify-content-center text-center'>
                                             <a>{'Tiempo de Viaje'}</a>
@@ -244,7 +244,7 @@ const AddVisitPage = () => {
                                         </Row>
                                         <Row className='justify-content-center text-center'>
                                             <Col>
-                                                <TextField id="standard-basic" label="" variant="standard"/>
+                                                <Switch id="standard-basic" label="" variant="standard"/>
                                             </Col>
                                         </Row>
                                     </Container>
