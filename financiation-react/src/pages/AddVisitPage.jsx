@@ -9,14 +9,10 @@ import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 import HotelIcon from '@mui/icons-material/Hotel';
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
-import GroupIcon from '@mui/icons-material/Group';
-import TourIcon from '@mui/icons-material/Tour';
-import HandshakeIcon from '@mui/icons-material/Handshake';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
+
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import Card from '@mui/material/Card';
@@ -24,6 +20,7 @@ import Select from "@mui/material/Select";
 import {CardContent, Switch} from "@mui/material";
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import DirectionsIcon from '@mui/icons-material/Directions';
+import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon';
 
 const AddVisitPage = () => {
 
@@ -238,6 +235,11 @@ const AddVisitPage = () => {
                                     </Row>
                                 </Container>
                             </Card>
+                        </Col>
+                        <Col>
+
+                            {renderIconAndInput(InsertEmoticonIcon, '', 'colaborador_finanzas', 'select', true, 'Colaborador finanzas')}
+
                         </Col>
                     </Row>
                 </Form.Group>
