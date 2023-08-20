@@ -464,7 +464,7 @@ def getUsers(request):
 
 @api_view(['GET'])
 def getVehicles(request):
-    vehicles = Vehicles.objects.all()
+    vehicles = Vehicle.objects.all()
     serializer = VehiclesSerializer(vehicles, many=True)
     return Response(serializer.data)
 
