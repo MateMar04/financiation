@@ -23,6 +23,9 @@
     color: #53A6DC;
 }
 
+.ImgNavBar{
+    padding-left: 10%;
+}
 * {
     font-family: "Poppins";
 }
