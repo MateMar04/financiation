@@ -57,6 +57,7 @@ class Faq(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+
 class Why(models.Model):
     name = models.TextField()
 
@@ -75,14 +76,6 @@ class Mayor(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=70)
     department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
-
-    def __str__(self):
-        return f"{self.name}"
-
-
-class Logo(models.Model):
-    name = models.CharField(max_length=30)
-    description = models.TextField()
 
     def __str__(self):
         return f"{self.name}"
@@ -200,7 +193,7 @@ class Group(models.Model):
         return f"{self.name}"
 
 
-class Vehicles(models.Model):
+class Vehicle(models.Model):
     plate = models.ForeignKey(VehiclePlate, models.DO_NOTHING)
     brand = models.ForeignKey(VehicleBrand, models.DO_NOTHING)
     model = models.ForeignKey(VehicleModel, models.DO_NOTHING)
