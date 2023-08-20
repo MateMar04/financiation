@@ -59,12 +59,6 @@ class AddressSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class LogoSerializer(ModelSerializer):
-    class Meta:
-        model = Logo
-        fields = '__all__'
-
-
 class MinistryDepartmentSerializer(ModelSerializer):
     class Meta:
         model = MinistryDepartment
@@ -94,7 +88,7 @@ class UserAccountSerializer(ModelSerializer):
 
 class VehiclesSerializer(ModelSerializer):
     class Meta:
-        model = Vehicles
+        model = Vehicle
         fields = '__all__'
 
 
