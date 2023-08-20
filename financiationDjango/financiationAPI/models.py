@@ -52,7 +52,13 @@ class VisitStatus(models.Model):
 
 class Faq(models.Model):
     name = models.TextField()
-    ministry_department = models.ManyToManyField(MinistryDepartment)
+    ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.name}"
+
+class Why(models.Model):
+    name = models.TextField()
 
     def __str__(self):
         return f"{self.name}"
@@ -123,6 +129,7 @@ class Role(models.Model):
 class ContactedReferrer(models.Model):
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
+    position = models.TextField()
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
@@ -167,7 +174,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
-    profile_picture = models.ImageField(default=None)
+    profile_picture = models.BinaryField()
     role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
@@ -203,23 +210,27 @@ class Vehicles(models.Model):
 
 
 class Visit(models.Model):
-    flyer = models.IntegerField()
-    distance = models.IntegerField()
-    travel_time = models.IntegerField()
-    visit_date = models.DateField()
-    civil_registration = models.BooleanField()
-    accommodation = models.BooleanField()
-    modernization_fund = models.BooleanField()
-    start_time = models.DateTimeField()
-    finish_time = models.DateTimeField()
-    place_name = models.CharField(max_length=70)
     location = models.ForeignKey(Location, models.DO_NOTHING)
-    group = models.ForeignKey(Group, models.DO_NOTHING)
-    visit_status = models.ForeignKey(VisitStatus, models.DO_NOTHING)
-    agreement = models.ManyToManyField(Agreement)
-    contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
+    visit_date = models.DateField()
+    start_time = models.TimeField()
+    finish_time = models.TimeField()
+    flyer = models.BooleanField()
+    finance_collaborator = models.ManyToManyField(UserAccount, related_name='finance_collaborator')
+    rent_collaborator = models.ManyToManyField(UserAccount, related_name='rent_collaborator')
+    rent_observations = models.TextField()
+    distance = models.IntegerField()
+    travel_time = models.TimeField()
+    civil_registration = models.BooleanField()
+    place_name = models.CharField(max_length=70)
     address = models.ForeignKey(Address, models.DO_NOTHING)
-    logo = models.ManyToManyField(Logo)
+    contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
+    accommodation = models.BooleanField()
+    politic_party = models.ForeignKey(PoliticParty, models.DO_NOTHING)
+    mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+    agreement = models.ManyToManyField(Agreement)
+    modernization_fund = models.BooleanField()
+    visit_status = models.ForeignKey(VisitStatus, models.DO_NOTHING)
+    group = models.ForeignKey(Group, models.DO_NOTHING)
 
     def __str__(self):
         return f"Visit to {self.location}"
@@ -252,10 +263,11 @@ class Advisor(models.Model):
 
 
 class Request(models.Model):
+    datatime = models.DateTimeField()
     visit = models.ForeignKey(Visit, models.DO_NOTHING)
-    advisor = models.ForeignKey(Advisor, models.DO_NOTHING)
-    ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
+    why = models.ForeignKey(Why, models.DO_NOTHING)
+    advisor = models.ForeignKey(Advisor, models.DO_NOTHING)
     status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
 
     def __str__(self):
@@ -263,7 +275,7 @@ class Request(models.Model):
 
 
 class ContactedReferrerEmail(models.Model):
-    mail = models.CharField(max_length=100)
+    mail = models.EmailField()
     contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
 
     def __str__(self):
@@ -271,15 +283,15 @@ class ContactedReferrerEmail(models.Model):
 
 
 class MayorPhone(models.Model):
-    phone = models.BigIntegerField()
+    phone_number = models.BigIntegerField()
     mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
     def __str__(self):
-        return f"Request {self.phone}"
+        return f"Request {self.phone_number}"
 
 
 class MayorEmail(models.Model):
-    mail = models.CharField(max_length=100)
+    mail = models.EmailField()
     mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
 
     def __str__(self):
@@ -287,8 +299,8 @@ class MayorEmail(models.Model):
 
 
 class ContactedReferrerPhone(models.Model):
-    phone = models.BigIntegerField()
+    phone_number = models.BigIntegerField()
     contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
 
     def __str__(self):
-        return f"Request {self.phone}"
+        return f"Request {self.phone_number}"
