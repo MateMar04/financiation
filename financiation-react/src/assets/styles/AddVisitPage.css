@@ -1,0 +1,24 @@
+.Background {
+    background-color: #f4f4f4;
+
+}
+
+.MiniContainerVisit {
+    background-color: white;
+    border-radius: 25px;
+}
+
+body {
+    font-family: "Poppins";
+}
+
+.CardVisit{
+    width: 220px;
+    height: 200px;
+    background-color: #f4f4f4;
+    border-radius: 40px;
+}
+
+.h1NuevaVisita{
+    color: #0d0d0d;
+}
