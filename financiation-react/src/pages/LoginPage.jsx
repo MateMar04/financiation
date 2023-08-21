@@ -14,8 +14,8 @@ const LoginPage = () => {
             </Container>
             <Form onSubmit={loginUser}>
                 <Container>
-                    <FloatingLabel className='floatingLabel' label="Usuario">
-                        <Form.Control placeholder="Usuario" type="text" name="username" required/>
+                    <FloatingLabel className='floatingLabel' label="Cuil">
+                        <Form.Control placeholder="Cuil" type="text" name="ssn" required/>
                     </FloatingLabel>
                 </Container>
                 <Container>

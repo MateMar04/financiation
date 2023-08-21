@@ -28,11 +28,6 @@ const SigninPage = () => {
 
                     <Row className='justify-content-md-center'>
                         <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Usuario">
-                                <Form.Control placeholder="Usuario" type="text" name='username' required/>
-                            </FloatingLabel>
-                        </Col>
-                        <Col lg="5" className='input-required'>
                             <FloatingLabel className='floatingLabel' label="DNI">
                                 <Form.Control placeholder="DNI" type="number" name='ssn' required/>
                             </FloatingLabel>
