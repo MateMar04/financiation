@@ -20,7 +20,7 @@ class VisitSerializer(ModelSerializer):
 
     @staticmethod
     def get_name(obj):
-        return f"{obj.id_locality.name} {obj.visit_date}"
+        return f"{obj.location.name} {obj.visit_date}"
 
 
 class GroupSerializer(ModelSerializer):
@@ -29,7 +29,7 @@ class GroupSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class LocalitySerializer(ModelSerializer):
+class LocationsSerializer(ModelSerializer):
     class Meta:
         model = Location
         fields = '__all__'
