@@ -1,4 +1,3 @@
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -17,20 +16,18 @@ class RequestApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        visit = Visit.objects.get(id=data['id_visit'])
-        advised = Advised.objects.get(id=data['id_advised'])
-        advisor = Advisor.objects.get(id=data['id_advisor'])
-        ministryDepartment = MinistryDepartment.objects.get(id=data['id_ministry_department'])
-        faq = Faq.objects.get(id=data['id_faq'])
-        requestStatus = RequestStatus.objects.get(id=data['id_status'])
+        visit = Visit.objects.get(id=data['visit_id'])
+        advisor = Advisor.objects.get(id=data['advisor_id'])
+        ministryDepartment = MinistryDepartment.objects.get(id=data['ministry_department_id'])
+        faq = Faq.objects.get(id=data['faq_id'])
+        requestStatus = RequestStatus.objects.get(id=data['status_id'])
 
         request = Request.objects.create(
-            id_visit=visit,
-            id_advised=advised,
-            id_advisor=advisor,
-            id_ministry_department=ministryDepartment,
-            id_faq=faq,
-            id_status=requestStatus,
+            visit_id=visit,
+            advisor_id=advisor,
+            ministry_department_id=ministryDepartment,
+            faq_id=faq,
+            status_id=requestStatus,
         )
 
         serializer = RequestSerializer(request, many=False)
@@ -45,7 +42,9 @@ class VisitApiView(APIView):
         if isinstance(locations_ids, type(None)):
             visits = Visit.objects.all()
         else:
-            visits = Visit.objects.raw('SELECT * FROM "financiationAPI_visit" WHERE id_locality_id IN %s',
+            visits = Visit.objects.raw("SELECT * "
+                                       "FROM \"financiationAPI_visit\" "
+                                       "WHERE location_id IN %s",
                                        [locations_ids])
 
         serializer = VisitSerializer(visits, many=True)
@@ -54,11 +53,11 @@ class VisitApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        locality = Location.objects.get(id=data['id_locality'])
-        group = Group.objects.get(id=data['id_group'])
-        visit_status = VisitStatus.objects.get(id=data['id_visit_status'])
-        contacted_referrer = ContactedReferrer.objects.get(id=data['id_contacted_referrer'])
-        address = Address.objects.get(id=data['id_address'])
+        location = Location.objects.get(id=data['location_id'])
+        group = Group.objects.get(id=data['group_id'])
+        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
+        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+        address = Address.objects.get(id=data['address_id'])
 
         visit = Visit.objects.create(
             flyer=data['flyer'],
@@ -71,40 +70,18 @@ class VisitApiView(APIView):
             start_time=data['start_time'],
             finish_time=data['finish_time'],
             place_name=data['place_name'],
-            id_locality=locality,
-            id_group=group,
-            id_visit_status=visit_status,
-            id_contacted_referrer=contacted_referrer,
-            id_address=address,
+            location_id=location,
+            group_id=group,
+            visit_status_id=visit_status,
+            contacted_referrer_id=contacted_referrer,
+            address_id=address,
         )
 
-        for i in data['id_agreement']:
+        for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
-            visit.id_agreement.add(agreement)
-
-        for j in data['id_logo']:
-            logo = Logo.objects.get(id=j)
-            visit.id_logo.add(logo)
+            visit.agreement_id.add(agreement)
 
         serializer = VisitSerializer(visit, many=False)
-        return Response(serializer.data)
-
-
-class AdiviseeApiView(APIView):
-
-    def get(self, request, *args, **kwargs):
-        advised = Advised.objects.all()
-        serializer = AdvisedSerializer(advised, many=True)
-        return Response(serializer.data)
-
-    def post(self, request, *args, **kwargs):
-        data = request.data
-        advised = Advised.objects.create(
-            first_name=data['first_name'],
-            last_name=data['last_name'],
-            ssn=data['ssn']
-        )
-        serializer = AdvisedSerializer(advised, many=False)
         return Response(serializer.data)
 
 
@@ -133,12 +110,12 @@ class CoordinatorApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        user = UserAccount.objects.get(id=data['id_user'])
-        group = Group.objects.get(id=data['id_group'])
+        user = UserAccount.objects.get(id=data['user_id'])
+        group = Group.objects.get(id=data['group_id'])
 
         coordinator = Coordinator.objects.create(
-            id_user=user,
-            id_group=group
+            user_id=user,
+            group_id=group
         )
 
         serializer = CoordinatorSerializer(coordinator, many=False)
@@ -154,12 +131,12 @@ class AdvisorApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        user = UserAccount.objects.get(id=data['id_user'])
-        group = Group.objects.get(id=data['id_group'])
+        user = UserAccount.objects.get(id=data['user_id'])
+        group = Group.objects.get(id=data['group_id'])
 
         advisor = Advisor.objects.create(
-            id_user=user,
-            id_group=group,
+            user_id=user,
+            group_id=group,
         )
 
         serializer = AdvisorSerializer(advisor, many=False)
@@ -167,234 +144,9 @@ class AdvisorApiView(APIView):
 
 
 @api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        {
-            'Endpoint': '/api/advised/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an array of advised'
-        },
-        {
-            'Endpoint': '/api/advised/id/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an advised'
-        },
-        {
-            'Endpoint': '/auth/jwt/verify',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': '',
-                'new_password': '',
-                're_new_password': ''
-            },
-            'description': 'Authenticates the user account'
-        },
-        {
-            'Endpoint': '/auth/users/me/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns the user account'
-        },
-        {
-            'Endpoint': '/auth/users/id/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an user account'
-        },
-        {
-            'Endpoint': '/auth/users/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'first_name': '',
-                'last_name': '',
-                'email': '',
-                'ssn': '',
-                'username': '',
-                'phone_number': '',
-                'password': '',
-                're_password': ''
-            },
-            'description': 'Creates an Account'
-        },
-        {
-            'Endpoint': '/auth/users/activation/uid/token/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': ''
-            },
-            'description': 'Activates an Account'
-        },
-        {
-            'Endpoint': '/auth/jwt/create/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'username': '',
-                'password': '',
-            },
-            'description': 'Returns a new JWT'
-        },
-        {
-            'Endpoint': '/auth/jwt/refresh/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'refresh': ''
-            },
-            'description': 'Returns a new access token'
-        },
-        {
-            'Endpoint': '/auth/users/reset_password/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'username': '',
-                'email': ''
-            },
-            'description': 'Sends an email to reset password'
-        },
-        {
-            'Endpoint': 'auth/users/reset_password_confirm/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': '',
-                'new_password': '',
-                're_new_password': ''
-            },
-            'description': 'Resets account password'
-        },
-        {
-            'Endpoint': '/api/visit/add',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'flyer': '',
-                'distance': '',
-                'travel_time': '',
-                'visit_date': '',
-                'civil_registration': '',
-                'accommodation': '',
-                'modernization_fund': '',
-                'start_time': '',
-                'finish_time': '',
-                'place_name': '',
-                'id_locality': '',
-                'id_group': '',
-                'id_visit_status': '',
-                'id_agreement': '',
-                'id_contacted_referrer': '',
-                'id_address': '',
-                'id_logo': ''
-            },
-            'description': 'Adds a visit'
-        },
-        {
-            'Endpoint': '/api/group/add',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'name': ''
-            },
-            'description': 'Adds a visit'
-        },
-        {
-            'Endpoint': 'api/request/add/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'id_visit': '',
-                'id_advised': '',
-                'id_advisor': '',
-                'id_ministry_department': '',
-                'id_faq': '',
-                'id_status': ''
-            },
-            'description': 'Sends a request'
-        },
-    ]
-    return Response(routes)
-
-
-@api_view(['GET'])
-def getAdvisee(request, id):
-    advised = Advised.objects.get(id=id)
-    serializer = AdvisedSerializer(advised, many=False)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
 def getLocations(request):
-    localities = Location.objects.all()
-    serializer = LocalitySerializer(localities, many=True)
+    locations = Location.objects.all()
+    serializer = LocationsSerializer(locations, many=True)
     return Response(serializer.data)
 
 
@@ -413,7 +165,10 @@ def getMinistryDepartmentFaqs(request):
         faqs = Faq.objects.all()
     else:
         faqs = Faq.objects.raw(
-            'SELECT F.id FROM "financiationAPI_faq" as F INNER JOIN "financiationAPI_faq_id_ministry_department" FMD on F.id = FMD.faq_id WHERE ministrydepartment_id in %s group by F.id',
+            "SELECT F.id "
+            "FROM \"financiationAPI_faq\" AS F "
+            "WHERE ministry_department_id IN (1) "
+            "GROUP BY F.id",
             [ministry_ids])
 
     serializer = FaqSerializer(faqs, many=True)
@@ -445,13 +200,6 @@ def getContactedReferrers(request):
 def getAddresses(request):
     addresses = Address.objects.all()
     serializer = AddressSerializer(addresses, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getLogos(request):
-    logos = Logo.objects.all()
-    serializer = LogoSerializer(logos, many=True)
     return Response(serializer.data)
 
 
@@ -583,14 +331,14 @@ def getRequestStatuses(request):
 
 @api_view(['GET'])
 def getGroupAdvisors(request, id):
-    advisors = Advisor.objects.filter(id_group__id=id)
+    advisors = Advisor.objects.filter(group_id__id=id)
     serializer = AdvisorSerializer(advisors, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getGroupCoordinators(request, id):
-    coordinators = Coordinator.objects.filter(id_group__id=id)
+    coordinators = Coordinator.objects.filter(group_id__id=id)
     serializer = CoordinatorSerializer(coordinators, many=True)
     return Response(serializer.data)
 
@@ -611,20 +359,23 @@ def getCoordinatorUsers(request):
 
 @api_view(['GET'])
 def getGroupCoordinatorUsers(request, id):
-    users = User.objects.filter(coordinator__id_group__id=id)
+    users = User.objects.filter(coordinator__group_id__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
 def getReport(request):
-    ministry_departments_ids = parse_and_convert(request.GET.getlist('deps'))
     faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
     visits_ids = parse_and_convert(request.GET.getlist('visits'))
 
     requests = Request.objects.raw(
-        'SELECT * FROM "financiationAPI_request" WHERE id_visit_id IN %s AND id_ministry_department_id IN %s AND id_faq_id IN %s',
-        [visits_ids, ministry_departments_ids, faqs_ids])
+        "SELECT * "
+        "FROM \"financiationAPI_request\" AS R "
+        "INNER JOIN \"financiationAPI_faq\" AS F ON R.faq_id = F.id "
+        "WHERE R.visit_id IN %s "
+        "AND R.faq_id IN %s",
+        [visits_ids, faqs_ids])
     print(requests)
     serializer = RequestSerializer(requests, many=True)
     return Response(serializer.data)
@@ -632,7 +383,7 @@ def getReport(request):
 
 @api_view(['GET'])
 def getGroupAdvisorUsers(request, id):
-    users = User.objects.filter(advisor__id_group__id=id)
+    users = User.objects.filter(advisor__group_id__id=id)
     serializer = UserAccountSerializer(users, many=True)
     return Response(serializer.data)
 
