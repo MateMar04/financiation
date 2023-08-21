@@ -814,16 +814,27 @@ class Migration(migrations.Migration):
             "AND mod(M.id, 3) = mod(PP.id, 3)"
             "AND mod(PP.id, 3) = mod(VS.id, 3)) as d"),
 
-        migrations.RunSQL("SELECT A.id, F.id, RS.id, V.id, W.id "
-                          "FROM \"financiationAPI_advisor\" as A, "
-                          "\"financiationAPI_faq\" as F, "
-                          "\"financiationAPI_requeststatus\" as RS, "
-                          "\"financiationAPI_visit\" as V, "
-                          "\"financiationAPI_why\" as W "
-                          "WHERE mod(A.id, 3) = mod(F.id, 3)"
-                          "AND mod(F.id, 3) = mod(RS.id, 3)"
-                          "AND mod(RS.id, 3) = mod(V.id, 3)"
-                          "AND mod(V.id, 3) = mod(W.id, 3)")
+        migrations.RunSQL(
+            "INSERT INTO \"financiationAPI_request\" (datatime, advisor_id, faq_id, status_id, visit_id, why_id)"
+            "select request_datatime, advisor_id, faq_id, status_id, visit_id, why_id "
+            "from (SELECT V.visit_date + V.finish_time                                                as finish_time,"
+            "(V.visit_date + V.start_time) + interval '1.5 min' *"
+            "row_number() over (partition by V.id, W.id) as request_datatime,"
+            "A.id                                                                        as advisor_id,"
+            "F.id                                                                        as faq_id,"
+            "RS.id                                                                       as status_id,"
+            "V.id                                                                        as visit_id,"
+            "W.id                                                                        as why_id "
+            "FROM \"financiationAPI_advisor\" as A, "
+            " \"financiationAPI_faq\" as F, "
+            " \"financiationAPI_requeststatus\" as RS, "
+            " \"financiationAPI_visit\" as V, "
+            " \"financiationAPI_why\" as W "
+            "WHERE mod(A.id, 3) = mod(F.id, 3) "
+            "AND mod(F.id, 3) = mod(RS.id, 3) "
+            "AND mod(RS.id, 3) = mod(V.id, 3) "
+            "AND mod(V.id, 3) = mod(W.id, 3)) as d "
+            "where d.finish_time > d.request_datatime")
     ]
     dependencies = [
         ('financiationAPI', '0002_locations'),
