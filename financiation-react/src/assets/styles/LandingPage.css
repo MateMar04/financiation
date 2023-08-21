@@ -1,13 +1,8 @@
 
-
-.verifyimg {
-    width: 200px;
-    height: 115px;
-}
-
 .ImgLogoFinanzasLanding {
     width: 200px;
     height: 60px;
+
 }
 
 
@@ -15,7 +10,7 @@
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow-y: hidden;
 
 }
 
@@ -26,6 +21,7 @@
   width: 100%;
   height: 100%;
     overflow: hidden;
+    overflow-y: hidden;
 }
 
 .imagen-diagonal {
@@ -33,8 +29,9 @@
   height: 100%;
   object-fit: cover;
   clip-path: polygon(0 0, 70% 0, 38% 100%, 0% 100%);
+    overflow-y: hidden;
 
 }
 .stopScrolling{
-    overflow: hidden;
+    overflow-y: hidden;
 }
