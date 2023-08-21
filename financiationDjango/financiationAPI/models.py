@@ -256,7 +256,7 @@ class Advisor(models.Model):
 
 
 class Request(models.Model):
-    datatime = models.DateTimeField()
+    request_datatime = models.DateTimeField()
     visit = models.ForeignKey(Visit, models.DO_NOTHING)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)
