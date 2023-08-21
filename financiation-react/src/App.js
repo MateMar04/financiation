@@ -26,12 +26,15 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React from 'react';
+import {ReportsProvider} from "./context/ReportsContext";
 
 function App() {
     return (
         <Router>
             <div className="App">
                 <AuthProvider>
+                    <ReportsProvider>
+
                         <Navbar/>
                         <Routes>
                             <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
@@ -69,6 +72,8 @@ function App() {
                             <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
                         </Routes>
+                    </ReportsProvider>
+
                 </AuthProvider>
             </div>
         </Router>

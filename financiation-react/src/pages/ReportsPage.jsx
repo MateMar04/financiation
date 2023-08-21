@@ -44,7 +44,6 @@ export const ReportsPage = () => {
     }, [])
 
     return (
-        <ReportsProvider>
             <Container fluid>
                 <Container fluid>
                     <Row>
@@ -88,7 +87,6 @@ export const ReportsPage = () => {
                     </Row>
                 </Container>
             </Container>
-        </ReportsProvider>
     )
 }
 
