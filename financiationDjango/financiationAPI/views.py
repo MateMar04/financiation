@@ -40,7 +40,7 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()
+            visits = Visit.objects.all()[:100]
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
@@ -162,7 +162,7 @@ def getMinistryDepartmentFaqs(request):
     ministry_ids = parse_and_convert(request.GET.getlist('deps'))
 
     if isinstance(ministry_ids, type(None)):
-        faqs = Faq.objects.all()
+        faqs = Faq.objects.all()[:100]
     else:
         faqs = Faq.objects.raw(
             "SELECT F.id "
