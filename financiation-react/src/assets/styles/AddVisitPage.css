@@ -18,5 +18,19 @@
 
 .h1NuevaVisita{
     color: #0d0d0d;
-    padding: 15px;
+}
+
+.carousel-indicators {
+  bottom: -20px;
+}
+
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -23%;
+}
+
+.carousel-button {
+  border-radius: 25px;
+  margin: 0 5px;
 }

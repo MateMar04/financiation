@@ -67,13 +67,11 @@ const NavbarComponent = () => {
                                                 </Row>
                                                 <Row className={'justify-content-center text-center'}>
                                                     <Link to="/me/">
-                                                        <small className={'aNavBar'}>Ver perfil</small>
+                                                        <a className={'aNavBar'}>Ver perfil</a>
                                                     </Link>
                                                 </Row>
                                             </Col>
-                                            <Col>
-                                                 <Button  onClick={logoutUser}/>
-                                            </Col>
+
                                         </Row>
                                     </div>
                                 </Col>
