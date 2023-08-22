@@ -1,42 +1,45 @@
-import React, {useEffect} from "react";
+import React from "react";
 import '../assets/styles/LandingPage.css'
 import imagenPanal from "../assets/images/panal.jpg";
 import Logo from "../assets/images/LOGOGOBIERNO.png";
 import {Button, Container, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 
-
 const LandingPage = () => {
-    useEffect(() => {
-        document.body.classList.add("landing-page-body");
-        return () => {
-            document.body.classList.remove("landing-page-body");
-        };
-    }, []);
-
     return (
         <div className="landing-page">
             <Container fluid className="containerLanding">
                 <Row>
-                    <Col md={10}>
+                    <Col md={8} className="imagen">
                         <img src={imagenPanal} alt="" className="imagen-diagonal"/>
                     </Col>
-                    <Col className={'overlay-content'} md={3}>
-
-                        <img src={Logo} className="ImgLogoFinanzasLanding"/>
-
-                        <p>Si ya tienes una cuenta puedes iniciar sesión</p>
-                        <Link to='/login/'><Button>Iniciar Sesión</Button></Link>
-                        <p>Si no tienes una cuenta puedes crearte una</p>
-                        <Link to='/signin/'><Button>Crea una Cuenta</Button></Link>
+                    <Col md={6} className="overlay-content">
+                        <div className="overlay-content-inner">
+                            <Row>
+                                <img src={Logo} className="ImgLogoFinanzasLanding" alt="Logo"/>
+                            </Row>
+                            <Row>
+                                <p className={'pInLanding'}>Ya tengo una cuenta</p>
+                            </Row>
+                            <Row>
+                                <Link to='/login/'>
+                                    <Button className={'BtnLanding'}>Iniciar Sesión</Button>
+                                </Link>
+                            </Row>
+                            <Row>
+                                <p className={'pInLanding'}>No tengo una cuenta</p>
+                            </Row>
+                            <Row>
+                                <Link to='/signin/'><Button className={'BtnLanding'}>Crea una Cuenta</Button></Link>
+                            </Row>
+                        </div>
                     </Col>
-
-
                 </Row>
             </Container>
         </div>
-    )
-        ;
+
+
+    );
 }
 
 export default LandingPage;
