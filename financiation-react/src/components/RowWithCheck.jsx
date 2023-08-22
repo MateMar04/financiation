@@ -9,7 +9,7 @@ export const RowWithCheck = ({item}) => {
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check id={item.name} value={item.id} defaultChecked={item.checked}></Form.Check>
+                <Form.Check id={item.id} value={item.id} defaultChecked={item.checked}></Form.Check>
             </Col>
         </Row>
     )

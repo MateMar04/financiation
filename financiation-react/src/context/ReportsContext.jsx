@@ -29,11 +29,11 @@ export const ReportsProvider = ({children}) => {
                 await getVisitFromLocationsForFilters(authTokens.access).then(r => setVisits(r))
                 break
             case 'Visitas':
-                let locality_id = visits.filter(v => v.id == e.target.value)[0].id_locality
+                let locality_id = visits.filter(v => v.id == e.target.value)[0].location
                 toggle('Visitas', selectedLocations[locality_id], e)
                 break
             case 'Motivos':
-                let ministryDepartment_id = faqs.filter(f => f.id == e.target.value)[0].id_ministry_department
+                let ministryDepartment_id = faqs.filter(f => f.id == e.target.value)[0].ministry_department
                 toggle('Motivos', selectedMinistryDepartments[ministryDepartment_id], e)
                 break
         }
