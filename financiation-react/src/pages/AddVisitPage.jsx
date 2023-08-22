@@ -91,12 +91,14 @@ const AddVisitPage = () => {
         <Container fluid className={'Background'}>
             <Container>
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
-                <Container className={'MiniContainerVisit'}>
+                <Container >
                     <SucceedModal message="la visita" show={showsuccess}/>
                     <FailedModal message="la visita" show={showfail}/>
                     <Form onSubmit={postVisit}>
+
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}>
-                            <Carousel.Item>
+
+                            <Carousel.Item className={'MiniContainerVisit'}>
                                 <Row className='justify-content-center'>
                                     <Col>
                                         <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
@@ -276,9 +278,8 @@ const AddVisitPage = () => {
                                 </Row>
 
                             </Carousel.Item>
-                            <CarouselButtons prev={handlePrev} next={handleNext}/>
 
-                            <Carousel.Item>
+                            <Carousel.Item className={'MiniContainerVisit'}>
 
                                 <Row className='justify-content-center'>
                                     <Col>
@@ -440,9 +441,9 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                 </Row>
-
                             </Carousel.Item>
                         </Carousel>
+                        <CarouselButtons prev={handlePrev} next={handleNext}/>
                     </Form>
                 </Container>
             </Container>
