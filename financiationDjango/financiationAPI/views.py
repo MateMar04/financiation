@@ -167,7 +167,7 @@ def getMinistryDepartmentFaqs(request):
         faqs = Faq.objects.raw(
             "SELECT F.id "
             "FROM \"financiationAPI_faq\" AS F "
-            "WHERE ministry_department_id IN (1) "
+            "WHERE ministry_department_id IN %s "
             "GROUP BY F.id",
             [ministry_ids])
 
