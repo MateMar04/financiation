@@ -1,6 +1,6 @@
 import React ,{useEffect} from "react";
 import '../assets/styles/LandingPage.css'
-import imagenPanal from "../assets/images/panal.jpg";
+import imagenPanal from "../assets/images/panell.jpeg";
 import Logo from "../assets/images/LOGOGOBIERNO.png";
 import {Button, Container, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";

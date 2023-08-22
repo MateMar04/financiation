@@ -1,8 +1,9 @@
-/* Estilos CSS */
+
 .landing-page {
     overflow: hidden;
     height: 100vh;
     width: 100%;
+    background-color: #F4F4F4;
 }
 
 .containerLanding {
@@ -37,9 +38,8 @@
 
 .overlay-content-inner {
     position: absolute;
-    transform: translate(-20%, 45%);
+    transform: translate(-40%, 56%);
     right: -90%;
-
 }
 
 .ImgLogoFinanzasLanding {
