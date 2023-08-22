@@ -36,23 +36,35 @@ export const UserCard = ({user}) => {
                                 </Col>
                                 <Col>
                                     <Row>
-                                        <Col xs={9} md={6}>
+                                        <Col xs={2} md={5}>
                                             <strong>
                                                 <a>{user.first_name} {user.last_name}</a>
                                             </strong>
                                         </Col>
-                                        <Col xs={9} md={5}>
+                                        <Col xs={2} md={2}>
                                             <a>{status.name}</a>
                                         </Col>
-                                        <Col xs={1} md={1}>
-                                            <IconButton>
-                                                <GroupAddIcon/>
-                                            </IconButton>
-                                        </Col>
+                                            {status.name === 'Disponible' ? (
+                                                            <Col xs={2} md={2}>
+                                                                <select
+                                                                    placeholder="Rol en grupo"
+                                                                    className='form-select'
+                                                                    name="Role">
+                                                                    <option>Coordinador</option>
+                                                                    <option>Asesor</option>
+                                                                </select>
+                                                            </Col>
+                                                        ) : (
+                                                            <Col xs={2} md={5}>
+                                                                <a>Este usuario se encuentra ocupado</a>
+                                                            </Col>
+                                                        )
+                                                    }
                                     </Row>
                                     <Row>
                                         <small>{role.name}</small>
                                     </Row>
+                                    
                                 </Col>
                             </Row>
                         </Container>
