@@ -18,7 +18,7 @@ body {
 }
 
 .CardVisitConvenios{
-  width: auto !important;
+  width: 55vw !important;
     height: 35vh !important;
     background-color: #f4f4f4 !important;
     border-radius: 40px !important;
@@ -51,3 +51,5 @@ body {
     justify-content: center;
     height: 100%;
 }
+
+
