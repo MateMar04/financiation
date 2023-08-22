@@ -3,13 +3,8 @@
     max-height: 20%;
 }
 
-#logoboton {
-    width: 160px;
-    height: 60px;
-    overflow-y: hidden;
-    padding-right: 10px
 
-}
+
 
 .navLinkLogin {
     position: absolute;
@@ -25,6 +20,8 @@
 
 .ImgNavBar{
     padding-left: 10%;
+    width: 150px;
+    height: 50px;
 }
 * {
     font-family: "Poppins";

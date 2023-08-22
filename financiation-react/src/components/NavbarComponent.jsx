@@ -23,8 +23,8 @@ const NavbarComponent = () => {
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
             <Container fluid>
                 <Link to="/">
-                    <Navbar.Brand id="logoboton" alt='logoboton' className={'ImgNavBar'}><img src={Logo} id='logoboton'
-                                                                      alt="logo de ministerio de finanzas" />
+                    <Navbar.Brand>
+                        <img src={Logo} id='logoboton' alt="logo de ministerio de finanzas" className={'ImgNavBar'}/>
                     </Navbar.Brand>
                 </Link>
 
