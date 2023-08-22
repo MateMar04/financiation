@@ -6,7 +6,7 @@ body {
 .MiniContainerVisit {
     background-color: white;
     border-radius: 8vh;
-    height: 80vh;
+    height: 82vh;
 }
 
 
@@ -19,7 +19,7 @@ body {
 
 .CardVisitConvenios{
   width: auto !important;
-    height: 200px !important;
+    height: 35vh !important;
     background-color: #f4f4f4 !important;
     border-radius: 40px !important;
 }
@@ -29,7 +29,7 @@ body {
 }
 
 .carousel-indicators {
-  bottom: -5vh;
+  bottom: -8vh;
 }
 
 .carousel-buttons {
