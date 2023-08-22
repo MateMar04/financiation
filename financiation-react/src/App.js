@@ -26,6 +26,7 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React, { useState, useEffect } from 'react';
+import "@fontsource/poppins";
 
 function App() {
     return (
