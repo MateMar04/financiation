@@ -1,15 +1,27 @@
-import React from "react";
-import {Container} from "react-bootstrap";
-import '../assets/styles/ProfilePicture.css'
+import React, { useState } from "react";
+import { Container } from "react-bootstrap";
+import '../assets/styles/ProfilePicture.css';
 
-export const ProfilePicture = ({username, profileImg}) => {
+export const ProfilePicture = ({ username, profileImg, updateProfilePicture }) => {
+    const [selectedImage, setSelectedImage] = useState(null);
+
+    const handleImageChange = (e) => {
+        const imageFile = e.target.files[0];
+        setSelectedImage(imageFile);
+    };
+
+    const handleImageUpload = () => {
+        if (selectedImage) {
+            updateProfilePicture(selectedImage);
+        }
+    };
+
     return (
         <Container className="profile-picture">
-            <img src={profileImg} alt={username} className="responsive-image"/>
-            
+            <img src={profileImg} alt={username} className="responsive-image" />
+            <input type="file" onChange={handleImageChange} />
+            <button onClick={handleImageUpload}>Upload Image</button>
         </Container>
-        
-    )
-}
-
-export default ProfilePicture
+    );
+};
+export default ProfilePicture;

@@ -1,4 +1,5 @@
 from django.urls import path, re_path
+from .views import ProfilePictureView
 
 from . import views
 
@@ -85,5 +86,9 @@ urlpatterns = [
     path('user-statuses', views.getUserStatuses, name='userStatuses'),
 
     # Reports
-    re_path(r'reports$', views.getReport, name='report')
+    re_path(r'reports$', views.getReport, name='report'),
+
+    #EditarProfilePic
+    path('update-profile-picture', ProfilePictureView.as_view(), name='update-profile-picture')
+
 ]
