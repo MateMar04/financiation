@@ -1,18 +1,17 @@
+/* Estilos CSS */
 
 .ImgLogoFinanzasLanding {
     width: 200px;
     height: 60px;
-
 }
-
 
 .containerLanding {
   position: relative;
   width: 100vw;
   height: 100vh;
-
-  overflow-y: hidden !important;
-
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
 }
 
 .imagen {
@@ -21,18 +20,28 @@
   left: 0;
   width: 100%;
   height: 100%;
-    overflow: hidden;
-    overflow-y: hidden !important;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .imagen-diagonal {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  clip-path: polygon(0 0, 70% 0, 38% 100%, 0% 100%);
-    overflow-y: hidden !important;
-
+  clip-path: polygon(0 0, 70% 0, 30% 100%, 0% 100%);
+  overflow: hidden;
 }
-.stopScrolling{
-    overflow-y: hidden !important;
+
+.stopScrolling {
+    overflow-y: hidden;
+}
+
+.landing-page-body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100%;
 }
