@@ -4,22 +4,25 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getUserById} from "../services/UserServices";
+import {getUserStatusesById} from "../services/StatusServices/getUserStatusesById";
+import {getUserRolesById} from "../services/RoleServices/getUserRolesById";
 import Card from '@mui/material/Card';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
 
 
-export const AdvisorCard = ({addToGroup, userId, advisor}) => {
+export const AdvisorCard = ({statusId, advisor, roleId}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let [advisors, setAdvisors] = useState([])
-    let [user, setUser] = useState([])
+    let [advisor, setAdvisors] = useState([])
+    let [role, setRole] = useState([])
+    let [status, setStatus] = useState([])
 
     useEffect(() => {
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
-        // getUserById(authTokens.access, userId).then(data => setUser(data))
+        getUserStatusesById(authTokens.access, statusId).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, roleId).then(data => setRole(data))
     }, [])
 
     return (
@@ -42,16 +45,16 @@ export const AdvisorCard = ({addToGroup, userId, advisor}) => {
                                             </strong>
                                         </Col>
                                         <Col xs={9} md={5}>
-                                            <a>En Visita</a>
+                                            <a>{status.name}</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={console.log(advisor.id)} onClick={addToGroup}>
+                                            <IconButton value={console.log(advisor.id)}>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <small>Asesor</small>
+                                        <small>{role.name}</small>
                                     </Row>
                                 </Col>
                             </Row>

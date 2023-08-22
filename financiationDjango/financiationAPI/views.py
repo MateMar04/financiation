@@ -674,7 +674,13 @@ def getGroupById(request, id):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getUsersStatusRole(request):
-    users = UserAccount.objects.raw('SELECT u.id, r.name, S.name FROM "financiationAPI_useraccount" as U INNER JOIN public."financiationAPI_role" R on U.id_role_id = R.id INNER JOIN public."financiationAPI_userstatus" S on S.id = U.id_user_status_id')
-    serializer = UserAccountSerializer(users, many=True)
+def getStatusesById(request, id):
+    status = UserStatus.objects.get(id=id)
+    serializer = UserStatusSerializer(status, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRolesById(request, id):
+    role = Role.objects.get(id=id)
+    serializer = RoleSerializer(role, many=False)
     return Response(serializer.data)

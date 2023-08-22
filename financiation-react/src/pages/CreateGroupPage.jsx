@@ -7,23 +7,25 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-import {getUsers} from "../services/UserServices";
-import {getUserRoleStatus} from "../services/UserServices";
+import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-import {UserCard } from "../components/UserCard";
+import CoordinatorCard from "../components/CoordinatorCard";
+import AdvisorCard from "../components/AdvisorCard";
 
 export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-    let [users, setUsers] = useState([])
-    let [rolestatus, setRoleStatus] = useState([])
+    let [coordinators, setCoordinators] = useState([])
+    let [advisors, setAdvisors] = useState([])
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getUserRoleStatus(authTokens.access).then(data => setUsers(data))
+        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
     }, [])
 
     let postGroup = async (e) => {
@@ -83,12 +85,21 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <div>
-                    {users?.map((user) => (
+                    {coordinators?.map((coordinator) => (
                         <Container>
-                            <UserCard user={user}/>
+                            <CoordinatorCard coordinator={coordinator} addToGroup={handdlerOpenDrawer} />
                         </Container>
                     ))}
                 </div>
+                    
+                <div>
+                    {advisors?.map((advisor) => (
+                        <Container>
+                            <AdvisorCard advisor={advisor} addToGroup={handdlerOpenDrawer} />
+                        </Container>
+                    ))}
+                </div>  
+
                 <Container>
                         <Row className='justify-content-center'>
                             <Col md={2} xs={4}>
