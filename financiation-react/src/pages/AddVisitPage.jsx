@@ -92,18 +92,17 @@ const AddVisitPage = () => {
         <Container fluid className={'Background'}>
             <Container>
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
-                <Container >
+                <Container className={'MiniContainerVisit'}>
                     <SucceedModal message="la visita" show={showsuccess} />
                     <FailedModal message="la visita" show={showfail} />
                     <Form onSubmit={postVisit}>
+                        <Carousel variant="dark" interval={null} ref={carouselRef} controls={false} className={'carouselAddVisit'}>
 
-                        <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}>
-
-                            <Carousel.Item className={'MiniContainerVisit'}>
+                            <Carousel.Item >
                                 <Row className='justify-content-center'>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <CalendarMonthIcon sx={{ fontSize: 65 }} />
@@ -124,7 +123,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <PlaceOutlinedIcon sx={{ fontSize: 65 }} />
@@ -145,7 +144,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <HouseOutlinedIcon sx={{ fontSize: 65 }} />
@@ -166,7 +165,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <DirectionsIcon sx={{ fontSize: 65 }} />
@@ -190,7 +189,7 @@ const AddVisitPage = () => {
                                 <Row>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <AccessTimeIcon sx={{ fontSize: 65 }} />
@@ -217,7 +216,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <SocialDistanceOutlinedIcon sx={{ fontSize: 65 }} />
@@ -237,7 +236,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />
@@ -257,7 +256,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
 
                                                     <Row className="justify-content-center">
@@ -285,7 +284,7 @@ const AddVisitPage = () => {
                                 <Row className='justify-content-center'>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
 
                                                     <Row className="justify-content-center">
@@ -306,7 +305,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <PersonIcon sx={{ fontSize: 65 }} />
@@ -327,7 +326,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <PersonIcon sx={{ fontSize: 65 }} />
@@ -348,7 +347,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className="justify-content-center">
                                                         <PersonIcon sx={{ fontSize: 65 }} />
@@ -372,7 +371,7 @@ const AddVisitPage = () => {
                                 <Row>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className='justify-content-center text-center'>
                                                         <a>{'Partido Politico'}</a>
@@ -390,7 +389,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className='justify-content-center text-center'>
                                                         <a>{'Intendente'}</a>
@@ -408,7 +407,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
 
                                                     <Row className='justify-content-center text-center'>
@@ -426,7 +425,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className='justify-content-center text-center'>
                                                         <a>{'¿Flyer?'}</a>
@@ -449,7 +448,7 @@ const AddVisitPage = () => {
                                 <Row className='justify-content-center'>
                                     <Col>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisitConvenios'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Row>
                                                     <Col>
                                                         <Row className='justify-content-center text-center'>
@@ -507,7 +506,7 @@ const AddVisitPage = () => {
                                     </Col>
                                     <Col md={3}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent>
+                                            <CardContent className={'CenterContentCard'}>
                                                 <Container>
                                                     <Row className='justify-content-center text-center'>
                                                         <a>{'Estado'}</a>

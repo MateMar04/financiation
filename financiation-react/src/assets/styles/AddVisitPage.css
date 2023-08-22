@@ -5,12 +5,20 @@ body {
 
 .MiniContainerVisit {
     background-color: white;
-    border-radius: 25px;
+    border-radius: 8vh;
+    height: 80vh;
 }
 
 
 .CardVisit{
-    width: 220px !important;
+    width: 15vw !important;
+    height: 35vh !important;
+    background-color: #f4f4f4 !important;
+    border-radius: 8vh !important;
+}
+
+.CardVisitConvenios{
+  width: auto !important;
     height: 200px !important;
     background-color: #f4f4f4 !important;
     border-radius: 40px !important;
@@ -21,32 +29,25 @@ body {
 }
 
 .carousel-indicators {
-  bottom: -20px;
+  bottom: -5vh;
 }
 
 .carousel-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: -23%;
+  margin-top: -38vh;
 }
 
-.carousel-button {
-  border-radius: 25px;
-  margin: 0 5px;
+
+.carouselAddVisit{
+    width: 80vw;
+    height: 75vh;
 }
 
-.CardVisitConvenios{
-  width: auto !important;
-    height: 200px !important;
-    background-color: #f4f4f4 !important;
-    border-radius: 40px !important;
+.CenterContentCard{
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
-
-.selectVisit{
-  width: auto;
-  background-color: white !important;
-  border-color: white !important;
-  border-radius: 25px !important;
-  height: 40px;
-}
-
