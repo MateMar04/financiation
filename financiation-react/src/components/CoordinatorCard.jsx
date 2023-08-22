@@ -4,8 +4,8 @@ import "../assets/styles/AdvisorMiniCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {getUserStatusesById} from "../services/StatusServices/getUserStatusesById";
-import {getUserRolesById} from "../services/RoleServices/getUserRolesById";
+import {getUserStatusesById} from "../services/StatusServices";
+import {getUserRolesById} from "../services/RoleServices";
 import Card from "@mui/material/Card";
 import IconButton from "@mui/material/IconButton";
 import {getUserById} from "../services/UserServices";
@@ -16,7 +16,7 @@ import {Zoom} from "@mui/material";
 export const CoordinatorCard = ({statusId, coordinator, roleId}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let [coordinator, setCoordinators] = useState([])
+    let [coordinators, setCoordinators] = useState([])
     let [role, setRole] = useState([])
     let [status, setStatus] = useState([])
 
@@ -50,7 +50,7 @@ export const CoordinatorCard = ({statusId, coordinator, roleId}) => {
                                                 <a>{status.name}</a>
                                             </Col>
                                             <Col xs={1} md={1}>
-                                                <IconButton value={console.log(coordinator.id)} onClick={addToGroup}>
+                                                <IconButton>
                                                     <GroupAddIcon/>
                                                 </IconButton>
                                             </Col>

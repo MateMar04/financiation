@@ -7,25 +7,21 @@ import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getUsers} from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-import CoordinatorCard from "../components/CoordinatorCard";
-import AdvisorCard from "../components/AdvisorCard";
+import {UserCard } from "../components/UserCard";
 
 export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-    let [coordinators, setCoordinators] = useState([])
-    let [advisors, setAdvisors] = useState([])
+    let [users, setUsers] = useState([])
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getUsers(authTokens.access).then(data => setUsers(data))
     }, [])
 
     let postGroup = async (e) => {
@@ -85,20 +81,12 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <div>
-                    {coordinators?.map((coordinator) => (
+                    {users?.map((user) => (
                         <Container>
-                            <CoordinatorCard coordinator={coordinator} addToGroup={handdlerOpenDrawer} />
+                            <UserCard user={user}/>
                         </Container>
                     ))}
                 </div>
-                    
-                <div>
-                    {advisors?.map((advisor) => (
-                        <Container>
-                            <AdvisorCard advisor={advisor} addToGroup={handdlerOpenDrawer} />
-                        </Container>
-                    ))}
-                </div>  
 
                 <Container>
                         <Row className='justify-content-center'>

@@ -6,7 +6,7 @@ export const getUserStatusesById = async (tokens, statusId) => {
         "Accept": "application/json"
     }
 
-    let response = await fetch(`/api/statuses/${statusId}`, {headers: headers})
+    let response = await fetch(`/api/user-statuses/${statusId}`, {headers: headers})
     let data = await response.json()
     return data
 }

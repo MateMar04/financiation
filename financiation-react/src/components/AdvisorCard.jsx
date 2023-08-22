@@ -4,8 +4,8 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getUserStatusesById} from "../services/StatusServices/getUserStatusesById";
-import {getUserRolesById} from "../services/RoleServices/getUserRolesById";
+import {getUserStatusesById} from "../services/StatusServices";
+import {getUserRolesById} from "../services/RoleServices";
 import Card from '@mui/material/Card';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
@@ -15,7 +15,7 @@ import {Zoom} from "@mui/material";
 export const AdvisorCard = ({statusId, advisor, roleId}) => {
 
     let {authTokens} = useContext(AuthContext)
-    let [advisor, setAdvisors] = useState([])
+    let [advisors, setAdvisors] = useState([])
     let [role, setRole] = useState([])
     let [status, setStatus] = useState([])
 
@@ -48,7 +48,7 @@ export const AdvisorCard = ({statusId, advisor, roleId}) => {
                                             <a>{status.name}</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={console.log(advisor.id)}>
+                                            <IconButton>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>

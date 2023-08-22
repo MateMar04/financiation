@@ -7,11 +7,20 @@ import Card from '@mui/material/Card';
 import IconButton from "@mui/material/IconButton";
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import {Zoom} from "@mui/material";
+import {getUserStatusesById} from "../services/StatusServices";
+import {getUserRolesById} from "../services/RoleServices";
 
 
 export const UserCard = ({user}) => {
 
     let {authTokens} = useContext(AuthContext)
+    let [role, setRole] = useState([])
+    let [status, setStatus] = useState([])
+
+    useEffect(() => {
+        getUserStatusesById(authTokens.access, user.id_user_status).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, user.id_role).then(data => setRole(data))
+    }, [])
 
     return (
         <>
@@ -33,16 +42,16 @@ export const UserCard = ({user}) => {
                                             </strong>
                                         </Col>
                                         <Col xs={9} md={5}>
-                                            <a>{user.id_role}</a>
+                                            <a>{status.name}</a>
                                         </Col>
                                         <Col xs={1} md={1}>
-                                            <IconButton value={console.log(user.id)}>
+                                            <IconButton>
                                                 <GroupAddIcon/>
                                             </IconButton>
                                         </Col>
                                     </Row>
                                     <Row>
-                                        <small>{user.id_user_status}</small>
+                                        <small>{role.name}</small>
                                     </Row>
                                 </Col>
                             </Row>
