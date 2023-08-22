@@ -1,36 +1,34 @@
-/* Estilos CSS */
-
 .ImgLogoFinanzasLanding {
     width: 200px;
     height: 60px;
 }
 
 .containerLanding {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-y: hidden;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
 }
 
 .imagen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .imagen-diagonal {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  clip-path: polygon(0 0, 70% 0, 30% 100%, 0% 100%);
-  overflow: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: polygon(0 0, 70% 0, 30% 100%, 0% 100%);
+    overflow: hidden;
 }
 
 .stopScrolling {
@@ -38,10 +36,15 @@
 }
 
 .landing-page-body {
-  margin: 0;
-  padding: 0;
-  overflow-y: hidden;
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-content {
+    position: relative;
+    z-index: 2; /* Asegura que estén en la parte superior */
 }
