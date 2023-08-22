@@ -11,7 +11,7 @@ const LandingPage = () => {
         <div className={'stopScrolling'}>
             <Container fluid className="containerLanding">
                 <Row>
-                    <Col md={8} className="imagen">
+                    <Col md={6} className="imagen">
                         <img src={imagenPanal} alt="" className="imagen-diagonal"/>
                     </Col>
                     <Col md={4} className={'justify-content-end'}>

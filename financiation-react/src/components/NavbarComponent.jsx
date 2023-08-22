@@ -1,7 +1,7 @@
 import React, {Fragment, useContext, useEffect, useState} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
-import logofinanzas from '../assets/images/logofinanzas.png';
+import logofinanzas from '../assets/images/LOGOGOBIERNO.png';
 import Logo from "../assets/images/LOGOGOBIERNO.png";
 import {Button, Col, Container, Nav, Navbar, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
