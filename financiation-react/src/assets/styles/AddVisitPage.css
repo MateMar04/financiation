@@ -34,3 +34,19 @@ body {
   border-radius: 25px;
   margin: 0 5px;
 }
+
+.CardVisitConvenios{
+  width: auto !important;
+    height: 200px !important;
+    background-color: #f4f4f4 !important;
+    border-radius: 40px !important;
+}
+
+.selectVisit{
+  width: auto;
+  background-color: white !important;
+  border-color: white !important;
+  border-radius: 25px !important;
+  height: 40px;
+}
+
