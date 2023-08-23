@@ -60,3 +60,16 @@ body {
     border-radius: 40px !important;
 }
 
+
+.BtnAddVisit{
+    width: 18vw;
+    height: 10vh;
+    background-color: #53A6DC !important;
+    border-color: #53A6DC !important;
+    color: white !important;
+    padding: 10px;
+    border-radius: 1vw !important;
+}
+.BtnAddVisit:hover {
+    background-color: #097cce !important;
+}

@@ -519,7 +519,7 @@ const AddVisitPage = () => {
                                 </Row>
                                 <Row className='justify-content-center text-center'>
                                 <Col className='ContentCenterCard'>    
-                                <Button className={'BtnLanding'} variant='outlined'>Guardar Visita</Button>
+                                <Button className={'BtnAddVisit'} variant='outlined'>Guardar Visita</Button>
                                 </Col>
                                 </Row>
                             </Carousel.Item>
