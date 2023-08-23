@@ -5,17 +5,19 @@ from rest_framework.views import APIView
 from rest_framework import status
 from .serializers import ProfilePictureSerializer
 from .serializers import *
-
+from .models import UserAccount
+from .serializers import UserAccountSerializer 
 
 # Create your views here.
 
 class ProfilePictureView(APIView):
     def put(self, request):
         print("hola")
+        
         user = request.data
         user_id = request.data.get('id_useraccount')
         print("hola")
-        user_profile = UserAccount.objects.get(id=1)  
+        user_profile = UserAccount.objects.get(id=5)  
         print("hola")
         serializer = UserAccountSerializer(user_profile, data=request.data, partial=True)
         print("hola4")
