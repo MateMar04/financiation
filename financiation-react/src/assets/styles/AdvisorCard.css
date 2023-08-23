@@ -22,7 +22,7 @@
     padding: 3vh;
 }
 .role{
-    padding: 3vh;
+    padding: 2.3vh;
 }
 .profileimage{
     padding: 1.4vh;
@@ -96,12 +96,3 @@ dos bordes con color y que giramos con transform: rotate(-45deg);
 .content-select:hover i{
 	margin-top: 3px;
 }
-
-.select-items {
-    position: absolute;
-    background-color: DodgerBlue;
-    top: 100%;
-    left: 0;
-    right: 0;
-    z-index: 99;
-  }
