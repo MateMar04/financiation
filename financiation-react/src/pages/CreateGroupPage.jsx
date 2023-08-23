@@ -60,6 +60,7 @@ export const CreateGroupPage = () => {
                         <Row className={'justify-content-center'}>
                             <Col md={8} xs={9}>
                                 <TextField
+                                    className="font"
                                     fullWidth
                                     id="standard-bare"
                                     variant="outlined"

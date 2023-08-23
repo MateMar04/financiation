@@ -24,14 +24,13 @@ export const UserCard = ({user}) => {
 
     return (
         <>
-                <Zoom in style={{ transitionDelay: '300ms'}}>
+                <Zoom in style={{ transitionDelay: '200ms'}}>
                 <div className={'UserCard font'}>
                     <Card className='UserCard font'>
-                        <Container className={'OutlineCard'}>
+                        <Container>
                             <Row key={user.id}>
                                 <Col md={1} xs={2} className='profileimage'>
-                                    <Avatar alt="Remy Sharp" src={user?.profile_picture}
-                                            sx={{width: 56, height: 56}}/>
+                                    <Avatar className='avatar' alt="Remy Sharp" src={user?.profile_picture}/>
                                 </Col>
                                 <Col xs={2} md={3} className='name'>
                                     <Row>
@@ -65,18 +64,15 @@ export const UserCard = ({user}) => {
                                         <i></i>
                                     </Col>
                                     ) : (
-                                    <Col xs={2} md={4} className='role'>
+                                    <Col xs={2} md={5} className='roleocupado'>
                                         <a>Este usuario se encuentra ocupado</a>
                                     </Col>
                                     )
                                 }
                                 {status.name === 'Disponible' ? (
-                                        <Col xs={2} md={3} className='name'>
+                                        <Col xs={2} md={2} className='combo'>
                                             <Row>
-                                                <Checkbox
-                                                    {...label}
-                                                    sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }}
-                                                />
+                                                <input type="checkbox" className='check' />
                                             </Row>
                                         </Col> 
                                     ) : (

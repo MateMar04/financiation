@@ -1,72 +1,67 @@
-/*
-
-
-.OutlineCard{
-
-    border:solid lightgrey 1px;
-    border-radius: 15px;
-}
-
-.TextEmailCard{
-    margin-top: 15px;
-
-}
-
- */
-
 .UserCard{
     padding: 0.4vh;
-    border-radius: 50px !important;
+    border-radius: 15vh !important;
+	font-size: 0.9vw !important;
 }
 .status{
-    padding: 3vh;
+    padding: 1.5vw;
 }
 .role{
-    padding: 2.3vh;
+    padding: 1.2vw;
+}
+.roleocupado{
+	padding: 1.5vw;
 }
 .profileimage{
-    padding: 1.4vh;
+    padding: 0.7vw;
     padding-left: 1vw;
 }
+.avatar{
+	width: 3vw !important;
+	height: 3vw !important;
+}
 .name{
-    padding: 2vh;
+    padding: 1vw;
     text-align: center;
 }
+.check{
+	margin-top: 1.5vw;
+	margin-left: 8vw;
+	width: 1.3vw;
+	height: 1.3vw;
+}
+
 .circle_red{
-    height: 1vh;
-    width: 1vh;
+    height: 0.6vw;
+    width: 0.6vw;
     background-color: #a32323;
-    border-radius: 50%;
+    border-radius: 15vw;
     display: inline-block;
 }
 .circle_green{
-    height: 1vh;
-    width: 1vh;
+    height: 0.6vw;
+    width: 0.6vw;
     background-color: #177c17;
-    border-radius: 50%;
+    border-radius: 15vw;
     display: inline-block;
 }
 
 
 .content-select{
-	max-width: 250px;
+	max-width: 30vw;
 	position: relative;
 }
  
 .content-select select{
 	display: inline-block;
-	width: 100%;
 	cursor: pointer;
-  	padding: 7px 10px;
-  	height: 42px;
-  	outline: 0; 
+  	height: 2vw;
   	border: 0;
-	border-radius: 0;
 	background: #f0f0f0;
 	color: #7b7b7b;
-	font-size: 1em;
+	font-size: 0.8vw;
 	color: #999;
-    border-radius: 50px;
+    border-radius: 15vw;
     position: relative;
     transition: all 0.25s ease;
 }
@@ -82,17 +77,17 @@ dos bordes con color y que giramos con transform: rotate(-45deg);
 */
 .content-select i{
 	position: absolute;
-	right: 40px;
-	top: calc(50% - 13px);
-	width: 16px;
-	height: 16px;
+	right: 2vw;
+	top: 1.7vw;
+	width: 0.7vw;
+	height: 0.7vw;
 	display: block;
-	border-left:4px solid #b4babd;
-	border-bottom:4px solid #b4babd;
+	border-left:0.25vw solid #b4babd;
+	border-bottom:0.25vw solid #b4babd;
 	transform: rotate(-45deg); /* Giramos el cuadrado */
 	transition: all 0.25s ease;
 }
  
 .content-select:hover i{
-	margin-top: 3px;
+	margin-top: 0.1vw;
 }
