@@ -1,11 +1,9 @@
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
-
-
-# Create your views here.
 
 class RequestApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -120,7 +118,6 @@ class CoordinatorApiView(APIView):
 
         serializer = CoordinatorSerializer(coordinator, many=False)
         return Response(serializer.data)
-
 
 class AdvisorApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -400,4 +397,16 @@ def parse_and_convert(input_list):
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getStatusesById(request, id):
+    status = UserStatus.objects.get(id=id)
+    serializer = UserStatusSerializer(status, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRolesById(request, id):
+    role = Role.objects.get(id=id)
+    serializer = RoleSerializer(role, many=False)
     return Response(serializer.data)
