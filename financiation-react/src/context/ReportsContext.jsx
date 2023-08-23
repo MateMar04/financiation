@@ -105,7 +105,7 @@ export const ReportsProvider = ({children}) => {
 
             data.forEach((element) => {
                 element.type = 'visit'
-                element.checked = selectedLocations[element.id_locality].hasOwnProperty(element.id)
+                element.checked = selectedLocations[element.location].hasOwnProperty(element.id)
             })
 
             setVisits(data)
@@ -145,6 +145,7 @@ export const ReportsProvider = ({children}) => {
             let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
             let data = await response.json()
             setRequests(data)
+            console.log(data)
             return data
         }
 
