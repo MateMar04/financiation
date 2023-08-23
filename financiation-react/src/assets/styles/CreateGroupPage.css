@@ -8,6 +8,15 @@
     align-items: center;
 }
 
-.container {
-	
+body {
+	background-color: #F4F4F4;
+}
+.separation{
+	padding: 1vh;
+}
+.font{
+	font-family: poppins;
+}
+.boton{
+	padding: 3vh;
 }

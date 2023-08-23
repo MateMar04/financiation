@@ -13,3 +13,95 @@
 }
 
  */
+
+.UserCard{
+    padding: 0.4vh;
+    border-radius: 50px !important;
+}
+.status{
+    padding: 3vh;
+}
+.role{
+    padding: 3vh;
+}
+.profileimage{
+    padding: 1.4vh;
+    padding-left: 1vw;
+}
+.name{
+    padding: 2vh;
+    text-align: center;
+}
+.circle_red{
+    height: 1vh;
+    width: 1vh;
+    background-color: #a32323;
+    border-radius: 50%;
+    display: inline-block;
+}
+.circle_green{
+    height: 1vh;
+    width: 1vh;
+    background-color: #177c17;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+
+.content-select{
+	max-width: 250px;
+	position: relative;
+}
+ 
+.content-select select{
+	display: inline-block;
+	width: 100%;
+	cursor: pointer;
+  	padding: 7px 10px;
+  	height: 42px;
+  	outline: 0; 
+  	border: 0;
+	border-radius: 0;
+	background: #f0f0f0;
+	color: #7b7b7b;
+	font-size: 1em;
+	color: #999;
+    border-radius: 50px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+ 
+.content-select select:hover{
+	background-color: #FFFFFF;
+}
+ 
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+.content-select i{
+	position: absolute;
+	right: 40px;
+	top: calc(50% - 13px);
+	width: 16px;
+	height: 16px;
+	display: block;
+	border-left:4px solid #b4babd;
+	border-bottom:4px solid #b4babd;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+}
+ 
+.content-select:hover i{
+	margin-top: 3px;
+}
+
+.select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+  }

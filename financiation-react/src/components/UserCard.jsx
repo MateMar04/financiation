@@ -4,8 +4,7 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import IconButton from "@mui/material/IconButton";
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Checkbox from '@mui/material/Checkbox';
 import {Zoom} from "@mui/material";
 import {getUserStatusesById} from "../services/StatusServices";
 import {getUserRolesById} from "../services/RoleServices";
@@ -13,6 +12,7 @@ import {getUserRolesById} from "../services/RoleServices";
 
 export const UserCard = ({user}) => {
 
+    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     let {authTokens} = useContext(AuthContext)
     let [role, setRole] = useState([])
     let [status, setStatus] = useState([])
@@ -24,48 +24,67 @@ export const UserCard = ({user}) => {
 
     return (
         <>
-            
                 <Zoom in style={{ transitionDelay: '300ms'}}>
-                <div className={'mt-3'}>
-                    <Card>
+                <div className={'UserCard font'}>
+                    <Card className='UserCard font'>
                         <Container className={'OutlineCard'}>
                             <Row key={user.id}>
-                                <Col md={2} xs={3} lg={2}>
+                                <Col md={1} xs={2} className='profileimage'>
                                     <Avatar alt="Remy Sharp" src={user?.profile_picture}
                                             sx={{width: 56, height: 56}}/>
                                 </Col>
-                                <Col>
+                                <Col xs={2} md={3} className='name'>
                                     <Row>
-                                        <Col xs={2} md={5}>
+                                        <Col>
                                             <strong>
                                                 <a>{user.first_name} {user.last_name}</a>
                                             </strong>
                                         </Col>
-                                        <Col xs={2} md={2}>
-                                            <a>{status.name}</a>
-                                        </Col>
-                                            {status.name === 'Disponible' ? (
-                                                            <Col xs={2} md={2}>
-                                                                <select
-                                                                    placeholder="Rol en grupo"
-                                                                    className='form-select'
-                                                                    name="Role">
-                                                                    <option>Coordinador</option>
-                                                                    <option>Asesor</option>
-                                                                </select>
-                                                            </Col>
-                                                        ) : (
-                                                            <Col xs={2} md={5}>
-                                                                <a>Este usuario se encuentra ocupado</a>
-                                                            </Col>
-                                                        )
-                                                    }
                                     </Row>
                                     <Row>
                                         <small>{role.name}</small>
                                     </Row>
-                                    
                                 </Col>
+                                {status.name === 'Disponible' ? (
+                                        <Col xs={2} md={3} className='status'>
+                                            <a>{status.name} <div className='circle_green'></div></a>
+                                        </Col>
+                                    ):(
+                                        <Col xs={2} md={3} className='status'>
+                                            <a>{status.name} <div className='circle_red'></div></a>
+                                        </Col>
+                                    )
+                                }
+                                {status.name === 'Disponible' ? (
+                                    <Col xs={2} md={2} className='role content-select'>
+                                        <select placeholder="Rol en grupo" className='form-select ' name="Role">
+                                            <option value="none" selected disabled hidden>Seleccionar</option>
+                                            <option>Coordinador</option>
+                                            <option>Asesor</option>
+                                        </select>
+                                        <i></i>
+                                    </Col>
+                                    ) : (
+                                    <Col xs={2} md={4} className='role'>
+                                        <a>Este usuario se encuentra ocupado</a>
+                                    </Col>
+                                    )
+                                }
+                                {status.name === 'Disponible' ? (
+                                        <Col xs={2} md={3} className='name'>
+                                            <Row>
+                                                <Checkbox
+                                                    {...label}
+                                                    sx={{ '& .MuiSvgIcon-root': { fontSize: 32 } }}
+                                                />
+                                            </Row>
+                                        </Col> 
+                                    ) : (
+                                        <Col>
+                                        </Col>
+                                    )
+                                }
+                                 
                             </Row>
                         </Container>
                     </Card>
