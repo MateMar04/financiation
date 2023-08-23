@@ -1,17 +1,21 @@
 import React, {useContext} from "react";
 import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
-import {Button, Container, FloatingLabel, Form} from "react-bootstrap";
+import {Button, Card, Container, FloatingLabel, Form} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)
     return (
+        <Card className="GeneralCard">
         <Container fluid className="general">
             <Container fluid className="image-container">
                 <img src={Logo} alt="Logo del ministerio de finanzas"/>
             </Container>
+            <Container className="Titulo1">
+                    <h1>Iniciar Sesion</h1>
+                </Container>
             <Form onSubmit={loginUser}>
                 <Container>
                     <FloatingLabel className='floatingLabel' label="Usuario">
@@ -30,6 +34,7 @@ const LoginPage = () => {
             <Link to="/signin/"><Button variant="link" className="link">No tengo una cuenta</Button></Link>
             <Link to="/reset-password/"><Button variant="link" className="link">Me olvidé la contraseña</Button></Link>
         </Container>
+        </Card>
     )
 };
 

@@ -26,3 +26,40 @@
 .input-required {
     padding: 15px;
 }
+
+
+.link{
+    font-size: 20px;
+    color: #53A6DC;
+    padding-top: 10px;
+}
+
+.image-container{
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    margin-right: 5vw;
+    margin-left: 3vw;
+    max-width: 2%;
+    height: auto;
+}
+
+.GeneralCard {
+    width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
+    padding: 10vh, 10vw;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Esto centra horizontalmente la tarjeta */
+  }
+  
+  @media (max-width: 60vh) {
+    .GeneralCard {
+      width: 100%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+    }
+  }
+
+.Titulo1{
+    border-bottom: 0px;
+    margin-bottom: 0%;
+}
