@@ -201,4 +201,4 @@ class RequestStatusSerializer(ModelSerializer):
 class ProfilePictureSerializer(ModelSerializer):
     class Meta:
         model = UserAccount 
-        fields = 'profile_picture'
+        fields = '__all__'

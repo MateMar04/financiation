@@ -10,11 +10,20 @@ from .serializers import *
 # Create your views here.
 
 class ProfilePictureView(APIView):
-    def put(self, request, *args, **kwargs):
-        user_account = request.user.user_account
-        serializer = ProfilePictureSerializer(user_account, data=request.data, partial=True)
-
-        return Response(serializer.data)
+    def put(self, request):
+        print("hola")
+        user = request.data
+        user_id = request.data.get('id_useraccount')
+        print("hola")
+        user_profile = UserAccount.objects.get(id=1)  
+        print("hola")
+        serializer = UserAccountSerializer(user_profile, data=request.data, partial=True)
+        print("hola4")
+        serializer.is_valid() 
+        serializer.save() 
+        print("print")
+        return Response(serializer.data)  
+       
 
 class RequestApiView(APIView):
     def get(self, request, *args, **kwargs):

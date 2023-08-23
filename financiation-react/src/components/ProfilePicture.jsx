@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 import '../assets/styles/ProfilePicture.css';
 
-export const ProfilePicture = ({ username, profileImg, updateProfilePicture }) => {
+export const ProfilePicture = ({ username, profileImg, ProfilePicture }) => {
     const [selectedImage, setSelectedImage] = useState(null);
 
     const handleImageChange = (e) => {
