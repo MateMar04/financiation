@@ -71,6 +71,8 @@ const NavbarComponent = () => {
                                                     </Link>
                                                 </Row>
                                             </Col>
+                                            <Col>
+                                            <Button onClick={logoutUser}></Button></Col>
 
                                         </Row>
                                     </div>
