@@ -59,3 +59,16 @@ export const getGroupCoordinatorUsers = async (tokens, groupId) => {
     let data = await response.json()
     return data
 }
+export const getUsers = async (tokens) => {
+
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+
+    let response = await fetch(`/auth/users`, {headers: headers})
+    let data = await response.json()
+    return data
+}
+
