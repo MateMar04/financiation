@@ -6,6 +6,8 @@ import "../assets/styles/ProfilePage.css";
 import ProfileModifyForm from "../components/ProfileModifyForm";
 import AuthContext from "../context/AuthContext";
 import "../assets/styles/ProfileModifyForm.css";
+import {getUser} from "../services/UserServices";
+
 
 const ProfilePage = () => {
 
@@ -16,16 +18,6 @@ const ProfilePage = () => {
         getUser()
     })
 
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/me/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    }
 
     return (
         <Container fluid>
