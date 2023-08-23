@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/NavbarComponent'
 import AdvisedListPage from './pages/AdvisedListPage'
@@ -55,18 +55,20 @@ function App() {
                             <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
                             <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
-                        <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
-                        <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
-                        <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
-                        <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
-                        <Route path='/coordinators' element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
+                            <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
+                            <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
+                            <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
+                            <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
+                            <Route path='/coordinators'
+                                   element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
 
 
-                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
-                        <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
-                        <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
-                        <Route path='/coordinator/add' element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
-                        <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
+                            <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                            <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
+                            <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
+                            <Route path='/coordinator/add'
+                                   element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
+                            <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
                             <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
 
