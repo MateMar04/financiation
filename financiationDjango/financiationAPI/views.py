@@ -5,9 +5,6 @@ from rest_framework.views import APIView
 
 from .serializers import *
 
-
-# Create your views here.
-
 class RequestApiView(APIView):
     def get(self, request, *args, **kwargs):
         requests = Request.objects.all()
@@ -144,7 +141,6 @@ class CoordinatorApiView(APIView):
         serializer = CoordinatorSerializer(coordinator, many=False)
         return Response(serializer.data)
 
-
 class AdvisorApiView(APIView):
     def get(self, request, *args, **kwargs):
         advisors = Advisor.objects.all()
@@ -165,7 +161,6 @@ class AdvisorApiView(APIView):
         serializer = AdvisorSerializer(advisor, many=False)
         return Response(serializer.data)
 
-
 @api_view(['GET'])
 def getRoutes(request):
     routes = [
@@ -179,6 +174,34 @@ def getRoutes(request):
             },
             'body': None,
             'description': 'Returns an array of advised'
+        },
+        {
+            'Endpoint': '/auth/users/statuses/',
+            'method': 'GET',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'name': '',
+                'description': ''
+            },
+            'description': 'Returns an array of statuses'
+        },
+        {
+            'Endpoint': '/auth/users/roles/',
+            'method': 'GET',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'name': '',
+                'description': ''
+            },
+            'description': 'Returns an array of roles'
         },
         {
             'Endpoint': '/api/advised/id/',
@@ -644,9 +667,20 @@ def parse_and_convert(input_list):
         numbers_tuple = tuple(map(int, numbers_list))
         return numbers_tuple
 
-
 @api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getStatusesById(request, id):
+    status = UserStatus.objects.get(id=id)
+    serializer = UserStatusSerializer(status, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getRolesById(request, id):
+    role = Role.objects.get(id=id)
+    serializer = RoleSerializer(role, many=False)
     return Response(serializer.data)

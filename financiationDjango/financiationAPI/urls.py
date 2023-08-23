@@ -75,6 +75,7 @@ urlpatterns = [
 
     # Roles
     path('roles', views.getRoles, name='roles'),
+    path('roles/<int:id>', views.getRolesById, name='userStatuses'),
 
     # Requests
     path('requests', views.RequestApiView.as_view(), name='requests'),
@@ -83,6 +84,7 @@ urlpatterns = [
     path('visit-statuses', views.getVisitSatuses, name='visitStatuses'),
     path('request-statuses', views.getRequestStatuses, name='requestStatuses'),
     path('user-statuses', views.getUserStatuses, name='userStatuses'),
+    path('user-statuses/<int:id>', views.getStatusesById, name='userStatuses'),
 
     # Reports
     re_path(r'reports$', views.getReport, name='report')

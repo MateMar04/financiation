@@ -11,6 +11,19 @@ export const getUser = async (tokens) => {
     return data
 }
 
+export const getUsers = async (tokens) => {
+
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+
+    let response = await fetch(`/api/users`, {headers: headers})
+    let data = await response.json()
+    return data
+}
+
 export const getUserById = async (tokens, userId) => {
     let headers = {
         "Content-Type": "application/json",
@@ -30,7 +43,7 @@ export const getGroupAdvisorUsers = async (tokens, groupId) => {
         "Accept": "application/json"
     }
 
-    let response = await fetch(`/api/group/${groupId}/advisor-users`, {headers: headers})
+    let response = await fetch(`/api/groups/${groupId}/advisor-users`, {headers: headers})
     let data = await response.json()
     return data
 }
@@ -42,7 +55,7 @@ export const getGroupCoordinatorUsers = async (tokens, groupId) => {
         "Accept": "application/json"
     }
 
-    let response = await fetch(`/api/group/${groupId}/coordinator-users`, {headers: headers})
+    let response = await fetch(`/api/groups/${groupId}/coordinator-users`, {headers: headers})
     let data = await response.json()
     return data
 }
