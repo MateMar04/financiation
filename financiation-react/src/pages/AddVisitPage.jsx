@@ -1,7 +1,7 @@
 import React, {useContext, useState, useRef} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import Carousel from 'react-bootstrap/Carousel';
-import {Button, Col, Container, Form, Row,} from "react-bootstrap";
+import {Col, Container, Form, Row,} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import FailedModal from "../components/FailedModal";
@@ -21,8 +21,8 @@ import HotelIcon from '@mui/icons-material/Hotel';
 import PersonIcon from '@mui/icons-material/Person';
 import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
 
-import {CheckBox} from '@mui/icons-material';
 
 const AddVisitPage = () => {
 
@@ -446,12 +446,11 @@ const AddVisitPage = () => {
                                 </Row>
                             </Carousel.Item>
 
-                            <Carousel.Item className={'MiniContainerVisit'}>
-
+                            <Carousel.Item className={'ThirdCarousel'}>
                                 <Row className='justify-content-center'>
                                     <Col>
                                         <Card sx={{my: 2, mx: 2}} className={'CardVisitConvenios'}>
-                                            <CardContent className={'CenterContentCardConvenios'}>
+                                            <CardContent className='CenterContentCardConvenios'>
                                                 <Row>
                                                     <Col md={3}>
                                                         <Row className='text-center'>
@@ -518,8 +517,11 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                 </Row>
-
-
+                                <Row className='justify-content-center text-center'>
+                                <Col className='ContentCenterCard'>    
+                                <Button className={'BtnLanding'} variant='outlined'>Guardar Visita</Button>
+                                </Col>
+                                </Row>
                             </Carousel.Item>
                         </Carousel>
                         <CarouselButtons prev={handlePrev} next={handleNext}/>
