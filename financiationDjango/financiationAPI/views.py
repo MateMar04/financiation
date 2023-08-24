@@ -1,9 +1,11 @@
-from django.http import JsonResponse
+from django.db import connection
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.http import JsonResponse
 
 from .serializers import *
+
 
 class RequestApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -118,6 +120,7 @@ class CoordinatorApiView(APIView):
 
         serializer = CoordinatorSerializer(coordinator, many=False)
         return Response(serializer.data)
+
 
 class AdvisorApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -362,7 +365,7 @@ def getGroupCoordinatorUsers(request, id):
 
 
 @api_view(['GET'])
-def getReport(request):
+def getRequests(request):
     faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
     visits_ids = parse_and_convert(request.GET.getlist('visits'))
 
@@ -399,14 +402,30 @@ def getGroupById(request, id):
     serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getStatusesById(request, id):
     status = UserStatus.objects.get(id=id)
     serializer = UserStatusSerializer(status, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getRolesById(request, id):
     role = Role.objects.get(id=id)
     serializer = RoleSerializer(role, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getTotalRequests(request):
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT count(*) as \"total_requests\" "
+                                         "FROM \"financiationAPI_request\" "
+                                         "WHERE visit_id IN %s "
+                                         "AND faq_id IN %s", [visits_ids, faqs_ids])
+        row = cursor.fetchone()
+        return JsonResponse({'total_requests': row}, safe=False)

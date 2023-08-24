@@ -79,5 +79,7 @@ urlpatterns = [
     path('user-statuses/<int:id>', views.getStatusesById, name='userStatuses'),
 
     # Reports
-    re_path(r'reports$', views.getReport, name='report')
+    re_path(r'reports$', views.getRequests, name='report'),
+    re_path(r'reports/total-requests$', views.getTotalRequests, name='report')
+
 ]
