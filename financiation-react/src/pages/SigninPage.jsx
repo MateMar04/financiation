@@ -168,7 +168,7 @@ const SigninPage = () => {
                             <Row>
                                 <Col>
                                     <Button variant="contained" id="botonsign" color="primary" type="submit">
-                                        Crear Cuenta
+                                        Crear 
                                     </Button>
                                 </Col>
                             </Row>
