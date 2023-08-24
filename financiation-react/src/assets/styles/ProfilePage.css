@@ -9,17 +9,15 @@
 
 };
 
-@media screen and (min-width: 801px){
-.InputsProfile{
+
+.inputsProfile{
     border-radius: 10vw !important; 
-    width: 80vw !important;
-}
-};
-
-
-@media screen and (max-width: 800px) {
-.ProfilePicture{
-    transform: translateY(15vh);
+    width: 30vw !important;
+    background-color: #f4f4f4 !important;
 }
 
+.textfieldprofile{
+    border-radius: 10vw !important; 
+    width: 30vw !important;
+    background-color: #f4f4f4 !important;
 }

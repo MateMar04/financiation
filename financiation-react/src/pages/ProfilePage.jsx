@@ -23,7 +23,7 @@ const ProfilePage = () => {
     return (
 
         <Container className="ContainerProfilePage">
-            <Row className={'d-flex justify-content-center'}>
+            <Row>
                 <Col className="d-flex justify-content-center">
                             <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
                             </Col>
@@ -38,12 +38,12 @@ const ProfilePage = () => {
             <Row className={"d-flex justify-content-center text-center"}>
                 <Col md={6}>
 
-                    <TextField variant='filled' label='Nombre' required className='InputsProfile' defaultValue={user?.first_name} sx={{ my: 3 }}></TextField>
+                    <TextField variant='standard' label='Nombre' required className='textfieldprofile' defaultValue={user?.first_name} sx={{ my: 3 }}></TextField>
 
                 </Col>
                 <Col md={6}>
 
-                    <TextField variant='filled' label='Apellido' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
+                    <TextField variant='standard' label='Apellido' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
 
                 </Col>
             </Row>
@@ -52,12 +52,24 @@ const ProfilePage = () => {
             <Row className={"d-flex justify-content-center text-center"}>
                 <Col md={6}>
 
-                    <TextField variant='filled' label='Correo Electronico' required className='InputsProfile' defaultValue={user?.email} sx={{ my: 3 }}></TextField>
+                    <TextField variant='standard' label='CUIL' required className='InputsProfile' defaultValue={user?.cuil} sx={{ my: 3 }}></TextField>
 
                 </Col>
                 <Col md={6}>
 
-                    <TextField variant='filled' label='Fecha de Nacimiento' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
+                    <TextField variant='standard' label='Telefono' required className='InputsProfile' defaultValue={user?.phone} sx={{ my: 3 }}></TextField>
+
+                </Col>
+            </Row>
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6} xs={12}>
+
+                    <TextField variant='standard' label='Fecha de Nacimiento' className='InputsProfile' sx={{ my: 3 }}></TextField>
+
+                </Col>
+                <Col md={6}>
+
+                    <TextField variant='standard' label='Fecha de Nacimiento' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
 
                 </Col>
             </Row>
