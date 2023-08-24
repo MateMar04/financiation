@@ -29,9 +29,15 @@
 
 
 .link{
-    font-size: 20px;
-    color: #53A6DC;
+    font-size: 0,3rem;
+    color: #000000;
     padding-top: 10px;
+    text-decoration: none; /* Eliminar subrayado */
+
+}
+.link:hover{
+    color:#373b3b;
+
 }
 
 .image-container{
@@ -47,10 +53,11 @@
     width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
     padding: 10vh, 10vw;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin: 0 auto; /* Esto centra horizontalmente la tarjeta */
+    
   }
   
   @media (max-width: 60vh) {
@@ -62,4 +69,23 @@
 .Titulo1{
     border-bottom: 0px;
     margin-bottom: 0%;
+}
+
+.Image{
+    padding-top: 0.9rem;
+    width: 55%;
+    height: 55%;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+.AccesButton{
+    color:cornsilk;
+    background-color: #53A6DC;
+    border: #53A6DC;
+    
+}
+.AccesButton:hover{
+    background-color: #469bd4;
+
 }
