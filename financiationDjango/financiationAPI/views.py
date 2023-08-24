@@ -496,3 +496,20 @@ def getTotalRequestsByLocation(request):
                        "GROUP BY L.name", [visits_ids, faqs_ids])
         row = cursor.fetchall()
         return JsonResponse({'requests_by_location': row}, safe=False)
+
+
+@api_view(['GET'])
+def getTotalRequestsByVisits(request):
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(L.name, ' ', V.visit_date), count(*) "
+                       "FROM \"financiationAPI_request\" "
+                       "INNER JOIN \"financiationAPI_visit\" V on visit_id = V.id "
+                       "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
+                       "WHERE visit_id IN %s "
+                       "AND faq_id IN %s "
+                       "GROUP BY CONCAT(L.name, ' ', V.visit_date)", [visits_ids, faqs_ids])
+        row = cursor.fetchall()
+        return JsonResponse({'requests_by_visits': row}, safe=False)
