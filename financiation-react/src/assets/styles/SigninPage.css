@@ -17,8 +17,8 @@
 
 #botonsign{
     border-radius: 4vh;
-    font-size: 0.7rem; /* Tamaño de fuente */
-    padding: 13px 19px; /* Ajusta el relleno según sea necesario */
+    font-size: 0.7rem; 
+    padding: 2vh 3vw;
     min-width: 100px; 
 }
 
@@ -51,8 +51,8 @@
 @media (max-width: 768px) {
     #botonsign {
         border-radius: 4vh;
-        font-size: 0.7rem; /* Tamaño de fuente para pantallas pequeñas */
-        padding: 9px 12px; /* Ajusta el relleno para pantallas pequeñas */
-        min-width: 80px; /* Ajusta el ancho mínimo para pantallas pequeñas */
+        font-size: 0.7rem;
+        padding: 1.5vh 2.5vw;
+        min-width: 80px;
     }
 }
