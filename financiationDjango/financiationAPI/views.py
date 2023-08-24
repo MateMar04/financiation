@@ -1,8 +1,8 @@
 from django.db import connection
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.http import JsonResponse
 
 from .serializers import *
 
@@ -424,8 +424,25 @@ def getTotalRequests(request):
 
     with connection.cursor() as cursor:
         cursor.execute("SELECT count(*) as \"total_requests\" "
-                                         "FROM \"financiationAPI_request\" "
-                                         "WHERE visit_id IN %s "
-                                         "AND faq_id IN %s", [visits_ids, faqs_ids])
-        row = cursor.fetchone()
+                       "FROM \"financiationAPI_request\" "
+                       "WHERE visit_id IN %s "
+                       "AND faq_id IN %s", [visits_ids, faqs_ids])
+        row = cursor.fetchall()
         return JsonResponse({'total_requests': row}, safe=False)
+
+
+@api_view(['GET'])
+def getTotalRequestsByAdvisor(request):
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(U.first_name, ' ', U.last_name), count(*) "
+                       "FROM \"financiationAPI_request\" "
+                       "INNER JOIN \"financiationAPI_advisor\" AS A on advisor_id = A.id "
+                       "INNER JOIN \"financiationAPI_useraccount\" U on A.user_id = U.id "
+                       "WHERE visit_id IN %s "
+                       "AND faq_id IN %s "
+                       "GROUP BY CONCAT(U.first_name, ' ', U.last_name)", [visits_ids, faqs_ids])
+        row = cursor.fetchall()
+        return JsonResponse({'requests_by_advisor': row}, safe=False)
