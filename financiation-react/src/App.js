@@ -34,7 +34,6 @@ function App() {
         <Router>
             <div className="App">
                 <AuthProvider>
-
                     <Navbar/>
                     <Routes>
                         <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
@@ -72,8 +71,6 @@ function App() {
                         <Route path='/reports'
                                element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
                     </Routes>
-
-
                 </AuthProvider>
             </div>
         </Router>
