@@ -1,3 +1,11 @@
+.contsign{
+    width: 50vw!important; /* Ancho del 80% del viewport width */
+    height: 95vh!important; /* Altura del 70% del viewport height */
+    max-width: 40rem!important; /* Ancho máximo según tus preferencias, utilizando unidades 'rem' */
+    margin: 0 auto!important; /* Centra horizontalmente la tarjeta */
+    padding: 2vw!important;
+    border-radius: 4vh!important;
+}
 
 .cardsign {
     width: 50vw!important; /* Ancho del 80% del viewport width */
@@ -9,12 +17,20 @@
 }
 
 .logosign{
-    width: 25vw; /* Ancho del 80% del viewport width */
-    height: 15vh; /* Altura del 70% del viewport height */
-    max-width: 40rem; /* Ancho máximo según tus preferencias, utilizando unidades 'rem' */
-    margin: 0 auto; /* Centra horizontalmente la tarjeta */
+    width: 25vw; 
+    height: 15vh; 
+    max-width: 40rem; 
+    margin: 0 auto; 
+    max-width: 100%;
+    height: auto;
 }
 
 #botonsign{
     border-radius: 4vh;
 }
+
+@media (max-width: 768px) {
+    .logosign {
+      max-width: 80%; /* Ajusta el tamaño máximo para pantallas pequeñas */
+    }
+  }
