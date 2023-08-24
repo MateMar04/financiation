@@ -23,7 +23,7 @@ const LoginPage = () => {
                 <img src={Logo} className="Image"   alt="Logo del ministerio de finanzas"/>
 
             <Container className="Titulo1">
-                    <h1>Iniciar Sesion</h1>
+                    <h2>Iniciar Sesion</h2>
                 </Container>
             <Form onSubmit={loginUser}>
                 <Container>
@@ -60,7 +60,7 @@ const LoginPage = () => {
                                 />
                 </Container>
                 <Container fluid>
-                    <Button type="submit" className="AccesButton">Acceder</Button>
+                    <Button type="submit" className="AccesButton">Iniciar Sesion</Button>
                 </Container>
             </Form>
             <Link to="/reset-password/"><Button variant="link" className="link">Me olvidé la contraseña</Button></Link>

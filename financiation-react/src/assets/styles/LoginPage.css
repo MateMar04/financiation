@@ -29,9 +29,8 @@
 
 
 .link{
-    font-size: 0,3rem;
+    font-size: 0.25 rem;
     color: #000000;
-    padding-top: 10px;
     text-decoration: none; /* Eliminar subrayado */
 
 }
@@ -40,14 +39,7 @@
 
 }
 
-.image-container{
-    margin-top: 0.5vh;
-    margin-bottom: 0.5vh;
-    margin-right: 5vw;
-    margin-left: 3vw;
-    max-width: 2%;
-    height: auto;
-}
+
 
 .GeneralCard {
     width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
@@ -83,9 +75,10 @@
     color:cornsilk;
     background-color: #53A6DC;
     border: #53A6DC;
-    
+    border-radius: 10px;
+
 }
 .AccesButton:hover{
     background-color: #469bd4;
-
+    
 }
