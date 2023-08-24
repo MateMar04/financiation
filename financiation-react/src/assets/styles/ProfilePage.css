@@ -1,10 +1,32 @@
-.ProfileCard {
-    margin-top: 4vh;
-    margin-bottom: 8vh;
-    margin-right: 13vw;
-    margin-left: 13vw;
-    border: none;
-   
-    
+
+@media screen and (min-width: 801px){
+    .ContainerProfilePage{
+        transform: translateY(25vh);
+        background-color: white;
+        border-radius: 10vh;
+        width: 60vw;
+    }
+
+};
+
+@media screen and (min-width: 801px){
+.InputsProfile{
+    border-radius: 10vw !important; 
+    width: 80vw !important;
+}
+};
+
+
+.ProfilePicture{
+    transform: translateY(-15vh);
+    width: 100%;
 }
 
+
+@media screen and (max-width: 800px) {
+.ProfilePicture{
+    justify-content: center;
+    transform: translateX(10vw);
+}
+
+}

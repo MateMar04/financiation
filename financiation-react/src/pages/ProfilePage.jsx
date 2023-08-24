@@ -1,45 +1,70 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
 import "../assets/styles/ProfilePage.css";
 import ProfileModifyForm from "../components/ProfileModifyForm";
 import AuthContext from "../context/AuthContext";
 import "../assets/styles/ProfileModifyForm.css";
-import {getUser} from "../services/UserServices";
+import { getUser } from "../services/UserServices";
+import { Avatar, TextField } from "@mui/material";
 
 
 const ProfilePage = () => {
 
     let [user, setUser] = useState()
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    let { authTokens, logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
-        getUser()
+        getUser(authTokens.access).then(data => setUser(data))
     })
 
 
     return (
-        <Container fluid>
-            <Card className="ProfileCard">
-                <Row>
-                    <Col lg={4}>
-                        <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
-                        {/* Falta añadir icono para editar imagen */}
-                        {/* Deberia cambiarse el img por un avatar */}
 
+        <Container className="ContainerProfilePage">
+            <Row className={'d-flex justify-content-center'}>
+                <Col md='1'>
+                    <Avatar src={user?.profile_picture} sx={{ width: 200, height:200 }} className="ProfilePicture"/>
                     </Col>
-                    <Col lg={8}>
-                        <ProfileData username={user?.username} firstName={user?.first_name} lastName={user?.last_name}
-                                     email={user?.email} ssn={user?.ssn}
-                                     phone_number={user?.phone_number}/>
-                    </Col>
-                </Row>
-                <ProfileModifyForm/>
-            </Card>
+            </Row>
+            
+            <Row className={'justify-content-center text-center'}>
+                <h1>{user?.first_name} {user?.last_name}</h1>
+                <h3>Coordinador</h3>
+            </Row>
 
-           
-        </Container>
+
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6}>
+
+                    <TextField variant='filled' label='Nombre' required className='InputsProfile' defaultValue={user?.first_name} sx={{ my: 3 }}></TextField>
+
+                </Col>
+                <Col md={6}>
+
+                    <TextField variant='filled' label='Apellido' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
+
+                </Col>
+            </Row>
+
+
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6}>
+
+                    <TextField variant='filled' label='Correo Electronico' required className='InputsProfile' defaultValue={user?.email} sx={{ my: 3 }}></TextField>
+
+                </Col>
+                <Col md={6}>
+
+                    <TextField variant='filled' label='Fecha de Nacimiento' required className='InputsProfile' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
+
+                </Col>
+            </Row>
+        </Container >
+
+
+
     );
 }
 
