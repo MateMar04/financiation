@@ -84,5 +84,6 @@ urlpatterns = [
     re_path(r'reports/total-requests-by-advisor$', views.getTotalRequestsByAdvisor, name='report'),
     re_path(r'reports/total-requests-by-ministry-department$', views.getTotalRequestsByMinistryDepartment, name='report'),
     re_path(r'reports/total-requests-by-faq$', views.getTotalRequestsByFaq, name='report'),
+    re_path(r'reports/total-requests-by-location$', views.getTotalRequestsByLocation, name='report'),
 
 ]
