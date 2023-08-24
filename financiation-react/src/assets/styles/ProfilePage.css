@@ -1,7 +1,7 @@
 
 @media screen and (min-width: 801px){
     .ContainerProfilePage{
-        transform: translateY(25vh);
+        transform: translateY(15vh);
         background-color: white;
         border-radius: 10vh;
         width: 60vw;
@@ -17,16 +17,9 @@
 };
 
 
-.ProfilePicture{
-    transform: translateY(-15vh);
-    width: 100%;
-}
-
-
 @media screen and (max-width: 800px) {
 .ProfilePicture{
-    justify-content: center;
-    transform: translateX(10vw);
+    transform: translateY(15vh);
 }
 
 }

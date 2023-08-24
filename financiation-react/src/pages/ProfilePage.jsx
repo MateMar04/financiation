@@ -24,11 +24,11 @@ const ProfilePage = () => {
 
         <Container className="ContainerProfilePage">
             <Row className={'d-flex justify-content-center'}>
-                <Col md='1'>
-                    <Avatar src={user?.profile_picture} sx={{ width: 200, height:200 }} className="ProfilePicture"/>
-                    </Col>
+                <Col className="d-flex justify-content-center">
+                            <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
+                            </Col>
             </Row>
-            
+
             <Row className={'justify-content-center text-center'}>
                 <h1>{user?.first_name} {user?.last_name}</h1>
                 <h3>Coordinador</h3>
