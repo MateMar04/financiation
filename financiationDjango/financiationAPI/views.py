@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+import json
+
 from .serializers import *
 
 
@@ -512,4 +514,15 @@ def getTotalRequestsByVisits(request):
                        "AND faq_id IN %s "
                        "GROUP BY CONCAT(L.name, ' ', V.visit_date)", [visits_ids, faqs_ids])
         row = cursor.fetchall()
-        return JsonResponse({'requests_by_visits': row}, safe=False)
+        return Response(convert_to_json(row))
+
+
+def convert_to_json(input_data):
+    result = []
+    for name, requests in input_data:
+        entry = {
+            "name": name,
+            "requests": requests
+        }
+        result.append(entry)
+    return result
