@@ -1,36 +1,58 @@
-.contsign{
-    width: 50vw!important; /* Ancho del 80% del viewport width */
-    height: 95vh!important; /* Altura del 70% del viewport height */
-    max-width: 40rem!important; /* Ancho máximo según tus preferencias, utilizando unidades 'rem' */
-    margin: 0 auto!important; /* Centra horizontalmente la tarjeta */
-    padding: 2vw!important;
-    border-radius: 4vh!important;
-}
 
 .cardsign {
-    width: 50vw!important; /* Ancho del 80% del viewport width */
-    height: 95vh!important; /* Altura del 70% del viewport height */
-    max-width: 40rem!important; /* Ancho máximo según tus preferencias, utilizando unidades 'rem' */
-    margin: 0 auto!important; /* Centra horizontalmente la tarjeta */
+    width: 80vw!important;
+    max-width: 40rem!important;
+    margin: 0 auto!important; 
     padding: 2vw!important;
     border-radius: 4vh!important;
 }
 
 .logosign{
     width: 25vw; 
-    height: 15vh; 
-    max-width: 40rem; 
-    margin: 0 auto; 
+    max-width: 40rem;
+    margin: 0 auto;
     max-width: 100%;
     height: auto;
 }
 
 #botonsign{
     border-radius: 4vh;
+    font-size: 0.7rem; /* Tamaño de fuente */
+    padding: 13px 19px; /* Ajusta el relleno según sea necesario */
+    min-width: 100px; 
+}
+
+.titsign {
+    font-size: 1.2rem; 
+}
+
+#linksign{
+    font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+    .titsign {
+        font-size: 0.8rem; 
+    }
 }
 
 @media (max-width: 768px) {
     .logosign {
-      max-width: 80%; /* Ajusta el tamaño máximo para pantallas pequeñas */
+        width: 45vw;
     }
-  }
+}
+
+@media (max-width: 768px) {
+    #linksign {
+        font-size: 0.7rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    #botonsign {
+        border-radius: 4vh;
+        font-size: 0.7rem; /* Tamaño de fuente para pantallas pequeñas */
+        padding: 9px 12px; /* Ajusta el relleno para pantallas pequeñas */
+        min-width: 80px; /* Ajusta el ancho mínimo para pantallas pequeñas */
+    }
+}
