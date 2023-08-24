@@ -463,3 +463,19 @@ def getTotalRequestsByMinistryDepartment(request):
                        "GROUP BY MD.name", [visits_ids, faqs_ids])
         row = cursor.fetchall()
         return JsonResponse({'requests_by_ministry_department': row}, safe=False)
+
+
+@api_view(['GET'])
+def getTotalRequestsByFaq(request):
+    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
+    visits_ids = parse_and_convert(request.GET.getlist('visits'))
+
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT F.name, count(*) "
+                       "FROM \"financiationAPI_request\" "
+                       "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
+                       "WHERE visit_id IN %s "
+                       "AND faq_id IN %s "
+                       "GROUP BY F.name", [visits_ids, faqs_ids])
+        row = cursor.fetchall()
+        return JsonResponse({'requests_by_ministry_department': row}, safe=False)
