@@ -58,7 +58,7 @@ export const CreateGroupPage = () => {
                 <Form onSubmit={postGroup}>
                     <Container className="separation font">
                         <Row className={'justify-content-center'}>
-                            <Col md={8} xs={9}>
+                            <Col md={8} xs={8}>
                                 <TextField
                                     className="font"
                                     fullWidth
@@ -90,10 +90,10 @@ export const CreateGroupPage = () => {
                     </div>
 
                     <Container>
-                            <Row className='justify-content-center boton'>
-                                <Col md={2} xs={4}>
+                            <Row className='justify-content-center '>
+                                <Col md={2} xs={2}>
                                     <Form.Group>
-                                        <Button type="submit" size="medium" variant="outline-primary">Crear Grupo</Button>
+                                        <button type="submit" class="button-28" role="button">Crear Grupo</button>
                                     </Form.Group>
                                 </Col>
                             </Row>
