@@ -6,9 +6,6 @@ import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import PersonIcon from '@mui/icons-material/Person';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import PhoneIcon from '@mui/icons-material/Phone';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LockIcon from '@mui/icons-material/Lock';
 
