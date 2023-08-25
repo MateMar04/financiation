@@ -54,7 +54,7 @@
   
   @media (max-width: 60vh) {
     .GeneralCard {
-      width: 100%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+      width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
     }
   }
 
