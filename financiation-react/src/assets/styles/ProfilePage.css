@@ -8,9 +8,10 @@
     }
 
     .profileTextField{
-        border-radius: 5vw !important; 
         width: 20vw !important;
-        background-color: #f4f4f4 !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+      
     }
 
     .ProfilePicture{
@@ -18,9 +19,14 @@
     }
 
     .ProfileText{
+        transform: translateY(-8vh)
+    }
+
+    .InputsProfile{
         transform: translateY(-5vh)
     }
 };
+
 
 @media all and (max-width: 600px){
     .ContainerProfilePage{
@@ -31,7 +37,8 @@
     }
 
     .profileTextField{
-        width: 60vw;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
     }
 
     .ProfilePicture{
@@ -58,5 +65,7 @@
 }
 
 .EditIconProfile{
-    transform: translateX(54vw);
+    
+    transform: translateY(5vh);
+    transform: translateX(2vw);
 }

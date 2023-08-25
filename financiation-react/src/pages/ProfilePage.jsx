@@ -44,44 +44,45 @@ const ProfilePage = () => {
                 <h3 className="ProfileText">Coordinador</h3>
             </Row>
 
+        <Container className="InputsProfile">
 
-            <Row className={"d-flex justify-content-center text-center"}>
+            <Row className={"d-flex justify-content-center text-center py-3"}>
                 <Col md={6}>
 
-                    <TextField variant='standard' label='Nombre' required className='profileTextField' defaultValue={user?.first_name} sx={{ my: 3 }}></TextField>
+                    <TextField variant='outlined' label='Nombre' required className='profileTextField' defaultValue={user?.first_name} InputProps={{ sx: { borderRadius: 5} }}></TextField>
 
                 </Col>
                 <Col md={6}>
 
-                    <TextField variant='standard' label='Apellido' required className='profileTextField' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
-
-                </Col>
-            </Row>
-
-
-            <Row className={"d-flex justify-content-center text-center"}>
-                <Col md={6}>
-
-                    <TextField variant='standard' label='CUIL' required className='profileTextField' defaultValue={user?.cuil} sx={{ my: 3 }}></TextField>
-
-                </Col>
-                <Col md={6}>
-
-                    <TextField variant='standard' label='Telefono' required className='profileTextField' defaultValue={user?.phone} sx={{ my: 3 }}></TextField>
+                    <TextField variant='outlined' label='Apellido' required className='profileTextField' defaultValue={user?.last_name} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
                 </Col>
             </Row>
-            <Row className={"d-flex justify-content-center text-center"}>
+
+
+            <Row className={"d-flex justify-content-center text-center py-3"}>
+                <Col md={6}>
+
+                    <TextField variant='outlined' label='CUIL' required className='profileTextField' defaultValue={user?.ssn} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
+                </Col>
+                <Col md={6}>
+
+                    <TextField variant='outlined' label='Telefono' required className='profileTextField' defaultValue={user?.phone_number} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
+                </Col>
+            </Row>
+            <Row className={"d-flex justify-content-center text-center py-3"}>
                 <Col md={6} xs={12}>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DateField label="Fecha de Nacimiento" className='profileTextField' sx={{ my: 3 }} variant="standard" />
+                        <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }} variant="outlined" />
                     </LocalizationProvider>
 
 
                 </Col>
                 <Col md={6}>
 
-                    <TextField variant='standard' label='Ciudad' className='profileTextField' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
+                    <TextField variant='outlined' label='Ciudad' className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
                 </Col>
             </Row>
@@ -90,6 +91,7 @@ const ProfilePage = () => {
                     <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my:3}}>Cerrar Sesion</Button>
                 </Col>
             </Row>
+            </Container>
         </Container >
 
 
