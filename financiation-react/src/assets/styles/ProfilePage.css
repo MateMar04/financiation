@@ -65,7 +65,31 @@
 }
 
 .EditIconProfile{
-    
     transform: translateY(5vh);
     transform: translateX(2vw);
+}
+
+.CancelarBtnProfile{
+    background-color: #848484;
+    border-radius: 3vh;
+    border-color: #848484;
+    width: 230px;
+}
+
+.CancelarBtnProfile:hover{
+    background-color: #545454;
+    border-color: #545454;
+
+}
+
+.GuardarBtnProfile{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 230px;
+}
+
+.GuardarBtnProfile:hover{
+    background-color: #026fb8;
+    border-color: #026fb8;
 }
