@@ -11,6 +11,7 @@ import { Avatar, Input, TextField } from "@mui/material";
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -29,11 +30,14 @@ const ProfilePage = () => {
     return (
 
         <Container className="ContainerProfilePage">
+            <EditIcon color='action' className="EditIconProfile"/>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
                 </Col>
+                
             </Row>
+            
 
             <Row className={'justify-content-center text-center'}>
                 <h1 className="ProfileText">{user?.first_name} {user?.last_name}</h1>
@@ -83,7 +87,7 @@ const ProfilePage = () => {
             </Row>
             <Row>
                 <Col className="d-flex justify-content-center">
-                    <Button className='BtnProfileCerrarSesion' onClick={logoutUser}>Cerrar Sesion</Button>
+                    <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my:3}}>Cerrar Sesion</Button>
                 </Col>
             </Row>
         </Container >

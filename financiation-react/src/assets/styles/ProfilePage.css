@@ -37,6 +37,10 @@
     .ProfilePicture{
         transform: translateY(-10vh)
     }
+
+    .EditIconProfile{
+        transform: translateX(80vw);
+    }
    
 }
 
@@ -53,3 +57,6 @@
 
 }
 
+.EditIconProfile{
+    transform: translateX(54vw);
+}
