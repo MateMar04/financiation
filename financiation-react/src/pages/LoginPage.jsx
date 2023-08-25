@@ -22,11 +22,11 @@ const LoginPage = () => {
             
                 <img src={Logo} className="Image"   alt="Logo del ministerio de finanzas"/>
 
-            <Container className="Titulo1">
-                    <h2>Iniciar Sesion</h2>
+            <Container fluid className="Titulo1">
+                    <p>Iniciar Sesion</p>
                 </Container>
             <Form onSubmit={loginUser}>
-                <Container>
+                
                 <TextField
                                     label="CUIL"
                                     variant="standard"
@@ -41,8 +41,8 @@ const LoginPage = () => {
                                     name='cuil'
                                     required
                                 />
-                </Container>
-                <Container>
+                
+                <Container className="SecondTextField">
                 
                 <TextField
                                     label="Contraseña"
