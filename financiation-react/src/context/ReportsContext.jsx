@@ -18,6 +18,13 @@ export const ReportsProvider = ({children}) => {
 
     const [requests, setRequests] = useState({});
 
+    const [totalRequests, setTotalRequests] = useState([{}]);
+    const [totalRequestsByAdvisors, setTotalRequestsByAdvisors] = useState([{}]);
+    const [totalRequestsByLocations, setTotalRequestsByLocations] = useState([{}]);
+    const [totalRequestsByVisits, setTotalRequestsByVisits] = useState([{}]);
+    const [totalRequestsByFaqs, setTotalRequestsByFaqs] = useState([{}]);
+    const [totalRequestsByMinistryDepartments, setTotalRequestsByMinistryDepartments] = useState([{}]);
+
     let dataHandler = async (title, e) => {
         switch (title) {
             case 'Departamentos':
@@ -133,24 +140,68 @@ export const ReportsProvider = ({children}) => {
         return []
     }
 
-    let getRequestsFromVisitDepsFaqs = async () => {
+    const faqsQP = () => extractData(selectedMinistryDepartments)
+    const visitsQP = () => extractData(selectedLocations)
 
-        let deps_ = Object.keys(selectedMinistryDepartments).join()
-        let faqs_ = extractData(selectedMinistryDepartments)
-        let visits_ = extractData(selectedLocations)
 
-        if (!checkText(deps_) || !checkText(faqs_) || !checkText(visits_)) {
-            alert("Por favor seleccione algo en todos los campos")
+    let getRequestsByVisitFaq = async () => {
+        let response = await fetch(`/api/reports?faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+    let getTotalRequests = async () => {
+        let response = await fetch(`/api/reports/total-requests?faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let getTotalRequestsByAdvisors = async () => {
+        let response = await fetch(`/api/reports/total-requests-by-advisors?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let getTotalRequestsByVisits = async () => {
+        let response = await fetch(`/api/reports/total-requests-by-visits?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let getTotalRequestsByLocations = async () => {
+        let response = await fetch(`/api/reports/total-requests-by-locations?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let getTotalRequestsByFaqs = async () => {
+        let response = await fetch(`/api/reports/total-requests-by-faqs?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let getTotalRequestsByMinistryDepartments = async () => {
+        let response = await fetch(`/api/reports/total-requests-by-ministry-departments?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let data = await response.json()
+        return data
+    }
+
+    let generateReports = async () => {
+
+        if (!checkText(faqsQP()) || !checkText(visitsQP())) {
+            await getRequestsByVisitFaq().then(r => setRequests(r))
+            await getTotalRequests().then(r => setTotalRequests(r))
+            await getTotalRequestsByAdvisors.then(r => setTotalRequestsByAdvisors(r))
+            await getTotalRequestsByVisits().then(r => setTotalRequestsByVisits(r))
+            await getTotalRequestsByLocations().then(r => setTotalRequestsByLocations(r))
+            await getTotalRequestsByFaqs.then(r => setTotalRequestsByFaqs(r))
+            await getTotalRequestsByMinistryDepartments().then(r => setTotalRequestsByMinistryDepartments(r))
         } else {
-            let response = await fetch(`/api/reports?deps=${deps_}&faqs=${faqs_}&visits=${visits_}`, {headers: headers})
-            let data = await response.json()
-            setRequests(data)
-            console.log(data)
-            return data
+            alert('Seleccione algo en todos los campos')
         }
 
-
     }
+
+
 
 
     let contextData = {
@@ -158,10 +209,18 @@ export const ReportsProvider = ({children}) => {
         locations: selectedLocations,
         ministryDepartments: selectedMinistryDepartments,
         faqs: faqs,
+        requests: requests,
+        totalRequests: totalRequests,
+        totalRequestsByAdvisors: totalRequestsByAdvisors,
+        totalRequestsByFaqs: totalRequestsByFaqs,
+        totalRequestsByMinistryDepartments: totalRequestsByMinistryDepartments,
+        totalRequestsByVisits: totalRequestsByVisits,
+        totalRequestsByLocations: totalRequestsByLocations,
         dataHandler: dataHandler,
-        getRequestsFromVisitDepsFaqs: getRequestsFromVisitDepsFaqs,
+        getRequestsFromVisitDepsFaqs: getRequestsByVisitFaq,
         getMinistryDepartmentsForFilter: getMinistryDepartmentsForFilters,
-        getLocationsForFilter: getLocationsForFilters
+        getLocationsForFilter: getLocationsForFilters,
+        generateReports: generateReports
     }
 
     return (
