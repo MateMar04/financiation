@@ -1,5 +1,5 @@
 
-@media screen and (min-width: 801px){
+@media all and (min-width: 801px){
     .ContainerProfilePage{
         transform: translateY(15vh);
         background-color: white;
@@ -7,17 +7,36 @@
         width: 60vw;
     }
 
+    .profileTextField{
+        border-radius: 10vw !important; 
+        width: 20vw !important;
+        background-color: #f4f4f4 !important;
+    }
+
+    .ProfilePicture{
+        transform: translateY(-15vh)
+    }
+
+    .ProfileText{
+        transform: translateY(-5vh)
+    }
 };
 
+@media all and (max-width: 600px){
+    .ContainerProfilePage{
+        transform: translateY(10vh);
+        background-color: white;
+        border-radius: 5vh;
+        width: 90vw;
+    }
 
-.inputsProfile{
-    border-radius: 10vw !important; 
-    width: 30vw !important;
-    background-color: #f4f4f4 !important;
+    .profileTextField{
+        width: 60vw;
+    }
+
+    .ProfilePicture{
+        transform: translateY(-10vh)
+    }
+   
 }
 
-.textfieldprofile{
-    border-radius: 10vw !important; 
-    width: 30vw !important;
-    background-color: #f4f4f4 !important;
-}
