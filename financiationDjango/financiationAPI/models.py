@@ -177,7 +177,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
-    profile_picture = models.ImageField(default=None)
+    profile_picture = models.BinaryField(default=None)
     id_role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     id_user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
