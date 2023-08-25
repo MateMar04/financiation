@@ -46,13 +46,13 @@ const ProfilePage = () => {
 
         <Container className="InputsProfile">
 
-            <Row className={"d-flex justify-content-center text-center py-3"}>
-                <Col md={6}>
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6} className="py-3">
 
                     <TextField variant='outlined' label='Nombre' required className='profileTextField' defaultValue={user?.first_name} InputProps={{ sx: { borderRadius: 5} }}></TextField>
 
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="py-3">
 
                     <TextField variant='outlined' label='Apellido' required className='profileTextField' defaultValue={user?.last_name} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
@@ -60,27 +60,27 @@ const ProfilePage = () => {
             </Row>
 
 
-            <Row className={"d-flex justify-content-center text-center py-3"}>
-                <Col md={6}>
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6} className="py-3">
 
                     <TextField variant='outlined' label='CUIL' required className='profileTextField' defaultValue={user?.ssn} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="py-3">
 
                     <TextField variant='outlined' label='Telefono' required className='profileTextField' defaultValue={user?.phone_number} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
                 </Col>
             </Row>
-            <Row className={"d-flex justify-content-center text-center py-3"}>
-                <Col md={6} xs={12}>
+            <Row className={"d-flex justify-content-center text-center"}>
+                <Col md={6} xs={12} className="py-3">
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }} variant="outlined" />
                     </LocalizationProvider>
 
 
                 </Col>
-                <Col md={6}>
+                <Col md={6} className="py-3">
 
                     <TextField variant='outlined' label='Ciudad' className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
