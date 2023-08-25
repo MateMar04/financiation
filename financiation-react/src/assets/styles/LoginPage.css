@@ -1,6 +1,7 @@
 .general {
     padding: 2vw;
     text-align: center;
+    
 }
 
 .form-control {
@@ -21,4 +22,69 @@
 
 .input-required {
     padding: 15px;
+}
+
+
+.link{
+    font-size: 0.80rem;
+    color: #000000;
+    text-decoration: none; /* Eliminar subrayado */
+
+}
+.link:hover{
+    color:#373b3b;
+
+}
+
+
+
+.GeneralCard {
+    width: 30vw; /* Ajusta el ancho de la tarjeta según tus necesidades */
+    padding: 10vh, 10vw;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Esto centra horizontalmente la tarjeta */
+  }
+  
+  @media (max-width: 60vh) {
+    .GeneralCard {
+      width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+    }
+  }
+
+.Titulo1{
+    padding-top: 0.8rem;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 0rem;
+    margin-bottom: 0rem;
+    margin: 0;
+}
+
+.Image{
+    width: 17.5vw; 
+    max-width: 30rem;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+    padding-top: 4vh;
+}
+
+.AccesButton{
+    margin-top: 0.3rem;
+    color: cornsilk;
+    background-color: #53A6DC;
+    border: none; /* Elimina el borde si no es necesario */
+    border-radius: 20px; /* Aumenta el valor del border-radius para hacerlo más redondeado */
+    padding: 0.5rem 1rem; /* Ajusta el espaciado interno del botón para que se vea bien */
+    margin-bottom: 1.5vh;
+}
+.AccesButton:hover{
+    background-color: #469bd4;
+    
+}
+.SecondTextField{
+    padding: 1.5rem;
 }
