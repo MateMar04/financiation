@@ -34,7 +34,9 @@ export const ReportsPage = () => {
         faqs,
         getRequestsFromVisitDepsFaqs,
         getMinistryDepartmentsForFilter,
-        getLocationsForFilter
+        getLocationsForFilter,
+        totalData,
+        generateReports
     } = useContext(ReportsContext)
 
 
@@ -42,6 +44,11 @@ export const ReportsPage = () => {
         getLocationsForFilter(authTokens.access).then(r => setLocalities(r))
         getMinistryDepartmentsForFilter(authTokens.access).then(r => setMinistryDepartments(r))
     }, [])
+
+    const buttonClick = async () => {
+        console.log("Hasta aca");
+        await generateReports()
+    };
 
     return (
             <Container fluid>
@@ -64,7 +71,7 @@ export const ReportsPage = () => {
                         </Col>
                     </Row>
                 </Container>
-                <Button onClick={() => getRequestsFromVisitDepsFaqs(authTokens.access)}>Generar</Button>
+                <Button onClick={buttonClick}>Generar</Button>
 
                 <hr/>
 
