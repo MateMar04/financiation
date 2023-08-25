@@ -8,7 +8,7 @@
     }
 
     .profileTextField{
-        border-radius: 10vw !important; 
+        border-radius: 5vw !important; 
         width: 20vw !important;
         background-color: #f4f4f4 !important;
     }
@@ -38,5 +38,18 @@
         transform: translateY(-10vh)
     }
    
+}
+
+.BtnProfileCerrarSesion{
+    background-color: #F33131;
+    border-radius: 3vh;
+    border-color: #F33131;
+    width: 15vw;
+}
+
+.BtnProfileCerrarSesion:hover{
+    background-color: #a20d0d;
+    border-color: #a20d0d;
+
 }
 

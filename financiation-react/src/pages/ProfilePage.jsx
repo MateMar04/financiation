@@ -31,8 +31,8 @@ const ProfilePage = () => {
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
-                            <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
-                            </Col>
+                    <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
+                </Col>
             </Row>
 
             <Row className={'justify-content-center text-center'}>
@@ -69,8 +69,8 @@ const ProfilePage = () => {
             </Row>
             <Row className={"d-flex justify-content-center text-center"}>
                 <Col md={6} xs={12}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DateField label="Fecha de Nacimiento" className='profileTextField' sx={{ my: 3 }} variant="standard"/>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DateField label="Fecha de Nacimiento" className='profileTextField' sx={{ my: 3 }} variant="standard" />
                     </LocalizationProvider>
 
 
@@ -79,6 +79,11 @@ const ProfilePage = () => {
 
                     <TextField variant='standard' label='Ciudad' className='profileTextField' defaultValue={user?.last_name} sx={{ my: 3 }}></TextField>
 
+                </Col>
+            </Row>
+            <Row>
+                <Col className="d-flex justify-content-center">
+                    <Button className='BtnProfileCerrarSesion' onClick={logoutUser}>Cerrar Sesion</Button>
                 </Col>
             </Row>
         </Container >
