@@ -30,7 +30,7 @@ const ProfilePage = () => {
     return (
 
         <Container className="ContainerProfilePage">
-            <EditIcon color='action' className="EditIconProfile"/>
+            <EditIcon color='action' className="EditIconProfile" sx={{width: 25, height:25} } />
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
@@ -87,7 +87,7 @@ const ProfilePage = () => {
                 </Col>
             </Row>
             <Row>
-                <Col className="d-flex justify-content-center">
+                <Col className="d-flex justify-content-center py-3">
                     <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my:3}}>Cerrar Sesion</Button>
                 </Col>
             </Row>
