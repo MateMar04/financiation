@@ -376,7 +376,6 @@ def getRequests(request):
         "WHERE R.visit_id IN %s "
         "AND R.faq_id IN %s",
         [visits_ids, faqs_ids])
-    print(requests)
     serializer = RequestSerializer(requests, many=True)
     return Response(serializer.data)
 
