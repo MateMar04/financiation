@@ -20,14 +20,17 @@
     font-size: 0.7rem; 
     padding: 2vh 3vw;
     min-width: 100px; 
+    font-family: Arial, sans-serif;
 }
 
 .titsign {
     font-size: 1.2rem; 
+    font-family: Arial, sans-serif;
 }
 
 #linksign{
     font-size: 0.8rem;
+    font-family: Arial, sans-serif;
 }
 
 @media (max-width: 768px) {
