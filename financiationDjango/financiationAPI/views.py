@@ -419,27 +419,21 @@ def getRolesById(request, id):
 
 @api_view(['GET'])
 def getTotalRequests(request):
-    execute_query("SELECT 'requests', count(*) as \"total_requests\" "
-                  "FROM \"financiationAPI_request\" "
-                  "WHERE visit_id IN %s "
-                  "AND faq_id IN %s", request)
+    return execute_query("SELECT 'requests', count(*) as \"total_requests\" "
+                         "FROM \"financiationAPI_request\" "
+                         "WHERE visit_id IN %s "
+                         "AND faq_id IN %s", request)
 
 
 @api_view(['GET'])
 def getTotalRequestsByAdvisor(request):
-    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
-    visits_ids = parse_and_convert(request.GET.getlist('visits'))
-
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT CONCAT(U.first_name, ' ', U.last_name), count(*) "
-                       "FROM \"financiationAPI_request\" "
-                       "INNER JOIN \"financiationAPI_advisor\" AS A on advisor_id = A.id "
-                       "INNER JOIN \"financiationAPI_useraccount\" U on A.user_id = U.id "
-                       "WHERE visit_id IN %s "
-                       "AND faq_id IN %s "
-                       "GROUP BY CONCAT(U.first_name, ' ', U.last_name)", [visits_ids, faqs_ids])
-        row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
+    return execute_query("SELECT CONCAT(U.first_name, ' ', U.last_name), count(*) "
+                         "FROM \"financiationAPI_request\" "
+                         "INNER JOIN \"financiationAPI_advisor\" AS A on advisor_id = A.id "
+                         "INNER JOIN \"financiationAPI_useraccount\" U on A.user_id = U.id "
+                         "WHERE visit_id IN %s "
+                         "AND faq_id IN %s "
+                         "GROUP BY CONCAT(U.first_name, ' ', U.last_name)", request)
 
 
 @api_view(['GET'])
@@ -453,6 +447,38 @@ def getTotalRequestsByMinistryDepartment(request):
                          "GROUP BY MD.name", request)
 
 
+@api_view(['GET'])
+def getTotalRequestsByFaq(request):
+    return execute_query("SELECT F.name, count(*) "
+                         "FROM \"financiationAPI_request\" "
+                         "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
+                         "WHERE visit_id IN %s "
+                         "AND faq_id IN %s "
+                         "GROUP BY F.name", request)
+
+
+@api_view(['GET'])
+def getTotalRequestsByLocation(request):
+    return execute_query("SELECT L.name, count(*) "
+                         "FROM \"financiationAPI_request\" "
+                         "INNER JOIN \"financiationAPI_visit\" V on visit_id = V.id "
+                         "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
+                         "WHERE visit_id IN %s "
+                         "AND faq_id IN %s "
+                         "GROUP BY L.name", request)
+
+
+@api_view(['GET'])
+def getTotalRequestsByVisits(request):
+    return execute_query("SELECT CONCAT(L.name, ' ', V.visit_date), count(*) "
+                         "FROM \"financiationAPI_request\" "
+                         "INNER JOIN \"financiationAPI_visit\" V on visit_id = V.id "
+                         "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
+                         "WHERE visit_id IN %s "
+                         "AND faq_id IN %s "
+                         "GROUP BY CONCAT(L.name, ' ', V.visit_date)", request)
+
+
 def execute_query(query, request):
     faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
     visits_ids = parse_and_convert(request.GET.getlist('visits'))
@@ -460,38 +486,6 @@ def execute_query(query, request):
         cursor.execute(query, [visits_ids, faqs_ids])
         row = cursor.fetchall()
         return JsonResponse(convert_to_json(row), safe=False)
-
-
-@api_view(['GET'])
-def getTotalRequestsByFaq(request):
-    execute_query("SELECT F.name, count(*) "
-                  "FROM \"financiationAPI_request\" "
-                  "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
-                  "WHERE visit_id IN %s "
-                  "AND faq_id IN %s "
-                  "GROUP BY F.name", request)
-
-
-@api_view(['GET'])
-def getTotalRequestsByLocation(request):
-    execute_query("SELECT L.name, count(*) "
-                  "FROM \"financiationAPI_request\" "
-                  "INNER JOIN \"financiationAPI_visit\" V on visit_id = V.id "
-                  "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
-                  "WHERE visit_id IN %s "
-                  "AND faq_id IN %s "
-                  "GROUP BY L.name", request)
-
-
-@api_view(['GET'])
-def getTotalRequestsByVisits(request):
-    execute_query("SELECT CONCAT(L.name, ' ', V.visit_date), count(*) "
-                  "FROM \"financiationAPI_request\" "
-                  "INNER JOIN \"financiationAPI_visit\" V on visit_id = V.id "
-                  "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
-                  "WHERE visit_id IN %s "
-                  "AND faq_id IN %s "
-                  "GROUP BY CONCAT(L.name, ' ', V.visit_date)", request)
 
 
 def convert_to_json(input_data):
