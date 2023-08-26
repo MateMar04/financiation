@@ -13,21 +13,21 @@
 }
 
 @media (max-width: 60vh) {
-    .GeneralCard {
+    .ContainerLoginPage {
         width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
     }
 }
 
-.AccesButton {
-    width: 210px;
-    border-radius: 15px;
+.BtnIniciarSesionLogin {
+    width: 12vw;
+    border-radius: 10vh;
     background-color: #53A6DC;
     border-color: #53A6DC;
     color: white;
     padding: 10px;
 }
 
-.AccesButton:hover {
+.BtnIniciarSesionLogin:hover {
     background-color: #1f8bda;
     border-color: #1f8bda;
 
@@ -41,4 +41,16 @@
 
 .h3LoginPage{
     margin: 2vh;
+}
+
+.pLoginPage{
+    margin-top: 2vh;
+    color: black;
+}
+
+.SecondpLoginPage{
+    color: black;
+}
+a:link, a:visited, a:active {
+    text-decoration:none;
 }

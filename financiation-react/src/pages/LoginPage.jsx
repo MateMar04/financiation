@@ -6,8 +6,8 @@ import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import LockIcon from '@mui/icons-material/Lock';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)
@@ -26,35 +26,28 @@ const LoginPage = () => {
                     <TextField
                         label="CUIL"
                         variant="outlined"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <AccountBoxIcon/>
-                                </InputAdornment>
-                            ),
-                        }}
+                        InputProps={{ startAdornment: (<InputAdornment position="start"> <AccountCircleOutlinedIcon/> </InputAdornment> ),sx: { borderRadius: 6 , borderColor: '#f4f4f4'} }}
                         type="number"
                         name='ssn'
                         required
-                        InputProps={{ sx: { borderRadius: 6 } }}
                         className={'InputLoginPage'}
                     />
                 </Row>
                 <Row className={'justify-content-center text-center py-4'}>
-                    <TextField label="Contraseña" variant="outlined" InputProps={{ startAdornment: (<InputAdornment position="start"> <LockIcon/> </InputAdornment> ), }} type="password" name="password" required InputProps={{ sx: { borderRadius: 6 , borderColor: '#f4f4f4'} }} className={'InputLoginPage'} />
+                    <TextField label="Contraseña" variant="outlined" InputProps={{ startAdornment: (<InputAdornment position="start"> <VpnKeyOutlinedIcon/> </InputAdornment> ),sx: { borderRadius: 6 , borderColor: '#f4f4f4'} }} type="password" name="password" required className={'InputLoginPage'} />
                 </Row>
                 <Row className={'justify-content-center text-center'}>
-                    <Button type="submit" className="AccesButton">Iniciar Sesion</Button>
+                    <Button type="submit" className="BtnIniciarSesionLogin">Iniciar Sesion</Button>
                 </Row>
 
                 <Row className={'justify-content-center text-center'}>
                     <Link to="/reset-password/">
-                        <a>Olvidé mi contraseña</a>
+                        <p className={'pLoginPage'}>Olvidé mi contraseña</p>
                     </Link>
                 </Row>
                 <Row className={'justify-content-center text-center'}>
                     <Link to="/signin/">
-                        <a>Crea una cuenta</a>
+                        <p className={'SecondpLoginPage'}>Crea una cuenta</p>
                     </Link>
                 </Row>
 
