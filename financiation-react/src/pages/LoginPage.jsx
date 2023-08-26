@@ -19,13 +19,13 @@ const LoginPage = () => {
                     <img src={Logo} className="ImgLogoLogin" alt="Logo del ministerio de finanzas"/>
                 </Row>
                 <Row className={'justify-content-center text-center'}>
-                    <h3>Iniciar Sesion</h3>
+                    <h3 className={'h3LoginPage'}>Iniciar Sesion</h3>
                 </Row>
 
                 <Row className={'justify-content-center text-center'}>
                     <TextField
                         label="CUIL"
-                        variant="standard"
+                        variant="outlined"
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -36,23 +36,12 @@ const LoginPage = () => {
                         type="number"
                         name='ssn'
                         required
+                        InputProps={{ sx: { borderRadius: 6 } }}
+                        className={'InputLoginPage'}
                     />
                 </Row>
-                <Row className={'justify-content-center text-center'}>
-                    <TextField
-                        label="Contraseña"
-                        variant="standard"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <LockIcon/>
-                                </InputAdornment>
-                            ),
-                        }}
-                        type="password"
-                        name="password"
-                        required
-                    />
+                <Row className={'justify-content-center text-center py-4'}>
+                    <TextField label="Contraseña" variant="outlined" InputProps={{ startAdornment: (<InputAdornment position="start"> <LockIcon/> </InputAdornment> ), }} type="password" name="password" required InputProps={{ sx: { borderRadius: 6 , borderColor: '#f4f4f4'} }} className={'InputLoginPage'} />
                 </Row>
                 <Row className={'justify-content-center text-center'}>
                     <Button type="submit" className="AccesButton">Iniciar Sesion</Button>
