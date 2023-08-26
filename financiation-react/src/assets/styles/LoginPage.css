@@ -12,11 +12,6 @@
     margin-bottom: 2vh;
 }
 
-@media (max-width: 60vh) {
-    .ContainerLoginPage {
-        width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
-    }
-}
 
 .BtnIniciarSesionLogin {
     width: 12vw;
@@ -39,19 +34,55 @@
     border-radius: 3vh;
 }
 
-.h3LoginPage{
+.h3LoginPage {
     margin-bottom: 5vh;
     margin-top: 2vh;
 }
 
-.pLoginPage{
+.pLoginPage {
     margin-top: 2vh;
     color: black;
 }
 
-.SecondpLoginPage{
+.SecondpLoginPage {
     color: black;
 }
+
 a:link, a:visited, a:active {
-    text-decoration:none;
+    text-decoration: none;
+}
+
+@media (max-width: 60vh) {
+    .ContainerLoginPage {
+        width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+    }
+
+    .BtnIniciarSesionLogin {
+        width: 40vw;
+        border-radius: 10vh;
+        background-color: #53A6DC;
+        border-color: #53A6DC;
+        color: white;
+        padding: 10px;
+    }
+
+    .BtnIniciarSesionLogin:hover {
+    background-color: #1f8bda;
+    border-color: #1f8bda;
+
+}
+
+    .InputLoginPage {
+        width: 60vw !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+    }
+
+    .ImgLogoLogin {
+    width: 55vw;
+    height: 8vh;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+}
+
 }
