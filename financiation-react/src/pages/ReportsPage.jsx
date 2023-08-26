@@ -73,7 +73,7 @@ export const ReportsPage = () => {
             <Container fluid>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={visitsData}/>}/>
+                        <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
                         <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
