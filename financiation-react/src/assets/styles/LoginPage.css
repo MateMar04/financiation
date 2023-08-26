@@ -1,39 +1,40 @@
-.ContainerLoginPage {
-    margin-top: 8vh;
-    background-color: white;
-    width: 25vw;
-    border-radius: 5vh;
+@media (min-width: 801px) {
+    .ContainerLoginPage {
+        margin-top: 8vh;
+        background-color: white;
+        width: 25vw;
+        border-radius: 5vh;
+    }
+
+    .ImgLogoLogin {
+        width: 13vw;
+        height: 8vh;
+        margin-top: 4vh;
+        margin-bottom: 2vh;
+    }
+
+
+    .BtnIniciarSesionLogin {
+        width: 12vw;
+        border-radius: 10vh;
+        background-color: #53A6DC;
+        border-color: #53A6DC;
+        color: white;
+        padding: 10px;
+    }
+
+    .BtnIniciarSesionLogin:hover {
+        background-color: #1f8bda;
+        border-color: #1f8bda;
+
+    }
+
+    .InputLoginPage {
+        width: 20vw !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+    }
 }
-
-.ImgLogoLogin {
-    width: 13vw;
-    height: 8vh;
-    margin-top: 4vh;
-    margin-bottom: 2vh;
-}
-
-
-.BtnIniciarSesionLogin {
-    width: 12vw;
-    border-radius: 10vh;
-    background-color: #53A6DC;
-    border-color: #53A6DC;
-    color: white;
-    padding: 10px;
-}
-
-.BtnIniciarSesionLogin:hover {
-    background-color: #1f8bda;
-    border-color: #1f8bda;
-
-}
-
-.InputLoginPage {
-    width: 20vw !important;
-    background-color: #f4f4f4;
-    border-radius: 3vh;
-}
-
 .h3LoginPage {
     margin-bottom: 5vh;
     margin-top: 2vh;
@@ -52,9 +53,13 @@ a:link, a:visited, a:active {
     text-decoration: none;
 }
 
-@media (max-width: 60vh) {
+@media (max-width: 800px) {
+
     .ContainerLoginPage {
+        margin-top: 8vh;
         width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+        background-color: white;
+        border-radius: 5vh;
     }
 
     .BtnIniciarSesionLogin {
@@ -79,8 +84,8 @@ a:link, a:visited, a:active {
     }
 
     .ImgLogoLogin {
-    width: 55vw;
-    height: 8vh;
+    width: 60%;
+    height: 10%;
     margin-top: 4vh;
     margin-bottom: 2vh;
 }
