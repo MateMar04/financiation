@@ -1,10 +1,95 @@
-.ProfileCard {
-    margin-top: 4vh;
-    margin-bottom: 8vh;
-    margin-right: 13vw;
-    margin-left: 13vw;
-    border: none;
+
+@media only screen and (min-width: 801px){
+    .ContainerProfilePage{
+        transform: translateY(15vh);
+        background-color: white;
+        border-radius: 10vh;
+        width: 60vw;
+    }
+
+    .profileTextField{
+        width: 20vw !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+      
+    }
+
+    .ProfilePicture{
+        transform: translateY(-15vh)
+    }
+
+    .ProfileText{
+        transform: translateY(-8vh)
+    }
+
+    .InputsProfile{
+        transform: translateY(-5vh)
+    }
+};
+
+@media only screen and (max-width: 768px) {
+
+    .ContainerProfilePage{
+        transform: translateY(10vh);
+        background-color: white;
+        border-radius: 5vh;
+        width: 90vw;
+    }
+
+    .profileTextField{
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+    }
+
+    .ProfilePicture{
+        transform: translateY(-10vh)
+    }
+
+    .EditIconProfile{
+        transform: translateX(80vw);
+    }
    
-    
 }
 
+.BtnProfileCerrarSesion{
+    background-color: #F33131;
+    border-radius: 3vh;
+    border-color: #F33131;
+    width: 230px;
+}
+
+.BtnProfileCerrarSesion:hover{
+    background-color: #a20d0d;
+    border-color: #a20d0d;
+
+}
+
+.EditIconProfile{
+    transform: translateY(5vh);
+    transform: translateX(2vw);
+}
+
+.CancelarBtnProfile{
+    background-color: #848484;
+    border-radius: 3vh;
+    border-color: #848484;
+    width: 230px;
+}
+
+.CancelarBtnProfile:hover{
+    background-color: #545454;
+    border-color: #545454;
+
+}
+
+.GuardarBtnProfile{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 230px;
+}
+
+.GuardarBtnProfile:hover{
+    background-color: #026fb8;
+    border-color: #026fb8;
+}

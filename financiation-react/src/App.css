@@ -11,3 +11,11 @@
     font-size: 30px;
     color: #1fa4e6;
 }
+
+* {
+    font-family: "Poppins";
+}
+
+body {
+    background-color: #f4f4f4;
+}
