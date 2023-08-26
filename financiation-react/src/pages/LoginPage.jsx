@@ -14,31 +14,31 @@ const LoginPage = () => {
     return (
 
         <Container className="ContainerLoginPage">
-            <Row className={'justify-content-center text-center'}>
-                <img src={Logo} className="ImgLogoLogin" alt="Logo del ministerio de finanzas"/>
-            </Row>
-            <Row className={'justify-content-center text-center'}>
-                <h3>Iniciar Sesion</h3>
-            </Row>
-
             <Form onSubmit={loginUser}>
-                <TextField
-                    label="CUIL"
-                    variant="standard"
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <AccountBoxIcon/>
-                            </InputAdornment>
-                        ),
-                    }}
-                    type="number"
-                    name='ssn'
-                    required
-                />
+                <Row className={'justify-content-center text-center'}>
+                    <img src={Logo} className="ImgLogoLogin" alt="Logo del ministerio de finanzas"/>
+                </Row>
+                <Row className={'justify-content-center text-center'}>
+                    <h3>Iniciar Sesion</h3>
+                </Row>
 
-                <Container className="SecondTextField">
-
+                <Row className={'justify-content-center text-center'}>
+                    <TextField
+                        label="CUIL"
+                        variant="standard"
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <AccountBoxIcon/>
+                                </InputAdornment>
+                            ),
+                        }}
+                        type="number"
+                        name='ssn'
+                        required
+                    />
+                </Row>
+                <Row className={'justify-content-center text-center'}>
                     <TextField
                         label="Contraseña"
                         variant="standard"
@@ -53,15 +53,23 @@ const LoginPage = () => {
                         name="password"
                         required
                     />
-                </Container>
-                <Container fluid>
+                </Row>
+                <Row className={'justify-content-center text-center'}>
                     <Button type="submit" className="AccesButton">Iniciar Sesion</Button>
-                </Container>
+                </Row>
+
+                <Row className={'justify-content-center text-center'}>
+                    <Link to="/reset-password/">
+                        <a>Olvidé mi contraseña</a>
+                    </Link>
+                </Row>
+                <Row className={'justify-content-center text-center'}>
+                    <Link to="/signin/">
+                        <a>Crea una cuenta</a>
+                    </Link>
+                </Row>
+
             </Form>
-            <Link to="/reset-password/"><Button variant="link" className="link">Olvidé mi contraseña</Button></Link>
-            <Link to="/signin/"><Button variant="link" className="link">Crea una cuenta</Button></Link>
-
-
         </Container>
 
     )

@@ -19,26 +19,18 @@
   }
 
 
-.Image{
-    width: 17.5vw; 
-    max-width: 30rem;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
-    padding-top: 4vh;
-}
 
 .AccesButton{
-    margin-top: 0.3rem;
-    color: cornsilk;
+     width: 210px;
+    border-radius: 15px;
     background-color: #53A6DC;
-    border: none; /* Elimina el borde si no es necesario */
-    border-radius: 20px; /* Aumenta el valor del border-radius para hacerlo más redondeado */
-    padding: 0.5rem 1rem; /* Ajusta el espaciado interno del botón para que se vea bien */
-    margin-bottom: 1.5vh;
+    border-color: #53A6DC;
+    color: white;
+    padding: 10px;
 }
 .AccesButton:hover{
-    background-color: #469bd4;
+    background-color: #1f8bda;
+    border-color: #1f8bda;
 
 }
 .SecondTextField{
