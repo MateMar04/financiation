@@ -24,8 +24,12 @@ export const ReportsPage = () => {
         data,
         getMinistryDepartmentsForFilter,
         getLocationsForFilter,
-        totalData,
-        totalRequestsByMinistryDepartments,
+
+        advisorsData,
+        ministryDepsData,
+        faqsData,
+        visitsData,
+
         generateReports
     } = useContext(ReportsContext)
 
@@ -62,25 +66,25 @@ export const ReportsPage = () => {
                 </Row>
             </Container>
             <Button onClick={buttonClick}>Generar</Button>
-            <Button onClick={() => console.log(totalData)}>SHOW</Button>
+            <Button onClick={() => console.log(advisorsData)}>SHOW</Button>
 
             <hr/>
 
             <Container fluid>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
+                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
+                        <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Motivos" chart={<PieChart chartData={totalData}/>}/>
+                        <ReportChartCard title="Motivos" chart={<PieChart chartData={faqsData}/>}/>
                     </Col>
                     <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
+                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={advisorsData}/>}/>
                     </Col>
                 </Row>
             </Container>

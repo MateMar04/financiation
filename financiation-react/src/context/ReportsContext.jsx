@@ -209,11 +209,38 @@ export const ReportsProvider = ({children}) => {
                 console.log('Error')
             });
 
-            setTotalData({
+            setAdvisorsData({
                 labels: totalRequestsByAdvisors?.map(item => item.name),
                 datasets: [{
                     label: "Consultas",
                     data: totalRequestsByAdvisors?.map(data => data.requests),
+                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                }]
+            })
+
+            setFaqsData({
+                labels: totalRequestsByFaqs?.map(item => item.name),
+                datasets: [{
+                    label: "Consultas",
+                    data: totalRequestsByFaqs?.map(data => data.requests),
+                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                }]
+            })
+
+            setMinistryDepsData({
+                labels: totalRequestsByMinistryDepartments?.map(item => item.name),
+                datasets: [{
+                    label: "Consultas",
+                    data: totalRequestsByMinistryDepartments?.map(data => data.requests),
+                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                }]
+            })
+
+            setVisitsData({
+                labels: totalRequestsByVisits?.map(item => item.name),
+                datasets: [{
+                    label: "Consultas",
+                    data: totalRequestsByVisits?.map(data => data.requests),
                     backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
                 }]
             })
@@ -223,7 +250,34 @@ export const ReportsProvider = ({children}) => {
     }
 
 
-    const [totalData, setTotalData] = useState({
+    const [advisorsData, setAdvisorsData] = useState({
+        labels: [],
+        datasets: [{
+            label: "",
+            data: [],
+            backgroundColor: []
+        }]
+    })
+
+    const [faqsData, setFaqsData] = useState({
+        labels: [],
+        datasets: [{
+            label: "",
+            data: [],
+            backgroundColor: []
+        }]
+    })
+
+    const [ministryDepsData, setMinistryDepsData] = useState({
+        labels: [],
+        datasets: [{
+            label: "",
+            data: [],
+            backgroundColor: []
+        }]
+    })
+
+    const [visitsData, setVisitsData] = useState({
         labels: [],
         datasets: [{
             label: "",
@@ -254,7 +308,10 @@ export const ReportsProvider = ({children}) => {
         totalRequestsByMinistryDepartments: totalRequestsByMinistryDepartments,
         totalRequestsByVisits: totalRequestsByVisits,
         totalRequestsByLocations: totalRequestsByLocations,
-        totalData: totalData,
+        advisorsData: advisorsData,
+        ministryDepsData: ministryDepsData,
+        faqsData: faqsData,
+        visitsData: visitsData,
         data: data,
         dataHandler: dataHandler,
         getRequestsFromVisitDepsFaqs: getRequestsByVisitFaq,
