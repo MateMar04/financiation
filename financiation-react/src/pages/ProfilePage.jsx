@@ -1,13 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import ProfilePicture from "../components/ProfilePicture";
-import ProfileData from "../components/ProfileData";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
-import ProfileModifyForm from "../components/ProfileModifyForm";
 import AuthContext from "../context/AuthContext";
-import "../assets/styles/ProfileModifyForm.css";
 import { getUser } from "../services/UserServices";
-import { Avatar, Input, TextField } from "@mui/material";
+import { Avatar, TextField } from "@mui/material";
 import { DateField } from '@mui/x-date-pickers/DateField';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -28,13 +24,13 @@ const ProfilePage = () => {
     })
 
     const [showButton, setShowButton] = useState(false);
-    const [showLogoutButton, setShowLogoutButton] = useState(true); // Nueva variable
+    const [showLogoutButton, setShowLogoutButton] = useState(true);
 
 
 
     const handleAddButton = () => {
         setShowButton(!showButton);
-        setShowLogoutButton(!showLogoutButton); // Cambiar la visibilidad del botón de Cerrar Sesión
+        setShowLogoutButton(!showLogoutButton);
 
     };
 
