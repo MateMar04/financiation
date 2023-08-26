@@ -1,53 +1,127 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Card, Col, Container, Row} from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import ProfilePicture from "../components/ProfilePicture";
 import ProfileData from "../components/ProfileData";
 import "../assets/styles/ProfilePage.css";
 import ProfileModifyForm from "../components/ProfileModifyForm";
 import AuthContext from "../context/AuthContext";
 import "../assets/styles/ProfileModifyForm.css";
+import { getUser } from "../services/UserServices";
+import { Avatar, Input, TextField } from "@mui/material";
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+
+
+
+
 
 const ProfilePage = () => {
 
     let [user, setUser] = useState()
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    let { authTokens, logoutUser } = useContext(AuthContext)
 
     useEffect(() => {
-        getUser()
+        getUser(authTokens.access).then(data => setUser(data))
     })
 
-    let getUser = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/auth/users/me/`, {headers: headers})
-        let data = await response.json()
-        setUser(data)
-    }
+    const [showButton, setShowButton] = useState(false);
+    const [showLogoutButton, setShowLogoutButton] = useState(true); // Nueva variable
+
+
+
+    const handleAddButton = () => {
+        setShowButton(!showButton);
+        setShowLogoutButton(!showLogoutButton); // Cambiar la visibilidad del botón de Cerrar Sesión
+
+    };
+
 
     return (
-        <Container fluid>
-            <Card className="ProfileCard">
-                <Row>
-                    <Col lg={4}>
-                        <ProfilePicture profileImg={user?.profile_picture} username={user?.username}/>
-                        {/* Falta añadir icono para editar imagen */}
-                        {/* Deberia cambiarse el img por un avatar */}
+        <Container className="ContainerProfilePage">
+            <IconButton className="EditIconProfile" onClick={handleAddButton}><EditIcon color='action' sx={{ width: 25, height: 25 }} /></IconButton>
+            <Row>
+                <Col className="d-flex justify-content-center">
+                    <Avatar src={user?.profile_picture} sx={{ width: 200, height: 200 }} className="ProfilePicture" />
+                </Col>
+
+            </Row>
+
+
+            <Row className={'justify-content-center text-center'}>
+                <h1 className="ProfileText">{user?.first_name} {user?.last_name}</h1>
+                <h3 className="ProfileText">Coordinador</h3>
+            </Row>
+
+            <Container className="InputsProfile">
+
+                <Row className={"d-flex justify-content-center text-center"}>
+                    <Col md={6} className="py-3">
+
+                        <TextField variant='outlined' label='Nombre' required className='profileTextField' defaultValue={user?.first_name} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
 
                     </Col>
-                    <Col lg={8}>
-                        <ProfileData username={user?.username} firstName={user?.first_name} lastName={user?.last_name}
-                                     email={user?.email} ssn={user?.ssn}
-                                     phone_number={user?.phone_number}/>
+                    <Col md={6} className="py-3">
+
+                        <TextField variant='outlined' label='Apellido' required className='profileTextField' defaultValue={user?.last_name} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
                     </Col>
                 </Row>
-                <ProfileModifyForm/>
-            </Card>
 
-           
-        </Container>
+
+                <Row className={"d-flex justify-content-center text-center"}>
+                    <Col md={6} className="py-3">
+
+                        <TextField variant='outlined' label='CUIL' required className='profileTextField' defaultValue={user?.ssn} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
+                    </Col>
+                    <Col md={6} className="py-3">
+
+                        <TextField variant='outlined' label='Telefono' required className='profileTextField' defaultValue={user?.phone_number} InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
+                    </Col>
+                </Row>
+                <Row className={"d-flex justify-content-center text-center"}>
+                    <Col md={6} xs={12} className="py-3">
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }} variant="outlined" />
+                        </LocalizationProvider>
+
+
+                    </Col>
+                    <Col md={6} className="py-3">
+
+                        <TextField variant='outlined' label='Ciudad' className='profileTextField' InputProps={{ sx: { borderRadius: 5 } }}></TextField>
+
+                    </Col>
+                </Row>
+                <Row>
+
+                    {showButton &&(
+                        <Col className="d-flex justify-content-center py-3">
+                            <Button className="CancelarBtnProfile" onClick={handleAddButton}>Cancelar</Button>
+                        </Col>
+                    )}
+
+                    {showLogoutButton && (
+                        <Col className="d-flex justify-content-center py-3">
+                            <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{ my: 3 }}>Cerrar Sesion</Button>
+                        </Col>
+                    )}
+
+                    {showButton &&(
+                        <Col className="d-flex justify-content-center py-3">
+                            <Button className="GuardarBtnProfile">Guardar</Button>
+                        </Col>
+                    )}
+                </Row>
+            </Container>
+        </Container >
+
+
+
     );
 }
 
