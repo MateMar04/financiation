@@ -1,5 +1,6 @@
 import {createContext, useContext, useState} from "react";
 import AuthContext from "./AuthContext";
+import {UserData} from "../components/Data";
 
 const ReportsContext = createContext();
 
@@ -18,12 +19,12 @@ export const ReportsProvider = ({children}) => {
 
     const [requests, setRequests] = useState({});
 
-    const [totalRequests, setTotalRequests] = useState([{}]);
-    const [totalRequestsByAdvisors, setTotalRequestsByAdvisors] = useState([{}]);
-    const [totalRequestsByLocations, setTotalRequestsByLocations] = useState([{}]);
-    const [totalRequestsByVisits, setTotalRequestsByVisits] = useState([{}]);
-    const [totalRequestsByFaqs, setTotalRequestsByFaqs] = useState([{}]);
-    const [totalRequestsByMinistryDepartments, setTotalRequestsByMinistryDepartments] = useState([{}]);
+    const [totalRequests, setTotalRequests] = useState([]);
+    const [totalRequestsByAdvisors, setTotalRequestsByAdvisors] = useState([]);
+    const [totalRequestsByLocations, setTotalRequestsByLocations] = useState([]);
+    const [totalRequestsByVisits, setTotalRequestsByVisits] = useState([]);
+    const [totalRequestsByFaqs, setTotalRequestsByFaqs] = useState([]);
+    const [totalRequestsByMinistryDepartments, setTotalRequestsByMinistryDepartments] = useState([]);
 
     let dataHandler = async (title, e) => {
         switch (title) {
@@ -158,6 +159,7 @@ export const ReportsProvider = ({children}) => {
     let getTotalRequestsByAdvisors = async () => {
         let response = await fetch(`/api/reports/total-requests-by-advisors?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
         let data = await response.json()
+        console.log(data)
         return data
     }
 
@@ -187,21 +189,57 @@ export const ReportsProvider = ({children}) => {
 
     let generateReports = async () => {
 
-        if (!checkText(faqsQP()) || !checkText(visitsQP())) {
-            await getRequestsByVisitFaq().then(r => setRequests(r))
-            await getTotalRequests().then(r => setTotalRequests(r))
-            await getTotalRequestsByAdvisors.then(r => setTotalRequestsByAdvisors(r))
-            await getTotalRequestsByVisits().then(r => setTotalRequestsByVisits(r))
-            await getTotalRequestsByLocations().then(r => setTotalRequestsByLocations(r))
-            await getTotalRequestsByFaqs.then(r => setTotalRequestsByFaqs(r))
-            await getTotalRequestsByMinistryDepartments().then(r => setTotalRequestsByMinistryDepartments(r))
-        } else {
-            alert('Seleccione algo en todos los campos')
-        }
+        if (checkText(faqsQP()) || checkText(visitsQP())) {
+            const promises = Promise.all([await getRequestsByVisitFaq(),
+                await getTotalRequests(),
+                await getTotalRequestsByAdvisors(),
+                await getTotalRequestsByVisits(),
+                await getTotalRequestsByLocations(),
+                await getTotalRequestsByFaqs(),
+                await getTotalRequestsByMinistryDepartments()]);
+            promises.then(result => {
+                setRequests(result[0]);
+                setTotalRequests(result[1]);
+                setTotalRequestsByAdvisors(result[2]);
+                setTotalRequestsByVisits(result[3]);
+                setTotalRequestsByLocations(result[4]);
+                setTotalRequestsByFaqs(result[5])
+                setTotalRequestsByMinistryDepartments(result[6]);
+            }).catch(err => {
+                console.log('Error')
+            });
 
+            setTotalData({
+                labels: totalRequestsByAdvisors?.map(item => item.name),
+                datasets: [{
+                    label: "Consultas",
+                    data: totalRequestsByAdvisors?.map(data => data.requests),
+                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                }]
+            })
+        } else {
+            alert('Selecciona algo en todos los campos')
+        }
     }
 
 
+    const [totalData, setTotalData] = useState({
+        labels: [],
+        datasets: [{
+            label: "",
+            data: [],
+            backgroundColor: []
+        }]
+    })
+
+    const [data, setData] = useState({
+        labels: UserData.map((data) => data.year),
+        datasets: [{
+            label: "Pepe",
+            data: UserData.map((data) => data.userGain),
+            backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+        }]
+    })
 
 
     let contextData = {
@@ -216,6 +254,8 @@ export const ReportsProvider = ({children}) => {
         totalRequestsByMinistryDepartments: totalRequestsByMinistryDepartments,
         totalRequestsByVisits: totalRequestsByVisits,
         totalRequestsByLocations: totalRequestsByLocations,
+        totalData: totalData,
+        data: data,
         dataHandler: dataHandler,
         getRequestsFromVisitDepsFaqs: getRequestsByVisitFaq,
         getMinistryDepartmentsForFilter: getMinistryDepartmentsForFilters,
