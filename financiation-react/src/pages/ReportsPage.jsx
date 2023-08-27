@@ -21,7 +21,6 @@ export const ReportsPage = () => {
     let {
         visits,
         faqs,
-        data,
         getMinistryDepartmentsForFilter,
         getLocationsForFilter,
 

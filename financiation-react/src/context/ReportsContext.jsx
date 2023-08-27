@@ -1,6 +1,5 @@
 import {createContext, useContext, useState} from "react";
 import AuthContext from "./AuthContext";
-import {UserData} from "../components/Data";
 
 const ReportsContext = createContext();
 
@@ -214,7 +213,7 @@ export const ReportsProvider = ({children}) => {
                 datasets: [{
                     label: "Consultas",
                     data: totalRequestsByAdvisors?.map(data => data.requests),
-                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                    backgroundColor: colors
                 }]
             })
 
@@ -223,7 +222,7 @@ export const ReportsProvider = ({children}) => {
                 datasets: [{
                     label: "Consultas",
                     data: totalRequestsByFaqs?.map(data => data.requests),
-                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                    backgroundColor: colors
                 }]
             })
 
@@ -232,7 +231,7 @@ export const ReportsProvider = ({children}) => {
                 datasets: [{
                     label: "Consultas",
                     data: totalRequestsByMinistryDepartments?.map(data => data.requests),
-                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                    backgroundColor: colors
                 }]
             })
 
@@ -241,7 +240,7 @@ export const ReportsProvider = ({children}) => {
                 datasets: [{
                     label: "Consultas",
                     data: totalRequestsByVisits?.map(data => data.requests),
-                    backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
+                    backgroundColor: colors
                 }]
             })
         } else {
@@ -249,6 +248,7 @@ export const ReportsProvider = ({children}) => {
         }
     }
 
+    const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']
 
     const [advisorsData, setAdvisorsData] = useState({
         labels: [],
@@ -286,15 +286,6 @@ export const ReportsProvider = ({children}) => {
         }]
     })
 
-    const [data, setData] = useState({
-        labels: UserData.map((data) => data.year),
-        datasets: [{
-            label: "Pepe",
-            data: UserData.map((data) => data.userGain),
-            backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
-        }]
-    })
-
 
     let contextData = {
         visits: visits,
@@ -312,7 +303,6 @@ export const ReportsProvider = ({children}) => {
         ministryDepsData: ministryDepsData,
         faqsData: faqsData,
         visitsData: visitsData,
-        data: data,
         dataHandler: dataHandler,
         getRequestsFromVisitDepsFaqs: getRequestsByVisitFaq,
         getMinistryDepartmentsForFilter: getMinistryDepartmentsForFilters,
