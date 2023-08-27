@@ -18,11 +18,15 @@ const ProfilePage = () => {
 
     useEffect(() => {
         getUser(authTokens.access).then(data => setUser(data));
-    }, [authTokens.access]);
+    }, );
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
     let [editMode, setEditMode] = useState(false);
+    const defaultFirstName = user?.first_name || '';
+    const defaultLastName = user?.last_name || '';
+    const defaultSSN = user?.ssn || '';
+    const defaultPhoneNumber = user?.phone_number || '';
 
 
     const handleAddButton = () => {
@@ -58,7 +62,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                   defaultValue={user?.first_name} InputProps={{
+                                   value={defaultFirstName} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -67,7 +71,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                   defaultValue={user?.last_name} InputProps={{
+                                   value={defaultLastName} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -80,7 +84,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                   defaultValue={user?.ssn} InputProps={{
+                                   value={defaultSSN} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -89,7 +93,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                   defaultValue={user?.phone_number} InputProps={{
+                                   value={defaultPhoneNumber} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
