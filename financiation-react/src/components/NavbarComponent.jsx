@@ -10,8 +10,8 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-    let {user, authTokens} = useContext(AuthContext)
 
+    let {user} = useContext(AuthContext)
 
     /*
         useEffect(() => {
@@ -65,11 +65,11 @@ const NavbarComponent = () => {
                                             </Col>
                                             <Col md={9} xs={9} className={'justify-content-center'}>
                                                 <Row className={'justify-content-center text-center'}>
-                                                    <small className={'aNavBar'}>¡Hola {user.first_name}!</small>
+                                                    <a className={'aNavBar'}>¡Hola {user.first_name}!</a>
                                                 </Row>
                                                 <Row className={'justify-content-center text-center'}>
                                                     <Link to="/me/">
-                                                        <a className={'aNavBar'}>Ver perfil</a>
+                                                        <small className={'aNavBar'}>Ver perfil</small>
                                                     </Link>
                                                 </Row>
                                             </Col>
