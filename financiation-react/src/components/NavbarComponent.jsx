@@ -10,13 +10,14 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-    let {user, logoutUser} = useContext(AuthContext)
+    let {user, authTokens} = useContext(AuthContext)
+
 
     /*
-    useEffect(() => {
-        getUser(authTokens.access).then(data => setUser(data))
-    })
-     */
+        useEffect(() => {
+            getUser(authTokens.access).then(data => setUser(data))
+        })
+    */
     return (
 
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
@@ -37,13 +38,15 @@ const NavbarComponent = () => {
                                 <Col className="d-flex justify-content-sm-center justify-content-md-start">
                                     <div className="mx-2">
                                         <Link>
-                                            <Button variant="text" className={'BtnNavBar linksNavbar'}>Calendario</Button>
+                                            <Button variant="text"
+                                                    className={'BtnNavBar linksNavbar'}>Calendario</Button>
 
                                         </Link>
                                     </div>
                                     <div className="mx-2">
                                         <Link to="/form/">
-                                            <Button variant="text" className={'BtnNavBar linksNavbar'}>Formulario</Button>
+                                            <Button variant="text"
+                                                    className={'BtnNavBar linksNavbar'}>Formulario</Button>
 
                                         </Link>
                                     </div>
