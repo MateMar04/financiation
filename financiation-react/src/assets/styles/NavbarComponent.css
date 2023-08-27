@@ -20,3 +20,12 @@
     width: 150px;
     height: 50px;
 }
+
+@media (max-width: 800px){
+    .navbarcs{
+        text-align: center;
+        justify-content: center;
+    }
+
+
+}

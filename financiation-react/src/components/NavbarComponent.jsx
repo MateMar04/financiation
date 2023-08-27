@@ -53,15 +53,14 @@ const NavbarComponent = () => {
                                         </Link>
                                     </div>
                                 </Col>
-                                <Col className="d-flex justify-content-end">
+                                <Col className="d-flex justify-content-center justify-content-md-end">
                                     <div className="mx-2">
-
-                                        <Row>
-                                            <Col md={3}>
+                                        <Row className={'justify-content-center'}>
+                                            <Col md={3} xs={3} className={'justify-content-center'}>
                                                 <Avatar alt="Remy Sharp" src={user?.profile_picture}
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
-                                            <Col md={8}>
+                                            <Col md={9} xs={9} className={'justify-content-center'}>
                                                 <Row className={'justify-content-center text-center'}>
                                                     <small className={'aNavBar'}>¡Hola {user.first_name}!</small>
                                                 </Row>
