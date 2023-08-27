@@ -1,6 +1,7 @@
 #navbarcs {
     background-color: #ebf1f4;
     max-height: 20%;
+    overflow: hidden;
 }
 
 .navLinkLogin {
@@ -21,10 +22,12 @@
     height: 50px;
 }
 
-@media (max-width: 800px){
-    .navbarcs{
-        text-align: center;
+@media (max-width: 500px){
+    .linksNavbar{
+        width: 100%;
         justify-content: center;
+        text-align: center;
+        transform: translateX(-8vw);
     }
 
 
