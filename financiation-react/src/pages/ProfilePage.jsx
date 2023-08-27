@@ -11,9 +11,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 
 
-
-
-
 const ProfilePage = () => {
 
     let [user, setUser] = useState()

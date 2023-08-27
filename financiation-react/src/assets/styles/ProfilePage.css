@@ -1,5 +1,5 @@
 
-@media only screen and (min-width: 801px){
+@media (min-width: 801px){
     .ContainerProfilePage{
         transform: translateY(15vh);
         background-color: white;
@@ -25,9 +25,9 @@
     .InputsProfile{
         transform: translateY(-5vh)
     }
-};
+}
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 800px) {
 
     .ContainerProfilePage{
         transform: translateY(10vh);
