@@ -104,6 +104,23 @@ class AdiviseeApiView(APIView):
         serializer = AdvisedSerializer(advised, many=False)
         return Response(serializer.data)
 
+class MayorApiView(APIView):
+    def get(self,request,*args,**kwargs):
+        mayor=Mayor.objects.all()
+        serializer=MayorSerializer(mayor,many=True)
+        return Response(serializer.data)
+    
+    def post(self,request,*args,**kwargs):
+        data=request.data
+        mayor=Mayor.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+        )
+        serializer=MayorSerializer(mayor,many=False)
+        return Response(serializer.data)
+
+
+
 
 class GroupApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -403,9 +420,29 @@ def getRoutes(request):
             },
             'description': 'Sends a request'
         },
+        {
+            'Endpoint': 'api/mayors/add/',
+            'method': 'POST',
+            'headers': {
+                'Content-Type': 'application/json',
+                'Authorization': 'JWT accessToken',
+                'Accept': 'application/json'
+            },
+            'body': {
+                'first_name': '',
+                'last_name': '',
+
+            },
+            'description': 'Sends a request'
+        },
     ]
     return Response(routes)
 
+@api_view(['GET'])
+def getMayor(request):
+    mayor=Mayor.objects.all()
+    serializer=MayorSerializer(mayor,many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getAdvisee(request, id):
