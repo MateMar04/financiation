@@ -39,7 +39,7 @@ export const AuthProvider = ({children}) => {
                 "last_name": e.target.last_name.value,
                 "ssn": e.target.ssn.value,
                 "email": e.target.email.value,
-                "phone_number": e.target.phone.value,
+                "phone_number": e.target.phone_number.value,
                 "password": e.target.password.value,
                 "re_password": e.target.re_password.value
             })

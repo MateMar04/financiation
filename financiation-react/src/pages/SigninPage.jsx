@@ -28,22 +28,9 @@ const SigninPage = () => {
                             <Row className='justify-content-md-center'>
                                 <Col lg="5" className='input-required'>
                                     <TextField
-                                        label="Apellido"
-                                        variant="standard"
-                                        InputProps={{
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <PersonIcon/>
-                                                </InputAdornment>
-                                            ),
-                                        }}
-                                        name='last_name'
-                                        required
-                                    />
-                                </Col>
-                                <Col lg="5" className='input-required'>
-                                    <TextField
                                         label="Nombre"
+                                        placeholder="Nombre"
+                                        type="text"
                                         variant="standard"
                                         InputProps={{
                                             startAdornment: (
@@ -56,12 +43,30 @@ const SigninPage = () => {
                                         required
                                     />
                                 </Col>
+                                <Col lg="5" className='input-required'>
+                                    <TextField
+                                        label="Apellido"
+                                        placeholder="Apellido"
+                                        type="text"
+                                        variant="standard"
+                                        InputProps={{
+                                            startAdornment: (
+                                                <InputAdornment position="start">
+                                                    <PersonIcon/>
+                                                </InputAdornment>
+                                            ),
+                                        }}
+                                        name='last_name'
+                                        required
+                                    />
+                                </Col>
                             </Row>
 
                             <Row className='justify-content-md-center'>
                                 <Col lg="5" className='input-required'>
                                     <TextField
                                         label="Teléfono"
+                                        placeholder="Teléfono"
                                         variant="standard"
                                         InputProps={{
                                             startAdornment: (
@@ -78,6 +83,8 @@ const SigninPage = () => {
                                 <Col lg="5" className='input-required'>
                                     <TextField
                                         label="CUIL"
+                                        placeholder="CUIL"
+                                        type="number"
                                         variant="standard"
                                         InputProps={{
                                             startAdornment: (
@@ -86,7 +93,6 @@ const SigninPage = () => {
                                                 </InputAdornment>
                                             ),
                                         }}
-                                        type="text" // Agrega el tipo "text"
                                         name='ssn'
                                         required
                                     />
@@ -97,6 +103,8 @@ const SigninPage = () => {
                                 <Col lg="5" className='input-required'>
                                     <TextField
                                         label="Correo Electrónico"
+                                        placeholder="Correo Electrónico"
+                                        type="email"
                                         variant="standard"
                                         InputProps={{
                                             startAdornment: (
@@ -105,7 +113,6 @@ const SigninPage = () => {
                                                 </InputAdornment>
                                             ),
                                         }}
-                                        type="email"
                                         name="email"
                                         required
                                     />
@@ -113,7 +120,8 @@ const SigninPage = () => {
                                 <Col lg="5" className='input-required'>
                                     <TextField
                                         label="Repetir Correo Electrónico"
-                                        variant="standard"
+                                        placeholder="Repetir Correo Electrónico"
+                                        type="email"
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
@@ -121,8 +129,7 @@ const SigninPage = () => {
                                                 </InputAdornment>
                                             ),
                                         }}
-                                        type="email" // Usamos el tipo "email" para validar el formato
-                                        name='email'
+                                        name="re_email"
                                         required
                                     />
                                 </Col>
@@ -132,7 +139,9 @@ const SigninPage = () => {
                                 <Col lg="5" className='input-required'>
                                     <TextField
                                         label="Contraseña"
+                                        placeholder="Contraseña"
                                         variant="standard"
+                                        type="password"
                                         InputProps={{
                                             startAdornment: (
                                                 <InputAdornment position="start">
@@ -140,7 +149,6 @@ const SigninPage = () => {
                                                 </InputAdornment>
                                             ),
                                         }}
-                                        type="password"
                                         name="password"
                                         required
                                     />
