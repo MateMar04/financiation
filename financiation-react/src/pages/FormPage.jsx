@@ -87,18 +87,18 @@ const FormPage = () => {
                 <Container>
                     <Container>
                         <Container>
-                            <Row>
+                            <Row className='justify-content-center text-center'>
                                 <Col md={3}>
-                                    <p>Fecha y hora</p>
+                                    <p className='pInFormPage'>Fecha y hora</p>
                                 </Col>
                                 <Col>
-                                    <p>Visita</p>
+                                    <p className='pInFormPage'>Visita</p>
                                 </Col>
                                 <Col>
-                                    <p>Asesor</p>
+                                    <p className='pInFormPage'>Asesor</p>
                                 </Col>
                             </Row>
-                            <Row>
+                            <Row className='justify-content-center text-center'>
                                 <Col md={3}>
 
 
@@ -106,7 +106,7 @@ const FormPage = () => {
                                         <DateTimePicker className='InputsFormPage' format='DD/MM/YYYY hh:mm' />
                                     </LocalizationProvider>
                                 </Col>
-                                <Col>
+                                <Col md={4}>
 
                                     <Select
                                         placeholder="Localidad"
@@ -119,7 +119,7 @@ const FormPage = () => {
                                     </Select>
 
                                 </Col>
-                                <Col>
+                                <Col md={3}>
                                     <Container className='ContainerPersonForm'>
                                         <Row className='justify-content-center text-center'>
                                             <Col md={3} className='justify-content-center text-center'>

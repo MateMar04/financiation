@@ -17,3 +17,7 @@
 .InputsFormPage{
     background-color: white;
 }
+
+.pInFormPage{
+    transform: translateY(2vh);
+}
