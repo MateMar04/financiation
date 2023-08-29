@@ -37,10 +37,9 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({
                 "first_name": e.target.first_name.value,
                 "last_name": e.target.last_name.value,
-                "username": e.target.username.value,
                 "ssn": e.target.ssn.value,
                 "email": e.target.email.value,
-                "phone_number": e.target.phone.value,
+                "phone_number": e.target.phone_number.value,
                 "password": e.target.password.value,
                 "re_password": e.target.re_password.value
             })
@@ -62,7 +61,7 @@ export const AuthProvider = ({children}) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'username': e.target.username.value, 'password': e.target.password.value})
+            body: JSON.stringify({'ssn': e.target.ssn.value, 'password': e.target.password.value})
         })
         let data = await response.json()
         if (response.status === 200) {

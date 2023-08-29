@@ -3,12 +3,6 @@ from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
-    path('', views.getRoutes, name='routes'),
-
-    # Advisees
-    path('advisees', views.AdiviseeApiView.as_view(), name='advisees'),
-    path('advisees/<int:id>', views.getAdvisee, name='advisee'),
-
     # Locations
     path('locations', views.getLocations, name='locations'),
 
@@ -30,8 +24,6 @@ urlpatterns = [
     # Addresses
     path('addresses', views.getAddresses, name='addresses'),
 
-    # Logos
-    path('logos', views.getLogos, name='logos'),
 
     # Visits
     path('visits', views.VisitApiView.as_view(), name='visits'),
@@ -61,7 +53,7 @@ urlpatterns = [
     path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
 
     # FAQs
-    path('faqs', views.getFaqs, name='faqs'),
+    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
 
     # Coordinators
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
@@ -69,7 +61,7 @@ urlpatterns = [
     path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
 
     # Advisors
-    path('advisors', views.AdiviseeApiView.as_view(), name='advisors'),
+    path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
 
@@ -87,5 +79,13 @@ urlpatterns = [
     path('user-statuses/<int:id>', views.getStatusesById, name='userStatuses'),
 
     # Reports
-    re_path(r'reports$', views.getReport, name='report')
+    re_path(r'reports$', views.getRequests, name='report'),
+    re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
+    re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
+    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment, name='report'),
+    re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
+    re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
+    re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
+
+
 ]

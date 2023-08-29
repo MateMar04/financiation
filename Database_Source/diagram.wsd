@@ -1,245 +1,271 @@
-@startuml Diagram
+@startuml ER
 
-class Usuarios {
-    -id : int
-    -nombre_de_usuario : str
-    -CUIL : int
-    -contraseña : password
-    -foto_perfil : img
-    -email : mail
-    -rol : Rol
-    -verificacion : Estados_Verificaion_Usuarios
-    -estado : Estado_Usuario
+class Agreement {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
 }
 
-class Roles {
-    -id : int
-    -nombre : str
-    -descripcion : str
+class CityDepartment {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
 }
 
-class Visitas {
-    -id : int
-    -flyer : boolean
-    -distancia : int
-    -tiempo_de_viaje : time
-    -fecha_de_visita : date
-    -registro_civil : boolean
-    -hospedaje : boolean
-    -fondo_modernizacion : boolean
-    -horario_inicio : datetime
-    -horario_finalizacion : datetime
-    -nombre_del_lugar : str
-    -localidad : Localidad
-    -grupo : Grupo
-    -estado_visita : Estado_Visita
-    -convenios_firmados : Convenio
-    -referente_contactado : Referente_Contactado
-    -direccion : Direccion
-    -logos : Logos
+class MinistryDepartment {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
 }
 
-class Consultas {
-    -id : int
-    -visita : Visita
-    -asesorado : Asesorado
-    -asesor : Usuario
-    -departamento : Departamento_Ministerio
-    -faq : FAQ
+class Address {
+    class Agreement {
+    * id: int primary key
+    * street: varchar()
+    * number: int
+    --
 }
 
-class Intendentes {
-    -id : int
-    -nombre : str
-    -apellido : str
+class UserStatus {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
 }
 
-class Vehiculos {
-    -id : int
-    -patente : Patente
-    -modelo : Modelo
-    -marca : Marca
+class VisitStatus {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
+}
+
+class Faq {
+    * id: int primary key
+    * name: varchar()
+    * minstry_department: int (foreign key)
+    --
+}
+
+class Why {
+    * id: int primary key
+    * name: varchar()
+}
+
+class Mayor {
+    * id: int primary key
+    * first_name: varchar()
+    * last_name: varchar()
+    --
+}
+
+class Location {
+    * id: int primary key
+    * name: varchar()
+    * department: int (foreign key)
+    --
+}
+
+class VehicleBrand {
+    * id: int primary key
+    * name: varchar()
+    --
+}
+
+class VehicleModel {
+    * id: int primary key
+    * name: varchar()
+    * brand: int (foreign key)
+    --
+}
+
+class VehiclePlate {
+    * id: int primary key
+    * plate: varchar()
+    --
+}
+
+class Vehicle {
+    * id: int primary key
+    * plate: int (foreign key)
+    * brand: int (foreign key)
+    * model: int (foreign key)
+    --
+}
+
+class PoliticParty {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
+}
+
+class Role {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
+}
+
+class ContactedReferrer {
+    * id: int primary key
+    * first_name: varchar()
+    * last_name: varchar()
+    --
+}
+
+class UserAccount {
+    * id: int primary key
+    * ssn: int unique
+    * last_login: timestamp
+    * email: varchar()
+    * first_name: varchar()
+    * last_name: varchar()
+    * is_staff: bool
+    * is_active: bool
+    * is_superuser: bool
+    * phone_number: bigint
+    * profile_picture: bytea
+    * role: int (foreign key)
+    * user_status: int (foreign key)
+    --
+}
+
+class Group {
+    * id: int primary key
+    * name: varchar()
+    --
+}
+
+class Visit {
+    * id: int primary key
+    * location: int (foreign key)
+    * start_time: timestamp
+    * finish_time: timestamp
+    * flyer: bool
+    * finance_collaborator: int (foreign key)
+    * rent_collaborator: int (foreign key)
+    * rent_observations: text
+    * distance: int
+    * travel_time: timestamp
+    * civil_registration: bool
+    * place_name: varchar()
+    * address: int (foreign key)
+    * contacted_referrer: int (foreign key)
+    * accommodation: bool
+    * politic_party: int (foreign key)
+    * mayor: int (foreign key)
+    * agreement: int (foreign key)
+    * modernization_fund: bool
+    * visit_status: int (foreign key)
+    * group: int (foreign key)
+    --
+}
+
+class RequestStatus {
+    * id: int primary key
+    * name: varchar()
+    * description: text
+    --
+}
+
+class Coordinator {
+    * id: int primary key
+    * user: int (foreign key)
+    * group: int (foreign key)
+    --
+}
+
+class Advisor {
+    * id: int primary key
+    * user: int (foreign key)
+    * group: int (foreign key)
+    --
+}
+
+class Request {
+    * id: int primary key
+    * visit: int (foreign key)
+    * ministry_department: int (foreign key)
+    * faq: int (foreign key)
+    * why: int (foreign key)
+    * advisor: int (foreign key)
+    * status: int (foreign key)
+    --
+}
+
+class ContactedReferrerEmail {
+    * id: int primary key
+    * mail: varchar()
+    * contacted_referrer: int (foreign key)
+    --
+}
+
+class ContactedReferrerPhone {
+    * id: int primary key
+    * phone_number: bigint
+    * contacted_referrer: int (foreign key)
+    --
+}
+
+class MayorEmail {
+    * id: int primary key
+    * mail: varchar()
+    * mayor: int (foreign key)
+    --
+}
+
+class MayorPhone {
+    * id: int primary key
+    * phone_number: bigint
+    * mayor: int (foreign key)
+    --
 }
 
 
-class Estados_Usuarios {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
 
-class Estados_Verificacion_Usuarios {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+UserAccount ||--o{ UserStatus
+UserAccount ||--o{ Role
 
-class Estados_Visitas {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+Location }|--|| CityDepartment
 
-class Localidades {
-    -id : int
-    -nombre : str
-    -departamento : Departamento
-}
+Advisor -- UserAccount
+Coordinator -- UserAccount
 
-class Departamentos_Ministerio {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+Group |o--o{ Advisor
+Group }o--|{ Coordinator
 
-class Departamentos_Ciudad {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+Visit }o--|| Location
+Visit }o--o{ FinanceCollaborator
+Visit }o--o{ RentCollaborator
+Visit }|--|| Address
+Visit }|--o{ ContactedReferrer
+Visit }o--|| PoliticParty 
+Visit }o--|| Mayor
+Visit }o--|| VisitStatus
+Visit }o--|| Group
+Visit }o--o{ Agreement
 
-class Partidos_Politicos {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+Request }o--|| Visit
+Request }o--|| Faq
+Request }o--|| Why
+Request }o--|| Advisor
+Request }o--|| RequestStatus
 
-class Convenios {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
+Faq }|--|| MinistryDepartment
 
-class Referentes_Contactados {
-    -id : int
-    -nombre : str
-    -apellido : str
-    -email : emails_referentes
-    -telefono : telefonos_referentes
-}
+Vehicle }|--|| VehicleBrand
+Vehicle }|--|| VehicleModel
+Vehicle ||--|| VehiclePlate
+VehicleModel }|--|| VehicleBrand
 
-class Direcciones {
-    -id : int
-    -calle : str
-    -altura : int
-}
+Mayor ||--|{ MayorEmail
+Mayor ||--|{ MayorPhone
 
-class Logos {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
-
-class Asesorados {
-    -id : int
-    -CUIL : int
-    -nombre : str
-    -apellido : str
-}
-
-class FAQs {
-    -id : int
-    -pregunta : str
-}
-
-class Patentes_Vehiculos {
-    -id : int
-    -patente : str
-}
-
-class Modelos_Vehiculos {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
-
-class Marcas_Vehiculos {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
-
-class Emails_Usuarios {
-    -id : int
-    -email : str
-}
-
-class Emails_Referentes {
-    -id : int
-    -email : str
-}
-
-class Telefonos_Referentes {
-    -id : int
-    -telefono : int
-}
-
-class Grupos {
-    -id : int
-    -nombre : str
-}
-
-
-class Asesores {
-    -id : int
-    -grupo : Grupo
-    -usuario : Usuario
-}
-
-class Coordinadores {
-    -id : int
-    -grupo : Grupo
-    -usuario : Usuario
-}
-
-class Emails_Intendentes {
-    -id : int
-    -email : str
-}
-
-class Telefonos_Intendentes {
-    -id : int
-    -telefono : int
-}
-
-class Estados_Constulta {
-    -id : int
-    -nombre : str
-    -descripcion : str
-}
-
-Usuarios --> Roles
-Usuarios <-- Grupos
-Usuarios --> Estados_Usuarios
-Usuarios --> Estados_Verificacion_Usuarios
-Usuarios --> Emails_Usuarios
-Grupos <-- Visitas
-Visitas <-- Consultas
-Visitas --> Localidades
-Visitas --> Estados_Visitas
-Visitas --> Referentes_Contactados
-Visitas --> Convenios
-Visitas --> Direcciones
-Visitas --> Logos
-Localidades --> Departamentos_Ciudad
-Localidades --> Partidos_Politicos
-Localidades --> Intendentes
-Consultas --> FAQs
-Consultas --> Usuarios
-Consultas --> Asesorados
-Consultas --> Departamentos_Ministerio
-Referentes_Contactados --> Emails_Referentes
-Referentes_Contactados --> Telefonos_Referentes
-Vehiculos --> Patentes_Vehiculos
-Vehiculos --> Marcas_Vehiculos
-Vehiculos --> Modelos_Vehiculos
-Marcas_Vehiculos --> Modelos_Vehiculos
-Usuarios --> Coordinadores
-Grupos <-- Coordinadores
-Usuarios --> Asesores
-Grupos <-- Asesores
-Intendentes --> Telefonos_Intendentes
-Intendentes --> Emails_Intendentes
-Consultas --> Estados_Constulta
+ContactedReferrer ||--|{ ContactedReferrerEmail
+ContactedReferrer ||--|{ ContactedReferrerPhone
 
 @enduml
