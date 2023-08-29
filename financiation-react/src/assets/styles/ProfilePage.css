@@ -1,5 +1,5 @@
 
-@media only screen and (min-width: 801px){
+@media (min-width: 800px) {
     .ContainerProfilePage{
         transform: translateY(15vh);
         background-color: white;
@@ -11,7 +11,7 @@
         width: 20vw !important;
         background-color: #f4f4f4;
         border-radius: 3vh;
-      
+
     }
 
     .ProfilePicture{
@@ -25,9 +25,9 @@
     .InputsProfile{
         transform: translateY(-5vh)
     }
-};
+}
 
-@media only screen and (max-width: 768px) {
+@media (max-width: 800px) {
 
     .ContainerProfilePage{
         transform: translateY(10vh);
@@ -45,10 +45,7 @@
         transform: translateY(-10vh)
     }
 
-    .EditIconProfile{
-        transform: translateX(80vw);
-    }
-   
+
 }
 
 .BtnProfileCerrarSesion{
