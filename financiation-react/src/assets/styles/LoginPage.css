@@ -1,28 +1,93 @@
-.general {
-    padding: 2vw;
-    text-align: center;
+@media (min-width: 801px) {
+    .ContainerLoginPage {
+        margin-top: 8vh;
+        background-color: white;
+        width: 25vw;
+        border-radius: 5vh;
+    }
+
+    .ImgLogoLogin {
+        width: 13vw;
+        height: 8vh;
+        margin-top: 4vh;
+        margin-bottom: 2vh;
+    }
+
+
+    .BtnIniciarSesionLogin {
+        width: 12vw;
+        border-radius: 10vh;
+        background-color: #53A6DC;
+        border-color: #53A6DC;
+        color: white;
+        padding: 10px;
+    }
+
+    .BtnIniciarSesionLogin:hover {
+        background-color: #1f8bda;
+        border-color: #1f8bda;
+
+    }
+
+    .InputLoginPage {
+        width: 20vw !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+    }
+}
+.h3LoginPage {
+    margin-bottom: 5vh;
+    margin-top: 2vh;
 }
 
-.form-control {
-    padding: 2vh;
-    min-height: 50px;
-    height: 5%;
-    box-shadow: rgba(17, 12, 46, 0.1) 5px 5px 10px 0;
+.pLoginPage {
+    margin-top: 2vh;
+    color: black;
 }
 
-.container {
-    padding: 2vh;
+.SecondpLoginPage {
+    color: black;
 }
 
-.login {
-    margin: 2vh;
-    box-shadow: rgba(0, 72, 255, 0.3) 5px 5px 10px 0;
+a:link, a:visited, a:active {
+    text-decoration: none;
 }
 
-.floatingLabel {
-    color: #7e8181
+@media (max-width: 800px) {
+
+    .ContainerLoginPage {
+        margin-top: 8vh;
+        width: 80%; /* La tarjeta ocupará el ancho completo en pantallas pequeñas */
+        background-color: white;
+        border-radius: 5vh;
+    }
+
+    .BtnIniciarSesionLogin {
+        width: 40vw;
+        border-radius: 10vh;
+        background-color: #53A6DC;
+        border-color: #53A6DC;
+        color: white;
+        padding: 10px;
+    }
+
+    .BtnIniciarSesionLogin:hover {
+    background-color: #1f8bda;
+    border-color: #1f8bda;
+
 }
 
-.input-required {
-    padding: 15px;
+    .InputLoginPage {
+        width: 60vw !important;
+        background-color: #f4f4f4;
+        border-radius: 3vh;
+    }
+
+    .ImgLogoLogin {
+    width: 60%;
+    height: 10%;
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+}
+
 }

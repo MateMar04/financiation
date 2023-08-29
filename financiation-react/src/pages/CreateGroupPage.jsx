@@ -1,30 +1,28 @@
-import React, {useContext, useState} from "react";
-import {Container, Col, Row, Form} from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
+import {Button, Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-
-import {SideBarGroups} from "../components/SideBarGroups";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import CoordinatorCard from "../components/CoordinatorCard";
-import AdvisorCard from "../components/AdvisorCard";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
-
+import {getUsers} from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-
+import {UserCard } from "../components/UserCard";
 
 export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-
+    let [users, setUsers] = useState([])
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
+    useEffect(() => {
+        getUsers(authTokens.access).then(data => setUsers(data))
+    }, [])
 
     let postGroup = async (e) => {
         e.preventDefault()
@@ -40,7 +38,6 @@ export const CreateGroupPage = () => {
         if (response.status === 200) {
             toggleModalsucceed();
             await postGroup()
-
         } else if (response.status === 500) {
             toggleModalfailed();
             await postGroup()
@@ -50,59 +47,59 @@ export const CreateGroupPage = () => {
         } else if (response.status === 400) {
             toggleModalfailed();
             await postGroup()
-
         }
     }
 
-    const handdlerOpenDrawer = () => {
-        setIsDrawerOpen(!isDrawerOpen);
-    };
-
-
     return (
-        <Container fluid>
-            <SucceedModal message="el coordinador" show={showsuccess}/>
-            <FailedModal message="el coordinador" show={showfail}/>
+            <Container fluid>
+                <SucceedModal message="el coordinador" show={showsuccess}/>
+                <FailedModal message="el coordinador" show={showfail}/>
 
+                <Form onSubmit={postGroup}>
+                    <Container className="separation font">
+                        <Row className={'justify-content-center'}>
+                            <Col md={8} xs={8}>
+                                <TextField
+                                    className="font"
+                                    fullWidth
+                                    id="standard-bare"
+                                    variant="outlined"
+                                    label={'Buscar Persona'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <IconButton>
+                                                <SearchIcon/>
+                                            </IconButton>
+                                        ),
+                                    }}
+                                />
+                            </Col>
+                            <Col md={1} xs={1} lg={1}>
+                                <IconButton  href="http://localhost:3000/groups/" sx={{width: 56, height: 56} }
+                                            className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                            </Col>
+                        </Row>
+                    </Container>
 
-            <Form onSubmit={postGroup}>
-                <Container>
-                    <Row className={'justify-content-center'}>
-                        <Col md={8} xs={9}>
-                            <TextField
-                                fullWidth
-                                id="standard-bare"
-                                variant="outlined"
-                                label={'Buscar Persona'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <IconButton>
-                                            <SearchIcon/>
-                                        </IconButton>
-                                    ),
-                                }}
-                            />
-                        </Col>
-                        <Col md={1} xs={1} lg={1}>
-                            <IconButton onClick={handdlerOpenDrawer} sx={{width: 56, height: 56}}
-                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
-                        </Col>
-                    </Row>
-                </Container>
+                    <div>
+                        {users?.map((user) => (
+                            <Container>
+                                <UserCard user={user}/>
+                            </Container>
+                        ))}
+                    </div>
 
-                <Container>
-                    <CoordinatorCard addToGroup={handdlerOpenDrawer} />
-                </Container>
+                    <Container>
+                            <Row className='justify-content-center '>
+                                <Col md={2} xs={2}>
+                                    <Form.Group>
+                                        <button type="submit" class="button-28" role="button">Crear Grupo</button>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                    </Container>
 
-
-                <Container>
-                    <AdvisorCard addToGroup={handdlerOpenDrawer} />
-                </Container>
-
-                {isDrawerOpen &&
-                  <SideBarGroups OpenDrawer={handdlerOpenDrawer}/>
-                }
-            </Form>
-        </Container>
+                </Form>
+            </Container>
     )
 }

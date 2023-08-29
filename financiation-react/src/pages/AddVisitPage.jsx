@@ -1,26 +1,28 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useRef} from 'react';
 import "../assets/styles/AddVisitPage.css"
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import Carousel from 'react-bootstrap/Carousel';
+import {Col, Container, Form, Row,} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import DriveEtaIcon from '@mui/icons-material/DriveEta';
-import ImageIcon from '@mui/icons-material/Image';
-import QueryBuilderIcon from '@mui/icons-material/QueryBuilder';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import HotelIcon from '@mui/icons-material/Hotel';
-import LocalAtmIcon from '@mui/icons-material/LocalAtm';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import GroupIcon from '@mui/icons-material/Group';
-import TourIcon from '@mui/icons-material/Tour';
-import HandshakeIcon from '@mui/icons-material/Handshake';
-import ContactMailIcon from '@mui/icons-material/ContactMail';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import BrandingWatermarkIcon from '@mui/icons-material/BrandingWatermark';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
+import Card from '@mui/material/Card';
+import Select from "@mui/material/Select";
+import {CardContent, Switch} from "@mui/material";
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
+import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
+import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
+import HotelIcon from '@mui/icons-material/Hotel';
+import PersonIcon from '@mui/icons-material/Person';
+import CarouselButtons from "../components/CarouselButton";
+import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+
 
 const AddVisitPage = () => {
 
@@ -63,231 +65,472 @@ const AddVisitPage = () => {
             toggleModalsucceed();
             await postVisit()
             //alert('se registro la visita correctamente')
-        } else if (response.status == 500) {
+        } else if (response.status === 500) {
             toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
-        } else if (response.status == 401) {
+        } else if (response.status === 401) {
             toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Desautorizado)')
-        } else if (response.status == 400) {
+        } else if (response.status === 400) {
             toggleModalfailed();
             await postVisit()
             //alert('no se a registrado la visita (Bad request)')
         }
     }
 
+    const carouselRef = useRef(null);
+
+    const handlePrev = () => {
+        carouselRef.current.prev();
+    };
+
+    const handleNext = () => {
+        carouselRef.current.next();
+    };
+
     return (
-        <Container className="scrolling">
-            <SucceedModal message="la visita" show={showsuccess}/>
-            <FailedModal message="la visita" show={showfail}/>
-            <Form onSubmit={postVisit}>
-                <Box sx={{width: '100%', bgcolor: 'background.paper'}}>
-                    <Form.Group>
-                        <Container>
-                            <Row className='justify-content-center'>
-                                <Col className='justify-content-center'>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <ImageIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Inserte el ID del Flyer" variant="standard"
-                                                   name="flyer"
-                                                   type="number" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+        <Container fluid className={'Background'}>
+            <Container>
+                <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
+                <Container className={'MiniContainerVisit'}>
+                    <SucceedModal message="la visita" show={showsuccess}/>
+                    <FailedModal message="la visita" show={showfail}/>
+                    <Form onSubmit={postVisit}>
+                        <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
+                                  className={'carouselAddVisit'}>
 
-                                        <BrandingWatermarkIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID del logo" variant="standard"
-                                                   name="id_logo"
-                                                   type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <DriveEtaIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Distancia int" variant="standard"
-                                                   name="distance" type="number" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <QueryBuilderIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Tiempo de viaje int" variant="standard"
-                                                   name="travel_time" type="number" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <CalendarMonthIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Fecha de visita YYYY-MM-DD"
-                                                   variant="standard"
-                                                   name="visit_date" type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <AssignmentIndIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Registro Civil int" variant="standard"
-                                                   name="civil_registration" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <HotelIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Introducir hospedaje int"
-                                                   variant="standard"
-                                                   name="accommodation" type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <LocalAtmIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Fondo de modernizacion int"
-                                                   variant="standard"
-                                                   name="modernization_fund" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <a>Hora de inicio de la jornada</a>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            <Carousel.Item>
+                                <Row className='justify-content-center'>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <CalendarMonthIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Fecha de Visita'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
 
-                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
-                                                   variant="standard" name="start_time" type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <a>Hora de fin de la jornada</a>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <PlaceOutlinedIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Localidad'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
 
-                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Hora YYYY-MM-DD"
-                                                   variant="standard" name="finish_time" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <HouseOutlinedIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Nombre del Lugar'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
 
-                                        <HourglassBottomIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="Nombre del lugar txt" variant="standard"
-                                                   name="place_name" type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <DirectionsIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Dirección del Lugar'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
 
-                                        <LocationOnIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID de la Localidad" variant="standard"
-                                                   name="id_locality" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                </Row>
 
+                                <Row>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <AccessTimeIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Horario de Jornada'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
 
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <SocialDistanceOutlinedIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Distancia'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <HistoryToggleOffOutlinedIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Tiempo de Viaje'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <TextField id="standard-basic" label=""
+                                                                       variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
 
-                                        <GroupIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID del grupo" variant="standard"
-                                                   name="id_group"
-                                                   type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <TourIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID del Estado de visita" variant="standard"
-                                                   name="id_visit_status" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
+                                                    <Row className="justify-content-center">
+                                                        <StickyNote2OutlinedIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'¿Registro Civil?'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Switch id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                </Row>
 
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
-                                        <HandshakeIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID del acuerdo" variant="standard"
-                                                   name="id_agreement"
-                                                   type="text" required/>
-                                    </Box>
-                                </Col>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            </Carousel.Item>
 
-                                        <DirectionsIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID de la Direccion" variant="standard"
-                                                   name="id_address" type="text" required/>
-                                    </Box>
-                                </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <Box sx={{display: 'flex', alignItems: 'flex-end'}}>
+                            <Carousel.Item className={'MiniContainerVisit'}>
 
-                                        <ContactMailIcon sx={{color: 'action.active', mr: 1, my: 0.5}}/>
-                                        <TextField id="input-with-sx" label="ID del contacto del referido"
-                                                   variant="standard"
-                                                   name="id_contacted_referrer" type="text" required/>
-                                    </Box>
+                                <Row className='justify-content-center'>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+
+                                                    <Row className="justify-content-center">
+                                                        <HotelIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'¿Hospedaje?'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Switch id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <PersonIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Colaborador Finanzas'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <PersonIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Colaborador Rentas'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className="justify-content-center">
+                                                        <PersonIcon sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Referente Local'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Partido Politico'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Intendente'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'Fondo de Modernización'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Switch id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <a>{'¿Flyer?'}</a>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Switch id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                            </Carousel.Item>
+
+                            <Carousel.Item className={'ThirdCarousel'}>
+                                <Row className='justify-content-center'>
+                                    <Col>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisitConvenios'}>
+                                            <CardContent className='CenterContentCardConvenios'>
+                                                <Row>
+                                                    <Col md={3}>
+                                                        <Row className='text-center'>
+                                                            <p>{'Convenios Firmados'}</p>
+                                                        </Row>
+                                                    </Col>
+
+                                                    <Col md={4}>
+                                                        <Row className='justify-content-center text-center'>
+
+                                                            <Col>
+                                                                <Checkbox/>
+                                                            </Col>
+                                                            <Col>
+                                                                <p>{'Convenio 1'}</p>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row className='justify-content-center text-center'>
+                                                            <Col>
+                                                                <Checkbox/>
+                                                            </Col>
+                                                            <Col>
+                                                                <p>{'Convenio 2'}</p>
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                    <Col md={4}>
+                                                        <Row className='justify-content-center text-center'>
+                                                            <Col>
+                                                                <Checkbox/>
+                                                            </Col>
+                                                            <Col>
+                                                                <p>{'Convenio 3'}</p>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row className='justify-content-center text-center'>
+                                                            <Col>
+                                                                <Checkbox/>
+                                                            </Col>
+                                                            <Col>
+                                                                <p>{'Convenio 4'}</p>
+                                                            </Col>
+                                                        </Row>
+                                                    </Col>
+                                                </Row>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                    <Col md={3}>
+                                        <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                            <CardContent className={'CenterContentCard'}>
+                                                <Container>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <p>{'Estado'}</p>
+                                                    </Row>
+                                                    <Row className='justify-content-center text-center'>
+                                                        <Col>
+                                                            <Select id="standard-basic" label=""
+                                                                    variant="standard"/>
+                                                        </Col>
+                                                    </Row>
+                                                </Container>
+                                            </CardContent>
+                                        </Card>
+                                    </Col>
+                                </Row>
+                                <Row className='justify-content-center text-center'>
+                                <Col className='ContentCenterCard'>    
+                                <Button className={'BtnAddVisit'} variant='outlined'>Guardar Visita</Button>
                                 </Col>
-                            </Row>
-                        </Container>
-                        <hr/>
-                    </Form.Group>
-                </Box>
-                <Container>
-                    <Container>
-                        <Row className='justify-content-center'>
-                            <Col md={2} xs={4}>
-                                <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary">Añadir
-                                        Visita</Button>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                    </Container>
+                                </Row>
+                            </Carousel.Item>
+                        </Carousel>
+                        <CarouselButtons prev={handlePrev} next={handleNext}/>
+                    </Form>
                 </Container>
-            </Form>
+            </Container>
         </Container>
+
     )
         ;
-
 };
 export default AddVisitPage;

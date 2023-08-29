@@ -1,17 +1,35 @@
 #navbarcs {
-    background-color: #1fa4e6;
+    background-color: #ebf1f4;
     max-height: 20%;
-}
-
-#logoboton {
-    width: 160px;
-    height: 60px;
-    overflow-y: hidden;
-    padding-right: 10px
-
+    overflow: hidden;
 }
 
 .navLinkLogin {
     position: absolute;
     right: 20px;
+}
+
+.BtnNavBar{
+    color: #53A6DC;
+}
+.aNavBar{
+    color: #53A6DC;
+    text-decoration: none;
+}
+
+.ImgNavBar{
+    padding-left: 10%;
+    width: 150px;
+    height: 50px;
+}
+
+@media (max-width: 500px){
+    .linksNavbar{
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        transform: translateX(-8vw);
+    }
+
+
 }

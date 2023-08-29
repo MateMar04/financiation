@@ -26,6 +26,8 @@ import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React, { useState, useEffect } from 'react';
+import '@fontsource/poppins';
+
 
 function App() {
     return (
@@ -58,7 +60,7 @@ function App() {
 
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
-                        <Route path='/group/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
+                        <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
                         <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
                         <Route path='/coordinator/add' element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
                         <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
