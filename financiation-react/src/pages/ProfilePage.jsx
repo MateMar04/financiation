@@ -7,8 +7,10 @@ import {Avatar, TextField} from "@mui/material";
 import {DateField} from '@mui/x-date-pickers/DateField';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {ProfilePicture} from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+
 
 
 const ProfilePage = () => {
@@ -38,17 +40,20 @@ const ProfilePage = () => {
 
 
     return (
+        
         <Container className="ContainerProfilePage">
+            <Row>
+                <Col className="d-flex justify-content-center">
+                    {/* <Avatar src={user?.profile_picture} sx={{width: 200, height: 200}} className="ProfilePicture"/> */}
+                    <ProfilePicture/>
+                </Col>
+
+            </Row>
             <IconButton className="EditIconProfile" onClick={handleAddButton}><EditIcon color='action' sx={{
                 width: 25,
                 height: 25
             }}/></IconButton>
-            <Row>
-                <Col className="d-flex justify-content-center">
-                    <Avatar src={user?.profile_picture} sx={{width: 200, height: 200}} className="ProfilePicture"/>
-                </Col>
-
-            </Row>
+            
 
 
             <Row className={'justify-content-center text-center'}>

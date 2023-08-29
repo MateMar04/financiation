@@ -10,7 +10,7 @@ import AuthContext from "../context/AuthContext";
 //     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
 //     let {authTokens} = useContext(AuthContext)
 
-function ProfilePicture() {
+export const ProfilePicture= () =>  {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
     
@@ -70,7 +70,7 @@ function ProfilePicture() {
             <p>{message}</p>
         </div>
     );
-}
+};
 //     return (
         
 //             <Container className="profile-picture">
@@ -81,4 +81,4 @@ function ProfilePicture() {
         
 //     );
 // }
-export default ProfilePicture;
+
