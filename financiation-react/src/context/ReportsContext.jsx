@@ -158,7 +158,6 @@ export const ReportsProvider = ({children}) => {
     let getTotalRequestsByAdvisors = async () => {
         let response = await fetch(`/api/reports/total-requests-by-advisors?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
         let data = await response.json()
-        console.log(data)
         return data
     }
 

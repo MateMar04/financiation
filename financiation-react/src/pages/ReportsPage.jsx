@@ -39,7 +39,6 @@ export const ReportsPage = () => {
     }, [])
 
     const buttonClick = async () => {
-        console.log("Hasta aca");
         await generateReports()
     };
 
