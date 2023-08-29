@@ -1,14 +1,23 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import {Link, useNavigate} from "react-router-dom";
-import {getVisits} from "../services/VisitServices";
+import { Link, useNavigate } from "react-router-dom";
+import { getVisits } from "../services/VisitServices";
 import getAdvisees from "../services/AdviseeServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
+import { getAdvisorUsers } from "../services/AdvisorServices";
 import getFaqs from "../services/FaqServices";
-import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
+import { getMinistryDepartments } from "../services/MinistryDepartmentServices";
+import Avatar from '@mui/material/Avatar';
+import { getUser } from '../services/UserServices';
+import Select from '@mui/material/Select';
+import { MenuItem } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
 
 
 const FormPage = () => {
@@ -22,10 +31,11 @@ const FormPage = () => {
         padding: '15px',
     };
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
+    let [user, setUser] = useState([])
     let [advised, setAdvised] = useState([])
     let [visits, setVisits] = useState([])
     let history = useNavigate()
@@ -40,6 +50,8 @@ const FormPage = () => {
         getAdvisees(authTokens.access).then(data => setAdvised(data))
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getUser(authTokens.access).then(data => setUser(data))
+
     }, [])
 
     let postRequest = async (e) => {
@@ -76,63 +88,67 @@ const FormPage = () => {
                     <Container>
                         <Container>
                             <Row>
+                                <Col md={3}>
+                                    <p>Fecha y hora</p>
+                                </Col>
                                 <Col>
-                                    <select
+                                    <p>Visita</p>
+                                </Col>
+                                <Col>
+                                    <p>Asesor</p>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={3}>
+
+
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DateTimePicker className='InputsFormPage' format='DD/MM/YYYY hh:mm' />
+                                    </LocalizationProvider>
+                                </Col>
+                                <Col>
+
+                                    <Select
                                         placeholder="Localidad"
                                         className='form-select'
                                         name="visit">
 
                                         {visits?.map((visit) => (
-                                            <option value={visit.id}>{visit.name}</option>
+                                            <MenuItem value={visit.id}>{visit.name}</MenuItem>
                                         ))}
+                                    </Select>
 
-                                    </select>
                                 </Col>
                                 <Col>
-                                    <select
-                                        placeholder="Localidad"
-                                        className='form-select'
-                                        name="advisor">
-                                        {advisors?.map((advisor) => (
-                                            <option value={advisor.id}>{advisor.first_name} {advisor.last_name}</option>
-                                        ))}
-                                    </select>
-                                </Col>
-                                <Col>
-                                    <input type="date" className='input-group-text' name="date"></input>
+                                    <Container className='ContainerPersonForm'>
+                                        <Row className='justify-content-center text-center'>
+                                            <Col md={3} className='justify-content-center text-center'>
+                                                <Avatar alt="Remy Sharp" src={user?.profile_picture}
+                                                    sx={{ width: 35, height: 35 }} />
+                                            </Col>
+                                            <Col>
+                                                <p>{user.first_name}</p></Col>
+                                        </Row>
+                                    </Container>
                                 </Col>
                             </Row>
                         </Container>
                         <div className="py-3">
+
                             <Row className='justify-content-md-center'>
                                 <Col xs={12} md={10}>
-                                    <select
+                                    <p>Departamento</p>
+                                    <Select
                                         placeholder="Area"
                                         className='form-select'
-                                        style={selectStyle}
-                                        name="advised">
 
-
-                                        {advised?.map((advi) => (
-                                            <option value={advi.id}>{advi.first_name} {advi.last_name}</option>
-                                        ))}
-
-                                    </select>
-                                </Col>
-                            </Row>
-                            <Row className='justify-content-md-center'>
-                                <Col xs={12} md={10}>
-                                    <select
-                                        placeholder="Area"
-                                        className='form-select'
-                                        style={selectStyle}
                                         name="ministryDepartment">
 
                                         {ministryDepartments?.map((ministryDepartment) => (
-                                            <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                                            <MenuItem value={ministryDepartment.id}>{ministryDepartment.name}</MenuItem>
                                         ))}
 
-                                    </select>
+                                    </Select>
                                 </Col>
                             </Row>
                         </div>
@@ -141,22 +157,23 @@ const FormPage = () => {
 
                         <Row className='justify-content-md-center'>
                             <Col xs={12} md={10}>
-                                <select
+                                <p>¿Por que vino?</p>
+                                <Select
                                     placeholder="Por que vino?"
                                     className='form-select'
-                                    style={selectStyle}
+
                                     name="faq">
 
                                     {faqs?.map((faq) => (
-                                        <option value={faq.id}>{faq.name}</option>
+                                        <MenuItem value={faq.id}>{faq.name}</MenuItem>
                                     ))}
 
-                                </select>
+                                </Select>
                                 <div className="py-3">
                                     <Row className='justify-content-md-center'>
                                         <Col xs={3} md={2}>
                                             <Button type='submit' variant="primary" size="md"
-                                                    className='buttonconsulta'>Enviar
+                                                className='buttonconsulta'>Enviar
                                                 Consulta</Button>
                                         </Col>
                                     </Row>
@@ -171,7 +188,7 @@ const FormPage = () => {
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
                             <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
                                 <p className="text-center">¡Se a registrado el asesor correctamente!</p>
                             </Col>
                         </Row>

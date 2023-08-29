@@ -5,3 +5,15 @@
 .buttonconsulta {
     max-width: 120px;
 }
+
+.ContainerPersonForm{
+    background-color: white;
+    width: 12vw;
+    padding-top: 2vh;
+    border-radius: 3vh;
+    align-items: center;
+}
+
+.InputsFormPage{
+    background-color: white;
+}
