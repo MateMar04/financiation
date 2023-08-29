@@ -51,54 +51,55 @@ export const CreateGroupPage = () => {
     }
 
     return (
-        <Container fluid>
-            <SucceedModal message="el coordinador" show={showsuccess}/>
-            <FailedModal message="el coordinador" show={showfail}/>
+            <Container fluid>
+                <SucceedModal message="el coordinador" show={showsuccess}/>
+                <FailedModal message="el coordinador" show={showfail}/>
 
-            <Form onSubmit={postGroup}>
-                <Container>
-                    <Row className={'justify-content-center'}>
-                        <Col md={8} xs={9}>
-                            <TextField
-                                fullWidth
-                                id="standard-bare"
-                                variant="outlined"
-                                label={'Buscar Persona'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <IconButton>
-                                            <SearchIcon/>
-                                        </IconButton>
-                                    ),
-                                }}
-                            />
-                        </Col>
-                        <Col md={1} xs={1} lg={1}>
-                            <IconButton  href="http://localhost:3000/groups/" sx={{width: 56, height: 56} }
-                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
-                        </Col>
-                    </Row>
-                </Container>
-
-                <div>
-                    {users?.map((user) => (
-                        <Container>
-                            <UserCard user={user}/>
-                        </Container>
-                    ))}
-                </div>
-
-                <Container>
-                        <Row className='justify-content-center'>
-                            <Col md={2} xs={4}>
-                                <Form.Group>
-                                    <Button type="submit" size="medium" variant="outline-primary">Crear Grupo</Button>
-                                </Form.Group>
+                <Form onSubmit={postGroup}>
+                    <Container className="separation font">
+                        <Row className={'justify-content-center'}>
+                            <Col md={8} xs={8}>
+                                <TextField
+                                    className="font"
+                                    fullWidth
+                                    id="standard-bare"
+                                    variant="outlined"
+                                    label={'Buscar Persona'}
+                                    InputProps={{
+                                        endAdornment: (
+                                            <IconButton>
+                                                <SearchIcon/>
+                                            </IconButton>
+                                        ),
+                                    }}
+                                />
+                            </Col>
+                            <Col md={1} xs={1} lg={1}>
+                                <IconButton  href="http://localhost:3000/groups/" sx={{width: 56, height: 56} }
+                                            className={'GroupsIcon'}><GroupsIcon/></IconButton>
                             </Col>
                         </Row>
-                </Container>
+                    </Container>
 
-            </Form>
-        </Container>
+                    <div>
+                        {users?.map((user) => (
+                            <Container>
+                                <UserCard user={user}/>
+                            </Container>
+                        ))}
+                    </div>
+
+                    <Container>
+                            <Row className='justify-content-center '>
+                                <Col md={2} xs={2}>
+                                    <Form.Group>
+                                        <button type="submit" class="button-28" role="button">Crear Grupo</button>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
+                    </Container>
+
+                </Form>
+            </Container>
     )
 }
