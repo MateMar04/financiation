@@ -15,7 +15,7 @@ const LandingPage = () => {
     return (
         <div className="landing-page">
             <Container fluid className="containerLanding">
-                <Row>
+                <Row className={'ThingsInLanding'}>
                     <Col md={8} className="imagen">
                         <img src={imagenPanal} alt="" className="imagen-diagonal"/>
                     </Col>

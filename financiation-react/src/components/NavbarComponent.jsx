@@ -1,9 +1,8 @@
 import React, {Fragment, useContext, useEffect, useState} from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../assets/styles/NavbarComponent.css"
-import logofinanzas from '../assets/images/LOGOGOBIERNO.png';
 import Logo from "../assets/images/LOGOGOBIERNO.png";
-import {Button, Col, Container, Nav, Navbar, Row} from "react-bootstrap";
+import {Button, Col, Container, Navbar, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Avatar from "@mui/material/Avatar";
@@ -11,13 +10,14 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-    let {user, logoutUser} = useContext(AuthContext)
+
+    let {user} = useContext(AuthContext)
 
     /*
-    useEffect(() => {
-        getUser(authTokens.access).then(data => setUser(data))
-    })
-     */
+        useEffect(() => {
+            getUser(authTokens.access).then(data => setUser(data))
+        })
+    */
     return (
 
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
@@ -34,45 +34,45 @@ const NavbarComponent = () => {
                     {user ? (
                         <Container fluid>
                             <Row>
-                                <Col className="d-flex justify-content-start">
+
+                                <Col className="d-flex justify-content-sm-center justify-content-md-start">
                                     <div className="mx-2">
                                         <Link>
-                                            <Button variant="text" className={'BtnNavBar'}>Calendario</Button>
+                                            <Button variant="text"
+                                                    className={'BtnNavBar linksNavbar'}>Calendario</Button>
 
                                         </Link>
                                     </div>
                                     <div className="mx-2">
                                         <Link to="/form/">
-                                            <Button variant="text" className={'BtnNavBar'}>Formulario</Button>
+                                            <Button variant="text"
+                                                    className={'BtnNavBar linksNavbar'}>Formulario</Button>
 
                                         </Link>
                                     </div>
                                     <div className="mx-2">
                                         <Link to="/reports/">
-                                            <Button variant="text" className={'BtnNavBar'}>Reportes</Button>
+                                            <Button variant="text" className={'BtnNavBar linksNavbar'}>Reportes</Button>
                                         </Link>
                                     </div>
                                 </Col>
-                                <Col className="d-flex justify-content-end">
+                                <Col className="d-flex justify-content-center justify-content-md-end linksNavbar">
                                     <div className="mx-2">
-
-                                        <Row>
-                                            <Col md={3}>
+                                        <Row className={'justify-content-center'}>
+                                            <Col md={3} xs={3} className={'justify-content-center '}>
                                                 <Avatar alt="Remy Sharp" src={user?.profile_picture}
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
-                                            <Col md={8}>
+                                            <Col md={9} xs={9} className={'justify-content-center'}>
                                                 <Row className={'justify-content-center text-center'}>
-                                                    <small className={'aNavBar'}>¡Hola {user.first_name}!</small>
+                                                    <a className={'aNavBar'}>¡Hola {user.first_name}!</a>
                                                 </Row>
                                                 <Row className={'justify-content-center text-center'}>
                                                     <Link to="/me/">
-                                                        <a className={'aNavBar'}>Ver perfil</a>
+                                                        <small className={'aNavBar'}>Ver perfil</small>
                                                     </Link>
                                                 </Row>
                                             </Col>
-                                            <Col>
-                                            <Button onClick={logoutUser}></Button></Col>
 
                                         </Row>
                                     </div>
