@@ -64,7 +64,7 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Button onClick={buttonClick}>Generar</Button>
+            <Button onClick={() => buttonClick()}>Generar</Button>
             <Button onClick={() => console.log(advisorsData)}>SHOW</Button>
 
             <hr/>

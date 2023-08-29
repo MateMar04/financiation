@@ -204,45 +204,49 @@ export const ReportsProvider = ({children}) => {
                 setTotalRequestsByLocations(result[4]);
                 setTotalRequestsByFaqs(result[5])
                 setTotalRequestsByMinistryDepartments(result[6]);
+
+
+                setAdvisorsData({
+                    labels: result[2]?.map(item => item.name),
+                    datasets: [{
+                        label: "Consultas",
+                        data: result[2]?.map(data => data.requests),
+                        backgroundColor: colors
+                    }]
+                })
+
+                setFaqsData({
+                    labels: result[5]?.map(item => item.name),
+                    datasets: [{
+                        label: "Consultas",
+                        data: result[5]?.map(data => data.requests),
+                        backgroundColor: colors
+                    }]
+                })
+
+                setMinistryDepsData({
+                    labels: result[6]?.map(item => item.name),
+                    datasets: [{
+                        label: "Consultas",
+                        data: result[6]?.map(data => data.requests),
+                        backgroundColor: colors
+                    }]
+                })
+
+                setVisitsData({
+                    labels: result[3]?.map(item => item.name),
+                    datasets: [{
+                        label: "Consultas",
+                        data: result[3]?.map(data => data.requests),
+                        backgroundColor: colors
+                    }]
+                })
+
             }).catch(err => {
                 console.log('Error')
             });
 
-            setAdvisorsData({
-                labels: totalRequestsByAdvisors?.map(item => item.name),
-                datasets: [{
-                    label: "Consultas",
-                    data: totalRequestsByAdvisors?.map(data => data.requests),
-                    backgroundColor: colors
-                }]
-            })
 
-            setFaqsData({
-                labels: totalRequestsByFaqs?.map(item => item.name),
-                datasets: [{
-                    label: "Consultas",
-                    data: totalRequestsByFaqs?.map(data => data.requests),
-                    backgroundColor: colors
-                }]
-            })
-
-            setMinistryDepsData({
-                labels: totalRequestsByMinistryDepartments?.map(item => item.name),
-                datasets: [{
-                    label: "Consultas",
-                    data: totalRequestsByMinistryDepartments?.map(data => data.requests),
-                    backgroundColor: colors
-                }]
-            })
-
-            setVisitsData({
-                labels: totalRequestsByVisits?.map(item => item.name),
-                datasets: [{
-                    label: "Consultas",
-                    data: totalRequestsByVisits?.map(data => data.requests),
-                    backgroundColor: colors
-                }]
-            })
         } else {
             alert('Selecciona algo en todos los campos')
         }
