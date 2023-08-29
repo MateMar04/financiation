@@ -1,4 +1,4 @@
-let getFaqs = async (tokens) => {
+export const getFaqs = async (tokens) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),
@@ -8,5 +8,3 @@ let getFaqs = async (tokens) => {
     let data = await response.json()
     return data
 };
-
-export default getFaqs

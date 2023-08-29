@@ -25,17 +25,17 @@ import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
 import {AdvisorsPage} from "./pages/AdvisorsPage";
 import {CoordinatorsPage} from "./pages/CoordinatorsPage";
-import React, { useState, useEffect } from 'react';
-import '@fontsource/poppins';
-
+import React from 'react';
+import {ReportsProvider} from "./context/ReportsContext";
+import "@fontsource/poppins";
 
 function App() {
     return (
         <Router>
             <div className="App">
-                    <AuthProvider>
-                        <Navbar />
-                        <Routes>
+                <AuthProvider>
+                    <Navbar/>
+                    <Routes>
                         <Route path='/' exact element={<PublicRoute children={<LandingPage/>}></PublicRoute>}/>
 
                         <Route path='/login' element={<PublicRoute children={<LoginPage/>}/>}/>
@@ -43,7 +43,8 @@ function App() {
                         <Route path='/reset-password' element={<PublicRoute children={<ResetPasswordPage/>}/>}/>
                         <Route path='/password/reset/confirm/:uid/:token'
                                element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
-                        <Route path='/activate/:uid/:token' element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
+                        <Route path='/activate/:uid/:token'
+                               element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
@@ -56,21 +57,24 @@ function App() {
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
                         <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
-                        <Route path='/coordinators' element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
+                        <Route path='/coordinators'
+                               element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
 
 
                         <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
                         <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
                         <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
-                        <Route path='/coordinator/add' element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
+                        <Route path='/coordinator/add'
+                               element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
                         <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
-                        <Route path='/reports' element={<PrivateRoute children={<ReportsPage/>}/>}/>
-
-                        </Routes>
-                    </AuthProvider>
+                        <Route path='/reports'
+                               element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
+                    </Routes>
+                </AuthProvider>
             </div>
         </Router>
     );
 }
+
 export default App;
