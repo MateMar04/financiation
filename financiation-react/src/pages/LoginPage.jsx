@@ -36,7 +36,7 @@ const LoginPage = () => {
                                 sx: {borderRadius: 6, borderColor: '#f4f4f4'}
                             }}
                             type="text"
-                            name='username'
+                            name='ssn'
                             required
                             className={'InputLoginPage'}
                         />
