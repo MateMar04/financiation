@@ -53,6 +53,15 @@ export const MainMenuPage = () => {
                         <Container>
                             <VisitCardMainMenu/>
                             <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu/>
                         </Container>
                     </Card>
                 </Col>
