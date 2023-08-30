@@ -4,6 +4,8 @@
     margin-top: 2vh;
     display: flex;
     align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
 }
 
 .visit-row {
@@ -13,4 +15,9 @@
 
 .visit-title {
     margin: 0;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
 }

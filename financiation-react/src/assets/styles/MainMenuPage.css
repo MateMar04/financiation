@@ -24,6 +24,14 @@
     margin-right: auto;
 }
 
+.profile-card {
+    height: 60vh;
+}
+
+.last-requests-card {
+    height: 20vh;
+}
+
 .name-title {
     text-align: center;
 }
@@ -31,4 +39,8 @@
 .property-title {
     text-align: start;
     font-weight: bold;
+}
+
+.visit-card {
+    height: 84vh;
 }

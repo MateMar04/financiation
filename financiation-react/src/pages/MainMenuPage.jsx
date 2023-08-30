@@ -12,10 +12,10 @@ export const MainMenuPage = () => {
 
 
     return (
-        <Container fluid>
+        <Container fluid className="main-menu-container">
             <Row>
                 <Col lg={4}>
-                    <Card className="main-menu-card" id="left-card">
+                    <Card className="main-menu-card profile-card" id="left-card">
                         <Container fluid className="avatar_container">
                             <Avatar src={myUser?.profile_picture} className="profile_picture_avatar"/>
                         </Container>
@@ -38,7 +38,7 @@ export const MainMenuPage = () => {
                             </Container>
                         </Container>
                     </Card>
-                    <Card className="main-menu-card" id="left-card">
+                    <Card className="main-menu-card last-requests-card" id="left-card">
                         <h1 className="name-title">Consultas resueltas en la ultima visita</h1>
                         <h1 className="name-title">53</h1>
                     </Card>
@@ -46,7 +46,7 @@ export const MainMenuPage = () => {
                 </Col>
 
                 <Col lg={4}>
-                    <Card className="main-menu-card" id="center-card">
+                    <Card className="main-menu-card visit-card" id="center-card">
 
                         <h1 className="name-title">Proximas Visitas</h1>
 
