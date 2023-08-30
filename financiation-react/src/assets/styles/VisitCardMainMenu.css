@@ -1,0 +1,16 @@
+.visit-container {
+    background-color: #F4F4F4;
+    border-radius: 3vh;
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+}
+
+.visit-row {
+    display: flex;
+    align-items: center;
+}
+
+.visit-title {
+    margin: 0;
+}
