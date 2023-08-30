@@ -7,7 +7,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {getVisits} from "../services/VisitServices";
 import getAdvisees from "../services/AdviseeServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import getFaqs from "../services/FaqServices";
+import {getFaqs} from "../services/FaqServices";
 import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 
 
