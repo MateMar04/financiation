@@ -22,10 +22,10 @@ export const ProfilePicture= () =>  {
         e.preventDefault();
     
         const formData = new FormData();
-        formData.append('profile_picture', file);
+        formData.append('ProfilePicture', file);
     
         try {
-            const response = await fetch('/api/update-profile-picture/', {
+            const response = await fetch('/api/ProfilePicture/', {
                 method: 'PUT',
                 body: formData,
             });

@@ -91,6 +91,6 @@ urlpatterns = [
     re_path(r'reports$', views.getReport, name='report'),
 
     #EditarProfilePic
-    path('update-profile-picture', views.ProfilePictureView.as_view(), name='update-profile-picture')
+    path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture')
 
 ]

@@ -23,7 +23,7 @@ class ProfilePictureView(APIView):
         except UserAccount.DoesNotExist:
             return Response({"error": "User not found."}, status=404)
 
-        image_path = request.data.get('profile_picture')  # Assuming you're sending the path of the image
+        image_path = request.data.get('ProfilePicture')  # Assuming you're sending the path of the image
 
 
         # Create a serializer instance to validate and update other fields
