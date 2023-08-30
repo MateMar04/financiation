@@ -16,19 +16,15 @@ import IconButton from '@mui/material/IconButton';
 const ProfilePage = () => {
 
     let [user, setUser] = useState()
-    let {authTokens, logoutUser} = useContext(AuthContext)
-
-    useEffect(() => {
-        getUser(authTokens.access).then(data => setUser(data));
-    }, );
+    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
     let [editMode, setEditMode] = useState(false);
-    const defaultFirstName = user?.first_name || '';
-    const defaultLastName = user?.last_name || '';
-    const defaultSSN = user?.ssn || '';
-    const defaultPhoneNumber = user?.phone_number || '';
+    const defaultFirstName = myUser?.first_name || '';
+    const defaultLastName = myUser?.last_name || '';
+    const defaultSSN = myUser?.ssn || '';
+    const defaultPhoneNumber = myUser?.phone_number || '';
 
 
     const handleAddButton = () => {
@@ -43,7 +39,7 @@ const ProfilePage = () => {
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
-                    {/* <Avatar src={user?.profile_picture} sx={{width: 200, height: 200}} className="ProfilePicture"/> */}
+                    {/* <Avatar src={myUser?.profile_picture} sx={{width: 200, height: 200}} className="ProfilePicture"/> */}
                     <ProfilePicture/>
                 </Col>
 
@@ -56,7 +52,7 @@ const ProfilePage = () => {
 
 
             <Row className={'justify-content-center text-center'}>
-                <h1 className="ProfileText">{user?.first_name} {user?.last_name}</h1>
+                <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
                 <h3 className="ProfileText">Coordinador</h3>
             </Row>
 
