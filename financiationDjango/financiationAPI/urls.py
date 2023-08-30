@@ -29,6 +29,7 @@ urlpatterns = [
     path('visits', views.VisitApiView.as_view(), name='visits'),
 
     # Users
+    path('users/<int:id>', views.getUserById, name='user'),
     path('users', views.getUsers, name='users'),
     path('advisor-users', views.getAdvisorUsers, name='advisorUsers'),
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),

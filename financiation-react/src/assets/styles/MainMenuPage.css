@@ -1,0 +1,34 @@
+.main-menu-card {
+    margin-top: 4vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+#left-card {
+    margin-left: 6vh;
+}
+
+#right-card {
+    margin-right: 6vh;
+}
+
+#center-card {
+    margin-right: 3vh;
+    margin-left: 3vh;
+}
+
+.profile_picture_avatar {
+    width: 15vw !important;
+    height: 15vw !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.name-title {
+    text-align: center;
+}
+
+.property-title {
+    text-align: start;
+    font-weight: bold;
+}

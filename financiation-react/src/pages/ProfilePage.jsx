@@ -35,7 +35,6 @@ const ProfilePage = () => {
         setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
-
     };
 
 

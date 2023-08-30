@@ -1,91 +1,114 @@
-import { Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
-import { MenuCard } from "../components/MenuCard";
-import visitas from "../assets/images/visitaspic.jpeg";
-import grupos from "../assets/images/grupospic.jpeg";
-import asesores from "../assets/images/asesorespic.jpeg";
-import coordinadores from "../assets/images/coordinadorespic.jpeg";
-import asesorados from "../assets/images/asesoradospic.jpeg";
-import intendentes from "../assets/images/intendentespic.jpeg";
+import Card from "@mui/material/Card";
+import Avatar from "@mui/material/Avatar";
+import {useContext} from "react";
+import AuthContext from "../context/AuthContext";
 
 export const MainMenuPage = () => {
+
+    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+
+
     return (
+        <Container fluid>
+            <Row>
+                <Col lg={4}>
+                    <Card className="main-menu-card" id="left-card">
+                        <Container fluid className="avatar_container">
+                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar"/>
+                        </Container>
 
-        <Container fluid className="menuback full-height">
-           
+                        <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
 
-            <Row className="justify-content-center">
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard
-                        title="Visitas"
-                        link1="/visits/"
-                        link2="/visit/add/"
-                        image={visitas}
-                        customText="Proporciona una vista general de todas las visitas programadas y realizadas."
-                        title1="Ver Visitas"
-                        title2="Crear Visitas"
-                    />
-                </Col>
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard 
-                    title="Grupos" 
-                    link1="/groups/"
-                    link2="/groups/add/"
-                    image={grupos}
-                    customText="Proporciona una vista general de todos los grupos existentes en tu sistema."
-                    title1="Ver Grupos" 
-                    title2="Crear Grupo" 
-                    
-                    />
+                        <Container>
+                            <Container>
+                                <h5 className="property-title">Estado:</h5>
+                                <p>{myUser?.user_status}</p>
+
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">Rol:</h5>
+                                <p>{myUser?.role}</p>
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">CUIL:</h5>
+                                <p>{myUser?.ssn}</p>
+                            </Container>
+                        </Container>
+                    </Card>
+                    <Card className="main-menu-card" id="left-card">
+                    <h1 className="name-title">Consultas resueltas en la ultima visita</h1>
+                        <h1 className="name-title">53</h1>
+                    </Card>
+
                 </Col>
 
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard
-                        title="Asesores"
-                        link1="/advisors/"
-                        link2="/advisor/add/"
-                        image={asesores}
-                        customText="Permite explorar la lista y acceder a detalles específicos de cada asesor."
-                        title1="Ver Asesores"
-                        title2="Crear Asesores"
-                    />
+                <Col lg={4}>
+                    <Card className="main-menu-card" id="center-card">
+                        <Container fluid className="avatar_container">
+                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar"/>
+                        </Container>
+
+                        <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
+
+                        <Container>
+                            <Container>
+                                <h5 className="property-title">Estado:</h5>
+                                <p>{myUser?.user_status}</p>
+
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">Rol:</h5>
+                                <p>{myUser?.role}</p>
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">CUIL:</h5>
+                                <p>{myUser?.ssn}</p>
+                            </Container>
+                        </Container>
+                    </Card>
+                    <Card className="main-menu-card" id="center-card">
+                    <h1 className="name-title">Consultas resueltas en la ultima visita</h1>
+                        <h1 className="name-title">53</h1>
+                    </Card>
+
                 </Col>
+
+                <Col lg={4}>
+                    <Card className="main-menu-card" id="right-card">
+                        <Container fluid className="avatar_container">
+                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar"/>
+                        </Container>
+
+                        <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
+
+                        <Container>
+                            <Container>
+                                <h5 className="property-title">Estado:</h5>
+                                <p>{myUser?.user_status}</p>
+
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">Rol:</h5>
+                                <p>{myUser?.role}</p>
+                            </Container>
+                            <Container>
+                                <h5 className="property-title">CUIL:</h5>
+                                <p>{myUser?.ssn}</p>
+                            </Container>
+                        </Container>
+                    </Card>
+                    <Card className="main-menu-card" id="right-card">
+                    <h1 className="name-title">Consultas resueltas en la ultima visita</h1>
+                        <h1 className="name-title">53</h1>
+                    </Card>
+
+                </Col>
+
             </Row>
-            <Row className="justify-content-center">
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard
-                        title="Coordinadores"
-                        link1="/coordinators/"
-                        link2="/coordinator/add/"
-                        image={coordinadores}
-                        customText="Proporciona una lista completa de todos los coordinadores registrados en tu plataforma."
-                        title1="Ver Coordinadores"
-                        title2="Crear Coordinadores"
-                    />
-                </Col>
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard
-                        title="Asesorados"
-                        link1="/advised/"
-                        link2="/advised/add/"
-                        image={asesorados}
-                        customText="Proporciona una lista completa de todas las personas que están siendo asesoradas en tu plataforma."
-                        title1="Ver Asesorados"
-                        title2="Crear Asesorados"
-                    />
-                </Col>
-                <Col lg={3} md={6} className="cardd">
-                    <MenuCard
-                        title="Intendentes"
-                        link1="/advised/"
-                        link2="/advised/add/"
-                        image={intendentes}
-                        customText="Proporciona una lista completa de los Intendentes en cada localidad en tu sistema."
-                        title1="Ver Intendentes"
-                        title2="Crear Intendentes"
-                    />
-                </Col>
-            </Row>
+
+
         </Container>
     )
 }
