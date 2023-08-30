@@ -496,3 +496,10 @@ def convert_to_json(input_data):
         }
         result.append(entry)
     return result
+
+
+@api_view(['GET'])
+def getUserById(request, id):
+    user = UserAccount.objects.get(id=id)
+    serializer = UserAccountSerializer(user, many=False)
+    return Response(serializer.data)
