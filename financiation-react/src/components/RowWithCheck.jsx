@@ -1,16 +1,15 @@
 import {Col, Form, Row} from "react-bootstrap";
 import React from "react";
 import '../assets/styles/RowWithCheck.css'
-import {dataHandler} from "../services/RequestServices";
 
-export const RowWithCheck = ({item, tokens}) => {
+export const RowWithCheck = ({item}) => {
     return (
         <Row key={item.id}>
             <Col className='row-label'>
                 <Form.Label>{item.name}</Form.Label>
             </Col>
             <Col className='row-check'>
-                <Form.Check value={item.id} onChange={() => dataHandler(item, tokens)}></Form.Check>
+                <Form.Check id={item.id} value={item.id} defaultChecked={item.checked}></Form.Check>
             </Col>
         </Row>
     )
