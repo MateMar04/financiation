@@ -68,3 +68,9 @@
 .BtnAddVisit:hover {
     background-color: #097cce !important;
 }
+
+.icon{
+    margin: 30px;
+    margin-top: -30px;
+    margin-left: 38px;
+}

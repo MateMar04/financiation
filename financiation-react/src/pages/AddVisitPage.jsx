@@ -22,6 +22,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const AddVisitPage = () => {
@@ -31,6 +32,12 @@ const AddVisitPage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+
+    const [showButton, setShowButton] = useState(false);
+
+    const handleAddButton = () => {
+        setShowButton(!showButton);
+    };
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -391,10 +398,19 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                     <Col>
+                                            
                                         <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                        
                                             <CardContent className={'CenterContentCard'}>
+                                                
+                                                <Container className='icon' >
+                                                    <AddIcon className='icon' type="submit" aria-label="search" onClick={handleAddButton}></AddIcon>
+                                                </Container>
+                                                
                                                 <Container>
+
                                                     <Row className='justify-content-center text-center'>
+                                                        
                                                         <a>{'Intendente'}</a>
                                                     </Row>
                                                     <Row className='justify-content-center text-center'>
