@@ -4,58 +4,60 @@
     max-width: 40rem!important;
     margin: 0 auto!important; 
     padding: 2vw!important;
-    border-radius: 4vh!important;
+    border-radius: 5vh!important;
+    background-color: white!important;
+    margin-top: 8vh!important;
+    margin-bottom: 8vh!important;
 }
 
-.logosign{
-    width: 25vw; 
-    max-width: 40rem;
-    margin: 0 auto;
-    max-width: 100%;
-    height: auto;
+.InputSigninPage {
+    margin-bottom: 3vh!important;
+    background-color: #f4f4f4!important;
 }
 
-#botonsign{
-    border-radius: 4vh;
-    font-size: 0.7rem; 
-    padding: 2vh 3vw;
-    min-width: 100px; 
-    font-family: Arial, sans-serif;
+.logosign {
+    width: 15vw;
+    margin-bottom: 3.5vh;
 }
 
 .titsign {
-    font-size: 1.2rem; 
+    font-size: 2.3rem; 
     font-family: Arial, sans-serif;
+    margin: 0 auto;
+    margin-bottom: 4.5vh;
+}
+
+#botonsign{
+    border-radius: 5vh;
+    font-size: 0.8rem; 
+    padding: 2.3vh 5vw;
+    min-width: 100px; 
+    font-family: Arial, sans-serif;
+    margin-top: 3vh;
+    background-color: #53A6DC;
 }
 
 #linksign{
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-family: Arial, sans-serif;
+    color: black;
 }
 
 @media (max-width: 768px) {
     .titsign {
-        font-size: 0.8rem; 
+        font-size: 1rem; 
     }
-}
-
-@media (max-width: 768px) {
     .logosign {
         width: 45vw;
     }
-}
-
-@media (max-width: 768px) {
     #linksign {
         font-size: 0.7rem; 
     }
-}
-
-@media (max-width: 768px) {
     #botonsign {
-        border-radius: 4vh;
+        border-radius: 5vh;
         font-size: 0.7rem;
-        padding: 1.5vh 2.5vw;
+        padding: 2vh 7vw;
         min-width: 80px;
     }
 }
+
