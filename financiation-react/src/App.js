@@ -70,6 +70,9 @@ function App() {
 
                         <Route path='/reports'
                                element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
+
+                        <Route path='/mayors/add'
+                                element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
