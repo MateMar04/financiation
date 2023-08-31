@@ -16,6 +16,12 @@ import { MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import {DateField} from '@mui/x-date-pickers/DateField';
+import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
+
+
 
 
 
@@ -86,69 +92,77 @@ const FormPage = () => {
             <Form onSubmit={postRequest}>
                 <Container>
                     <Container>
-                        <Container>
-                            <Row className='justify-content-center text-center'>
-                                <Col md={3}>
+                        <Container className='justify-content-center'>
+                            <Row className='justify-content-center'>
+                                <Col md={4}>
                                     <p className='pInFormPage'>Fecha y hora</p>
                                 </Col>
-                                <Col>
+                                <Col md={4}>
                                     <p className='pInFormPage'>Visita</p>
                                 </Col>
-                                <Col>
+                                <Col md={4}>
                                     <p className='pInFormPage'>Asesor</p>
                                 </Col>
                             </Row>
-                            <Row className='justify-content-center text-center'>
-                                <Col md={3}>
-
-
+                            <Row className='justify-content-center'>
+                                <Col md={4}>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DateTimePicker className='InputsFormPage' format='DD/MM/YYYY hh:mm' />
-                                    </LocalizationProvider>
+                                            <DateTimeField
+                                                format='DD/MM/YYYY HH:mm'
+                                                label={''}
+                                                className='InputsFormPage'
+                                                InputProps={{
+                                                    sx: { borderRadius: '3vh' }
+                                                }}
+                                            />
+                                            </LocalizationProvider>
                                 </Col>
                                 <Col md={4}>
-
-                                    <Select
-                                        placeholder="Localidad"
+                                    <select
+                                        placeholder="Visita"
                                         className='form-select'
+                                        sx={{ borderRadius: '3vh' }}
+                                        label={'Visita'}
                                         name="visit">
 
                                         {visits?.map((visit) => (
-                                            <MenuItem value={visit.id}>{visit.name}</MenuItem>
+                                            <option value={visit.id}>{visit.name}</option>
                                         ))}
-                                    </Select>
+                                    </select>
 
                                 </Col>
-                                <Col md={3}>
-                                    <Container className='ContainerPersonForm'>
-                                        <Row className='justify-content-center text-center'>
-                                            <Col md={3} className='justify-content-center text-center'>
+                                <Col md={4}>
+                                  
+                                        <Row className='ContainerPersonForm'>
+                                            <Col md={4}>
                                                 <Avatar alt="Remy Sharp" src={user?.profile_picture}
                                                     sx={{ width: 35, height: 35 }} />
                                             </Col>
                                             <Col>
                                                 <p>{user.first_name}</p></Col>
                                         </Row>
-                                    </Container>
+                                  
                                 </Col>
                             </Row>
                         </Container>
+
+
                         <div className="py-3">
 
                             <Row className='justify-content-md-center'>
                                 <Col xs={12} md={10}>
                                     <p>Departamento</p>
-                                    <Select
+                                    <select
                                         placeholder="Area"
-                                        className='form-select'
+                                        className='form-select department-select'
 
                                         name="ministryDepartment">
 
                                         {ministryDepartments?.map((ministryDepartment) => (
-                                            <MenuItem value={ministryDepartment.id}>{ministryDepartment.name}</MenuItem>
+                                            <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
                                         ))}
 
-                                    </Select>
+                                    </select>
                                 </Col>
                             </Row>
                         </div>
@@ -158,17 +172,17 @@ const FormPage = () => {
                         <Row className='justify-content-md-center'>
                             <Col xs={12} md={10}>
                                 <p>¿Por que vino?</p>
-                                <Select
+                                <select
                                     placeholder="Por que vino?"
-                                    className='form-select'
+                                    className='form-select department-select'
 
                                     name="faq">
 
                                     {faqs?.map((faq) => (
-                                        <MenuItem value={faq.id}>{faq.name}</MenuItem>
+                                        <option value={faq.id}>{faq.name}</option>
                                     ))}
 
-                                </Select>
+                                </select>
                                 <div className="py-3">
                                     <Row className='justify-content-md-center'>
                                         <Col xs={3} md={2}>
@@ -189,7 +203,7 @@ const FormPage = () => {
                         <Row className='justify-content-center'>
                             <Col md={5}>
                                 <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
-                                <p className="text-center">¡Se a registrado el asesor correctamente!</p>
+                                <p className="text-center">¡Se ha registrado el asesor correctamente!</p>
                             </Col>
                         </Row>
                     </Container>

@@ -11,13 +11,24 @@
     width: 12vw;
     padding-top: 2vh;
     border-radius: 3vh;
-    align-items: center;
 }
 
 .InputsFormPage{
-    background-color: white;
+    background-color: white;background-color: white;
+    border-radius: 3vh;
+    height: 9vh;
 }
 
 .pInFormPage{
     transform: translateY(2vh);
+}
+
+.form-select{
+    background-color: white;
+    border-radius: 3vh;
+    height: 9vh;
+}
+
+.department-select{
+    width: 65vw;
 }
