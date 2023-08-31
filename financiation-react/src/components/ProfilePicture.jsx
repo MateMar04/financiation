@@ -21,14 +21,10 @@ export const ProfilePicture= () =>  {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const formData = new FormData();
-        formData.append('ProfilePicture', file);
-    
         try {
-            console.log(formData)
             const response = await fetch('/api/update-profile-picture', {
                 method: 'PUT',
-                body: formData,
+                body: file
             });
     
             if (!response.ok) {
@@ -41,32 +37,13 @@ export const ProfilePicture= () =>  {
             console.error('Error uploading profile picture:', error);
         }
     };
-    
-    
-    
-    
-    // let putPicture= {
-    //     method: 'PUT',
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         "Authorization": "JWT " + String(authTokens.access),
-    //         "Accept": "application/json"
-    //     },
-    //     body: JSON.stringify({"name": e.target.profile_picture.value})
-    // };
-    // fetch('api/update-profile-picture', requestOptions)
-    //     .then(response => response.json())
-    //     .then(data => this.setState({ postId: data.id }));
 
-    // if (response.status === 200) {
-    //     toggleModalsucceed();
-    // }
     
     return (
         <div>
             <h2>Update Profile Picture</h2>
             <form onSubmit={handleSubmit}>
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <input name="imageFile" type="file" accept="image/*" onChange={handleFileChange} />
                 <button type="submit">Update</button>
             </form>
             <p>{message}</p>
