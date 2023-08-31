@@ -2,19 +2,23 @@
     margin-top: 4vh;
     padding-top: 2vh;
     padding-bottom: 2vh;
+
 }
 
 #left-card {
     margin-left: 6vh;
+    border-radius: 4vh;
 }
 
 #right-card {
     margin-right: 6vh;
+    border-radius: 4vh;
 }
 
 #center-card {
     margin-right: 3vh;
     margin-left: 3vh;
+    border-radius: 4vh;
 }
 
 .profile_picture_avatar {
