@@ -93,11 +93,11 @@ const FormPage = () => {
                 <Container>
                     <Container>
                         <Container className='justify-content-center'>
-                            <Row className='justify-content-center'>
+                            <Row>
                                 <Col md={4}>
                                     <p className='pInFormPage'>Fecha y hora</p>
                                 </Col>
-                                <Col md={4}>
+                                <Col md={2}>
                                     <p className='pInFormPage'>Visita</p>
                                 </Col>
                                 <Col md={4}>
@@ -105,7 +105,7 @@ const FormPage = () => {
                                 </Col>
                             </Row>
                             <Row className='justify-content-center'>
-                                <Col md={4}>
+                                <Col md={3}>
                                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                                             <DateTimeField
                                                 format='DD/MM/YYYY HH:mm'
@@ -117,7 +117,7 @@ const FormPage = () => {
                                             />
                                             </LocalizationProvider>
                                 </Col>
-                                <Col md={4}>
+                                <Col md={3}>
                                     <select
                                         placeholder="Visita"
                                         className='form-select'
@@ -131,15 +131,15 @@ const FormPage = () => {
                                     </select>
 
                                 </Col>
-                                <Col md={4}>
-                                  
+                                <Col md={3} className='justify-content-center'>
                                         <Row className='ContainerPersonForm'>
-                                            <Col md={4}>
+                                            <Col md={4} className='justify-content-center'>
                                                 <Avatar alt="Remy Sharp" src={user?.profile_picture}
-                                                    sx={{ width: 35, height: 35 }} />
+                                                    sx={{ width: 35, height: 35}} />
                                             </Col>
                                             <Col>
-                                                <p>{user.first_name}</p></Col>
+                                                <p>{user.first_name}</p>
+                                                </Col>
                                         </Row>
                                   
                                 </Col>

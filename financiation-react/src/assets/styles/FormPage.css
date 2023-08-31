@@ -9,8 +9,11 @@
 .ContainerPersonForm{
     background-color: white;
     width: 12vw;
-    padding-top: 2vh;
     border-radius: 3vh;
+    align-items: center;
+    padding: 1vh;
+    text-align: center;
+    justify-content: center;
 }
 
 .InputsFormPage{
