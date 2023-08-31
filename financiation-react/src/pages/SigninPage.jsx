@@ -3,7 +3,6 @@ import '../assets/styles/SigninPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
 import { Col, Container, Form, Row, } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Card from '@mui/material/Card';
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
