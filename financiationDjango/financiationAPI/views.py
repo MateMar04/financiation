@@ -16,7 +16,7 @@ from rest_framework.response import Response
 # Create your views here.
 
 class ProfilePictureView(APIView):
-    def put(self,request):
+    def put(self, request):
         user_id = request.data.get('id_useraccount')
 
         try:
@@ -24,7 +24,6 @@ class ProfilePictureView(APIView):
         except UserAccount.DoesNotExist:
             return Response({"error": "User not found."}, status=404)
 
-        image_path = request.data.get('ProfilePicture')  # Assuming you're sending the path of the image
 
 
         # Create a serializer instance to validate and update other fields
@@ -46,55 +45,8 @@ class ProfilePictureView(APIView):
         profile_picture = user_profile.profile_picture
 
         if profile_picture:
-            # You can access properties of the ImageField like this:
-            file_path = profile_picture.path
-            file_url = profile_picture.url
-            file_size = profile_picture.size
-            file_name = profile_picture.name
+            return Response({"pic": profile_picture})
 
-            # You can also work with the file directly, like opening it
-            with profile_picture.open('rb') as image_file:
-                image_data = image_file.read()
-                # You have the image data as bytes in `image_data`
-
-
-
-        return Response({
-            "file_path": file_path,
-            "file_url": file_url,
-            "file_size": file_size,
-            "file_name": file_name,
-            "image_data": image_data,
-            "message": "Image data accessed"
-        })
-        # GET
-        # useraccount = UserAccount.objects.all()
-        # serializer = ProfilePictureSerializer(useraccount, many=True)
-        # return Response(serializer.data)
-
-        # PUT
-        # user_id = request.data.get('id_useraccount')
-
-        # try:
-        #     user_profile = UserAccount.objects.get(id=5)
-        # except UserAccount.DoesNotExist:
-        #     return Response({"error": "User not found."}, status=404)
-
-        # image_path = request.data.get('profile_picture')  # Assuming you're sending the path of the image
-
-        # # Read the image content as bytes
-        # with open(image_path, 'rb') as image_file:
-        #     image_bytes = image_file.read()
-
-        # # Update the profile picture field in the user_profile model with the byte data
-        # user_profile.profile_picture.save(os.path.basename(image_path), ContentFile(image_bytes))
-
-        # # Create a serializer instance to validate and update other fields
-        # serializer = UserAccountSerializer(user_profile, data=request.data, partial=True)
-        # if serializer.is_valid():
-        #     serializer.save()
-
-        # return Response(serializer.data)
 
 class RequestApiView(APIView):
     def get(self, request, *args, **kwargs):
