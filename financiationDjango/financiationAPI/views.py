@@ -28,7 +28,9 @@ class ProfilePictureView(APIView):
 
         user = UserAccount.objects.get(id=3)
 
-        bin_img = image_to_binary(data['profile_picture'] )
+        print(data['profile_picture'])
+
+        bin_img = image_to_binary(data['profile_picture'])
 
         user.profile_picture = bin_img
 

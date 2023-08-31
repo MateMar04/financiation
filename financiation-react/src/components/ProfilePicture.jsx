@@ -25,7 +25,7 @@ export const ProfilePicture = () => {
             const response = await fetch('/api/update-profile-picture', {
                 method: 'PUT',
                 headers: headers,
-                body: file
+                body: JSON.stringify({"profile_picture": file})
             });
 
             if (!response.ok) {
