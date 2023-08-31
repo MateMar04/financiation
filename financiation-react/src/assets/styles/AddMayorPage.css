@@ -5,6 +5,10 @@
     height: 35vw;
     border-radius: 5vh;
 }
+.container-addmayor-modal{
+    width: 20vw !important;
+}
+
 .container-adddmayor {
     background-color: rgb(243, 219, 219);
     height: 35vw;
