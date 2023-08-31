@@ -1,3 +1,9 @@
+:root {
+    --title-font-size: calc(24px + 0.390625vw);
+    --subtitle-font-size: calc(12px + 0.390625vw);
+    --text-font-size: calc(8px + 0.390625vw);
+}
+
 .main-menu-card {
     margin-top: 4vh;
     padding-top: 2vh;
@@ -22,8 +28,8 @@
 }
 
 .profile_picture_avatar {
-    width: 15vw !important;
-    height: 15vw !important;
+    width: 10vw !important;
+    height: 10vw !important;
     margin-left: auto;
     margin-right: auto;
 }
@@ -38,11 +44,13 @@
 
 .name-title {
     text-align: center;
+    font-size: var(--title-font-size)
 }
 
 .property-title {
     text-align: start;
     font-weight: bold;
+    font-size: var(--subtitle-font-size);
 }
 
 .visit-card {
@@ -55,4 +63,12 @@
 
 .report-card-main-menu {
     height: 40vh;
+}
+
+.text-main-manu {
+    font-size: var(--text-font-size);
+}
+
+.property-container {
+    margin: 0;
 }

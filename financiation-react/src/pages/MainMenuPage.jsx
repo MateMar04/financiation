@@ -24,18 +24,18 @@ export const MainMenuPage = () => {
                         <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
 
                         <Container>
-                            <Container>
+                            <Container className="property-container">
                                 <h5 className="property-title">Estado:</h5>
-                                <p>{myUser?.user_status}</p>
+                                <p className="text-main-menu">{myUser?.user_status}</p>
 
                             </Container>
-                            <Container>
+                            <Container className="property-container">
                                 <h5 className="property-title">Rol:</h5>
-                                <p>{myUser?.role}</p>
+                                <p className="text-main-menu">{myUser?.role}</p>
                             </Container>
-                            <Container>
+                            <Container className="property-container">
                                 <h5 className="property-title">CUIL:</h5>
-                                <p>{myUser?.ssn}</p>
+                                <p className="text-main-menu">{myUser?.ssn}</p>
                             </Container>
                         </Container>
                     </Card>
@@ -70,12 +70,12 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="main-menu-card group-card-main-menu" id="right-card">
                         <h1 className="name-title">Grupo 1</h1>
-                        <Row>
+                        <Row className="">
                             <Col lg={6}>
-                                <h5>Mateo Marchisone</h5>
+                                <h5 className="property-title">Mateo Marchisone</h5>
                             </Col>
                             <Col lg={6}>
-                                <p>Coordinador</p>
+                                <p className="text-main-menu">Coordinador</p>
                             </Col>
                         </Row>
 
