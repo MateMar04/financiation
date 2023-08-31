@@ -2,12 +2,6 @@ import React, {useContext, useState} from "react";
 import '../assets/styles/ProfilePicture.css';
 import AuthContext from "../context/AuthContext";
 
-
-// const ProfilePicture = ({ username, profileImg }) => {
-//     const [selectedImage, setSelectedImage] = useState(null);
-//     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
-//     let {authTokens} = useContext(AuthContext)
-
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
@@ -57,14 +51,3 @@ export const ProfilePicture = () => {
         </div>
     );
 };
-//     return (
-
-//             <Container className="profile-picture">
-//                 <img src={profileImg} alt={username} className="responsive-image" />
-//                 <input type="file" />
-//                 <button type="submit" onClick={putpicture}>Anadir </button>
-//             </Container>
-
-//     );
-// }
-
