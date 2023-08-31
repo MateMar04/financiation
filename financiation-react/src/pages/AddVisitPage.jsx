@@ -6,6 +6,7 @@ import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
+import MayorCreateModal from "../components/MayorCreateModal";
 import Card from '@mui/material/Card';
 import Select from "@mui/material/Select";
 import {CardContent, Switch} from "@mui/material";
@@ -32,12 +33,9 @@ const AddVisitPage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [showcreate, setShowcreate] = useState(false);
+    const toggleModalCreate = () => setShowcreate(!showcreate);
 
-    const [showButton, setShowButton] = useState(false);
-
-    const handleAddButton = () => {
-        setShowButton(!showButton);
-    };
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -102,6 +100,7 @@ const AddVisitPage = () => {
             <Container>
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
+                    <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
                     <SucceedModal message="la visita" show={showsuccess}/>
                     <FailedModal message="la visita" show={showfail}/>
                     <Form onSubmit={postVisit}>
@@ -404,7 +403,7 @@ const AddVisitPage = () => {
                                             <CardContent className={'CenterContentCard'}>
                                                 
                                                 <Container className='icon' >
-                                                    <AddIcon className='icon' type="submit" aria-label="search" onClick={handleAddButton}></AddIcon>
+                                                    <AddIcon className='icon' type="submit" aria-label="search" onClick={() => toggleModalCreate()}></AddIcon>
                                                 </Container>
                                                 
                                                 <Container>

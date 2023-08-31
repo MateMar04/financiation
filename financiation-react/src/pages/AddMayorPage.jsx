@@ -13,6 +13,7 @@ export const AddMayorPage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    
 
     let postAdvised = async (e) => {
         e.preventDefault()
@@ -54,7 +55,7 @@ export const AddMayorPage = () => {
             <Form.Control placeholder='Nombre del Intendente' name="first_name" type="text" required></Form.Control>
             <Form.Control placeholder='Apellido del Intendente' name="last_name" type="text" required></Form.Control>
             <Form.Control placeholder='Telefono del intendente' name="phone_number" type="number" required></Form.Control>
-            <Form.Control placeholder='mail del intendente' name="mail" type="email" required></Form.Control>
+            <Form.Control placeholder='mail del intendente' name="mail" type="number" required></Form.Control>
             <Button type="submit">Registrar</Button>
         </Form>
     )
