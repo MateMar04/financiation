@@ -25,18 +25,20 @@ export const ProfilePicture= () =>  {
         formData.append('ProfilePicture', file);
     
         try {
-            const response = await fetch('/api/ProfilePicture/', {
+            console.log(formData)
+            const response = await fetch('/api/update-profile-picture', {
                 method: 'PUT',
                 body: formData,
             });
     
-            if (response.ok) {
-                setMessage('Profile picture updated successfully!');
-            } else {
-                setMessage('Error updating profile picture.');
-            }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+             }
+
+            const data = await response.json();
+            console.log('Response from server:', data);
         } catch (error) {
-            setMessage('Error updating profile picture.');
+            console.error('Error uploading profile picture:', error);
         }
     };
     
