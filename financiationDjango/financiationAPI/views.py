@@ -4,12 +4,22 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import UserAccount
 from .serializers import *
 from .serializers import UserAccountSerializer
 
 
 # Create your views here.
+
+def image_to_binary(image_file_path):
+    try:
+        with open(image_file_path, "rb") as image_file:
+            image_data = image_file.read()
+
+        return image_data
+    except Exception as e:
+        print("An error occurred:", e)
+        return None
+
 
 class ProfilePictureView(APIView):
     def put(self, request, *args, **kwargs):
@@ -17,20 +27,14 @@ class ProfilePictureView(APIView):
         data = request.data
 
         user = UserAccount.objects.get(id=3)
-        user.profile_picture = data['profile_picture']
+
+        bin_img = image_to_binary(data['profile_picture'] )
+
+        user.profile_picture = bin_img
 
         serializer = UserAccountSerializer(user, many=False)
 
         return Response(serializer.data)
-
-
-        #     return Response({"error": "User not found."}, status=404)
-        #
-        # # Create a serializer instance to validate and update other fields
-        # serializer = ProfilePictureView(user_profile, data=request.data, partial=True)
-        # if serializer.is_valid():
-        #     serializer.save()
-
 
     def get(self, request):
         user_id = request.query_params.get('id_useraccount')
