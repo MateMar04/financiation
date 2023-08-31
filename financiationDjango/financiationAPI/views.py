@@ -3,38 +3,36 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import status
-from .serializers import ProfilePictureSerializer
-from .serializers import *
+
 from .models import UserAccount
+from .serializers import *
 from .serializers import UserAccountSerializer
-import os
-from django.core.files.base import ContentFile
-from rest_framework.response import Response
 
 
 # Create your views here.
 
 class ProfilePictureView(APIView):
-    def put(self, request):
-        user_id = request.data.get('id_useraccount')
+    def put(self, request, *args, **kwargs):
 
-        try:
-            user_profile = UserAccount.objects.get(id=3)
-        except UserAccount.DoesNotExist:
-            return Response({"error": "User not found."}, status=404)
+        data = request.data
 
+        user = UserAccount.objects.get(id=3)
+        user.profile_picture = data['profile_picture']
 
-
-        # Create a serializer instance to validate and update other fields
-        serializer = UserAccountSerializer(user_profile, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+        serializer = UserAccountSerializer(user, many=False)
 
         return Response(serializer.data)
 
 
-    def get(self,request):
+        #     return Response({"error": "User not found."}, status=404)
+        #
+        # # Create a serializer instance to validate and update other fields
+        # serializer = ProfilePictureView(user_profile, data=request.data, partial=True)
+        # if serializer.is_valid():
+        #     serializer.save()
+
+
+    def get(self, request):
         user_id = request.query_params.get('id_useraccount')
 
         try:
