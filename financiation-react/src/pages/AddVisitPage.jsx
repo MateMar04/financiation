@@ -101,8 +101,8 @@ const AddVisitPage = () => {
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
                     <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
-                    <SucceedModal message="la visita" show={showsuccess}/>
-                    <FailedModal message="la visita" show={showfail}/>
+                    <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
+                    <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
                     <Form onSubmit={postVisit}>
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
                                   className={'carouselAddVisit'}>
@@ -145,7 +145,6 @@ const AddVisitPage = () => {
                                                             <Select id="standard-basic" label=""
                                                                     variant="standard"/>
                                                         </Col>
-
                                                     </Row>
                                                 </Container>
                                             </CardContent>
