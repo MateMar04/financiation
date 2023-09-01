@@ -67,10 +67,10 @@ export const AuthProvider = ({children}) => {
         })
         let data = await response.json()
         if (response.status === 200) {
-            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
+            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
             history('/menu')
         } else {
             if (response.status === 401) {
@@ -95,7 +95,6 @@ export const AuthProvider = ({children}) => {
     }
 
     let updateToken = async () => {
-        setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
         console.log('Update')
         let response = await fetch('/auth/jwt/refresh', {
             method: 'POST',
@@ -105,11 +104,11 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({'refresh': authTokens?.refresh})
         })
         let data = await response.json()
-
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
+            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
         } else {
             logoutUser()
         }
