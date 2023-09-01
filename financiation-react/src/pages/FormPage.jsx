@@ -1,29 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import { Link, useNavigate } from "react-router-dom";
-import { getVisits } from "../services/VisitServices";
+import {Link, useNavigate} from "react-router-dom";
+import {getVisits} from "../services/VisitServices";
 import getAdvisees from "../services/AdviseeServices";
-import { getAdvisorUsers } from "../services/AdvisorServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
 import getFaqs from "../services/FaqServices";
-import { getMinistryDepartments } from "../services/MinistryDepartmentServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
-import { getUser } from '../services/UserServices';
+import {getUser} from '../services/UserServices';
 import Select from '@mui/material/Select';
-import { MenuItem } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { renderTimeViewClock } from '@mui/x-date-pickers/timeViewRenderers';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import {MenuItem} from '@mui/material';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {renderTimeViewClock} from '@mui/x-date-pickers/timeViewRenderers';
+import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {DateField} from '@mui/x-date-pickers/DateField';
-import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
-
-
-
-
+import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
 
 
 const FormPage = () => {
@@ -33,11 +29,7 @@ const FormPage = () => {
     };
 
 
-    const selectStyle = {
-        padding: '15px',
-    };
-
-    let { authTokens } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -88,121 +80,120 @@ const FormPage = () => {
 
 
     return (
-        <div>
-            <Form onSubmit={postRequest}>
-                <Container>
-                    <Container>
-                        <Container className='justify-content-center'>
-                            <Row>
-                                <Col md={4}>
-                                    <p className='pInFormPage'>Fecha y hora</p>
-                                </Col>
-                                <Col md={2}>
-                                    <p className='pInFormPage'>Visita</p>
-                                </Col>
-                                <Col md={4}>
-                                    <p className='pInFormPage'>Asesor</p>
-                                </Col>
-                            </Row>
-                            <Row className='justify-content-center'>
-                                <Col md={3}>
-                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <DateTimeField
-                                                format='DD/MM/YYYY HH:mm'
-                                                label={''}
-                                                className='InputsFormPage'
-                                                InputProps={{
-                                                    sx: { borderRadius: '3vh' }
-                                                }}
-                                            />
-                                            </LocalizationProvider>
-                                </Col>
-                                <Col md={3}>
-                                    <select
-                                        placeholder="Visita"
-                                        className='form-select'
-                                        sx={{ borderRadius: '3vh' }}
-                                        label={'Visita'}
-                                        name="visit">
 
-                                        {visits?.map((visit) => (
-                                            <option value={visit.id}>{visit.name}</option>
-                                        ))}
-                                    </select>
+        <Form onSubmit={postRequest}>
+            <Container>
+                <Row className='justify-content-center'>
+                    <Col md={4}>
 
-                                </Col>
-                                <Col md={3} className='justify-content-center'>
-                                        <Row className='ContainerPersonForm'>
-                                            <Col md={4} className='justify-content-center'>
-                                                <Avatar alt="Remy Sharp" src={user?.profile_picture}
-                                                    sx={{ width: 35, height: 35}} />
-                                            </Col>
-                                            <Col>
-                                                <p>{user.first_name}</p>
-                                                </Col>
-                                        </Row>
-                                  
-                                </Col>
-                            </Row>
-                        </Container>
+                    </Col>
+                    <Col md={2}>
+
+                    </Col>
+                    <Col md={4}>
+
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <p className={'pInFormPage'}>Fecha y hora</p>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DateTimeField
+                                format='DD/MM/YYYY HH:mm'
+                                label={''}
+                                className='InputsFormPage'
+                                InputProps={{
+                                    sx: {borderRadius: '3vh', height: '7vh'}
+                                }}
+                            />
+                        </LocalizationProvider>
+                    </Col>
+                    <Col>
+                        <p className={'pInFormPage'}>Visita</p>
+                        <select
+                            placeholder="Visita"
+                            className='form-select'
+                            name="visit">
+
+                            {visits?.map((visit) => (
+                                <option value={visit.id}>{visit.name}</option>
+                            ))}
+                        </select>
+
+                    </Col>
+                    <Col>
+
+                        <p className={'pInFormPage'}>Asesor</p>
+                        <Row className='ContainerPersonForm'>
+                            <Col md={4} className='justify-content-center'>
+                                <Avatar alt="Remy Sharp" src={user?.profile_picture}
+                                        sx={{width: 35, height: 35}}/>
+                            </Col>
+                            <Col>
+                                <p>{user.first_name}</p>
+                            </Col>
+                        </Row>
+
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+
+                <div className="py-3">
+
+                    <Row className='justify-content-md-center'>
+                        <Col xs={12} md={10}>
+                            <p className={'pInFormPage'}>Departamento</p>
+                            <select
+                                placeholder="Area"
+                                className='form-select department-select'
+
+                                name="ministryDepartment">
+
+                                {ministryDepartments?.map((ministryDepartment) => (
+                                    <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                                ))}
+
+                            </select>
+                        </Col>
+                    </Row>
+                </div>
 
 
+                <Row className='justify-content-md-center'>
+                    <Col xs={12} md={10}>
+                        <p className={'pInFormPage'}>¿Por que vino?</p>
+                        <select
+                            placeholder="Por que vino?"
+                            className='form-select department-select'
+
+                            name="faq">
+
+                            {faqs?.map((faq) => (
+                                <option value={faq.id}>{faq.name}</option>
+                            ))}
+
+                        </select>
                         <div className="py-3">
-
                             <Row className='justify-content-md-center'>
-                                <Col xs={12} md={10}>
-                                    <p>Departamento</p>
-                                    <select
-                                        placeholder="Area"
-                                        className='form-select department-select'
-
-                                        name="ministryDepartment">
-
-                                        {ministryDepartments?.map((ministryDepartment) => (
-                                            <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
-                                        ))}
-
-                                    </select>
+                                <Col xs={3} md={2}>
+                                    <Button type='submit' variant="primary" size="md"
+                                            className='buttonconsulta'>Enviar
+                                        Consulta</Button>
                                 </Col>
                             </Row>
                         </div>
-                    </Container>
-                    <Container>
+                    </Col>
+                </Row>
+            </Container>
 
-                        <Row className='justify-content-md-center'>
-                            <Col xs={12} md={10}>
-                                <p>¿Por que vino?</p>
-                                <select
-                                    placeholder="Por que vino?"
-                                    className='form-select department-select'
 
-                                    name="faq">
-
-                                    {faqs?.map((faq) => (
-                                        <option value={faq.id}>{faq.name}</option>
-                                    ))}
-
-                                </select>
-                                <div className="py-3">
-                                    <Row className='justify-content-md-center'>
-                                        <Col xs={3} md={2}>
-                                            <Button type='submit' variant="primary" size="md"
-                                                className='buttonconsulta'>Enviar
-                                                Consulta</Button>
-                                        </Col>
-                                    </Row>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Container>
-            </Form>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Body>
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
                             <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
                                 <p className="text-center">¡Se ha registrado el asesor correctamente!</p>
                             </Col>
                         </Row>
@@ -216,9 +207,10 @@ const FormPage = () => {
                     </Link>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </Form>
 
-    );
+    )
+        ;
 };
 
 
