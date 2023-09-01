@@ -32,3 +32,8 @@
 .inputNombre{
     padding-bottom: 1vw !important;
 }
+.BtnIniciarSesionLogin:hover {
+    background-color: #1f8bda;
+    border-color: #1f8bda;
+
+}

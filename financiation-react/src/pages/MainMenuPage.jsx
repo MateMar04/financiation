@@ -77,8 +77,8 @@ export const MainMenuPage = () => {
                 <Col lg={3} md={6} className="cardd">
                     <MenuCard
                         title="Intendentes"
-                        link1="/advised/"
-                        link2="/advised/add/"
+                        link1="/mayors/"
+                        link2="/mayors/add/"
                         image={intendentes}
                         customText="Proporciona una lista completa de los Intendentes en cada localidad en tu sistema."
                         title1="Ver Intendentes"
