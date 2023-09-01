@@ -84,22 +84,21 @@ class VisitApiView(APIView):
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
 
+
 class MayorApiView(APIView):
-    def get(self,request,*args,**kwargs):
-        mayor=Mayor.objects.all()
-        serializer=MayorSerializer(mayor,many=True)
+    def get(self, request, *args, **kwargs):
+        mayor = Mayor.objects.all()
+        serializer = MayorSerializer(mayor, many=True)
         return Response(serializer.data)
-    
-    def post(self,request,*args,**kwargs):
-        data=request.data
-        mayor=Mayor.objects.create(
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
         )
-        serializer=MayorSerializer(mayor,many=False)
+        serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
-
-
 
 
 class GroupApiView(APIView):
@@ -159,276 +158,11 @@ class AdvisorApiView(APIView):
         serializer = AdvisorSerializer(advisor, many=False)
         return Response(serializer.data)
 
-@api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        {
-            'Endpoint': '/api/advised/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an array of advised'
-        },
-        {
-            'Endpoint': '/auth/users/statuses/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'name': '',
-                'description': ''
-            },
-            'description': 'Returns an array of statuses'
-        },
-        {
-            'Endpoint': '/auth/users/roles/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'name': '',
-                'description': ''
-            },
-            'description': 'Returns an array of roles'
-        },
-        {
-            'Endpoint': '/api/advised/id/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an advised'
-        },
-        {
-            'Endpoint': '/auth/jwt/verify',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': '',
-                'new_password': '',
-                're_new_password': ''
-            },
-            'description': 'Authenticates the user account'
-        },
-        {
-            'Endpoint': '/auth/users/me/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns the user account'
-        },
-        {
-            'Endpoint': '/auth/users/id/',
-            'method': 'GET',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': None,
-            'description': 'Returns an user account'
-        },
-        {
-            'Endpoint': '/auth/users/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'first_name': '',
-                'last_name': '',
-                'email': '',
-                'ssn': '',
-                'username': '',
-                'phone_number': '',
-                'password': '',
-                're_password': ''
-            },
-            'description': 'Creates an Account'
-        },
-        {
-            'Endpoint': '/auth/users/activation/uid/token/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': ''
-            },
-            'description': 'Activates an Account'
-        },
-        {
-            'Endpoint': '/auth/jwt/create/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'username': '',
-                'password': '',
-            },
-            'description': 'Returns a new JWT'
-        },
-        {
-            'Endpoint': '/auth/jwt/refresh/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'refresh': ''
-            },
-            'description': 'Returns a new access token'
-        },
-        {
-            'Endpoint': '/auth/users/reset_password/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'username': '',
-                'email': ''
-            },
-            'description': 'Sends an email to reset password'
-        },
-        {
-            'Endpoint': 'auth/users/reset_password_confirm/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'uid': '',
-                'token': '',
-                'new_password': '',
-                're_new_password': ''
-            },
-            'description': 'Resets account password'
-        },
-        {
-            'Endpoint': '/api/visit/add',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'flyer': '',
-                'distance': '',
-                'travel_time': '',
-                'visit_date': '',
-                'civil_registration': '',
-                'accommodation': '',
-                'modernization_fund': '',
-                'start_time': '',
-                'finish_time': '',
-                'place_name': '',
-                'id_locality': '',
-                'id_group': '',
-                'id_visit_status': '',
-                'id_agreement': '',
-                'id_contacted_referrer': '',
-                'id_address': '',
-                'id_logo': ''
-            },
-            'description': 'Adds a visit'
-        },
-        {
-            'Endpoint': '/api/group/add',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'name': ''
-            },
-            'description': 'Adds a visit'
-        },
-        {
-            'Endpoint': 'api/request/add/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'id_visit': '',
-                'id_advised': '',
-                'id_advisor': '',
-                'id_ministry_department': '',
-                'id_faq': '',
-                'id_status': ''
-            },
-            'description': 'Sends a request'
-        },
-        {
-            'Endpoint': 'api/mayors/add/',
-            'method': 'POST',
-            'headers': {
-                'Content-Type': 'application/json',
-                'Authorization': 'JWT accessToken',
-                'Accept': 'application/json'
-            },
-            'body': {
-                'first_name': '',
-                'last_name': '',
-
-            },
-            'description': 'Sends a request'
-        },
-    ]
-    return Response(routes)
 
 @api_view(['GET'])
 def getMayor(request):
-    mayor=Mayor.objects.all()
-    serializer=MayorSerializer(mayor,many=True)
-    return Response(serializer.data)
-
-@api_view(['GET'])
-def getAdvisee(request, id):
-    advised = Advised.objects.get(id=id)
-    serializer = AdvisedSerializer(advised, many=False)
+    mayor = Mayor.objects.all()
+    serializer = MayorSerializer(mayor, many=True)
     return Response(serializer.data)
 
 
