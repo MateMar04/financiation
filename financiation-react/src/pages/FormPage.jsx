@@ -20,6 +20,7 @@ import {renderTimeViewClock} from '@mui/x-date-pickers/timeViewRenderers';
 import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
 import {DateField} from '@mui/x-date-pickers/DateField';
 import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
+import TextField from "@mui/material/TextField";
 
 
 const FormPage = () => {
@@ -92,7 +93,7 @@ const FormPage = () => {
                                 label={''}
                                 className='InputsFormPage'
                                 InputProps={{
-                                    sx: {borderRadius: '3vh', height: '7vh'}
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor:'white'}
                                 }}
                             />
                         </LocalizationProvider>
@@ -127,28 +128,41 @@ const FormPage = () => {
             </Container>
             <Container>
 
-                <div className="py-3">
 
-                    <Row className='justify-content-md-center'>
-                        <Col xs={12} md={10}>
-                            <p className={'pInFormPage'}>Departamento</p>
-                            <select
-                                placeholder="Area"
-                                className='form-select department-select'
+                <Row className='justify-content-md-center py-2'>
+                    <Col xs={12} md={10}>
+                        <p className={'pInFormPage'}>Departamento</p>
+                        <select
+                            placeholder="Departamento"
+                            className='form-select department-select'
 
-                                name="ministryDepartment">
+                            name="ministryDepartment">
 
-                                {ministryDepartments?.map((ministryDepartment) => (
-                                    <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
-                                ))}
+                            {ministryDepartments?.map((ministryDepartment) => (
+                                <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                            ))}
 
-                            </select>
-                        </Col>
-                    </Row>
-                </div>
+                        </select>
+                    </Col>
+                </Row>
 
 
-                <Row className='justify-content-md-center'>
+                <Row className='justify-content-md-center py-2'>
+                    <Col xs={12} md={10}>
+                        <p className={'pInFormPage'}>Consulta</p>
+                        <select
+                            placeholder="Departamento"
+                            className='form-select department-select'
+                            name="ministryDepartment">
+
+                            <option>Consulta</option>
+
+                        </select>
+                    </Col>
+                </Row>
+
+
+                <Row className='justify-content-md-center py-2'>
                     <Col xs={12} md={10}>
                         <p className={'pInFormPage'}>¿Por que vino?</p>
                         <select
@@ -162,15 +176,19 @@ const FormPage = () => {
                             ))}
 
                         </select>
-                        <div className="py-3">
-                            <Row className='justify-content-md-center'>
-                                <Col xs={3} md={2}>
-                                    <Button type='submit' variant="primary" size="md"
-                                            className='buttonconsulta'>Enviar
-                                        Consulta</Button>
-                                </Col>
-                            </Row>
-                        </div>
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row className={'justify-content-center py-2'}>
+                    <Col>
+                        <p className={'pInFormPage'}>Cantidad</p>
+                        <TextField className={'InputInForm'}
+                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white'}}}/>
+                    </Col>
+                    <Col>
+                        <Button type='submit' variant="primary"
+                                className='buttonconsulta'>Enviar</Button>
                     </Col>
                 </Row>
             </Container>

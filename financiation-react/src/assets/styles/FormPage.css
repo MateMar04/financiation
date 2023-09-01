@@ -1,24 +1,36 @@
 
 .buttonconsulta {
-    max-width: 120px;
+    width: 210px;
+    border-radius: 15px;
+    background-color: #53A6DC;
+    border-color: #53A6DC;
+    color: white;
+    padding: 10px;
+
 }
 
 .ContainerPersonForm{
     background-color: white;
     border-color: black !important;
     width: 12vw;
-    border-radius: 3vh;
+    border-radius: 2vh;
     align-items: center;
     padding: 1vh;
     text-align: center;
     justify-content: center;
     height: 7vh;
+}
+
+.PinContainerPersonForm{
+    align-self: center;
+    text-align: center;
+    justify-content: center;
 
 }
 
 .InputsFormPage{
     background-color: white;
-    border-radius: 3vh;
+    border-radius: 2vh;
 }
 
 .pInFormPage{
@@ -27,7 +39,7 @@
 
 .form-select{
     background-color: white;
-    border-radius: 3vh;
+    border-radius: 2vh;
     height: 7vh;
 }
 
@@ -39,6 +51,15 @@
     width: 70vw;
 }
 
+.SecondContainerForm{
+     width: 60vw;
+}
 .VisitaDropDown{
     margin-right: 2vw;
+}
+
+.InputInForm{
+    width: 10vw !important;
+        background-color: white;
+        border-radius: 2vh;
 }
