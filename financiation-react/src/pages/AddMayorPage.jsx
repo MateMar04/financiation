@@ -7,8 +7,9 @@ import FailedModal from "../components/FailedModal";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Container, Card } from 'react-bootstrap'
-import '../assets/styles/AddMayorPage.css'
+import { Container, Card } from 'react-bootstrap';
+import '../assets/styles/AddMayorPage.css';
+import PhoneIcon from '@mui/icons-material/Phone';
 
 
 export const AddMayorPage = () => {
@@ -104,7 +105,7 @@ export const AddMayorPage = () => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <AccountCircleOutlinedIcon />
+                                        <PhoneIcon /> 
                                     </InputAdornment>
                                 ),
                                 sx: { borderRadius: 6, borderColor: '#f4f4f4' },
