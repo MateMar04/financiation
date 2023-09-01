@@ -160,13 +160,6 @@ class AdvisorApiView(APIView):
 
 
 @api_view(['GET'])
-def getMayor(request):
-    mayor = Mayor.objects.all()
-    serializer = MayorSerializer(mayor, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
 def getLocations(request):
     locations = Location.objects.all()
     serializer = LocationsSerializer(locations, many=True)
