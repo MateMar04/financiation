@@ -5,6 +5,7 @@
 
 .ContainerPersonForm{
     background-color: white;
+    border-color: black !important;
     width: 12vw;
     border-radius: 3vh;
     align-items: center;
@@ -12,6 +13,7 @@
     text-align: center;
     justify-content: center;
     height: 7vh;
+
 }
 
 .InputsFormPage{
@@ -31,4 +33,12 @@
 
 .department-select{
     width: 65vw;
+}
+
+.FirstContainerForm{
+    width: 70vw;
+}
+
+.VisitaDropDown{
+    margin-right: 2vw;
 }

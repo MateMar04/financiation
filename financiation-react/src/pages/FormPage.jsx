@@ -82,20 +82,9 @@ const FormPage = () => {
     return (
 
         <Form onSubmit={postRequest}>
-            <Container>
+            <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
-                    <Col md={4}>
-
-                    </Col>
-                    <Col md={2}>
-
-                    </Col>
-                    <Col md={4}>
-
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
+                    <Col md={3}>
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
@@ -108,7 +97,7 @@ const FormPage = () => {
                             />
                         </LocalizationProvider>
                     </Col>
-                    <Col>
+                    <Col md={4} className={'VisitaDropDown'}>
                         <p className={'pInFormPage'}>Visita</p>
                         <select
                             placeholder="Visita"
@@ -121,8 +110,7 @@ const FormPage = () => {
                         </select>
 
                     </Col>
-                    <Col>
-
+                    <Col md={3}>
                         <p className={'pInFormPage'}>Asesor</p>
                         <Row className='ContainerPersonForm'>
                             <Col md={4} className='justify-content-center'>
