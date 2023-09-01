@@ -154,9 +154,11 @@ const FormPage = () => {
                         <select
                             placeholder="Departamento"
                             className='form-select department-select'
-                            name="ministryDepartment">
-
-                            <option>Consulta</option>
+                            name="faq">
+                                {faqs?.map((faq) => (
+                                <option value={faq.id}>{faq.name}</option>
+                            ))}
+                            
 
                         </select>
                     </Col>
@@ -171,10 +173,10 @@ const FormPage = () => {
                             className='form-select department-select'
 
                             name="faq">
-
                             {faqs?.map((faq) => (
-                                <option value={faq.id}>{faq.name}</option>
-                            ))}
+                            <option value={faq.id}>{faq.name}</option>
+                        ))}
+                            
 
                         </select>
                     </Col>
