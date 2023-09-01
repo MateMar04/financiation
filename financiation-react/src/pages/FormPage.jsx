@@ -119,7 +119,7 @@ const FormPage = () => {
                                         sx={{width: 35, height: 35}}/>
                             </Col>
                             <Col>
-                                <p>{user.first_name}</p>
+                                <p className={'userFirstName'}>{user.first_name}</p>
                             </Col>
                         </Row>
 
@@ -191,6 +191,7 @@ const FormPage = () => {
                                    InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
                     </Col>
                     <Col md={3}>
+    
                         <Button type='submit' variant="primary"
                                 className='buttonconsulta'>Enviar</Button>
                     </Col>
