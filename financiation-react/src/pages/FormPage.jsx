@@ -179,14 +179,18 @@ const FormPage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container>
-                <Row className={'justify-content-center py-2'}>
-                    <Col>
-                        <p className={'pInFormPage'}>Cantidad</p>
+
+            <Container className={'SecondContainerForm'}>
+                <Row>
+                    <p className={'SecondpInFormPage'}>Cantidad</p>
+                    </Row>
+
+                <Row className={'justify-content-start py-2'}>
+                    <Col md={8}>
                         <TextField className={'InputInForm'}
-                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white'}}}/>
+                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
                     </Col>
-                    <Col>
+                    <Col md={3}>
                         <Button type='submit' variant="primary"
                                 className='buttonconsulta'>Enviar</Button>
                     </Col>

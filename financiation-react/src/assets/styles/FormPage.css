@@ -6,6 +6,7 @@
     border-color: #53A6DC;
     color: white;
     padding: 10px;
+    height: 7vh;
 
 }
 
@@ -62,4 +63,9 @@
     width: 10vw !important;
         background-color: white;
         border-radius: 2vh;
+        height: 7vh;
+}
+
+.SecondpInFormPage{
+    transform: translateY(3.5vh);
 }
