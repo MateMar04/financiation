@@ -28,11 +28,9 @@ class ProfilePictureView(APIView):
 
         user = UserAccount.objects.get(id=3)
 
-        print(data['profile_picture'])
+        print(data)
 
-        bin_img = image_to_binary(data['profile_picture'])
 
-        user.profile_picture = bin_img
 
         serializer = UserAccountSerializer(user, many=False)
 

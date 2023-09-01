@@ -12,13 +12,15 @@ export const ProfilePicture = () => {
     };
 
     let headers = {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "Authorization": "JWT " + String(authTokens.access),
         "Accept": "application/json"
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const formData = new FormData
 
         try {
             console.log(file)
