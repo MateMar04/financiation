@@ -12,7 +12,6 @@ export const ProfilePicture = () => {
     };
 
     let headers = {
-        "Content-Type": "multipart/form-data",
         "Authorization": "JWT " + String(authTokens.access),
         "Accept": "application/json"
     }
@@ -20,14 +19,16 @@ export const ProfilePicture = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const formData = new FormData
+        const formData = new FormData()
+        formData.append("profile_picture", file)
 
         try {
             console.log(file)
             const response = await fetch('/api/update-profile-picture', {
                 method: 'PUT',
                 headers: headers,
-                body: JSON.stringify({"profile_picture": file})
+                body: formData
+
             });
 
             if (!response.ok) {

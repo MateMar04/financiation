@@ -21,6 +21,17 @@ def image_to_binary(image_file_path):
         return None
 
 
+def in_memory_uploaded_file_to_binary(in_memory_uploaded_file):
+    try:
+        in_memory_uploaded_file.seek(0)  # Ensure the file cursor is at the beginning.
+        binary_data = in_memory_uploaded_file.read()
+        return binary_data
+    except Exception as e:
+        # Handle any potential exceptions that may occur during the process.
+        print(f"Error converting InMemoryUploadedFile to binary: {e}")
+        return None
+
+
 class ProfilePictureView(APIView):
     def put(self, request, *args, **kwargs):
 
@@ -28,13 +39,9 @@ class ProfilePictureView(APIView):
 
         user = UserAccount.objects.get(id=3)
 
-        print(data)
+        image = in_memory_uploaded_file_to_binary(data['profile_picture'])
 
-
-
-        serializer = UserAccountSerializer(user, many=False)
-
-        return Response(serializer.data)
+        return JsonResponse("HOLA", safe=False)
 
     def get(self, request):
         user_id = request.query_params.get('id_useraccount')
