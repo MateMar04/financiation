@@ -1,0 +1,23 @@
+.visit-container {
+    background-color: #F4F4F4;
+    border-radius: 3vh;
+    margin-top: 2vh;
+    display: flex;
+    align-items: center;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.visit-row {
+    display: flex;
+    align-items: center;
+}
+
+.visit-title {
+    margin: 0;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+}
