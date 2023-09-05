@@ -1,7 +1,7 @@
 .container-addmayor {
     margin-top: 8vh;
     background-color: white;
-    width: 70vw;
+    width: 50vw;
     height: 35vw;
     border-radius: 5vh;
 }
@@ -30,7 +30,8 @@
     padding-top: 10vw;
 }
 .inputNombre{
-    padding-bottom: 1vw !important;
+    padding-bottom: 2vw !important;
+    padding-right: 2vw !important;
 }
 .BtnIniciarSesionLogin:hover {
     background-color: #1f8bda;

@@ -10,7 +10,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
 import PhoneIcon from '@mui/icons-material/Phone';
-
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
 
 export const AddMayorPage = () => {
 
@@ -105,7 +105,7 @@ export const AddMayorPage = () => {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <PhoneIcon /> 
+                                        <PhoneIcon/> 
                                     </InputAdornment>
                                 ),
                                 sx: { borderRadius: 6, borderColor: '#f4f4f4' },
