@@ -18,7 +18,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="profile-card d-flex align-items-center" id="left-card">
                         <Container>
-                            <Row >
+                            <Row>
                                 <Col className="d-flex justify-content-center">
                                     <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
                                 </Col>
@@ -30,7 +30,7 @@ export const MainMenuPage = () => {
                                 </strong>
                             </Row>
 
-                            <Container className="last-text-main-menu-card">
+                            <Container>
                                 <Row>
                                     <strong>
                                         <p className="p-main-menu-card">Estado:</p>
@@ -53,7 +53,6 @@ export const MainMenuPage = () => {
                                     </strong>
                                 </Row>
                                 <p className="p-main-menu-card">{myUser?.ssn}</p>
-
                             </Container>
                         </Container>
                     </Card>
@@ -73,20 +72,24 @@ export const MainMenuPage = () => {
 
                 <Col lg={4}>
                     <Card className="next-visits-card" id="center-card">
-                        <Row className="text-center">
-                            <h2 className="name-title">Próximas Visitas</h2>
-                        </Row>
                         <Container>
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
-                            <VisitCardMainMenu />
+                            <Row className="text-center">
+                                <h2 className="name-title">Próximas Visitas</h2>
+                            </Row>
+                            <Row>
+                                <Container>
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
+                                    <VisitCardMainMenu />
 
+                                </Container>
+                            </Row>
                         </Container>
                     </Card>
                 </Col>
@@ -103,29 +106,27 @@ export const MainMenuPage = () => {
                         </Row>
                     </Card>
 
-                    <Card className="report-card-main-menu" id="right-card">
-                        <Row className="text-center">
-                            <h2 className="name-title ">Consultas</h2>
-                        </Row>
-
+                    <Card className="report-card-main-menu d-flex align-items-center" id="right-card">
                         <Container>
-                            <BarChart chartData={{
-                                labels: ["Pedro", "Maria", "Juan"],
-                                datasets: [{
-                                    label: "",
-                                    data: [30, 30, 40],
-                                    backgroundColor: ["red", "green", "blue"]
-                                }]
-                            }} />
+                            <Row className="text-center">
+                                <h2 className="name-title ">Consultas</h2>
+                            </Row>
+                            <Row>
+
+                                <BarChart className="barchart-report-card-main-menu" chartData={{
+                                    labels: ["Pedro", "Maria", "Juan"],
+                                    datasets: [{
+                                        label: "",
+                                        data: [30, 30, 40],
+                                        backgroundColor: ["red", "green", "blue"]
+                                    }]
+                                }} />
+
+                            </Row>
                         </Container>
-
                     </Card>
-
                 </Col>
-
             </Row >
-
-
         </Container >
     )
 }
