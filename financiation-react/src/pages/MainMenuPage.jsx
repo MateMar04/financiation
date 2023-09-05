@@ -5,7 +5,7 @@ import Avatar from "@mui/material/Avatar";
 import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
-import PieChart from "../components/PieChart";
+import BarChart from "../components/BarChart";
 
 export const MainMenuPage = () => {
 
@@ -76,7 +76,6 @@ export const MainMenuPage = () => {
                         <Row className="text-center">
                             <h2 className="name-title">Próximas Visitas</h2>
                         </Row>
-
                         <Container>
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
@@ -87,30 +86,30 @@ export const MainMenuPage = () => {
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
-
 
                         </Container>
                     </Card>
                 </Col>
 
                 <Col lg={4}>
-                    <Card className="main-menu-card group-card-main-menu" id="right-card">
-                        <h1 className="name-title">Grupo 1</h1>
-                        <Row className="">
-                            <Col lg={6}>
-                                <h5 className="property-title ">Mateo Marchisone</h5>
-                            </Col>
-                            <Col lg={6}>
-                                <p className="text-main-menu">Coordinador</p>
-                            </Col>
+                    <Card className="group-card-main-menu" id="right-card">
+                        <Row className="text-center">
+                            <h2 className="name-title">Grupo 1</h2>
+                        </Row>
+                        <Row className="justify-content-center text-center">
+
+                            <h5 className="property-title ">Coordinador: {myUser.first_name} {myUser.last_name}</h5>
+
+                        </Row>
+                    </Card>
+
+                    <Card className="report-card-main-menu" id="right-card">
+                        <Row className="text-center">
+                            <h2 className="name-title ">Consultas</h2>
                         </Row>
 
-
-                    </Card>
-                    <Card className="main-menu-card report-card-main-menu" id="right-card">
-                        <h1 className="name-title ">Reportes</h1>
                         <Container>
-                            <PieChart chartData={{
+                            <BarChart chartData={{
                                 labels: ["Pedro", "Maria", "Juan"],
                                 datasets: [{
                                     label: "",
