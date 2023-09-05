@@ -1,15 +1,15 @@
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import PieChart from "../components/PieChart";
 
 export const MainMenuPage = () => {
 
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let { authTokens, logoutUser, myUser } = useContext(AuthContext)
 
 
     return (
@@ -18,7 +18,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="main-menu-card profile-card" id="left-card">
                         <Container fluid className="avatar_container">
-                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar"/>
+                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar" />
                         </Container>
 
                         <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
@@ -39,9 +39,16 @@ export const MainMenuPage = () => {
                             </Container>
                         </Container>
                     </Card>
+
                     <Card className="main-menu-card last-requests-card" id="left-card">
-                        <h2 className="name-title">Consultas resueltas en la ultima visita:</h2>
-                        <h1 className="name-title fw-bold">53</h1>
+                        <Container className="padding-title">
+                            <Row className="text-center">
+                                <h4>Consultas resueltas en la ultima visita:</h4>
+                            </Row>
+                            <Row className="text-center">
+                                <h3 className="fw-bold">53</h3>
+                            </Row>
+                            </Container>
                     </Card>
 
                 </Col>
@@ -52,17 +59,17 @@ export const MainMenuPage = () => {
                         <h1 className="name-title">Proximas Visitas</h1>
 
                         <Container>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
-                            <VisitCardMainMenu/>
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />                            
+                            <VisitCardMainMenu />
+                            <VisitCardMainMenu />
+                            
+                           
                         </Container>
                     </Card>
                 </Col>
@@ -72,7 +79,7 @@ export const MainMenuPage = () => {
                         <h1 className="name-title">Grupo 1</h1>
                         <Row className="">
                             <Col lg={6}>
-                                <h5 className="property-title">Mateo Marchisone</h5>
+                                <h5 className="property-title ">Mateo Marchisone</h5>
                             </Col>
                             <Col lg={6}>
                                 <p className="text-main-menu">Coordinador</p>
@@ -82,16 +89,16 @@ export const MainMenuPage = () => {
 
                     </Card>
                     <Card className="main-menu-card report-card-main-menu" id="right-card">
-                        <h1 className="name-title">Reportes</h1>
-                        <Container fluid>
+                        <h1 className="name-title ">Reportes</h1>
+                        <Container>
                             <PieChart chartData={{
-                            labels: ["Pedro", "Maria", "Juan"],
-                            datasets: [{
-                                label: "",
-                                data: [30,30,40],
-                                backgroundColor: ["red","green","blue"]
-                            }]
-                        }}/>
+                                labels: ["Pedro", "Maria", "Juan"],
+                                datasets: [{
+                                    label: "",
+                                    data: [30, 30, 40],
+                                    backgroundColor: ["red", "green", "blue"]
+                                }]
+                            }} />
                         </Container>
 
                     </Card>
