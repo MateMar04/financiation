@@ -1,5 +1,26 @@
 .profile-card{
     height: 60vh;
-    margin: 5vh;
+    margin: 3vh;
     border-radius: 5vh !important;
+    vertical-align: middle !important;
+}
+
+.first-row-main-menu-card{
+    padding-top: 2vh;
+}
+
+.p-main-menu-card{
+    margin: 0;
+}
+
+.last-visits-card{
+    height: 20vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
+}
+
+.next-visits-card{
+    height: 83vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
 }

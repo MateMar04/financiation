@@ -16,9 +16,9 @@ export const MainMenuPage = () => {
         <Container fluid className="main-menu-container">
             <Row>
                 <Col lg={4}>
-                    <Card className="profile-card" id="left-card">
+                    <Card className="profile-card d-flex align-items-center" id="left-card">
                         <Container>
-                            <Row className="first-row-main-menu-card">
+                            <Row >
                                 <Col className="d-flex justify-content-center">
                                     <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
                                 </Col>
@@ -26,32 +26,41 @@ export const MainMenuPage = () => {
 
                             <Row className="text-center">
                                 <strong>
-                                <h3 className="name-title">{myUser?.first_name} {myUser?.last_name}</h3>
+                                    <h3>{myUser?.first_name} {myUser?.last_name}</h3>
                                 </strong>
                             </Row>
+
                             <Container className="last-text-main-menu-card">
                                 <Row>
-                                <h6 className="property-title">Estado:</h6>
+                                    <strong>
+                                        <p className="p-main-menu-card">Estado:</p>
+                                    </strong>
                                 </Row>
-                                    <p className="text-main-menu">{myUser?.user_status}</p>
-                              
+                                <Row>
+                                    <p className="p-main-menu-card">{myUser?.user_status}</p>
+                                </Row>
+                                <Row>
+                                    <strong>
+                                        <p className="p-main-menu-card">Rol:</p>
+                                    </strong>
+                                </Row>
+                                <Row>
+                                    <p className="p-main-menu-card">{myUser?.role}</p>
+                                </Row>
+                                <Row>
+                                    <strong>
+                                        <p className="p-main-menu-card">Cuil:</p>
+                                    </strong>
+                                </Row>
+                                <p className="p-main-menu-card">{myUser?.ssn}</p>
 
-                                <h6 className="property-title">Rol:</h6>
-                              
-                                    <p className="text-main-menu">{myUser?.role}</p>
-                             
-
-                                <h6 className="property-title">Cuil:</h6>
-                              
-                                    <p className="text-main-menu">{myUser?.ssn}</p>
-                               
                             </Container>
                         </Container>
                     </Card>
 
-                    <Card className="main-menu-card last-requests-card" id="left-card">
-                        <Container className="padding-title">
-                            <Row className="text-center">
+                    <Card className="last-visits-card border d-flex align-items-center" id="left-card">
+                        <Container className="">
+                            <Row className="text-center first-row-main-menu-card">
                                 <h4>Consultas resueltas en la ultima visita:</h4>
                             </Row>
                             <Row className="text-center">
@@ -63,9 +72,10 @@ export const MainMenuPage = () => {
                 </Col>
 
                 <Col lg={4}>
-                    <Card className="main-menu-card visit-card" id="center-card">
-
-                        <h1 className="name-title">Proximas Visitas</h1>
+                    <Card className="next-visits-card" id="center-card">
+                        <Row className="text-center">
+                            <h2 className="name-title">Próximas Visitas</h2>
+                        </Row>
 
                         <Container>
                             <VisitCardMainMenu />
