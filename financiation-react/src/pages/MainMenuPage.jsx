@@ -16,26 +16,35 @@ export const MainMenuPage = () => {
         <Container fluid className="main-menu-container">
             <Row>
                 <Col lg={4}>
-                    <Card className="main-menu-card profile-card" id="left-card">
-                        <Container fluid className="avatar_container">
-                            <Avatar src={myUser?.profile_picture} className="profile_picture_avatar" />
-                        </Container>
-
-                        <h1 className="name-title">{myUser?.first_name} {myUser?.last_name}</h1>
-
+                    <Card className="profile-card" id="left-card">
                         <Container>
-                            <Container className="property-container">
-                                <h5 className="property-title">Estado:</h5>
-                                <p className="text-main-menu">{myUser?.user_status}</p>
+                            <Row className="first-row-main-menu-card">
+                                <Col className="d-flex justify-content-center">
+                                    <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
+                                </Col>
+                            </Row>
 
-                            </Container>
-                            <Container className="property-container">
-                                <h5 className="property-title">Rol:</h5>
-                                <p className="text-main-menu">{myUser?.role}</p>
-                            </Container>
-                            <Container className="property-container">
-                                <h5 className="property-title">CUIL:</h5>
-                                <p className="text-main-menu">{myUser?.ssn}</p>
+                            <Row className="text-center">
+                                <strong>
+                                <h3 className="name-title">{myUser?.first_name} {myUser?.last_name}</h3>
+                                </strong>
+                            </Row>
+                            <Container className="last-text-main-menu-card">
+                                <Row>
+                                <h6 className="property-title">Estado:</h6>
+                                </Row>
+                                    <p className="text-main-menu">{myUser?.user_status}</p>
+                              
+
+                                <h6 className="property-title">Rol:</h6>
+                              
+                                    <p className="text-main-menu">{myUser?.role}</p>
+                             
+
+                                <h6 className="property-title">Cuil:</h6>
+                              
+                                    <p className="text-main-menu">{myUser?.ssn}</p>
+                               
                             </Container>
                         </Container>
                     </Card>
@@ -48,7 +57,7 @@ export const MainMenuPage = () => {
                             <Row className="text-center">
                                 <h3 className="fw-bold">53</h3>
                             </Row>
-                            </Container>
+                        </Container>
                     </Card>
 
                 </Col>
@@ -65,11 +74,11 @@ export const MainMenuPage = () => {
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
-                            <VisitCardMainMenu />                            
                             <VisitCardMainMenu />
                             <VisitCardMainMenu />
-                            
-                           
+                            <VisitCardMainMenu />
+
+
                         </Container>
                     </Card>
                 </Col>
@@ -105,9 +114,9 @@ export const MainMenuPage = () => {
 
                 </Col>
 
-            </Row>
+            </Row >
 
 
-        </Container>
+        </Container >
     )
 }
