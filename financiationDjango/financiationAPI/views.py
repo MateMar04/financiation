@@ -41,7 +41,12 @@ class ProfilePictureView(APIView):
 
         image = in_memory_uploaded_file_to_binary(data['profile_picture'])
 
-        return JsonResponse("HOLA", safe=False)
+
+        user.profile_picture = image
+
+        serializer = UserAccountSerializer(user, many=False)
+
+        return Response(serializer.data)
 
     def get(self, request):
         user_id = request.query_params.get('id_useraccount')
