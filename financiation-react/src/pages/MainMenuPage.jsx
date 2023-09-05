@@ -6,6 +6,7 @@ import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
+import VerMasButton from "../components/VerMasButton";
 
 export const MainMenuPage = () => {
 
@@ -76,20 +77,17 @@ export const MainMenuPage = () => {
                             <Row className="text-center">
                                 <h2 className="name-title">Próximas Visitas</h2>
                             </Row>
-                            <Row>
-                                <Container>
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
-                                    <VisitCardMainMenu />
+                            <Container>
 
-                                </Container>
-                            </Row>
+                                <VisitCardMainMenu />
+                                <VisitCardMainMenu />
+                                <VisitCardMainMenu />
+                                <VisitCardMainMenu />
+                                <VisitCardMainMenu />
+                                <VisitCardMainMenu />
+
+                            </Container>
+                            <VerMasButton/>
                         </Container>
                     </Card>
                 </Col>
