@@ -37,12 +37,14 @@ class ProfilePictureView(APIView):
 
         data = request.data
 
-        user = UserAccount.objects.get(id=3)
+        user = UserAccount.objects.get(id=1)
 
         image = in_memory_uploaded_file_to_binary(data['profile_picture'])
 
 
         user.profile_picture = image
+
+        user.save()
 
         serializer = UserAccountSerializer(user, many=False)
 
