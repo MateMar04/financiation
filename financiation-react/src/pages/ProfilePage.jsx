@@ -52,7 +52,7 @@ const ProfilePage = () => {
 
 
             <Row className={'justify-content-center text-center'}>
-                <Avatar src={myUser?.profile_picture}></Avatar>
+                <Avatar src={'data:image/png;base64, ' + myUser?.profile_picture}></Avatar>
                 <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
                 <h3 className="ProfileText">Coordinador</h3>
             </Row>
