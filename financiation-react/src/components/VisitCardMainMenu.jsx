@@ -11,10 +11,10 @@ export const VisitCardMainMenu = () => {
                 </Col>
                 <Col lg={5}>
                     <Row className="status-row">
-                        <Col lg={10}>
+                        <Col lg={9}>
                             <p className="visit-title">Confirmada</p>
                         </Col>
-                        <Col lg={2}>
+                        <Col lg={1}>
                             <a className="circle_green"></a>
                         </Col>
                     </Row>

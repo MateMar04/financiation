@@ -69,3 +69,36 @@
 .SecondpInFormPage{
     transform: translateY(3.5vh);
 }
+
+@media (max-width: 800px) {
+
+    .FirstContainerForm{
+        width: 100%;
+    }
+  .ContainerPersonForm{
+    width: max-content;
+  }
+
+  .VisitaDropDown{
+        width: fit-content;
+  }
+
+  .col-avatar{
+    justify-content: left;
+  }
+
+  .SecondContainerForm{
+    width: 100%;
+  }
+  .InputInForm{
+    width: 30vw !important;
+  }
+
+  .buttonconsulta{
+    width: 50vw !important;
+  }
+
+  .department-select{
+    width: 100% !important;
+}
+}

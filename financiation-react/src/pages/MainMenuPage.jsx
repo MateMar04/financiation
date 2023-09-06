@@ -102,7 +102,7 @@ export const MainMenuPage = () => {
                             <Link to={'/visits'}>
                                 <Row className={'justify-content-end'}>
                                     <Col md={4}>
-                                        <VerMasButton/>
+                                        <VerMasButton className={'ver-mas-bottom-visit'}/>
                                     </Col>
                                 </Row>
                             </Link>

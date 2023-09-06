@@ -11,14 +11,8 @@ import {getFaqs} from "../services/FaqServices";
 import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
 import {getUser} from '../services/UserServices';
-import Select from '@mui/material/Select';
-import {MenuItem} from '@mui/material';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {renderTimeViewClock} from '@mui/x-date-pickers/timeViewRenderers';
-import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
-import {DateField} from '@mui/x-date-pickers/DateField';
 import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
 
@@ -30,7 +24,7 @@ const FormPage = () => {
     };
 
 
-    let {authTokens} = useContext(AuthContext)
+    let {authTokens,myUser} = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -81,11 +75,10 @@ const FormPage = () => {
 
 
     return (
-
         <Form onSubmit={postRequest}>
             <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
-                    <Col md={3}>
+                    <Col md={{span: 3, order:1}} xs={{ span: 6, order: 1 }}>
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
@@ -98,7 +91,7 @@ const FormPage = () => {
                             />
                         </LocalizationProvider>
                     </Col>
-                    <Col md={4} className={'VisitaDropDown'}>
+                    <Col md={{span: 4, order: 2}} className={'VisitaDropDown'} xs={{order: 3}}>
                         <p className={'pInFormPage'}>Visita</p>
                         <select
                             placeholder="Visita"
@@ -112,14 +105,14 @@ const FormPage = () => {
 
 
                     </Col>
-                    <Col md={3}>
+                    <Col md={{span: 3, order: 3}} xs={{span: 6, order:2}}>
                         <p className={'pInFormPage'}>Asesor</p>
                         <Row className='ContainerPersonForm'>
-                            <Col md={4} className='justify-content-center'>
-                                <Avatar alt="Remy Sharp" src={user?.profile_picture}
+                            <Col md={4} xs={2} className='justify-content-center d-flex align-items-center col-avatar'>
+                                <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
                                         sx={{width: 35, height: 35}}/>
                             </Col>
-                            <Col>
+                            <Col className='d-flex align-items-center text-center'>
                                 <p className={'userFirstName'}>{user.first_name}</p>
                             </Col>
                         </Row>
@@ -127,7 +120,7 @@ const FormPage = () => {
                     </Col>
                 </Row>
             </Container>
-            <Container>
+            <Container className='justify-content-center'>
 
 
                 <Row className='justify-content-md-center py-2'>
@@ -188,15 +181,15 @@ const FormPage = () => {
                     <p className={'SecondpInFormPage'}>Cantidad</p>
                     </Row>
 
-                <Row className={'justify-content-start py-2'}>
-                    <Col md={8}>
+                <Row className={'justify-content-start py-2'} xs={12}>
+                    <Col md={8} xs={5}>
                         <TextField className={'InputInForm'}
                                    InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
                     </Col>
-                    <Col md={3}>
+                    <Col md={3} xs={6}>
     
                         <Button type='submit' variant="primary"
-                                className='buttonconsulta'>Enviar</Button>
+                                className='buttonconsulta'>Enviar Consulta</Button>
                     </Col>
                 </Row>
             </Container>
