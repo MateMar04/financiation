@@ -1,6 +1,7 @@
 .CompletlyContainer {
     justify-content: center;
     align-items: center;
+    margin-top: 5vh;
 
 }
 
@@ -11,4 +12,12 @@
     left: 15px;
     height: 100%;
 
+}
+
+.pencil-groups{
+    padding: 2vh;
+}
+
+.accordion-group{
+    border-radius: 3vh !important;
 }
