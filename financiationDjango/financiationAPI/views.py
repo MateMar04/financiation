@@ -52,16 +52,17 @@ class RequestApiView(APIView):
 
         visit = Visit.objects.get(id=data['visit_id'])
         advisor = Advisor.objects.get(id=data['advisor_id'])
-        ministryDepartment = MinistryDepartment.objects.get(id=data['ministry_department_id'])
         faq = Faq.objects.get(id=data['faq_id'])
+        why = Why.objects.get(id=data['why_id'])
         requestStatus = RequestStatus.objects.get(id=data['status_id'])
 
         request = Request.objects.create(
-            visit_id=visit,
-            advisor_id=advisor,
-            ministry_department_id=ministryDepartment,
-            faq_id=faq,
-            status_id=requestStatus,
+            request_datatime=data['request_datetime'],
+            visit=visit,
+            advisor=advisor,
+            faq=faq,
+            why=why,
+            status=requestStatus,
         )
 
         serializer = RequestSerializer(request, many=False)
