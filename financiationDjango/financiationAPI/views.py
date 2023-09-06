@@ -1,24 +1,13 @@
-from django.db import connection
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query
 
 
 # Create your views here.
-
-def in_memory_uploaded_file_to_binary(in_memory_uploaded_file):
-    try:
-        in_memory_uploaded_file.seek(0)  # Ensure the file cursor is at the beginning.
-        binary_data = in_memory_uploaded_file.read()
-        return binary_data
-    except Exception as e:
-        # Handle any potential exceptions that may occur during the process.
-        print(f"Error converting InMemoryUploadedFile to binary: {e}")
-        return None
 
 
 class ProfilePictureView(APIView):
@@ -432,14 +421,6 @@ def getGroupAdvisorUsers(request, id):
     return Response(serializer.data)
 
 
-def parse_and_convert(input_list):
-    if len(input_list) == 1 and isinstance(input_list[0], str):
-        numbers_str = input_list[0]
-        numbers_list = numbers_str.split(',')
-        numbers_tuple = tuple(map(int, numbers_list))
-        return numbers_tuple
-
-
 @api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
@@ -521,26 +502,6 @@ def getTotalRequestsByVisits(request):
                          "WHERE visit_id IN %s "
                          "AND faq_id IN %s "
                          "GROUP BY CONCAT(L.name, ' ', V.visit_date)", request)
-
-
-def execute_query(query, request):
-    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
-    visits_ids = parse_and_convert(request.GET.getlist('visits'))
-    with connection.cursor() as cursor:
-        cursor.execute(query, [visits_ids, faqs_ids])
-        row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
-
-
-def convert_to_json(input_data):
-    result = []
-    for name, requests in input_data:
-        entry = {
-            "name": name,
-            "requests": requests
-        }
-        result.append(entry)
-    return result
 
 
 @api_view(['GET'])
