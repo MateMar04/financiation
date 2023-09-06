@@ -15,6 +15,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
+import {getWhys} from "../services/WhyServices";
 
 
 const FormPage = () => {
@@ -31,7 +32,7 @@ const FormPage = () => {
     let [user, setUser] = useState([])
     let [advised, setAdvised] = useState([])
     let [visits, setVisits] = useState([])
-    let history = useNavigate()
+    let [whys, setWhys] = useState([])
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -39,8 +40,8 @@ const FormPage = () => {
 
     useEffect(() => {
         getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
-        getFaqs(authTokens.access).then(data => setFaqs(data))
         getAdvisees(authTokens.access).then(data => setAdvised(data))
+        getWhys(authTokens.access).then(r => setWhys(r))
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
         getUser(authTokens.access).then(data => setUser(data))
@@ -167,8 +168,8 @@ const FormPage = () => {
                             className='form-select department-select'
 
                             name="faq">
-                            {faqs?.map((faq) => (
-                                <option value={faq.id}>{faq.name}</option>
+                            {whys?.map((why) => (
+                                <option value={why.id}>{why.name}</option>
                             ))}
 
 
