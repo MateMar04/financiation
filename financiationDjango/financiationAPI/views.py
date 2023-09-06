@@ -509,3 +509,10 @@ def getUserById(request, id):
     user = UserAccount.objects.get(id=id)
     serializer = UserAccountSerializer(user, many=False)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getWhys(request):
+    whys = Why.objects.all()
+    serializer = WhySerializer(whys, many=True)
+    return Response(serializer.data)
