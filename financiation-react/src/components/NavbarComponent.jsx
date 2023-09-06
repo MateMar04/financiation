@@ -10,7 +10,7 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-
+    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
 
     /*
@@ -60,12 +60,12 @@ const NavbarComponent = () => {
                                     <div className="mx-2">
                                         <Row className={'justify-content-center'}>
                                             <Col md={3} xs={3} className={'justify-content-center '}>
-                                                <Avatar alt="Remy Sharp" src={user?.profile_picture}
+                                                <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
                                             <Col md={9} xs={9} className={'justify-content-center'}>
                                                 <Row className={'justify-content-center text-center'}>
-                                                    <a className={'aNavBar'}>¡Hola {user.first_name}!</a>
+                                                    <a className={'aNavBar'}>¡Hola {myUser?.first_name}!</a>
                                                 </Row>
                                                 <Row className={'justify-content-center text-center'}>
                                                     <Link to="/me/">

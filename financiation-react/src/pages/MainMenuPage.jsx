@@ -1,17 +1,17 @@
-import { Col, Container, Row } from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
 import VerMasButton from "../components/VerMasButton";
+import {Link} from "react-router-dom";
 
 export const MainMenuPage = () => {
 
-    let { authTokens, logoutUser, myUser } = useContext(AuthContext)
-
+    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
 
     return (
         <Container fluid className="main-menu-container">
@@ -19,9 +19,16 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="profile-card d-flex align-items-center" id="left-card">
                         <Container>
+                            <Row className={'justify-content-end'}>
+                                <Col md={4}>
+                                    <Link to={'/me'}>
+                                        <VerMasButton/>
+                                    </Link>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col className="d-flex justify-content-center">
-                                    <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
+                                    <Avatar src={myUser?.profile_picture} sx={{width: 128, height: 128}}/>
                                 </Col>
                             </Row>
 
@@ -79,21 +86,34 @@ export const MainMenuPage = () => {
                             </Row>
                             <Container>
 
-                                <VisitCardMainMenu />
-                                <VisitCardMainMenu />
-                                <VisitCardMainMenu />
-                                <VisitCardMainMenu />
-                                <VisitCardMainMenu />
-                                <VisitCardMainMenu />
+                                <VisitCardMainMenu/>
+                                <VisitCardMainMenu/>
+                                <VisitCardMainMenu/>
+                                <VisitCardMainMenu/>
+                                <VisitCardMainMenu/>
+                                <VisitCardMainMenu/>
 
                             </Container>
-                            <VerMasButton/>
+                            <Link to={'/visits'}>
+                                <Row className={'justify-content-end'}>
+                                    <Col md={4}>
+                                        <VerMasButton/>
+                                    </Col>
+                                </Row>
+                            </Link>
                         </Container>
                     </Card>
                 </Col>
 
                 <Col lg={4}>
                     <Card className="group-card-main-menu" id="right-card">
+                        <Row className={'justify-content-end'}>
+                            <Col md={5}>
+                                <Link to={'/groups'}>
+                                    <VerMasButton/>
+                                </Link>
+                            </Col>
+                        </Row>
                         <Row className="text-center">
                             <h2 className="name-title">Grupo 1</h2>
                         </Row>
@@ -118,13 +138,13 @@ export const MainMenuPage = () => {
                                         data: [30, 30, 40],
                                         backgroundColor: ["red", "green", "blue"]
                                     }]
-                                }} />
+                                }}/>
 
                             </Row>
                         </Container>
                     </Card>
                 </Col>
-            </Row >
-        </Container >
+            </Row>
+        </Container>
     )
 }
