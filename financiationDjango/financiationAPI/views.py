@@ -10,17 +10,6 @@ from .serializers import UserAccountSerializer
 
 # Create your views here.
 
-def image_to_binary(image_file_path):
-    try:
-        with open(image_file_path, "rb") as image_file:
-            image_data = image_file.read()
-
-        return image_data
-    except Exception as e:
-        print("An error occurred:", e)
-        return None
-
-
 def in_memory_uploaded_file_to_binary(in_memory_uploaded_file):
     try:
         in_memory_uploaded_file.seek(0)  # Ensure the file cursor is at the beginning.
@@ -40,7 +29,6 @@ class ProfilePictureView(APIView):
         user = UserAccount.objects.get(id=1)
 
         image = in_memory_uploaded_file_to_binary(data['profile_picture'])
-
 
         user.profile_picture = image
 
