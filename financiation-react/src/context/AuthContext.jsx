@@ -2,8 +2,8 @@ import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
 import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
 import LoadingModal from "../components/LoadingModal";
+import {getUserById} from "../services/UserServices";
 
 
 const AuthContext = createContext();
@@ -20,6 +20,8 @@ export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     let [loading, setLoading] = useState(true)
+    let [myUser, setMyUser] = useState({})
+
 
     let history = useNavigate()
     const [show, setShow] = React.useState(false);
@@ -48,7 +50,7 @@ export const AuthProvider = ({children}) => {
         if (response.status === 201) {
             history('/')
 
-        } else  if(response.status === 400) {
+        } else if (response.status === 400) {
             toggleModalfailed();
         }
     }
@@ -68,6 +70,7 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
+            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
             history('/menu')
         } else {
             if (response.status === 401) {
@@ -85,6 +88,7 @@ export const AuthProvider = ({children}) => {
     }
 
     let logoutUser = () => {
+        setMyUser({})
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
@@ -100,11 +104,11 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({'refresh': authTokens?.refresh})
         })
         let data = await response.json()
-
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
+            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
         } else {
             logoutUser()
         }
@@ -117,6 +121,7 @@ export const AuthProvider = ({children}) => {
     let contextData = {
         user: user,
         authTokens: authTokens,
+        myUser: myUser,
         signIn: signIn,
         loginUser: loginUser,
         logoutUser: logoutUser
@@ -141,8 +146,8 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={contextData}>
 
-                        <FailedModal message="la visita" show ={showfail}/>
-                        <LoadingModal message="la visita" show ={showloading}/>
+            <FailedModal message="la visita" show={showfail}/>
+            <LoadingModal message="la visita" show={showloading}/>
 
             {loading ? null : children}
         </AuthContext.Provider>
