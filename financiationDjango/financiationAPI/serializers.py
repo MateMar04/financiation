@@ -186,8 +186,15 @@ class RequestStatusSerializer(ModelSerializer):
     class Meta:
         model = RequestStatus
         fields = '__all__'
-        
+
+
 class ProfilePictureSerializer(ModelSerializer):
     class Meta:
-        model = UserAccount 
+        model = UserAccount
+        fields = '__all__'
+
+
+class WhySerializer(ModelSerializer):
+    class Meta:
+        model = Why
         fields = '__all__'
