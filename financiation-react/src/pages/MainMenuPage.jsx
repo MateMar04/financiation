@@ -17,52 +17,57 @@ export const MainMenuPage = () => {
         <Container fluid className="main-menu-container">
             <Row>
                 <Col lg={4}>
-                    <Card className="profile-card d-flex align-items-center" id="left-card">
-                        <Container>
-                            <Row className={'justify-content-end'}>
-                                <Col md={4}>
-                                    <Link to={'/me'}>
-                                        <VerMasButton/>
-                                    </Link>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col className="d-flex justify-content-center">
-                                    <Avatar src={myUser?.profile_picture} sx={{width: 128, height: 128}}/>
-                                </Col>
-                            </Row>
+                    <Card className="profile-card " id="left-card">
+                        <Row className={'justify-content-end'}>
+                            <Col md={4}>
+                                <Link to={'/me'}>
+                                    <VerMasButton/>
+                                </Link>
+                            </Col>
+                        </Row>
 
-                            <Row className="text-center">
-                                <strong>
-                                    <h3>{myUser?.first_name} {myUser?.last_name}</h3>
-                                </strong>
-                            </Row>
-
+                        <Container className={'d-flex align-items-center'}>
                             <Container>
+
                                 <Row>
+                                    <Col className="d-flex justify-content-center">
+                                        <Avatar src={myUser?.profile_picture} sx={{width: 128, height: 128}}/>
+                                    </Col>
+                                </Row>
+
+                                <Row className="text-center">
                                     <strong>
-                                        <p className="p-main-menu-card">Estado:</p>
+                                        <h3>{myUser?.first_name} {myUser?.last_name}</h3>
                                     </strong>
                                 </Row>
-                                <Row>
-                                    <p className="p-main-menu-card">{myUser?.user_status}</p>
-                                </Row>
-                                <Row>
-                                    <strong>
-                                        <p className="p-main-menu-card">Rol:</p>
-                                    </strong>
-                                </Row>
-                                <Row>
-                                    <p className="p-main-menu-card">{myUser?.role}</p>
-                                </Row>
-                                <Row>
-                                    <strong>
-                                        <p className="p-main-menu-card">Cuil:</p>
-                                    </strong>
-                                </Row>
-                                <p className="p-main-menu-card">{myUser?.ssn}</p>
+
+                                <Container>
+                                    <Row>
+                                        <strong>
+                                            <p className="p-main-menu-card">Estado:</p>
+                                        </strong>
+                                    </Row>
+                                    <Row>
+                                        <p className="p-main-menu-card">{myUser?.user_status}</p>
+                                    </Row>
+                                    <Row>
+                                        <strong>
+                                            <p className="p-main-menu-card">Rol:</p>
+                                        </strong>
+                                    </Row>
+                                    <Row>
+                                        <p className="p-main-menu-card">{myUser?.role}</p>
+                                    </Row>
+                                    <Row>
+                                        <strong>
+                                            <p className="p-main-menu-card">Cuil:</p>
+                                        </strong>
+                                    </Row>
+                                    <p className="p-main-menu-card">{myUser?.ssn}</p>
+                                </Container>
                             </Container>
                         </Container>
+
                     </Card>
 
                     <Card className="last-visits-card border d-flex align-items-center" id="left-card">
@@ -108,7 +113,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="group-card-main-menu" id="right-card">
                         <Row className={'justify-content-end'}>
-                            <Col md={5}>
+                            <Col md={4}>
                                 <Link to={'/groups'}>
                                     <VerMasButton/>
                                 </Link>
