@@ -11,14 +11,8 @@ import {getFaqs} from "../services/FaqServices";
 import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
 import {getUser} from '../services/UserServices';
-import Select from '@mui/material/Select';
-import {MenuItem} from '@mui/material';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {DateTimePicker} from '@mui/x-date-pickers/DateTimePicker';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {renderTimeViewClock} from '@mui/x-date-pickers/timeViewRenderers';
-import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
-import {DateField} from '@mui/x-date-pickers/DateField';
 import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
 
@@ -93,7 +87,7 @@ const FormPage = () => {
                                 label={''}
                                 className='InputsFormPage'
                                 InputProps={{
-                                    sx: {borderRadius: '2vh', height: '7vh', borderColor:'white'}
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
                                 }}
                             />
                         </LocalizationProvider>
@@ -155,10 +149,10 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq">
-                                {faqs?.map((faq) => (
+                            {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
-                            
+
 
                         </select>
                     </Col>
@@ -174,9 +168,9 @@ const FormPage = () => {
 
                             name="faq">
                             {faqs?.map((faq) => (
-                            <option value={faq.id}>{faq.name}</option>
-                        ))}
-                            
+                                <option value={faq.id}>{faq.name}</option>
+                            ))}
+
 
                         </select>
                     </Col>
@@ -186,7 +180,7 @@ const FormPage = () => {
             <Container className={'SecondContainerForm'}>
                 <Row>
                     <p className={'SecondpInFormPage'}>Cantidad</p>
-                    </Row>
+                </Row>
 
                 <Row className={'justify-content-start py-2'}>
                     <Col md={8}>
@@ -194,7 +188,7 @@ const FormPage = () => {
                                    InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
                     </Col>
                     <Col md={3}>
-    
+
                         <Button type='submit' variant="primary"
                                 className='buttonconsulta'>Enviar</Button>
                     </Col>
