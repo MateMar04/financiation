@@ -70,7 +70,16 @@
 }
 
 .icon{
-    margin: 30px;
-    margin-top: -30px;
-    margin-left: 80px;
+    font-size: 3vw !important;
+    margin: 1vw;
+    margin-top: -6vw;
+    margin-left: 10vw;
+}
+
+.icon:hover{
+    color: #53A6DC;
+}
+.iconperson{
+    margin-top: -3vw;
+    margin-left: 5vw;
 }

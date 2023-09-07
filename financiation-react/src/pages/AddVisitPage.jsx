@@ -401,8 +401,13 @@ const AddVisitPage = () => {
                                         
                                             <CardContent className={'CenterContentCard'}>
                                                 
-                                                <Container className='icon' >
-                                                    <AddIcon className='icon' type="submit" aria-label="search" onClick={() => toggleModalCreate()}></AddIcon>
+                                                <Container>
+                                                    <Row>
+                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row>
+                                                        <AddIcon className='icon' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                    </Row>
                                                 </Container>
                                                 
                                                 <Container>
