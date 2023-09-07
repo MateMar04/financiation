@@ -40,7 +40,6 @@ const FormPage = () => {
 
     useEffect(() => {
         getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
-        getAdvisees(authTokens.access).then(data => setAdvised(data))
         getWhys(authTokens.access).then(r => setWhys(r))
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
@@ -50,7 +49,7 @@ const FormPage = () => {
 
     let postRequest = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/request/add/', {
+        let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -58,17 +57,19 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "id_visit": e.target.visit.value,
-                "id_advised": e.target.advised.value,
-                "id_advisor": e.target.advisor.value,
-                "id_ministry_department": e.target.ministryDepartment.value,
-                "id_faq": e.target.faq.value,
-                "id_status": 1
+                "request_datetime": e.target.request_datetime.value,
+                "visit": e.target.visit.value,
+                "advisor": e.target.advisor.value,
+                "faq": e.target.faq.value,
+                "why": e.target.why.value,
+                "status": 1
             })
         })
         if (response.status === 200) {
             handleShow()
-            await postRequest()
+            for (let i = 1; i <= e.target.quantity.value; i++) {
+                await postRequest()
+            }
         } else {
             alert('Something went wrong')
         }
@@ -87,6 +88,7 @@ const FormPage = () => {
                                 format='DD/MM/YYYY HH:mm'
                                 label={''}
                                 className='InputsFormPage'
+                                name="request_datetime"
                                 InputProps={{
                                     sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
                                 }}
@@ -167,8 +169,7 @@ const FormPage = () => {
                         <select
                             placeholder="Por que vino?"
                             className='form-select department-select'
-
-                            name="faq">
+                            name='why'>
                             {whys?.map((why) => (
                                 <option value={why.id}>{why.name}</option>
                             ))}
@@ -187,6 +188,7 @@ const FormPage = () => {
                 <Row className={'justify-content-start py-2'}>
                     <Col md={8}>
                         <TextField className={'InputInForm'}
+                                   name="quantity"
                                    InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
                     </Col>
                     <Col md={3}>
