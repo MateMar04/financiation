@@ -25,6 +25,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import {getMayors} from '../services/MayorServices';
+import IconButton from "@mui/material/IconButton";
+import CreateIcon from '@mui/icons-material/Create';
 
 const AddVisitPage = () => {
 
@@ -407,10 +409,11 @@ const AddVisitPage = () => {
                                                 
                                                 <Container>
                                                     <Row>
-                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
+                                                        <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                        <CreateIcon className='iconedit'></CreateIcon>
                                                     </Row>
                                                     <Row>
-                                                        <AddIcon className='icon' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
                                                     </Row>
                                                 </Container>
                                                 <Container>
