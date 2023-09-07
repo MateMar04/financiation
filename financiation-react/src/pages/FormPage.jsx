@@ -36,22 +36,31 @@ const FormPage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
+    let [selectedDatetime, setSelectedDatetime] = useState()
+    let [selectedVisit, setSelectedVisit] = useState()
+    let [selectedFaq, setSelectedFaq] = useState()
+    let [selectedWhy, setSelectedWhy] = useState()
+    let [selectedQuantity, setSelectedQuantity] = useState()
+
+
+
     const formatDate = (inputDate) => {
         // Split the input string into date and time parts
         const [datePart, timePart] = inputDate.split(' ');
-      
+
         // Split the date part into day, month, and year
         const [day, month, year] = datePart.split('/');
-      
+
         // Split the time part into hours and minutes
         const [hours, minutes] = timePart.split(':');
-      
+
         // Create a Date object with the components
         const formattedDate = (`${year}-${month}-${day} ${hours}:${minutes}:00-03`);
 
-      
+
         return formattedDate;
-      }
+    }
 
 
     useEffect(() => {
@@ -64,7 +73,6 @@ const FormPage = () => {
     }, [])
 
     let postRequest = async (e) => {
-        e.preventDefault()
         let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
@@ -73,30 +81,39 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "request_datetime": formatDate(e.target.request_datetime.value),
-                "visit_id": e.target.visit.value,
+                "request_datetime": selectedDatetime,
+                "visit_id": selectedVisit,
                 "advisor_id": myUser.id,
-                "faq_id": e.target.faq.value,
-                "why_id": e.target.why.value,
+                "faq_id": selectedFaq,
+                "why_id": selectedWhy,
                 "status_id": 1
             })
         })
         if (response.status === 200) {
             handleShow()
-                
-            for (let i = 1; i <= e.target.quantity.value; i++) {
-                await postRequest()
-            }
-
         } else {
             alert('Something went wrong')
+        }
+    }
+
+    let handleSumbit = async (e) => {
+        e.preventDefault()
+
+        setSelectedDatetime(formatDate(e.target.request_datetime.value))
+        setSelectedVisit(e.target.visit.value)
+        setSelectedFaq(e.target.faq.value)
+        setSelectedWhy(e.target.why.value)
+        setSelectedQuantity(e.target.quantity.value)
+
+        for (let i = 1; i <= selectedQuantity; i++) {
+            await postRequest()
         }
     }
 
 
     return (
 
-        <Form onSubmit={postRequest}>
+        <Form onSubmit={handleSumbit}>
             <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
                     <Col md={3}>
