@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import MayorCreateModal from "../components/MayorCreateModal";
+import MayorModifyModal from "../components/MayorModifyModal";
 import Card from '@mui/material/Card';
 import Select from "@mui/material/Select";
 import {CardContent, Switch} from "@mui/material";
@@ -36,7 +37,9 @@ const AddVisitPage = () => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [showcreate, setShowcreate] = useState(false);
+    const [showmodify, setShowmodify] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
+    const toggleModalModify = () => setShowmodify(!showmodify);
     let [mayors, setMayors] = useState([])
 
     useEffect(() => {
@@ -107,6 +110,7 @@ const AddVisitPage = () => {
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
                     <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
+                    <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify}/>
                     <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
                     <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
                     <Form onSubmit={postVisit}>
@@ -410,7 +414,7 @@ const AddVisitPage = () => {
                                                 <Container>
                                                     <Row>
                                                         <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                        <CreateIcon className='iconedit'></CreateIcon>
+                                                        <CreateIcon className='iconedit' onClick={() => toggleModalModify()}></CreateIcon>
                                                     </Row>
                                                     <Row>
                                                         <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
