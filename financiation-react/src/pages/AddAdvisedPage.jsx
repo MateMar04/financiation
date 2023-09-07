@@ -8,7 +8,6 @@ import FailedModal from "../components/FailedModal";
 export const AddAdvisedPage = () => {
 
     let {authTokens} = useContext(AuthContext)
-    let history = useNavigate()
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);

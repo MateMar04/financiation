@@ -20,7 +20,18 @@ export const MayorCreateModal = (props) => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     let postMayor = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+    
+        const firstName = e.target.first_name.value;
+        const lastName = e.target.last_name.value;
+    
+        // Check if either the first name or last name is empty
+        if (!firstName || !lastName) {
+            // Display an error message or take appropriate action
+            toggleModalfailed();
+            return;
+        }
+    
         let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
@@ -29,28 +40,22 @@ export const MayorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": e.target.first_name.value,
-                "last_name": e.target.last_name.value
+                "first_name": firstName,
+                "last_name": lastName
             })
-        })
+        });
+    
         if (response.status === 200) {
             toggleModalsucceed();
-            await postMayor()
-            //alert('se registro la visita correctamente')
         } else if (response.status === 500) {
             toggleModalfailed();
-            await postMayor()
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
         } else if (response.status === 401) {
             toggleModalfailed();
-            await postMayor()
-            //alert('no se a registrado la visita (Desautorizado)')
         } else if (response.status === 400) {
             toggleModalfailed();
-            await postMayor()
-            //alert('no se a registrado la visita (Bad request)')
         }
     }
+    
     return (
             <Modal show={props.show} >
                 <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
