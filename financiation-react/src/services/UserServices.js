@@ -19,7 +19,7 @@ export const getUserById = async (tokens, userId) => {
         "Accept": "application/json"
     }
 
-    let response = await fetch(`/auth/users/${userId}`, {headers: headers})
+    let response = await fetch(`/api/users/${userId}`, {headers: headers})
     let data = await response.json()
     return data
 }

@@ -29,6 +29,7 @@ urlpatterns = [
     path('visits', views.VisitApiView.as_view(), name='visits'),
 
     # Users
+    path('users/<int:id>', views.getUserById, name='user'),
     path('users', views.getUsers, name='users'),
     path('advisor-users', views.getAdvisorUsers, name='advisorUsers'),
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
@@ -86,6 +87,8 @@ urlpatterns = [
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
 
+    #EditarProfilePic
+    path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture')
     #mayors
     path('mayors', views.MayorApiView.as_view(), name='mayors'),
 ]
