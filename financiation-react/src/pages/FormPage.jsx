@@ -36,6 +36,23 @@ const FormPage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const formatDate = (inputDate) => {
+        // Split the input string into date and time parts
+        const [datePart, timePart] = inputDate.split(' ');
+      
+        // Split the date part into day, month, and year
+        const [day, month, year] = datePart.split('/');
+      
+        // Split the time part into hours and minutes
+        const [hours, minutes] = timePart.split(':');
+      
+        // Create a Date object with the components
+        const formattedDate = (`${year}-${month}-${day} ${hours}:${minutes}:00-03`);
+
+      
+        return formattedDate;
+      }
+
 
     useEffect(() => {
         getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
@@ -56,7 +73,7 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "request_datetime": e.target.request_datetime.value,
+                "request_datetime": formatDate(e.target.request_datetime.value),
                 "visit_id": e.target.visit.value,
                 "advisor_id": myUser.id,
                 "faq_id": e.target.faq.value,
@@ -66,7 +83,7 @@ const FormPage = () => {
         })
         if (response.status === 200) {
             handleShow()
-
+                
             for (let i = 1; i <= e.target.quantity.value; i++) {
                 await postRequest()
             }
