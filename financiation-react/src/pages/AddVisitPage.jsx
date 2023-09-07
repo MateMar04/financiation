@@ -25,8 +25,8 @@ import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import {getMayors} from '../services/MayorServices';
-import IconButton from "@mui/material/IconButton";
+import {getMayorById} from '../services/MayorServices';
+import {getMayors} from '../services/MayorServices'
 import CreateIcon from '@mui/icons-material/Create';
 
 const AddVisitPage = () => {
@@ -41,9 +41,11 @@ const AddVisitPage = () => {
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
     let [mayors, setMayors] = useState([])
+    let [mayor, setMayor] = useState([])
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
+        getMayorById(authTokens.access).then(data => setMayor(data))
     }, [])
 
     let postVisit = async (e) => {
@@ -110,9 +112,9 @@ const AddVisitPage = () => {
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
                     <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
-                    <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify}/>
-                    <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                    <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
+                    <MayorModifyModal mayor={mayor} onClose={() => toggleModalModify()}show={showmodify}/>
+                    <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
+                    <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
                     <Form onSubmit={postVisit}>
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
                                   className={'carouselAddVisit'}>
@@ -414,7 +416,7 @@ const AddVisitPage = () => {
                                                 <Container>
                                                     <Row>
                                                         <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                        <CreateIcon className='iconedit' onClick={() => toggleModalModify()}></CreateIcon>
+                                                        <CreateIcon className='iconedit' type="submit"onClick={() => toggleModalModify()}></CreateIcon>
                                                     </Row>
                                                     <Row>
                                                         <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
@@ -429,9 +431,10 @@ const AddVisitPage = () => {
                                                             <select className='select' id="standard-basic" variant="standard" >  
                                                                     <option selected disabled hidden></option>
                                                                 {mayors?.map((mayor) => (
-                                                                    <option value={mayor.id}>{mayor.first_name}</option>
+                                                                    <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
                                                                 ))}
                                                             </select>
+                                                            
                                                         </Col>
                                                     </Row>
 

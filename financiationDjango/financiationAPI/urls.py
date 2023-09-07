@@ -90,5 +90,6 @@ urlpatterns = [
     #EditarProfilePic
     path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture'),
     #mayors
+    path('mayors/<int:id>', views.getMayorById, name='mayor'),
     path('mayors', views.MayorApiView.as_view(), name='mayors'),
 ]

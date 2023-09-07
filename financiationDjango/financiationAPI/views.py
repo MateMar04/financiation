@@ -525,3 +525,9 @@ def getUserById(request, id):
     user = UserAccount.objects.get(id=id)
     serializer = UserAccountSerializer(user, many=False)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getMayorById(request, id):
+    mayor = Mayor.objects.get(id=id)
+    serializer = MayorSerializer(mayor, many=False)
+    return Response(serializer.data)
