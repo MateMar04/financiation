@@ -226,6 +226,7 @@ const FormPage = () => {
                     <Col md={8}>
                         <TextField className={'InputInForm'}
                             name="quantity"
+                            defaultValue={1}
                             InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }} />
                     </Col>
                     <Col md={3}>
