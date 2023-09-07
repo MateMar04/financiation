@@ -413,18 +413,16 @@ const AddVisitPage = () => {
                                                         <AddIcon className='icon' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
                                                     </Row>
                                                 </Container>
-                                                
                                                 <Container>
-
                                                     <Row className='justify-content-center text-center'>
-                                                        
                                                         <a>{'Intendente'}</a>
                                                     </Row>
                                                     <Row className='justify-content-center text-center'>
                                                         <Col>
-                                                            <select className='select' id="standard-basic" label=""variant="standard">
+                                                            <select className='select' id="standard-basic" variant="standard" >  
+                                                                    <option selected disabled hidden></option>
                                                                 {mayors?.map((mayor) => (
-                                                                    <option value={mayor.id}>{mayor.name}</option>
+                                                                    <option value={mayor.id}>{mayor.first_name}</option>
                                                                 ))}
                                                             </select>
                                                         </Col>
