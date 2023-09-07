@@ -1,21 +1,20 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
+import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import {Link} from "react-router-dom";
-import {getVisits} from "../services/VisitServices";
-import getAdvisees from "../services/AdviseeServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getFaqsByMinistryDepartment} from "../services/FaqServices";
-import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
+import { Link } from "react-router-dom";
+import { getVisits } from "../services/VisitServices";
+import { getAdvisorUsers } from "../services/AdvisorServices";
+import { getFaqsByMinistryDepartment } from "../services/FaqServices";
+import { getMinistryDepartments } from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
-import {getUser} from '../services/UserServices';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
+import { getUser } from '../services/UserServices';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
-import {getWhys} from "../services/WhyServices";
+import { getWhys } from "../services/WhyServices";
 
 
 const FormPage = () => {
@@ -25,7 +24,7 @@ const FormPage = () => {
     };
 
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens, myUser } = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -58,18 +57,20 @@ const FormPage = () => {
             },
             body: JSON.stringify({
                 "request_datetime": e.target.request_datetime.value,
-                "visit": e.target.visit.value,
-                "advisor": e.target.advisor.value,
-                "faq": e.target.faq.value,
-                "why": e.target.why.value,
-                "status": 1
+                "visit_id": e.target.visit.value,
+                "advisor_id": myUser.id,
+                "faq_id": e.target.faq.value,
+                "why_id": e.target.why.value,
+                "status_id": 1
             })
         })
         if (response.status === 200) {
             handleShow()
+
             for (let i = 1; i <= e.target.quantity.value; i++) {
                 await postRequest()
             }
+
         } else {
             alert('Something went wrong')
         }
@@ -90,7 +91,7 @@ const FormPage = () => {
                                 className='InputsFormPage'
                                 name="request_datetime"
                                 InputProps={{
-                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
+                                    sx: { borderRadius: '2vh', height: '7vh', borderColor: 'white' }
                                 }}
                             />
                         </LocalizationProvider>
@@ -114,7 +115,7 @@ const FormPage = () => {
                         <Row className='ContainerPersonForm'>
                             <Col md={4} className='justify-content-center'>
                                 <Avatar alt="Remy Sharp" src={user?.profile_picture}
-                                        sx={{width: 35, height: 35}}/>
+                                    sx={{ width: 35, height: 35 }} />
                             </Col>
                             <Col>
                                 <p className={'userFirstName'}>{user.first_name}</p>
@@ -133,8 +134,8 @@ const FormPage = () => {
                         <select
                             placeholder="Departamento"
                             className='form-select department-select'
-
                             name="ministryDepartment"
+
                             onChange={(e) => getFaqsByMinistryDepartment(authTokens.access, e.target.value).then(r => setFaqs(r))}>
 
                             {ministryDepartments?.map((ministryDepartment) => (
@@ -153,6 +154,7 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq">
+
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
@@ -170,6 +172,7 @@ const FormPage = () => {
                             placeholder="Por que vino?"
                             className='form-select department-select'
                             name='why'>
+
                             {whys?.map((why) => (
                                 <option value={why.id}>{why.name}</option>
                             ))}
@@ -188,13 +191,13 @@ const FormPage = () => {
                 <Row className={'justify-content-start py-2'}>
                     <Col md={8}>
                         <TextField className={'InputInForm'}
-                                   name="quantity"
-                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
+                            name="quantity"
+                            InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }} />
                     </Col>
                     <Col md={3}>
 
                         <Button type='submit' variant="primary"
-                                className='buttonconsulta'>Enviar</Button>
+                            className='buttonconsulta'>Enviar</Button>
                     </Col>
                 </Row>
             </Container>
@@ -205,7 +208,7 @@ const FormPage = () => {
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
                             <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
                                 <p className="text-center">¡Se ha registrado el asesor correctamente!</p>
                             </Col>
                         </Row>
