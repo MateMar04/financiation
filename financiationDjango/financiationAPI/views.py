@@ -119,6 +119,22 @@ class VisitApiView(APIView):
         return Response(serializer.data)
 
 
+class MayorApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        mayor = Mayor.objects.all()
+        serializer = MayorSerializer(mayor, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        mayor = Mayor.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+        )
+        serializer = MayorSerializer(mayor, many=False)
+        return Response(serializer.data)
+
+
 class GroupApiView(APIView):
     def get(self, request, *args, **kwargs):
         groups = Group.objects.all()

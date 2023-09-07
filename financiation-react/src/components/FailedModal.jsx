@@ -6,10 +6,6 @@ import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 
 
 export const FailedModal = (props, {message}) => {
-
-    if (!props.show) {
-        return null
-    }
     return (
         <Modal show={props.show}>
                 <Modal.Body>
@@ -23,11 +19,9 @@ export const FailedModal = (props, {message}) => {
                     </Container>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="failed">
+                        <Button onClick={props.onClose} variant="failed">
                             OK
                         </Button>
-                    </Link>
                 </Modal.Footer>
             </Modal>
 
