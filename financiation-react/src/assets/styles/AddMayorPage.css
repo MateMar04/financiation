@@ -5,6 +5,14 @@
     height: 35vw;
     border-radius: 5vh;
 }
+.containermayor{
+    margin-top: 8vh;
+    background-color: white;
+    width: 70vw;
+    height: 35vw;
+    border-radius: 5vh;
+}
+
 .container-addmayor-modal{
     width: 20vw !important;
 }
@@ -20,6 +28,7 @@
     justify-content: center;   
 }
 
+
 .FormAddMayor{
     align-items: center;
     text-align: center;
@@ -32,6 +41,9 @@
 .inputNombre{
     padding-bottom: 2vw !important;
     padding-right: 2vw !important;
+}
+.input{
+    padding-bottom: 1vw !important;
 }
 .BtnIniciarSesionLogin:hover {
     background-color: #1f8bda;

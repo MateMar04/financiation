@@ -21,7 +21,7 @@ export const MayorCreateModal = (props) => {
 
     let postMayor = async (e) => {
         e.preventDefault()
-        let response = await fetch('/api/mayors/add', {
+        let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -29,8 +29,8 @@ export const MayorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "flyer": e.target.flyer.value,
-                "distance": e.target.distance.value
+                "first_name": e.target.first_name.value,
+                "last_name": e.target.last_name.value
             })
         })
         if (response.status === 200) {
@@ -55,17 +55,18 @@ export const MayorCreateModal = (props) => {
             <Modal show={props.show} >
                 <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
                 <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
-                <Container className="container-addmayor container-addmayor-modal">
+                <Container className="containermayor container-addmayor-modal">
 
-                    <Form >
+                    <Form onSubmit={postMayor}>
                         <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
 
 
                         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
                                 <TextField
-                                    className="inputNombre"
+                                    className="input"
                                     label="Nombre"
+                                    name='first_name'
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -79,8 +80,9 @@ export const MayorCreateModal = (props) => {
                             </Form.Group>
                             <Form.Group style={{ textAlign: 'center' }}>
                                 <TextField
-                                    className="inputNombre"
+                                    className="input"
                                     label="Apellido"
+                                    name='last_name'
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -94,48 +96,14 @@ export const MayorCreateModal = (props) => {
                             </Form.Group>
                         </div>
 
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="inputNombre"
-                                    label="Telefono"
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                            <Form.Group style={{ textAlign: 'center' }}>
-                                <TextField
-                                    className="inputNombre"
-                                    label="Email"
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                        </div>
+                        
 
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button type="submit">Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin' type="submit">Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
                                 Cancelar
-                            </Button>
-                            <Button variant="outlined" color="secondary" style={{ marginLeft: '10px' }}>
-                                Borrar
                             </Button>
                         </div>
                     </Form>
