@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import Carousel from 'react-bootstrap/Carousel';
 import {Col, Container, Form, Row,} from "react-bootstrap";
@@ -24,7 +24,7 @@ import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-
+import {getMayors} from '../services/MayorServices';
 
 const AddVisitPage = () => {
 
@@ -35,7 +35,11 @@ const AddVisitPage = () => {
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [showcreate, setShowcreate] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
+    let [mayors, setMayors] = useState([])
 
+    useEffect(() => {
+        getMayors(authTokens.access).then(data => setMayors(data))
+    }, [])
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -418,8 +422,11 @@ const AddVisitPage = () => {
                                                     </Row>
                                                     <Row className='justify-content-center text-center'>
                                                         <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                    variant="standard"/>
+                                                            <select className='select' id="standard-basic" label=""variant="standard">
+                                                                {mayors?.map((mayor) => (
+                                                                    <option value={mayor.id}>{mayor.name}</option>
+                                                                ))}
+                                                            </select>
                                                         </Col>
                                                     </Row>
 
