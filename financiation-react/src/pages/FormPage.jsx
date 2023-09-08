@@ -18,11 +18,6 @@ import { getWhys } from "../services/WhyServices";
 
 
 const FormPage = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const handleDropdownChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
-
 
     let { authTokens, myUser } = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
