@@ -1,7 +1,14 @@
 import React from "react";
 import {Button, Card, Col, Container, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
+import Logo from "../assets/images/PRUEBA.PNG";
 import Check from "../assets/images/checked.gif";
 import {Link, useNavigate} from "react-router-dom";
+import '../assets/styles/ResetPassword.css'
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 const ResetPasswordPage = () => {
 
@@ -34,53 +41,39 @@ const ResetPasswordPage = () => {
     return (
 
         <Container fluid className="fondo">
-            <Container>
-                <Row className='justify-content-center'>
-                    <Col md={6}>
-                        <Card id="carta">
-                            <Card.Header as="h5">Restablecer su contraseña</Card.Header>
-                            <Card.Body>
-                                <Card.Text>
-                                    Ingresa tu correo electrónico y te enviaremos un enlace para que recuperes el
-                                    acceso a tu cuenta.
-                                </Card.Text>
-                                <Form onSubmit={resetPasswordEmail}>
-                                    <FloatingLabel className='floatingLabel' label="Correo electronico">
-                                        <Form.Control className='form-control'
-                                                      type='email'
-                                                      placeholder='Email'
-                                                      name='email'
-                                                      required>
-                                        </Form.Control>
-                                    </FloatingLabel>
-                                    <div className='py-3'>
-                                        <Button className='btn btn-primary' type='submit'>Enviar</Button>
-                                    </div>
-                                </Form>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+             <Container className="ContainerResetPassword">
+
+<Row className={'justify-content-center text-center'}>
+    <img src={Logo} className="ImgLogoResetPassword" alt="Logo del ministerio de finanzas"/>
+</Row>
+<Row className={'justify-content-center text-center'}>
+                <h3 className={'h3LoginPage'}>Reestablece tu contraseña</h3>
+            </Row>
+            <Row className={'justify-content-center text-center'}>
+                <h6>Hola</h6>
+            </Row>
+            <Form>
+
+                <Row className={'justify-content-center text-center'}>
+                    <Form.Group>
+                        <TextField
+                            label="Email"
+                            variant="outlined"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start"> <MailOutlineIcon/> </InputAdornment>),
+                                sx: {borderRadius: 6, borderColor: '#f4f4f4'}
+                            }}
+                            type="text"
+                            name='ssn'
+                            required
+                            className={'InputResetPassword'}
+                        />
+                    </Form.Group>
                 </Row>
-            </Container>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a enviado una solicitud para restaurar su contraseña!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
+                </Form>
+            
+        </Container>
         </Container>
     );
 }
