@@ -68,3 +68,11 @@
     text-decoration: none;
     color: black;
 }
+.inputedit{
+    max-width: 8vw;
+    background-color: #f4f4f4;
+    border-radius: 4vw;
+    border-width: 0.1vw;
+    border-color: gray;
+    padding-left: 0.5vw;
+}

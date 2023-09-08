@@ -7,8 +7,8 @@ import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import {getMayors } from '../services/MayorServices';
-import {getMayorById} from '../services/MayorServices';
+import { getMayors } from '../services/MayorServices';
+import { getMayorById } from '../services/MayorServices';
 
 export const MayorModifyModal = (props) => {
 
@@ -19,16 +19,17 @@ export const MayorModifyModal = (props) => {
     const toggleModalfailed = () => setShowfailture(!showfail);
     let [mayors, setMayors] = useState([])
     let [mayor, setMayor] = useState([])
+    const [editedMayor, setEditedMayor] = useState({});
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
     }, [])
 
-    let postMayor = async (e) => {
+    let putMayor = async (e) => {
         e.preventDefault();
 
         let response = await fetch('/api/mayors', {
-            method: "POST",
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": "JWT " + String(authTokens.access),
@@ -76,28 +77,46 @@ export const MayorModifyModal = (props) => {
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Container className="containermayor container-addmayor-modal">
 
-                <Form onSubmit={postMayor}>
+                <Form>
                     <h3 className={'h3LoginPage'}>Seleccione Intendente</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={(e) => getMayorById(authTokens.access, e.target.value).then(data => setMayor(data))}>
-                                <option selected disabled hidden></option>
-                                {mayors?.map((mayor) => (
-                                    <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
-                                ))}
-                            </select> 
+                        <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={(e) => getMayorById(authTokens.access, e.target.value).then(data => setMayor(data))}>
+                            <option selected disabled hidden></option>
+                            {mayors?.map((mayor) => (
+                                <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className='display'>
                         <p>
-                            <a className='displayitem'>Nombre:</a><a>{mayor.first_name}</a>
+                            <a className='displayitem'>Nombre:</a>
+                            <span>
+                                <input
+                                    className='inputedit'
+                                    type="text"
+                                    value={mayor.first_name}
+                                    readOnly={false}
+                                    onChange={(e) => setEditedMayor({first_name: e.target.value })}
+                                />
+                            </span>
                         </p>
                         <p>
-                            <a className='displayitem'>Apellido:</a><a>{mayor.last_name}</a> 
+                            <a className='displayitem'>Apellido:</a>
+                            <span>
+                                <input
+                                    className='inputedit'
+                                    type="text"
+                                    value={mayor.last_name}
+                                    readOnly={false}
+                                    onChange={(e) => setEditedMayor({last_name: e.target.value })}
+                                />
+                            </span>
                         </p>
                     </div>
 
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <Button className='BtnIniciarSesionLogin' type="submit">Actualizar</Button>
+                        <Button className='BtnIniciarSesionLogin' onClick={() => putMayor()}>Actualizar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Button className='BtnBorrar' onClick={() => deleteMayor(mayor.id)}>Eliminar</Button>
