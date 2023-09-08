@@ -251,7 +251,7 @@ export const ReportsProvider = ({children}) => {
         }
     }
 
-    const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#A0C4FF', '#BDB2FF', '#FFC6FF']
+    const colors = ['#288d85', '#b9d9b4', '#d18e8f', '#b05574', '#f0a991', '#50723C', '#D1B1C8', '#B87D4B','#c7ede8']
 
     const [advisorsData, setAdvisorsData] = useState({
         labels: [],
