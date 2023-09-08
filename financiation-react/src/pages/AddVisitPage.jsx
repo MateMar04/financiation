@@ -77,19 +77,15 @@ const AddVisitPage = () => {
         if (response.status === 200) {
             toggleModalsucceed();
             await postVisit()
-            //alert('se registro la visita correctamente')
         } else if (response.status === 500) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
         } else if (response.status === 401) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Desautorizado)')
         } else if (response.status === 400) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Bad request)')
         }
     }
 
