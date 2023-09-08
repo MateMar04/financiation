@@ -1,10 +1,44 @@
-from django.db import connection
-from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
+from .serializers import UserAccountSerializer
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query
+
+
+# Create your views here.
+
+
+class ProfilePictureView(APIView):
+    def put(self, request, *args, **kwargs):
+
+        data = request.data
+
+        user = UserAccount.objects.get(id=1)
+
+        image = in_memory_uploaded_file_to_binary(data['profile_picture'])
+
+        user.profile_picture = image
+
+        user.save()
+
+        serializer = UserAccountSerializer(user, many=False)
+
+        return Response(serializer.data)
+
+    def get(self, request):
+        user_id = request.query_params.get('id_useraccount')
+
+        try:
+            user_profile = UserAccount.objects.get(id=5)
+        except UserAccount.DoesNotExist:
+            return Response({"error": "User not found."}, status=404)
+
+        profile_picture = user_profile.profile_picture
+
+        if profile_picture:
+            return Response({"pic": profile_picture})
 
 
 class RequestApiView(APIView):
@@ -82,6 +116,22 @@ class VisitApiView(APIView):
             visit.agreement_id.add(agreement)
 
         serializer = VisitSerializer(visit, many=False)
+        return Response(serializer.data)
+
+
+class MayorApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        mayor = Mayor.objects.all()
+        serializer = MayorSerializer(mayor, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        mayor = Mayor.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+        )
+        serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
 
 
@@ -387,14 +437,6 @@ def getGroupAdvisorUsers(request, id):
     return Response(serializer.data)
 
 
-def parse_and_convert(input_list):
-    if len(input_list) == 1 and isinstance(input_list[0], str):
-        numbers_str = input_list[0]
-        numbers_list = numbers_str.split(',')
-        numbers_tuple = tuple(map(int, numbers_list))
-        return numbers_tuple
-
-
 @api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
@@ -476,26 +518,6 @@ def getTotalRequestsByVisits(request):
                          "WHERE visit_id IN %s "
                          "AND faq_id IN %s "
                          "GROUP BY CONCAT(L.name, ' ', V.visit_date)", request)
-
-
-def execute_query(query, request):
-    faqs_ids = parse_and_convert(request.GET.getlist('faqs'))
-    visits_ids = parse_and_convert(request.GET.getlist('visits'))
-    with connection.cursor() as cursor:
-        cursor.execute(query, [visits_ids, faqs_ids])
-        row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
-
-
-def convert_to_json(input_data):
-    result = []
-    for name, requests in input_data:
-        entry = {
-            "name": name,
-            "requests": requests
-        }
-        result.append(entry)
-    return result
 
 
 @api_view(['GET'])
