@@ -1,17 +1,25 @@
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
 import VerMasButton from "../components/VerMasButton";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import {
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+} from 'react-native';
+
 
 export const MainMenuPage = () => {
 
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let { authTokens, logoutUser, myUser } = useContext(AuthContext)
 
     return (
         <Container fluid className="main-menu-container">
@@ -19,9 +27,9 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="profile-card " id="left-card">
                         <Row className={'justify-content-end'}>
-                            <Col md={4}>
+                            <Col md={4} xs={6}>
                                 <Link to={'/me'}>
-                                    <VerMasButton/>
+                                    <VerMasButton />
                                 </Link>
                             </Col>
                         </Row>
@@ -31,7 +39,7 @@ export const MainMenuPage = () => {
 
                                 <Row>
                                     <Col className="d-flex justify-content-center">
-                                        <Avatar src={myUser?.profile_picture} sx={{width: 128, height: 128}}/>
+                                        <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
                                     </Col>
                                 </Row>
 
@@ -89,23 +97,30 @@ export const MainMenuPage = () => {
                             <Row className="text-center">
                                 <h2 className="name-title">Próximas Visitas</h2>
                             </Row>
-                            <Container>
-
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-
+                            <Container className="container-visit-card-main-menu">
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
+                                        <VisitCardMainMenu />
                             </Container>
                             <Link to={'/visits'}>
                                 <Row className={'justify-content-end'}>
-                                    <Col md={4}>
-                                        <VerMasButton className={'ver-mas-bottom-visit'}/>
+                                    <Col md={4} xs={6}>
+                                        <VerMasButton className={'ver-mas-bottom-visit'} />
                                     </Col>
                                 </Row>
                             </Link>
+
                         </Container>
                     </Card>
                 </Col>
@@ -113,9 +128,9 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Card className="group-card-main-menu" id="right-card">
                         <Row className={'justify-content-end'}>
-                            <Col md={4}>
+                            <Col md={4} xs={6}>
                                 <Link to={'/groups'}>
-                                    <VerMasButton/>
+                                    <VerMasButton />
                                 </Link>
                             </Col>
                         </Row>
@@ -143,13 +158,13 @@ export const MainMenuPage = () => {
                                         data: [30, 30, 40],
                                         backgroundColor: ["red", "green", "blue"]
                                     }]
-                                }}/>
+                                }} />
 
                             </Row>
                         </Container>
                     </Card>
                 </Col>
             </Row>
-        </Container>
+        </Container >
     )
 }

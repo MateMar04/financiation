@@ -48,3 +48,8 @@
 .ver-mas-bottom-visit{
     bottom: 0 !important;
 }
+
+.container-visit-card-main-menu{
+    overflow-y:auto;
+    height: 65vh;
+}
