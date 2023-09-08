@@ -21,6 +21,12 @@ export const MayorModifyModal = (props) => {
     let [mayor, setMayor] = useState([])
     const [editedMayor, setEditedMayor] = useState({});
 
+    const handleMayorSelection = (e) => {
+        const selectedMayorId = e.target.value;
+        const selectedMayor = mayors.find((mayor) => mayor.id === parseInt(selectedMayorId, 10));
+        setEditedMayor(selectedMayor);
+    };
+
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
     }, [])
@@ -81,7 +87,7 @@ export const MayorModifyModal = (props) => {
                     <h3 className={'h3LoginPage'}>Seleccione Intendente</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={(e) => getMayorById(authTokens.access, e.target.value).then(data => setMayor(data))}>
+                        <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={handleMayorSelection}>
                             <option selected disabled hidden></option>
                             {mayors?.map((mayor) => (
                                 <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
@@ -95,9 +101,8 @@ export const MayorModifyModal = (props) => {
                                 <input
                                     className='inputedit'
                                     type="text"
-                                    value={mayor.first_name}
-                                    readOnly={false}
-                                    onChange={(e) => setEditedMayor({first_name: e.target.value })}
+                                    value={editedMayor.first_name || ""}
+                                    onChange={(e) => setEditedMayor({ ...editedMayor, first_name: e.target.value })}
                                 />
                             </span>
                         </p>
@@ -107,9 +112,8 @@ export const MayorModifyModal = (props) => {
                                 <input
                                     className='inputedit'
                                     type="text"
-                                    value={mayor.last_name}
-                                    readOnly={false}
-                                    onChange={(e) => setEditedMayor({last_name: e.target.value })}
+                                    value={editedMayor.last_name || ""}
+                                    onChange={(e) => setEditedMayor({ ...editedMayor, last_name: e.target.value })}
                                 />
                             </span>
                         </p>
