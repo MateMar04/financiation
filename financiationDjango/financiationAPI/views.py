@@ -133,6 +133,9 @@ class MayorApiView(APIView):
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
+    
+
+    
 
 
 class GroupApiView(APIView):
@@ -531,3 +534,10 @@ def getMayorById(request, id):
     mayor = Mayor.objects.get(id=id)
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def deleteMayorById(request, id, *args, **kwargs):
+        mayor = Mayor.objects.get(id=id)
+        mayor.delete()
+        serializer = MayorSerializer(mayor, many=False)
+        return Response(serializer.data)

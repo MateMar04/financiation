@@ -25,7 +25,6 @@ import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-import {getMayorById} from '../services/MayorServices';
 import {getMayors} from '../services/MayorServices'
 import CreateIcon from '@mui/icons-material/Create';
 
@@ -40,12 +39,10 @@ const AddVisitPage = () => {
     const [showmodify, setShowmodify] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
-    let [mayors, setMayors] = useState([])
-    let [mayor, setMayor] = useState([])
+    let [mayors, setMayors] = useState([]) 
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
-        getMayorById(authTokens.access).then(data => setMayor(data))
     }, [])
 
     let postVisit = async (e) => {
@@ -112,7 +109,7 @@ const AddVisitPage = () => {
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
                     <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
-                    <MayorModifyModal mayor={mayor} onClose={() => toggleModalModify()}show={showmodify}/>
+                    <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify}/>
                     <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
                     <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
                     <Form onSubmit={postVisit}>
