@@ -15,6 +15,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
 import { getWhys } from "../services/WhyServices";
+import dayjs from 'dayjs';
 
 
 const FormPage = () => {
@@ -37,6 +38,24 @@ const FormPage = () => {
     let [selectedQuantity, setSelectedQuantity] = useState(1)
 
     let dateRef = useRef(null);
+
+
+    function getCurrentDateTime() {
+        // Create a new Date object with the current date and time
+        const currentDateTime = new Date();
+      
+        // Get the individual components
+        const year = currentDateTime.getFullYear(); // Get the current year
+        const month = currentDateTime.getMonth() + 1; // Get the current month (0-based, so add 1)
+        const day = currentDateTime.getDate(); // Get the current day of the month
+        const hours = currentDateTime.getHours(); // Get the current hour
+        const minutes = currentDateTime.getMinutes(); // Get the current minute
+      
+        // Format the date and time as a string
+        const formattedDateTime = (`${day}-${month}'${year} ${hours}:${minutes}`);
+      
+        return formattedDateTime;
+      }
 
 
     const formatDate = (inputDate) => {
@@ -98,7 +117,7 @@ const FormPage = () => {
         console.log(selectedFaq)
 
         for (let i = 1; i <= selectedQuantity; i++) {
-            console.log("post", i)
+console.log("post", i)
             await postRequest()
         }
     }
@@ -118,6 +137,7 @@ const FormPage = () => {
                                 label={''}
                                 className='InputsFormPage'
                                 name="request_datetime"
+                                defaultValue={dayjs(getCurrentDateTime())}
                                 InputProps={{
                                     sx: { borderRadius: '2vh', height: '7vh', borderColor: 'white' }
                                 }}
