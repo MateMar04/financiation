@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import "../assets/styles/FormPage.css";
 import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
@@ -24,7 +24,6 @@ const FormPage = () => {
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
     let [user, setUser] = useState([])
-    let [advised, setAdvised] = useState([])
     let [visits, setVisits] = useState([])
     let [whys, setWhys] = useState([])
     const [show, setShow] = React.useState(false);
@@ -32,12 +31,12 @@ const FormPage = () => {
     const handleShow = () => setShow(true);
 
 
-    let [selectedDatetime, setSelectedDatetime] = useState()
-    let [selectedVisit, setSelectedVisit] = useState()
+    let [selectedVisit, setSelectedVisit] = useState(1)
     let [selectedFaq, setSelectedFaq] = useState()
-    let [selectedWhy, setSelectedWhy] = useState()
-    let [selectedQuantity, setSelectedQuantity] = useState()
+    let [selectedWhy, setSelectedWhy] = useState(1)
+    let [selectedQuantity, setSelectedQuantity] = useState(1)
 
+    let dateRef = useRef(null);
 
 
     const formatDate = (inputDate) => {
@@ -76,7 +75,7 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "request_datetime": selectedDatetime,
+                "request_datetime": formatDate(dateRef.current.value),
                 "visit_id": selectedVisit,
                 "advisor_id": myUser.id,
                 "faq_id": selectedFaq,
@@ -94,13 +93,11 @@ const FormPage = () => {
     let handleSumbit = async (e) => {
         e.preventDefault()
 
-        setSelectedDatetime(formatDate(e.target.request_datetime.value))
-        setSelectedVisit(e.target.visit.value)
-        setSelectedFaq(e.target.faq.value)
-        setSelectedWhy(e.target.why.value)
-        setSelectedQuantity(e.target.quantity.value)
+        console.log("post request")
+        console.log(selectedFaq)
 
         for (let i = 1; i <= selectedQuantity; i++) {
+            console.log("post", i)
             await postRequest()
         }
     }
@@ -115,6 +112,7 @@ const FormPage = () => {
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
+                                inputRef={dateRef}
                                 format='DD/MM/YYYY HH:mm'
                                 label={''}
                                 className='InputsFormPage'
@@ -130,7 +128,8 @@ const FormPage = () => {
                         <select
                             placeholder="Visita"
                             className='form-select'
-                            name="visit">
+                            name="visit"
+                            onChange={(e) => setSelectedVisit(e.target.value)}>
 
                             {visits?.map((visit) => (
                                 <option value={visit.id}>{visit.name}</option>
@@ -182,7 +181,8 @@ const FormPage = () => {
                         <select
                             placeholder="Departamento"
                             className='form-select department-select'
-                            name="faq">
+                            name="faq"
+                            onChange={(e) => setSelectedFaq(e.target.value)}>
 
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
@@ -200,7 +200,8 @@ const FormPage = () => {
                         <select
                             placeholder="Por que vino?"
                             className='form-select department-select'
-                            name='why'>
+                            name='why'
+                            onChange={(e) => setSelectedWhy(e.target.value)}>
 
                             {whys?.map((why) => (
                                 <option value={why.id}>{why.name}</option>
@@ -222,7 +223,8 @@ const FormPage = () => {
                         <TextField className={'InputInForm'}
                             name="quantity"
                             defaultValue={1}
-                            InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }} />
+                            InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }}
+                            onChange={(e) => setSelectedQuantity(e.target.value)} />
                     </Col>
                     <Col md={3}>
 
