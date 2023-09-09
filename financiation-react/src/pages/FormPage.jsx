@@ -43,19 +43,19 @@ const FormPage = () => {
     function getCurrentDateTime() {
         // Create a new Date object with the current date and time
         const currentDateTime = new Date();
-      
+
         // Get the individual components
         const year = currentDateTime.getFullYear(); // Get the current year
         const month = currentDateTime.getMonth() + 1; // Get the current month (0-based, so add 1)
         const day = currentDateTime.getDate(); // Get the current day of the month
         const hours = currentDateTime.getHours(); // Get the current hour
         const minutes = currentDateTime.getMinutes(); // Get the current minute
-      
+
         // Format the date and time as a string
         const formattedDateTime = (`${day}-${month}'${year} ${hours}:${minutes}`);
-      
+
         return formattedDateTime;
-      }
+    }
 
 
     const formatDate = (inputDate) => {
@@ -113,11 +113,7 @@ const FormPage = () => {
     let handleSumbit = async (e) => {
         e.preventDefault()
 
-        console.log("post request")
-        console.log(selectedFaq)
-
         for (let i = 1; i <= selectedQuantity; i++) {
-console.log("post", i)
             await postRequest()
         }
     }
@@ -137,7 +133,7 @@ console.log("post", i)
                                 label={''}
                                 className='InputsFormPage'
                                 name="request_datetime"
-                                defaultValue={dayjs(getCurrentDateTime())}
+                                value={dayjs(getCurrentDateTime())}
                                 InputProps={{
                                     sx: { borderRadius: '2vh', height: '7vh', borderColor: 'white' }
                                 }}
