@@ -45,7 +45,6 @@ urlpatterns = [
     path('politic-parties', views.getPoliticParties, name='politicParties'),
 
     # Mayors
-    path('mayors', views.getMayors, name='mayors'),
     path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
     path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
 
@@ -93,5 +92,6 @@ urlpatterns = [
 
     # EditarProfilePic
     path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture')
-
+    #mayors
+    path('mayors', views.MayorApiView.as_view(), name='mayors'),
 ]

@@ -6,6 +6,7 @@ import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
+import MayorCreateModal from "../components/MayorCreateModal";
 import Card from '@mui/material/Card';
 import Select from "@mui/material/Select";
 import {CardContent, Switch} from "@mui/material";
@@ -22,6 +23,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
+import AddIcon from '@mui/icons-material/Add';
 
 
 const AddVisitPage = () => {
@@ -31,6 +33,9 @@ const AddVisitPage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [showcreate, setShowcreate] = useState(false);
+    const toggleModalCreate = () => setShowcreate(!showcreate);
+
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -95,8 +100,9 @@ const AddVisitPage = () => {
             <Container>
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
-                    <SucceedModal message="la visita" show={showsuccess}/>
-                    <FailedModal message="la visita" show={showfail}/>
+                    <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
+                    <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
+                    <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
                     <Form onSubmit={postVisit}>
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
                                   className={'carouselAddVisit'}>
@@ -139,7 +145,6 @@ const AddVisitPage = () => {
                                                             <Select id="standard-basic" label=""
                                                                     variant="standard"/>
                                                         </Col>
-
                                                     </Row>
                                                 </Container>
                                             </CardContent>
@@ -391,10 +396,24 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                     <Col>
+                                            
                                         <Card sx={{my: 2, mx: 2}} className={'CardVisit'}>
+                                        
                                             <CardContent className={'CenterContentCard'}>
+                                                
                                                 <Container>
+                                                    <Row>
+                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
+                                                    </Row>
+                                                    <Row>
+                                                        <AddIcon className='icon' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                    </Row>
+                                                </Container>
+                                                
+                                                <Container>
+
                                                     <Row className='justify-content-center text-center'>
+                                                        
                                                         <a>{'Intendente'}</a>
                                                     </Row>
                                                     <Row className='justify-content-center text-center'>

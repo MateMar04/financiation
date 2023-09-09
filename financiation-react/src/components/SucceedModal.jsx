@@ -19,11 +19,9 @@ export const SucceedModal = (props, {message}) => {
                 </Container>
             </Modal.Body>
             <Modal.Footer>
-                <Link to={'/login'}>
                     <Button onClick={props.onClose} variant="success">
                         OK
                     </Button>
-                </Link>
             </Modal.Footer>
         </Modal>
     )
