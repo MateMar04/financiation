@@ -13,7 +13,6 @@ import IconButton from "@mui/material/IconButton";
 import {Zoom} from "@mui/material";
 
 
-
 export const GroupCard = ({group}) => {
 
     const [showButton, setShowButton] = useState(false);
@@ -32,10 +31,9 @@ export const GroupCard = ({group}) => {
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <Zoom in style={{ transitionDelay: '100ms'}}>
-
+            <Zoom in style={{transitionDelay: '100ms'}}>
                 <div>
-                    <Accordion>
+                    <Accordion className={'accordion-group'}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon/>}
                             aria-controls="panel1a-content"
@@ -46,9 +44,13 @@ export const GroupCard = ({group}) => {
                         </AccordionSummary>
 
                         <AccordionDetails>
-                            <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
-                                <CreateIcon/>
-                            </IconButton>
+                            <Row className={'justify-content-start pencil-groups'}>
+                                <Col md={2}>
+                                    <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
+                                        <CreateIcon/>
+                                    </IconButton>
+                                </Col>
+                            </Row>
                             <Container>
                                 <Row>
                                     <Col>

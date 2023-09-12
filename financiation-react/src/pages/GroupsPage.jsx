@@ -14,11 +14,13 @@ export const GroupsPage = () => {
 
     return (
         <div>
-            {groups?.map((group) => (
-                <Container>
-                    <GroupCard group={group}/>
-                </Container>
-            ))}
+            <Container>
+                {groups?.map((group) => (
+                    <Container>
+                        <GroupCard group={group}/>
+                    </Container>
+                ))}
+            </Container>
         </div>
     )
 }
