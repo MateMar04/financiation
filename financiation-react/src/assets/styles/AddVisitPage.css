@@ -2,7 +2,11 @@
     background-color: white;
     border-radius: 8vh;
     height: 82vh;
+
+    justify-content: center !important;
+    align-items: center !important;
 }
+
 
 .CardVisit {
     width: 15vw !important;
@@ -71,9 +75,9 @@
 }
 
 .icon {
-    font-size: 3vw !important;
+    font-size: 50px !important;
     margin: 1vw;
-    margin-top: -6vw;
+    margin-top: -8vw;
     margin-left: 10vw;
 }
 
@@ -81,9 +85,10 @@
     color: #53A6DC;
 }
 
-.iconperson {
-    margin-top: -3vw;
-    margin-left: 5vw;
+.CarouselItemOne{
+    justify-items: center !important;
+        align-items: center !important;
+        justify-content: center !important;
 }
 
 @media (max-width: 800px) {
@@ -117,5 +122,28 @@
         margin-top: 0;
     }
     
+    .ThirdCarousel{
+        height: auto;
+    }
+    .CardVisitConvenios{
+        width: auto !important;
+        height: auto;
+    }
 
+    .CenterContentCardConvenios{
+        width: auto;
+        height: auto;
+      
+    }
+
+    .BtnAddVisit {
+        width: auto;
+    }
+
+    .icon {
+        font-size: 50px !important;
+        margin: 1vw;
+        margin-top: -15vh;
+        margin-left: 50vw;
+    }
 }

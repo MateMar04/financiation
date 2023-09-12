@@ -402,7 +402,7 @@ const AddVisitPage = () => {
                                             <CardContent className={'CenterContentCard'}>
 
                                                 <Container>
-                                                    <Row>
+                                                    <Row className="justify-content-center">
                                                         <PersonIcon className='iconperson' sx={{ fontSize: 65 }} />
                                                     </Row>
                                                     <Row>
