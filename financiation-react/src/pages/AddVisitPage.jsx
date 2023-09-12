@@ -109,7 +109,7 @@ const AddVisitPage = () => {
 
                             <Carousel.Item className='CarouselItemOne'>
                                 <Row className='justify-content-center text-center'>
-                                    <Col className='justify-content-center'>
+                                    <Col className='justify-content-center CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -130,7 +130,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -150,7 +150,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -171,7 +171,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -195,7 +195,7 @@ const AddVisitPage = () => {
                                 </Row>
 
                                 <Row>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -222,7 +222,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -242,7 +242,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -262,7 +262,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -276,7 +276,7 @@ const AddVisitPage = () => {
                                                     <Row className='justify-content-center text-center'>
                                                         <Col>
                                                             <Switch id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
+                                                                variant="standard"/>
                                                         </Col>
                                                     </Row>
                                                 </Container>
@@ -290,7 +290,7 @@ const AddVisitPage = () => {
                             <Carousel.Item className={'MiniContainerVisit'}>
 
                                 <Row className='justify-content-center'>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -304,14 +304,14 @@ const AddVisitPage = () => {
                                                     <Row className='justify-content-center text-center'>
                                                         <Col>
                                                             <Switch id="standard-basic" label=""
-                                                                variant="standard" />
+                                                                variant="standard"/>
                                                         </Col>
                                                     </Row>
                                                 </Container>
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -332,7 +332,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -353,7 +353,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -377,7 +377,7 @@ const AddVisitPage = () => {
                                 </Row>
 
                                 <Row>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -395,7 +395,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
 
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
 
@@ -427,7 +427,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className='CenterContentCard'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -445,7 +445,7 @@ const AddVisitPage = () => {
                                             </CardContent>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col className={'CenterContentCard'}>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
                                             <CardContent className={'CenterContentCard'}>
                                                 <Container>
@@ -537,7 +537,7 @@ const AddVisitPage = () => {
                                     </Col>
                                 </Row>
                                 <Row className='justify-content-center text-center'>
-                                    <Col className='ContentCenterCard'>
+                                    <Col>
                                         <Button className={'BtnAddVisit'} variant='outlined'>Guardar Visita</Button>
                                     </Col>
                                 </Row>

@@ -42,6 +42,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
 }
 
 
@@ -56,7 +57,7 @@
     width: 55vw !important;
     height: 35vh !important;
     background-color: #f4f4f4 !important;
-    border-radius: 40px !important;
+    border-radius: 8vh !important;
 }
 
 
@@ -98,10 +99,13 @@
         justify-items: center !important;
         align-items: center !important;
         justify-content: center !important;
+        padding-top: 2vh;
+        border-radius: 10vh !important;
+        padding-bottom: 4vh;
     }
 
     .CardVisit {
-        width: auto !important;
+        width: 70vw !important;
     }
 
     .InputVisit {
@@ -118,8 +122,7 @@
 
     .carousel-buttons {
         display: flex;
-        justify-content: space-between;
-        margin-top: 0;
+        margin-top: 1vh;
     }
     
     .ThirdCarousel{
@@ -138,6 +141,8 @@
 
     .BtnAddVisit {
         width: auto;
+        border-radius: 8vw !important;
+
     }
 
     .icon {
@@ -147,3 +152,59 @@
         margin-left: 50vw;
     }
 }
+/*
+
+@media (min-width: 801px) and (max-width: 1024px) {
+
+    .MiniContainerVisit {
+        height: auto;
+        justify-items: center !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .CardVisit {
+        width: 30vw !important;
+    }
+
+    .InputVisit {
+        width: auto;
+    }
+
+    .carouselAddVisit {
+        height: auto;
+        width: 90vw;
+    }
+
+    .CarouselItemOne{
+        height: auto;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0;
+    }
+    
+    .ThirdCarousel{
+        height: auto;
+    }
+    .CardVisitConvenios{
+        width: 80vw !important;
+        height: auto;
+    }
+
+    .CenterContentCardConvenios{
+        width: auto;
+        height: auto;
+      
+    }
+
+    .BtnAddVisit {
+        width: auto;
+    }
+
+
+}
+
+*/
