@@ -1,0 +1,52 @@
+.container-addmayor {
+    margin-top: 8vh;
+    background-color: white;
+    width: 50vw;
+    height: 35vw;
+    border-radius: 5vh;
+}
+.containermayor{
+    margin-top: 8vh;
+    background-color: white;
+    width: 70vw;
+    height: 35vw;
+    border-radius: 5vh;
+}
+
+.container-addmayor-modal{
+    width: 20vw !important;
+}
+
+.container-adddmayor {
+    background-color: rgb(243, 219, 219);
+    height: 35vw;
+    border-radius: 5vh;
+    align-items: center;
+    display: flex;
+    flex-direction:column ;
+    align-items: center;
+    justify-content: center;   
+}
+
+
+.FormAddMayor{
+    align-items: center;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    vertical-align:text-bottom ;
+    padding-top: 10vw;
+}
+.inputNombre{
+    padding-bottom: 2vw !important;
+    padding-right: 2vw !important;
+}
+.input{
+    padding-bottom: 1vw !important;
+}
+.BtnIniciarSesionLogin:hover {
+    background-color: #1f8bda;
+    border-color: #1f8bda;
+
+}

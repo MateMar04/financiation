@@ -1,21 +1,19 @@
-import {Button, Form} from "react-bootstrap";
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from 'react';
 import AuthContext from "../context/AuthContext";
-import {useNavigate} from "react-router-dom";
-import {SucceedModal} from "../components/SucceedModal"
-import FailedModal from "../components/FailedModal";
 
-export const AddAdvisedPage = () => {
+
+export const AddMayor = () => {
 
     let {authTokens} = useContext(AuthContext)
+    let history = useNavigate()
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-    let postAdvised = async (e) => {
+    let postMayor = async (e) => {
         e.preventDefault()
-        let response = await fetch(' /api/advisees', {
+        let response = await fetch('api/mayors/add/', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +23,6 @@ export const AddAdvisedPage = () => {
             body: JSON.stringify({
                 "first_name": e.target.first_name.value,
                 "last_name": e.target.last_name.value,
-                "ssn": e.target.ssn.value
             })
         })
         if (response.status === 200) {
@@ -47,12 +44,11 @@ export const AddAdvisedPage = () => {
     }
 
     return (
-        <Form onSubmit={postAdvised}>
-            <SucceedModal message="la visita" show={showsuccess}/>
-            <FailedModal message="la visita" show={showfail}/>
-            <Form.Control placeholder='Nombre del Asesorado' name="first_name" type="text" required></Form.Control>
-            <Form.Control placeholder='Apellido del Asesorado' name="last_name" type="text" required></Form.Control>
-            <Form.Control placeholder='CUIL del Asesorado' name="ssn" type="number" required></Form.Control>
+        <Form onSubmit={postMayor}>
+            <SucceedModal message="funca" show={showsuccess}/>
+            <FailedModal message="funca" show={showfail}/>
+            <Form.Control placeholder='Nombre del Intendente' name="first_name" type="text" required></Form.Control>
+            <Form.Control placeholder='Apellido del Intendente' name="last_name" type="text" required></Form.Control>
             <Button type="submit">Registrar</Button>
         </Form>
     )
