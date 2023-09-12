@@ -1,69 +1,56 @@
-import {Card, Col, Container, Row} from "react-bootstrap";
+import { Card, Col, Container, Row } from "react-bootstrap";
+import "../assets/styles/VisitCard.css"
 
-export const VisitCard = ({visit}) => {
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Zoom } from "@mui/material";
+
+export const VisitCard = ({ visit }) => {
     return (
-        <Card>
-            <Card.Header><h3>{visit.name}</h3></Card.Header>
-            <Card.Body>
-                <Container>
-                    <Row>
-                        <Col>
-                            <h5>Localidad:</h5>
-                        </Col>
-                        <Col>
+
+        <Container className='CompletlyContainer'>
+            <Zoom in style={{ transitionDelay: '100ms' }}>
+                <div>
+                    <Accordion className={'accordion-visits'}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                            className="AccordionSummary"
+
+                        >
+                            <Row>
+                                    <h5 className="VisitName">{visit.name}</h5>
+                                 
+                            </Row>
+
+                        </AccordionSummary>
+
+                        <AccordionDetails>
                             <p>{visit.id_locality}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Tiempo de Viaje:</h5>
-                        </Col>
-                        <Col>
+
                             <p>{visit.travel_time}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Distancia:</h5>
-                        </Col>
-                        <Col>
+
                             <p>{visit.distance}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Fecha de Visita:</h5>
-                        </Col>
-                        <Col>
+
                             <p>{visit.visit_date}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Nombre del Lugar:</h5>
-                        </Col>
-                        <Col>
+
                             <p>{visit.place_name}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
+
                             <h5>Grupo:</h5>
-                        </Col>
-                        <Col>
+
                             <p>{visit.id_group}</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <h5>Status:</h5>
-                        </Col>
-                        <Col>
+
+
                             <p>{visit.id_visit_status}</p>
-                        </Col>
-                    </Row>
-                </Container>
-            </Card.Body>
-        </Card>
+
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
+            </Zoom>
+        </Container >
     )
 }

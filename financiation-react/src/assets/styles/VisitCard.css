@@ -1,0 +1,26 @@
+.accordion-visits{
+    width: 50vw;
+}
+
+.VisitName{
+    text-transform:lowercase !important ;
+    margin: 0;
+}
+
+.VisitConfirm{
+    margin-left: auto;
+}
+
+.circle_green {
+    margin-left: 5px; /* Ajusta este valor según sea necesario para el espacio deseado */
+    margin-right: 0; /* Elimina cualquier margen en el lado derecho */
+  }
+
+.SearchVisit{
+    margin-top: 5vh;
+    width: 65vw !important;
+    background-color: white;
+    border-radius: 4vh;
+    color: #000;
+}
+ 
