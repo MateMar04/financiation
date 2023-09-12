@@ -94,7 +94,7 @@
 @media (max-width: 800px) {
 
     .MiniContainerVisit {
-        height: 320vh;
+        height: auto;
         justify-items: center !important;
         align-items: center !important;
         justify-content: center !important;
@@ -123,7 +123,7 @@
     }
     
     .ThirdCarousel{
-        height: auto;
+        height: 90vh;
     }
     .CardVisitConvenios{
         width: auto !important;
