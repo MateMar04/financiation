@@ -47,10 +47,11 @@ const ResetPasswordPage = () => {
     <img src={Logo} className="ImgLogoResetPassword" alt="Logo del ministerio de finanzas"/>
 </Row>
 <Row className={'justify-content-center text-center'}>
-                <h3 className={'h3LoginPage'}>Reestablece tu contraseña</h3>
+                <h3 className={'h3ResetPasswordPage'}>Reestablece tu contraseña</h3>
             </Row>
             <Row className={'justify-content-center text-center'}>
-                <h6>Hola</h6>
+                <p className={'pResetPassword'}>No recuerdas tu contraseña? Introduce tu email para cambiarla!</p>
+
             </Row>
             <Form>
 
@@ -70,9 +71,14 @@ const ResetPasswordPage = () => {
                             className={'InputResetPassword'}
                         />
                     </Form.Group>
+
+                    
                 </Row>
-                </Form>
-            
+                
+                <Row className={'justify-content-center text-center'}>
+                    <Button type="submit" className="BtnEnviarResetPassword">Enviar</Button>
+                </Row>
+            </Form>
         </Container>
         </Container>
     );
