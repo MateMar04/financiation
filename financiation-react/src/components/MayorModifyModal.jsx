@@ -31,10 +31,21 @@ export const MayorModifyModal = (props) => {
         getMayors(authTokens.access).then(data => setMayors(data))
     }, [])
 
-    let putMayor = async (e) => {
+    const handleFormSubmit = (e) => {
         e.preventDefault();
+    
+        if (!editedMayor.first_name || !editedMayor.last_name) {
+            // Fields are empty, show an error message or handle it accordingly
+            alert("Please fill in all required fields.");
+            return;
+        }
+    
+        // If the fields are not empty, proceed with form submission logic
+        putMayor(editedMayor.id);
+    };
 
-        let response = await fetch('/api/mayors', {
+    let putMayor = async (id) => {
+        let response = await fetch(`/api/mayors/put/${id}`, {
             method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
@@ -42,10 +53,10 @@ export const MayorModifyModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": firstName,
-                "last_name": lastName
+                "first_name": editedMayor.first_name,
+                "last_name": editedMayor.last_name,
             })
-        });
+        })
 
         if (response.status === 200) {
             toggleModalsucceed();
@@ -83,7 +94,7 @@ export const MayorModifyModal = (props) => {
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Container className="containermayor container-addmayor-modal">
 
-                <Form>
+                <Form onSubmit={(e) => handleFormSubmit(e)}>
                     <h3 className={'h3LoginPage'}>Seleccione Intendente</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -99,7 +110,7 @@ export const MayorModifyModal = (props) => {
                             <a className='displayitem'>Nombre:</a>
                             <span>
                                 <input
-                                    className='inputedit'
+                                    className='inputedit' required
                                     type="text"
                                     value={editedMayor.first_name || ""}
                                     onChange={(e) => setEditedMayor({ ...editedMayor, first_name: e.target.value })}
@@ -110,7 +121,7 @@ export const MayorModifyModal = (props) => {
                             <a className='displayitem'>Apellido:</a>
                             <span>
                                 <input
-                                    className='inputedit'
+                                    className='inputedit' required
                                     type="text"
                                     value={editedMayor.last_name || ""}
                                     onChange={(e) => setEditedMayor({ ...editedMayor, last_name: e.target.value })}
@@ -120,7 +131,7 @@ export const MayorModifyModal = (props) => {
                     </div>
 
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <Button className='BtnIniciarSesionLogin' onClick={() => putMayor()}>Actualizar</Button>
+                        <Button className='BtnIniciarSesionLogin' type='submit'>Actualizar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Button className='BtnBorrar' onClick={() => deleteMayor(mayor.id)}>Eliminar</Button>
