@@ -1,4 +1,4 @@
-import React, {useContext, useState, useRef} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import "../assets/styles/AddVisitPage.css"
 import Carousel from 'react-bootstrap/Carousel';
 import {Col, Container, Form, Row,} from "react-bootstrap";
@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import MayorCreateModal from "../components/MayorCreateModal";
+import MayorModifyModal from "../components/MayorModifyModal";
 import Card from '@mui/material/Card';
 import Select from "@mui/material/Select";
 import {CardContent, Switch} from "@mui/material";
@@ -24,7 +25,8 @@ import CarouselButtons from "../components/CarouselButton";
 import Checkbox from '@mui/material/Checkbox';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
-
+import {getMayors} from '../services/MayorServices'
+import CreateIcon from '@mui/icons-material/Create';
 
 const AddVisitPage = () => {
 
@@ -34,8 +36,14 @@ const AddVisitPage = () => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [showcreate, setShowcreate] = useState(false);
+    const [showmodify, setShowmodify] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
+    const toggleModalModify = () => setShowmodify(!showmodify);
+    let [mayors, setMayors] = useState([]) 
 
+    useEffect(() => {
+        getMayors(authTokens.access).then(data => setMayors(data))
+    }, [])
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -69,19 +77,15 @@ const AddVisitPage = () => {
         if (response.status === 200) {
             toggleModalsucceed();
             await postVisit()
-            //alert('se registro la visita correctamente')
         } else if (response.status === 500) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
         } else if (response.status === 401) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Desautorizado)')
         } else if (response.status === 400) {
             toggleModalfailed();
             await postVisit()
-            //alert('no se a registrado la visita (Bad request)')
         }
     }
 
@@ -101,8 +105,9 @@ const AddVisitPage = () => {
                 <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
                 <Container className={'MiniContainerVisit'}>
                     <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
-                    <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                    <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
+                    <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify}/>
+                    <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
+                    <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
                     <Form onSubmit={postVisit}>
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
                                   className={'carouselAddVisit'}>
@@ -403,23 +408,26 @@ const AddVisitPage = () => {
                                                 
                                                 <Container>
                                                     <Row>
-                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
+                                                        <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                        <CreateIcon className='iconedit' type="submit"onClick={() => toggleModalModify()}></CreateIcon>
                                                     </Row>
                                                     <Row>
-                                                        <AddIcon className='icon' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
                                                     </Row>
                                                 </Container>
-                                                
                                                 <Container>
-
                                                     <Row className='justify-content-center text-center'>
-                                                        
                                                         <a>{'Intendente'}</a>
                                                     </Row>
                                                     <Row className='justify-content-center text-center'>
                                                         <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                    variant="standard"/>
+                                                            <select className='select' id="standard-basic" variant="standard" >  
+                                                                    <option selected disabled hidden></option>
+                                                                {mayors?.map((mayor) => (
+                                                                    <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
+                                                                ))}
+                                                            </select>
+                                                            
                                                         </Col>
                                                     </Row>
 
