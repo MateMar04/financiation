@@ -92,7 +92,7 @@
         justify-content: center !important;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 767px) {
 
     .MiniContainerVisit {
         height: auto;
@@ -152,12 +152,13 @@
         margin-left: 50vw;
     }
 }
-/*
 
-@media (min-width: 801px) and (max-width: 1024px) {
+
+@media (min-width: 768px) and (max-width: 1024px) {
 
     .MiniContainerVisit {
         height: auto;
+        width: 100%;
         justify-items: center !important;
         align-items: center !important;
         justify-content: center !important;
@@ -205,6 +206,10 @@
     }
 
 
+    .icon {
+        margin-top: -18vh;
+        margin-left: 20vw;
+    }
+
 }
 
-*/
