@@ -219,7 +219,7 @@ class Visit(models.Model):
     contacted_referrer = models.ForeignKey(ContactedReferrer, models.DO_NOTHING)
     accommodation = models.BooleanField()
     politic_party = models.ForeignKey(PoliticParty, models.DO_NOTHING)
-    mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+    mayor = models.ForeignKey(Mayor, models.SET_NULL, null=True)
     agreement = models.ManyToManyField(Agreement)
     modernization_fund = models.BooleanField()
     visit_status = models.ForeignKey(VisitStatus, models.DO_NOTHING)
@@ -277,7 +277,7 @@ class ContactedReferrerEmail(models.Model):
 
 class MayorPhone(models.Model):
     phone_number = models.BigIntegerField()
-    mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+    mayor = models.ForeignKey(Mayor, models.CASCADE)
 
     def __str__(self):
         return f"Request {self.phone_number}"
@@ -285,7 +285,7 @@ class MayorPhone(models.Model):
 
 class MayorEmail(models.Model):
     mail = models.EmailField()
-    mayor = models.ForeignKey(Mayor, models.DO_NOTHING)
+    mayor = models.ForeignKey(Mayor, models.CASCADE)
 
     def __str__(self):
         return f"Request {self.mail}"

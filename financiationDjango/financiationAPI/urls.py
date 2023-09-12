@@ -90,8 +90,13 @@ urlpatterns = [
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
 
-    # EditarProfilePic
+    #EditarProfilePic
     path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+    
     #mayors
+    path('mayors/<int:id>', views.getMayorById, name='mayor'),
+    path('mayors/delete/<int:id>', views.deleteMayorById, name='delete_mayor'),
+    path('mayors/put/<int:id>', views.putMayorById, name='put_mayor'),
     path('mayors', views.MayorApiView.as_view(), name='mayors'),
+
 ]
