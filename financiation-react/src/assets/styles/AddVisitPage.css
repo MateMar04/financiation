@@ -89,8 +89,7 @@
 @media (max-width: 800px) {
 
     .MiniContainerVisit {
-        width: auto;
-        height: auto;
+        height: 320vh;
         justify-items: center !important;
         align-items: center !important;
         justify-content: center !important;
@@ -105,7 +104,18 @@
     }
 
     .carouselAddVisit {
-        width: auto;
         height: auto;
     }
+
+    .CarouselItemOne{
+        height: auto;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0;
+    }
+    
+
 }

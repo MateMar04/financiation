@@ -107,7 +107,7 @@ const AddVisitPage = () => {
                         <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
                             className={'carouselAddVisit justify-content-center text-center'}>
 
-                            <Carousel.Item>
+                            <Carousel.Item className='CarouselItemOne'>
                                 <Row className='justify-content-center text-center'>
                                     <Col className='justify-content-center'>
                                         <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
@@ -543,7 +543,7 @@ const AddVisitPage = () => {
                                 </Row>
                             </Carousel.Item>
                         </Carousel>
-                        <CarouselButtons prev={handlePrev} next={handleNext} />
+                        <CarouselButtons prev={handlePrev} next={handleNext}/>
                     </Form>
                 </Container>
             </Container>
