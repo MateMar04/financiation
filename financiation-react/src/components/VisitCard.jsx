@@ -21,46 +21,39 @@ export const VisitCard = ({ visit }) => {
                             id="panel1a-header"
                             className="AccordionSummary"
                         >
-                            <Row className="d-flex align-items-center">
-                                <Col md={10}>
-                                    <h5 className="VisitName">{visit.name}</h5>
-                                </Col>
-                                <Col md={2}>
-                                    <Row className="justify-content-end">
-                                        <Col md={9}>
-                                        <a>Confirmada</a>
-                                        </Col>
-                                        <Col md={1}>
-                                        <a className="circle_green"></a>
-                                        </Col>
-                                    </Row>
-                                </Col>
-                            </Row>
+                            <Typography sx={{ width: '80%'}} className="VisitName text-start">
+                            {visit.name}
+                            </Typography>
+                            <Typography sx={{ color: 'text.secondary', width: '10%' }}>Realizada</Typography>
+                            <Typography sx={{ color: 'text.secondary', width: '10%' }}><a className="circle_green"></a></Typography>
+                        
+                                    
+                      
 
-                        </AccordionSummary>
+                </AccordionSummary>
 
-                        <AccordionDetails>
-                            <p>{visit.id_locality}</p>
+                <AccordionDetails>
+                    <p>{visit.id_locality}</p>
 
-                            <p>{visit.travel_time}</p>
+                    <p>{visit.travel_time}</p>
 
-                            <p>{visit.distance}</p>
+                    <p>{visit.distance}</p>
 
-                            <p>{visit.visit_date}</p>
+                    <p>{visit.visit_date}</p>
 
-                            <p>{visit.place_name}</p>
+                    <p>{visit.place_name}</p>
 
-                            <h5>Grupo:</h5>
+                    <h5>Grupo:</h5>
 
-                            <p>{visit.id_group}</p>
+                    <p>{visit.id_group}</p>
 
 
-                            <p>{visit.id_visit_status}</p>
+                    <p>{visit.id_visit_status}</p>
 
-                        </AccordionDetails>
-                    </Accordion>
-                </div>
-            </Zoom>
+                </AccordionDetails>
+            </Accordion>
+        </div>
+            </Zoom >
         </Container >
     )
 }
