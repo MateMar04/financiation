@@ -575,3 +575,10 @@ def getLatestVisitRequestCount(request):
                        "limit 1)", request)
         row = cursor.fetchall()
         return JsonResponse(convert_to_json(row), safe=False)
+
+
+@api_view(['GET'])
+def getLatestVisits(request):
+    visits = Visit.objects.filter().order_by('-visit_date')[:10]
+    serializer = VisitSerializer(visits, many=True)
+    return Response(serializer.data)
