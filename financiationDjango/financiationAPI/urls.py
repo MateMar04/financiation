@@ -92,6 +92,7 @@ urlpatterns = [
 
     # EditarProfilePic
     path('update-profile-picture/<int:id>', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+
     #mayors
     path('mayors/<int:id>', views.getMayorById, name='mayor'),
     path('mayors/delete/<int:id>', views.deleteMayorById, name='delete_mayor'),
