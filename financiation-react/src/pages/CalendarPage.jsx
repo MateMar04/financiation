@@ -1,15 +1,24 @@
-import React, {useContext, useState} from "react";
-import {Container, Col, Row} from 'react-bootstrap';
-import '../assets/styles/CalendarPage.css';
-import type {Dayjs} from 'dayjs';
-import type {CalendarProps} from 'antd';
-import { Calendar } from "antd";
-import esES from "antd/lib/locale/es_ES"; // Importa el idioma español
+import React from "react";
+import {Calendar} from "antd";
+import {Container, Row, Col} from 'react-bootstrap';
+import '../assets/styles/CalendarPage.css'
+import locale from 'antd/locale/es_ES';
+import dayjs from 'dayjs';
+
+import 'dayjs/locale/es';
+import { ConfigProvider } from 'antd';
 
 export const CalendarPage = () => {
+    const onPanelChange = (value, mode) => {
+        console.log(value.format("DD-MM-YYYY"), mode);
+    };
 
     return (
-            <Calendar locale={esES}/>
-    )
+        <Container fluid>
+            <ConfigProvider locale={locale}>
+            <Calendar className={'CalendarCalendarPage'}/>
+                </ConfigProvider>;
+        </Container>
 
-}
+    );
+};
