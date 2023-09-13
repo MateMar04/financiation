@@ -1,6 +1,7 @@
-import {Col, Form, Row} from "react-bootstrap";
+import {Col, Container, Form, Row} from "react-bootstrap";
 import React from "react";
 import '../assets/styles/RowWithCheck.css'
+import "../assets/styles/ReportsPage.css"
 
 export const RowWithCheck = ({item}) => {
     return (

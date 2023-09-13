@@ -10,12 +10,6 @@ import VerMasButton from "../components/VerMasButton";
 import { Link } from "react-router-dom";
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import {
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-} from 'react-native';
-
 
 export const MainMenuPage = () => {
 

@@ -1,8 +1,17 @@
 .row-label {
     text-align: start;
     font-weight: bold;
+    text-align: center;
 }
 
 .row-check {
     text-align: start;
+    text-align: center;
+}
+.profile-fc {
+    
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    align-self: center;
+    
+    
 }
