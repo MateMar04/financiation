@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 import {getWhys} from "../services/WhyServices";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {DateTimeField} from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 
 const FormPage = () => {
@@ -39,21 +40,15 @@ const FormPage = () => {
     let [selectedQuantity, setSelectedQuantity] = useState(1)
 
 
-    function getCurrentDateTime() {
-        // Create a new Date object with the current date and time
-        const currentDateTime = new Date();
+    function getCurrentDateTimeString() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
 
-        // Get the individual components
-        const year = currentDateTime.getFullYear(); // Get the current year
-        const month = currentDateTime.getMonth() + 1; // Get the current month (0-based, so add 1)
-        const day = currentDateTime.getDate(); // Get the current day of the month
-        const hours = currentDateTime.getHours(); // Get the current hour
-        const minutes = currentDateTime.getMinutes(); // Get the current minute
-
-        // Format the date and time as a string
-        const formattedDateTime = (`${day}-${month}'${year} ${hours}:${minutes}`);
-
-        return formattedDateTime;
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
     }
 
 
@@ -131,6 +126,7 @@ const FormPage = () => {
                                 label={''}
                                 className='InputsFormPage'
                                 name="request_datetime"
+                                defaultValue={dayjs(getCurrentDateTimeString())}
                                 InputProps={{
                                     sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
                                 }}
