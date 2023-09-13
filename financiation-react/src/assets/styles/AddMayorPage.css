@@ -1,16 +1,13 @@
 .container-addmayor {
     margin-top: 8vh;
     background-color: white;
-    width: 50vw;
     height: 35vw;
     border-radius: 5vh;
 }
 .containermayor{
-    margin-top: 8vh;
     background-color: white;
-    width: 70vw;
-    height: 35vw;
     border-radius: 5vh;
+    margin: 2vw;
 }
 
 .container-addmayor-modal{
@@ -58,6 +55,19 @@
 .display{
     padding: 2vw;
 }
+@media only screen and (max-width: 1600px) {
+    .display {
+        padding: 1vw !important;
+        width: 20vw !important;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .display {
+        margin-left: -10vw;
+        padding: 1vw !important;
+        width: 50vw !important;
+    }
+}
 .displayitem{
     background-color: #f4f4f4;
     padding: 0.4vw;
@@ -75,4 +85,29 @@
     border-width: 0.1vw;
     border-color: gray;
     padding-left: 0.5vw;
+    @media only screen and (max-width : 950px) {
+        max-width: 15vw;
+	}
+}
+.btnactualizar{
+    margin-top: 0px !important;
+    text-align: center !important;
+    justify-content: center;
+    align-items: center !important;
+}
+.btn{
+    width: 8vw !important;
+    @media only screen and (max-width : 1200px) {
+        width: 26vw !important;
+	}
+}
+.modal{
+    margin-left: 20vw;
+    width: 60vw !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+.crearintendente{
+    text-align: center;
 }

@@ -95,7 +95,7 @@ export const MayorModifyModal = (props) => {
             <Container className="containermayor container-addmayor-modal">
 
                 <Form onSubmit={(e) => handleFormSubmit(e)}>
-                    <h3 className={'h3LoginPage'}>Seleccione Intendente</h3>
+                    <h3 className={'h3LoginPage crearintendente'}>Seleccione Intendente</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={handleMayorSelection}>
@@ -130,8 +130,8 @@ export const MayorModifyModal = (props) => {
                         </p>
                     </div>
 
-                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <Button className='BtnIniciarSesionLogin' type='submit'>Actualizar</Button>
+                    <div className='btnactualizar'>
+                        <Button className='BtnIniciarSesionLogin btn' type='submit'>Actualizar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Button className='BtnBorrar' onClick={() => deleteMayor(mayor.id)}>Eliminar</Button>
