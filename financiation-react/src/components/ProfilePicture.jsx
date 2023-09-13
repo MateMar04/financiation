@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
-    const {authTokens} = useContext(AuthContext)
+    const {authTokens, myUser} = useContext(AuthContext)
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -24,7 +24,7 @@ export const ProfilePicture = () => {
 
         try {
             console.log(file)
-            const response = await fetch('/api/update-profile-picture', {
+            const response = await fetch(`/api/update-profile-picture/${myUser.id}`, {
                 method: 'PUT',
                 headers: headers,
                 body: formData

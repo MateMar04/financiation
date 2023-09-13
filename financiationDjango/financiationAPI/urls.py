@@ -91,7 +91,7 @@ urlpatterns = [
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
 
     # EditarProfilePic
-    path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+    path('update-profile-picture/<int:id>', views.ProfilePictureView.as_view(), name='ProfilePicture'),
 
     #mayors
     path('mayors/<int:id>', views.getMayorById, name='mayor'),
