@@ -1,9 +1,10 @@
 .accordion-visits{
     width: 50vw;
+    border-radius: 2vh !important;
+    padding: 5px;
 }
 
 .VisitName{
-    text-transform:lowercase !important ;
     margin: 0;
 }
 
@@ -17,10 +18,11 @@
   }
 
 .SearchVisit{
-    margin-top: 5vh;
+    margin-top: 5vh !important;
     width: 65vw !important;
     background-color: white;
     border-radius: 4vh;
     color: #000;
+
 }
  
