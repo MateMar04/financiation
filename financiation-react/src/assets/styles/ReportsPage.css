@@ -39,4 +39,15 @@
     height: 100vh;
     background-color: white;
     border-radius: 5vh;
+    margin-top: 2vh;
+    
+}
+.titulo1{
+    margin-top: 2vh;
+    text-align: center;
+    font-weight: bold;
+}
+
+.container1{
+    margin-top:5vh;
 }

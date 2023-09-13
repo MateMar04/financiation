@@ -44,6 +44,7 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
+            <h1 className='titulo1'>Reportes</h1>
             <Container fluid className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
@@ -70,9 +71,9 @@ export const ReportsPage = () => {
               
             </Container>
 
-            <hr/>
+            
 
-            <Container fluid>
+            <Container fluid className='container1'>
                 <Row>
                     <Col lg={6} className='chart-column'>
                         <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
