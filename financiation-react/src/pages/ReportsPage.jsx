@@ -44,7 +44,7 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Container fluid>
+            <Container fluid className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
@@ -62,8 +62,13 @@ export const ReportsPage = () => {
                         <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
                     </Col>
                 </Row>
+                <Row className='justify-content-center'>
+                    <Col lg={1}>
+                        <Button  onClick={() => buttonClick()}>Generar</Button>
+                    </Col>
+                </Row>
+              
             </Container>
-            <Button onClick={() => buttonClick()}>Generar</Button>
 
             <hr/>
 

@@ -35,3 +35,8 @@
     align-items: center;
 
 }
+.container-white{
+    height: 100vh;
+    background-color: white;
+    border-radius: 5vh;
+}
