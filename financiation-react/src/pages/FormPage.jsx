@@ -153,7 +153,7 @@ const FormPage = () => {
                         <Row className='ContainerPersonForm'>
                             <Col md={4} xs={2}
                                  className='justify-content-center d-flex align-items-center col-avatar'>
-                                <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
+                                <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                                         sx={{width: 35, height: 35}}/>
                             </Col>
                             <Col className='d-flex align-items-center text-center'>
