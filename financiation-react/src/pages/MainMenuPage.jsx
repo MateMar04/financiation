@@ -2,17 +2,26 @@ import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
 import VerMasButton from "../components/VerMasButton";
 import {Link} from "react-router-dom";
+import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices";
 
 
 export const MainMenuPage = () => {
 
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let {authTokens, myUser} = useContext(AuthContext)
+    const [latestVisits, setLatestVisits] = useState()
+    const [latestVisitRequests, setLatestVisitRequests] = useState()
+
+
+    useEffect(() => {
+        getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
+        getLatestVisitRequests(authTokens.access).then(r => setLatestVisitRequests(r))
+    }, []);
 
     return (
         <Container fluid className="main-menu-container">
@@ -78,7 +87,7 @@ export const MainMenuPage = () => {
                                 <h4>Consultas resueltas en la ultima visita:</h4>
                             </Row>
                             <Row className="text-center">
-                                <h3 className="fw-bold">53</h3>
+                                <h3 className="fw-bold">{latestVisitRequests[0]?.requests}</h3>
                             </Row>
                         </Container>
                     </Card>
@@ -92,20 +101,7 @@ export const MainMenuPage = () => {
                                 <h2 className="name-title">Próximas Visitas</h2>
                             </Row>
                             <Container className="container-visit-card-main-menu">
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
-                                <VisitCardMainMenu/>
+                                {}
                             </Container>
                             <Link to={'/visits'}>
                                 <Row className={'justify-content-end'}>
