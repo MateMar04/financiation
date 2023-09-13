@@ -11,11 +11,11 @@ from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute
 
 
 class ProfilePictureView(APIView):
-    def put(self, request, *args, **kwargs):
+    def put(self, request, id, *args, **kwargs):
 
         data = request.data
 
-        user = UserAccount.objects.get(id=1)
+        user = UserAccount.objects.get(id=id)
 
         image = in_memory_uploaded_file_to_binary(data['profile_picture'])
 
@@ -27,11 +27,11 @@ class ProfilePictureView(APIView):
 
         return Response(serializer.data)
 
-    def get(self, request):
+    def get(self, request, id):
         user_id = request.query_params.get('id_useraccount')
 
         try:
-            user_profile = UserAccount.objects.get(id=5)
+            user_profile = UserAccount.objects.get(id=id)
         except UserAccount.DoesNotExist:
             return Response({"error": "User not found."}, status=404)
 
