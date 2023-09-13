@@ -12,7 +12,7 @@ export const VisitCard = ({ visit }) => {
     return (
 
         <Container className='CompletlyContainer'>
-            <Zoom in style={{ transitionDelay: '100ms' }}>
+            <Zoom in>
                 <div>
                     <Accordion className={'accordion-visits'}>
                         <AccordionSummary
@@ -20,11 +20,21 @@ export const VisitCard = ({ visit }) => {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             className="AccordionSummary"
-
                         >
-                            <Row>
+                            <Row className="d-flex align-items-center">
+                                <Col md={10}>
                                     <h5 className="VisitName">{visit.name}</h5>
-                                 
+                                </Col>
+                                <Col md={2}>
+                                    <Row className="justify-content-end">
+                                        <Col md={9}>
+                                        <a>Confirmada</a>
+                                        </Col>
+                                        <Col md={1}>
+                                        <a className="circle_green"></a>
+                                        </Col>
+                                    </Row>
+                                </Col>
                             </Row>
 
                         </AccordionSummary>
