@@ -1,10 +1,12 @@
+from django.db import connection
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json
 
 
 # Create your views here.
@@ -134,7 +136,6 @@ class MayorApiView(APIView):
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
-
 
 
 class GroupApiView(APIView):
@@ -535,25 +536,42 @@ def getWhys(request):
     serializer = WhySerializer(whys, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getMayorById(request, id):
     mayor = Mayor.objects.get(id=id)
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 def deleteMayorById(request, id, *args, **kwargs):
-        mayor = Mayor.objects.get(id=id)
-        mayor.delete()
-        serializer = MayorSerializer(mayor, many=False)
-        return Response(serializer.data)
+    mayor = Mayor.objects.get(id=id)
+    mayor.delete()
+    serializer = MayorSerializer(mayor, many=False)
+    return Response(serializer.data)
+
 
 @api_view(['PUT'])
 def putMayorById(request, id, *args, **kwargs):
-        data = request.data
-        mayor = Mayor.objects.get(id=id)
-        mayor.first_name = data['first_name']
-        mayor.last_name = data['last_name']
-        mayor.save()
-        serializer = MayorSerializer(mayor, many=False)
-        return Response(serializer.data)
+    data = request.data
+    mayor = Mayor.objects.get(id=id)
+    mayor.first_name = data['first_name']
+    mayor.last_name = data['last_name']
+    mayor.save()
+    serializer = MayorSerializer(mayor, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLatestVisitRequestCount(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT 'requests', count(*) "
+                       "from \"financiationAPI_request\" "
+                       "where visit_id = (SELECT id "
+                       "FROM \"financiationAPI_visit\" "
+                       "WHERE visit_status_id = 4 "
+                       "ORDER BY visit_date desc "
+                       "limit 1)", request)
+        row = cursor.fetchall()
+        return JsonResponse(convert_to_json(row), safe=False)

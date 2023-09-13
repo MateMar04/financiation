@@ -26,6 +26,7 @@ urlpatterns = [
 
     # Visits
     path('visits', views.VisitApiView.as_view(), name='visits'),
+    path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
 
     # Users
     path('users/<int:id>', views.getUserById, name='user'),
