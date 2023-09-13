@@ -16,43 +16,84 @@ export const VisitCard = ({ visit }) => {
                 <div>
                     <Accordion className={'accordion-visits'}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
+                            expandIcon={<ExpandMoreIcon fontSize="large" />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             className="AccordionSummary"
                         >
-                            <Typography sx={{ width: '80%'}} className="VisitName text-start">
-                            {visit.name}
+                            <Typography sx={{ width: '70%' }} className="VisitName text-start"><h6>
+                                {visit.name}</h6>
                             </Typography>
-                            <Typography sx={{ color: 'text.secondary', width: '10%' }}>Realizada</Typography>
-                            <Typography sx={{ color: 'text.secondary', width: '10%' }}><a className="circle_green"></a></Typography>
-                        
-                                    
-                      
-
-                </AccordionSummary>
-
-                <AccordionDetails>
-                    <p>{visit.id_locality}</p>
-
-                    <p>{visit.travel_time}</p>
-
-                    <p>{visit.distance}</p>
-
-                    <p>{visit.visit_date}</p>
-
-                    <p>{visit.place_name}</p>
-
-                    <h5>Grupo:</h5>
-
-                    <p>{visit.id_group}</p>
+                            <Typography sx={{ color: 'text.secondary', width: '20%' }} className="text-end">Realizada</Typography>
+                            <Typography sx={{ color: 'text.secondary', width: '10%' }}><a className="circle_green text-end"></a></Typography>
 
 
-                    <p>{visit.id_visit_status}</p>
 
-                </AccordionDetails>
-            </Accordion>
-        </div>
+
+                        </AccordionSummary>
+
+                        <AccordionDetails>
+                            <Row className="row1">
+                                <Col>
+                                    <p>Id Localidad:</p>
+                                </Col>
+                                <Col>
+                                    <p>{visit.id_locality}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row2 d-flex align-items-center ">
+                                <Col className="d-flex align-items-center">
+                                    <p>Tiempo de viaje:</p>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.travel_time} hs</p>
+                                </Col>
+                            </Row>
+                            <Row className="row1">
+                                <Col className="d-flex align-items-center">
+                                    <p>Distancia:</p>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.distance} Km</p>
+                                </Col>
+                            </Row>
+                            <Row className="row2">
+                                <Col className="d-flex align-items-center">
+                                    <p>Fecha de la visita:</p>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.visit_date}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row1">
+                                <Col className="d-flex align-items-center">
+                                    <p>Nombre del lugar:</p>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.place_name}</p>
+                                </Col>
+                            </Row>
+
+                            <Row className="row2">
+                                <Col className="d-flex align-items-center">
+                                    <p>Grupo:</p>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.id_group}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row1">
+                                <Col className="d-flex align-items-center">
+                                    <p>Estado:</p>
+                                    <Col className="d-flex align-items-center">
+                                    </Col>
+                                    <p>{visit.id_visit_status}</p>
+                                </Col>
+                            </Row>
+
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
             </Zoom >
         </Container >
     )

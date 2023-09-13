@@ -1,14 +1,28 @@
 .accordion-visits{
     width: auto;
     border-radius: 2vh !important;
+    padding: 3px;
   
 }
 
 .SearchVisit{
-    margin-top: 5vh !important;
+    margin-top: 2vh !important;
     width: 65vw !important;
     background-color: white;
     border-radius: 4vh;
     color: #000;
+}
 
+.row1{
+    background-color: #f4f4f4;
+    border-radius: 2vh;
+}
+
+.row2{
+    background-color: white;
+    border-radius: 2vh;
+}
+
+.ButtonAddVisit{
+    margin-top: 2vh !important;
 }

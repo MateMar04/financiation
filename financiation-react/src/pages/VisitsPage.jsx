@@ -5,7 +5,7 @@ import { getVisits } from "../services/VisitServices";
 import { TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from '@mui/material/IconButton';
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card, Col, Container, Row, Button } from "react-bootstrap";
 
 
 
@@ -21,38 +21,37 @@ export const VisitsPage = () => {
 
     return (
         <Container>
-            <Container>
             <Row className='justify-content-center text-center'>
-                    <Col md={12}>
-                <TextField
-                    fullWidth
-                    id="SearchVisit"
-                    variant="outlined"
-                    label='Buscar'
-                    className="SearchVisit"
-                    InputProps={{
-                        sx: {borderRadius: 5, color: "black"},
-                        endAdornment: (
-                            <IconButton>
-                                <SearchIcon />
-                            </IconButton>
-                        ),
-                    }}
-                />
-                </Col>
+                    <Col md={10}>
+                        <TextField
+                            fullWidth
+                            id="SearchVisit"
+                            variant="outlined"
+                            label='Buscar'
+                            className="SearchVisit"
+                            InputProps={{
+                                sx: { borderRadius: 5, color: "black" },
+                                endAdornment: (
+                                    <IconButton>
+                                        <SearchIcon />
+                                    </IconButton>
+                                ),
+                            }}
+                        />
+                    </Col>
                 </Row>
-            </Container>
+          
             <Container>
-            <Row className='justify-content-center text-center'>
+                <Row className='justify-content-center text-center'>
                     <Col md={8}>
-                {visits?.map((visit) => (
-                    
-                    <VisitCard visit={visit} />
-                 
-                ))}
-                </Col>
+                        {visits?.map((visit) => (
+
+                            <VisitCard visit={visit} />
+
+                        ))}
+                    </Col>
                 </Row>
-              
+
             </Container>
         </Container>
     )
