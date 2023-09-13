@@ -1,46 +1,78 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import "../assets/styles/FormPage.css";
 import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {getVisits} from "../services/VisitServices";
-import getAdvisees from "../services/AdviseeServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getFaqs} from "../services/FaqServices";
+import {getFaqsByMinistryDepartment} from "../services/FaqServices";
 import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
 import {getUser} from '../services/UserServices';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {DateTimeField} from '@mui/x-date-pickers/DateTimeField';
 import TextField from "@mui/material/TextField";
+import {getWhys} from "../services/WhyServices";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DateTimeField} from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 
 const FormPage = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const handleDropdownChange = (event) => {
-        setSelectedOption(event.target.value);
-    };
 
-
-    let {authTokens,myUser} = useContext(AuthContext)
+    let {authTokens, myUser} = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
     let [user, setUser] = useState([])
-    let [advised, setAdvised] = useState([])
     let [visits, setVisits] = useState([])
-    let history = useNavigate()
+    let [whys, setWhys] = useState([])
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
 
+    let dateRef = useRef(null);
+
+    let [selectedVisit, setSelectedVisit] = useState(1)
+    let [selectedFaq, setSelectedFaq] = useState()
+    let [selectedWhy, setSelectedWhy] = useState(1)
+    let [selectedQuantity, setSelectedQuantity] = useState(1)
+
+
+    function getCurrentDateTimeString() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+
+        return `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+
+
+    const formatDate = (inputDate) => {
+        // Split the input string into date and time parts
+        const [datePart, timePart] = inputDate.split(' ');
+
+        // Split the date part into day, month, and year
+        const [day, month, year] = datePart.split('/');
+
+        // Split the time part into hours and minutes
+        const [hours, minutes] = timePart.split(':');
+
+        // Create a Date object with the components
+        const formattedDate = (`${year}-${month}-${day} ${hours}:${minutes}:00-03`);
+
+
+        return formattedDate;
+    }
+
+
     useEffect(() => {
         getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
-        getFaqs(authTokens.access).then(data => setFaqs(data))
-        getAdvisees(authTokens.access).then(data => setAdvised(data))
+        getWhys(authTokens.access).then(r => setWhys(r))
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
         getUser(authTokens.access).then(data => setUser(data))
@@ -48,8 +80,7 @@ const FormPage = () => {
     }, [])
 
     let postRequest = async (e) => {
-        e.preventDefault()
-        let response = await fetch(' /api/request/add/', {
+        let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -57,36 +88,47 @@ const FormPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "id_visit": e.target.visit.value,
-                "id_advised": e.target.advised.value,
-                "id_advisor": e.target.advisor.value,
-                "id_ministry_department": e.target.ministryDepartment.value,
-                "id_faq": e.target.faq.value,
-                "id_status": 1
+                "request_datetime": formatDate(dateRef.current.value),
+                "visit_id": selectedVisit,
+                "advisor_id": myUser.id,
+                "faq_id": selectedFaq,
+                "why_id": selectedWhy,
+                "status_id": 1
             })
         })
         if (response.status === 200) {
             handleShow()
-            await postRequest()
         } else {
             alert('Something went wrong')
         }
     }
 
+    let handleSumbit = async (e) => {
+        e.preventDefault()
+
+        for (let i = 1; i <= selectedQuantity; i++) {
+            await postRequest()
+        }
+    }
+
 
     return (
-        <Form onSubmit={postRequest}>
+
+        <Form onSubmit={handleSumbit}>
             <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
-                    <Col md={{span: 3, order:1}} xs={{ span: 6, order: 1 }}>
+                    <Col md={{span: 3, order: 1}} xs={{span: 6, order: 1}}>
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
+                                inputRef={dateRef}
                                 format='DD/MM/YYYY HH:mm'
                                 label={''}
                                 className='InputsFormPage'
+                                name="request_datetime"
+                                defaultValue={dayjs(getCurrentDateTimeString())}
                                 InputProps={{
-                                    sx: {borderRadius: '2vh', height: '7vh', borderColor:'white'}
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
                                 }}
                             />
                         </LocalizationProvider>
@@ -96,7 +138,8 @@ const FormPage = () => {
                         <select
                             placeholder="Visita"
                             className='form-select'
-                            name="visit">
+                            name="visit"
+                            onChange={(e) => setSelectedVisit(e.target.value)}>
 
                             {visits?.map((visit) => (
                                 <option value={visit.id}>{visit.name}</option>
@@ -105,10 +148,11 @@ const FormPage = () => {
 
 
                     </Col>
-                    <Col md={{span: 3, order: 3}} xs={{span: 6, order:2}}>
+                    <Col md={{span: 3, order: 3}} xs={{span: 6, order: 2}}>
                         <p className={'pInFormPage'}>Asesor</p>
                         <Row className='ContainerPersonForm'>
-                            <Col md={4} xs={2} className='justify-content-center d-flex align-items-center col-avatar'>
+                            <Col md={4} xs={2}
+                                 className='justify-content-center d-flex align-items-center col-avatar'>
                                 <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
                                         sx={{width: 35, height: 35}}/>
                             </Col>
@@ -129,8 +173,9 @@ const FormPage = () => {
                         <select
                             placeholder="Departamento"
                             className='form-select department-select'
+                            name="ministryDepartment"
 
-                            name="ministryDepartment">
+                            onChange={(e) => getFaqsByMinistryDepartment(authTokens.access, e.target.value).then(r => setFaqs(r))}>
 
                             {ministryDepartments?.map((ministryDepartment) => (
                                 <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
@@ -147,11 +192,13 @@ const FormPage = () => {
                         <select
                             placeholder="Departamento"
                             className='form-select department-select'
-                            name="faq">
-                                {faqs?.map((faq) => (
+                            name="faq"
+                            onChange={(e) => setSelectedFaq(e.target.value)}>
+
+                            {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
-                            
+
 
                         </select>
                     </Col>
@@ -164,12 +211,13 @@ const FormPage = () => {
                         <select
                             placeholder="Por que vino?"
                             className='form-select department-select'
+                            name='why'
+                            onChange={(e) => setSelectedWhy(e.target.value)}>
 
-                            name="faq">
-                            {faqs?.map((faq) => (
-                            <option value={faq.id}>{faq.name}</option>
-                        ))}
-                            
+                            {whys?.map((why) => (
+                                <option value={why.id}>{why.name}</option>
+                            ))}
+
 
                         </select>
                     </Col>
@@ -179,15 +227,19 @@ const FormPage = () => {
             <Container className={'SecondContainerForm'}>
                 <Row>
                     <p className={'SecondpInFormPage'}>Cantidad</p>
-                    </Row>
+                </Row>
 
                 <Row className={'justify-content-start py-2'} xs={12}>
                     <Col md={8} xs={5}>
                         <TextField className={'InputInForm'}
-                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}/>
+                                   name="quantity"
+                                   defaultValue={1}
+                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}
+                                   onChange={(e) => setSelectedQuantity(e.target.value)}/>
                     </Col>
+
                     <Col md={3} xs={6}>
-    
+
                         <Button type='submit' variant="primary"
                                 className='buttonconsulta'>Enviar Consulta</Button>
                     </Col>

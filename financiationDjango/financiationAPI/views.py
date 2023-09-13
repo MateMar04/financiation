@@ -52,16 +52,17 @@ class RequestApiView(APIView):
 
         visit = Visit.objects.get(id=data['visit_id'])
         advisor = Advisor.objects.get(id=data['advisor_id'])
-        ministryDepartment = MinistryDepartment.objects.get(id=data['ministry_department_id'])
         faq = Faq.objects.get(id=data['faq_id'])
+        why = Why.objects.get(id=data['why_id'])
         requestStatus = RequestStatus.objects.get(id=data['status_id'])
 
         request = Request.objects.create(
-            visit_id=visit,
-            advisor_id=advisor,
-            ministry_department_id=ministryDepartment,
-            faq_id=faq,
-            status_id=requestStatus,
+            request_datatime=data['request_datetime'],
+            visit=visit,
+            advisor=advisor,
+            faq=faq,
+            why=why,
+            status=requestStatus,
         )
 
         serializer = RequestSerializer(request, many=False)
@@ -133,8 +134,8 @@ class MayorApiView(APIView):
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
-    
-    
+
+
 
 class GroupApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -527,6 +528,13 @@ def getUserById(request, id):
     serializer = UserAccountSerializer(user, many=False)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+def getWhys(request):
+    whys = Why.objects.all()
+    serializer = WhySerializer(whys, many=True)
+    return Response(serializer.data)
+
 @api_view(['GET'])
 def getMayorById(request, id):
     mayor = Mayor.objects.get(id=id)
@@ -544,7 +552,7 @@ def deleteMayorById(request, id, *args, **kwargs):
 def putMayorById(request, id, *args, **kwargs):
         data = request.data
         mayor = Mayor.objects.get(id=id)
-        mayor.first_name = data['first_name'] 
+        mayor.first_name = data['first_name']
         mayor.last_name = data['last_name']
         mayor.save()
         serializer = MayorSerializer(mayor, many=False)
