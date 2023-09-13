@@ -134,8 +134,8 @@ class MayorApiView(APIView):
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
-    
-    
+
+
 
 class GroupApiView(APIView):
     def get(self, request, *args, **kwargs):
@@ -552,7 +552,7 @@ def deleteMayorById(request, id, *args, **kwargs):
 def putMayorById(request, id, *args, **kwargs):
         data = request.data
         mayor = Mayor.objects.get(id=id)
-        mayor.first_name = data['first_name'] 
+        mayor.first_name = data['first_name']
         mayor.last_name = data['last_name']
         mayor.save()
         serializer = MayorSerializer(mayor, many=False)
