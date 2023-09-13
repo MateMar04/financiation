@@ -1,26 +1,25 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import { Button, Col, Container, Form, Modal, Row } from "react-bootstrap";
+import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import { Link } from "react-router-dom";
-import { getVisits } from "../services/VisitServices";
-import { getAdvisorUsers } from "../services/AdvisorServices";
-import { getFaqsByMinistryDepartment } from "../services/FaqServices";
-import { getMinistryDepartments } from "../services/MinistryDepartmentServices";
+import {Link} from "react-router-dom";
+import {getVisits} from "../services/VisitServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getFaqsByMinistryDepartment} from "../services/FaqServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
-import { getUser } from '../services/UserServices';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateTimeField } from '@mui/x-date-pickers/DateTimeField';
+import {getUser} from '../services/UserServices';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import TextField from "@mui/material/TextField";
-import { getWhys } from "../services/WhyServices";
-import dayjs from 'dayjs';
+import {getWhys} from "../services/WhyServices";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {DateTimeField} from "@mui/x-date-pickers";
 
 
 const FormPage = () => {
 
-    let { authTokens, myUser } = useContext(AuthContext)
+    let {authTokens, myUser} = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -32,12 +31,12 @@ const FormPage = () => {
     const handleShow = () => setShow(true);
 
 
+    let dateRef = useRef(null);
+
     let [selectedVisit, setSelectedVisit] = useState(1)
     let [selectedFaq, setSelectedFaq] = useState()
     let [selectedWhy, setSelectedWhy] = useState(1)
     let [selectedQuantity, setSelectedQuantity] = useState(1)
-
-    let dateRef = useRef(null);
 
 
     function getCurrentDateTime() {
@@ -104,7 +103,6 @@ const FormPage = () => {
         })
         if (response.status === 200) {
             handleShow()
-            await postRequest()
         } else {
             alert('Something went wrong')
         }
@@ -124,7 +122,7 @@ const FormPage = () => {
         <Form onSubmit={handleSumbit}>
             <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
-                    <Col md={{ span: 3, order: 1 }} xs={{ span: 6, order: 1 }}>
+                    <Col md={{span: 3, order: 1}} xs={{span: 6, order: 1}}>
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
@@ -133,14 +131,13 @@ const FormPage = () => {
                                 label={''}
                                 className='InputsFormPage'
                                 name="request_datetime"
-                                value={dayjs(getCurrentDateTime())}
                                 InputProps={{
-                                    sx: { borderRadius: '2vh', height: '7vh', borderColor: 'white' }
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
                                 }}
                             />
                         </LocalizationProvider>
                     </Col>
-                    <Col md={{ span: 4, order: 2 }} className={'VisitaDropDown'} xs={{ order: 3 }}>
+                    <Col md={{span: 4, order: 2}} className={'VisitaDropDown'} xs={{order: 3}}>
                         <p className={'pInFormPage'}>Visita</p>
                         <select
                             placeholder="Visita"
@@ -155,12 +152,13 @@ const FormPage = () => {
 
 
                     </Col>
-                    <Col md={{ span: 3, order: 3 }} xs={{ span: 6, order: 2 }}>
+                    <Col md={{span: 3, order: 3}} xs={{span: 6, order: 2}}>
                         <p className={'pInFormPage'}>Asesor</p>
                         <Row className='ContainerPersonForm'>
-                            <Col md={4} xs={2} className='justify-content-center d-flex align-items-center col-avatar'>
+                            <Col md={4} xs={2}
+                                 className='justify-content-center d-flex align-items-center col-avatar'>
                                 <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
-                                    sx={{ width: 35, height: 35 }} />
+                                        sx={{width: 35, height: 35}}/>
                             </Col>
                             <Col className='d-flex align-items-center text-center'>
                                 <p className={'userFirstName'}>{user.first_name}</p>
@@ -238,16 +236,16 @@ const FormPage = () => {
                 <Row className={'justify-content-start py-2'} xs={12}>
                     <Col md={8} xs={5}>
                         <TextField className={'InputInForm'}
-                            name="quantity"
-                            defaultValue={1}
-                            InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }}
-                            onChange={(e) => setSelectedQuantity(e.target.value)} />
+                                   name="quantity"
+                                   defaultValue={1}
+                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}
+                                   onChange={(e) => setSelectedQuantity(e.target.value)}/>
                     </Col>
 
                     <Col md={3} xs={6}>
 
                         <Button type='submit' variant="primary"
-                            className='buttonconsulta'>Enviar Consulta</Button>
+                                className='buttonconsulta'>Enviar Consulta</Button>
                     </Col>
                 </Row>
             </Container>
@@ -258,7 +256,7 @@ const FormPage = () => {
                     <Container className='justify-content-center'>
                         <Row className='justify-content-center'>
                             <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
+                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
                                 <p className="text-center">¡Se ha registrado el asesor correctamente!</p>
                             </Col>
                         </Row>
