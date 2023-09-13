@@ -7,7 +7,7 @@ export const getGroups = async (tokens) => {
     let response = await fetch('/api/groups', {headers: headers})
     let data = await response.json()
     return data
-}
+};
 
 export const getGroupCoordinators = async (tokens, group) => {
     let headers = {

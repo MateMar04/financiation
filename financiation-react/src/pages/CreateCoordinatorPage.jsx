@@ -27,19 +27,10 @@ const CoordinatorPage = () => {
         if (response.status === 200) {
             await postCoordinator()
         } else if (response.status === 500) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
             alert('no se a registrado la visita (Hay un campo vacio)')
         } else if (response.status === 401) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
             alert('no se a registrado la visita (Desautorizado)')
         } else if (response.status === 400) {
-            //handleShow()
-            //<SucceedModal message="la visita" onclose = {setShow(false)} show ={show}/>
-            //await postVisit()
             alert('no se a registrado la visita (Bad request)')
         }
     }

@@ -41,15 +41,12 @@ export const AddMayorPage = () => {
             await postAdvised()
         } else if (response.status == 500) {
             toggleModalfailed();
-            //alert('no se a registrado la visita (Uno de los datos ingresados no coincide con la base de datos)')
             await postAdvised()
         } else if (response.status == 401) {
             toggleModalfailed();
-            //alert('no se a registrado la visita (Desautorizado)')
             await postAdvised()
         } else if (response.status == 400) {
             toggleModalfailed();
-            //alert('no se a registrado la visita (Bad request)')
             await postAdvised()
         }
     }
