@@ -49,15 +49,21 @@ export const ProfilePicture = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-
-                <Row className={'justify-content-center text center'}>
+                <Row className={'justify-content-center text-center'}>
                     <Col>
-                        <input name="imageFile" type="file" accept="image/*" className={'SelectFile'}
-                               onChange={handleFileChange}/>
+                        <label htmlFor="imageFile" className="SelectFileButton">Seleccionar archivo</label>
+                        <input
+                            id="imageFile"
+                            name="imageFile"
+                            type="file"
+                            accept="image/*"
+                            className="SelectFileInput"
+                            onChange={handleFileChange}
+                        />
                     </Col>
                 </Row>
 
-                <Row className={'justify-content-center text center'}>
+                <Row className={'justify-content-center text-center'}>
                     <Col>
                         <Button type="submit">Actualizar</Button>
                     </Col>

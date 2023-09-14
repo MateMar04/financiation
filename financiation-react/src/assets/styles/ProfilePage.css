@@ -91,6 +91,19 @@
     border-color: #026fb8;
 }
 
-.SelectFile{
+.SelectFileButton {
+  background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 15vw;
+    height: 5vh;
+    color: white;
+}
 
+.SelectFileButton:hover{
+    background-color: #026fb8;
+    border-color: #026fb8;
+}
+.SelectFileInput {
+  display: none;
 }
