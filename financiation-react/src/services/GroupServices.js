@@ -30,3 +30,5 @@ export const getGroupAdvisors = async (tokens, group) => {
     let data = await response.json()
     return data
 };
+
+export const getCurrentGroup = async (tokens)

@@ -1,5 +1,3 @@
-import json
-
 from django.db import connection
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -588,8 +586,31 @@ def getLatestVisits(request):
                        "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
                        "order by visit_date desc limit 10", request)
         row = cursor.fetchall()
-        print(row)
         return JsonResponse(convert_to_json_large(row), safe=False)
+
+
+@api_view(['GET'])
+def getUserGroup(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("WITH roles as (SELECT 'Asesor' as role, id, group_id, user_id "
+                       "FROM \"financiationAPI_advisor\" "
+                       "UNION ALL "
+                       "SELECT 'Coordinador', id, group_id, user_id "
+                       "FROM \"financiationAPI_coordinator\"), "
+                       "persona_grupo_roles as (select r.role, r.group_id, g.name, r.user_id, u.first_name, u.last_name"
+                       " from roles as r "
+                       "inner join \"financiationAPI_group\" as g on (r.group_id = g.id) "
+                       "inner join \"financiationAPI_useraccount\" as u on (r.user_id = u.id)) "
+                       "SELECT * "
+                       "FROM persona_grupo_roles as a "
+                       "where a.user_id in (%s) "
+                       "union "
+                       "SELECT * "  
+                       "FROM persona_grupo_roles as b "
+                       "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
+                       "order by 4", [id, id])
+        row = cursor.fetchall()
+        return JsonResponse(convert_to_json_larger(row), safe=False)
 
 
 def convert_to_json_large(data):
@@ -598,5 +619,20 @@ def convert_to_json_large(data):
     for item in data:
         key, value = item
         result.append({"name": key, "status": value})
+
+    return result
+
+
+def convert_to_json_larger(data):
+    result = []
+
+    for item in data:
+        role, group_id, group_name, user_id, first_name, last_name = item
+        result.append({
+            "role": role,
+            "group": group_name,
+            "first_name": first_name,
+            "last_name": last_name
+        })
 
     return result
