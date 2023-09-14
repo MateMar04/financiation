@@ -13,10 +13,10 @@ export const VisitCardMainMenu = ({name, status}) => {
                 <Col lg={5} >
                     <Row className="status-row">
                         <Col xs={5} md={9} className="justify-content-start d-flex align-items-center">
-                            <p className="visit-title">{status}</p>
+                            <p className="visit-title text-center">{status}</p>
                         </Col>
                         <Col xs={1} md={1} className="justify-content-end">
-                            <a className="circle_green"></a>
+                            <a className="circle_green text-center"></a>
                         </Col>
 
                     </Row>
