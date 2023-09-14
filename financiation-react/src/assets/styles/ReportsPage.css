@@ -12,6 +12,7 @@
     background-color: #F4F4F4;
     border-radius: 3vh;
     border: none;
+    border-color: #F4F4F4;
 
 }
 
@@ -26,6 +27,7 @@
 .chart-card {
     padding: 1vh;
     align-items: center;
+    border: none;
 }
 .titulolocalidad{
     text-align: center;
@@ -38,7 +40,7 @@
 
 }
 .container-white{
-    height: 100vh;
+    height: 106vh;
     background-color: white;
     border-radius: 5vh;
     margin-top: 2vh;
