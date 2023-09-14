@@ -59,7 +59,7 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Visitas" items={Object.values(visits)} tokens={authTokens.access}/>
                     </Col>
-                    <Col lg={6} className='filters-column'>
+                    <Col lg={6} className='filters-column'> 
                         <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
                     </Col>
                 </Row>

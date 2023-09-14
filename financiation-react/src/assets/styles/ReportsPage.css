@@ -17,7 +17,10 @@
 }
 
 .filter-card-scroll {
-    overflow-y: scroll;
+        overflow-y: scroll;
+        scroll-margin-right: 300vh;
+        flex: 1; /* Hace que el área de desplazamiento ocupe el espacio restante */
+    
 }
 
 .visit-container {
@@ -53,4 +56,7 @@
 
 .container1{
     margin-top:5vh;
+}
+.chart-column{
+    border-radius: 3vh;
 }
