@@ -1,9 +1,7 @@
 import React, {useContext, useState} from "react";
 import '../assets/styles/ProfilePicture.css';
 import AuthContext from "../context/AuthContext";
-import {Button, Col, Container, Row} from "react-bootstrap";
-import {Fab} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import {Button, Col, Row} from "react-bootstrap";
 
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
@@ -21,6 +19,7 @@ export const ProfilePicture = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        window.location.reload();
 
         const formData = new FormData()
         formData.append("profile_picture", file)
@@ -51,7 +50,7 @@ export const ProfilePicture = () => {
             <form onSubmit={handleSubmit}>
                 <Row className={'justify-content-center text-center'}>
                     <Col>
-                        <label htmlFor="imageFile" className="SelectFileButton">Seleccionar archivo</label>
+                        <label htmlFor="imageFile" className="SelectFileButton">Cambiar Imagen</label>
                         <input
                             id="imageFile"
                             name="imageFile"
@@ -65,7 +64,7 @@ export const ProfilePicture = () => {
 
                 <Row className={'justify-content-center text-center'}>
                     <Col>
-                        <Button type="submit">Actualizar</Button>
+                        <Button type="submit" className={'GuardarCambiosButton'}>Guardar Cambios</Button>
                     </Col>
                 </Row>
             </form>

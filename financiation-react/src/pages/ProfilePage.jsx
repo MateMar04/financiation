@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
-import {getUser} from "../services/UserServices";
 import {Avatar, TextField} from "@mui/material";
 import {DateField} from '@mui/x-date-pickers/DateField';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
@@ -14,7 +13,6 @@ import IconButton from '@mui/material/IconButton';
 
 const ProfilePage = () => {
 
-    let [user, setUser] = useState()
     let {authTokens, logoutUser, myUser} = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
@@ -38,22 +36,22 @@ const ProfilePage = () => {
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
+                    <IconButton className="EditIconProfile" onClick={handleAddButton}>
+                        <EditIcon color='action' sx={{width: 25, height: 25}}/>
+                    </IconButton>
+                </Col>
+            </Row>
+            <Row>
+                <Col className="d-flex justify-content-center">
                     <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                             sx={{width: 200, height: 200}} className="ProfilePicture"/>
-
                 </Col>
             </Row>
             {showButton && (
-            <Row className={'justify-content-center text-center'}>
-                <ProfilePicture/>
-            </Row>
-                )}
-
-                <IconButton className="EditIconProfile" onClick={handleAddButton}><EditIcon color='action' sx={{
-                    width: 25,
-                    height: 25
-                }}/></IconButton>
-
+                <Row className={'justify-content-center text-center'}>
+                    <ProfilePicture/>
+                </Row>
+            )}
 
 
             <Row className={'justify-content-center text-center'}>
@@ -126,23 +124,10 @@ const ProfilePage = () => {
                     </Col>
                 </Row>
                 <Row>
-
-                    {showButton && (
-                        <Col className="d-flex justify-content-center py-3">
-                            <Button className="CancelarBtnProfile" onClick={handleAddButton}>Cancelar</Button>
-                        </Col>
-                    )}
-
                     {showLogoutButton && (
                         <Col className="d-flex justify-content-center py-3">
                             <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my: 3}}>Cerrar
                                 Sesion</Button>
-                        </Col>
-                    )}
-
-                    {showButton && (
-                        <Col className="d-flex justify-content-center py-3">
-                            <Button className="GuardarBtnProfile" type={'submit'}>Guardar</Button>
                         </Col>
                     )}
                 </Row>

@@ -25,7 +25,17 @@
     .InputsProfile{
         transform: translateY(-5vh)
     }
+
+    .EditIconProfile{
+        position: fixed;
+        z-index: 1;
+        transform: translate(6vw,9vh);
+
+
+    }
 }
+
+
 
 @media (max-width: 800px) {
 
@@ -61,10 +71,8 @@
 
 }
 
-.EditIconProfile{
-    transform: translateY(5vh);
-    transform: translateX(2vw);
-}
+
+
 
 .CancelarBtnProfile{
     background-color: #848484;
@@ -92,18 +100,29 @@
 }
 
 .SelectFileButton {
-  background-color: #53A6DC;
+    background-color: #848484;
+    border-radius: 3vh;
+    border-color: #848484;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    transform: translateY(-10vh);
+}
+
+.SelectFileButton:hover{
+    background-color: #545454;
+    border-color: #545454;
+}
+.SelectFileInput {
+  display: none;
+}
+
+.GuardarCambiosButton{
+    background-color: #53A6DC;
     border-radius: 3vh;
     border-color: #53A6DC;
     width: 200px;
     padding: 8px;
     color: white;
-}
-
-.SelectFileButton:hover{
-    background-color: #026fb8;
-    border-color: #026fb8;
-}
-.SelectFileInput {
-  display: none;
+    transform: translateY(-8vh);
 }
