@@ -2,7 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
@@ -10,12 +10,20 @@ import VerMasButton from "../components/VerMasButton";
 import { Link } from "react-router-dom";
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
+import {getUserStatusesById} from "../services/StatusServices";
+import {getUserRolesById} from "../services/RoleServices";
 
 
 
 export const MainMenuPage = () => {
 
     let { authTokens, logoutUser, myUser } = useContext(AuthContext)
+    let [role, setRole] = useState([])
+    let [status, setStatus] = useState([])
+    useEffect(() => {
+        getUserStatusesById(authTokens.access, myUser.user_status).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, myUser.role).then(data => setRole(data))
+    }, [])
 
     return (
         <Container fluid className="main-menu-container">
@@ -52,7 +60,7 @@ export const MainMenuPage = () => {
                                         </strong>
                                     </Row>
                                     <Row>
-                                        <p className="p-main-menu-card">{myUser?.user_status}</p>
+                                        <p className="p-main-menu-card">{status?.name}</p>
                                     </Row>
                                     <Row>
                                         <strong>
@@ -60,7 +68,7 @@ export const MainMenuPage = () => {
                                         </strong>
                                     </Row>
                                     <Row>
-                                        <p className="p-main-menu-card">{myUser?.role}</p>
+                                        <p className="p-main-menu-card">{role?.name}</p>
                                     </Row>
                                     <Row>
                                         <strong>

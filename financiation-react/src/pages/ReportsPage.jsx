@@ -44,7 +44,8 @@ export const ReportsPage = () => {
 
     return (
         <Container fluid>
-            <Container fluid>
+            <h1 className='titulo1'>Reportes</h1>
+            <Container fluid className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
@@ -58,16 +59,21 @@ export const ReportsPage = () => {
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Visitas" items={Object.values(visits)} tokens={authTokens.access}/>
                     </Col>
-                    <Col lg={6} className='filters-column'>
+                    <Col lg={6} className='filters-column'> 
                         <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
                     </Col>
                 </Row>
+                <Row className='justify-content-center'>
+                    <Col lg={2}>
+                        <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar</Button>
+                    </Col>
+                </Row>
+              
             </Container>
-            <Button onClick={() => buttonClick()}>Generar</Button>
 
-            <hr/>
+            
 
-            <Container fluid>
+            <Container fluid className='container1'>
                 <Row>
                     <Col lg={6} className='chart-column'>
                         <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
