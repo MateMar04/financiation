@@ -68,7 +68,20 @@
 }
 
 .chart-column{
-    border-radius: 3vh;
     text-align: center;
-    padding: 3vh;
+    margin: 3vh;
+    border-radius: 5vh;
+    background-color: #f4f4f4;
+    width: 35vw;
+}
+
+@media (max-width: 768px) {
+    .chart-column{
+        text-align: center;
+        margin: 3vh;
+        border-radius: 5vh;
+        background-color: #f4f4f4;
+        width: 80vw;
+    }
+    
 }
