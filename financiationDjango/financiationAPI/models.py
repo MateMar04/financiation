@@ -174,7 +174,7 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'ssn'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone_number', 'profile_picture']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone_number', 'profile_picture', 'role', 'user_status']
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"

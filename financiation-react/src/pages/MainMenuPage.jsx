@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices";
 import {getUserGroup} from "../services/GroupServices";
 import {PersonRowMainMenu} from "../components/PersonRowMainMenu";
-import {getUser} from "../services/UserServices";
+import {getUser, getUserById} from "../services/UserServices";
 
 
 export const MainMenuPage = () => {
