@@ -6,17 +6,17 @@
 }
 
 .filter-card {
-    max-height: 40vh;
-    height: 40vh;
+    max-height: 43vh;
+    height: 50vh;
     margin: 0;
     background-color: #F4F4F4;
     border-radius: 3vh;
+    border: none;
 
 }
 
 .filter-card-scroll {
     overflow-y: scroll;
-
 }
 
 .visit-container {
