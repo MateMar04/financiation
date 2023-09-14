@@ -43,7 +43,7 @@ export const MainMenuPage = () => {
 
                                 <Row>
                                     <Col className="d-flex justify-content-center">
-                                        <Avatar src={myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
+                                        <Avatar src={'data:image/png;base64, ' + myUser?.profile_picture} sx={{ width: 128, height: 128 }} />
                                     </Col>
                                 </Row>
 
