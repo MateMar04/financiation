@@ -1,16 +1,13 @@
 import React, {useContext, useEffect} from "react";
-import {Button, Col, Container, Form, Modal, Row} from "react-bootstrap";
-import Check from "../assets/images/checked.gif";
+import {Button, Container, Form} from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import {getAdvisors} from "../services/AdvisorServices";
-import {getUser, getUsers} from "../services/UserServices";
+import {getUsers} from "../services/UserServices";
 
 
 const AdvisorPage = () => {

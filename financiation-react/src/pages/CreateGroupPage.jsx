@@ -1,5 +1,5 @@
-import React, {useContext, useState, useEffect} from "react";
-import {Button, Container, Col, Row, Form} from "react-bootstrap";
+import React, {useContext, useEffect, useState} from "react";
+import {Col, Container, Form, Row} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import IconButton from "@mui/material/IconButton";
@@ -9,7 +9,7 @@ import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 import {getUsers} from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-import {UserCard } from "../components/UserCard";
+import {UserCard} from "../components/UserCard";
 
 export const CreateGroupPage = () => {
     let {authTokens} = useContext(AuthContext)
@@ -51,55 +51,55 @@ export const CreateGroupPage = () => {
     }
 
     return (
-            <Container fluid>
-                <SucceedModal message="el coordinador" show={showsuccess}/>
-                <FailedModal message="el coordinador" show={showfail}/>
+        <Container fluid>
+            <SucceedModal message="el coordinador" show={showsuccess}/>
+            <FailedModal message="el coordinador" show={showfail}/>
 
-                <Form onSubmit={postGroup}>
-                    <Container className="separation font">
-                        <Row className={'justify-content-center'}>
-                            <Col md={8} xs={8}>
-                                <TextField
-                                    className="font"
-                                    fullWidth
-                                    id="standard-bare"
-                                    variant="outlined"
-                                    label={'Buscar Persona'}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton>
-                                                <SearchIcon/>
-                                            </IconButton>
-                                        ),
-                                    }}
-                                />
-                            </Col>
-                            <Col md={1} xs={1} lg={1}>
-                                <IconButton  href="http://localhost:3000/groups/" sx={{width: 56, height: 56} }
-                                            className={'GroupsIcon'}><GroupsIcon/></IconButton>
-                            </Col>
-                        </Row>
-                    </Container>
+            <Form onSubmit={postGroup}>
+                <Container className="separation font">
+                    <Row className={'justify-content-center'}>
+                        <Col md={8} xs={8}>
+                            <TextField
+                                className="font"
+                                fullWidth
+                                id="standard-bare"
+                                variant="outlined"
+                                label={'Buscar Persona'}
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton>
+                                            <SearchIcon/>
+                                        </IconButton>
+                                    ),
+                                }}
+                            />
+                        </Col>
+                        <Col md={1} xs={1} lg={1}>
+                            <IconButton href="http://localhost:3000/groups/" sx={{width: 56, height: 56}}
+                                        className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                        </Col>
+                    </Row>
+                </Container>
 
-                    <div>
-                        {users?.map((user) => (
-                            <Container>
-                                <UserCard user={user}/>
-                            </Container>
-                        ))}
-                    </div>
+                <div>
+                    {users?.map((user) => (
+                        <Container>
+                            <UserCard user={user}/>
+                        </Container>
+                    ))}
+                </div>
 
-                    <Container>
-                            <Row className='justify-content-center '>
-                                <Col md={2} xs={2}>
-                                    <Form.Group>
-                                        <button type="submit" class="button-28" role="button">Crear Grupo</button>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                    </Container>
+                <Container>
+                    <Row className='justify-content-center '>
+                        <Col md={2} xs={2}>
+                            <Form.Group>
+                                <button type="submit" class="button-28" role="button">Crear Grupo</button>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                </Container>
 
-                </Form>
-            </Container>
+            </Form>
+        </Container>
     )
 }

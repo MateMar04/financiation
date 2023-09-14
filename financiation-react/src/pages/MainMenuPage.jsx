@@ -23,7 +23,7 @@ export const MainMenuPage = () => {
     const [userGroup, setUserGroup] = useState([])
 
 
-    const getUsuario =  async  ()  => {
+    const getData =  async  ()  => {
         const usuario = await getUser(authTokens.access)
         setMyUser(usuario)
         getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
@@ -33,7 +33,7 @@ export const MainMenuPage = () => {
 
     useEffect( () => {
 
-        getUsuario()
+        getData();
 
     }, []);
 
