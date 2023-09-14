@@ -1,9 +1,29 @@
-.shadowbox {
-    -webkit-box-shadow: -1px 2px 42px -7px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: -1px 2px 42px -7px rgba(0, 0, 0, 0.75);
-    box-shadow: -1px 2px 42px -7px rgba(0, 0, 0, 0.75);
+.cardactivate{
+    max-width: 30rem!important;
+    margin: 0 auto!important; 
+    padding: 2vw!important;
+    border-radius: 5vh!important;
+    background-color: white!important;
+    margin-top: 18vh!important;
 }
 
+.logoactivate{
+    width: 15vw;
+    margin-bottom: 3.5vh;
+}
+
+.titacti1{
+    margin-bottom: 3.5vh;
+}
+
+.botonactivate{
+    border-radius: 5vh;
+    background-color: #53A6DC;
+    border-color: #53A6DC;
+    color: rgb(255, 255, 255);
+    padding: 15px;
+ 
+}
 
 .fondo {
     margin: 0;
@@ -13,13 +33,16 @@
     height: 100vh;
 }
 
-.imgVerify {
-    max-height: 150px;
-    max-width: 250px;
-}
 
-.imgCheck {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+@media (max-width: 768px) {
+    .logoactivate {
+        width: 45vw;
+    }
+    #botonactivate {
+        width: 200px;
+        border-radius: 5vh;
+        font-size: 0.7rem;
+        padding: 2vh 15vw;
+    }
 }

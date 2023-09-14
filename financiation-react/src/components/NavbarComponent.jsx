@@ -43,7 +43,7 @@ const NavbarComponent = () => {
 
                                 <Col className="d-flex justify-content-sm-center justify-content-md-start">
                                     <div className="mx-2">
-                                        <Link>
+                                        <Link to="/calendar/">
                                             <Button variant="text"
                                                     className={'BtnNavBar linksNavbar'}>Calendario</Button>
 

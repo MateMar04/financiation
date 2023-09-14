@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices";
 import {getUserGroup} from "../services/GroupServices";
 import {PersonRowMainMenu} from "../components/PersonRowMainMenu";
-import {getUser, getUserById} from "../services/UserServices";
+import {getUser} from "../services/UserServices";
 
 
 export const MainMenuPage = () => {
@@ -23,7 +23,7 @@ export const MainMenuPage = () => {
     const [userGroup, setUserGroup] = useState([])
 
 
-    const getData =  async  ()  => {
+    const getData = async () => {
         const usuario = await getUser(authTokens.access)
         setMyUser(usuario)
         getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
@@ -31,7 +31,7 @@ export const MainMenuPage = () => {
         getUserGroup(authTokens.access, usuario.id).then(r => setUserGroup(r))
     }
 
-    useEffect( () => {
+    useEffect(() => {
 
         getData();
 
@@ -146,10 +146,10 @@ export const MainMenuPage = () => {
                         </Row>
                         <Row className="text-center">
                             {userGroup && userGroup.length > 0 ? (
-                                    <h2 className="name-title">{userGroup[0].group}</h2>
-                                ) : (
-                                    <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
-                                )}
+                                <h2 className="name-title">{userGroup[0].group}</h2>
+                            ) : (
+                                <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
+                            )}
 
                         </Row>
                         <Row className="justify-content-center text-center">

@@ -29,7 +29,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Nombre"
-                                placeholder="Nombre"
                                 type="text"
                                 variant="outlined"
                                 InputProps={{
@@ -43,6 +42,7 @@ const SigninPage = () => {
                                 name='first_name'
                                 required
                                 className={'InputSigninPage'}
+                                id="inputizq"
                             />
                         </Form.Group>
                     </Col>
@@ -51,7 +51,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Apellido"
-                                placeholder="Apellido"
                                 type="text"
                                 variant="outlined"
                                 InputProps={{
@@ -65,6 +64,7 @@ const SigninPage = () => {
                                 name='last_name'
                                 required
                                 className={'InputSigninPage'}
+                                id="inputder"
                             />
                         </Form.Group>
                     </Col>
@@ -77,7 +77,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Teléfono"
-                                placeholder="Teléfono"
                                 variant="outlined"
                                 InputProps={{
                                     startAdornment: (
@@ -91,6 +90,7 @@ const SigninPage = () => {
                                 name="phone_number"
                                 required
                                 className={'InputSigninPage'}
+                                id="inputizq"
                             />
                         </Form.Group>
                     </Col>
@@ -108,6 +108,7 @@ const SigninPage = () => {
                                 name='ssn'
                                 required
                                 className={'InputSigninPage'}
+                                id="inputder"
                             />
                         </Form.Group>
                     </Col>
@@ -119,7 +120,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Correo Electrónico"
-                                placeholder="Correo Electrónico"
                                 type="email"
                                 variant="outlined"
                                 InputProps={{
@@ -133,6 +133,7 @@ const SigninPage = () => {
                                 name="email"
                                 required
                                 className={'InputSigninPage'}
+                                id="inputizq"
                             />
                         </Form.Group>
                     </Col>
@@ -140,7 +141,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Repetir Correo Electrónico"
-                                placeholder="Repetir Correo Electrónico"
                                 type="email"
                                 InputProps={{
                                     startAdornment: (
@@ -153,6 +153,7 @@ const SigninPage = () => {
                                 name="re_email"
                                 required
                                 className={'InputSigninPage'}
+                                id="inputder"
                             />
                         </Form.Group>
                     </Col>
@@ -163,7 +164,6 @@ const SigninPage = () => {
                         <Form.Group>
                             <TextField
                                 label="Contraseña"
-                                placeholder="Contraseña"
                                 variant="outlined"
                                 type="password"
                                 InputProps={{
@@ -175,6 +175,7 @@ const SigninPage = () => {
                                 name="password"
                                 required
                                 className={'InputSigninPage'}
+                                id="inputizq"
                             />
                         </Form.Group>
                     </Col>
@@ -193,6 +194,7 @@ const SigninPage = () => {
                                 name="re_password"
                                 required
                                 className={'InputSigninPage'}
+                                id="inputder"
                             />
                         </Form.Group>
                     </Col>

@@ -408,8 +408,8 @@ const AddVisitPage = () => {
 
                                                 <Container>
                                                     <Row className="justify-content-center">
-                                                        <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                        <CreateIcon className='iconedit' type="submit"onClick={() => toggleModalModify()}></CreateIcon>
+                                                        <AddIcon className='iconadd' sx={{fontSize: 65}} type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                        <CreateIcon className='iconedit' sx={{fontSize: 65}} type="submit"onClick={() => toggleModalModify()}></CreateIcon>
                                                         </Row>
                                                     <Row>
                                                         <PersonIcon className='iconperson' sx={{fontSize: 65}}/>

@@ -1,8 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/NavbarComponent'
-import AdvisedListPage from './pages/AdvisedListPage'
-import AdvisedPage from "./pages/AdvisedPage";
 import LoginPage from "./pages/LoginPage";
 import SigninPage from "./pages/SigninPage";
 import LandingPage from "./pages/LandingPage";
@@ -28,6 +26,7 @@ import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React from 'react';
 import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
+import { CalendarPage } from './pages/CalendarPage';
 import "@fontsource/poppins";
 
 function App() {
@@ -51,8 +50,6 @@ function App() {
 
                         <Route path="/menu" element={<PrivateRoute children={<MainMenuPage/>}/>}/>
 
-                        <Route path='/advised' exact element={<PrivateRoute children={<AdvisedListPage/>}/>}/>
-                        <Route path='/advised/:id' element={<PrivateRoute children={<AdvisedPage/>}/>}/>
 
                         <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
@@ -73,6 +70,7 @@ function App() {
                                element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
 
                         <Route path='/mayors/add' element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
+                        <Route path='/calendar' element={<PrivateRoute children={<CalendarPage></CalendarPage>}/>}/>
                     </Routes>
                 </AuthProvider>
             </div>

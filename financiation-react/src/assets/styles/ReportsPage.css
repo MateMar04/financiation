@@ -1,19 +1,74 @@
 .filters-column {
     padding: 3vh;
+    text-align: center;
+    margin: auto;
+    align-items: center;
 }
 
 .filter-card {
-    max-height: 40vh;
-    height: 40vh;
+    max-height: 43vh;
+    height: 50vh;
     margin: 0;
+    background-color: #F4F4F4;
+    border-radius: 3vh;
+    border: none;
+    border-color: #F4F4F4;
+
 }
 
 .filter-card-scroll {
-    overflow-y: scroll;
+        overflow-y: scroll;
+        scroll-margin-right: 300vh;
+        flex: 1; /* Hace que el área de desplazamiento ocupe el espacio restante */
+    
 }
 
+.visit-container {
+    background-color: #FFA794;
 
+}
 .chart-card {
     padding: 1vh;
     align-items: center;
+    border: none;
+}
+.titulolocalidad{
+    text-align: center;
+
+}
+.pepeloco{
+    text-align: center;
+    margin: auto;
+    align-items: center;
+
+}
+.container-white{
+    height: 106vh;
+    background-color: white;
+    border-radius: 5vh;
+    margin-top: 2vh;
+    
+}
+.titulo1{
+    margin-top: 2vh;
+    margin-left: 3vh;
+}
+
+.container1{
+    margin-top:5vh;
+}
+
+.BtnGenera{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+}
+
+.chart-column{
+    border-radius: 3vh;
+    text-align: center;
+    padding: 3vh;
 }
