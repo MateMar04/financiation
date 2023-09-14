@@ -133,8 +133,6 @@ const ProfilePage = () => {
                 </Row>
             </Container>
         </Container>
-
-
     );
 }
 
