@@ -16,15 +16,13 @@
     margin-bottom: 3.5vh;
 }
 
-#botonactivate{
+.botonactivate{
     border-radius: 5vh;
-    font-size: 1.2rem; 
-    font-family: Arial, sans-serif;
-    margin-top: 3vh;
     background-color: #53A6DC;
+    border-color: #53A6DC;
     color: rgb(255, 255, 255);
-    width: 20vw;
-    height: 7vh;
+    padding: 15px;
+ 
 }
 
 .fondo {
