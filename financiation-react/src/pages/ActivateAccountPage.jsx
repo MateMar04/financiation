@@ -1,12 +1,13 @@
-import React, {useState} from "react";
-import {Button, Card, Col, Container, Modal, Row} from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
 import verifyimg from '../assets/images/verifyimg.gif';
 import Check from "../assets/images/checked.gif";
 import '../assets/styles/ActivateAccountPAge.css'
-import {Link, useNavigate, useParams} from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import Logo from "../assets/images/PRUEBA.PNG";
 
 const ActivateAccountPage = () => {
-    const {uid, token} = useParams()
+    const { uid, token } = useParams()
     let history = useNavigate()
 
 
@@ -44,18 +45,25 @@ const ActivateAccountPage = () => {
 
         <Container fluid className="fondo">
             <Container>
-                <Card id="carta">
-                    <Container>
-                        <Row className='justify-content-center'>
-                            <img src={verifyimg} className='imgVerify' alt=''/>
-                            <h5>Verifique su cuenta</h5>
-                            <div className='py-3'>
-                                <Button onClick={pressedVerifyButton}>Verificar</Button>
-                            </div>
-                        </Row>
-                    </Container>
+                <Container className="cardactivate">
 
-                </Card>
+                    <Row className={'justify-content-center text-center'}>
+                        <img src={Logo} className="logoactivate" alt="Logo ministerio de finanzas" />
+                    </Row>
+                    <Row className={'justify-content-center text-center'}>
+                        <h4 className="titacti1">Solo un paso mas...</h4>
+                    </Row>
+                    <Row className={'justify-content-center text-center'}>
+                        <h7 className="titacti1">Presiona el boton debajo para activar tu cuenta</h7>
+                    </Row>
+                    <Row className={'justify-content-center text-center'}>
+                        <Button variant="contained" id="botonactivate" color="primary" type="submit" onClick={pressedVerifyButton}>
+                            Activar Cuenta
+                        </Button>
+                    </Row>
+
+
+                </Container>
 
 
                 <Modal show={show} onHide={handleClose}>
@@ -63,7 +71,7 @@ const ActivateAccountPage = () => {
                         <Container className='justify-content-center'>
                             <Row className='justify-content-center'>
                                 <Col md={5}>
-                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
+                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
                                     <p className="text-center">¡Su cuenta ha sido verficada!</p>
                                 </Col>
                             </Row>
