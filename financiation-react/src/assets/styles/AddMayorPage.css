@@ -95,7 +95,7 @@
     justify-content: center;
     align-items: center !important;
 }
-.btn{
+.btninedit{
     width: 8vw !important;
     @media only screen and (max-width : 1200px) {
         width: 26vw !important;
@@ -112,11 +112,13 @@
 @media only screen and (max-width: 1000px) {
     .modal {
         width: 35vw !important;
+        margin-left: 40vw;
     }
 }
 @media only screen and (max-width: 650px) {
     .modal {
         width: 40vw !important;
+        margin-left: 30vw;
     }
 }
 @media only screen and (max-width: 500px) {
@@ -141,3 +143,58 @@
         width: 20vw !important;
     }
 }
+
+@media only screen and (max-width: 1250px) {
+    .modalcreate {
+        height: 40vw !important;
+        width: 30vw !important;
+    }
+    .input{
+        width: 13vw!important ;
+    }
+    .datos{
+        padding-left: 6vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .modalcreate {
+        height: 100vw !important;
+        width: 50vw !important;
+    }
+    .input{
+        width: 15vw!important ;
+    }
+    .datos{
+        padding-left: 14vw !important;
+    }
+    .datosin{
+        padding-left: 6vw !important;
+    }
+    .btnregis{
+        width: 15vw !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .modalcreate {
+        height: 100vw !important;
+        width: 80vw !important;
+    }
+    .input{
+        width: 30vw!important ;
+    }
+    .datos{
+        padding-left: 20vw !important;
+    }
+    .datosin{
+        padding-left: 12vw !important;
+    }
+    .btnregis{
+        width: 25vw !important;
+    }
+    .modal{
+        margin-left: 10vw !important;
+    }
+}
+

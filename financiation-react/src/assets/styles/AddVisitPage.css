@@ -75,26 +75,54 @@
     background-color: #097cce !important;
 }
 
-.icon {
-    font-size: 50px !important;
+.iconperson {
+    font-size: 2vw;
     margin: 1vw;
-    margin-top: -8vw;
-    margin-left: 10vw;
+    margin-top: -2vw;
+    margin-left: 5vw;
+    margin-bottom: 0vw;
+}
+.iconadd{
+    font-size: 3vw !important;
+    margin-top: -5.2vw;
+
 }
 
 .iconadd:hover{
-    color: #53A6DC;
+    color: #41be31;
 }
 
 .iconedit{
     font-size: 2.6vw !important;
-    margin: 1vw;
-    margin-top: -6vw;
-    margin-left: 0.5vw;
+    margin-top: -5vw;
+
 }
 
 .iconedit:hover{
-    color: #53A6DC;
+    color: #dce73b;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .iconadd {
+        font-size: 7vw !important;
+    }
+    .iconedit {
+        font-size: 6vw !important;
+    }
+    .iconperson {
+        margin-left: 10vw;
+    }
+}
+@media (min-width: 200px) and (max-width: 768px) {
+    .iconadd {
+        font-size: 9vw !important;
+    }
+    .iconedit {
+        font-size: 8vw !important;
+    }
+    .iconperson {
+        margin-left: 27vw;
+    }
 }
 
 .CarouselItemOne{

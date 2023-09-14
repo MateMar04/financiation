@@ -131,7 +131,7 @@ export const MayorModifyModal = (props) => {
                     </div>
 
                     <div className='btnactualizar'>
-                        <Button className='BtnIniciarSesionLogin btn' type='submit'>Actualizar</Button>
+                        <Button className='BtnIniciarSesionLogin btninedit' type='submit'>Actualizar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
                         <Button className='BtnBorrar' onClick={() => deleteMayor(mayor.id)}>Eliminar</Button>
