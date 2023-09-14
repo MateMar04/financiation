@@ -3,10 +3,11 @@ import '../assets/styles/LoginPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
 import {Button, Row, Container, Form, FloatingLabel} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import AuthContext from "../context/AuthContext";
+import AuthContext  from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const LoginPage = () => {

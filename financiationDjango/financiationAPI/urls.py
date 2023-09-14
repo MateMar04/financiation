@@ -24,7 +24,6 @@ urlpatterns = [
     # Addresses
     path('addresses', views.getAddresses, name='addresses'),
 
-
     # Visits
     path('visits', views.VisitApiView.as_view(), name='visits'),
 
@@ -55,6 +54,9 @@ urlpatterns = [
     # FAQs
     path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
 
+    # Whys
+    path('whys', views.getWhys, name='whys'),
+
     # Coordinators
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
     path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
@@ -82,13 +84,19 @@ urlpatterns = [
     re_path(r'reports$', views.getRequests, name='report'),
     re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
     re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
-    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment, name='report'),
+    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment,
+            name='report'),
     re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
 
-    #EditarProfilePic
-    path('update-profile-picture', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+    # EditarProfilePic
+    path('update-profile-picture/<int:id>', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+
     #mayors
+    path('mayors/<int:id>', views.getMayorById, name='mayor'),
+    path('mayors/delete/<int:id>', views.deleteMayorById, name='delete_mayor'),
+    path('mayors/put/<int:id>', views.putMayorById, name='put_mayor'),
     path('mayors', views.MayorApiView.as_view(), name='mayors'),
+
 ]

@@ -45,8 +45,34 @@
 .input{
     padding-bottom: 1vw !important;
 }
-.BtnIniciarSesionLogin:hover {
-    background-color: #1f8bda;
-    border-color: #1f8bda;
-
+.BtnBorrar{
+    border-radius: 3vw;
+    color: #da1f1f;
+    background-color: #ffffff;
+    border-color: #da1f1f;
+}
+.BtnBorrar:hover {
+    background-color: #da3b1f;
+    border-color: #da1f1f;
+}
+.display{
+    padding: 2vw;
+}
+.displayitem{
+    background-color: #f4f4f4;
+    padding: 0.4vw;
+    padding-left: 0.7vw;
+    padding-right: 0.7vw;
+    border-radius: 3vw;
+    margin-right: 1vw;
+    text-decoration: none;
+    color: black;
+}
+.inputedit{
+    max-width: 8vw;
+    background-color: #f4f4f4;
+    border-radius: 4vw;
+    border-width: 0.1vw;
+    border-color: gray;
+    padding-left: 0.5vw;
 }
