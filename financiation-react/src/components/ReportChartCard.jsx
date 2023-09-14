@@ -4,7 +4,7 @@ import "../assets/styles/ReportsPage.css"
 
 export const ReportChartCard = ({title, chart}) => {
     return (
-        <Card className='chart-card'>
+        <Card className='chart-column'>
             <h1>{title}</h1>
             {chart}
         </Card>
