@@ -31,4 +31,13 @@ export const getGroupAdvisors = async (tokens, group) => {
     return data
 };
 
-export const getCurrentGroup = async (tokens)
+export const getUserGroup = async (tokens, id) => {
+    let headers = {
+        "Content-Type": "application/json",
+        "Authorization": "JWT " + String(tokens),
+        "Accept": "application/json"
+    }
+    let response = await fetch(`/api/groups/user/${id}`, {headers: headers})
+    let data = await response.json()
+    return data
+};

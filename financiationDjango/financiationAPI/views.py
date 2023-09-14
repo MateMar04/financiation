@@ -605,7 +605,7 @@ def getUserGroup(request, id):
                        "FROM persona_grupo_roles as a "
                        "where a.user_id in (%s) "
                        "union "
-                       "SELECT * "  
+                       "SELECT * "
                        "FROM persona_grupo_roles as b "
                        "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
                        "order by 4", [id, id])

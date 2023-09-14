@@ -9,18 +9,32 @@ import BarChart from "../components/BarChart";
 import VerMasButton from "../components/VerMasButton";
 import {Link} from "react-router-dom";
 import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices";
+import {getUserGroup} from "../services/GroupServices";
+import {PersonRowMainMenu} from "../components/PersonRowMainMenu";
+import {getUser, getUserById} from "../services/UserServices";
 
 
 export const MainMenuPage = () => {
 
-    let {authTokens, myUser} = useContext(AuthContext)
+    let {authTokens, user} = useContext(AuthContext)
+    const [myUser, setMyUser] = useState()
     const [latestVisits, setLatestVisits] = useState()
     const [latestVisitRequests, setLatestVisitRequests] = useState()
+    const [userGroup, setUserGroup] = useState([])
 
 
-    useEffect(() => {
+    const getUsuario =  async  ()  => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
         getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
         getLatestVisitRequests(authTokens.access).then(r => setLatestVisitRequests(r))
+        getUserGroup(authTokens.access, usuario.id).then(r => setUserGroup(r))
+    }
+
+    useEffect( () => {
+
+        getUsuario()
+
     }, []);
 
     return (
@@ -131,12 +145,18 @@ export const MainMenuPage = () => {
                             </Col>
                         </Row>
                         <Row className="text-center">
-                            <h2 className="name-title">Grupo 1</h2>
+                            {userGroup && userGroup.length > 0 ? (
+                                    <h2 className="name-title">{userGroup[0].group}</h2>
+                                ) : (
+                                    <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
+                                )}
+
                         </Row>
                         <Row className="justify-content-center text-center">
 
-                            <h5 className="property-title ">Coordinador: {myUser.first_name} {myUser.last_name}</h5>
-
+                            {userGroup?.map((i) => (
+                                <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name}/>
+                            ))}
                         </Row>
                     </Card>
 
