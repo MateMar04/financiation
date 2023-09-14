@@ -30,8 +30,6 @@
         position: fixed;
         z-index: 1;
         transform: translate(6vw,9vh);
-
-
     }
 }
 
@@ -51,11 +49,18 @@
         border-radius: 3vh;
     }
 
+    .ProfileText{
+        transform: translateY(-5vh);
+    }
     .ProfilePicture{
-        transform: translateY(-10vh)
+        transform: translateY(-14vh)
     }
 
-
+     .EditIconProfile{
+        position: fixed;
+        z-index: 1;
+        transform: translate(25vw,15vh);
+    }
 }
 
 .BtnProfileCerrarSesion{
@@ -70,8 +75,6 @@
     border-color: #a20d0d;
 
 }
-
-
 
 
 .CancelarBtnProfile{
