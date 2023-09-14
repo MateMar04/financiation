@@ -10,11 +10,13 @@
     height: 40vh;
     margin: 0;
     background-color: #F4F4F4;
+    border-radius: 3vh;
+
 }
 
 .filter-card-scroll {
     overflow-y: scroll;
-    
+
 }
 
 .visit-container {

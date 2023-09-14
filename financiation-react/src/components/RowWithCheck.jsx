@@ -5,7 +5,7 @@ import "../assets/styles/ReportsPage.css"
 
 export const RowWithCheck = ({item}) => {
     return (
-        <Row key={item.id}>
+        <Row key={item.id} className="labelfondo" >
             <Col className='row-label'>
                 <Form.Label>{item.name}</Form.Label>
             </Col>
