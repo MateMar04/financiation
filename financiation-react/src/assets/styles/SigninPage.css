@@ -12,7 +12,8 @@
 
 .InputSigninPage {
     margin-bottom: 3vh!important;
-    background-color: #f4f4f4!important;
+    border-radius: 3vh;
+    background-color: #f4f4f4;
 }
 
 .logosign {
@@ -26,6 +27,8 @@
     margin: 0 auto;
     margin-bottom: 4.5vh;
 }
+
+
 
 #botonsign{
     border-radius: 5vh;
@@ -41,6 +44,7 @@
     font-size: 0.7rem;
     font-family: Arial, sans-serif;
     color: black;
+    margin-top: 1.7vh;
 }
 
 @media (max-width: 768px) {
