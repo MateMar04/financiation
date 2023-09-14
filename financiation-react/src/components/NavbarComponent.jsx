@@ -10,14 +10,20 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let {authTokens, logoutUser} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
+    const [myUser, setMyUser] = useState()
 
-    /*
-        useEffect(() => {
-            getUser(authTokens.access).then(data => setUser(data))
-        })
-    */
+
+    // const getData = async () => {
+    //     const usuario = await getUser(authTokens.access)
+    //     setMyUser(usuario)
+    // }
+    //
+    // useEffect(() => {
+    //     getData()
+    // })
+
     return (
 
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
@@ -60,7 +66,8 @@ const NavbarComponent = () => {
                                     <div className="mx-2">
                                         <Row className={'justify-content-center'}>
                                             <Col md={3} xs={3} className={'justify-content-center '}>
-                                                <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
+                                                <Avatar alt="Remy Sharp"
+                                                        src={'data:image/png;base64, ' + myUser?.profile_picture}
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
                                             <Col md={9} xs={9} className={'justify-content-center'}>
