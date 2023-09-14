@@ -35,22 +35,14 @@
     height: 100vh;
 }
 
-.imgVerify {
-    max-height: 150px;
-    max-width: 250px;
-}
 
-.imgCheck {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 @media (max-width: 768px) {
     .logoactivate {
         width: 45vw;
     }
     #botonactivate {
+        width: 200px;
         border-radius: 5vh;
         font-size: 0.7rem;
         padding: 2vh 15vw;
