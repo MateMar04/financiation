@@ -6,13 +6,12 @@
 }
 
 .filter-card {
-    max-height: 43vh;
-    height: 50vh;
-    margin: 0;
-    background-color: #F4F4F4;
+    height: 70vh;
+    background-color: #f4f4f4;
     border-radius: 3vh;
-    border: none;
     border-color: #F4F4F4;
+    margin: 2vh;
+    padding-bottom: 5vh;
 
 }
 
@@ -43,7 +42,7 @@
 
 }
 .container-white{
-    height: 106vh;
+  
     background-color: white;
     border-radius: 5vh;
     margin-top: 2vh;
@@ -65,6 +64,7 @@
     width: 200px;
     padding: 8px;
     color: white;
+    margin-bottom: 5vh;
 }
 
 .chart-column{

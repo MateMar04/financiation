@@ -45,7 +45,7 @@ export const ReportsPage = () => {
     return (
         <Container fluid>
             <h1 className='titulo1'>Reportes</h1>
-            <Container fluid className='container-white'>
+            <Container  className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
@@ -68,12 +68,11 @@ export const ReportsPage = () => {
                         <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar</Button>
                     </Col>
                 </Row>
-              
             </Container>
 
             
 
-            <Container fluid className='container1'>
+            <Container className='container1'>
                 <Row>
                     <Col lg={6} className='chart-column'>
                         <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
