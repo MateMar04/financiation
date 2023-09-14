@@ -37,7 +37,7 @@ const NavbarComponent = () => {
 
                                 <Col className="d-flex justify-content-sm-center justify-content-md-start">
                                     <div className="mx-2">
-                                        <Link>
+                                        <Link to="/calendar/">
                                             <Button variant="text"
                                                     className={'BtnNavBar linksNavbar'}>Calendario</Button>
 
@@ -60,7 +60,7 @@ const NavbarComponent = () => {
                                     <div className="mx-2">
                                         <Row className={'justify-content-center'}>
                                             <Col md={3} xs={3} className={'justify-content-center '}>
-                                                <Avatar alt="Remy Sharp" src={myUser?.profile_picture}
+                                                <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
                                             <Col md={9} xs={9} className={'justify-content-center'}>

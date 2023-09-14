@@ -2,9 +2,13 @@
     background-color: white;
     border-radius: 8vh;
     height: 82vh;
+
+    justify-content: center !important;
+    align-items: center !important;
 }
 
-.CardVisit{
+
+.CardVisit {
     width: 15vw !important;
     height: 35vh !important;
     background-color: #f4f4f4 !important;
@@ -12,51 +16,52 @@
 }
 
 
-.h1NuevaVisita{
+.h1NuevaVisita {
     color: #0d0d0d;
 }
 
 .carousel-indicators {
-  bottom: -8vh;
+    bottom: -8vh;
 }
 
 .carousel-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: -38vh;
+    display: flex;
+    justify-content: space-between;
+    margin-top: -38vh;
 }
 
 
-.carouselAddVisit{
+.carouselAddVisit {
     width: 80vw;
     height: 75vh;
 }
 
-.CenterContentCard{
-   display: flex;
+.CenterContentCard {
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 100%;
 }
 
 
-.CenterContentCardConvenios{
-   display: flex;
+.CenterContentCardConvenios {
+    display: flex;
     flex-direction: column;
     justify-content: center;
     height: 100%;
 }
 
-.CardVisitConvenios{
-  width: 55vw !important;
+.CardVisitConvenios {
+    width: 55vw !important;
     height: 35vh !important;
     background-color: #f4f4f4 !important;
-    border-radius: 40px !important;
+    border-radius: 8vh !important;
 }
 
 
-.BtnAddVisit{
+.BtnAddVisit {
     width: 18vw;
     height: 10vh;
     background-color: #53A6DC !important;
@@ -65,21 +70,157 @@
     padding: 10px;
     border-radius: 1vw !important;
 }
+
 .BtnAddVisit:hover {
     background-color: #097cce !important;
 }
 
-.icon{
-    font-size: 3vw !important;
+.icon {
+    font-size: 50px !important;
     margin: 1vw;
-    margin-top: -6vw;
+    margin-top: -8vw;
     margin-left: 10vw;
 }
 
-.icon:hover{
+.iconadd:hover{
     color: #53A6DC;
 }
-.iconperson{
-    margin-top: -3vw;
-    margin-left: 5vw;
+
+.iconedit{
+    font-size: 2.6vw !important;
+    margin: 1vw;
+    margin-top: -6vw;
+    margin-left: 0.5vw;
 }
+
+.iconedit:hover{
+    color: #53A6DC;
+}
+
+.CarouselItemOne{
+    justify-items: center !important;
+        align-items: center !important;
+        justify-content: center !important;
+}
+
+@media (max-width: 767px) {
+
+    .MiniContainerVisit {
+        height: auto;
+        justify-items: center !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding-top: 2vh;
+        border-radius: 10vh !important;
+        padding-bottom: 4vh;
+    }
+
+    .CardVisit {
+        width: 70vw !important;
+    }
+
+    .InputVisit {
+        width: 30vw;
+    }
+
+    .carouselAddVisit {
+        height: auto;
+    }
+
+    .CarouselItemOne{
+        height: auto;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        margin-top: 1vh;
+    }
+    
+    .ThirdCarousel{
+        height: 90vh;
+    }
+    .CardVisitConvenios{
+        width: auto !important;
+        height: auto;
+    }
+
+    .CenterContentCardConvenios{
+        width: auto;
+        height: auto;
+      
+    }
+
+    .BtnAddVisit {
+        width: auto;
+        border-radius: 8vw !important;
+
+    }
+
+    .icon {
+        font-size: 50px !important;
+        margin: 1vw;
+        margin-top: -15vh;
+        margin-left: 50vw;
+    }
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    .MiniContainerVisit {
+        height: auto;
+        width: 100%;
+        justify-items: center !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .CardVisit {
+        width: 30vw !important;
+    }
+
+    .InputVisit {
+        width: auto;
+    }
+
+    .carouselAddVisit {
+        height: auto;
+        width: 90vw;
+    }
+
+    .CarouselItemOne{
+        height: auto;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0;
+    }
+    
+    .ThirdCarousel{
+        height: auto;
+    }
+    .CardVisitConvenios{
+        width: 80vw !important;
+        height: auto;
+    }
+
+    .CenterContentCardConvenios{
+        width: auto;
+        height: auto;
+      
+    }
+
+    .BtnAddVisit {
+        width: auto;
+    }
+
+
+    .icon {
+        margin-top: -18vh;
+        margin-left: 20vw;
+    }
+
+}
+

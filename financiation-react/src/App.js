@@ -28,6 +28,7 @@ import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React from 'react';
 import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
+import { CalendarPage } from './pages/CalendarPage';
 import "@fontsource/poppins";
 
 function App() {
@@ -73,6 +74,7 @@ function App() {
                                element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
 
                         <Route path='/mayors/add' element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
+                        <Route path='/calendar' element={<PrivateRoute children={<CalendarPage></CalendarPage>}/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
