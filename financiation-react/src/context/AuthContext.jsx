@@ -20,7 +20,6 @@ export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     let [loading, setLoading] = useState(true)
-    let [myUser, setMyUser] = useState({})
 
 
     let history = useNavigate()
@@ -70,7 +69,6 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
             history('/menu')
         } else {
             if (response.status === 401) {
@@ -88,7 +86,6 @@ export const AuthProvider = ({children}) => {
     }
 
     let logoutUser = () => {
-        setMyUser({})
         setAuthTokens(null)
         setUser(null)
         localStorage.removeItem('authTokens')
@@ -108,7 +105,6 @@ export const AuthProvider = ({children}) => {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens', JSON.stringify(data))
-            setMyUser(getUserById(authTokens.access, user?.user_id).then(data => setMyUser(data)))
         } else {
             logoutUser()
         }
@@ -121,7 +117,6 @@ export const AuthProvider = ({children}) => {
     let contextData = {
         user: user,
         authTokens: authTokens,
-        myUser: myUser,
         signIn: signIn,
         loginUser: loginUser,
         logoutUser: logoutUser
