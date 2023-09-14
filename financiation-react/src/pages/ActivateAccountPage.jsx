@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Container, Modal, Row } from "react-bootstrap";
-import verifyimg from '../assets/images/verifyimg.gif';
-import Check from "../assets/images/checked.gif";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import '../assets/styles/ActivateAccountPAge.css'
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../assets/images/PRUEBA.PNG";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const ActivateAccountPage = () => {
     const { uid, token } = useParams()
@@ -57,35 +57,20 @@ const ActivateAccountPage = () => {
                         <h7 className="titacti1">Presiona el boton debajo para activar tu cuenta</h7>
                     </Row>
                     <Row className={'justify-content-center text-center'}>
-                        <Button variant="contained" id="botonactivate" color="primary" type="submit" onClick={pressedVerifyButton}>
-                            Activar Cuenta
-                        </Button>
+                        <Col>                        
+                        <Button className="botonactivate" type="submit" onClick={pressedVerifyButton}>Activar Cuenta</Button>
+                        </Col>
+
                     </Row>
 
 
                 </Container>
 
-
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Body>
-                        <Container className='justify-content-center'>
-                            <Row className='justify-content-center'>
-                                <Col md={5}>
-                                    <img src={Check} alt="CheckButton" className="mx-auto img-fluid" />
-                                    <p className="text-center">¡Su cuenta ha sido verficada!</p>
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Link to={'/login'}>
-                            <Button variant="success">
-                                OK
-                            </Button>
-                        </Link>
-
-                    </Modal.Footer>
-                </Modal>
+                <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>
+                ¡Su cuenta ha sido verficada!
+                </Alert>
+            </Snackbar>
             </Container>
         </Container>
     );
