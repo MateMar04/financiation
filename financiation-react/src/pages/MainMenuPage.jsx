@@ -87,7 +87,11 @@ export const MainMenuPage = () => {
                                 <h4>Consultas resueltas en la ultima visita:</h4>
                             </Row>
                             <Row className="text-center">
-                                <h3 className="fw-bold">{latestVisitRequests[0]?.requests}</h3>
+                                {latestVisitRequests && latestVisitRequests.length > 0 ? (
+                                    <h3 className="fw-bold">{latestVisitRequests[0].requests}</h3>
+                                ) : (
+                                    <p>No visit requests available</p>
+                                )}
                             </Row>
                         </Container>
                     </Card>
@@ -101,7 +105,9 @@ export const MainMenuPage = () => {
                                 <h2 className="name-title">Próximas Visitas</h2>
                             </Row>
                             <Container className="container-visit-card-main-menu">
-                                {}
+                                {latestVisits?.map((visit) => (
+                                    <VisitCardMainMenu name={visit.name} status={visit.status}/>
+                                ))}
                             </Container>
                             <Link to={'/visits'}>
                                 <Row className={'justify-content-end'}>
