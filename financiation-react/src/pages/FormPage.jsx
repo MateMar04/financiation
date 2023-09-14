@@ -157,7 +157,7 @@ const FormPage = () => {
                                         sx={{width: 35, height: 35}}/>
                             </Col>
                             <Col className='d-flex align-items-center text-center'>
-                                <p className={'userFirstName'}>{user.first_name}</p>
+                                <h5 className={'userFirstName'}>{user.first_name}</h5>
                             </Col>
                         </Row>
 
