@@ -1,16 +1,13 @@
 .container-addmayor {
     margin-top: 8vh;
     background-color: white;
-    width: 50vw;
     height: 35vw;
     border-radius: 5vh;
 }
 .containermayor{
-    margin-top: 8vh;
     background-color: white;
-    width: 70vw;
-    height: 35vw;
     border-radius: 5vh;
+    margin: 2vw;
 }
 
 .container-addmayor-modal{
@@ -58,6 +55,19 @@
 .display{
     padding: 2vw;
 }
+@media only screen and (max-width: 1600px) {
+    .display {
+        padding: 1vw !important;
+        width: 20vw !important;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .display {
+        margin-left: -10vw;
+        padding: 1vw !important;
+        width: 50vw !important;
+    }
+}
 .displayitem{
     background-color: #f4f4f4;
     padding: 0.4vw;
@@ -75,4 +85,116 @@
     border-width: 0.1vw;
     border-color: gray;
     padding-left: 0.5vw;
+    @media only screen and (max-width : 950px) {
+        max-width: 15vw;
+	}
 }
+.btnactualizar{
+    margin-top: 0px !important;
+    text-align: center !important;
+    justify-content: center;
+    align-items: center !important;
+}
+.btninedit{
+    width: 8vw !important;
+    @media only screen and (max-width : 1200px) {
+        width: 26vw !important;
+	}
+}
+.modal{
+    margin-top: 2vw;
+    margin-left: 35vw;
+    width: 24vw !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+}
+@media only screen and (max-width: 1000px) {
+    .modal {
+        width: 35vw !important;
+        margin-left: 40vw;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .modal {
+        width: 40vw !important;
+        margin-left: 30vw;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .modal {
+        width: 65vw !important;
+    }
+}
+.crearintendente{
+    text-align: center;
+}
+
+.selcetuser{
+    width: 10vw !important;
+}
+@media only screen and (max-width: 1000px) {
+    .selcetuser {
+        width: 15vw !important;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .selcetuser {
+        width: 20vw !important;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    .modalcreate {
+        height: 40vw !important;
+        width: 30vw !important;
+    }
+    .input{
+        width: 13vw!important ;
+    }
+    .datos{
+        padding-left: 6vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .modalcreate {
+        height: 100vw !important;
+        width: 50vw !important;
+    }
+    .input{
+        width: 15vw!important ;
+    }
+    .datos{
+        padding-left: 14vw !important;
+    }
+    .datosin{
+        padding-left: 6vw !important;
+    }
+    .btnregis{
+        width: 15vw !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .modalcreate {
+        height: 100vw !important;
+        width: 80vw !important;
+    }
+    .input{
+        width: 30vw!important ;
+    }
+    .datos{
+        padding-left: 20vw !important;
+    }
+    .datosin{
+        padding-left: 12vw !important;
+    }
+    .btnregis{
+        width: 25vw !important;
+    }
+    .modal{
+        margin-left: 10vw !important;
+    }
+}
+

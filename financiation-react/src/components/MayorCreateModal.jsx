@@ -57,16 +57,16 @@ export const MayorCreateModal = (props) => {
     }
     
     return (
-            <Modal show={props.show} >
+            <Modal className='modalcreate' show={props.show} >
                 <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
                 <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
                 <Container className="containermayor container-addmayor-modal">
 
-                    <Form onSubmit={postMayor}>
+                    <Form className='datos' onSubmit={postMayor}>
                         <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
 
 
-                        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
                                 <TextField
                                     className="input"
@@ -104,7 +104,7 @@ export const MayorCreateModal = (props) => {
                         
 
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin' type="submit">Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' type="submit">Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
