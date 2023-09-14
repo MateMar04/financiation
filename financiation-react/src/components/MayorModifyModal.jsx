@@ -89,7 +89,7 @@ export const MayorModifyModal = (props) => {
     }
 
     return (
-        <Modal show={props.show} >
+        <Modal className='modal' show={props.show} >
             <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess} />
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Container className="containermayor container-addmayor-modal">
@@ -98,7 +98,7 @@ export const MayorModifyModal = (props) => {
                     <h3 className={'h3LoginPage crearintendente'}>Seleccione Intendente</h3>
 
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <select className='select' id="standard-basic" variant="standard" name='mayor' onChange={handleMayorSelection}>
+                        <select className='select selcetuser' id="standard-basic" variant="standard" name='mayor' onChange={handleMayorSelection}>
                             <option selected disabled hidden></option>
                             {mayors?.map((mayor) => (
                                 <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>

@@ -102,12 +102,42 @@
 	}
 }
 .modal{
-    margin-left: 20vw;
-    width: 60vw !important;
+    margin-top: 2vw;
+    margin-left: 35vw;
+    width: 24vw !important;
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
 }
+@media only screen and (max-width: 1000px) {
+    .modal {
+        width: 35vw !important;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .modal {
+        width: 40vw !important;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .modal {
+        width: 65vw !important;
+    }
+}
 .crearintendente{
     text-align: center;
+}
+
+.selcetuser{
+    width: 10vw !important;
+}
+@media only screen and (max-width: 1000px) {
+    .selcetuser {
+        width: 15vw !important;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .selcetuser {
+        width: 20vw !important;
+    }
 }
