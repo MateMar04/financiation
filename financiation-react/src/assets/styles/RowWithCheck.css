@@ -1,8 +1,32 @@
 .row-label {
     text-align: start;
     font-weight: bold;
+    text-align: center;
 }
 
 .row-check {
     text-align: start;
+    text-align: center;
+}
+.profile-fc {
+    
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
+    align-self: center;
+    
+    
+}
+.fondovisitas {
+    width: 50%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+  }
+
+.labelfondo{
+    margin-top: 2vh;
+    background-color: #ffffff;
+    border-radius: 3vh;
+    padding: 1vh;
+    text-align: center;
 }
