@@ -57,6 +57,16 @@
 .container1{
     margin-top:5vh;
 }
+
+.BtnGenera{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+}
+
 .chart-column{
     border-radius: 3vh;
     text-align: center;

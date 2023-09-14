@@ -64,8 +64,8 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
                 <Row className='justify-content-center'>
-                    <Col lg={1}>
-                        <Button  onClick={() => buttonClick()}>Generar</Button>
+                    <Col lg={2}>
+                        <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar</Button>
                     </Col>
                 </Row>
               
