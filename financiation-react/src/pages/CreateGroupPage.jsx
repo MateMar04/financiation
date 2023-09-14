@@ -56,34 +56,36 @@ export const CreateGroupPage = () => {
             <FailedModal message="el coordinador" show={showfail} />
 
             <Form onSubmit={postGroup}>
-                <Container className="separation font">
-                    <Row className={'justify-content-center'}>
-                        <Col md={8} xs={8}>
-                            <TextField
-                                className="font"
-                                fullWidth
-                                id="standard-bare"
-                                variant="outlined"
-                                label={'Buscar Persona'}
-                                InputProps={{
-                                    endAdornment: (
-                                        <IconButton>
-                                            <SearchIcon />
-                                        </IconButton>
-                                    ),
-                                }}
-                            />
-                        </Col>
-                        <Col md={1} xs={1} lg={1}>
+                <Container className="separation font text-center justify-content-center">
+                    <Row className='justify-content-center text-center'>
+                    <Col md={10}>
+                        <TextField
+                            fullWidth
+                            id="SearchVisit"
+                            variant="outlined"
+                            label='Buscar'
+                            className="SearchVisit"
+                            InputProps={{
+                                sx: { borderRadius: 5, color: "black" },
+                                endAdornment: (
+                                    <IconButton>
+                                        <SearchIcon />
+                                    </IconButton>
+                                ),
+                            }}
+                        />
+                    </Col>
+
+                        <Col md={2} xs={1} lg={1}>
                             <IconButton href="/groups/" sx={{ width: 56, height: 56 }}
-                                className={'GroupsIcon'}><GroupsIcon /></IconButton>
+                                className={'GroupsIcon'}><GroupsIcon/></IconButton>
                         </Col>
                     </Row>
                 </Container>
 
                 <Container className="justify-content-center">
                     {users?.map((user) => (
-                        <Container className="containerUserCard justify-content-center">
+                        <Container className="containerUserCard justify-content-center text-center">
                             <UserCard user={user} />
                         </Container>
                     ))}
@@ -99,7 +101,7 @@ export const CreateGroupPage = () => {
                     </Col>
                 </Row>
 
-            </Form>
-        </Container>
+            </Form >
+        </Container >
     )
 }
