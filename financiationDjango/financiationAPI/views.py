@@ -1,3 +1,5 @@
+import json
+
 from django.db import connection
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -579,6 +581,22 @@ def getLatestVisitRequestCount(request):
 
 @api_view(['GET'])
 def getLatestVisits(request):
-    visits = Visit.objects.filter().order_by('-visit_date')[:10]
-    serializer = VisitSerializer(visits, many=True)
-    return Response(serializer.data)
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(L.name, ' ', v.visit_date) as name, VS.name as status "
+                       "FROM \"financiationAPI_visit\" AS V "
+                       "INNER JOIN \"financiationAPI_visitstatus\" VS on VS.id = V.visit_status_id "
+                       "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
+                       "order by visit_date desc limit 10", request)
+        row = cursor.fetchall()
+        print(row)
+        return JsonResponse(convert_to_json_large(row), safe=False)
+
+
+def convert_to_json_large(data):
+    result = []
+
+    for item in data:
+        key, value = item
+        result.append({"name": key, "status": value})
+
+    return result
