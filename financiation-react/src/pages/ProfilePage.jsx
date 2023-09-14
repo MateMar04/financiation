@@ -3,7 +3,7 @@ import {Button, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
 import {getUser} from "../services/UserServices";
-import {Avatar, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import {DateField} from '@mui/x-date-pickers/DateField';
 import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -12,20 +12,27 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 
 
-
 const ProfilePage = () => {
 
-    let [user, setUser] = useState()
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let {authTokens, logoutUser} = useContext(AuthContext)
+
+    const [myUser, setMyUser] = useState()
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
     let [editMode, setEditMode] = useState(false);
-    const defaultFirstName = myUser?.first_name || '';
-    const defaultLastName = myUser?.last_name || '';
-    const defaultSSN = myUser?.ssn || '';
-    const defaultPhoneNumber = myUser?.phone_number || '';
 
+
+    const loadData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+    }
+
+    useEffect(() => {
+
+        loadData()
+
+    }, []);
 
     const handleAddButton = () => {
         setShowButton(!showButton);
@@ -35,7 +42,7 @@ const ProfilePage = () => {
 
 
     return (
-        
+
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
@@ -48,7 +55,6 @@ const ProfilePage = () => {
                 width: 25,
                 height: 25
             }}/></IconButton>
-            
 
 
             <Row className={'justify-content-center text-center'}>
@@ -62,7 +68,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                   value={defaultFirstName} InputProps={{
+                                   value={myUser?.first_name || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -71,7 +77,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                   value={defaultLastName} InputProps={{
+                                   value={myUser?.last_name || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -84,7 +90,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                   value={defaultSSN} InputProps={{
+                                   value={myUser?.ssn || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -93,7 +99,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                   value={defaultPhoneNumber} InputProps={{
+                                   value={myUser?.phone_number || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
