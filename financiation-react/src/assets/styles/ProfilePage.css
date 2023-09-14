@@ -29,7 +29,7 @@
     .EditIconProfile{
         position: fixed;
         z-index: 1;
-        transform: translate(6vw,9vh);
+        transform: translate(8vw,9vh);
     }
 }
 
