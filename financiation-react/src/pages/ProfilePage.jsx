@@ -30,7 +30,6 @@ const ProfilePage = () => {
 
     useEffect(() => {
         loadData()
-
     }, []);
 
     const handleAddButton = () => {
@@ -68,14 +67,14 @@ const ProfilePage = () => {
                 <Row className={"d-flex justify-content-center text-center"}>
                     <Col md={6} className="py-3">
                         <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                   value={defaultFirstName} InputProps={{
+                                   value={myUser?.first_name || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
                     </Col>
                     <Col md={6} className="py-3">
                         <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                   value={defaultLastName} InputProps={{
+                                   value={myUser?.last_name || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
@@ -84,14 +83,14 @@ const ProfilePage = () => {
                 <Row className={"d-flex justify-content-center text-center"}>
                     <Col md={6} className="py-3">
                         <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                   value={defaultSSN} InputProps={{
+                                   value={myUser?.ssn || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
                     </Col>
                     <Col md={6} className="py-3">
                         <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                   value={defaultPhoneNumber} InputProps={{
+                                   value={myUser?.phone_number || ''} InputProps={{
                             sx: {borderRadius: 5},
                             readOnly: !editMode
                         }}></TextField>
