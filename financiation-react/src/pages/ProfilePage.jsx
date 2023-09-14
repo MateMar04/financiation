@@ -12,7 +12,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 
 
-
 const ProfilePage = () => {
 
     let [user, setUser] = useState()
@@ -35,20 +34,26 @@ const ProfilePage = () => {
 
 
     return (
-        
+
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
-                    {/* <Avatar src={myUser?.profile_picture} sx={{width: 200, height: 200}} className="ProfilePicture"/> */}
-                    <ProfilePicture/>
-                </Col>
+                    <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
+                            sx={{width: 200, height: 200}} className="ProfilePicture"/>
 
+                </Col>
             </Row>
-            <IconButton className="EditIconProfile" onClick={handleAddButton}><EditIcon color='action' sx={{
-                width: 25,
-                height: 25
-            }}/></IconButton>
-            
+            {showButton && (
+            <Row className={'justify-content-center text-center'}>
+                <ProfilePicture/>
+            </Row>
+                )}
+
+                <IconButton className="EditIconProfile" onClick={handleAddButton}><EditIcon color='action' sx={{
+                    width: 25,
+                    height: 25
+                }}/></IconButton>
+
 
 
             <Row className={'justify-content-center text-center'}>
@@ -137,7 +142,7 @@ const ProfilePage = () => {
 
                     {showButton && (
                         <Col className="d-flex justify-content-center py-3">
-                            <Button className="GuardarBtnProfile">Guardar</Button>
+                            <Button className="GuardarBtnProfile" type={'submit'}>Guardar</Button>
                         </Col>
                     )}
                 </Row>

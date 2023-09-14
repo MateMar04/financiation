@@ -1,6 +1,9 @@
 import React, {useContext, useState} from "react";
 import '../assets/styles/ProfilePicture.css';
 import AuthContext from "../context/AuthContext";
+import {Button, Col, Container, Row} from "react-bootstrap";
+import {Fab} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
@@ -45,10 +48,20 @@ export const ProfilePicture = () => {
 
     return (
         <div>
-            <h2>Update Profile Picture</h2>
             <form onSubmit={handleSubmit}>
-                <input name="imageFile" type="file" accept="image/*" onChange={handleFileChange}/>
-                <button type="submit">Update</button>
+
+                <Row className={'justify-content-center text center'}>
+                    <Col>
+                        <input name="imageFile" type="file" accept="image/*" className={'SelectFile'}
+                               onChange={handleFileChange}/>
+                    </Col>
+                </Row>
+
+                <Row className={'justify-content-center text center'}>
+                    <Col>
+                        <Button type="submit">Actualizar</Button>
+                    </Col>
+                </Row>
             </form>
             <p>{message}</p>
         </div>
