@@ -1,6 +1,12 @@
+.nameuser{
+	margin-top: 1vh;
+}
+
 .UserCard{
 	margin: 0.3vw;
-    border-radius: 15vh !important;
+    border-radius: 3vh !important;
+	height: 9vh;
+
 	
 	@media only screen and (min-width : 801px) {
 		font-size: 1vw;
