@@ -31,7 +31,7 @@ export const UserCard = ({user}) => {
                         <Container className='UserCard'>
                             <Row key={user.id}>
                                 <Col md={1} xs={1} className='profileimage'>
-                                    <Avatar className='avatar' alt="Remy Sharp" src={user?.profile_picture}/>
+                                    <Avatar className='avatar' alt="Remy Sharp" src={'data:image/png;base64, ' + user?.profile_picture}/>
                                 </Col>
                                 <Col xs={3} md={3} className='name'>
                                     <Row>

@@ -12,6 +12,7 @@ urlpatterns = [
     # Groups
     path('groups', views.GroupApiView.as_view(), name='groups'),
     path('groups/<int:id>', views.getGroupById, name='group'),
+    path('groups/user/<int:id>', views.getUserGroup, name='currenGroup'),
 
     # Agreements
     path('agreements', views.getAgreements, name='agreements'),
@@ -26,6 +27,8 @@ urlpatterns = [
 
     # Visits
     path('visits', views.VisitApiView.as_view(), name='visits'),
+    path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
+    path('visits/latest', views.getLatestVisits, name='latestVisits'),
 
     # Users
     path('users/<int:id>', views.getUserById, name='user'),
@@ -34,6 +37,7 @@ urlpatterns = [
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
     path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
     path('groups/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
+    # path('users/me/<int:id>', views.getMyUser, name='me'),
 
     # Vehicles
     path('vehicles', views.getVehicles, name='vehicles'),

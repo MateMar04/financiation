@@ -3,11 +3,11 @@ import "../assets/styles/FormPage.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import Check from "../assets/images/checked.gif";
-import { Link } from "react-router-dom";
-import { getVisits } from "../services/VisitServices";
-import { getAdvisorUsers } from "../services/AdvisorServices";
-import { getFaqsByMinistryDepartment } from "../services/FaqServices";
-import { getMinistryDepartments } from "../services/MinistryDepartmentServices";
+import {Link} from "react-router-dom";
+import {getLatestVisitRequests, getLatestVisits, getVisits} from "../services/VisitServices";
+import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getFaqsByMinistryDepartment} from "../services/FaqServices";
+import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
 import Avatar from '@mui/material/Avatar';
 import { getUser } from '../services/UserServices';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -16,6 +16,7 @@ import { getWhys } from "../services/WhyServices";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import {getUserGroup} from "../services/GroupServices";
 import { Modal } from 'antd';
 
 import Snackbar from '@mui/material/Snackbar';
@@ -26,7 +27,7 @@ import Alert from '@mui/material/Alert';
 
 const FormPage = () => {
 
-    let { authTokens, myUser } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -44,7 +45,17 @@ const FormPage = () => {
     let [selectedFaq, setSelectedFaq] = useState()
     let [selectedWhy, setSelectedWhy] = useState(1)
     let [selectedQuantity, setSelectedQuantity] = useState(1)
+    const [myUser, setMyUser] = useState()
 
+    const getData =  async  ()  => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+        getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
+        getWhys(authTokens.access).then(r => setWhys(r))
+        getVisits(authTokens.access).then(data => setVisits(data))
+        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
+        getUser(authTokens.access).then(data => setUser(data))
+    }
 
     function getCurrentDateTimeString() {
         const now = new Date();
@@ -77,12 +88,7 @@ const FormPage = () => {
 
 
     useEffect(() => {
-        getMinistryDepartments(authTokens.access).then(data => setMinistryDepartments(data))
-        getWhys(authTokens.access).then(r => setWhys(r))
-        getVisits(authTokens.access).then(data => setVisits(data))
-        getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
-        getUser(authTokens.access).then(data => setUser(data))
-
+        getData()
     }, [])
 
     let postRequest = async (e) => {

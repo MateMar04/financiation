@@ -167,14 +167,14 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
     phone_number = models.BigIntegerField()
-    profile_picture = models.BinaryField(editable=True)
+    profile_picture = models.BinaryField(editable=True, blank=True)
     role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
 
     objects = UserAccountManager()
 
     USERNAME_FIELD = 'ssn'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone_number', 'profile_picture']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone_number', 'profile_picture', 'role', 'user_status']
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
