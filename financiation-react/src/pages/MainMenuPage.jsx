@@ -12,6 +12,8 @@ import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices
 import {getUserGroup} from "../services/GroupServices";
 import {PersonRowMainMenu} from "../components/PersonRowMainMenu";
 import {getMyUser, getUser, getUserById} from "../services/UserServices";
+import {getUserStatusesById} from "../services/StatusServices";
+import {getUserRolesById} from "../services/RoleServices";
 
 
 export const MainMenuPage = () => {
@@ -21,6 +23,8 @@ export const MainMenuPage = () => {
     const [latestVisits, setLatestVisits] = useState()
     const [latestVisitRequests, setLatestVisitRequests] = useState()
     const [userGroup, setUserGroup] = useState([])
+    let [role, setRole] = useState([])
+    let [status, setStatus] = useState([])
 
 
     const getData = async () => {
@@ -29,6 +33,8 @@ export const MainMenuPage = () => {
         getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
         getLatestVisitRequests(authTokens.access).then(r => setLatestVisitRequests(r))
         getUserGroup(authTokens.access, usuario.id).then(r => setUserGroup(r))
+        getUserStatusesById(authTokens.access, myUser.user_status).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, myUser.role).then(data => setRole(data))
     }
 
     useEffect(() => {
@@ -73,7 +79,7 @@ export const MainMenuPage = () => {
                                         </strong>
                                     </Row>
                                     <Row>
-                                        <p className="p-main-menu-card">{myUser?.user_status}</p>
+                                        <p className="p-main-menu-card">{status?.name}</p>
                                     </Row>
                                     <Row>
                                         <strong>
@@ -81,7 +87,7 @@ export const MainMenuPage = () => {
                                         </strong>
                                     </Row>
                                     <Row>
-                                        <p className="p-main-menu-card">{myUser?.role}</p>
+                                        <p className="p-main-menu-card">{role?.name}</p>
                                     </Row>
                                     <Row>
                                         <strong>
