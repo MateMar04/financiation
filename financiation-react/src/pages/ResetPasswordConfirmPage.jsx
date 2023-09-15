@@ -21,7 +21,6 @@ const ResetPasswordConfirmPage = () => {
 
 
     let resetPasswordConfirm = async (e) => {
-        e.preventDefault()
         let response = await fetch('/auth/users/reset_password_confirm/', {
             method: "POST",
             headers: {
