@@ -35,11 +35,11 @@ export const UserCard = ({user}) => {
                                 </Col>
                                 <Col xs={3} md={3} className='name'>
                                     <Row>
-                                        <Col>
+                                      
                                             <strong>
-                                                <a>{user.first_name} {user.last_name}</a>
+                                                <p>{user.first_name} {user.last_name}</p>
                                             </strong>
-                                        </Col>
+                                       
                                     </Row>
                                     <Row>
                                         <small>{role.name}</small>

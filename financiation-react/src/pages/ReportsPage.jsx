@@ -45,7 +45,7 @@ export const ReportsPage = () => {
     return (
         <Container fluid>
             <h1 className='titulo1'>Reportes</h1>
-            <Container fluid className='container-white'>
+            <Container  className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
@@ -63,30 +63,29 @@ export const ReportsPage = () => {
                         <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
                     </Col>
                 </Row>
-                <Row className='justify-content-center'>
+                <Row className='justify-content-center text-center'>
                     <Col lg={2}>
-                        <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar</Button>
+                        <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar gráfico</Button>
                     </Col>
                 </Row>
-              
             </Container>
 
             
 
-            <Container fluid className='container1'>
-                <Row>
-                    <Col lg={6} className='chart-column'>
+            <Container className='container1 container-white'>
+                <Row className='justify-content-center text-center'>
+                    <Col lg={6} >
                         <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
-                    <Col lg={6} className='chart-column'>
+                    <Col lg={6} >
                         <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
                     </Col>
                 </Row>
-                <Row>
-                    <Col lg={6} className='chart-column'>
+                <Row className='justify-content-center text-center'>
+                    <Col lg={6} >
                         <ReportChartCard title="Motivos" chart={<PieChart chartData={faqsData}/>}/>
                     </Col>
-                    <Col lg={6} className='chart-column'>
+                    <Col lg={6} >
                         <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={advisorsData}/>}/>
                     </Col>
                 </Row>
