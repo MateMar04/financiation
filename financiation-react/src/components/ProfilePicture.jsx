@@ -1,12 +1,23 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import '../assets/styles/ProfilePicture.css';
 import AuthContext from "../context/AuthContext";
 import {Button, Col, Row} from "react-bootstrap";
+import {getMyUser, getUser} from "../services/UserServices";
 
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
-    const {authTokens, myUser} = useContext(AuthContext)
+    const {authTokens} = useContext(AuthContext)
+    const [myUser, setMyUser] = useState()
+
+    const getData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+    }
+
+    useEffect(() => {
+        getData()
+    }, []);
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
