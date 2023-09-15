@@ -51,9 +51,10 @@ export const CreateGroupPage = () => {
     }
 
     return (
-        <Container fluid>
-            <SucceedModal message="el coordinador" show={showsuccess} />
-            <FailedModal message="el coordinador" show={showfail} />
+
+            <Container fluid>
+                <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess}/>
+                <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail}/>
 
             <Form onSubmit={postGroup}>
                 <Container className="separation font text-center justify-content-center">
