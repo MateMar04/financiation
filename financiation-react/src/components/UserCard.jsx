@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
 import Checkbox from '@mui/material/Checkbox';
-import {Zoom} from "@mui/material";
+import {Zoom, useRadioGroup} from "@mui/material";
 import {getUserStatusesById} from "../services/StatusServices";
 import {getUserRolesById} from "../services/RoleServices";
 
@@ -18,8 +18,8 @@ export const UserCard = ({user}) => {
     let [status, setStatus] = useState([])
 
     useEffect(() => {
-        getUserStatusesById(authTokens.access, user.id_user_status).then(data => setStatus(data))
-        getUserRolesById(authTokens.access, user.id_role).then(data => setRole(data))
+        getUserStatusesById(authTokens.access, user?.user_status).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, user?.role).then(data => setRole(data))
     }, [])
 
     return (
@@ -27,7 +27,7 @@ export const UserCard = ({user}) => {
                 <Zoom in style={{ transitionDelay: '200ms'}}>
                 <div className={'UserCard font'}>
                     <Container>
-                    <Card className='UserCard font'>
+                    <Card className='UserCard font' onClick={() => console.log(user)}>
                         <Container className='UserCard'>
                             <Row key={user.id}>
                                 <Col md={1} xs={1} className='profileimage'>
