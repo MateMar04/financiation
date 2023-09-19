@@ -33,8 +33,8 @@ export const MainMenuPage = () => {
         getLatestVisits(authTokens.access).then(r => setLatestVisits(r))
         getLatestVisitRequests(authTokens.access).then(r => setLatestVisitRequests(r))
         getUserGroup(authTokens.access, usuario.id).then(r => setUserGroup(r))
-        getUserStatusesById(authTokens.access, myUser.user_status).then(data => setStatus(data))
-        getUserRolesById(authTokens.access, myUser.role).then(data => setRole(data))
+        getUserStatusesById(authTokens.access, usuario.user_status).then(data => setStatus(data))
+        getUserRolesById(authTokens.access, usuario.role).then(data => setRole(data))
     }
 
     useEffect(() => {
