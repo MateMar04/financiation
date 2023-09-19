@@ -7,7 +7,7 @@ import {getGroupAdvisorUsers} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 
-export const AdvisorMiniCardGroup = ({group, showButton}) => {
+export const AdvisorMiniCardGroup = ({group, showButton, DeleteAdvisor}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
@@ -16,10 +16,6 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
     }, [])
 
-    const DeleteAdvisor = (advisorId) => {
-        const updatedAdvisors = advisors.filter(advisor => advisor.id_user !== advisorId);
-        setAdvisors(updatedAdvisors);
-    };
     return (
         <>
             {advisors?.map((advisor) => (
@@ -41,7 +37,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => DeleteAdvisor(advisor.id_user)}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={DeleteAdvisor}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>

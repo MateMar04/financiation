@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import Accordion from '@mui/material/Accordion';
@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
 import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
+import {getGroupAdvisorUsers} from "../services/UserServices";
+import AuthContext from "../context/AuthContext";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
 import {Zoom} from "@mui/material";
@@ -15,7 +17,10 @@ import {Zoom} from "@mui/material";
 
 export const GroupCard = ({group}) => {
 
+    let {authTokens} = useContext(AuthContext)
     const [showButton, setShowButton] = useState(false);
+    let [advisors, setAdvisors] = useState([])
+    let [advisor, setAdvisor] = useState([])
 
     const handleAddButton = () => {
         setShowButton(!showButton);
@@ -26,8 +31,19 @@ export const GroupCard = ({group}) => {
     };
 
     const handleDeleteAdvisor = () => {
-        console.log('Asesor eliminado brother')
+        console.log('Coordinador eliminado brother')
     };
+
+    // const handleDeleteAdvisor = (advisorId) => {
+    //         console.log("Before deletion:", advisors);
+    //         const updatedAdvisors = advisors.filter(advisor => advisor.id_user !== advisorId);
+    //         console.log("After deletion:", updatedAdvisors);
+    //         setAdvisors(updatedAdvisors);
+    // };
+
+    // useEffect(() => {
+    //     getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+    // }, [])
 
     return (
         <Container fluid className='CompletlyContainer'>
@@ -55,7 +71,7 @@ export const GroupCard = ({group}) => {
                                 <Row>
                                     <Col>
                                         <AdvisorMiniCardGroup group={group} showButton={showButton}
-                                                              DeleteAdvisor={handleDeleteAdvisor}/>
+                                                              DeleteAdvisor={() => handleDeleteAdvisor(advisor.id_user)}/>
                                     </Col>
                                     <Col md={1}>
                                         <div className="vl"></div>
