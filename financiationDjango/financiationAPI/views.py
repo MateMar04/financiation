@@ -1,10 +1,12 @@
+from django.db import connection
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json
 
 
 # Create your views here.
@@ -134,7 +136,6 @@ class MayorApiView(APIView):
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
-
 
 
 class GroupApiView(APIView):
@@ -535,25 +536,140 @@ def getWhys(request):
     serializer = WhySerializer(whys, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getMayorById(request, id):
     mayor = Mayor.objects.get(id=id)
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 def deleteMayorById(request, id, *args, **kwargs):
-        mayor = Mayor.objects.get(id=id)
-        mayor.delete()
-        serializer = MayorSerializer(mayor, many=False)
-        return Response(serializer.data)
+    mayor = Mayor.objects.get(id=id)
+    mayor.delete()
+    serializer = MayorSerializer(mayor, many=False)
+    return Response(serializer.data)
+
 
 @api_view(['PUT'])
 def putMayorById(request, id, *args, **kwargs):
-        data = request.data
-        mayor = Mayor.objects.get(id=id)
-        mayor.first_name = data['first_name']
-        mayor.last_name = data['last_name']
-        mayor.save()
-        serializer = MayorSerializer(mayor, many=False)
-        return Response(serializer.data)
+    data = request.data
+    mayor = Mayor.objects.get(id=id)
+    mayor.first_name = data['first_name']
+    mayor.last_name = data['last_name']
+    mayor.save()
+    serializer = MayorSerializer(mayor, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getLatestVisitRequestCount(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT 'requests', count(*) "
+                       "from \"financiationAPI_request\" "
+                       "where visit_id = (SELECT id "
+                       "FROM \"financiationAPI_visit\" "
+                       "WHERE visit_status_id = 4 "
+                       "ORDER BY visit_date desc "
+                       "limit 1)", request)
+        row = cursor.fetchall()
+        return JsonResponse(convert_to_json(row), safe=False)
+
+
+@api_view(['GET'])
+def getLatestVisits(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(L.name, ' ', v.visit_date) as name, VS.name as status "
+                       "FROM \"financiationAPI_visit\" AS V "
+                       "INNER JOIN \"financiationAPI_visitstatus\" VS on VS.id = V.visit_status_id "
+                       "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
+                       "order by visit_date desc limit 10", request)
+        row = cursor.fetchall()
+        return JsonResponse(convert_to_json_large(row), safe=False)
+
+
+@api_view(['GET'])
+def getUserGroup(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("WITH roles as (SELECT 'Asesor' as role, id, group_id, user_id "
+                       "FROM \"financiationAPI_advisor\" "
+                       "UNION ALL "
+                       "SELECT 'Coordinador', id, group_id, user_id "
+                       "FROM \"financiationAPI_coordinator\"), "
+                       "persona_grupo_roles as (select r.role, r.group_id, g.name, r.user_id, u.first_name, u.last_name"
+                       " from roles as r "
+                       "inner join \"financiationAPI_group\" as g on (r.group_id = g.id) "
+                       "inner join \"financiationAPI_useraccount\" as u on (r.user_id = u.id)) "
+                       "SELECT * "
+                       "FROM persona_grupo_roles as a "
+                       "where a.user_id in (%s) "
+                       "union "
+                       "SELECT * "
+                       "FROM persona_grupo_roles as b "
+                       "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
+                       "order by 4", [id, id])
+        row = cursor.fetchall()
+        return JsonResponse(convert_to_json_larger(row), safe=False)
+
+
+# @api_view(['GET'])
+# def getMyUser(request, id):
+#     with connection.cursor() as cursor:
+#         cursor.execute("SELECT U.id, "
+#                        "ssn, "
+#                        "email, "
+#                        "first_name, "
+#                        "last_name, "
+#                        "phone_number, "
+#                        "profile_picture, "
+#                        "R.name, "
+#                        "US.name "
+#                        "FROM \"financiationAPI_useraccount\" AS U "
+#                        "INNER JOIN \"financiationAPI_role\" R ON U.role_id = R.id "
+#                        "INNER JOIN \"financiationAPI_userstatus\" US on US.id = U.user_status_id WHERE U.id = %s", [id])
+#         row = cursor.fetchall()
+#         print(row)
+#         return JsonResponse(convert_to_json_1(row), safe=False)
+
+
+def convert_to_json_large(data):
+    result = []
+
+    for item in data:
+        key, value = item
+        result.append({"name": key, "status": value})
+
+    return result
+
+
+def convert_to_json_larger(data):
+    result = []
+
+    for item in data:
+        role, group_id, group_name, user_id, first_name, last_name = item
+        result.append({
+            "role": role,
+            "group": group_name,
+            "first_name": first_name,
+            "last_name": last_name
+        })
+
+    return result
+
+
+# def convert_to_json_1(data):
+#     result = {
+#         "id": data[0][0],
+#         "ssn": str(data[0][1]),
+#         "mail": data[0][2],
+#         "first_name": data[0][3],
+#         "last_name": data[0][4],
+#         "phone_number": str(data[0][5]),
+#         "profile_picture": str(data[0][6]),  # Assuming you want to represent it as a string
+#         "role": data[0][7],
+#         "status": data[0][8]
+#     }
+#     return result
+
+

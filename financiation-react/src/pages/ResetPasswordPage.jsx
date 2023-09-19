@@ -32,7 +32,6 @@ const ResetPasswordPage = () => {
     };
 
     let resetPasswordEmail = async (e) => {
-        e.preventDefault()
         let response = await fetch('/auth/users/reset_password/', {
             method: "POST",
             headers: {
@@ -67,12 +66,13 @@ const ResetPasswordPage = () => {
                     <p className={'pResetPassword'}>¿No recuerdas tu contraseña? Introduce tu correo electrónico para cambiarla.</p>
 
                 </Row>
-                <Form>
+                <Form onSubmit={resetPasswordEmail}>
                     <Row className={'justify-content-center text-center'}>
                         <Form.Group>
                             <TextField
                                 label="Correo Electrónico"
                                 variant="outlined"
+                                name="email"
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start"> <MailOutlineIcon /> </InputAdornment>),
@@ -86,7 +86,7 @@ const ResetPasswordPage = () => {
                     </Row>
 
                     <Row className={'justify-content-center text-center'}>
-                        <Button type="submit" className="BtnEnviarResetPassword" onClick={showModal}>Enviar</Button>
+                        <Button type="submit" className="BtnEnviarResetPassword">Enviar</Button>
                     </Row>
                 </Form>
                 <Modal title="Activación de cuenta" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

@@ -1,0 +1,6 @@
+.BtnFlotante{
+    right: 3vw !important;
+    bottom: 5vh !important;
+    z-index: 99 !important;
+    position: fixed !important;
+}

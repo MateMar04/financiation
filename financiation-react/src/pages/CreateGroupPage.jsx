@@ -1,18 +1,18 @@
-import React, {useContext, useState, useEffect} from "react";
-import {Button, Container, Col, Row, Form} from "react-bootstrap";
+import React, { useContext, useState, useEffect } from "react";
+import { Button, Container, Col, Row, Form } from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import {SucceedModal} from "../components/SucceedModal"
-import {FailedModal} from "../components/FailedModal"
-import {getUsers} from "../services/UserServices";
+import { SucceedModal } from "../components/SucceedModal"
+import { FailedModal } from "../components/FailedModal"
+import { getUsers } from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-import {UserCard } from "../components/UserCard";
+import { UserCard } from "../components/UserCard";
 
 export const CreateGroupPage = () => {
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     let [users, setUsers] = useState([])
@@ -33,7 +33,7 @@ export const CreateGroupPage = () => {
                 "Authorization": "JWT " + String(authTokens.access),
                 "Accept": "application/json"
             },
-            body: JSON.stringify({"name": e.target.name.value})
+            body: JSON.stringify({ "name": e.target.name.value })
         })
         if (response.status === 200) {
             toggleModalsucceed();
@@ -51,55 +51,58 @@ export const CreateGroupPage = () => {
     }
 
     return (
+
             <Container fluid>
-                <SucceedModal message="el coordinador" show={showsuccess}/>
-                <FailedModal message="el coordinador" show={showfail}/>
+                <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess}/>
+                <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail}/>
 
-                <Form onSubmit={postGroup}>
-                    <Container className="separation font">
-                        <Row className={'justify-content-center'}>
-                            <Col md={8} xs={8}>
-                                <TextField
-                                    className="font"
-                                    fullWidth
-                                    id="standard-bare"
-                                    variant="outlined"
-                                    label={'Buscar Persona'}
-                                    InputProps={{
-                                        endAdornment: (
-                                            <IconButton>
-                                                <SearchIcon/>
-                                            </IconButton>
-                                        ),
-                                    }}
-                                />
-                            </Col>
-                            <Col md={1} xs={1} lg={1}>
-                                <IconButton  href="http://localhost:3000/groups/" sx={{width: 56, height: 56} }
-                                            className={'GroupsIcon'}><GroupsIcon/></IconButton>
-                            </Col>
-                        </Row>
-                    </Container>
+            <Form onSubmit={postGroup}>
+                <Container className="separation font text-center justify-content-center">
+                    <Row className='justify-content-center text-center'>
+                    <Col md={10}>
+                        <TextField
+                            fullWidth
+                            id="SearchVisit"
+                            variant="outlined"
+                            label='Buscar'
+                            className="SearchVisit"
+                            InputProps={{
+                                sx: { borderRadius: 5, color: "black" },
+                                endAdornment: (
+                                    <IconButton>
+                                        <SearchIcon />
+                                    </IconButton>
+                                ),
+                            }}
+                        />
+                    </Col>
 
-                    <div>
-                        {users?.map((user) => (
-                            <Container>
-                                <UserCard user={user}/>
-                            </Container>
-                        ))}
-                    </div>
+                        <Col md={2} xs={1} lg={1}>
+                            <IconButton href="/groups/" sx={{ width: 56, height: 56 }}
+                                className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                        </Col>
+                    </Row>
+                </Container>
 
-                    <Container>
-                            <Row className='justify-content-center '>
-                                <Col md={2} xs={2}>
-                                    <Form.Group>
-                                        <button type="submit" class="button-28" role="button">Crear Grupo</button>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                    </Container>
+                <Container className="justify-content-center">
+                    {users?.map((user) => (
+                        <Container className="containerUserCard justify-content-center text-center">
+                            <UserCard user={user} />
+                        </Container>
+                    ))}
+                </Container>
 
-                </Form>
-            </Container>
+
+                <Row className='text-center'>
+                    <Col>
+                        <Form.Group>
+                            <Button type="submit" className={'BtnCrearGrupo'}>Crear Grupo</Button>
+
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+            </Form >
+        </Container >
     )
 }

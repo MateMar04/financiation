@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {Button, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
@@ -9,21 +9,30 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {ProfilePicture} from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
+import {getUser} from "../services/UserServices";
 
 
 const ProfilePage = () => {
 
-    let {authTokens, logoutUser, myUser} = useContext(AuthContext)
+    let {authTokens, logoutUser, user} = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
     let [editMode, setEditMode] = useState(false);
+    const [myUser, setMyUser] = useState()
     const defaultFirstName = myUser?.first_name || '';
     const defaultLastName = myUser?.last_name || '';
     const defaultSSN = myUser?.ssn || '';
     const defaultPhoneNumber = myUser?.phone_number || '';
 
+    const getData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+    }
 
+    useEffect(() => {
+        getData()
+    }, []);
     const handleAddButton = () => {
         setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
@@ -133,8 +142,6 @@ const ProfilePage = () => {
                 </Row>
             </Container>
         </Container>
-
-
     );
 }
 
