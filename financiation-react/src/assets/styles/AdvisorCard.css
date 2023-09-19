@@ -1,0 +1,190 @@
+.nameuser{
+	margin-top: 1vh;
+}
+
+.UserCard{
+	margin: 0.3vw;
+    border-radius: 3vh !important;
+	height: 9vh;
+
+	
+	@media only screen and (min-width : 801px) {
+		font-size: 1vw;
+		}
+	@media only screen and (max-width : 800px) {
+		font-size: 2.6vw;
+		min-width:91vw !important;
+		margin-left: -3vw !important;
+		vertical-align: middle;
+		}
+}
+.profileimage{
+	@media only screen and (min-width : 801px) {
+		padding: 0.2vw;
+		}
+	@media only screen and (max-width : 800px) {
+		padding: 4vw;
+		margin-right: 4vw;
+		}
+}
+.avatar{
+	@media only screen and (min-width : 801px) {
+		width: 3vw !important;
+		height: 3vw !important;
+		}
+	@media only screen and (max-width : 800px) {
+		width: 10vw !important;
+		height: 10vw !important;
+		}
+}
+.status{
+	
+	@media only screen and (min-width : 801px) {
+		padding: 1vw;
+		}
+	@media only screen and (max-width : 800px) {
+		padding-top: 6.5vw;
+		padding-right: 3vw;
+		margin-left: -6vw;
+		}
+}
+.name{
+
+    text-align: center;
+	@media only screen and (min-width : 801px) {
+		padding: 0.5vh;
+		}
+	@media only screen and (max-width : 800px) {
+		padding-top: 4vw;
+		padding-right: 0vw;
+		margin-right: 5vw;
+		}
+}
+.check{
+	@media only screen and (min-width : 801px) {
+		padding: 1.1vw;
+		width: 1.3vw;
+		height: 1.3vw;
+		margin-left: 3vw;
+		}
+	@media only screen and (max-width : 800px) {
+		padding: 7vw;
+		width: 4vw;
+		height: 4vw;
+		margin-left: 3vw;
+		}
+	
+	
+}
+.roleocupado{
+	@media only screen and (min-width : 801px) {
+		padding: 1vw;
+		}
+	@media only screen and (max-width : 800px) {
+		padding: 5vw;
+		margin-left: -4vw;
+		}
+	
+}
+.circle_red{
+    background-color: #a32323;
+    border-radius: 15vw;
+    display: inline-block;
+	@media only screen and (min-width : 801px) {
+		height: 0.6vw;
+    	width: 0.6vw;
+		}
+	@media only screen and (max-width : 800px) {
+		height: 1vw;
+    	width: 1vw;
+		}
+}
+.circle_green{
+    background-color: #177c17;
+    border-radius: 15vw;
+    display: inline-block;
+	@media only screen and (min-width : 801px) {
+		height: 0.6vw;
+    	width: 0.6vw;
+		}
+	@media only screen and (max-width : 800px) {
+		height: 1vw;
+    	width: 1vw;
+		}
+}
+
+
+.content-select{
+	position: relative;
+	
+	@media only screen and (min-width : 801px) {
+		padding: 0.7vw;
+		}
+	@media only screen and (max-width : 800px) {
+		padding: 6vw;
+		margin-left: -5vw;
+		margin-right: 7vw;
+		}
+	
+}
+ 
+.content-select select{
+	
+	cursor: pointer;
+  	border: 0;
+	background: #f0f0f0;
+	color: #999;
+    border-radius: 15vw;
+    position: relative;
+    transition: all 0.25s ease;
+	@media only screen and (min-width : 801px) {
+		height: 2vw;
+		font-size: 1vw;
+		}	
+	@media only screen and (max-width : 800px) {
+		height: 6vw;
+		font-size: 2vw;
+		padding-right: 2vw;
+		}
+}
+ 
+.content-select select:hover{
+	background-color: #FFFFFF;
+}
+ 
+/* 
+Creamos la fecha que aparece a la izquierda del select.
+Realmente este elemento es un cuadrado que sólo tienen
+dos bordes con color y que giramos con transform: rotate(-45deg);
+*/
+.content-select i{
+	position: absolute;
+	right: 2vw;
+	width: 0.7vw;
+	height: 0.7vw;
+	display: block;
+	border-left:0.25vw solid #b4babd;
+	border-bottom:0.25vw solid #b4babd;
+	transform: rotate(-45deg); /* Giramos el cuadrado */
+	transition: all 0.25s ease;
+	@media only screen and (min-width : 801px) {
+		top: 1.2vw;
+		right: 2vw;
+		}
+	@media only screen and (max-width : 800px) {
+		right: -7.5vw;
+		top: 8.5vw;
+		}
+}
+
+.form-select{
+	@media only screen and (min-width : 801px) {
+		padding-left: 0.2 !important;
+		padding-top: 0%;
+		padding-bottom: 0%;
+		}
+	@media only screen and (max-width : 800px) {
+		width: auto;
+		}
+	
+}

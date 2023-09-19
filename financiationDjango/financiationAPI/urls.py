@@ -1,52 +1,106 @@
-from django.urls import path
+from django.urls import path, re_path
 
 from . import views
 
 urlpatterns = [
-    path('', views.getRoutes, name='routes'),
+    # Locations
+    path('locations', views.getLocations, name='locations'),
 
-    # GETs
-    path('advised/', views.getAdvised, name='advised'),
-    path('advised/<int:pk>/', views.getOneAdvised, name='oneAdvised'),
-    path('locality/', views.getLocalities, name='getLocalities'),
-    path('group/', views.getGroups, name='getGroups'),
-    path('visit-status/', views.getVisitSatuses, name='getVisitStatuses'),
-    path('agreement/', views.getAgreements, name='getAgreements'),
-    path('contacted-referrer/', views.getContactedReferrers, name='getContactedReferrers'),
-    path('address/', views.getAddresses, name='getAddresses'),
-    path('logo/', views.getLogos, name='getLogos'),
-    path('visit/', views.getVisits, name='getVisits'),
-    path('useraccount/', views.getUserAccount, name='getUserAccount'),
-    path('vehicles/', views.getVehicles, name='getVehicles'),
-    path('requeststatus/', views.getRequestStatus, name='getRequestStatus'),
-    path('contactedreferreremail/', views.getContactedReferrerEmail, name='getContactedReferrerEmail'),
-    path('contactedreferrerphone/', views.getContactedReferrerPhone, name='getContactedReferrerPhone'),
-    path('mayoremail/', views.getMayorEmail, name='getMayorEmail'),
-    path('mayorphone/', views.getMayorPhone, name='getMayorPhone'),
-    path('ministry-department/', views.getMinistryDepartments, name='getMinistryDepartments'),
-    path('faq/', views.getFaqs, name='getFaqs'),
-    path('coordinator/', views.getCoordinators, name='getCoordinators'),
-    path('coordinator/<int:pk>/', views.getOneCoordinator, name='getOneCoordinator'),
-    path('advisor/', views.getAdvisors, name='getAdvisors'),
-    path('advisor/<int:pk>/', views.getOneAdvisor, name='getOneAdvisor'),
-    path('cityDepartment/', views.getCityDepartments, name='getCityDepartment'),
-    path('userstatuses/', views.getUserStatuses, name='getUserStatuses'),
-    path('mayors/', views.getMayors, name='getMayors'),
-    path('vehiclebrand/', views.getVehicleBrands, name='getVehicleBrand'),
-    path('vehiclemodel/', views.getVehicleModels, name='getVehicleModels'),
-    path('politicparty/', views.getPoliticParties, name='getPoliticParties'),
-    path('vehicleplate/', views.getVehiclePlates, name='getVehiclePlates'),
-    path('role/', views.getRoles, name='getRoles'),
-    path('requeststatus/', views.getRequestStatuses, name='getRequestStatuses'),
-    path('request/', views.getRequests, name='getRequests'),
-    path('groups/<int:id_group>/advisors', views.getGroupAdvisors, name='getGroupAdvisors'),
-    path('groups/<int:id_group>/coordinators', views.getGroupCoordinators, name='getGroupCoordinators'),
+    # City Departments
+    path('city-departments', views.getCityDepartments, name='cityDepartments'),
 
-    # POSTs
-    path('visit/add/', views.postVisit, name='postVisit'),
-    path('group/add/', views.postGroup, name='postGroup'),
-    path('request/add/', views.postRequest, name='postRequest'),
-    path('coordinator/add/', views.postCoordinator, name='postCoordinator'),
-    path('advisor/add/', views.postAdvisor, name='postAdvisor'),
-    path('advised/add/', views.postAdvised, name='postAdvised'),
+    # Groups
+    path('groups', views.GroupApiView.as_view(), name='groups'),
+    path('groups/<int:id>', views.getGroupById, name='group'),
+    path('groups/user/<int:id>', views.getUserGroup, name='currenGroup'),
+
+    # Agreements
+    path('agreements', views.getAgreements, name='agreements'),
+
+    # Contacted Referrers
+    path('contacted-referrers', views.getContactedReferrers, name='contactedReferrers'),
+    path('contacted-referrers-emails', views.getContactedReferrersEmails, name='contactedReferrerEmails'),
+    path('contacted-referrers-phones', views.getContactedReferrersPhones, name='contactedReferrerPhones'),
+
+    # Addresses
+    path('addresses', views.getAddresses, name='addresses'),
+
+    # Visits
+    path('visits', views.VisitApiView.as_view(), name='visits'),
+    path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
+    path('visits/latest', views.getLatestVisits, name='latestVisits'),
+
+    # Users
+    path('users/<int:id>', views.getUserById, name='user'),
+    path('users', views.getUsers, name='users'),
+    path('advisor-users', views.getAdvisorUsers, name='advisorUsers'),
+    path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
+    path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
+    path('groups/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
+    # path('users/me/<int:id>', views.getMyUser, name='me'),
+
+    # Vehicles
+    path('vehicles', views.getVehicles, name='vehicles'),
+    path('vehicle-brands', views.getVehicleBrands, name='vehicleBrand'),
+    path('vehicle-models', views.getVehicleModels, name='vehicleModels'),
+    path('vehicle-plates', views.getVehiclePlates, name='vehiclePlates'),
+
+    # Politic Parties
+    path('politic-parties', views.getPoliticParties, name='politicParties'),
+
+    # Mayors
+    path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
+    path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
+
+    # Ministry Departments
+    path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
+
+    # FAQs
+    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
+
+    # Whys
+    path('whys', views.getWhys, name='whys'),
+
+    # Coordinators
+    path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
+    path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
+    path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
+
+    # Advisors
+    path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
+    path('advisors/<int:id>', views.getAdvisor, name='advisor'),
+    path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
+
+    # Roles
+    path('roles', views.getRoles, name='roles'),
+    path('roles/<int:id>', views.getRolesById, name='userStatuses'),
+
+    # Requests
+    path('requests', views.RequestApiView.as_view(), name='requests'),
+
+    # Statuses
+    path('visit-statuses', views.getVisitSatuses, name='visitStatuses'),
+    path('request-statuses', views.getRequestStatuses, name='requestStatuses'),
+    path('user-statuses', views.getUserStatuses, name='userStatuses'),
+    path('user-statuses/<int:id>', views.getStatusesById, name='userStatuses'),
+
+    # Reports
+    re_path(r'reports$', views.getRequests, name='report'),
+    re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
+    re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
+    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment,
+            name='report'),
+    re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
+    re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
+    re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
+
+    # EditarProfilePic
+    path('update-profile-picture/<int:id>', views.ProfilePictureView.as_view(), name='ProfilePicture'),
+
+    #mayors
+    path('mayors/<int:id>', views.getMayorById, name='mayor'),
+    path('mayors/delete/<int:id>', views.deleteMayorById, name='delete_mayor'),
+    path('mayors/put/<int:id>', views.putMayorById, name='put_mayor'),
+    path('mayors', views.MayorApiView.as_view(), name='mayors'),
+
 ]

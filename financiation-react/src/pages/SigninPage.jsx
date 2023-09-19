@@ -1,85 +1,224 @@
-import React, {useContext} from "react";
-import '../assets/styles/LoginPage.css'
+import React, { useContext } from "react";
+import '../assets/styles/SigninPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
-import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import { Col, Container, Form, Row, } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import PersonIcon from '@mui/icons-material/Person';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import PhoneIcon from '@mui/icons-material/Phone';
+import Button from '@mui/material/Button';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const SigninPage = () => {
-    let {signIn} = useContext(AuthContext)
+    let { signIn } = useContext(AuthContext)
     return (
-        <Container fluid className="general">
-            <img src={Logo} alt="Logo ministerio de finanzas"/>
-            <Container>
-                <Form onSubmit={signIn}>
-                    <Row className='justify-content-md-center'>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Nombre">
-                                <Form.Control placeholder="Nombre" type="text" className='input-required'
-                                              name='first_name' required/>
-                            </FloatingLabel>
-                        </Col>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Apellido">
-                                <Form.Control placeholder="Apellido" type="text" name='last_name' required/>
-                            </FloatingLabel>
+        <Container className="cardsign ">
+            <Row className={'justify-content-center text-center'}>
+                <img src={Logo} className="logosign" alt="Logo ministerio de finanzas" />
+            </Row>
+            <Row className={'justify-content-center text-center'}>
+                <h2 className="titsign">Crear Cuenta</h2>
+            </Row>
+            <Form onSubmit={signIn}>
+                <Row className={'justify-content-center text-center'}>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Nombre"
+                                type="text"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PersonIcon />
+                                        </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                name='first_name'
+                                required
+                                className={'InputSigninPage'}
+                                id="inputizq"
+                            />
+                        </Form.Group>
+                    </Col>
+
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Apellido"
+                                type="text"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PersonIcon />
+                                        </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                name='last_name'
+                                required
+                                className={'InputSigninPage'}
+                                id="inputder"
+                            />
+                        </Form.Group>
+                    </Col>
+
+                </Row>
+
+
+                <Row className={'justify-content-center text-center'}>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Teléfono"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <PhoneIcon />
+                                        </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                type="tel"
+                                name="phone_number"
+                                required
+                                className={'InputSigninPage'}
+                                id="inputizq"
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="CUIL"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start"> <AccountCircleOutlinedIcon /> </InputAdornment>),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                type="text"
+                                name='ssn'
+                                required
+                                className={'InputSigninPage'}
+                                id="inputder"
+                            />
+                        </Form.Group>
+                    </Col>
+
+                </Row>
+
+                <Row className={'justify-content-center text-center'}>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Correo Electrónico"
+                                type="email"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineIcon />
+                                        </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                name="email"
+                                required
+                                className={'InputSigninPage'}
+                                id="inputizq"
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Repetir Correo Electrónico"
+                                type="email"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <MailOutlineIcon />
+                                        </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                name="re_email"
+                                required
+                                className={'InputSigninPage'}
+                                id="inputder"
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+                <Row className={'justify-content-center text-center'}>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Contraseña"
+                                variant="outlined"
+                                type="password"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start"> <VpnKeyOutlinedIcon/> </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                name="password"
+                                required
+                                className={'InputSigninPage'}
+                                id="inputizq"
+                            />
+                        </Form.Group>
+                    </Col>
+                    <Col lg="5">
+                        <Form.Group>
+                            <TextField
+                                label="Repita la contraseña"
+                                variant="outlined"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start"> <VpnKeyOutlinedIcon/> </InputAdornment>
+                                    ),
+                                    sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                                }}
+                                type="password"
+                                name="re_password"
+                                required
+                                className={'InputSigninPage'}
+                                id="inputder"
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+
+                <Container>
+                    <Row className={'justify-content-center text-center'}>
+                        <Col>
+                            <Button variant="contained" id="botonsign" color="primary" type="submit">
+                                Crear
+                            </Button>
                         </Col>
                     </Row>
-
-                    <Row className='justify-content-md-center'>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Usuario">
-                                <Form.Control placeholder="Usuario" type="text" name='username' required/>
-                            </FloatingLabel>
-                        </Col>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="DNI">
-                                <Form.Control placeholder="DNI" type="number" name='ssn' required/>
-                            </FloatingLabel>
-                        </Col>
+                    <Row className={'justify-content-center text-center'}>
+                        <Link to="/login/"><Button variant="link" id="linksign" className="link">
+                            Ya tengo una cuenta
+                        </Button></Link>
                     </Row>
+                </Container>
 
-                    <Row className='justify-content-md-center'>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Correo Electrónico">
-                                <Form.Control placeholder="Correo electronico" type="email" name='email' required/>
-                            </FloatingLabel>
-                        </Col>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Telefono">
-                                <Form.Control placeholder="Telefono" type="tel" name='phone' required/>
-                            </FloatingLabel>
-                        </Col>
-                    </Row>
+            </Form>
 
-                    <Row className='justify-content-md-center'>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Contraseña">
-                                <Form.Control placeholder="Contraseña" type="password" name="password" required/>
-                            </FloatingLabel>
-                        </Col>
-                        <Col lg="5" className='input-required'>
-                            <FloatingLabel className='floatingLabel' label="Repita la contraseña">
-                                <Form.Control placeholder="Repita Contraseña" type="password" name="re_password"
-                                              required/>
-                            </FloatingLabel>
-                        </Col>
-                    </Row>
 
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Button className="create" type="submit">Crear Cuenta</Button>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Link to="/login/"><Button variant="link" className="link">Ya tengo una
-                                cuenta</Button></Link>
-                        </Row>
-                    </Container>
 
-                </Form>
-            </Container>
         </Container>
     );
 }

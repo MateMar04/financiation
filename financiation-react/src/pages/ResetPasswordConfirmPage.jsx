@@ -1,12 +1,16 @@
 import React from "react";
-import keyy from "../assets/images/keyy.gif";
-import {Button, Card, Col, Container, FloatingLabel, Form, Modal, Row} from "react-bootstrap";
-import Check from "../assets/images/checked.gif";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import '../assets/styles/ResetPasswordConfirm.css'
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
+import {useNavigate, useParams } from "react-router-dom";
+import Logo from "../assets/images/PRUEBA.PNG";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const ResetPasswordConfirmPage = () => {
 
-    const {uid, token} = useParams()
+    const { uid, token } = useParams()
     let history = useNavigate()
 
     let uidToken = uid
@@ -17,7 +21,6 @@ const ResetPasswordConfirmPage = () => {
 
 
     let resetPasswordConfirm = async (e) => {
-        e.preventDefault()
         let response = await fetch('/auth/users/reset_password_confirm/', {
             method: "POST",
             headers: {
@@ -40,73 +43,59 @@ const ResetPasswordConfirmPage = () => {
     }
 
     return (
-        <Container fluid className='fondo'>
-            <Container>
-                <Card id='carta'>
-                    <Card.Body>
-                        <img src={keyy} alt="" className='imgLogo'/>
 
-                        <Form onSubmit={resetPasswordConfirm}>
-                            <div className='py-2'>
-                                <FloatingLabel controlId="floatingTextarea2"
-                                               label="Introduzca su nueva contraseña">
-
-                                    <Form.Control className='form-control'
-                                                  type='password'
-                                                  placeholder='Confirm New Password'
-                                                  name='new_password'
-                                                  minLength='6'
-                                                  required>
-
-                                    </Form.Control>
-                                </FloatingLabel>
-                            </div>
-                            <div className='py-2'>
-                                <FloatingLabel controlId="floatingTextarea2" label="Repita su nueva contraseña">
-                                    <Form.Control className='form-control'
-                                                  type='password'
-                                                  placeholder='Repita la contraseña'
-                                                  name='re_new_password'
-                                                  minLength='6'
-                                                  required>
-                                    </Form.Control>
-                                </FloatingLabel>
-                            </div>
-                            <div className='py-2'>
-                                <button className='btn btn-primary' type='submit'>Cambiar Contraseña</button>
-                            </div>
-
-                        </Form>
+        <Container className="ContainerResetPasswordConfirm">
+            <Row className={'justify-content-center text-center'}>
+                <img src={Logo} className="ImgLogoResetPassword" alt="Logo del ministerio de finanzas" />
+            </Row>
+            <Row className={'justify-content-center text-center'}>
+                <h3 className={'h3LoginPage'}>Reestablece tu constraseña</h3>
+            </Row>
 
 
-                    </Card.Body>
-                </Card>
+            <Form onSubmit={resetPasswordConfirm}>
 
-            </Container>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Body>
-                    <Container className='justify-content-center'>
-                        <Row className='justify-content-center'>
-                            <Col md={5}>
-                                <img src={Check} alt="CheckButton" className="mx-auto img-fluid"/>
-                                <p className="text-center">¡Se a cambiado la contraseña correctamente!</p>
-                            </Col>
-                        </Row>
-                    </Container>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Link to={'/login'}>
-                        <Button variant="success">
-                            OK
-                        </Button>
-                    </Link>
-                </Modal.Footer>
-            </Modal>
-        </Container>
+                <Row className={'justify-content-center text-center'}>
+                    <Form.Group>
+                        <TextField
+                            label="Nueva Contraseña"
+                            variant="outlined"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start"> <AccountCircleOutlinedIcon /> </InputAdornment>),
+                                sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                            }}
+                            type="password"
+                            name='new_password'
+                            minLength='6'
+                            required
+                            className={'InputResetPasswordConfirm'}
+                        />
+                    </Form.Group>
+                </Row>
+
+                <Row className={'justify-content-center text-center py-4'}>
+                    <Form.Group>
+                        <TextField label="Repita la contraseña" variant="outlined" InputProps={{
+                            startAdornment: (<InputAdornment position="start"> <VpnKeyOutlinedIcon /> </InputAdornment>),
+                            sx: { borderRadius: 6, borderColor: '#f4f4f4' }
+                        }} type="password" name="re_new_password"  minLength='6' required className={'InputResetPasswordConfirm'} />
+                    </Form.Group>
+                </Row>
+
+                <Row className={'justify-content-center text-center'}>
+                    <Button type="submit" className="BtnIniciarSesionLogin">Reestablecer</Button>
+                </Row>
+            </Form>
+        
+
+            </Container >
+            
+    
 
 
     )
-        ;
+;
 }
 
 export default ResetPasswordConfirmPage

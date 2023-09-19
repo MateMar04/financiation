@@ -1,19 +1,87 @@
 .filters-column {
     padding: 3vh;
+    text-align: center;
+    margin: auto;
+    align-items: center;
 }
 
 .filter-card {
-    max-height: 40vh;
-    height: 40vh;
-    margin: 0;
+    height: 70vh;
+    background-color: #f4f4f4;
+    border-radius: 3vh;
+    border-color: #F4F4F4;
+    margin: 2vh;
+    padding-bottom: 5vh;
+
 }
 
 .filter-card-scroll {
-    overflow-y: scroll;
+        overflow-y: scroll;
+        scroll-margin-right: 300vh;
+        flex: 1; /* Hace que el área de desplazamiento ocupe el espacio restante */
+    
 }
 
+.visit-container {
+    background-color: #FFA794;
 
+}
 .chart-card {
     padding: 1vh;
     align-items: center;
+    border: none;
+}
+.titulolocalidad{
+    text-align: center;
+
+}
+.pepeloco{
+    text-align: center;
+    margin: auto;
+    align-items: center;
+
+}
+.container-white{
+  
+    background-color: white;
+    border-radius: 5vh;
+    margin-top: 2vh;
+    
+}
+.titulo1{
+    margin-top: 2vh;
+    margin-left: 3vh;
+}
+
+.container1{
+    margin-top:5vh;
+}
+
+.BtnGenera{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    margin-bottom: 5vh;
+}
+
+.chart-column{
+    text-align: center;
+    margin: 3vh;
+    border-radius: 5vh;
+    background-color: #f4f4f4;
+    width: 35vw;
+}
+
+@media (max-width: 768px) {
+    .chart-column{
+        text-align: center;
+        margin: 3vh;
+        border-radius: 5vh;
+        background-color: #f4f4f4;
+        width: 80vw;
+    }
+    
 }

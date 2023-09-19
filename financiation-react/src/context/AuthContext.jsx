@@ -1,6 +1,9 @@
-import {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
+import FailedModal from "../components/FailedModal";
+import LoadingModal from "../components/LoadingModal";
+import {getUserById} from "../services/UserServices";
 
 
 const AuthContext = createContext();
@@ -8,14 +11,25 @@ const AuthContext = createContext();
 export default AuthContext
 export const AuthProvider = ({children}) => {
 
+
+    const [showfail, setShowfailture] = useState(false);
+    const [showloading, setShowloading] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
+
+
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     let [loading, setLoading] = useState(true)
 
+
     let history = useNavigate()
+    const [show, setShow] = React.useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     let signIn = async (e) => {
         e.preventDefault()
+        setShowloading(true)
         let response = await fetch('/auth/users/', {
             method: 'POST',
             headers: {
@@ -24,18 +38,19 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({
                 "first_name": e.target.first_name.value,
                 "last_name": e.target.last_name.value,
-                "username": e.target.username.value,
                 "ssn": e.target.ssn.value,
                 "email": e.target.email.value,
-                "phone_number": e.target.phone.value,
+                "phone_number": e.target.phone_number.value,
                 "password": e.target.password.value,
                 "re_password": e.target.re_password.value
             })
         })
+        setShowloading(false)
         if (response.status === 201) {
             history('/')
-        } else {
-            alert('Something went wrong')
+
+        } else if (response.status === 400) {
+            toggleModalfailed();
         }
     }
 
@@ -47,7 +62,7 @@ export const AuthProvider = ({children}) => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({'username': e.target.username.value, 'password': e.target.password.value})
+            body: JSON.stringify({'ssn': e.target.ssn.value, 'password': e.target.password.value})
         })
         let data = await response.json()
         if (response.status === 200) {
@@ -56,8 +71,18 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('authTokens', JSON.stringify(data))
             history('/menu')
         } else {
-            alert('Something went wrong')
+            if (response.status === 401) {
+                alert("Revisa las credenciales ingresadas")
+
+            }
+            if (response.status === 400) {
+                alert("Ocurrio un error inesperado")
+            } else {
+                alert("Ocurrio un error inesperado")
+
+            }
         }
+
     }
 
     let logoutUser = () => {
@@ -76,7 +101,6 @@ export const AuthProvider = ({children}) => {
             body: JSON.stringify({'refresh': authTokens?.refresh})
         })
         let data = await response.json()
-
         if (response.status === 200) {
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
@@ -116,6 +140,10 @@ export const AuthProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={contextData}>
+
+            <FailedModal message="la visita" show={showfail}/>
+            <LoadingModal message="la visita" show={showloading}/>
+
             {loading ? null : children}
         </AuthContext.Provider>
     );

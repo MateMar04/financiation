@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Col, Container, Row} from "react-bootstrap";
+import {Button, Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ReportsPage.css"
-import {UserData} from "../components/Data";
 import BarChart from "../components/BarChart";
 import PieChart from "../components/PieChart";
 import PolarAreaChart from "../components/PolarAreaChart";
@@ -9,121 +8,89 @@ import AuthContext from "../context/AuthContext";
 import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
+import ReportsContext from "../context/ReportsContext";
+
 
 export const ReportsPage = () => {
 
 
-    const [data, setData] = useState({
-        labels: UserData.map((data) => data.year),
-        datasets: [{
-            label: "Pepe",
-            data: UserData.map((data) => data.userGain),
-            backgroundColor: ["#22AED1", "#688E26", "#DE541E", "#820933", "#F7A072"]
-        }]
-    })
-
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
-    let [faqs, setFaqs] = useState([])
-    let [visits, setVisits] = useState([])
     let {authTokens} = useContext(AuthContext)
+
+    let {
+        visits,
+        faqs,
+        getMinistryDepartmentsForFilter,
+        getLocationsForFilter,
+
+        advisorsData,
+        ministryDepsData,
+        faqsData,
+        visitsData,
+
+        generateReports
+    } = useContext(ReportsContext)
 
 
     useEffect(() => {
-        getLocalities()
-        getMinistryDepartments()
-        getFaqs()
-        getVisits()
+        getLocationsForFilter(authTokens.access).then(r => setLocalities(r))
+        getMinistryDepartmentsForFilter(authTokens.access).then(r => setMinistryDepartments(r))
     }, [])
-    let getLocalities = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/locality/', {headers: headers})
-        let data = await response.json()
-        setLocalities(data)
+
+    const buttonClick = async () => {
+        await generateReports()
     };
-
-    let getMinistryDepartments = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/ministry-department/', {headers: headers})
-        let data = await response.json()
-        setMinistryDepartments(data)
-    };
-
-    let getFaqs = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/faq/', {headers: headers})
-        let data = await response.json()
-        setFaqs(data)
-    };
-
-
-    let getVisits = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch('/api/visit/', {headers: headers})
-        let data = await response.json()
-        setVisits(data)
-    };
-
 
     return (
         <Container fluid>
-            <Container fluid>
+            <h1 className='titulo1'>Reportes</h1>
+            <Container  className='container-white'>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Localidades" items={localities}/>
+                        <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Departamentos" items={ministryDepartments}/>
+                        <ReportFilterCard title="Departamentos" items={ministryDepartments}
+                                          tokens={authTokens.access}/>
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Motivos" items={faqs}/>
+                        <ReportFilterCard title="Visitas" items={Object.values(visits)} tokens={authTokens.access}/>
                     </Col>
-                    <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Visitas" items={visits}/>
+                    <Col lg={6} className='filters-column'> 
+                        <ReportFilterCard title="Motivos" items={Object.values(faqs)} tokens={authTokens.access}/>
+                    </Col>
+                </Row>
+                <Row className='justify-content-center text-center'>
+                    <Col lg={2}>
+                        <Button  onClick={() => buttonClick()} className='BtnGenera'>Generar gráfico</Button>
                     </Col>
                 </Row>
             </Container>
 
-            <hr/>
+            
 
-            <Container fluid>
-                <Row>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Ciudades" chart={<BarChart chartData={data}/>}/>
+            <Container className='container1 container-white'>
+                <Row className='justify-content-center text-center'>
+                    <Col lg={6} >
+                        <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Organismos" chart={<BarChart chartData={data}/>}/>
+                    <Col lg={6} >
+                        <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
                     </Col>
                 </Row>
-                <Row>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Motivos" chart={<PieChart chartData={data}/>}/>
+                <Row className='justify-content-center text-center'>
+                    <Col lg={6} >
+                        <ReportChartCard title="Motivos" chart={<PieChart chartData={faqsData}/>}/>
                     </Col>
-                    <Col lg={6} className='chart-column'>
-                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={data}/>}/>
+                    <Col lg={6} >
+                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={advisorsData}/>}/>
                     </Col>
                 </Row>
             </Container>
         </Container>
-
     )
 }
 

@@ -1,21 +1,49 @@
 .menu-card {
-    margin: 4vh;
+    margin: 4.5vh;
+    transition: box-shadow 0.3s ease;
+    border-radius: 0; 
+    max-height: 500px;
 }
 
+.cardd {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-image {
+    max-height: 140px;
+    border-radius: 0; 
+  }
+
+.menuback {
+    margin: 0;
+    padding: 0;
+    background-color: lightblue;
+    position: absolute;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.card:hover {
+    box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.2); 
+  }
+  
 .menu-card-row {
-    padding: 1vh;
+    padding: 0.5vh;
 }
 
 .menu-card-body {
-    padding: 1vh;
+    padding: 2vh;
+    
 }
 
-.menu-card-link {
-    width: auto;
-    margin: 1vh;
+
+@media screen and (max-width: 768px) {
+    .menuback {
+        
+        background-color: lightgray;
+    }
 }
 
-.menu-card-button {
-    box-shadow: rgba(13, 110, 253, 0.3) 0px 7px 29px 0px;
 
-}

@@ -1,18 +1,32 @@
-.create-group-card {
-    padding: 2vh;
+.BtnSeeGroup {
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
-.upper-row {
-    padding: 3vh;
+.GroupsIcon {
+	align-items: center;
 }
 
-.create-group-column {
-    padding: 2vh;
-    max-height: 55vh;
-    overflow: hidden;
+body {
+	background-color: #F4F4F4;
+	font-family: poppins;
 }
 
-.create-group-card-scroll {
-    max-height: 100%;
-    overflow-y: scroll;
+.separation {
+	padding: 1vh;
+}
+
+.BtnCrearGrupo{
+	background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+	margin: 5vh;
+}
+
+.containerUserCard {
+	margin-top: 3vh;
 }

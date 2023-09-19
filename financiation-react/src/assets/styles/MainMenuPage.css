@@ -1,0 +1,55 @@
+.profile-card{
+    height: 60vh;
+    margin: 3vh;
+    border-radius: 5vh !important;
+    vertical-align: middle !important;
+}
+
+.first-row-main-menu-card{
+    padding-top: 2vh;
+}
+
+.p-main-menu-card{
+    margin: 0;
+}
+
+.last-visits-card{
+    height: 20vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
+}
+
+.next-visits-card{
+    height: 83vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
+}
+.name-title{
+    padding-top: 2vh;
+}
+
+.group-card-main-menu{
+    height: 40vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
+}
+
+.report-card-main-menu{
+    height: 40vh;
+    border-radius: 5vh !important;
+    margin: 3vh;
+}
+
+.barchart-report-card-main-menu{
+    width: auto;
+    height: auto
+}
+
+.ver-mas-bottom-visit{
+    bottom: 0 !important;
+}
+
+.container-visit-card-main-menu{
+    overflow-y:auto;
+    height: 65vh;
+}

@@ -66,7 +66,7 @@ DOMAIN = ('localhost:3000')
 SITE_NAME = ('Dragoncitos Financieros Moviles')
 
 DJOSER = {
-    'LOGIN_FIELD': 'username',
+    'LOGIN_FIELD': 'ssn',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': True,
     'PASSWORD_CHANGED_EMAIL_CONFIRMATION': True,
@@ -118,8 +118,12 @@ WSGI_APPLICATION = 'financiationDjango.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'financiation',
+        'USER': 'postgres',
+        'PASSWORD': 'pepe1234',
+        'HOST': 'localhost',
+        'PORT': '5432'
     }
 }
 

@@ -1,72 +1,75 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Card, Col, Container, Row} from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Col, Container, Row} from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
-import {UserParagraph} from "./UserParagraph";
-import AuthContext from "../context/AuthContext";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
+import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
+import CreateIcon from '@mui/icons-material/Create';
+import IconButton from "@mui/material/IconButton";
+import {Zoom} from "@mui/material";
 
 
 export const GroupCard = ({group}) => {
 
-    let {authTokens} = useContext(AuthContext)
-    let [coordinators, setCoordinators] = useState([])
-    let [advisors, setAdvisors] = useState([])
+    const [showButton, setShowButton] = useState(false);
 
-
-    useEffect(() => {
-        getGroupAdvisors()
-        getGroupCoordinators()
-    }, [])
-    let getGroupCoordinators = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/coordinators`, {headers: headers})
-        let data = await response.json()
-        setCoordinators(data)
+    const handleAddButton = () => {
+        setShowButton(!showButton);
     };
 
-    let getGroupAdvisors = async () => {
-        let headers = {
-            "Content-Type": "application/json",
-            "Authorization": "JWT " + String(authTokens.access),
-            "Accept": "application/json"
-        }
-        let response = await fetch(`/api/groups/${group.id}/advisors`, {headers: headers})
-        let data = await response.json()
-        setAdvisors(data)
+    const handleDeleteCoordinator = () => {
+        console.log('Coordinador eliminado brother')
     };
 
+    const handleDeleteAdvisor = () => {
+        console.log('Asesor eliminado brother')
+    };
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <Card className='groupcard'>
-                <Container fluid className='ContainerNameGroup'>
-                    <h2 className='b'>{group.name}</h2>
-                </Container>
-                <Row className='Columna1'>
+            <Zoom in style={{transitionDelay: '100ms'}}>
+                <div>
+                    <Accordion className={'accordion-group'}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon/>}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography>{group.name}</Typography>
 
-                    <Col>
-                        <Container>
-                            <h3 className='a'>Asesores</h3>
-                        </Container>
-                        {advisors?.map((advisor) => (
-                            <UserParagraph userId={advisor.id_user}/>
-                        ))}
+                        </AccordionSummary>
 
-                    </Col>
-                    <Col>
-                        <Container>
-                            <h3 className='a'>Coordinadores</h3>
-                        </Container>
-                        {coordinators?.map((coordinator) => (
-                            <UserParagraph userId={coordinator.id_user}/>
-                        ))}
-                    </Col>
-                </Row>
-            </Card>
-
+                        <AccordionDetails>
+                            <Row className={'justify-content-start pencil-groups'}>
+                                <Col md={2}>
+                                    <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
+                                        <CreateIcon/>
+                                    </IconButton>
+                                </Col>
+                            </Row>
+                            <Container>
+                                <Row>
+                                    <Col>
+                                        <AdvisorMiniCardGroup group={group} showButton={showButton}
+                                                              DeleteAdvisor={handleDeleteAdvisor}/>
+                                    </Col>
+                                    <Col md={1}>
+                                        <div className="vl"></div>
+                                    </Col>
+                                    <Col>
+                                        <CoordinatorMiniCardGroup group={group} showButton={showButton}
+                                                                  DeleteCoordinator={handleDeleteCoordinator}/>
+                                    </Col>
+                                </Row>
+                            </Container>
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
+            </Zoom>
         </Container>
 
     )
