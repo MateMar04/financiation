@@ -7,10 +7,7 @@ import {Link} from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Avatar from "@mui/material/Avatar";
 import {getUser} from "../services/UserServices";
-import {getMyUser, getUserById} from "../services/UserServices";
-import VisitCardMainMenu from "../components/VisitCardMainMenu";
-import BarChart from "../components/BarChart";
-import VerMasButton from "../components/VerMasButton";
+
 
 
 const NavbarComponent = () => {
