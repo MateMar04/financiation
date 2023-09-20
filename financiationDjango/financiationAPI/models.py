@@ -18,8 +18,9 @@ class CityDepartment(models.Model):
         return f"{self.name}"
 
 
-class MinistryDepartment(models.Model):
+class Division(models.Model):
     name = models.CharField(max_length=30)
+    observation = models.TextField(blank=True)
     description = models.TextField()
 
     def __str__(self):
@@ -52,7 +53,7 @@ class VisitStatus(models.Model):
 
 class Faq(models.Model):
     name = models.TextField()
-    ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
+    ministry_department = models.ForeignKey(Division, models.DO_NOTHING)
 
     def __str__(self):
         return f"{self.name}"
@@ -65,20 +66,21 @@ class Why(models.Model):
         return f"{self.name}"
 
 
-class Mayor(models.Model):
-    first_name = models.CharField(max_length=70)
-    last_name = models.CharField(max_length=70)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
 class Location(models.Model):
     name = models.CharField(max_length=70)
     department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Mayor(models.Model):
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
+    location = models.ForeignKey(Location, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class VehicleBrand(models.Model):
@@ -257,6 +259,7 @@ class Advisor(models.Model):
 
 class Request(models.Model):
     request_datatime = models.DateTimeField()
+    observation = models.TextField(blank=True)
     visit = models.ForeignKey(Visit, models.DO_NOTHING)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)

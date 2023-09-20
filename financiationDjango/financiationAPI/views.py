@@ -205,7 +205,7 @@ def getLocations(request):
 
 @api_view(['GET'])
 def getMinistryDepartments(request):
-    departments = MinistryDepartment.objects.all()
+    departments = Division.objects.all()
     serializer = MinistryDepartmentSerializer(departments, many=True)
     return Response(serializer.data)
 
