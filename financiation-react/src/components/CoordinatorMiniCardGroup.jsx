@@ -6,15 +6,18 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import {getGroupCoordinatorUsers} from "../services/UserServices";
+import {getCoordinators} from "../services/CoordinatorServices";
 
 export const CoordinatorMiniCardGroup = ({group,showButton}) => {
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
+    let [coordi, setCoordi] = useState([])
     const [coordinatorDeleted, setCoordinatorDeleted] = useState(false);
     const toggleCoordinatorDeleted = () => setCoordinatorDeleted(!coordinatorDeleted);
 
     useEffect(() => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getCoordinators(authTokens.access).then(data => setCoordi(data))
     }, [coordinatorDeleted])
 
     const handleDeleteCoordinator = (coordinatorId) => {
