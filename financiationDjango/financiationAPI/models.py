@@ -77,7 +77,7 @@ class Location(models.Model):
 class Mayor(models.Model):
     first_name = models.CharField(max_length=70)
     last_name = models.CharField(max_length=70)
-    location = models.ForeignKey(Location, models.DO_NOTHING)
+    location = models.ForeignKey(Location, models.DO_NOTHING, default=1)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
