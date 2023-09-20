@@ -15,14 +15,7 @@ const NavbarComponent = () => {
     let {user} = useContext(AuthContext)
     const [myUser, setMyUser] = useState()
 
-    // const getData = async () => {
-    //     const usuario = await getUser(authTokens.access)
-    //     setMyUser(usuario)
-    // }
-    //
-    // useEffect(() => {
-    //     getData()
-    // })
+
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
