@@ -2,31 +2,38 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import '../assets/styles/AddVisitPage.css';
 import Carousel from 'react-bootstrap/Carousel';
 import { Col, Container, Form, Row } from 'react-bootstrap';
+import { getMayors } from '../services/MayorServices'
 import AuthContext from '../context/AuthContext';
 import TextField from '@mui/material/TextField';
 import FailedModal from '../components/FailedModal';
 import SucceedModal from '../components/SucceedModal';
 import MayorCreateModal from '../components/MayorCreateModal';
 import MayorModifyModal from '../components/MayorModifyModal';
-import { Card, MenuItem, Select, CardContent, Switch } from '@mui/material';
-import {
-  CalendarMonthIcon,
-  PlaceOutlinedIcon,
-  HouseOutlinedIcon,
-  DirectionsIcon,
-  AccessTimeIcon,
-  StickyNote2OutlinedIcon,
-  HistoryToggleOffOutlinedIcon,
-  SocialDistanceOutlinedIcon,
-  HotelIcon,
-  PersonIcon,
-  Checkbox,
-  Button,
-  AddIcon,
-} from '@mui/icons-material';
 import CarouselButtons from '../components/CarouselButton';
-import { getMayors } from '../services/MayorServices';
 import CardItem from '../components/AddVisitCard';
+
+import { Card, MenuItem, Select, CardContent, Switch, Button } from '@mui/material';
+
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import DirectionsIcon from '@mui/icons-material/Directions';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
+import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
+import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
+import HotelIcon from '@mui/icons-material/Hotel';
+import PersonIcon from '@mui/icons-material/Person';
+import Checkbox from '@mui/material/Checkbox';
+import AddIcon from '@mui/icons-material/Add';
+import CreateIcon from '@mui/icons-material/Create';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
+import FlagIcon from '@mui/icons-material/Flag';
+import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
+import ArticleIcon from '@mui/icons-material/Article';
+import ShareLocationIcon from '@mui/icons-material/ShareLocation';
+
+
 const AddVisitPage = () => {
 
     let { authTokens } = useContext(AuthContext)
@@ -123,7 +130,7 @@ const AddVisitPage = () => {
                                         <CardItem icon={<AccessTimeIcon sx={{ fontSize: 65 }} />} label="Horario de Jornada" inputLabel1=" " inputLabel2=" " type="time" />
                                         <CardItem icon={<SocialDistanceOutlinedIcon sx={{ fontSize: 65 }} />} label="Distancia" inputLabel1=" " />
                                         <CardItem icon={<HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />} label="Tiempo de Viaje" inputLabel1=" " type="time" />
-                                        <CardItem icon={<HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />} label="¿Registro Civil?" inputLabel1=" " isSwitch={true} />
+                                        <CardItem icon={<StickyNote2OutlinedIcon sx={{ fontSize: 65 }} />} label="¿Registro Civil?" inputLabel1=" " isSwitch={true} />
 
                                     </Row>
                                 </Container>
@@ -139,38 +146,38 @@ const AddVisitPage = () => {
                                 </Row>
 
                                 <Row>
-                                    <CardItem label="Partido Politico" isSelect={true} />
+                                    <CardItem icon={<FlagIcon sx={{ fontSize: 65 }}/>} label="Partido Politico" isSelect={true} />
 
                                     <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-
                                         <CardContent className={'CenterContentCard'}>
                                             <Container>
-                                                <Row className="justify-content-center">
+                                                <Row>
                                                     <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
                                                     <CreateIcon className='iconedit' type="submit" onClick={() => toggleModalModify()}></CreateIcon>
                                                 </Row>
-                                                <Row className="justify-content-center">
-                                                    <PersonIcon className='iconperson' sx={{ fontSize: 65 }} />
+                                                <Row className='justify-content-center'>
+                                                    <PersonIcon sx={{ fontSize: 65 }} />
+                                                </Row>
+
+                                                <Row className='justify-content-center text-center'>
+                                                    <a>{'Intendente'}</a>
+                                                </Row>
+                                                <Row className='justify-content-center text-center'>
+                                                    <Col>
+                                                        <TextField id="standard-select-currency" select variant="standard" >
+                                                            {mayors?.map((mayor) => (
+                                                                <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
+                                                            ))}
+                                                        </TextField>
+
+                                                    </Col>
                                                 </Row>
                                             </Container>
-                                            <Row className='justify-content-center text-center'>
-                                                <a>{'Intendente'}</a>
-                                            </Row>
-                                            <Row className='justify-content-center text-center'>
-                                                <Col>
-                                                    <TextField id="standard-select-currency" select variant="standard" >
-                                                        {mayors?.map((mayor) => (
-                                                            <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
-                                                        ))}
-                                                    </TextField>
-
-                                                </Col>
-                                            </Row>
                                         </CardContent>
                                     </Card>
 
-                                    <CardItem label="Fondo de Modernización" isSwitch={true} />
-                                    <CardItem label="¿Flyer?" isSwitch={true} />
+                                    <CardItem icon={<RequestQuoteIcon sx={{fontSize:65}}/>} label="Fondo de Modernización" isSwitch={true} />
+                                    <CardItem icon={<ArticleIcon sx={{fontSize:65}}/>} label="¿Flyer?" isSwitch={true} />
                                 </Row>
 
 
@@ -230,7 +237,7 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                     <Col md={3}>
-                                        <CardItem label="Estado" isSelect={true} />
+                                        <CardItem icon={<ShareLocationIcon sx={{fontSize: 65}}/>} label="Estado" isSelect={true} />
                                     </Col>
                                 </Row>
                                 <Row className='justify-content-center text-center'>
