@@ -24,7 +24,17 @@ const NavbarComponent = () => {
     //     getData()
     // })
 
+    const getData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
 
+    }
+
+    useEffect(() => {
+
+        getData();
+
+    }, []);
     return (
 
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
