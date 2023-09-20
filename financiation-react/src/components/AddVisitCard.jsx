@@ -34,9 +34,9 @@ function InputField ({ label, type }){
   
 export const CardItem = ({icon, label, inputLabel1, inputLabel2, type, isSelect, isSwitch}) => {
     return (
-        <Col className='CenterContentCard'>
-        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-          <CardContent className={'CenterContentCard'}>
+        <Col className='CenterContent'>
+        <Card  className={'CardVisit'}>
+          <CardContent className={'CenterContent'}>
             <Container>
               <Row className="justify-content-center">
                 {icon}
