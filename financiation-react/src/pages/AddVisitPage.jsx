@@ -114,12 +114,12 @@ const AddVisitPage = () => {
             <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail} />
 
             <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
-            <Container className={'MiniContainerVisit'}>
+            <Container>
                 <Form onSubmit={postVisit}>
                     <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
-                        className={'CarouselAddVisit MiniContainerVisit justify-content-center text-center'}>
+                        className={'CarouselAddVisit justify-content-center text-center'}>
 
-                        <Carousel.Item>
+                        <Carousel.Item className='align-items-center'>
 
                             <Row className='justify-content-center text-center'>
                                 <Col>
@@ -145,7 +145,7 @@ const AddVisitPage = () => {
 
                         </Carousel.Item>
 
-                        <Carousel.Item>
+                        <Carousel.Item className='justify-content-center align-items-center'>
                             <Row className='justify-content-center text-center'>
                             <Col><CardItem icon={<HotelIcon sx={{ fontSize: 65 }} />} label="¿Hospedaje?" isSwitch={true} /></Col>
                             <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Colaborador Finanzas" isSelect={true} /></Col>
@@ -160,9 +160,9 @@ const AddVisitPage = () => {
                                     <Card className={'CardVisit'}>
                                         <CardContent className={'CenterContent'}>
                                             <Container>
-                                                <Row>
-                                                    <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                    <CreateIcon className='iconedit' type="submit" onClick={() => toggleModalModify()}></CreateIcon>
+                                                <Row className='justify-content-center'>
+                                                    <AddIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                    <CreateIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalModify()}></CreateIcon>
                                                 </Row>
                                                 <Row className='justify-content-center'>
                                                     <PersonIcon sx={{ fontSize: 65 }} />
@@ -190,7 +190,7 @@ const AddVisitPage = () => {
                             </Row>
                         </Carousel.Item>
 
-                        <Carousel.Item>
+                        <Carousel.Item className=' align-items-center'>
                             <Row className='justify-content-center text-center'>
                                 <Col>
                                     <ConveniosCard />
