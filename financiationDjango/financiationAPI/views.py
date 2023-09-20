@@ -551,6 +551,21 @@ def deleteMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def deleteadvisorById(request, id, *args, **kwargs):
+    advisors = Advisor.objects.filter(user=id)
+
+    for i in advisors:
+        i.delete()
+
+    return JsonResponse("OK", safe=False)
+
+@api_view(['DELETE'])
+def deletecoordinatorById(request, id, *args, **kwargs):
+    coordinator = Coordinator.objects.get(id=id)
+    coordinator.delete()
+    serializer = CoordinatorSerializer(coordinator, many=False)
+    return Response(serializer.data)
 
 @api_view(['PUT'])
 def putMayorById(request, id, *args, **kwargs):

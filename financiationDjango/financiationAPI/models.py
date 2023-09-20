@@ -263,7 +263,7 @@ class Request(models.Model):
     visit = models.ForeignKey(Visit, models.DO_NOTHING)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)
-    advisor = models.ForeignKey(Advisor, models.DO_NOTHING)
+    advisor = models.ForeignKey(Advisor, models.SET_NULL , null=True)
     status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
 
     def __str__(self):
