@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
 import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
 import {getGroupAdvisorUsers} from "../services/UserServices";
+import {getGroupCoordinatorUsers} from "../services/UserServices";
 import AuthContext from "../context/AuthContext";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
@@ -20,38 +21,15 @@ export const GroupCard = ({group}) => {
     let {authTokens} = useContext(AuthContext)
     const [showButton, setShowButton] = useState(false);
     let [advisors, setAdvisors] = useState([])
-    let [advisor, setAdvisor] = useState([])
+    let [coordinators, setCoordinators] = useState([])
 
     const handleAddButton = () => {
         setShowButton(!showButton);
     };
 
-    const handleDeleteCoordinator = () => {
-        console.log('Coordinador eliminado brother')
-    };
-
-    const handleDeleteAdvisor = (advisorId) => {
-        let response = fetch(`/api/advisors/delete/${advisorId}`, {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-        });
-        if (response.status === 200) {
-            toggleModalsucceed();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
-        }
-    };
-
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [])
 
     return (
@@ -79,15 +57,13 @@ export const GroupCard = ({group}) => {
                             <Container>
                                 <Row>
                                     <Col>
-                                        <AdvisorMiniCardGroup group={group} showButton={showButton}
-                                                              DeleteAdvisor={() => handleDeleteAdvisor(advisor.id)}/>
+                                        <AdvisorMiniCardGroup group={group} showButton={showButton}/>
                                     </Col>
                                     <Col md={1}>
                                         <div className="vl"></div>
                                     </Col>
                                     <Col>
-                                        <CoordinatorMiniCardGroup group={group} showButton={showButton}
-                                                                  DeleteCoordinator={handleDeleteCoordinator}/>
+                                        <CoordinatorMiniCardGroup group={group} showButton={showButton}/>
                                     </Col>
                                 </Row>
                             </Container>

@@ -65,12 +65,13 @@ urlpatterns = [
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
     path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
     path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
+    path('coordinators/delete/<int:id>', views.deletecoordinatorById, name='deletecoordinator'),
 
     # Advisors
     path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
-    path('advisors/delete/<int:id>', views.deletedvisorById, name='deleteAdvisor'),
+    path('advisors/delete/<int:id>', views.deleteadvisorById, name='deleteAdvisor'),
 
     # Roles
     path('roles', views.getRoles, name='roles'),
