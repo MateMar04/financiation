@@ -5,7 +5,7 @@ import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {getGroupCoordinatorUsers} from "../services/UserServices";
 
 export const CoordinatorMiniCardGroup = ({group,showButton}) => {
     let {authTokens} = useContext(AuthContext)
@@ -14,7 +14,7 @@ export const CoordinatorMiniCardGroup = ({group,showButton}) => {
     const toggleCoordinatorDeleted = () => setCoordinatorDeleted(!coordinatorDeleted);
 
     useEffect(() => {
-        getCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [coordinatorDeleted])
 
     const handleDeleteCoordinator = (coordinatorId) => {

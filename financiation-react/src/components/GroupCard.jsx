@@ -8,8 +8,6 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
 import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
-import {getGroupAdvisorUsers} from "../services/UserServices";
-import {getGroupCoordinatorUsers} from "../services/UserServices";
 import AuthContext from "../context/AuthContext";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
@@ -20,17 +18,10 @@ export const GroupCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     const [showButton, setShowButton] = useState(false);
-    let [advisors, setAdvisors] = useState([])
-    let [coordinators, setCoordinators] = useState([])
 
     const handleAddButton = () => {
         setShowButton(!showButton);
     };
-
-    useEffect(() => {
-        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
-    }, [])
 
     return (
         <Container fluid className='CompletlyContainer'>
