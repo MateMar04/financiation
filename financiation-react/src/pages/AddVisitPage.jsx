@@ -8,7 +8,7 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import MayorCreateModal from "../components/MayorCreateModal";
 import MayorModifyModal from "../components/MayorModifyModal";
-import Card from '@mui/material/Card';
+import {Card, MenuItem} from '@mui/material';
 import Select from "@mui/material/Select";
 import { CardContent, Switch } from "@mui/material";
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -28,6 +28,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { getMayors } from '../services/MayorServices'
 import CreateIcon from '@mui/icons-material/Create';
 import CardItem from '../components/AddVisitCard';
+import IntendenteCardAddVisit from '../components/IntendenteCardAddVisit';
 
 const AddVisitPage = () => {
 
@@ -142,7 +143,35 @@ const AddVisitPage = () => {
 
                                 <Row>
                                     <CardItem label="Partido Politico" isSelect={true} />
-                                    <CardItem icon={<AddIcon className='iconadd' sx={{ fontSize: 65 }} />} label="Intendente" isSelect={true} options={mayors?.map((mayor) => ({ value: mayor.id, label: `${mayor.first_name} ${mayor.last_name}` }))} />
+
+                                    <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
+
+                                        <CardContent className={'CenterContentCard'}>
+                                            <Container>
+                                                <Row className="justify-content-center">
+                                                    <AddIcon className='iconadd' type="submit" onClick={() => toggleModalCreate()}></AddIcon>
+                                                    <CreateIcon className='iconedit' type="submit" onClick={() => toggleModalModify()}></CreateIcon>
+                                                </Row>
+                                                <Row className="justify-content-center">
+                                                    <PersonIcon className='iconperson' sx={{ fontSize: 65 }} />
+                                                </Row>
+                                            </Container>
+                                            <Row className='justify-content-center text-center'>
+                                                <a>{'Intendente'}</a>
+                                            </Row>
+                                            <Row className='justify-content-center text-center'>
+                                                <Col>
+                                                    <TextField id="standard-select-currency" select variant="standard" >
+                                                        {mayors?.map((mayor) => (
+                                                            <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
+                                                        ))}
+                                                    </TextField>
+
+                                                </Col>
+                                            </Row>
+                                        </CardContent>
+                                    </Card>
+
                                     <CardItem label="Fondo de Modernización" isSwitch={true} />
                                     <CardItem label="¿Flyer?" isSwitch={true} />
                                 </Row>
@@ -204,7 +233,7 @@ const AddVisitPage = () => {
                                         </Card>
                                     </Col>
                                     <Col md={3}>
-                                        <CardItem  label="Estado" isSelect={true} />
+                                        <CardItem label="Estado" isSelect={true} />
                                     </Col>
                                 </Row>
                                 <Row className='justify-content-center text-center'>
