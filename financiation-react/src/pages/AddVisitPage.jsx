@@ -1,35 +1,32 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import "../assets/styles/AddVisitPage.css"
+import '../assets/styles/AddVisitPage.css';
 import Carousel from 'react-bootstrap/Carousel';
-import { Col, Container, Form, Row, } from "react-bootstrap";
-import AuthContext from "../context/AuthContext";
+import { Col, Container, Form, Row } from 'react-bootstrap';
+import AuthContext from '../context/AuthContext';
 import TextField from '@mui/material/TextField';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
-import MayorCreateModal from "../components/MayorCreateModal";
-import MayorModifyModal from "../components/MayorModifyModal";
-import {Card, MenuItem} from '@mui/material';
-import Select from "@mui/material/Select";
-import { CardContent, Switch } from "@mui/material";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
-import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
-import HotelIcon from '@mui/icons-material/Hotel';
-import PersonIcon from '@mui/icons-material/Person';
-import CarouselButtons from "../components/CarouselButton";
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import { getMayors } from '../services/MayorServices'
-import CreateIcon from '@mui/icons-material/Create';
+import FailedModal from '../components/FailedModal';
+import SucceedModal from '../components/SucceedModal';
+import MayorCreateModal from '../components/MayorCreateModal';
+import MayorModifyModal from '../components/MayorModifyModal';
+import { Card, MenuItem, Select, CardContent, Switch } from '@mui/material';
+import {
+  CalendarMonthIcon,
+  PlaceOutlinedIcon,
+  HouseOutlinedIcon,
+  DirectionsIcon,
+  AccessTimeIcon,
+  StickyNote2OutlinedIcon,
+  HistoryToggleOffOutlinedIcon,
+  SocialDistanceOutlinedIcon,
+  HotelIcon,
+  PersonIcon,
+  Checkbox,
+  Button,
+  AddIcon,
+} from '@mui/icons-material';
+import CarouselButtons from '../components/CarouselButton';
+import { getMayors } from '../services/MayorServices';
 import CardItem from '../components/AddVisitCard';
-import IntendenteCardAddVisit from '../components/IntendenteCardAddVisit';
-
 const AddVisitPage = () => {
 
     let { authTokens } = useContext(AuthContext)
