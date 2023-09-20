@@ -70,6 +70,7 @@ urlpatterns = [
     path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
+    path('advisors/delete/<int:id>', views.deletedvisorById, name='deleteAdvisor'),
 
     # Roles
     path('roles', views.getRoles, name='roles'),
@@ -88,8 +89,7 @@ urlpatterns = [
     re_path(r'reports$', views.getRequests, name='report'),
     re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
     re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
-    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment,
-            name='report'),
+    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment, name='report'),
     re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),

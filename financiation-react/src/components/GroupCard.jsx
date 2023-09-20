@@ -30,20 +30,29 @@ export const GroupCard = ({group}) => {
         console.log('Coordinador eliminado brother')
     };
 
-    const handleDeleteAdvisor = () => {
-        console.log('Coordinador eliminado brother')
+    const handleDeleteAdvisor = (advisorId) => {
+        let response = fetch(`/api/advisors/delete/${advisorId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+        } else if (response.status === 500) {
+            toggleModalfailed();
+        } else if (response.status === 401) {
+            toggleModalfailed();
+        } else if (response.status === 400) {
+            toggleModalfailed();
+        }
     };
 
-    // const handleDeleteAdvisor = (advisorId) => {
-    //         console.log("Before deletion:", advisors);
-    //         const updatedAdvisors = advisors.filter(advisor => advisor.id_user !== advisorId);
-    //         console.log("After deletion:", updatedAdvisors);
-    //         setAdvisors(updatedAdvisors);
-    // };
-
-    // useEffect(() => {
-    //     getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-    // }, [])
+    useEffect(() => {
+        getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
+    }, [])
 
     return (
         <Container fluid className='CompletlyContainer'>
@@ -71,7 +80,7 @@ export const GroupCard = ({group}) => {
                                 <Row>
                                     <Col>
                                         <AdvisorMiniCardGroup group={group} showButton={showButton}
-                                                              DeleteAdvisor={() => handleDeleteAdvisor(advisor.id_user)}/>
+                                                              DeleteAdvisor={() => handleDeleteAdvisor(advisor.id)}/>
                                     </Col>
                                     <Col md={1}>
                                         <div className="vl"></div>
