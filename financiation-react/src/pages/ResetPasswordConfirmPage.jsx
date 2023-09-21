@@ -62,7 +62,7 @@ const ResetPasswordConfirmPage = () => {
                             variant="outlined"
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start"> <AccountCircleOutlinedIcon /> </InputAdornment>),
+                                    <InputAdornment position="start"> <VpnKeyOutlinedIcon /> </InputAdornment>),
                                 sx: { borderRadius: 6, borderColor: '#f4f4f4' }
                             }}
                             type="password"
