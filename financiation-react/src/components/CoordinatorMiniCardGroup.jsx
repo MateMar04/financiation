@@ -17,11 +17,10 @@ export const CoordinatorMiniCardGroup = ({group,showButton}) => {
 
     useEffect(() => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
-        getCoordinators(authTokens.access).then(data => setCoordi(data))
     }, [coordinatorDeleted])
 
-    const handleDeleteCoordinator = (coordinatorId) => {
-        let response = fetch(`/api/coordinators/delete/${coordinatorId}`, {
+    const handleDeleteCoordinator = (coordinatorId, groupId) => {
+        let response = fetch(`/api/groups/${groupId}/coordinators/delete/${coordinatorId}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +61,7 @@ export const CoordinatorMiniCardGroup = ({group,showButton}) => {
                         </Col>
                         <Col  md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id)}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id, group.id)}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>

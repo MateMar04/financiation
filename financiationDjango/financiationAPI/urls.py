@@ -65,7 +65,7 @@ urlpatterns = [
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
     path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
     path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
-    path('coordinators/delete/<int:id>', views.deletecoordinatorById, name='deletecoordinator'),
+    path('groups/<int:groupId>/coordinators/delete/<int:id>', views.deletecoordinatorById, name='deletecoordinator'),
 
     # Advisors
     path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
