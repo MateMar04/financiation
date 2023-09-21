@@ -101,7 +101,40 @@
     }
   
 }
+@media (min-width: 767px) {
+    .CarouselAddVisit{
+        height: 85vh;
+        background-color: white;
+        border-radius: 6vh;
+    }
 
+    .CardVisit {
+        width: 15vw !important;
+        height: 38vh !important;
+        background-color: #f4f4f4 !important;
+        padding: 2vh;
+        border-radius: 4vh !important;
+        margin: 2vh !important;
+    }
+    
+ 
+    .CardVisitConvenios {
+        width: 60vw !important;
+        height: 38vh !important;
+        border-radius: 4vh !important;
+        margin: 2vh;
+    }
+    
+    .BtnAddVisit {
+        width: 25vw;
+        height: 8vh;
+        background-color: #53A6DC !important;
+        border-color: #53A6DC !important;
+        color: white !important;
+        border-radius: 3vh !important;
+        margin-bottom: 2vh !important;
+    }
+}
 @media (min-width: 1920px) {
     .CarouselAddVisit{
         height: 48vh;
