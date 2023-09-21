@@ -104,13 +104,13 @@
 
 @media (min-width: 1920px) {
     .CarouselAddVisit{
-        height: 80vh;
+        height: 48vh;
         background-color: white;
         border-radius: 6vh;
     }
 
     .CardVisit {
-        width: 15vw !important;
+        width: 12vw !important;
         height: 20vh !important;
         background-color: #f4f4f4 !important;
         padding: 2vh;
@@ -120,7 +120,7 @@
     
  
     .CardVisitConvenios {
-        width: 30vw !important;
+        width: 44vw !important;
         height: 20vh !important;
         border-radius: 4vh !important;
         margin: 2vh;
