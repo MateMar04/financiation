@@ -181,9 +181,9 @@ const FormPage = () => {
 
                 <Row className='justify-content-md-center py-2'>
                     <Col xs={12} md={10}>
-                        <p className={'pInFormPage'}>Departamento</p>
+                        <p className={'pInFormPage'}>Reparticiones</p>
                         <select
-                            placeholder="Departamento"
+                            placeholder="Reparticiones"
                             className='form-select department-select'
                             name="ministryDepartment"
 
