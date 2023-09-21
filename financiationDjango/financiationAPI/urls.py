@@ -71,7 +71,7 @@ urlpatterns = [
     path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
-    path('advisors/delete/<int:id>', views.deleteadvisorById, name='deleteAdvisor'),
+    path('groups/<int:groupId>/advisors/delete/<int:id>', views.deleteadvisorById, name='deleteAdvisor'),
 
     # Roles
     path('roles', views.getRoles, name='roles'),

@@ -18,8 +18,8 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
     }, [advisorDeleted])
 
-    const handleDeleteAdvisor = (advisorId) => {
-        let response = fetch(`/api/advisors/delete/${advisorId}`, {
+    const handleDeleteAdvisor = (advisorId, groupId) => {
+        let response = fetch(`/api/groups/${groupId}/advisors/delete/${advisorId}`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id)}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id, group.id)}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>
