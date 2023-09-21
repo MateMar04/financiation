@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {getLatestVisitRequests, getLatestVisits, getVisits} from "../services/VisitServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getFaqsByMinistryDepartment} from "../services/FaqServices";
-import {getMinistryDepartments} from "../services/MinistryDepartmentServices";
+import {getMinistryDepartments} from "../services/DivisionServices";
 import Avatar from '@mui/material/Avatar';
 import { getUser } from '../services/UserServices';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';

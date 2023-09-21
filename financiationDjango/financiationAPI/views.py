@@ -204,7 +204,7 @@ def getLocations(request):
 
 
 @api_view(['GET'])
-def getMinistryDepartments(request):
+def getDivisions(request):
     departments = Division.objects.all()
     serializer = MinistryDepartmentSerializer(departments, many=True)
     return Response(serializer.data)
@@ -481,7 +481,7 @@ def getTotalRequestsByAdvisor(request):
 
 
 @api_view(['GET'])
-def getTotalRequestsByMinistryDepartment(request):
+def getTotalRequestsByDivisions(request):
     return execute_query("SELECT MD.name, count(*) "
                          "FROM \"financiationAPI_request\" "
                          "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
