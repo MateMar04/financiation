@@ -238,7 +238,7 @@ const FormPage = () => {
 
             <Container className={'SecondContainerForm'}>
                 <Row>
-                    <p className={'SecondpInFormPage'}>Cantidad</p>
+                    <p className={'pInFormPage'}>Cantidad</p>
                 </Row>
 
                 <Row className={'justify-content-start py-2'} xs={12}>
