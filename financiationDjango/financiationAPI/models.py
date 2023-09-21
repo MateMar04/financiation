@@ -20,7 +20,6 @@ class CityDepartment(models.Model):
 
 class Division(models.Model):
     name = models.CharField(max_length=30)
-    observation = models.TextField(blank=True)
     description = models.TextField()
 
     def __str__(self):
@@ -259,7 +258,7 @@ class Advisor(models.Model):
 
 class Request(models.Model):
     request_datetime = models.DateTimeField()
-    observation = models.TextField(blank=True)
+    observation = models.TextField(blank=True, default='None')
     visit = models.ForeignKey(Visit, models.DO_NOTHING)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)
