@@ -173,7 +173,7 @@ const AddVisitPage = () => {
                                                 </Row>
                                                 <Row className='justify-content-center text-center'>
                                                     <Col>
-                                                        <TextField id="standard-select-currency" select variant="standard" >
+                                                        <TextField id="standard-select-currency" select className='InputVisit' variant="standard" >
                                                             {mayors?.map((mayor) => (
                                                                 <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
                                                             ))}

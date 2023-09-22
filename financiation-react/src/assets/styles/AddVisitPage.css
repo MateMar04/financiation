@@ -10,6 +10,10 @@
     padding: 2vh;
     border-radius: 8vh !important;
     margin: 2vh !important;
+    justify-content: center !important;
+}
+.InputVisit{
+    width: 8vw;
 }
 
 .carousel-indicators {
