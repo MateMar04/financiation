@@ -56,7 +56,7 @@ urlpatterns = [
     path('divisions', views.getDivisions, name='divisions'),
 
     # FAQs
-    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
+    path('faqs', views.getDivisionsFaqs, name='faqs'),
 
     # Whys
     path('whys', views.getWhys, name='whys'),

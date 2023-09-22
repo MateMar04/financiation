@@ -59,7 +59,7 @@ class AddressSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class MinistryDepartmentSerializer(ModelSerializer):
+class DivisionSerializer(ModelSerializer):
     class Meta:
         model = Division
         fields = '__all__'

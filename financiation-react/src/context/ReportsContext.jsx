@@ -83,7 +83,7 @@ export const ReportsProvider = ({children}) => {
 
     let getMinistryDepartmentsForFilters = async () => {
 
-        let response = await fetch('/api/ministry-departments', {headers: headers})
+        let response = await fetch('/api/divisions', {headers: headers})
         let data = await response.json()
 
         decorateData(data, 'ministryDepartment');

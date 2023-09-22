@@ -205,24 +205,24 @@ def getLocations(request):
 
 @api_view(['GET'])
 def getDivisions(request):
-    departments = Division.objects.all()
-    serializer = MinistryDepartmentSerializer(departments, many=True)
+    divisions = Division.objects.all()
+    serializer = DivisionSerializer(divisions, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMinistryDepartmentFaqs(request):
-    ministry_ids = parse_and_convert(request.GET.getlist('deps'))
+def getDivisionsFaqs(request):
+    divisions_ids = parse_and_convert(request.GET.getlist('deps'))
 
-    if isinstance(ministry_ids, type(None)):
+    if isinstance(divisions_ids, type(None)):
         faqs = Faq.objects.all()[:100]
     else:
         faqs = Faq.objects.raw(
             "SELECT F.id "
             "FROM \"financiationAPI_faq\" AS F "
-            "WHERE ministry_department_id IN %s "
+            "WHERE division_id IN %s "
             "GROUP BY F.id",
-            [ministry_ids])
+            [divisions_ids])
 
     serializer = FaqSerializer(faqs, many=True)
     return Response(serializer.data)
@@ -485,7 +485,7 @@ def getTotalRequestsByDivisions(request):
     return execute_query("SELECT MD.name, count(*) "
                          "FROM \"financiationAPI_request\" "
                          "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
-                         "INNER JOIN \"financiationAPI_ministrydepartment\" MD on MD.id = F.ministry_department_id "
+                         "INNER JOIN \"financiationAPI_division\" MD on MD.id = F.division_id "
                          "WHERE visit_id IN %s "
                          "AND faq_id IN %s "
                          "GROUP BY MD.name", request)
