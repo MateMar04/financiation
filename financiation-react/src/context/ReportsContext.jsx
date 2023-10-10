@@ -27,7 +27,7 @@ export const ReportsProvider = ({children}) => {
 
     let dataHandler = async (title, e) => {
         switch (title) {
-            case 'Departamentos':
+            case 'Reparticiones':
                 toggle('Departamentos', selectedMinistryDepartments, e)
                 await getFaqFromMinistryForFilters(authTokens.access).then(r => setFaqs(r))
                 break
@@ -86,7 +86,6 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch('/api/divisions', {headers: headers})
         let data = await response.json()
 
-        console.log(data)
 
         decorateData(data, 'ministryDepartment');
 
@@ -130,7 +129,6 @@ export const ReportsProvider = ({children}) => {
 
         if (checkText(text)) {
 
-            console.log(text)
             let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
             let data = await response.json()
 
