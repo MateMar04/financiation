@@ -14,28 +14,30 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
     const [advisorDeleted, setAdvisorDeleted] = useState(false);
     const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
 
+
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
     }, [advisorDeleted])
 
-    const handleDeleteAdvisor = (advisorId, groupId) => {
-        let response = fetch(`/api/groups/${groupId}/advisors/delete/${advisorId}`, {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-        });
-        if (response.status === 200) {
-            toggleModalsucceed();
-            toggleAdvisorDeleted();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
+    const handleDeleteAdvisor = async (advisorId, groupId) => {
+        try {
+            let response = await fetch(`/api/groups/${groupId}/advisors/delete/${advisorId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "JWT " + String(authTokens.access),
+                    "Accept": "application/json"
+                },
+            });
+            if (response.status === 200) {
+                // toggleModalsucceed();
+                toggleAdvisorDeleted();
+            } else {
+                // toggleModalfailed();
+                console.error("Coordinator deletion failed");
+            }
+        } catch (error) {
+            console.error("Error deleting coordinator:", error);
         }
     };
 

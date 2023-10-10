@@ -1,17 +1,16 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
-import {getGroupCoordinatorUsers} from "../services/UserServices";
-import {getCoordinators} from "../services/CoordinatorServices";
+import { getGroupCoordinatorUsers } from "../services/UserServices";
+import { getCoordinators } from "../services/CoordinatorServices";
 
-export const CoordinatorMiniCardGroup = ({group,showButton}) => {
-    let {authTokens} = useContext(AuthContext)
-    let [coordinators, setCoordinators] = useState([])
-    let [coordi, setCoordi] = useState([])
+export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
+    let { authTokens } = useContext(AuthContext)
+    const [coordinators, setCoordinators] = useState([])
     const [coordinatorDeleted, setCoordinatorDeleted] = useState(false);
     const toggleCoordinatorDeleted = () => setCoordinatorDeleted(!coordinatorDeleted);
 
@@ -19,24 +18,23 @@ export const CoordinatorMiniCardGroup = ({group,showButton}) => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [coordinatorDeleted])
 
-    const handleDeleteCoordinator = (coordinatorId, groupId) => {
-        let response = fetch(`/api/groups/${groupId}/coordinators/delete/${coordinatorId}`, {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-        });
-        if (response.status === 200) {
-            toggleModalsucceed();
-            toggleCoordinatorDeleted();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
+    const handleDeleteCoordinator = async (coordinatorId, groupId) => {
+        try {
+            const response = await fetch(`/api/groups/${groupId}/coordinators/delete/${coordinatorId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "JWT " + String(authTokens.access),
+                    "Accept": "application/json"
+                },
+            });
+            if (response.status === 200) {
+                toggleCoordinatorDeleted();
+            } else {
+                console.error("Coordinator deletion failed");
+            }
+        } catch (error) {
+            console.error("Error deleting coordinator:", error);
         }
     };
 
@@ -59,20 +57,17 @@ export const CoordinatorMiniCardGroup = ({group,showButton}) => {
                                 <sub className='SecondaryText'>Coordinador</sub>
                             </Row>
                         </Col>
-                        <Col  md={1} xs={1}>
+                        <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id, group.id)}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id, group.id)}><ClearIcon /></IconButton>}
                             </Row>
                         </Col>
                     </Row>
-                    <hr/>
+                    <hr />
                 </Container>
             ))}
         </>
-
-
     )
 }
-
 
 export default CoordinatorMiniCardGroup;
