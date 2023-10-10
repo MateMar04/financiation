@@ -86,6 +86,8 @@ export const ReportsProvider = ({children}) => {
         let response = await fetch('/api/divisions', {headers: headers})
         let data = await response.json()
 
+        console.log(data)
+
         decorateData(data, 'ministryDepartment');
 
         return data
@@ -128,6 +130,7 @@ export const ReportsProvider = ({children}) => {
 
         if (checkText(text)) {
 
+            console.log(text)
             let response = await fetch(`/api/faqs?deps=${text}`, {headers: headers})
             let data = await response.json()
 
