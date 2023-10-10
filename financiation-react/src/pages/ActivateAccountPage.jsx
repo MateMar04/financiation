@@ -58,7 +58,7 @@ const ActivateAccountPage = () => {
                     </Row>
                     <Row className={'justify-content-center text-center'}>
                         <Col>                        
-                        <Button className="botonactivate" type="submit" onClick={pressedVerifyButton}>Activar Cuenta</Button>
+                        <Button className="botonactivate" type="submit" onClick={pressedVerifyButton}>Validar Cuenta</Button>
                         </Col>
 
                     </Row>
@@ -68,7 +68,7 @@ const ActivateAccountPage = () => {
 
                 <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>
-                ¡Su cuenta ha sido verficada!
+                ¡Su cuenta ha sido validada!
                 </Alert>
             </Snackbar>
             </Container>
