@@ -59,7 +59,7 @@ class RequestApiView(APIView):
         requestStatus = RequestStatus.objects.get(id=data['status_id'])
 
         request = Request.objects.create(
-            request_datatime=data['request_datetime'],
+            request_datetime=data['request_datetime'],
             visit=visit,
             advisor=advisor,
             faq=faq,
