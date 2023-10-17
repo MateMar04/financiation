@@ -52,11 +52,11 @@ urlpatterns = [
     path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
     path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
 
-    # Ministry Departments
-    path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
+    # Divisions
+    path('divisions', views.getDivisions, name='divisions'),
 
     # FAQs
-    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
+    path('faqs', views.getDivisionsFaqs, name='faqs'),
 
     # Whys
     path('whys', views.getWhys, name='whys'),
@@ -65,11 +65,13 @@ urlpatterns = [
     path('coordinators', views.CoordinatorApiView.as_view(), name='coordinators'),
     path('coordinators/<int:id>', views.getCoordinator, name='coordinator'),
     path('groups/<int:id>/coordinators', views.getGroupCoordinators, name='groupCoordinators'),
+    path('coordinators/delete/<int:id>', views.deletecoordinatorById, name='deletecoordinator'),
 
     # Advisors
     path('advisors', views.AdvisorApiView.as_view(), name='advisors'),
     path('advisors/<int:id>', views.getAdvisor, name='advisor'),
     path('groups/<int:id>/advisors', views.getGroupAdvisors, name='groupAdvisors'),
+    path('advisors/delete/<int:id>', views.deleteadvisorById, name='deleteAdvisor'),
 
     # Roles
     path('roles', views.getRoles, name='roles'),
@@ -88,8 +90,7 @@ urlpatterns = [
     re_path(r'reports$', views.getRequests, name='report'),
     re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
     re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
-    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment,
-            name='report'),
+    re_path(r'reports/total-requests-by-divisions$', views.getTotalRequestsByDivisions, name='report'),
     re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),

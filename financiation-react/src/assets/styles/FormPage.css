@@ -36,7 +36,7 @@
 }
 
 .pInFormPage{
-    transform: translateY(2vh);
+    transform: translateY(1.5vh);
 }
 
 .form-select{
@@ -65,9 +65,6 @@
     width: 10vw !important;
         background-color: white;
         border-radius: 2vh;
-}
-.SecondpInFormPage{
-    transform: translateY(3.5vh);
 }
 
 @media (max-width: 800px) {
