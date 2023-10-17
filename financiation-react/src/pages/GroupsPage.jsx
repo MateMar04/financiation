@@ -7,6 +7,7 @@ import '../assets/styles/GroupsPage.css'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
+import FlotantButton from "../components/FlotantButton";
 
 
 export const GroupsPage = () => {
@@ -21,15 +22,7 @@ export const GroupsPage = () => {
         <div>
             <Container>
                 <Link to='/groups/add'>
-                    <Fab
-                        variant="extended"
-                        size='medium'
-                        className="BtnFlotante"
-                        color="primary"
-                        >
-                        <AddIcon />
-                        Nuevo Grupo
-                    </Fab>
+                    <FlotantButton name='Nuevo Grupo'/>
                     </Link>
                 {groups?.map((group) => (
                     <Container>
