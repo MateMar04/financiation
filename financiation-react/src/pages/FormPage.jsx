@@ -18,6 +18,8 @@ import {DateTimeField} from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import {getUserGroup} from "../services/GroupServices";
 import {Modal} from 'antd';
+import LoadingModal from "../components/LoadingModal"; //fasfafasffa
+
 
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
@@ -34,7 +36,9 @@ const FormPage = () => {
     let [user, setUser] = useState([])
     let [visits, setVisits] = useState([])
     let [whys, setWhys] = useState([])
+    let [loading, setLoading] = useState(true) //qwqrqwrqr
     const [show, setShow] = React.useState(false);
+    const [showloading, setShowloading] = useState(false); //werwer
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -92,6 +96,7 @@ const FormPage = () => {
     }, [])
 
     let postRequest = async (e) => {
+        setShowloading(true)   //asfafasfasf
         let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
@@ -108,6 +113,7 @@ const FormPage = () => {
                 "status_id": 1
             })
         })
+        setShowloading(false) //adsdad
         if (response.status === 200) {
             handleShow()
         } else {
@@ -264,7 +270,10 @@ const FormPage = () => {
                     Consulta enviada!
                 </Alert>
             </Snackbar>
-
+            
+            <Container> 
+                <LoadingModal message="la visita" show={showloading}/>
+            </Container> 
 
         </Form>
 
