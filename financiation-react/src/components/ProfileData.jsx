@@ -1,6 +1,7 @@
 import {Col, Container, Row} from "react-bootstrap";
 import '../assets/styles/ProfileData.css'
-
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 export const ProfileData = ({username, firstName, lastName, email, ssn, phone_number}) => {
     return (
