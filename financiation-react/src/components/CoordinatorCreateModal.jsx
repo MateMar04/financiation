@@ -17,7 +17,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-export const AdvisorCoordinatorCreateModal = (props) => {
+export const CoordinatorCreateModal = (group, props) => {
 
     let { authTokens } = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
@@ -25,24 +25,17 @@ export const AdvisorCoordinatorCreateModal = (props) => {
     const [users, setUsers] = React.useState();
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [selectedUserId, setSelectedUserId] = useState(null);
     useEffect(() => {
         getUsers(authTokens.access).then(data => setUsers(data));
     }, []);
 
-    let postCoordinator = async (e) => {
-        e.preventDefault();
-
-        const firstName = e.target.first_name.value;
-        const lastName = e.target.last_name.value;
-
-        // Check if either the first name or last name is empty
-        if (!firstName || !lastName) {
-            // Display an error message or take appropriate action
+    let postCoordinator = async () => {
+        if (selectedUserId === null) {
             toggleModalfailed();
             return;
         }
-
-        let response = await fetch('/api/mayors', {
+        let response = await fetch('/api/coordinators', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -50,13 +43,13 @@ export const AdvisorCoordinatorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": firstName,
-                "last_name": lastName
+                "id_user": selectedUserId,
+                "id_group": group.id
             })
-        });
+        })
         if (response.status === 200) {
             toggleModalsucceed();
-        } else if (response.status === 500) {
+        } else {
             toggleModalfailed();
         }
     }
@@ -77,6 +70,8 @@ export const AdvisorCoordinatorCreateModal = (props) => {
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 label="Nombre de la persona"
+                                value={selectedUserId} 
+                                onChange={(event) => setSelectedUserId(event.target.value)}
                             >
                                 {users?.map((user) => (
                                     <MenuItem key={user.id} value={user.id}>{user.name}{user.last_name}</MenuItem>
@@ -100,4 +95,4 @@ export const AdvisorCoordinatorCreateModal = (props) => {
     )
 }
 
-export default AdvisorCoordinatorCreateModal
+export default CoordinatorCreateModal

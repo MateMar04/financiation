@@ -13,7 +13,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
 import AddIcon from '@mui/icons-material/Add';
 import {Zoom} from "@mui/material";
-import AdvisorCoordinatorCreateModal from './CoordinatorCreateModal';
+import CoordinatorCreateModal from './CoordinatorCreateModal';
 
 export const GroupCard = ({group}) => {
 
@@ -28,7 +28,7 @@ export const GroupCard = ({group}) => {
 
     return (
         <Container fluid className='CompletlyContainer'>
-            <AdvisorCoordinatorCreateModal onClose={() => toggleCreationModal()} show={showCreationModal}/>
+            <CoordinatorCreateModal group={group} onClose={() => toggleCreationModal()} show={showCreationModal}/>
             <Zoom in style={{transitionDelay: '100ms'}}>
                 <div>
                     <Accordion className={'accordion-group'}>
