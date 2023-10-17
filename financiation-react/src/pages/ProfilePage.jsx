@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
-    let [editMode, setEditMode] = useState(false);
+    const [editMode, setEditMode] = useState(false); 
     const [myUser, setMyUser] = useState()
     const defaultFirstName = myUser?.first_name || '';
     const defaultLastName = myUser?.last_name || '';
@@ -38,6 +38,11 @@ const ProfilePage = () => {
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
+    const handleEdit = () => {
+        setEditMode(true);
+      };
+    
+
 
 
     return (
@@ -73,10 +78,10 @@ const ProfilePage = () => {
                 <Row className={"d-flex justify-content-center text-center"}>
                     <Col md={6} className="py-3">
 
-                        <TextField variant='outlined' label='Nombre' required className='profileTextField'
+                        <TextField onClick={handleEdit} variant='outlined' label='Nombre' required className='profileTextField'
                                    value={defaultFirstName} InputProps={{
                             sx: {borderRadius: 5},
-                            readOnly: !editMode
+                            readOnly:editMode ? false : true
                         }}></TextField>
 
                     </Col>
