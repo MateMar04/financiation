@@ -7,14 +7,37 @@ import {getGroupAdvisorUsers} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 
-export const AdvisorMiniCardGroup = ({group, showButton, DeleteAdvisor}) => {
+export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     let {authTokens} = useContext(AuthContext)
     let [advisors, setAdvisors] = useState([])
+    const [advisorDeleted, setAdvisorDeleted] = useState(false);
+    const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-    }, [])
+    }, [advisorDeleted])
+
+    const handleDeleteAdvisor = (advisorId) => {
+        let response = fetch(`/api/advisors/delete/${advisorId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+            toggleAdvisorDeleted();
+        } else if (response.status === 500) {
+            toggleModalfailed();
+        } else if (response.status === 401) {
+            toggleModalfailed();
+        } else if (response.status === 400) {
+            toggleModalfailed();
+        }
+    };
 
     return (
         <>
@@ -37,7 +60,7 @@ export const AdvisorMiniCardGroup = ({group, showButton, DeleteAdvisor}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={DeleteAdvisor}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id)}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>

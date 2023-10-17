@@ -6,7 +6,7 @@ from .models import *
 
 admin.site.register(Agreement)
 admin.site.register(CityDepartment)
-admin.site.register(MinistryDepartment)
+admin.site.register(Division)
 admin.site.register(Address)
 admin.site.register(UserStatus)
 admin.site.register(VisitStatus)
