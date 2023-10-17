@@ -17,7 +17,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-export const CoordinatorCreateModal = (group, props) => {
+export const CoordinatorCreateModal = (props) => {
 
     let { authTokens } = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
@@ -44,7 +44,7 @@ export const CoordinatorCreateModal = (group, props) => {
             },
             body: JSON.stringify({
                 "id_user": selectedUserId,
-                "id_group": group.id
+                "id_group": props.group.id
             })
         })
         if (response.status === 200) {
@@ -60,7 +60,7 @@ export const CoordinatorCreateModal = (group, props) => {
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Container className="containermayor container-addmayor-modal">
 
-                <Form onSubmit={postCoordinator}>
+                <Form>
                     <h3 className={'h3LoginPage crearintendente'}>Crear coordinador</h3>
 
                     <Box sx={{ minWidth: 120 }}>
@@ -80,7 +80,7 @@ export const CoordinatorCreateModal = (group, props) => {
                         </FormControl>
                     </Box>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' type="submit">Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postCoordinator}>Registrar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '10px' }}>
                         <Button variant="outlined" color="primary" onClick={props.onClose}>
@@ -90,8 +90,6 @@ export const CoordinatorCreateModal = (group, props) => {
                 </Form>
             </Container>
         </Modal>
-
-
     )
 }
 
