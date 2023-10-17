@@ -5,15 +5,41 @@ import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
-import {getCoordinatorUsers} from "../services/CoordinatorServices";
+import {getGroupCoordinatorUsers} from "../services/UserServices";
+import {getCoordinators} from "../services/CoordinatorServices";
 
-export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator}) => {
+export const CoordinatorMiniCardGroup = ({group,showButton}) => {
     let {authTokens} = useContext(AuthContext)
     let [coordinators, setCoordinators] = useState([])
+    let [coordi, setCoordi] = useState([])
+    const [coordinatorDeleted, setCoordinatorDeleted] = useState(false);
+    const toggleCoordinatorDeleted = () => setCoordinatorDeleted(!coordinatorDeleted);
 
     useEffect(() => {
-        getCoordinatorUsers(authTokens.access).then(data => setCoordinators(data))
-    }, [])
+        getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
+        getCoordinators(authTokens.access).then(data => setCoordi(data))
+    }, [coordinatorDeleted])
+
+    const handleDeleteCoordinator = (coordinatorId) => {
+        let response = fetch(`/api/coordinators/delete/${coordinatorId}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+            toggleCoordinatorDeleted();
+        } else if (response.status === 500) {
+            toggleModalfailed();
+        } else if (response.status === 401) {
+            toggleModalfailed();
+        } else if (response.status === 400) {
+            toggleModalfailed();
+        }
+    };
 
     return (
         <>
@@ -36,7 +62,7 @@ export const CoordinatorMiniCardGroup = ({group, showButton, DeleteCoordinator})
                         </Col>
                         <Col  md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={DeleteCoordinator}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id)}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>
