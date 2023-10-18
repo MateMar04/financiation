@@ -3,10 +3,9 @@ import { Col, Container, Row } from 'react-bootstrap';
 import "../assets/styles/AdvisorMiniCard.css"
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
+import { getGroupCoordinatorUsers } from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
-import { getGroupCoordinatorUsers } from "../services/UserServices";
-import { getCoordinators } from "../services/CoordinatorServices";
 import AddIcon from '@mui/icons-material/Add';
 import CoordinatorCreateModal from './CoordinatorCreateModal';
 

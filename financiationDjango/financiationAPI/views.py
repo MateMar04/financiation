@@ -188,8 +188,8 @@ class AdvisorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         advisor = Advisor.objects.create(
-            user_id=user,
-            group_id=group,
+            user_id=user.id,
+            group_id=group.id,
         )
 
         serializer = AdvisorSerializer(advisor, many=False)

@@ -17,7 +17,7 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 
-export const AdvisotCreateModal = (props) => {
+export const AdvisorCreateModal = (props) => {
 
     let { authTokens } = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
@@ -61,7 +61,7 @@ export const AdvisotCreateModal = (props) => {
             <Container className="containermayor container-addmayor-modal">
 
                 <Form>
-                    <h3 className={'h3LoginPage crearintendente'}>Crear coordinador</h3>
+                    <h3 className={'h3LoginPage crearintendente'}>Crear asesor</h3>
 
                     <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
@@ -84,7 +84,7 @@ export const AdvisotCreateModal = (props) => {
                         </FormControl>
                     </Box>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postCoordinator}>Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postAdvisor}>Registrar</Button>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '10px' }}>
                         <Button variant="outlined" color="primary" onClick={props.onClose}>

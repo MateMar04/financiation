@@ -49,10 +49,10 @@
 }
 
 .centered_icon {
-    margin-left: 22vh;
-    margin-right: 30vh;
-
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
 .buttonWithBorder {
     border-radius: 10vh;

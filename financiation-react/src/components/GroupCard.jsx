@@ -19,8 +19,6 @@ export const GroupCard = ({group}) => {
 
     let {authTokens} = useContext(AuthContext)
     const [showButton, setShowButton] = useState(false);
-    const [showCreationModal, setShowCreationModal] = useState(false);
-    const toggleCreationModal = () => setShowCreationModal(!showCreationModal);
 
     const handleAddButton = () => {
         setShowButton(!showButton);
