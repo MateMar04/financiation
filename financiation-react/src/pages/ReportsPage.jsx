@@ -51,7 +51,7 @@ export const ReportsPage = () => {
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Departamentos" items={ministryDepartments}
+                        <ReportFilterCard title="Reparticiones" items={ministryDepartments}
                                           tokens={authTokens.access}/>
                     </Col>
                 </Row>

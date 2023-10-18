@@ -27,7 +27,7 @@ export const ReportsProvider = ({children}) => {
 
     let dataHandler = async (title, e) => {
         switch (title) {
-            case 'Departamentos':
+            case 'Reparticiones':
                 toggle('Departamentos', selectedMinistryDepartments, e)
                 await getFaqFromMinistryForFilters(authTokens.access).then(r => setFaqs(r))
                 break
@@ -40,7 +40,7 @@ export const ReportsProvider = ({children}) => {
                 toggle('Visitas', selectedLocations[locality_id], e)
                 break
             case 'Motivos':
-                let ministryDepartment_id = faqs.filter(f => f.id == e.target.value)[0].ministry_department
+                let ministryDepartment_id = faqs.filter(f => f.id == e.target.value)[0].division
                 toggle('Motivos', selectedMinistryDepartments[ministryDepartment_id], e)
                 break
         }
@@ -83,8 +83,9 @@ export const ReportsProvider = ({children}) => {
 
     let getMinistryDepartmentsForFilters = async () => {
 
-        let response = await fetch('/api/ministry-departments', {headers: headers})
+        let response = await fetch('/api/divisions', {headers: headers})
         let data = await response.json()
+
 
         decorateData(data, 'ministryDepartment');
 
@@ -180,7 +181,7 @@ export const ReportsProvider = ({children}) => {
     }
 
     let getTotalRequestsByMinistryDepartments = async () => {
-        let response = await fetch(`/api/reports/total-requests-by-ministry-departments?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
+        let response = await fetch(`/api/reports/total-requests-by-divisions?&faqs=${faqsQP()}&visits=${visitsQP()}`, {headers: headers})
         let data = await response.json()
         return data
     }

@@ -52,11 +52,11 @@ urlpatterns = [
     path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
     path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
 
-    # Ministry Departments
-    path('ministry-departments', views.getMinistryDepartments, name='ministryDepartments'),
+    # Divisions
+    path('divisions', views.getDivisions, name='divisions'),
 
     # FAQs
-    path('faqs', views.getMinistryDepartmentFaqs, name='faqs'),
+    path('faqs', views.getDivisionsFaqs, name='faqs'),
 
     # Whys
     path('whys', views.getWhys, name='whys'),
@@ -90,7 +90,7 @@ urlpatterns = [
     re_path(r'reports$', views.getRequests, name='report'),
     re_path(r'reports/total-requests$', views.getTotalRequests, name='report'),
     re_path(r'reports/total-requests-by-advisors$', views.getTotalRequestsByAdvisor, name='report'),
-    re_path(r'reports/total-requests-by-ministry-departments$', views.getTotalRequestsByMinistryDepartment, name='report'),
+    re_path(r'reports/total-requests-by-divisions$', views.getTotalRequestsByDivisions, name='report'),
     re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
