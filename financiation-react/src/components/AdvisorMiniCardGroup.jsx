@@ -6,6 +6,8 @@ import Avatar from '@mui/material/Avatar';
 import {getGroupAdvisorUsers} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
+import AdvisorCreateModal from './AdvisorCreateModal';
 
 export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
@@ -13,7 +15,8 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
     let [advisors, setAdvisors] = useState([])
     const [advisorDeleted, setAdvisorDeleted] = useState(false);
     const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
-
+    const [showCreationModal, setShowCreationModal] = useState(false);
+    const toggleCreationModal = () => setShowCreationModal(!showCreationModal);
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
@@ -43,6 +46,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     return (
         <>
+            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} show={showCreationModal}/>
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
@@ -69,6 +73,13 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                     <hr/>
                 </Container>
             ))}
+            <div className='centered_icon'>
+                <div className='buttonWithBorder'>
+                    <IconButton  type="submit" aria-label="search" onClick={() => toggleCreationModal()}>
+                        <AddIcon fontSize="large"/>
+                    </IconButton>
+                </div>
+            </div>
         </>
 
 
