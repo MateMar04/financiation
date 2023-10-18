@@ -1,24 +1,24 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
-import {Avatar, TextField} from "@mui/material";
-import {DateField} from '@mui/x-date-pickers/DateField';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {ProfilePicture} from "../components/ProfilePicture"
+import { Avatar, TextField } from "@mui/material";
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { ProfilePicture } from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-import {getUser} from "../services/UserServices";
+import { getUser } from "../services/UserServices";
 
 
 const ProfilePage = () => {
 
-    let {authTokens, logoutUser, user} = useContext(AuthContext)
+    let { authTokens, logoutUser, user } = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
-    const [editMode, setEditMode] = useState(false); 
+    const [editMode, setEditMode] = useState(false);
     const [myUser, setMyUser] = useState()
     const defaultFirstName = myUser?.first_name || '';
     const defaultLastName = myUser?.last_name || '';
@@ -38,11 +38,6 @@ const ProfilePage = () => {
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
-    const handleEdit = () => {
-        setEditMode(true);
-      };
-    
-
 
 
     return (
@@ -51,19 +46,19 @@ const ProfilePage = () => {
             <Row>
                 <Col className="d-flex justify-content-center">
                     <IconButton className="EditIconProfile" onClick={handleAddButton}>
-                        <EditIcon color='action' sx={{width: 25, height: 25}}/>
+                        <EditIcon color='action' sx={{ width: 25, height: 25 }} />
                     </IconButton>
                 </Col>
             </Row>
             <Row>
                 <Col className="d-flex justify-content-center">
                     <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                            sx={{width: 200, height: 200}} className="ProfilePicture"/>
+                        sx={{ width: 200, height: 200 }} className="ProfilePicture" />
                 </Col>
             </Row>
             {showButton && (
                 <Row className={'justify-content-center text-center'}>
-                    <ProfilePicture/>
+                    <ProfilePicture />
                 </Row>
             )}
 
@@ -78,20 +73,29 @@ const ProfilePage = () => {
                 <Row className={"d-flex justify-content-center text-center"}>
                     <Col md={6} className="py-3">
 
-                        <TextField onClick={handleEdit} variant='outlined' label='Nombre' required className='profileTextField'
-                                   value={defaultFirstName} InputProps={{
-                            sx: {borderRadius: 5},
-                            readOnly:editMode ? false : true
-                        }}></TextField>
+                        {editMode ?
+                            <TextField variant='outlined' label='Nombre' required className='profileTextField'
+                                defaultValue={defaultFirstName} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: false
+                                }}></TextField> :
+                            <TextField variant='outlined' label='Nombre' required className='profileTextField'
+                                value={defaultFirstName} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: true
+                                }}></TextField>
+                        }
+
+
 
                     </Col>
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                   value={defaultLastName} InputProps={{
-                            sx: {borderRadius: 5},
-                            readOnly: !editMode
-                        }}></TextField>
+                            value={defaultLastName} InputProps={{
+                                sx: { borderRadius: 5 },
+                                readOnly: !editMode
+                            }}></TextField>
 
                     </Col>
                 </Row>
@@ -101,19 +105,19 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                   value={defaultSSN} InputProps={{
-                            sx: {borderRadius: 5},
-                            readOnly: !editMode
-                        }}></TextField>
+                            value={defaultSSN} InputProps={{
+                                sx: { borderRadius: 5 },
+                                readOnly: !editMode
+                            }}></TextField>
 
                     </Col>
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                   value={defaultPhoneNumber} InputProps={{
-                            sx: {borderRadius: 5},
-                            readOnly: !editMode
-                        }}></TextField>
+                            value={defaultPhoneNumber} InputProps={{
+                                sx: { borderRadius: 5 },
+                                readOnly: !editMode
+                            }}></TextField>
 
                     </Col>
                 </Row>
@@ -121,9 +125,9 @@ const ProfilePage = () => {
                     <Col md={6} xs={12} className="py-3">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{
-                                sx: {borderRadius: 5},
+                                sx: { borderRadius: 5 },
                                 readOnly: !editMode
-                            }} variant="outlined"/>
+                            }} variant="outlined" />
                         </LocalizationProvider>
 
 
@@ -131,7 +135,7 @@ const ProfilePage = () => {
                     <Col md={6} className="py-3">
 
                         <TextField variant='outlined' label='Ciudad' className='profileTextField' InputProps={{
-                            sx: {borderRadius: 5},
+                            sx: { borderRadius: 5 },
                             readOnly: !editMode
                         }}></TextField>
 
@@ -140,7 +144,7 @@ const ProfilePage = () => {
                 <Row>
                     {showLogoutButton && (
                         <Col className="d-flex justify-content-center py-3">
-                            <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my: 3}}>Cerrar
+                            <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{ my: 3 }}>Cerrar
                                 Sesion</Button>
                         </Col>
                     )}
