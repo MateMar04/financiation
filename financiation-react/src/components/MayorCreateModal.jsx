@@ -19,18 +19,7 @@ export const MayorCreateModal = (props) => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-    let postMayor = async (e) => {
-        e.preventDefault();
-    
-        const firstName = e.target.first_name.value;
-        const lastName = e.target.last_name.value;
-    
-        // Check if either the first name or last name is empty
-        if (!firstName || !lastName) {
-            // Display an error message or take appropriate action
-            toggleModalfailed();
-            return;
-        }
+    let postMayor = async () => {
     
         let response = await fetch('/api/mayors', {
             method: "POST",
@@ -48,10 +37,6 @@ export const MayorCreateModal = (props) => {
         if (response.status === 200) {
             toggleModalsucceed();
         } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
             toggleModalfailed();
         }
     }
@@ -100,9 +85,6 @@ export const MayorCreateModal = (props) => {
                                 />
                             </Form.Group>
                         </div>
-
-                        
-
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
                             <Button className='BtnIniciarSesionLogin btnregis' type="submit">Registrar</Button>
                         </div>

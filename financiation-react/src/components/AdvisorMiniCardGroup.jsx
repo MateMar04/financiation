@@ -6,6 +6,8 @@ import Avatar from '@mui/material/Avatar';
 import {getGroupAdvisorUsers} from "../services/UserServices";
 import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
+import AddIcon from '@mui/icons-material/Add';
+import AdvisorCreateModal from './AdvisorCreateModal';
 
 export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
@@ -13,34 +15,38 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
     let [advisors, setAdvisors] = useState([])
     const [advisorDeleted, setAdvisorDeleted] = useState(false);
     const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
+    const [showCreationModal, setShowCreationModal] = useState(false);
+    const toggleCreationModal = () => setShowCreationModal(!showCreationModal);
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
     }, [advisorDeleted])
 
-    const handleDeleteAdvisor = (advisorId) => {
-        let response = fetch(`/api/advisors/delete/${advisorId}`, {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-        });
-        if (response.status === 200) {
-            toggleModalsucceed();
-            toggleAdvisorDeleted();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
+    const handleDeleteAdvisor = async (advisorId, groupId) => {
+        try {
+            let response = await fetch(`/api/groups/${groupId}/advisors/delete/${advisorId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "JWT " + String(authTokens.access),
+                    "Accept": "application/json"
+                },
+            });
+            if (response.status === 200) {
+                // toggleModalsucceed();
+                toggleAdvisorDeleted();
+            } else {
+                // toggleModalfailed();
+                console.error("Coordinator deletion failed");
+            }
+        } catch (error) {
+            console.error("Error deleting coordinator:", error);
         }
     };
 
     return (
         <>
+            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} show={showCreationModal}/>
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
@@ -60,13 +66,20 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id)}><ClearIcon/></IconButton>}
+                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id, group.id)}><ClearIcon/></IconButton>}
                             </Row>
                         </Col>
                     </Row>
                     <hr/>
                 </Container>
             ))}
+            <div className='centered_icon'>
+                <div className='buttonWithBorder'>
+                    <IconButton  type="submit" aria-label="search" onClick={() => toggleCreationModal()}>
+                        <AddIcon fontSize="large"/>
+                    </IconButton>
+                </div>
+            </div>
         </>
 
 
