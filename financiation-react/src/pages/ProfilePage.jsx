@@ -34,7 +34,6 @@ const ProfilePage = () => {
         getData()
     }, []);
     const handleAddButton = () => {
-        setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
@@ -90,20 +89,25 @@ const ProfilePage = () => {
 
                     </Col>
                     <Col md={6} className="py-3">
-
-                        <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                            value={defaultLastName} InputProps={{
-                                sx: { borderRadius: 5 },
-                                readOnly: !editMode
-                            }}></TextField>
-
+                    {editMode ?
+                            <TextField variant='outlined' label='Apellido' required className='profileTextField'
+                                defaultValue={defaultLastName} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: false
+                                }}></TextField> :
+                            <TextField variant='outlined' label='Apellido' required className='profileTextField'
+                                value={defaultLastName} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: true
+                                }}></TextField>
+                        }
                     </Col>
                 </Row>
 
 
                 <Row className={"d-flex justify-content-center text-center"}>
                     <Col md={6} className="py-3">
-
+                        
                         <TextField variant='outlined' label='CUIL' required className='profileTextField'
                             value={defaultSSN} InputProps={{
                                 sx: { borderRadius: 5 },
@@ -112,13 +116,19 @@ const ProfilePage = () => {
 
                     </Col>
                     <Col md={6} className="py-3">
-
-                        <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                            value={defaultPhoneNumber} InputProps={{
-                                sx: { borderRadius: 5 },
-                                readOnly: !editMode
-                            }}></TextField>
-
+                    {editMode ?
+                            <TextField variant='outlined' label='Telefono' required className='profileTextField'
+                                defaultValue={defaultPhoneNumber} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: false
+                                }}></TextField> :
+                            <TextField variant='outlined' label='Telefono' required className='profileTextField'
+                                value={defaultPhoneNumber} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: true
+                                }}></TextField>
+                        }
+                  
                     </Col>
                 </Row>
                 <Row className={"d-flex justify-content-center text-center"}>
@@ -147,8 +157,10 @@ const ProfilePage = () => {
                             <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{ my: 3 }}>Cerrar
                                 Sesion</Button>
                         </Col>
+                        
                     )}
                 </Row>
+              
             </Container>
         </Container>
     );
