@@ -167,8 +167,8 @@ class CoordinatorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         coordinator = Coordinator.objects.create(
-            user_id=user,
-            group_id=group
+            user_id=user.id,
+            group_id=group.id
         )
 
         serializer = CoordinatorSerializer(coordinator, many=False)

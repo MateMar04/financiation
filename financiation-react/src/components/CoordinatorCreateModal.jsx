@@ -31,26 +31,26 @@ export const CoordinatorCreateModal = (props) => {
     }, []);
 
     let postCoordinator = async () => {
-        if (selectedUserId === null) {
-            toggleModalfailed();
-            return;
-        }
-        let response = await fetch('/api/coordinators', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": "JWT " + String(authTokens.access),
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                "id_user": selectedUserId,
-                "id_group": props.group.id
+        if (selectedUserId) { 
+            let response = await fetch('/api/coordinators', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization": "JWT " + String(authTokens.access),
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    "user_id": selectedUserId,
+                    "group_id": props.group.id
+                })
             })
-        })
-        if (response.status === 200) {
-            toggleModalsucceed();
+            if (response.status === 200) {
+                toggleModalsucceed();
+            } else {
+                toggleModalfailed();
+            }
         } else {
-            toggleModalfailed();
+            toggleModalfailed()
         }
     }
 
@@ -71,7 +71,11 @@ export const CoordinatorCreateModal = (props) => {
                                 id="demo-simple-select"
                                 label="Nombre de la persona"
                                 value={selectedUserId} 
-                                onChange={(event) => setSelectedUserId(event.target.value)}
+                                onChange={(event) => {
+                                    console.log('Selected User ID:', event.target.value);
+                                    setSelectedUserId(event.target.value);
+                                }}
+
                             >
                                 {users?.map((user) => (
                                     <MenuItem key={user.id} value={user.id}>{user.name}{user.last_name}</MenuItem>
