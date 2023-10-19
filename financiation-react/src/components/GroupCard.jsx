@@ -11,6 +11,7 @@ import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
 import AuthContext from "../context/AuthContext";
 import CreateIcon from '@mui/icons-material/Create';
 import IconButton from "@mui/material/IconButton";
+import AddIcon from '@mui/icons-material/Add';
 import {Zoom} from "@mui/material";
 
 
@@ -25,6 +26,7 @@ export const GroupCard = ({group}) => {
 
     return (
         <Container fluid className='CompletlyContainer'>
+            
             <Zoom in style={{transitionDelay: '100ms'}}>
                 <div>
                     <Accordion className={'accordion-group'}>
@@ -39,7 +41,7 @@ export const GroupCard = ({group}) => {
 
                         <AccordionDetails>
                             <Row className={'justify-content-start pencil-groups'}>
-                                <Col md={2}>
+                                <Col md={11}>
                                     <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
                                         <CreateIcon/>
                                     </IconButton>

@@ -167,8 +167,8 @@ class CoordinatorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         coordinator = Coordinator.objects.create(
-            user_id=user,
-            group_id=group
+            user_id=user.id,
+            group_id=group.id
         )
 
         serializer = CoordinatorSerializer(coordinator, many=False)
@@ -188,8 +188,8 @@ class AdvisorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         advisor = Advisor.objects.create(
-            user_id=user,
-            group_id=group,
+            user_id=user.id,
+            group_id=group.id,
         )
 
         serializer = AdvisorSerializer(advisor, many=False)
@@ -552,20 +552,16 @@ def deleteMayorById(request, id, *args, **kwargs):
     return Response(serializer.data)
 
 @api_view(['DELETE'])
-def deleteadvisorById(request, id, *args, **kwargs):
-    advisors = Advisor.objects.filter(user=id)
-
-    for i in advisors:
-        i.delete()
-
+def deleteadvisorById(request, id, groupId, *args, **kwargs):
+    advisor = Advisor.objects.filter(user=id, group=groupId)
+    advisor.delete()
     return JsonResponse("OK", safe=False)
 
 @api_view(['DELETE'])
-def deletecoordinatorById(request, id, *args, **kwargs):
-    coordinator = Coordinator.objects.get(id=id)
+def deletecoordinatorById(request, id, groupId, *args, **kwargs):
+    coordinator = Coordinator.objects.filter(user=id, group=groupId)
     coordinator.delete()
-    serializer = CoordinatorSerializer(coordinator, many=False)
-    return Response(serializer.data)
+    return JsonResponse("OK", safe=False)
 
 @api_view(['PUT'])
 def putMayorById(request, id, *args, **kwargs):
