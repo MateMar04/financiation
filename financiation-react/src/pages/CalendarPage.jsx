@@ -1,34 +1,12 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Container, Row, Col} from 'react-bootstrap';
+import {Container} from 'react-bootstrap';
 import '../assets/styles/CalendarPage.css'
 import locale from 'antd/locale/es_ES';
-import Dayjs from 'dayjs';
 import 'dayjs/locale/es';
-import {ConfigProvider} from 'antd';
-import {Badge, Calendar} from 'antd';
+import {Calendar, ConfigProvider, Modal} from 'antd';
 import {getVisits} from "../services/VisitServices";
 import AuthContext from "../context/AuthContext";
-import {Modal} from 'antd';
 import {useNavigate} from 'react-router-dom';
-
-
-const getListData = (value: Dayjs) => {
-    let listData;
-    switch (value.date()) {
-        case 11:
-            listData = [
-                {type: 'success', content: 'Visita a EL DURAZNO'},
-            ];
-            break;
-        case 15:
-            listData = [
-                {type: 'error', content: 'Visita cancelada'},
-            ];
-            break;
-        default:
-    }
-    return listData || [];
-};
 
 export const CalendarPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,9 +33,17 @@ export const CalendarPage = () => {
         getVisits(authTokens.access).then(data => setVisits(data));
     }, []);
 
+    let getDayVisits = (date) => {
+        return visits.filter(v => {
+            let d = new Date(v.visit_date + "T" + v.start_time + "-03:00");
+            return d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getYear() === date.getYear();
+        });
+    }
+
 
     function isWeekend(date) {
         const dayOfWeek = new Date(date).getDay();
+        console.log("Dia: ", dayOfWeek)
         return dayOfWeek === 0 || dayOfWeek === 6;
     }
 
@@ -65,15 +51,17 @@ export const CalendarPage = () => {
         <Container fluid>
             <ConfigProvider locale={locale}>
                 <Calendar className={'CalendarCalendarPage'} onSelect={showModal}
-                          disabledDate={(date) => isWeekend(date)}
+
                           dateCellRender={(date) => {
-                              if (new Date(date).getDate() === new Date().getDate()){
-                                  return <h5>Visita</h5>;}
+                              let day = new Date(date)
+                              let visits = getDayVisits(day)
+                              return visits?.map(v => <h5>{v.name}</h5>)
                           }}
 
-                          monthCellRender={(date) =>{
-                               if (new Date(date).getMonth() === new Date().getMonth()){
-                                  return <h5>visitas: 2</h5>;}
+                          monthCellRender={(date) => {
+                              if (new Date(date).getMonth() === new Date().getMonth()) {
+                                  return <h5>visitas: 2</h5>;
+                              }
                           }}
 
                 />
