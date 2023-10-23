@@ -77,7 +77,7 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()[:100]
+            visits = Visit.objects.all()
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
@@ -215,7 +215,7 @@ def getDivisionsFaqs(request):
     divisions_ids = parse_and_convert(request.GET.getlist('deps'))
 
     if isinstance(divisions_ids, type(None)):
-        faqs = Faq.objects.all()[:100]
+        faqs = Faq.objects.all()
     else:
         faqs = Faq.objects.raw(
             "SELECT F.id "
@@ -551,6 +551,7 @@ def deleteMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 def deleteadvisorById(request, id, *args, **kwargs):
     advisors = Advisor.objects.filter(user=id)
@@ -560,12 +561,14 @@ def deleteadvisorById(request, id, *args, **kwargs):
 
     return JsonResponse("OK", safe=False)
 
+
 @api_view(['DELETE'])
 def deletecoordinatorById(request, id, *args, **kwargs):
     coordinator = Coordinator.objects.get(id=id)
     coordinator.delete()
     serializer = CoordinatorSerializer(coordinator, many=False)
     return Response(serializer.data)
+
 
 @api_view(['PUT'])
 def putMayorById(request, id, *args, **kwargs):
@@ -628,26 +631,6 @@ def getUserGroup(request, id):
         return JsonResponse(convert_to_json_larger(row), safe=False)
 
 
-# @api_view(['GET'])
-# def getMyUser(request, id):
-#     with connection.cursor() as cursor:
-#         cursor.execute("SELECT U.id, "
-#                        "ssn, "
-#                        "email, "
-#                        "first_name, "
-#                        "last_name, "
-#                        "phone_number, "
-#                        "profile_picture, "
-#                        "R.name, "
-#                        "US.name "
-#                        "FROM \"financiationAPI_useraccount\" AS U "
-#                        "INNER JOIN \"financiationAPI_role\" R ON U.role_id = R.id "
-#                        "INNER JOIN \"financiationAPI_userstatus\" US on US.id = U.user_status_id WHERE U.id = %s", [id])
-#         row = cursor.fetchall()
-#         print(row)
-#         return JsonResponse(convert_to_json_1(row), safe=False)
-
-
 def convert_to_json_large(data):
     result = []
 
@@ -671,20 +654,3 @@ def convert_to_json_larger(data):
         })
 
     return result
-
-
-# def convert_to_json_1(data):
-#     result = {
-#         "id": data[0][0],
-#         "ssn": str(data[0][1]),
-#         "mail": data[0][2],
-#         "first_name": data[0][3],
-#         "last_name": data[0][4],
-#         "phone_number": str(data[0][5]),
-#         "profile_picture": str(data[0][6]),  # Assuming you want to represent it as a string
-#         "role": data[0][7],
-#         "status": data[0][8]
-#     }
-#     return result
-
-
