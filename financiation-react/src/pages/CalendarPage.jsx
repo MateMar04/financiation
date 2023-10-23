@@ -3,7 +3,7 @@ import {Container} from 'react-bootstrap';
 import '../assets/styles/CalendarPage.css'
 import locale from 'antd/locale/es_ES';
 import 'dayjs/locale/es';
-import {Calendar, ConfigProvider, Modal} from 'antd';
+import {Badge, Calendar, ConfigProvider, Modal} from 'antd';
 import {getVisits} from "../services/VisitServices";
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom';
@@ -37,7 +37,21 @@ export const CalendarPage = () => {
         return visits.filter(v => {
             let d = new Date(v.visit_date + "T" + v.start_time + "-03:00");
             return d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getYear() === date.getYear();
-        });
+        }).map(v => {
+                switch (v.visit_status) {
+                    case 1:
+                        v.status = "error"
+                        break;
+                    case 4:
+                        v.status = "success"
+                        break;
+                    default:
+                        v.status = "warning"
+                        break;
+                }
+                return v;
+            }
+        );
     }
 
 
@@ -55,7 +69,7 @@ export const CalendarPage = () => {
                           dateCellRender={(date) => {
                               let day = new Date(date)
                               let visits = getDayVisits(day)
-                              return visits?.map(v => <h5>{v.name}</h5>)
+                              return visits?.map(v => <Badge status={v.status} text={v.name}/>)
                           }}
 
                           monthCellRender={(date) => {
