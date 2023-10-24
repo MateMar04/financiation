@@ -77,7 +77,16 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()
+                with connection.cursor() as cursor:
+                    cursor.execute("select *, CONCAT(l.name, ' ', V.visit_date) as name "
+                                   "from \"financiationAPI_visit\" as V "
+                                   "inner join \"financiationAPI_group\" G on G.id = V.group_id "
+                                   "inner join \"financiationAPI_location\" L on L.id = V.location_id "
+                                   "inner join public.\"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id")
+                    row = cursor.fetchall()
+                    print(row)
+                    return JsonResponse(row, safe=False)
+
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
