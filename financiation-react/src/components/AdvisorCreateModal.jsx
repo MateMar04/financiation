@@ -79,7 +79,7 @@ export const AdvisorCreateModal = (props) => {
 
                             >
                                 {users?.map((user) => (
-                                    <MenuItem key={user.id} value={user.id}>{user.name}{user.last_name}</MenuItem>
+                                    <MenuItem key={user.id} value={user.id}>{user.first_name} {user.last_name}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
