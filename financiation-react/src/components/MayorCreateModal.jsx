@@ -14,13 +14,15 @@ import SucceedModal from "../components/SucceedModal";
 export const MayorCreateModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     let postMayor = async () => {
-    
+        console.log('aaa')
         let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
@@ -29,13 +31,14 @@ export const MayorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": firstName,
-                "last_name": lastName
+                "first_name": first_name,
+                "last_name": last_name
             })
         });
     
         if (response.status === 200) {
             toggleModalsucceed();
+            props.setUpdateFlag((prevFlag) => !prevFlag);
         } else if (response.status === 500) {
             toggleModalfailed();
         }
@@ -47,9 +50,8 @@ export const MayorCreateModal = (props) => {
                 <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
                 <Container className="containermayor container-addmayor-modal">
 
-                    <Form className='datos' onSubmit={postMayor}>
+                    <Form className='datos'>
                         <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
-
 
                         <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
@@ -57,6 +59,7 @@ export const MayorCreateModal = (props) => {
                                     className="input"
                                     label="Nombre"
                                     name='first_name'
+                                    onChange={(e) => setFirstName(e.target.value)}
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -73,6 +76,7 @@ export const MayorCreateModal = (props) => {
                                     className="input"
                                     label="Apellido"
                                     name='last_name'
+                                    onChange={(e) => setLastName(e.target.value)}
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -86,7 +90,7 @@ export const MayorCreateModal = (props) => {
                             </Form.Group>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' type="submit">Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postMayor}>Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
