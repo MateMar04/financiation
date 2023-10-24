@@ -11,8 +11,9 @@ import AdvisorCreateModal from './AdvisorCreateModal';
 
 export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
-    let {authTokens} = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext);
     let [advisors, setAdvisors] = useState([])
+    const [updateFlag, setUpdateFlag] = useState(false);    
     const [advisorDeleted, setAdvisorDeleted] = useState(false);
     const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
     const [showCreationModal, setShowCreationModal] = useState(false);
@@ -20,7 +21,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     useEffect(() => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
-    }, [advisorDeleted])
+    }, [advisorDeleted, updateFlag])
 
     const handleDeleteAdvisor = async (advisorId, groupId) => {
         try {
@@ -46,7 +47,7 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     return (
         <>
-            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} show={showCreationModal}/>
+            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
             {advisors?.map((advisor) => (
                 <Container key={advisor.id_user}>
                     <Row className='AdvisorBorder'>
