@@ -48,6 +48,8 @@ const FormPage = () => {
     const [myUser, setMyUser] = useState()
     const [showObservationsInput, setShowObservationsInput] = useState(false);
     const [observations, setObservations] = useState('');
+    const [isObservationsVisible, setObservationsVisible] = useState(false);
+
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
@@ -211,10 +213,10 @@ const FormPage = () => {
 
                             onChange={(e) => {
                                 setSelectedFaq(e.target.value);
-                                if (e.target.options[e.target.selectedIndex].text === "Otros") {
-                                    setShowObservationsInput(true);
+                                if (faqs.some(faq => faq.name.includes("Otros"))) {
+                                    setObservationsVisible(true);
                                 } else {
-                                    setShowObservationsInput(false);
+                                    setObservationsVisible(false);
                                     setObservations('');
                                 }
                             }}>
@@ -228,7 +230,8 @@ const FormPage = () => {
                     </Col>
                 </Row>
                 <Row>
-                {showObservationsInput && (
+
+                {isObservationsVisible && (
                     <Container className={'ObservationsContainer'}>
                         <Row className='justify-content-center'>
                             <Col md={{ span: 6, order: 4 }} xs={{ span: 6, order: 4 }}>
@@ -304,4 +307,3 @@ const FormPage = () => {
 
 
 export default FormPage;
-
