@@ -130,9 +130,13 @@ class MayorApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        location_id = data.get('location')
+        location = Location.objects.get(id=location_id)
         mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
+            location = location
+
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
