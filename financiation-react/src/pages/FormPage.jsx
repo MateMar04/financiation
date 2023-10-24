@@ -113,9 +113,10 @@ const FormPage = () => {
                 "status_id": 1
             })
         })
-        setShowloading(false) //adsdad
+        //adsdad
         if (response.status === 200) {
-            handleShow()
+            await setShowloading(false);
+            handleShow();
         } else {
             alert('Something went wrong')
         }
