@@ -19,7 +19,8 @@ class Migration(migrations.Migration):
             "('Caja de Jubilaciones', 'Caja de Jubilaciones, Pensiones y Retiros de la Provincia de Córdoba'),"
             "('CiDi', 'Ciudadano Digital'),"
             "('IPJ', 'Inspecion de Personas Juridicas'),"
-            "('Registro de la Propiedad', 'Registro de la Propiedad')"),
+            "('Registro de la Propiedad', 'Registro de la Propiedad'),"
+            "('Otro', 'Otro')"),
 
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_faq\" (name, division_id)"
