@@ -46,6 +46,7 @@ export const CoordinatorCreateModal = (props) => {
             })
             if (response.status === 200) {
                 toggleModalsucceed();
+                props.setUpdateFlag((prevFlag) => !prevFlag);
             } else {
                 toggleModalfailed();
             }

@@ -11,6 +11,7 @@ import CoordinatorCreateModal from './CoordinatorCreateModal';
 
 export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
     let { authTokens } = useContext(AuthContext)
+    const [updateFlag, setUpdateFlag] = useState(false);
     const [coordinators, setCoordinators] = useState([])
     const [coordinatorDeleted, setCoordinatorDeleted] = useState(false);
     const toggleCoordinatorDeleted = () => setCoordinatorDeleted(!coordinatorDeleted);
@@ -19,7 +20,7 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
 
     useEffect(() => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
-    }, [coordinatorDeleted])
+    }, [coordinatorDeleted, updateFlag])
 
     const handleDeleteCoordinator = async (coordinatorId, groupId) => {
         try {
@@ -43,7 +44,7 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
 
     return (
         <>
-            <CoordinatorCreateModal group={group} onClose={() => toggleCreationModal()} show={showCreationModal}/>
+            <CoordinatorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
             {coordinators?.map((coordinator) => (
                 <Container key={coordinator.id_user}>
                     <Row className='AdvisorBorder'>
