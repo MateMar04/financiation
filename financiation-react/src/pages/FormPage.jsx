@@ -207,16 +207,18 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq"
+                            value={selectedFaq} // Add this line to ensure the correct selected value
 
                             onChange={(e) => {
                                 setSelectedFaq(e.target.value);
-                                if (e.target.value === 'Otro') {
+                                if (e.target.options[e.target.selectedIndex].text === "Otros") {
                                     setShowObservationsInput(true);
                                 } else {
                                     setShowObservationsInput(false);
-                                    setObservations(''); // Reset observations if not "otros"
+                                    setObservations('');
                                 }
                             }}>
+                                <option value="" disabled selected>Selecciona una opción</option>
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
@@ -229,7 +231,7 @@ const FormPage = () => {
                 {showObservationsInput && (
                     <Container className={'ObservationsContainer'}>
                         <Row className='justify-content-center'>
-                            <Col>
+                            <Col md={{ span: 6, order: 4 }} xs={{ span: 6, order: 4 }}>
                                 <p className={'pInFormPage'}>Observaciones</p>
                                 <input
                                     type="text"
