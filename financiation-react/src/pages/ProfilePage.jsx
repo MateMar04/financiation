@@ -24,6 +24,12 @@ const ProfilePage = () => {
     const defaultLastName = myUser?.last_name || '';
     const defaultSSN = myUser?.ssn || '';
     const defaultPhoneNumber = myUser?.phone_number || '';
+    const [editeduser,setEditedUser]=useState({});
+    const handleUserSelection = (e) => {
+        const selectedUserId = e.target.value;
+        const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
+        setEditedUser(selecteduser);
+    };
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
