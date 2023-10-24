@@ -70,13 +70,11 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
                     <hr />
                 </Container>
             ))}
-            <div className='centered_icon'>
+            {showButton &&<div className='centered_icon'>
                 <div className='buttonWithBorder'>
-                    <IconButton  type="submit" aria-label="search" onClick={() => toggleCreationModal()}>
-                        <AddIcon fontSize="large"/>
-                    </IconButton>
+                     <IconButton  type="submit" aria-label="search" onClick={() => toggleCreationModal()}><AddIcon fontSize="large"/></IconButton>
                 </div>
-            </div>
+            </div>}
             
         </>
     )
