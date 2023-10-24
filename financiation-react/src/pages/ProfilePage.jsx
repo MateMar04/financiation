@@ -10,7 +10,8 @@ import { ProfilePicture } from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { getUser } from "../services/UserServices";
-
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 const ProfilePage = () => {
 
@@ -25,11 +26,20 @@ const ProfilePage = () => {
     const defaultSSN = myUser?.ssn || '';
     const defaultPhoneNumber = myUser?.phone_number || '';
     const [editeduser,setEditedUser]=useState({});
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
+
+
+
     const handleUserSelection = (e) => {
         const selectedUserId = e.target.value;
         const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
         setEditedUser(selecteduser);
     };
+    
+    
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
@@ -43,10 +53,40 @@ const ProfilePage = () => {
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        console.log(editeduser.id);  
+        putUser(editeduser.id);
+    };
+    let putUser = async (id) => {
+        console.log(id);
+        let response = await fetch(`/api/users/put/${id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "first_name": editeduser.first_name,
+                "last_name": editeduser.last_name,
+                
+            })
+        })
 
+        if (response.status === 200) {
+            toggleModalsucceed();
+        } else if (response.status === 500) {
+            toggleModalfailed();
+        } else if (response.status === 401) {
+            toggleModalfailed();
+        } else if (response.status === 400) {
+            toggleModalfailed();
+        }
+    }
 
     return (
-
+        <form onSubmit={(e) => handleFormSubmit(e)} >
         <Container className="ContainerProfilePage">
             <Row>
                 <Col className="d-flex justify-content-center">
@@ -166,9 +206,12 @@ const ProfilePage = () => {
                         
                     )}
                 </Row>
-              
+                <div className='btnactualizar'>
+                        <Button onClick={() => putUser( myUser.id)} className='BtnIniciarSesionLogin btninedit' type='submit'>Actualizar</Button>
+                    </div>
             </Container>
         </Container>
+        </form>
     );
 }
 

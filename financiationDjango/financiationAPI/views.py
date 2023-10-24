@@ -576,6 +576,15 @@ def putMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+def putUserbyId(request, id, *args, **kwargs):
+    data = request.data
+    useraccount = UserAccount.objects.get(id=id)
+    useraccount.first_name = data['first_name']
+    useraccount.last_name = data['last_name']
+    useraccount.save()
+    serializer = UserAccountSerializer(useraccount, many=False)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
