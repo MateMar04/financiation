@@ -38,7 +38,7 @@ export const CalendarPage = () => {
             let d = new Date(v.visit_date + "T" + v.start_time + "-03:00");
             return d.getDate() === date.getDate() && d.getMonth() === date.getMonth() && d.getYear() === date.getYear();
         }).map(v => {
-                switch (v.visit_status) {
+                switch (v.visit_status_id) {
                     case 1:
                         v.status = "error"
                         break;
