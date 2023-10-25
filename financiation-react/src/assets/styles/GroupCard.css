@@ -2,9 +2,11 @@
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
-
 }
 
+.groupacord{
+    margin-bottom: -1vh !important;
+}
 .vl {
     border-left: 1px solid grey;
     position: relative;
@@ -15,7 +17,8 @@
 }
 
 .pencil-groups{
-    padding: 2vh;
+    padding-bottom: 2vh;
+    padding-left: 2vh;
 }
 
 .accordion-group{
