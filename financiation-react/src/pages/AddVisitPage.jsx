@@ -37,6 +37,7 @@ import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 const AddVisitPage = () => {
 
     let { authTokens } = useContext(AuthContext)
+    const [updateFlag, setUpdateFlag] = useState(false);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
@@ -49,7 +50,7 @@ const AddVisitPage = () => {
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
-    }, [])
+    }, [updateFlag])
 
     let postVisit = async (e) => {
         e.preventDefault()
@@ -108,8 +109,8 @@ const AddVisitPage = () => {
     return (
 
         <Container fluid>
-            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} />
-            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} />
+            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
+            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess} />
             <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail} />
 
