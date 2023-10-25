@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import '../assets/styles/AddVisitPage.css';
 import Carousel from 'react-bootstrap/Carousel';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { getMayors } from '../services/MayorServices'
+import {Col, Container, Form, Row} from 'react-bootstrap';
+import {getMayors} from '../services/MayorServices'
 import AuthContext from '../context/AuthContext';
 import TextField from '@mui/material/TextField';
 import FailedModal from '../components/FailedModal';
@@ -12,9 +12,7 @@ import MayorModifyModal from '../components/MayorModifyModal';
 import CarouselButtons from '../components/CarouselButton';
 import CardItem from '../components/AddVisitCard';
 import ConveniosCard from '../components/ConveniosCard';
-
-import { Card, MenuItem, Select, CardContent, Switch, Button, Checkbox } from '@mui/material';
-
+import {Button, Card, CardContent, MenuItem} from '@mui/material';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
 import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
@@ -29,14 +27,13 @@ import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import FlagIcon from '@mui/icons-material/Flag';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
 import ArticleIcon from '@mui/icons-material/Article';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
 
 
 const AddVisitPage = () => {
 
-    let { authTokens } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     const [updateFlag, setUpdateFlag] = useState(false);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
@@ -109,38 +106,48 @@ const AddVisitPage = () => {
     return (
 
         <Container fluid>
-            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
-            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
-            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess} />
-            <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail} />
+            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
 
             <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
             <Container>
                 <Form onSubmit={postVisit}>
                     <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
-                        className={'CarouselAddVisit justify-content-center text-center'}>
+                              className={'CarouselAddVisit justify-content-center text-center'}>
 
                         <Carousel.Item className='align-items-center'>
 
                             <Row className='justify-content-center text-center'>
                                 <Col>
-                                    <CardItem icon={<CalendarMonthIcon sx={{ fontSize: 65 }} />} label="Fecha de Visita" inputLabel1=" " type="date" />
+                                    <CardItem icon={<CalendarMonthIcon sx={{fontSize: 65}}/>} label="Fecha de Visita"
+                                              inputLabel1=" " type="date"/>
                                 </Col>
                                 <Col>
-                                    <CardItem icon={<PlaceOutlinedIcon sx={{ fontSize: 65 }} />} label="Localidad" inputLabel1=" " isSelect={true} />
+                                    <CardItem icon={<PlaceOutlinedIcon sx={{fontSize: 65}}/>} label="Localidad"
+                                              inputLabel1=" " isSelect={true}/>
                                 </Col>
                                 <Col>
-                                    <CardItem icon={<HouseOutlinedIcon sx={{ fontSize: 65 }} />} label="Nombre del Lugar" inputLabel1=" " />
+                                    <CardItem icon={<HouseOutlinedIcon sx={{fontSize: 65}}/>} label="Nombre del Lugar"
+                                              inputLabel1=" "/>
                                 </Col>
                                 <Col>
-                                    <CardItem icon={<DirectionsIcon sx={{ fontSize: 65 }} />} label="Dirección del Lugar" inputLabel1=" " />
+                                    <CardItem icon={<DirectionsIcon sx={{fontSize: 65}}/>} label="Dirección del Lugar"
+                                              inputLabel1=" "/>
                                 </Col>
                             </Row>
                             <Row className='justify-content-center text-center'>
-                            <Col> <CardItem icon={<AccessTimeIcon sx={{ fontSize: 65 }} />} label="Horario de Jornada" inputLabel1=" " inputLabel2=" " type="time" /></Col>
-                            <Col><CardItem icon={<SocialDistanceOutlinedIcon sx={{ fontSize: 65 }} />} label="Distancia" inputLabel1=" " /></Col>
-                            <Col><CardItem icon={<HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />} label="Tiempo de Viaje" inputLabel1=" " type="time" /></Col>
-                            <Col><CardItem icon={<StickyNote2OutlinedIcon sx={{ fontSize: 65 }} />} label="¿Registro Civil?" inputLabel1=" " isSwitch={true} /></Col>
+                                <Col> <CardItem icon={<AccessTimeIcon sx={{fontSize: 65}}/>} label="Horario de Jornada"
+                                                inputLabel1=" " inputLabel2=" " type="time"/></Col>
+                                <Col><CardItem icon={<SocialDistanceOutlinedIcon sx={{fontSize: 65}}/>}
+                                               label="Distancia" inputLabel1=" "/></Col>
+                                <Col><CardItem icon={<HistoryToggleOffOutlinedIcon sx={{fontSize: 65}}/>}
+                                               label="Tiempo de Viaje" inputLabel1=" " type="time"/></Col>
+                                <Col><CardItem icon={<StickyNote2OutlinedIcon sx={{fontSize: 65}}/>}
+                                               label="¿Registro Civil?" inputLabel1=" " isSwitch={true}/></Col>
 
                             </Row>
 
@@ -148,25 +155,32 @@ const AddVisitPage = () => {
 
                         <Carousel.Item className='justify-content-center align-items-center'>
                             <Row className='justify-content-center text-center'>
-                            <Col><CardItem icon={<HotelIcon sx={{ fontSize: 65 }} />} label="¿Hospedaje?" isSwitch={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Colaborador Finanzas" isSelect={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Colaborador Rentas" isSelect={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Referente Local" isSelect={true} /></Col>
+                                <Col><CardItem icon={<HotelIcon sx={{fontSize: 65}}/>} label="¿Hospedaje?"
+                                               isSwitch={true}/></Col>
+                                <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Colaborador Finanzas"
+                                               isSelect={true}/></Col>
+                                <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Colaborador Rentas"
+                                               isSelect={true}/></Col>
+                                <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Referente Local"
+                                               isSelect={true}/></Col>
                             </Row>
 
                             <Row className='justify-content-center text-center'>
-                            <Col><CardItem icon={<FlagIcon sx={{ fontSize: 65 }} />} label="Partido Politico" isSelect={true} /></Col>
+                                <Col><CardItem icon={<FlagIcon sx={{fontSize: 65}}/>} label="Partido Politico"
+                                               isSelect={true}/></Col>
 
                                 <Col className='CenterContent'>
                                     <Card className={'CardVisit'}>
                                         <CardContent className={'CenterContent'}>
                                             <Container>
                                                 <Row className='justify-content-center'>
-                                                    <AddIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                    <CreateIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalModify()}></CreateIcon>
+                                                    <AddIcon sx={{fontSize: 40}} type="submit"
+                                                             onClick={() => toggleModalCreate()}></AddIcon>
+                                                    <CreateIcon sx={{fontSize: 40}} type="submit"
+                                                                onClick={() => toggleModalModify()}></CreateIcon>
                                                 </Row>
                                                 <Row className='justify-content-center'>
-                                                    <PersonIcon sx={{ fontSize: 65 }} />
+                                                    <PersonIcon sx={{fontSize: 65}}/>
                                                 </Row>
 
                                                 <Row className='justify-content-center text-center'>
@@ -174,9 +188,11 @@ const AddVisitPage = () => {
                                                 </Row>
                                                 <Row className='justify-content-center text-center'>
                                                     <Col>
-                                                        <TextField id="standard-select-currency" select variant="standard" >
+                                                        <TextField id="standard-select-currency" select
+                                                                   variant="standard">
                                                             {mayors?.map((mayor) => (
-                                                                <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
+                                                                <MenuItem
+                                                                    value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
                                                             ))}
                                                         </TextField>
 
@@ -186,18 +202,20 @@ const AddVisitPage = () => {
                                         </CardContent>
                                     </Card>
                                 </Col>
-                                <CardItem icon={<RequestQuoteIcon sx={{ fontSize: 65 }} />} label="Fondo de Modernización" isSwitch={true} />
-                                <CardItem icon={<ArticleIcon sx={{ fontSize: 65 }} />} label="¿Flyer?" isSwitch={true} />
+                                <CardItem icon={<RequestQuoteIcon sx={{fontSize: 65}}/>} label="Fondo de Modernización"
+                                          isSwitch={true}/>
+                                <CardItem icon={<ArticleIcon sx={{fontSize: 65}}/>} label="¿Flyer?" isSwitch={true}/>
                             </Row>
                         </Carousel.Item>
 
                         <Carousel.Item className=' align-items-center'>
                             <Row className='justify-content-center text-center'>
                                 <Col>
-                                    <ConveniosCard />
+                                    <ConveniosCard/>
                                 </Col>
                                 <Col md={3}>
-                                    <CardItem icon={<ShareLocationIcon sx={{ fontSize: 65 }} />} label="Estado" isSelect={true} />
+                                    <CardItem icon={<ShareLocationIcon sx={{fontSize: 65}}/>} label="Estado"
+                                              isSelect={true}/>
                                 </Col>
                             </Row>
                             <Row className='justify-content-center text-center'>
@@ -207,7 +225,7 @@ const AddVisitPage = () => {
                             </Row>
                         </Carousel.Item>
                     </Carousel>
-                    <CarouselButtons prev={handlePrev} next={handleNext} />
+                    <CarouselButtons prev={handlePrev} next={handleNext}/>
                 </Form>
 
             </Container>
