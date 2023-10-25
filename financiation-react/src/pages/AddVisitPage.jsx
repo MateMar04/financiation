@@ -29,6 +29,11 @@ import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 import FlagIcon from '@mui/icons-material/Flag';
 import ArticleIcon from '@mui/icons-material/Article';
 import ShareLocationIcon from '@mui/icons-material/ShareLocation';
+import {getLocations} from "../services/LocationServices";
+import {getVisitStatuses} from "../services/StatusServices";
+import {getPoliticParties} from "../services/PoliticPartiesServices";
+import {getUsers} from "../services/UserServices";
+import {getContactedReferrers} from "../services/ContactedReferrersServices";
 
 
 const AddVisitPage = () => {
@@ -43,10 +48,20 @@ const AddVisitPage = () => {
     const [showmodify, setShowmodify] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
-    let [mayors, setMayors] = useState([])
+    const [mayors, setMayors] = useState([])
+    const [locations, setLocations] = useState()
+    const [visitStatuses, setVisitStatuses] = useState()
+    const [politicParties, setPoliticParties] = useState()
+    const [users, setUsers] = useState()
+    const [contactedReferrers, setContactedReferrers] = useState()
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
+        getLocations(authTokens.access).then(data => setLocations(data))
+        getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
+        getPoliticParties(authTokens.access).then(data => setPoliticParties(data))
+        getUsers(authTokens.access).then(data => setUsers(data))
+        getContactedReferrers(authTokens.access).then(data => setContactedReferrers(data))
     }, [updateFlag])
 
     let postVisit = async (e) => {
@@ -128,7 +143,7 @@ const AddVisitPage = () => {
                                 </Col>
                                 <Col>
                                     <CardItem icon={<PlaceOutlinedIcon sx={{fontSize: 65}}/>} label="Localidad"
-                                              inputLabel1=" " isSelect={true}/>
+                                               data={locations} isSelect={true}/>
                                 </Col>
                                 <Col>
                                     <CardItem icon={<HouseOutlinedIcon sx={{fontSize: 65}}/>} label="Nombre del Lugar"
@@ -158,16 +173,16 @@ const AddVisitPage = () => {
                                 <Col><CardItem icon={<HotelIcon sx={{fontSize: 65}}/>} label="¿Hospedaje?"
                                                isSwitch={true}/></Col>
                                 <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Colaborador Finanzas"
-                                               isSelect={true}/></Col>
+                                               isSelect={true} isUser={true} data={users}/></Col>
                                 <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Colaborador Rentas"
-                                               isSelect={true}/></Col>
+                                               isSelect={true} isUser={true} data={users}/></Col>
                                 <Col><CardItem icon={<PersonIcon sx={{fontSize: 65}}/>} label="Referente Local"
-                                               isSelect={true}/></Col>
+                                               isSelect={true} data={contactedReferrers} isUser={true}/></Col>
                             </Row>
 
                             <Row className='justify-content-center text-center'>
                                 <Col><CardItem icon={<FlagIcon sx={{fontSize: 65}}/>} label="Partido Politico"
-                                               isSelect={true}/></Col>
+                                               isSelect={true} data={politicParties}/></Col>
 
                                 <Col className='CenterContent'>
                                     <Card className={'CardVisit'}>
@@ -215,7 +230,7 @@ const AddVisitPage = () => {
                                 </Col>
                                 <Col md={3}>
                                     <CardItem icon={<ShareLocationIcon sx={{fontSize: 65}}/>} label="Estado"
-                                              isSelect={true}/>
+                                              isSelect={true} data={visitStatuses}/>
                                 </Col>
                             </Row>
                             <Row className='justify-content-center text-center'>
