@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json, to_json
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, to_json
 
 
 # Create your views here.
@@ -637,4 +637,5 @@ def getUserGroup(request, id):
                        "order by 4", [id, id])
         row = cursor.fetchall()
         print(row)
-        return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row), safe=False)
+        return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
+                            safe=False)
