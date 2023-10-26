@@ -219,10 +219,10 @@ const FormPage = () => {
                     <Row className='justify-content-md-center py-2'>
                     <Col xs={12} md={10}>
                     <p className={'pInFormPage'}>Observaciones</p>
-                            <input
+                            <textarea
                                 type="text"
-                                placeholder="Observaciones"
-                                className="form-control department-select"
+                                placeholder="La persona...."
+                                className="ObservationsInput"
                                 name="observaciones"
                             />
                         </Col>
