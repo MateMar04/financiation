@@ -187,7 +187,7 @@ const FormPage = () => {
                                 setShowObservacionesInput(selectedOptionName === 'Otros');
                                 getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
                             }}>
-
+                            <option value="" disabled selected>Seleccione una reparticion</option>
                             {divisions?.map((ministryDepartment) => (
                                 <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
                             ))}
@@ -204,11 +204,12 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq"
-                            onChange={(e) =>{
+                            onChange={(e) => {
                                 const selectedOptionName = e.target.options[e.target.selectedIndex].text;
                                 setShowObservacionesInput(selectedOptionName.includes('Otros'));
-                                setSelectedFaq(e.target.value)}}>
-
+                                setSelectedFaq(e.target.value)
+                            }}>
+                            <option value="" disabled selected>Seleccione un tipo de consulta</option>
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
@@ -220,8 +221,8 @@ const FormPage = () => {
 
                 {showObservacionesInput && (
                     <Row className='justify-content-md-center py-2'>
-                    <Col xs={12} md={10}>
-                    <p className={'pInFormPage'}>Observaciones</p>
+                        <Col xs={12} md={10}>
+                            <p className={'pInFormPage'}>Observaciones</p>
                             <textarea
                                 type="text"
                                 placeholder="La persona...."
@@ -241,7 +242,7 @@ const FormPage = () => {
                             className='form-select department-select'
                             name='why'
                             onChange={(e) => setSelectedWhy(e.target.value)}>
-
+                            <option value="" disabled selected>Determine el motivo de la visita</option>
                             {whys?.map((why) => (
                                 <option value={why.id}>{why.name}</option>
                             ))}
