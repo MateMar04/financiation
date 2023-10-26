@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import "../assets/styles/FormPage.css";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import Check from "../assets/images/checked.gif";
-import { Link } from "react-router-dom";
 import { getLatestVisitRequests, getLatestVisits, getVisits } from "../services/VisitServices";
 import { getAdvisorUsers } from "../services/AdvisorServices";
 import { getFaqsByDivisions } from "../services/FaqServices";
@@ -16,12 +14,7 @@ import { getWhys } from "../services/WhyServices";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DateTimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { getUserGroup } from "../services/GroupServices";
-import { Modal } from 'antd';
-
 import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Alert from '@mui/material/Alert';
 
 
@@ -38,6 +31,8 @@ const FormPage = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [showObservacionesInput, setShowObservacionesInput] = useState(false);
+
 
     let dateRef = useRef(null);
 
@@ -46,10 +41,6 @@ const FormPage = () => {
     let [selectedWhy, setSelectedWhy] = useState(1)
     let [selectedQuantity, setSelectedQuantity] = useState(1)
     const [myUser, setMyUser] = useState()
-    const [showObservationsInput, setShowObservationsInput] = useState(false);
-    const [observations, setObservations] = useState('');
-    const [isObservationsVisible, setObservationsVisible] = useState(false);
-
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
@@ -191,7 +182,11 @@ const FormPage = () => {
                             className='form-select department-select'
                             name="division"
 
-                            onChange={(e) => getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r))}>
+                            onChange={(e) => {
+                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                setShowObservacionesInput(selectedOptionName === 'Otros');
+                                getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
+                            }}>
 
                             {divisions?.map((ministryDepartment) => (
                                 <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
@@ -209,18 +204,8 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq"
-                            value={selectedFaq} // Add this line to ensure the correct selected value
+                            onChange={(e) => setSelectedFaq(e.target.value)}>
 
-                            onChange={(e) => {
-                                setSelectedFaq(e.target.value);
-                                if (faqs.some(faq => faq.name.includes("Otros"))) {
-                                    setObservationsVisible(true);
-                                } else {
-                                    setObservationsVisible(false);
-                                    setObservations('');
-                                }
-                            }}>
-                                <option value="" disabled selected>Selecciona una opción</option>
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
@@ -229,26 +214,21 @@ const FormPage = () => {
                         </select>
                     </Col>
                 </Row>
-                <Row>
 
-                {isObservationsVisible && (
-                    <Container className={'ObservationsContainer'}>
-                        <Row className='justify-content-center'>
-                            <Col md={{ span: 6, order: 4 }} xs={{ span: 6, order: 4 }}>
-                                <p className={'pInFormPage'}>Observaciones</p>
-                                <input
-                                    type="text"
-                                    placeholder="Observaciones"
-                                    className="form-control"
-                                    name="observations"
-                                    value={observations}
-                                    onChange={(e) => setObservations(e.target.value)}
-                                />
-                            </Col>
-                        </Row>
-                    </Container>
+                {showObservacionesInput && (
+                    <Row className='justify-content-md-center py-2'>
+                    <Col xs={12} md={10}>
+                    <p className={'pInFormPage'}>Observaciones</p>
+                            <input
+                                type="text"
+                                placeholder="Observaciones"
+                                className="form-control department-select"
+                                name="observaciones"
+                            />
+                        </Col>
+                    </Row>
                 )}
-                </Row>
+
 
                 <Row className='justify-content-md-center py-2'>
                     <Col xs={12} md={10}>
@@ -307,3 +287,4 @@ const FormPage = () => {
 
 
 export default FormPage;
+
