@@ -204,7 +204,10 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq"
-                            onChange={(e) => setSelectedFaq(e.target.value)}>
+                            onChange={(e) =>{
+                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                setShowObservacionesInput(selectedOptionName.includes('Otros'));
+                                setSelectedFaq(e.target.value)}}>
 
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
