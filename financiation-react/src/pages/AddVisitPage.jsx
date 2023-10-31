@@ -194,7 +194,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}>
+                        <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
@@ -215,7 +215,7 @@ const AddVisitPage = () => {
                             </Form.Item>
 
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -230,7 +230,7 @@ const AddVisitPage = () => {
                                 <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -250,7 +250,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -270,7 +270,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -285,7 +285,7 @@ const AddVisitPage = () => {
                                 <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -300,7 +300,7 @@ const AddVisitPage = () => {
                                 <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -315,7 +315,7 @@ const AddVisitPage = () => {
                                 <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -330,7 +330,7 @@ const AddVisitPage = () => {
                                 <Input className="visit-field" placeholder="Lugar"/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -349,7 +349,7 @@ const AddVisitPage = () => {
                                         filterOption={filterOption}/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -369,7 +369,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}>
+                        <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
@@ -393,7 +393,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -413,7 +413,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}>
+                        <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
@@ -432,7 +432,7 @@ const AddVisitPage = () => {
                                 <Switch/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -447,7 +447,7 @@ const AddVisitPage = () => {
                                 <Switch/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -462,7 +462,7 @@ const AddVisitPage = () => {
                                 <Switch/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -477,7 +477,7 @@ const AddVisitPage = () => {
                                 <Switch/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -497,7 +497,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}>
+                        <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
@@ -521,7 +521,7 @@ const AddVisitPage = () => {
                                         filterOption={filterOption}/>
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -541,7 +541,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col lg={2}></Col>
+                        <Col xs={2}></Col>
                     </Row>
                 </Container>
 
