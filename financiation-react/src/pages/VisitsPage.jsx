@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import FlotantButton from "../components/FlotantButton";
 import { Link } from "react-router-dom";
+import LoadingModal from "../components/LoadingModal";
 
 
 
@@ -16,11 +17,25 @@ export const VisitsPage = () => {
 
     let { authTokens } = useContext(AuthContext)
     let [visits, setVisits] = useState([])
+    let [loading, setLoading] = useState(true)
+    
+    const [showloading, setShowloading] = useState(false);
+   
 
 
     useEffect(() => {
-        getVisits(authTokens.access).then(r => setVisits(r))
-    }, [])
+        // Muestra el modal de carga antes de iniciar la carga de visitas
+        setShowloading(true);
+    
+        getVisits(authTokens.access)
+          .then((data) => {
+            setVisits(data);
+          })
+          .finally(() => {
+            // Oculta el modal de carga una vez que la carga se completa (independientemente de si tuvo éxito o no)
+            setShowloading(false);
+          });
+      }, []);
 
     return (
 
@@ -62,6 +77,9 @@ export const VisitsPage = () => {
                     </Col>
                 </Row>
 
+            </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
             </Container>
         </Container>
     )
