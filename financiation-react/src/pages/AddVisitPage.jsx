@@ -46,6 +46,14 @@ const AddVisitPage = () => {
     const [users, setUsers] = useState()
     const [contactedReferrers, setContactedReferrers] = useState()
 
+
+    const getItemNames = (array) => {
+        return array?.map(item => ({
+            label: item.name,
+            value: item.id
+        }));
+    }
+
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
         getLocations(authTokens.access).then(data => setLocations(data))
@@ -109,6 +117,9 @@ const AddVisitPage = () => {
         carouselRef.current.next();
     };
 
+    const filterOption = (input, option) =>
+        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
     return (
 
         <Container fluid>
@@ -128,7 +139,12 @@ const AddVisitPage = () => {
                             <p>Localidad:</p>
                         </Col>
                         <Col className="visit-field">
-                            <Select placeholder={"Localidad"} className="visit-field"/>
+                            <Select placeholder={"Localidad"} className="visit-field"
+                                    options={getItemNames(locations)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
+                            />
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
