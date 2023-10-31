@@ -81,6 +81,11 @@ const AddVisitPage = () => {
         getAddresses(authTokens.access).then(data => setAddresses(data))
     }, [updateFlag])
 
+    const getTimeFromDate = (date) => {
+        let nDate = new Date(date)
+        return nDate.getHours() + ":" + nDate.getMinutes() + ":" + nDate.getSeconds()
+    }
+
     let postVisit = async (values) => {
         let response = await fetch('/api/visits', {
             method: "POST",
@@ -92,25 +97,25 @@ const AddVisitPage = () => {
             body: JSON.stringify({
                 "accommodation": values.accommodation,
                 "address_id": values.address,
-                "agreement_id":,
+                "agreement_id": values.agreements,
                 "civil_registration": values.civil_registration,
                 "contacted_referrer_id": values.contacted_referrer,
                 "distance": values.distance,
-                "finance_collaborator_id":,
+                "finance_collaborator_id": values.finance_collaborator,
                 "flyer": values.flyer,
                 "group_id": values.group,
                 "location_id": values.location,
-                "mayor_id":,
+                "mayor_id": values.mayor,
                 "modernization_fund": values.modernization_fund,
-                "rent_observations":,
+                "rent_observations": values.observations,
                 "place_name": values.place,
-                "politic_party_id":,
-                "rent_collaborator_id":,
+                "politic_party_id": values.politic_party,
+                "rent_collaborator_id": values.rent_collaborator,
                 "travel_time": values.travel_time,
-                "visit_date": values.visit_date,
-                "start_time": values.visit_time[0],
-                "finish_time": values.visit_time[1],
-                "id_visit_status": values.visit_status
+                "visit_date": values.visit_date.toISOString().split('T')[0],
+                "start_time": getTimeFromDate(values.visit_time[0]),
+                "finish_time": getTimeFromDate(values.visit_time[1]),
+                "visit_status_id": values.visit_status
             })
         })
         if (response.status === 200) {
@@ -127,8 +132,10 @@ const AddVisitPage = () => {
             await postVisit()
         }
     }
+
+
     const onFinish = (values) => {
-        console.log(values)
+        console.log(values.accommodation)
         postVisit(values)
     };
 
@@ -423,7 +430,7 @@ const AddVisitPage = () => {
                                 label={"Flyer:"}
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                     },
                                 ]}>
                                 <Switch/>
@@ -438,7 +445,7 @@ const AddVisitPage = () => {
                                 label={"Registro Civil:"}
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                     },
                                 ]}>
                                 <Switch/>
@@ -453,7 +460,7 @@ const AddVisitPage = () => {
                                 label={"Hospedaje:"}
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                     },
                                 ]}>
                                 <Switch/>
@@ -468,7 +475,7 @@ const AddVisitPage = () => {
                                 label={"Fondo de Modernizacion:"}
                                 rules={[
                                     {
-                                        required: true,
+                                        required: false,
                                     },
                                 ]}>
                                 <Switch/>
