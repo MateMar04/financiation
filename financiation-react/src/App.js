@@ -28,7 +28,7 @@ import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
 import { CalendarPage } from './pages/CalendarPage';
 import "@fontsource/poppins";
-
+import * as logo from './assets/images/logo.jpeg'
 function App() {
     return (
         <Router>
