@@ -190,7 +190,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
-                                    options={getPersonNames(users)}/>
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -200,7 +203,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Colaborador de Rentas"}
-                                    options={getPersonNames(users)}/>
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -255,7 +261,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Referente Contactado"}
-                                    options={getPersonNames(contactedReferrers)}/>
+                                    options={getPersonNames(contactedReferrers)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
@@ -269,7 +278,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Partido Politico"}
-                            options={getItemNames(politicParties)}/>
+                                    options={getItemNames(politicParties)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -279,7 +291,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Intendente"}
-                            options={getPersonNames(mayors)}/>
+                                    options={getPersonNames(mayors)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
@@ -329,7 +344,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
-                                   options={getItemNames(agreements)}/>
+                                    options={getItemNames(agreements)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
@@ -343,7 +361,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Estado de Visita"}
-                            options={getItemNames(visitStatuses)}/>
+                                    options={getItemNames(visitStatuses)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -353,7 +374,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" placeholder={"Grupo"}
-                            options={getItemNames(groups)}/>
+                                    options={getItemNames(groups)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
