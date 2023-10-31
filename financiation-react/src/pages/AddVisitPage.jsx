@@ -81,8 +81,7 @@ const AddVisitPage = () => {
         getAddresses(authTokens.access).then(data => setAddresses(data))
     }, [updateFlag])
 
-    let postVisit = async (e) => {
-        e.preventDefault()
+    let postVisit = async (values) => {
         let response = await fetch('/api/visits', {
             method: "POST",
             headers: {
@@ -91,23 +90,27 @@ const AddVisitPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "flyer": e.target.flyer.value,
-                "distance": e.target.distance.value,
-                "travel_time": e.target.travel_time.value,
-                "visit_date": e.target.visit_date.value,
-                "civil_registration": e.target.civil_registration.value,
-                "accommodation": e.target.accommodation.value,
-                "modernization_fund": e.target.modernization_fund.value,
-                "start_time": e.target.start_time.value,
-                "finish_time": e.target.finish_time.value,
-                "place_name": e.target.place_name.value,
-                "id_locality": e.target.id_locality.value,
-                "id_group": e.target.id_group.value,
-                "id_visit_status": e.target.id_visit_status.value,
-                "id_agreement": e.target.id_agreement.value,
-                "id_contacted_referrer": e.target.id_contacted_referrer.value,
-                "id_address": e.target.id_address.value,
-                "id_logo": e.target.id_logo.value
+                "accommodation": values.accommodation,
+                "address_id": values.address,
+                "agreement_id":,
+                "civil_registration": values.civil_registration,
+                "contacted_referrer_id": values.contacted_referrer,
+                "distance": values.distance,
+                "finance_collaborator_id":,
+                "flyer": values.flyer,
+                "group_id": values.group,
+                "location_id": values.location,
+                "mayor_id":,
+                "modernization_fund": values.modernization_fund,
+                "rent_observations":,
+                "place_name": values.place,
+                "politic_party_id":,
+                "rent_collaborator_id":,
+                "travel_time": values.travel_time,
+                "visit_date": values.visit_date,
+                "start_time": values.visit_time[0],
+                "finish_time": values.visit_time[1],
+                "id_visit_status": values.visit_status
             })
         })
         if (response.status === 200) {
