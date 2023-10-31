@@ -67,6 +67,19 @@
         border-radius: 2vh;
 }
 
+.ObservationsInput{
+  background-color: white;
+  border-radius: 2vh;
+  width: 65vw;
+  height: auto;
+  margin: auto;
+  border: 1px solid rgb(207, 207, 207);
+  padding: 10px;
+}
+
+textarea:focus, input:focus{
+  outline: none;
+}
 @media (max-width: 800px) {
 
     .FirstContainerForm{

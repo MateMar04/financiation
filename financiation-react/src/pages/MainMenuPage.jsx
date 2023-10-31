@@ -1,24 +1,24 @@
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/MainMenuPage.css";
 import Card from "@mui/material/Card";
 import Avatar from "@mui/material/Avatar";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import VisitCardMainMenu from "../components/VisitCardMainMenu";
 import BarChart from "../components/BarChart";
 import VerMasButton from "../components/VerMasButton";
-import {Link} from "react-router-dom";
-import {getLatestVisitRequests, getLatestVisits} from "../services/VisitServices";
-import {getUserGroup} from "../services/GroupServices";
-import {PersonRowMainMenu} from "../components/PersonRowMainMenu";
-import {getMyUser, getUser, getUserById} from "../services/UserServices";
-import {getUserStatusesById} from "../services/StatusServices";
-import {getUserRolesById} from "../services/RoleServices";
+import { Link } from "react-router-dom";
+import { getLatestVisitRequests, getLatestVisits } from "../services/VisitServices";
+import { getUserGroup } from "../services/GroupServices";
+import { PersonRowMainMenu } from "../components/PersonRowMainMenu";
+import { getMyUser, getUser, getUserById } from "../services/UserServices";
+import { getUserStatusesById } from "../services/StatusServices";
+import { getUserRolesById } from "../services/RoleServices";
 
 
 export const MainMenuPage = () => {
 
-    let {authTokens, user} = useContext(AuthContext)
+    let { authTokens, user } = useContext(AuthContext)
     const [myUser, setMyUser] = useState()
     const [latestVisits, setLatestVisits] = useState()
     const [latestVisitRequests, setLatestVisitRequests] = useState()
@@ -51,7 +51,7 @@ export const MainMenuPage = () => {
                         <Row className={'justify-content-end'}>
                             <Col md={4} xs={6}>
                                 <Link to={'/me'}>
-                                    <VerMasButton/>
+                                    <VerMasButton />
                                 </Link>
                             </Col>
                         </Row>
@@ -62,7 +62,7 @@ export const MainMenuPage = () => {
                                 <Row>
                                     <Col className="d-flex justify-content-center">
                                         <Avatar src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                                sx={{width: 128, height: 128}}/>
+                                            sx={{ width: 128, height: 128 }} />
                                     </Col>
                                 </Row>
 
@@ -79,7 +79,18 @@ export const MainMenuPage = () => {
                                         </strong>
                                     </Row>
                                     <Row>
+                                        <Col xs={1} md={3}>
                                         <p className="p-main-menu-card">{status?.name}</p>
+                                        </Col>
+                                        <Col xs={1} md={1} className="justify-content-end">
+                                            {status.name === 'Disponible' && (
+                                                <a className="circle_green text-center"></a>
+                                            )}
+                                            {status.name  === 'Ocupado' && (
+                                                <a className="circle_red text-center"></a>
+                                            )}
+                                            
+                                        </Col>
                                     </Row>
                                     <Row>
                                         <strong>
@@ -126,13 +137,13 @@ export const MainMenuPage = () => {
                             </Row>
                             <Container className="container-visit-card-main-menu">
                                 {latestVisits?.map((visit) => (
-                                    <VisitCardMainMenu name={visit.name} status={visit.status}/>
+                                    <VisitCardMainMenu name={visit.name} status={visit.status} />
                                 ))}
                             </Container>
                             <Link to={'/visits'}>
                                 <Row className={'justify-content-end'}>
                                     <Col md={4} xs={6}>
-                                        <VerMasButton className={'ver-mas-bottom-visit'}/>
+                                        <VerMasButton className={'ver-mas-bottom-visit'} />
                                     </Col>
                                 </Row>
                             </Link>
@@ -146,7 +157,7 @@ export const MainMenuPage = () => {
                         <Row className={'justify-content-end'}>
                             <Col md={4} xs={6}>
                                 <Link to={'/groups'}>
-                                    <VerMasButton/>
+                                    <VerMasButton />
                                 </Link>
                             </Col>
                         </Row>
@@ -161,7 +172,7 @@ export const MainMenuPage = () => {
                         <Row className="justify-content-center text-center">
 
                             {userGroup?.map((i) => (
-                                <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name}/>
+                                <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
                             ))}
                         </Row>
                     </Card>
@@ -180,7 +191,7 @@ export const MainMenuPage = () => {
                                         data: [30, 30, 40],
                                         backgroundColor: ["red", "green", "blue"]
                                     }]
-                                }}/>
+                                }} />
 
                             </Row>
                         </Container>
