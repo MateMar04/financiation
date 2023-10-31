@@ -123,188 +123,204 @@ const AddVisitPage = () => {
 
             <Form>
                 <Container>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Localidad:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Localidad"}/>
+                        <Col className="visit-field">
+                            <Select placeholder={"Localidad"} className="visit-field"/>
                         </Col>
-                        <Col lg={1}>
+                        <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Fecha de la Visita:</p>
                         </Col>
-                        <Col lg={6}>
-                            <DatePicker/>
+                        <Col>
+                            <DatePicker className="visit-field"/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Horario de Jornada:</p>
                         </Col>
-                        <Col lg={6}>
-                            <RangePicker
-                                defaultValue={[dayjs('12:00', dateFormat), dayjs('13:00', dateFormat)]}
-                                format={dateFormat}
+                        <Col>
+                            <RangePicker className="visit-field"
+                                         defaultValue={[dayjs('12:00', dateFormat), dayjs('13:00', dateFormat)]}
+                                         format={dateFormat}
                             />
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Colaborador de Finanzas:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Colaborador de Finanzas"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Colaborador de Finanzas"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Colaborador de Rentas</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Colaborador de Rentas"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Colaborador de Rentas"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Observaciones: </p>
                         </Col>
-                        <Col lg={6}>
-                            <TextArea rows={4} placeholder={"Observaciones"}/>
+                        <Col>
+                            <TextArea className="visit-field" rows={4} placeholder={"Observaciones"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Distancia:</p>
                         </Col>
-                        <Col lg={6}>
-                            <InputNumber addonAfter="km" placeholder={"Distancia"}/>
+                        <Col>
+                            <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Tiempo de Viaje:</p>
                         </Col>
-                        <Col lg={6}>
-                            <InputNumber addonAfter="min" placeholder={"Tiempo de Viaje"}/>
+                        <Col>
+                            <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Lugar:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Input placeholder="Lugar"/>
+                        <Col>
+                            <Input className="visit-field" placeholder="Lugar"/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Direccion:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Input placeholder="Direccion"/>
+                        <Col>
+                            <Input className="visit-field" placeholder="Direccion"/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Referente Contactado:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Referente Contactado"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Referente Contactado"}/>
                         </Col>
-                        <Col lg={1}>
+                        <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Partido Politico:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Partido Politico"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Partido Politico"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Intendente:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Intendente"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Intendente"}/>
                         </Col>
-                        <Col lg={1}>
+                        <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Flyer:</p>
                         </Col>
-                        <Col lg={6}>
+                        <Col>
                             <Switch/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Registro Civil:</p>
                         </Col>
-                        <Col lg={6}>
+                        <Col>
                             <Switch/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Hospedaje:</p>
                         </Col>
-                        <Col lg={6}>
+                        <Col>
                             <Switch/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Fondo de Modernizacion:</p>
                         </Col>
-                        <Col lg={6}>
+                        <Col>
                             <Switch/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Acuerdos:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select mode="multiple" allowClear placeholder="Acuerdos" defaultValue={['a10', 'c12']}/>
+                        <Col>
+                            <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos" defaultValue={['a10', 'c12']}/>
                         </Col>
-                        <Col lg={1}>
+                        <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
                             </Tooltip>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Estado de Visita:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Estado de Visita"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Estado de Visita"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
-                    <Row>
-                        <Col lg={5}>
+                    <Row className="visit-field-row">
+                        <Col lg={2} className="visit-field-title">
                             <p>Grupo Asignado:</p>
                         </Col>
-                        <Col lg={6}>
-                            <Select placeholder={"Grupo"}/>
+                        <Col>
+                            <Select className="visit-field" placeholder={"Grupo"}/>
                         </Col>
+                        <Col lg={2}></Col>
                     </Row>
                 </Container>
 
