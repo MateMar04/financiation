@@ -6,7 +6,7 @@ from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, to_json
 
 
 # Create your views here.
@@ -77,7 +77,19 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()
+            with connection.cursor() as cursor:
+                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name "
+                               "from \"financiationAPI_visit\" as V "
+                               "inner join \"financiationAPI_location\" L on L.id = V.location_id "
+                               "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id")
+                row = cursor.fetchall()
+                print(row)
+                return JsonResponse(to_json(
+                    ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
+                     "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
+                     "address_id", "contacted_referrer_id", "group_id", "location_id", "mayor_id", "politic_party_id",
+                     "visit_status_id", "location_name", "visit_status_name", "name"], row), safe=False)
+
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
@@ -130,9 +142,13 @@ class MayorApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        location_id = data.get('location')
+        location = Location.objects.get(id=location_id)
         mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
+            location = location
+
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
@@ -589,7 +605,7 @@ def putUserbyId(request, id, *args, **kwargs):
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT 'requests', count(*) "
+        cursor.execute("SELECT count(*) "
                        "from \"financiationAPI_request\" "
                        "where visit_id = (SELECT id "
                        "FROM \"financiationAPI_visit\" "
@@ -597,7 +613,7 @@ def getLatestVisitRequestCount(request):
                        "ORDER BY visit_date desc "
                        "limit 1)", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
+        return JsonResponse(to_json(["requests"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -609,7 +625,7 @@ def getLatestVisits(request):
                        "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
                        "order by visit_date desc limit 10", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_large(row), safe=False)
+        return JsonResponse(to_json(["name", "status"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -633,29 +649,6 @@ def getUserGroup(request, id):
                        "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
                        "order by 4", [id, id])
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_larger(row), safe=False)
-
-
-def convert_to_json_large(data):
-    result = []
-
-    for item in data:
-        key, value = item
-        result.append({"name": key, "status": value})
-
-    return result
-
-
-def convert_to_json_larger(data):
-    result = []
-
-    for item in data:
-        role, group_id, group_name, user_id, first_name, last_name = item
-        result.append({
-            "role": role,
-            "group": group_name,
-            "first_name": first_name,
-            "last_name": last_name
-        })
-
-    return result
+        print(row)
+        return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
+                            safe=False)
