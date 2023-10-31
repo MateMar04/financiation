@@ -124,7 +124,7 @@ const AddVisitPage = () => {
             <Form>
                 <Container>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Localidad:</p>
                         </Col>
                         <Col className="visit-field">
@@ -137,7 +137,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Fecha de la Visita:</p>
                         </Col>
                         <Col>
@@ -146,7 +146,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Horario de Jornada:</p>
                         </Col>
                         <Col>
@@ -158,7 +158,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Colaborador de Finanzas:</p>
                         </Col>
                         <Col>
@@ -167,7 +167,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Colaborador de Rentas</p>
                         </Col>
                         <Col>
@@ -176,16 +176,16 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Observaciones: </p>
                         </Col>
                         <Col>
-                            <TextArea className="visit-field" rows={4} placeholder={"Observaciones"}/>
+                            <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Distancia:</p>
                         </Col>
                         <Col>
@@ -194,7 +194,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Tiempo de Viaje:</p>
                         </Col>
                         <Col>
@@ -203,7 +203,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Lugar:</p>
                         </Col>
                         <Col>
@@ -212,7 +212,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Direccion:</p>
                         </Col>
                         <Col>
@@ -221,7 +221,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Referente Contactado:</p>
                         </Col>
                         <Col>
@@ -234,7 +234,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Partido Politico:</p>
                         </Col>
                         <Col>
@@ -243,7 +243,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Intendente:</p>
                         </Col>
                         <Col>
@@ -256,7 +256,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Flyer:</p>
                         </Col>
                         <Col>
@@ -265,7 +265,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Registro Civil:</p>
                         </Col>
                         <Col>
@@ -274,7 +274,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Hospedaje:</p>
                         </Col>
                         <Col>
@@ -283,7 +283,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Fondo de Modernizacion:</p>
                         </Col>
                         <Col>
@@ -292,7 +292,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Acuerdos:</p>
                         </Col>
                         <Col>
@@ -306,7 +306,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Estado de Visita:</p>
                         </Col>
                         <Col>
@@ -315,7 +315,7 @@ const AddVisitPage = () => {
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={2} className="visit-field-title">
+                        <Col lg={3} className="visit-field-title">
                             <p>Grupo Asignado:</p>
                         </Col>
                         <Col>
@@ -326,9 +326,10 @@ const AddVisitPage = () => {
                 </Container>
 
 
-                <Button type="primary" icon={<PlusCircleOutlined/>}>
-                    Crear Visita
-                </Button>
+                <Container fluid className={"button-container"}>
+                    <Button className={"visit-submit-button"} type="primary" icon={<PlusCircleOutlined/>}>
+                        Crear Visita
+                    </Button></Container>
 
 
             </Form>

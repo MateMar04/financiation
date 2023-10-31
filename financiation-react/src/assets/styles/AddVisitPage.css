@@ -9,3 +9,14 @@
 .visit-field {
     width: 100%;
 }
+
+.visit-submit-button {
+    width: 15vw;
+    display: block;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5vh;
+}
