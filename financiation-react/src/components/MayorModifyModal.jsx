@@ -60,6 +60,7 @@ export const MayorModifyModal = (props) => {
 
         if (response.status === 200) {
             toggleModalsucceed();
+            props.setUpdateFlag((prevFlag) => !prevFlag);
         } else if (response.status === 500) {
             toggleModalfailed();
         } else if (response.status === 401) {
