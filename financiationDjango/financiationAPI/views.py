@@ -1,7 +1,9 @@
-import datetime
+from datetime import datetime
+from datetime import timedelta
 
 from django.db import connection
 from django.http import JsonResponse
+from django.utils.dateparse import parse_date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -117,7 +119,7 @@ class VisitApiView(APIView):
             accommodation=data['accommodation'],
             address=address,
             civil_registration=data['civil_registration'],
-            contacted_referrer_id=contacted_referrer,
+            contacted_referrer=contacted_referrer,
             distance=data['distance'],
             flyer=data['flyer'],
             group=group,
@@ -126,9 +128,9 @@ class VisitApiView(APIView):
             modernization_fund=data['modernization_fund'],
             rent_observations=data['rent_observations'],
             place_name=data['place_name'],
-            politic_party_id=politic_party,
-            travel_time=data['travel_time'],
-            visit_date=data['visit_date'],
+            politic_party=politic_party,
+            travel_time=timedelta(minutes=data['travel_time']),
+            visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
             visit_status=visit_status
@@ -136,7 +138,7 @@ class VisitApiView(APIView):
 
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
-            visit.agreement_id.add(agreement)
+            visit.agreement.add(agreement)
 
         finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
         visit.finance_collaborator.add(finance_collaborator)
