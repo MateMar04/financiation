@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import '../assets/styles/AddVisitPage.css';
-import {Col, Container, Form, Row} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import {getMayors} from '../services/MayorServices'
 import AuthContext from '../context/AuthContext';
 import FailedModal from '../components/FailedModal';
@@ -12,21 +12,17 @@ import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
 import {getUsers} from "../services/UserServices";
 import {getContactedReferrers} from "../services/ContactedReferrersServices";
-import {Button, DatePicker, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
+import {Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
 import {PlusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {getAgreements} from "../services/AgreementServices";
 import {getGroups} from "../services/GroupServices";
+import {getAddresses} from "../services/AddressServices";
 
 const {TextArea} = Input;
 
 dayjs.extend(customParseFormat);
-
-const {RangePicker} = DatePicker;
-const dateFormat = 'hh:mm';
-const weekFormat = 'MM/DD';
-const monthFormat = 'YYYY/MM';
 
 
 const AddVisitPage = () => {
@@ -49,7 +45,7 @@ const AddVisitPage = () => {
     const [contactedReferrers, setContactedReferrers] = useState()
     const [agreements, setAgreements] = useState()
     const [groups, setGroups] = useState();
-
+    const [addresses, setAddresses] = useState()
 
     const getItemNames = (array) => {
         return array?.map(item => ({
@@ -66,6 +62,13 @@ const AddVisitPage = () => {
         }));
     }
 
+    const getAddressNames = (array) => {
+        return array?.map(item => ({
+            label: item.street + " " + item.number,
+            value: item.id
+        }));
+    }
+
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
         getLocations(authTokens.access).then(data => setLocations(data))
@@ -75,6 +78,7 @@ const AddVisitPage = () => {
         getContactedReferrers(authTokens.access).then(data => setContactedReferrers(data))
         getAgreements(authTokens.access).then(data => setAgreements(data))
         getGroups(authTokens.access).then(data => setGroups(data))
+        getAddresses(authTokens.access).then(data => setAddresses(data))
     }, [updateFlag])
 
     let postVisit = async (e) => {
@@ -120,15 +124,26 @@ const AddVisitPage = () => {
             await postVisit()
         }
     }
-
-    const carouselRef = useRef(null);
-
-    const handlePrev = () => {
-        carouselRef.current.prev();
+    const onFinish = (values) => {
+        console.log(values)
+        postVisit(values)
     };
 
-    const handleNext = () => {
-        carouselRef.current.next();
+    const formRef = useRef(null);
+
+    const layout = {
+        labelCol: {
+            span: 8,
+        },
+        wrapperCol: {
+            span: 16,
+        },
+    };
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
     };
 
     const filterOption = (input, option) =>
@@ -146,19 +161,32 @@ const AddVisitPage = () => {
 
             <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
 
-            <Form>
+            <Form
+                {...layout}
+                ref={formRef}
+                name="control-ref"
+                onFinish={onFinish}>
+
+
                 <Container>
+
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Localidad:</p>
-                        </Col>
                         <Col className="visit-field">
-                            <Select placeholder={"Localidad"} className="visit-field"
-                                    options={getItemNames(locations)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}
-                            />
+                            <Form.Item
+                                name={"location"}
+                                label={"Localidad"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select placeholder={"Localidad"} className="visit-field"
+                                        options={getItemNames(locations)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
@@ -166,105 +194,174 @@ const AddVisitPage = () => {
                             </Tooltip>
                         </Col>
                     </Row>
+
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Fecha de la Visita:</p>
-                        </Col>
                         <Col>
-                            <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
+                            <Form.Item
+                                name={"visit_date"}
+                                label={"Fecha de la Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
+                            </Form.Item>
+
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Horario de Jornada:</p>
-                        </Col>
                         <Col>
-                            <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
+                            <Form.Item
+                                name={"visit_time"}
+                                label={"Jornada de trabajo:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Colaborador de Finanzas:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
-                                    options={getPersonNames(users)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"finance_collaborator"}
+                                label={"Colaborador de Finanzas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
+                                        options={getPersonNames(users)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Colaborador de Rentas</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Colaborador de Rentas"}
-                                    options={getPersonNames(users)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"rent_collaborator"}
+                                label={"Colaborador de Rentas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Colaborador de Rentas"}
+                                        options={getPersonNames(users)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Observaciones: </p>
-                        </Col>
                         <Col>
-                            <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
+                            <Form.Item
+                                name={"observations"}
+                                label={"Observaciones:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Distancia:</p>
-                        </Col>
                         <Col>
-                            <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
+                            <Form.Item
+                                name={"distance"}
+                                label={"Distancia:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Tiempo de Viaje:</p>
-                        </Col>
                         <Col>
-                            <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
+                            <Form.Item
+                                name={"travel_time"}
+                                label={"Tiempo de Viaje:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Lugar:</p>
-                        </Col>
                         <Col>
-                            <Input className="visit-field" placeholder="Lugar"/>
+                            <Form.Item
+                                name={"place"}
+                                label={"Lugar:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Input className="visit-field" placeholder="Lugar"/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Direccion:</p>
-                        </Col>
                         <Col>
-                            <Input className="visit-field" placeholder="Direccion"/>
+                            <Form.Item
+                                name={"address"}
+                                label={"Direccion:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                        options={getAddressNames(addresses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Referente Contactado:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Referente Contactado"}
-                                    options={getPersonNames(contactedReferrers)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"contacted_referrer"}
+                                label={"Referente Contactado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                        options={getPersonNames(contactedReferrers)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
@@ -273,28 +370,42 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Partido Politico:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Partido Politico"}
-                                    options={getItemNames(politicParties)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"politic_party"}
+                                label={"Partido Politico:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Partido Politico"}
+                                        options={getItemNames(politicParties)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Intendente:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Intendente"}
-                                    options={getPersonNames(mayors)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"mayor"}
+                                label={"Intendente:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Intendente"}
+                                        options={getPersonNames(mayors)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
@@ -303,51 +414,82 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Flyer:</p>
-                        </Col>
                         <Col>
-                            <Switch/>
+                            <Form.Item
+                                name={"flyer"}
+                                label={"Flyer:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Registro Civil:</p>
-                        </Col>
                         <Col>
-                            <Switch/>
+                            <Form.Item
+                                name={"civil_registration"}
+                                label={"Registro Civil:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Hospedaje:</p>
-                        </Col>
                         <Col>
-                            <Switch/>
+                            <Form.Item
+                                name={"accommodation"}
+                                label={"Hospedaje:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Fondo de Modernizacion:</p>
-                        </Col>
                         <Col>
-                            <Switch/>
+                            <Form.Item
+                                name={"modernization_fund"}
+                                label={"Fondo de Modernizacion:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Acuerdos:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
-                                    options={getItemNames(agreements)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"agreements"}
+                                label={"Acuerdos:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
+                                        options={getItemNames(agreements)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
@@ -356,28 +498,42 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Estado de Visita:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Estado de Visita"}
-                                    options={getItemNames(visitStatuses)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"visit_status"}
+                                label={"Estado de Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+
+                                <Select className="visit-field" placeholder={"Estado de Visita"}
+                                        options={getItemNames(visitStatuses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}/>
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
-                        <Col lg={3} className="visit-field-title">
-                            <p>Grupo Asignado:</p>
-                        </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Grupo"}
-                                    options={getItemNames(groups)}
-                                    showSearch
-                                    optionFilterProp="children"
-                                    filterOption={filterOption}/>
+                            <Form.Item
+                                name={"group"}
+                                label={"Grupo encargado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Grupo"}
+                                        options={getItemNames(groups)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -385,7 +541,8 @@ const AddVisitPage = () => {
 
 
                 <Container fluid className={"button-container"}>
-                    <Button className={"visit-submit-button"} type="primary" icon={<PlusCircleOutlined/>}>
+                    <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
+                            icon={<PlusCircleOutlined/>}>
                         Crear Visita
                     </Button></Container>
 
