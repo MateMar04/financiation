@@ -113,7 +113,7 @@ export const MayorModifyModal = (props) => {
                                     className='inputedit' required
                                     type="text"
                                     value={editedMayor.first_name || ""}
-                                    onChange={(e) => setEditedMayor({ ...editedMayor, first_name: e.target.value })}
+                                    onChange={(e) => setEditedMayor({...editedMayor, first_name: e.target.value})}
                                 />
                             </span>
                         </p>
