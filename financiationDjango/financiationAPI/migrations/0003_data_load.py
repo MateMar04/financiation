@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             "('CiDi', 'Ciudadano Digital'),"
             "('IPJ', 'Inspecion de Personas Juridicas'),"
             "('Registro de la Propiedad', 'Registro de la Propiedad'),"
-            "('Otro', 'Otro')"),
+            "('Otros', 'Otros')"),
 
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_faq\" (name, division_id)"
@@ -52,7 +52,8 @@ class Migration(migrations.Migration):
             "('Otros (Caja de Jubilaciones)', 4),"
             "('Otros (CiDi)', 5),"
             "('Otros (IPJ)', 6),"
-            "('Otros (Registro de la Propiedad)', 7)"),
+            "('Otros (Registro de la Propiedad)', 7),"
+            "('Otros', 8)"),
 
         migrations.RunSQL(
             "INSERT INTO \"financiationAPI_why\" (name)"
