@@ -12,8 +12,8 @@ import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
 import {getUsers} from "../services/UserServices";
 import {getContactedReferrers} from "../services/ContactedReferrersServices";
-import {DatePicker, Input, InputNumber, Select, Switch, Button} from 'antd';
-import { PlusCircleOutlined } from '@ant-design/icons';
+import {Button, DatePicker, Input, InputNumber, Select, Switch, Tooltip} from 'antd';
+import {PlusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 
@@ -124,15 +124,20 @@ const AddVisitPage = () => {
             <Form>
                 <Container>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Localidad:</p>
                         </Col>
                         <Col lg={6}>
                             <Select placeholder={"Localidad"}/>
                         </Col>
+                        <Col lg={1}>
+                            <Tooltip placement={"right"} title="Agregar Localidad">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Fecha de la Visita:</p>
                         </Col>
                         <Col lg={6}>
@@ -140,7 +145,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Horario de Jornada:</p>
                         </Col>
                         <Col lg={6}>
@@ -151,7 +156,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Colaborador de Finanzas:</p>
                         </Col>
                         <Col lg={6}>
@@ -159,7 +164,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Colaborador de Rentas</p>
                         </Col>
                         <Col lg={6}>
@@ -167,7 +172,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Observaciones: </p>
                         </Col>
                         <Col lg={6}>
@@ -175,7 +180,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Distancia:</p>
                         </Col>
                         <Col lg={6}>
@@ -183,7 +188,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Tiempo de Viaje:</p>
                         </Col>
                         <Col lg={6}>
@@ -191,7 +196,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Lugar:</p>
                         </Col>
                         <Col lg={6}>
@@ -199,7 +204,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Direccion:</p>
                         </Col>
                         <Col lg={6}>
@@ -207,15 +212,20 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Referente Contactado:</p>
                         </Col>
                         <Col lg={6}>
                             <Select placeholder={"Referente Contactado"}/>
                         </Col>
+                        <Col lg={1}>
+                            <Tooltip placement={"right"} title="Agregar Referente Contactado">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Partido Politico:</p>
                         </Col>
                         <Col lg={6}>
@@ -223,15 +233,20 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Intendente:</p>
                         </Col>
                         <Col lg={6}>
                             <Select placeholder={"Intendente"}/>
                         </Col>
+                        <Col lg={1}>
+                            <Tooltip placement={"right"} title="Agregar Intendente">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Flyer:</p>
                         </Col>
                         <Col lg={6}>
@@ -239,7 +254,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Registro Civil:</p>
                         </Col>
                         <Col lg={6}>
@@ -247,7 +262,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Hospedaje:</p>
                         </Col>
                         <Col lg={6}>
@@ -255,7 +270,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Fondo de Modernizacion:</p>
                         </Col>
                         <Col lg={6}>
@@ -263,15 +278,20 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Acuerdos:</p>
                         </Col>
                         <Col lg={6}>
                             <Select mode="multiple" allowClear placeholder="Acuerdos" defaultValue={['a10', 'c12']}/>
                         </Col>
+                        <Col lg={1}>
+                            <Tooltip placement={"right"} title="Agregar Acuerdo">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Estado de Visita:</p>
                         </Col>
                         <Col lg={6}>
@@ -279,7 +299,7 @@ const AddVisitPage = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col lg={6}>
+                        <Col lg={5}>
                             <p>Grupo Asignado:</p>
                         </Col>
                         <Col lg={6}>
