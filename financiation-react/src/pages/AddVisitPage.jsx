@@ -12,10 +12,12 @@ import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
 import {getUsers} from "../services/UserServices";
 import {getContactedReferrers} from "../services/ContactedReferrersServices";
-import {Button, DatePicker, Input, InputNumber, Select, Switch, Tooltip} from 'antd';
+import {Button, DatePicker, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
 import {PlusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import {getAgreements} from "../services/AgreementServices";
+import {getGroups} from "../services/GroupServices";
 
 const {TextArea} = Input;
 
@@ -45,11 +47,21 @@ const AddVisitPage = () => {
     const [politicParties, setPoliticParties] = useState()
     const [users, setUsers] = useState()
     const [contactedReferrers, setContactedReferrers] = useState()
+    const [agreements, setAgreements] = useState()
+    const [groups, setGroups] = useState();
 
 
     const getItemNames = (array) => {
         return array?.map(item => ({
             label: item.name,
+            value: item.id
+        }));
+    }
+
+
+    const getPersonNames = (array) => {
+        return array?.map(item => ({
+            label: item.first_name + " " + item.last_name,
             value: item.id
         }));
     }
@@ -61,6 +73,8 @@ const AddVisitPage = () => {
         getPoliticParties(authTokens.access).then(data => setPoliticParties(data))
         getUsers(authTokens.access).then(data => setUsers(data))
         getContactedReferrers(authTokens.access).then(data => setContactedReferrers(data))
+        getAgreements(authTokens.access).then(data => setAgreements(data))
+        getGroups(authTokens.access).then(data => setGroups(data))
     }, [updateFlag])
 
     let postVisit = async (e) => {
@@ -157,7 +171,7 @@ const AddVisitPage = () => {
                             <p>Fecha de la Visita:</p>
                         </Col>
                         <Col>
-                            <DatePicker className="visit-field"/>
+                            <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -166,10 +180,7 @@ const AddVisitPage = () => {
                             <p>Horario de Jornada:</p>
                         </Col>
                         <Col>
-                            <RangePicker className="visit-field"
-                                         defaultValue={[dayjs('12:00', dateFormat), dayjs('13:00', dateFormat)]}
-                                         format={dateFormat}
-                            />
+                            <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -178,7 +189,8 @@ const AddVisitPage = () => {
                             <p>Colaborador de Finanzas:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Colaborador de Finanzas"}/>
+                            <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
+                                    options={getPersonNames(users)}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -187,7 +199,8 @@ const AddVisitPage = () => {
                             <p>Colaborador de Rentas</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Colaborador de Rentas"}/>
+                            <Select className="visit-field" placeholder={"Colaborador de Rentas"}
+                                    options={getPersonNames(users)}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -241,7 +254,8 @@ const AddVisitPage = () => {
                             <p>Referente Contactado:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Referente Contactado"}/>
+                            <Select className="visit-field" placeholder={"Referente Contactado"}
+                                    options={getPersonNames(contactedReferrers)}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
@@ -254,7 +268,8 @@ const AddVisitPage = () => {
                             <p>Partido Politico:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Partido Politico"}/>
+                            <Select className="visit-field" placeholder={"Partido Politico"}
+                            options={getItemNames(politicParties)}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -263,7 +278,8 @@ const AddVisitPage = () => {
                             <p>Intendente:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Intendente"}/>
+                            <Select className="visit-field" placeholder={"Intendente"}
+                            options={getPersonNames(mayors)}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
@@ -313,7 +329,7 @@ const AddVisitPage = () => {
                         </Col>
                         <Col>
                             <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
-                                    defaultValue={['a10', 'c12']}/>
+                                   options={getItemNames(agreements)}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
@@ -326,7 +342,8 @@ const AddVisitPage = () => {
                             <p>Estado de Visita:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Estado de Visita"}/>
+                            <Select className="visit-field" placeholder={"Estado de Visita"}
+                            options={getItemNames(visitStatuses)}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
@@ -335,7 +352,8 @@ const AddVisitPage = () => {
                             <p>Grupo Asignado:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" placeholder={"Grupo"}/>
+                            <Select className="visit-field" placeholder={"Grupo"}
+                            options={getItemNames(groups)}/>
                         </Col>
                         <Col lg={2}></Col>
                     </Row>
