@@ -120,16 +120,12 @@ const AddVisitPage = () => {
         })
         if (response.status === 200) {
             toggleModalsucceed();
-            await postVisit()
         } else if (response.status === 500) {
             toggleModalfailed();
-            await postVisit()
         } else if (response.status === 401) {
             toggleModalfailed();
-            await postVisit()
         } else if (response.status === 400) {
             toggleModalfailed();
-            await postVisit()
         }
     }
 
