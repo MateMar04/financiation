@@ -20,7 +20,7 @@ const ProfilePage = () => {
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
     const [editMode, setEditMode] = useState(false);
-    const [myUser, setMyUser] = useState()
+    const [myUser, setMyUser] = useState({});
     const defaultFirstName = myUser?.first_name || '';
     const defaultLastName = myUser?.last_name || '';
     const defaultSSN = myUser?.ssn || '';
@@ -33,16 +33,9 @@ const ProfilePage = () => {
 
 
 
-    const handleUserSelection = (e) => {
-        const selectedUserId = e.target.value;
-        const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
-        setEditedUser(selecteduser);
-    };
-    
-    
 
     const getData = async () => {
-        const usuario = await getUser(authTokens.access)
+        const usuario = await getUser(authTokens.access);
         setMyUser(usuario)
     }
 
@@ -55,8 +48,7 @@ const ProfilePage = () => {
     };
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        console.log(editeduser.id);  
-        putUser(editeduser.id);
+        putUser(myUser.id); 
     };
     let putUser = async (id) => {
         console.log(id);
@@ -70,7 +62,6 @@ const ProfilePage = () => {
             body: JSON.stringify({
                 "first_name": editeduser.first_name,
                 "last_name": editeduser.last_name,
-                
             })
         })
 
