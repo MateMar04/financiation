@@ -34,8 +34,9 @@ export const GroupCard = ({group}) => {
                             expandIcon={<ExpandMoreIcon/>}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
+                            className='groupacord'
                         >
-                            <Typography>{group.name}</Typography>
+                            <Typography >{group.name}</Typography>
 
                         </AccordionSummary>
 
