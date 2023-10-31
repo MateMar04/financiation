@@ -296,7 +296,8 @@ const AddVisitPage = () => {
                             <p>Acuerdos:</p>
                         </Col>
                         <Col>
-                            <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos" defaultValue={['a10', 'c12']}/>
+                            <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
+                                    defaultValue={['a10', 'c12']}/>
                         </Col>
                         <Col lg={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
