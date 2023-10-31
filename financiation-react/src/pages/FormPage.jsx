@@ -1,33 +1,26 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import Check from "../assets/images/checked.gif";
-import {Link} from "react-router-dom";
-import {getLatestVisitRequests, getLatestVisits, getVisits} from "../services/VisitServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getFaqsByDivisions} from "../services/FaqServices";
-import {getDivisions} from "../services/DivisionServices";
+import { getLatestVisitRequests, getLatestVisits, getVisits } from "../services/VisitServices";
+import { getAdvisorUsers } from "../services/AdvisorServices";
+import { getFaqsByDivisions } from "../services/FaqServices";
+import { getDivisions } from "../services/DivisionServices";
 import Avatar from '@mui/material/Avatar';
-import {getUser} from '../services/UserServices';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import { getUser } from '../services/UserServices';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import TextField from "@mui/material/TextField";
-import {getWhys} from "../services/WhyServices";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import {DateTimeField} from "@mui/x-date-pickers";
+import { getWhys } from "../services/WhyServices";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimeField } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import {getUserGroup} from "../services/GroupServices";
-import {Modal} from 'antd';
-
 import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
 import Alert from '@mui/material/Alert';
 
 
 const FormPage = () => {
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
     let [divisions, setDivisions] = useState([])
     let [faqs, setFaqs] = useState([])
     let [advisors, setAdvisors] = useState([])
@@ -37,6 +30,8 @@ const FormPage = () => {
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [showObservacionesInput, setShowObservacionesInput] = useState(false);
 
 
     let dateRef = useRef(null);
@@ -129,7 +124,7 @@ const FormPage = () => {
         <Form onSubmit={handleSumbit}>
             <Container className={'FirstContainerForm'}>
                 <Row className='justify-content-center'>
-                    <Col md={{span: 3, order: 1}} xs={{span: 6, order: 1}}>
+                    <Col md={{ span: 3, order: 1 }} xs={{ span: 6, order: 1 }}>
                         <p className={'pInFormPage'}>Fecha y hora</p>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimeField
@@ -140,12 +135,12 @@ const FormPage = () => {
                                 name="request_datetime"
                                 defaultValue={dayjs(getCurrentDateTimeString())}
                                 InputProps={{
-                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
+                                    sx: { borderRadius: '2vh', height: '7vh', borderColor: 'white' }
                                 }}
                             />
                         </LocalizationProvider>
                     </Col>
-                    <Col md={{span: 4, order: 2}} className={'VisitaDropDown'} xs={{order: 3}}>
+                    <Col md={{ span: 4, order: 2 }} className={'VisitaDropDown'} xs={{ order: 3 }}>
                         <p className={'pInFormPage'}>Visita</p>
                         <select
                             placeholder="Visita"
@@ -160,13 +155,13 @@ const FormPage = () => {
 
 
                     </Col>
-                    <Col md={{span: 3, order: 3}} xs={{span: 6, order: 2}}>
+                    <Col md={{ span: 3, order: 3 }} xs={{ span: 6, order: 2 }}>
                         <p className={'pInFormPage'}>Asesor</p>
                         <Row className='ContainerPersonForm'>
                             <Col md={4} xs={2}
-                                 className='justify-content-center d-flex align-items-center col-avatar'>
+                                className='justify-content-center d-flex align-items-center col-avatar'>
                                 <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                        sx={{width: 35, height: 35}}/>
+                                    sx={{ width: 35, height: 35 }} />
                             </Col>
                             <Col className='d-flex align-items-center text-center'>
                                 <h5 className={'userFirstName'}>{user.first_name}</h5>
@@ -187,8 +182,12 @@ const FormPage = () => {
                             className='form-select department-select'
                             name="division"
 
-                            onChange={(e) => getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r))}>
-
+                            onChange={(e) => {
+                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                setShowObservacionesInput(selectedOptionName === 'Otros');
+                                getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
+                            }}>
+                            <option value="" disabled selected>Seleccione una reparticion</option>
                             {divisions?.map((ministryDepartment) => (
                                 <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
                             ))}
@@ -205,8 +204,12 @@ const FormPage = () => {
                             placeholder="Departamento"
                             className='form-select department-select'
                             name="faq"
-                            onChange={(e) => setSelectedFaq(e.target.value)}>
-
+                            onChange={(e) => {
+                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                setShowObservacionesInput(selectedOptionName.includes('Otros'));
+                                setSelectedFaq(e.target.value)
+                            }}>
+                            <option value="" disabled selected>Seleccione un tipo de consulta</option>
                             {faqs?.map((faq) => (
                                 <option value={faq.id}>{faq.name}</option>
                             ))}
@@ -215,6 +218,20 @@ const FormPage = () => {
                         </select>
                     </Col>
                 </Row>
+
+                {showObservacionesInput && (
+                    <Row className='justify-content-md-center py-2'>
+                        <Col xs={12} md={10}>
+                            <p className={'pInFormPage'}>Observaciones</p>
+                            <textarea
+                                type="text"
+                                placeholder="La persona...."
+                                className="ObservationsInput"
+                                name="observaciones"
+                            />
+                        </Col>
+                    </Row>
+                )}
 
 
                 <Row className='justify-content-md-center py-2'>
@@ -225,7 +242,7 @@ const FormPage = () => {
                             className='form-select department-select'
                             name='why'
                             onChange={(e) => setSelectedWhy(e.target.value)}>
-
+                            <option value="" disabled selected>Determine el motivo de la visita</option>
                             {whys?.map((why) => (
                                 <option value={why.id}>{why.name}</option>
                             ))}
@@ -244,23 +261,23 @@ const FormPage = () => {
                 <Row className={'justify-content-start py-2'} xs={12}>
                     <Col md={8} xs={5}>
                         <TextField className={'InputInForm'}
-                                   name="quantity"
-                                   defaultValue={1}
-                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}
-                                   onChange={(e) => setSelectedQuantity(e.target.value)}/>
+                            name="quantity"
+                            defaultValue={1}
+                            InputProps={{ sx: { borderRadius: 4, borderColor: 'white', height: '7vh' } }}
+                            onChange={(e) => setSelectedQuantity(e.target.value)} />
                     </Col>
 
                     <Col md={3} xs={6}>
 
                         <Button type='submit' variant="primary"
-                                className='buttonconsulta'>Enviar Consulta</Button>
+                            className='buttonconsulta'>Enviar Consulta</Button>
                     </Col>
                 </Row>
             </Container>
 
 
             <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>
                     Consulta enviada!
                 </Alert>
             </Snackbar>
