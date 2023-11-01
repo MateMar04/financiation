@@ -78,7 +78,7 @@ export const CreateGroupPage = () => {
                     </Col>
 
                         <Col md={2} xs={1} lg={1}>
-                            <IconButton href="/groups/" sx={{ width: 56, height: 56 }}
+                            <IconButton href="/groups/" id="icongroupgrupo" sx={{ width: 56, height: 56 }}
                                 className={'GroupsIcon'}><GroupsIcon/></IconButton>
                         </Col>
                     </Row>
