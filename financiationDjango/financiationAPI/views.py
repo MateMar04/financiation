@@ -1,5 +1,9 @@
+from datetime import datetime
+from datetime import timedelta
+
 from django.db import connection
 from django.http import JsonResponse
+from django.utils.dateparse import parse_date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -101,34 +105,46 @@ class VisitApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        print(data)
 
-        location = Location.objects.get(id=data['location_id'])
-        group = Group.objects.get(id=data['group_id'])
-        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
-        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
         address = Address.objects.get(id=data['address_id'])
+        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+        group = Group.objects.get(id=data['group_id'])
+        mayor = Mayor.objects.get(id=data['mayor_id'])
+        location = Location.objects.get(id=data['location_id'])
+        politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
 
         visit = Visit.objects.create(
-            flyer=data['flyer'],
-            distance=data['distance'],
-            travel_time=data['travel_time'],
-            visit_date=data['visit_date'],
-            civil_registration=data['civil_registration'],
             accommodation=data['accommodation'],
+            address=address,
+            civil_registration=data['civil_registration'],
+            contacted_referrer=contacted_referrer,
+            distance=data['distance'],
+            flyer=data['flyer'],
+            group=group,
+            location=location,
+            mayor=mayor,
             modernization_fund=data['modernization_fund'],
+            rent_observations=data['rent_observations'],
+            place_name=data['place_name'],
+            politic_party=politic_party,
+            travel_time=timedelta(minutes=data['travel_time']),
+            visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
-            place_name=data['place_name'],
-            location_id=location,
-            group_id=group,
-            visit_status_id=visit_status,
-            contacted_referrer_id=contacted_referrer,
-            address_id=address,
+            visit_status=visit_status
         )
 
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
-            visit.agreement_id.add(agreement)
+            visit.agreement.add(agreement)
+
+        finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
+        visit.finance_collaborator.add(finance_collaborator)
+
+        rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
+        visit.rent_collaborator.add(rent_collaborator)
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
@@ -147,7 +163,7 @@ class MayorApiView(APIView):
         mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
-            location = location
+            location=location
 
         )
         serializer = MayorSerializer(mayor, many=False)
