@@ -45,10 +45,10 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                 toggleAdvisorDeleted();
                 message.success('Se borró el usuario exitosamente');
             } else {
-                console.error("Coordinator deletion failed");
+                console.error("No se pudo borrar el asesor");
             }
         } catch (error) {
-            console.error("Error deleting coordinator:", error);
+            console.error("No se pudo borrar el asesor:", error);
         }
     };
 

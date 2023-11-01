@@ -14,7 +14,7 @@ import { InputLabel, Select, MenuItem } from '@mui/material';
 import {getLocations} from '../services/LocationServices';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-
+import {message} from 'antd';
 
 export const MayorCreateModal = (props) => {
 
@@ -49,10 +49,14 @@ export const MayorCreateModal = (props) => {
         });
     
         if (response.status === 200) {
-            toggleModalsucceed();
+            // toggleModalsucceed();
             props.setUpdateFlag((prevFlag) => !prevFlag);
-        } else if (response.status === 500) {
-            toggleModalfailed();
+            message.success('Se creó el intendente exitosamente');
+            props.onClose();
+        } else {
+            // toggleModalfailed();
+            console.error("No se pudo crear el intendente");
+            props.onClose()
         }
     }
     

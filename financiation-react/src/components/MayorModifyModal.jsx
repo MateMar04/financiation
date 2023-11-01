@@ -9,6 +9,7 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import { getMayors } from '../services/MayorServices';
 import { getMayorById } from '../services/MayorServices';
+import {message} from 'antd';
 
 export const MayorModifyModal = (props) => {
 
@@ -59,18 +60,18 @@ export const MayorModifyModal = (props) => {
         })
 
         if (response.status === 200) {
-            toggleModalsucceed();
+            // toggleModalsucceed();
+            message.success('Se actualizó el intendente exitosamente');
+            props.onClose();
             props.setUpdateFlag((prevFlag) => !prevFlag);
             getMayors(authTokens.access)
             .then(data => setMayors(data))
             .catch(error => console.error(error));
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
-        }
+        } else {
+            // toggleModalfailed();
+            console.error("No se pudo actualizar el intendente");
+            props.onClose()
+        } 
     }
     let deleteMayor = async (id) => {
         let response = await fetch(`/api/mayors/delete/${id}`, {
