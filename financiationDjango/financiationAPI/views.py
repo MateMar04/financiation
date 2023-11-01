@@ -1,12 +1,16 @@
+from datetime import datetime
+from datetime import timedelta
+
 from django.db import connection
 from django.http import JsonResponse
+from django.utils.dateparse import parse_date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, to_json
 
 
 # Create your views here.
@@ -77,7 +81,19 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()
+            with connection.cursor() as cursor:
+                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name "
+                               "from \"financiationAPI_visit\" as V "
+                               "inner join \"financiationAPI_location\" L on L.id = V.location_id "
+                               "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id")
+                row = cursor.fetchall()
+                print(row)
+                return JsonResponse(to_json(
+                    ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
+                     "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
+                     "address_id", "contacted_referrer_id", "group_id", "location_id", "mayor_id", "politic_party_id",
+                     "visit_status_id", "location_name", "visit_status_name", "name"], row), safe=False)
+
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
@@ -89,34 +105,46 @@ class VisitApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        print(data)
 
-        location = Location.objects.get(id=data['location_id'])
-        group = Group.objects.get(id=data['group_id'])
-        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
-        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
         address = Address.objects.get(id=data['address_id'])
+        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+        group = Group.objects.get(id=data['group_id'])
+        mayor = Mayor.objects.get(id=data['mayor_id'])
+        location = Location.objects.get(id=data['location_id'])
+        politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
 
         visit = Visit.objects.create(
-            flyer=data['flyer'],
-            distance=data['distance'],
-            travel_time=data['travel_time'],
-            visit_date=data['visit_date'],
-            civil_registration=data['civil_registration'],
             accommodation=data['accommodation'],
+            address=address,
+            civil_registration=data['civil_registration'],
+            contacted_referrer=contacted_referrer,
+            distance=data['distance'],
+            flyer=data['flyer'],
+            group=group,
+            location=location,
+            mayor=mayor,
             modernization_fund=data['modernization_fund'],
+            rent_observations=data['rent_observations'],
+            place_name=data['place_name'],
+            politic_party=politic_party,
+            travel_time=timedelta(minutes=data['travel_time']),
+            visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
-            place_name=data['place_name'],
-            location_id=location,
-            group_id=group,
-            visit_status_id=visit_status,
-            contacted_referrer_id=contacted_referrer,
-            address_id=address,
+            visit_status=visit_status
         )
 
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
-            visit.agreement_id.add(agreement)
+            visit.agreement.add(agreement)
+
+        finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
+        visit.finance_collaborator.add(finance_collaborator)
+
+        rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
+        visit.rent_collaborator.add(rent_collaborator)
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
@@ -135,7 +163,7 @@ class MayorApiView(APIView):
         mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
-            location = location
+            location=location
 
         )
         serializer = MayorSerializer(mayor, many=False)
@@ -580,11 +608,21 @@ def putMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+def putUserbyId(request, id, *args, **kwargs):
+    data = request.data
+    useraccount = UserAccount.objects.get(id=id)
+    useraccount.first_name = data['first_name']
+    useraccount.last_name = data['last_name']
+    useraccount.phone_number=data['phone_number']
+    useraccount.save()
+    serializer = UserAccountSerializer(useraccount, many=False)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT 'requests', count(*) "
+        cursor.execute("SELECT count(*) "
                        "from \"financiationAPI_request\" "
                        "where visit_id = (SELECT id "
                        "FROM \"financiationAPI_visit\" "
@@ -592,7 +630,7 @@ def getLatestVisitRequestCount(request):
                        "ORDER BY visit_date desc "
                        "limit 1)", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
+        return JsonResponse(to_json(["requests"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -604,7 +642,7 @@ def getLatestVisits(request):
                        "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
                        "order by visit_date desc limit 10", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_large(row), safe=False)
+        return JsonResponse(to_json(["name", "status"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -628,29 +666,6 @@ def getUserGroup(request, id):
                        "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
                        "order by 4", [id, id])
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_larger(row), safe=False)
-
-
-def convert_to_json_large(data):
-    result = []
-
-    for item in data:
-        key, value = item
-        result.append({"name": key, "status": value})
-
-    return result
-
-
-def convert_to_json_larger(data):
-    result = []
-
-    for item in data:
-        role, group_id, group_name, user_id, first_name, last_name = item
-        result.append({
-            "role": role,
-            "group": group_name,
-            "first_name": first_name,
-            "last_name": last_name
-        })
-
-    return result
+        print(row)
+        return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
+                            safe=False)

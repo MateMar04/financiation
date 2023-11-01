@@ -30,7 +30,6 @@ export const ProfilePicture = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        window.location.reload();
 
         const formData = new FormData()
         formData.append("profile_picture", file)
@@ -50,6 +49,7 @@ export const ProfilePicture = () => {
 
             const data = await response.json();
             console.log('Response from server:', data);
+            await window.location.reload();
         } catch (error) {
             console.error('Error uploading profile picture:', error);
         }

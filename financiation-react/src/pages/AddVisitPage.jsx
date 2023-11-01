@@ -1,42 +1,33 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import '../assets/styles/AddVisitPage.css';
-import Carousel from 'react-bootstrap/Carousel';
-import { Col, Container, Form, Row } from 'react-bootstrap';
-import { getMayors } from '../services/MayorServices'
+import {Col, Container, Row} from 'react-bootstrap';
+import {getMayors} from '../services/MayorServices'
 import AuthContext from '../context/AuthContext';
-import TextField from '@mui/material/TextField';
 import FailedModal from '../components/FailedModal';
 import SucceedModal from '../components/SucceedModal';
 import MayorCreateModal from '../components/MayorCreateModal';
 import MayorModifyModal from '../components/MayorModifyModal';
-import CarouselButtons from '../components/CarouselButton';
-import CardItem from '../components/AddVisitCard';
-import ConveniosCard from '../components/ConveniosCard';
+import {getLocations} from "../services/LocationServices";
+import {getVisitStatuses} from "../services/StatusServices";
+import {getPoliticParties} from "../services/PoliticPartiesServices";
+import {getUsers} from "../services/UserServices";
+import {getContactedReferrers} from "../services/ContactedReferrersServices";
+import {Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
+import {PlusCircleOutlined, PlusOutlined} from '@ant-design/icons';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import {getAgreements} from "../services/AgreementServices";
+import {getGroups} from "../services/GroupServices";
+import {getAddresses} from "../services/AddressServices";
 
-import { Card, MenuItem, Select, CardContent, Switch, Button, Checkbox } from '@mui/material';
+const {TextArea} = Input;
 
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
-import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
-import HotelIcon from '@mui/icons-material/Hotel';
-import PersonIcon from '@mui/icons-material/Person';
-import AddIcon from '@mui/icons-material/Add';
-import CreateIcon from '@mui/icons-material/Create';
-import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
-import FlagIcon from '@mui/icons-material/Flag';
-import PhotoLibraryIcon from '@mui/icons-material/PhotoLibrary';
-import ArticleIcon from '@mui/icons-material/Article';
-import ShareLocationIcon from '@mui/icons-material/ShareLocation';
+dayjs.extend(customParseFormat);
 
 
 const AddVisitPage = () => {
 
-    let { authTokens } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     const [updateFlag, setUpdateFlag] = useState(false);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
@@ -46,14 +37,56 @@ const AddVisitPage = () => {
     const [showmodify, setShowmodify] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
-    let [mayors, setMayors] = useState([])
+    const [mayors, setMayors] = useState([])
+    const [locations, setLocations] = useState()
+    const [visitStatuses, setVisitStatuses] = useState()
+    const [politicParties, setPoliticParties] = useState()
+    const [users, setUsers] = useState()
+    const [contactedReferrers, setContactedReferrers] = useState()
+    const [agreements, setAgreements] = useState()
+    const [groups, setGroups] = useState();
+    const [addresses, setAddresses] = useState()
+
+    const getItemNames = (array) => {
+        return array?.map(item => ({
+            label: item.name,
+            value: item.id
+        }));
+    }
+
+
+    const getPersonNames = (array) => {
+        return array?.map(item => ({
+            label: item.first_name + " " + item.last_name,
+            value: item.id
+        }));
+    }
+
+    const getAddressNames = (array) => {
+        return array?.map(item => ({
+            label: item.street + " " + item.number,
+            value: item.id
+        }));
+    }
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
+        getLocations(authTokens.access).then(data => setLocations(data))
+        getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
+        getPoliticParties(authTokens.access).then(data => setPoliticParties(data))
+        getUsers(authTokens.access).then(data => setUsers(data))
+        getContactedReferrers(authTokens.access).then(data => setContactedReferrers(data))
+        getAgreements(authTokens.access).then(data => setAgreements(data))
+        getGroups(authTokens.access).then(data => setGroups(data))
+        getAddresses(authTokens.access).then(data => setAddresses(data))
     }, [updateFlag])
 
-    let postVisit = async (e) => {
-        e.preventDefault()
+    const getTimeFromDate = (date) => {
+        let nDate = new Date(date)
+        return nDate.getHours() + ":" + nDate.getMinutes() + ":" + nDate.getSeconds()
+    }
+
+    let postVisit = async (values) => {
         let response = await fetch('/api/visits', {
             method: "POST",
             headers: {
@@ -62,155 +95,465 @@ const AddVisitPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "flyer": e.target.flyer.value,
-                "distance": e.target.distance.value,
-                "travel_time": e.target.travel_time.value,
-                "visit_date": e.target.visit_date.value,
-                "civil_registration": e.target.civil_registration.value,
-                "accommodation": e.target.accommodation.value,
-                "modernization_fund": e.target.modernization_fund.value,
-                "start_time": e.target.start_time.value,
-                "finish_time": e.target.finish_time.value,
-                "place_name": e.target.place_name.value,
-                "id_locality": e.target.id_locality.value,
-                "id_group": e.target.id_group.value,
-                "id_visit_status": e.target.id_visit_status.value,
-                "id_agreement": e.target.id_agreement.value,
-                "id_contacted_referrer": e.target.id_contacted_referrer.value,
-                "id_address": e.target.id_address.value,
-                "id_logo": e.target.id_logo.value
+                "accommodation": values.accommodation,
+                "address_id": values.address,
+                "agreement_id": values.agreements,
+                "civil_registration": values.civil_registration,
+                "contacted_referrer_id": values.contacted_referrer,
+                "distance": values.distance,
+                "finance_collaborator_id": values.finance_collaborator,
+                "flyer": values.flyer,
+                "group_id": values.group,
+                "location_id": values.location,
+                "mayor_id": values.mayor,
+                "modernization_fund": values.modernization_fund,
+                "rent_observations": values.observations,
+                "place_name": values.place,
+                "politic_party_id": values.politic_party,
+                "rent_collaborator_id": values.rent_collaborator,
+                "travel_time": values.travel_time,
+                "visit_date": values.visit_date.toISOString().split('T')[0],
+                "start_time": getTimeFromDate(values.visit_time[0]),
+                "finish_time": getTimeFromDate(values.visit_time[1]),
+                "visit_status_id": values.visit_status
             })
         })
         if (response.status === 200) {
             toggleModalsucceed();
-            await postVisit()
         } else if (response.status === 500) {
             toggleModalfailed();
-            await postVisit()
         } else if (response.status === 401) {
             toggleModalfailed();
-            await postVisit()
         } else if (response.status === 400) {
             toggleModalfailed();
-            await postVisit()
         }
     }
 
-    const carouselRef = useRef(null);
 
-    const handlePrev = () => {
-        carouselRef.current.prev();
+    const onFinish = (values) => {
+        console.log(values.accommodation)
+        postVisit(values)
     };
 
-    const handleNext = () => {
-        carouselRef.current.next();
+    const formRef = useRef(null);
+
+    const layout = {
+        labelCol: {
+            span: 8,
+        },
+        wrapperCol: {
+            span: 16,
+        },
     };
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
+    };
+
+    const filterOption = (input, option) =>
+        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
 
         <Container fluid>
-            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
-            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag}/>
-            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess} />
-            <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail} />
+            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
 
-            <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
-            <Container>
-                <Form onSubmit={postVisit}>
-                    <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
-                        className={'CarouselAddVisit justify-content-center text-center'}>
+            <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
 
-                        <Carousel.Item className='align-items-center'>
+            <Form
+                {...layout}
+                ref={formRef}
+                name="control-ref"
+                onFinish={onFinish}>
 
-                            <Row className='justify-content-center text-center'>
-                                <Col>
-                                    <CardItem icon={<CalendarMonthIcon sx={{ fontSize: 65 }} />} label="Fecha de Visita" inputLabel1=" " type="date" />
-                                </Col>
-                                <Col>
-                                    <CardItem icon={<PlaceOutlinedIcon sx={{ fontSize: 65 }} />} label="Localidad" inputLabel1=" " isSelect={true} />
-                                </Col>
-                                <Col>
-                                    <CardItem icon={<HouseOutlinedIcon sx={{ fontSize: 65 }} />} label="Nombre del Lugar" inputLabel1=" " />
-                                </Col>
-                                <Col>
-                                    <CardItem icon={<DirectionsIcon sx={{ fontSize: 65 }} />} label="Dirección del Lugar" inputLabel1=" " />
-                                </Col>
-                            </Row>
-                            <Row className='justify-content-center text-center'>
-                            <Col> <CardItem icon={<AccessTimeIcon sx={{ fontSize: 65 }} />} label="Horario de Jornada" inputLabel1=" " inputLabel2=" " type="time" /></Col>
-                            <Col><CardItem icon={<SocialDistanceOutlinedIcon sx={{ fontSize: 65 }} />} label="Distancia" inputLabel1=" " /></Col>
-                            <Col><CardItem icon={<HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />} label="Tiempo de Viaje" inputLabel1=" " type="time" /></Col>
-                            <Col><CardItem icon={<StickyNote2OutlinedIcon sx={{ fontSize: 65 }} />} label="¿Registro Civil?" inputLabel1=" " isSwitch={true} /></Col>
 
-                            </Row>
+                <Container>
 
-                        </Carousel.Item>
+                    <Row className="visit-field-row">
+                        <Col className="visit-field">
+                            <Form.Item
+                                name={"location"}
+                                label={"Localidad"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select placeholder={"Localidad"} className="visit-field"
+                                        options={getItemNames(locations)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}>
+                            <Tooltip placement={"right"} title="Agregar Localidad">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
 
-                        <Carousel.Item className='justify-content-center align-items-center'>
-                            <Row className='justify-content-center text-center'>
-                            <Col><CardItem icon={<HotelIcon sx={{ fontSize: 65 }} />} label="¿Hospedaje?" isSwitch={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Colaborador Finanzas" isSelect={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Colaborador Rentas" isSelect={true} /></Col>
-                            <Col><CardItem icon={<PersonIcon sx={{ fontSize: 65 }} />} label="Referente Local" isSelect={true} /></Col>
-                            </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_date"}
+                                label={"Fecha de la Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
+                            </Form.Item>
 
-                            <Row className='justify-content-center text-center'>
-                            <Col><CardItem icon={<FlagIcon sx={{ fontSize: 65 }} />} label="Partido Politico" isSelect={true} /></Col>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_time"}
+                                label={"Jornada de trabajo:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"finance_collaborator"}
+                                label={"Colaborador de Finanzas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
+                                        options={getPersonNames(users)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"rent_collaborator"}
+                                label={"Colaborador de Rentas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Colaborador de Rentas"}
+                                        options={getPersonNames(users)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"observations"}
+                                label={"Observaciones:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"distance"}
+                                label={"Distancia:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"travel_time"}
+                                label={"Tiempo de Viaje:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"place"}
+                                label={"Lugar:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Input className="visit-field" placeholder="Lugar"/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"address"}
+                                label={"Direccion:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                        options={getAddressNames(addresses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"contacted_referrer"}
+                                label={"Referente Contactado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                        options={getPersonNames(contactedReferrers)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}>
+                            <Tooltip placement={"right"} title="Agregar Referente Contactado">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"politic_party"}
+                                label={"Partido Politico:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Partido Politico"}
+                                        options={getItemNames(politicParties)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"mayor"}
+                                label={"Intendente:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Intendente"}
+                                        options={getPersonNames(mayors)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}>
+                            <Tooltip placement={"right"} title="Agregar Intendente">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"flyer"}
+                                label={"Flyer:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"civil_registration"}
+                                label={"Registro Civil:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"accommodation"}
+                                label={"Hospedaje:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"modernization_fund"}
+                                label={"Fondo de Modernizacion:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"agreements"}
+                                label={"Acuerdos:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
+                                        options={getItemNames(agreements)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}>
+                            <Tooltip placement={"right"} title="Agregar Acuerdo">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_status"}
+                                label={"Estado de Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
 
-                                <Col className='CenterContent'>
-                                    <Card className={'CardVisit'}>
-                                        <CardContent className={'CenterContent'}>
-                                            <Container>
-                                                <Row className='justify-content-center'>
-                                                    <AddIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                    <CreateIcon sx={{fontSize:40}} type="submit" onClick={() => toggleModalModify()}></CreateIcon>
-                                                </Row>
-                                                <Row className='justify-content-center'>
-                                                    <PersonIcon sx={{ fontSize: 65 }} />
-                                                </Row>
+                                <Select className="visit-field" placeholder={"Estado de Visita"}
+                                        options={getItemNames(visitStatuses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"group"}
+                                label={"Grupo encargado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Grupo"}
+                                        options={getItemNames(groups)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                </Container>
 
-                                                <Row className='justify-content-center text-center'>
-                                                    <a>{'Intendente'}</a>
-                                                </Row>
-                                                <Row className='justify-content-center text-center'>
-                                                    <Col>
-                                                        <TextField id="standard-select-currency" select variant="standard" >
-                                                            {mayors?.map((mayor) => (
-                                                                <MenuItem value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
-                                                            ))}
-                                                        </TextField>
 
-                                                    </Col>
-                                                </Row>
-                                            </Container>
-                                        </CardContent>
-                                    </Card>
-                                </Col>
-                                <CardItem icon={<RequestQuoteIcon sx={{ fontSize: 65 }} />} label="Fondo de Modernización" isSwitch={true} />
-                                <CardItem icon={<ArticleIcon sx={{ fontSize: 65 }} />} label="¿Flyer?" isSwitch={true} />
-                            </Row>
-                        </Carousel.Item>
+                <Container fluid className={"button-container"}>
+                    <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
+                            icon={<PlusCircleOutlined/>}>
+                        Crear Visita
+                    </Button></Container>
 
-                        <Carousel.Item className=' align-items-center'>
-                            <Row className='justify-content-center text-center'>
-                                <Col>
-                                    <ConveniosCard />
-                                </Col>
-                                <Col md={3}>
-                                    <CardItem icon={<ShareLocationIcon sx={{ fontSize: 65 }} />} label="Estado" isSelect={true} />
-                                </Col>
-                            </Row>
-                            <Row className='justify-content-center text-center'>
-                                <Col>
-                                    <Button className={'BtnAddVisit'} variant='outlined'>Guardar Visita</Button>
-                                </Col>
-                            </Row>
-                        </Carousel.Item>
-                    </Carousel>
-                    <CarouselButtons prev={handlePrev} next={handleNext} />
-                </Form>
 
-            </Container>
+            </Form>
         </Container>
 
     )
