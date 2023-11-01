@@ -26,10 +26,10 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
     }, [advisorDeleted, updateFlag])
 
 
-      const cancel = (e) => {
+    const cancel = (e) => {
         console.log(e);
-        message.error('Se a cancelado la eliminación');
-      };
+        message.error('Se ha cancelado la eliminación');
+    };
 
     const handleDeleteAdvisor = async (advisorId, groupId) => {
         try {
@@ -75,15 +75,16 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton &&  <Popconfirm
-                                    title="Eliminar usuario del grupo"
-                                    description="Esta seguro de que quiere eliminarlo?"
-                                    onConfirm={()=>handleDeleteAdvisor(advisor.id, group.id)}
-                                    onCancel={cancel}
-                                    okText="Si"
-                                    cancelText="No">
-                                        <IconButton ><ClearIcon/></IconButton>
-                                        </Popconfirm>}
+                                {showButton &&  
+                                    <Popconfirm
+                                        title="Eliminar usuario del grupo"
+                                        description="Esta seguro de que quiere eliminarlo?"
+                                        onConfirm={()=>handleDeleteAdvisor(advisor.id, group.id)}
+                                        onCancel={cancel}
+                                        okText="Si"
+                                        cancelText="No">
+                                            <IconButton ><ClearIcon/></IconButton>
+                                    </Popconfirm>}
                             </Row>
                         </Col>
                     </Row>
