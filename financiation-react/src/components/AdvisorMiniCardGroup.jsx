@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import AdvisorCreateModal from './AdvisorCreateModal';
+import { Button, message, Popconfirm } from 'antd';
+
 
 export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
@@ -23,6 +25,12 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
         getGroupAdvisorUsers(authTokens.access, group.id).then(data => setAdvisors(data))
     }, [advisorDeleted, updateFlag])
 
+
+      const cancel = (e) => {
+        console.log(e);
+        message.error('Se a cancelado la eliminación');
+      };
+
     const handleDeleteAdvisor = async (advisorId, groupId) => {
         try {
             let response = await fetch(`/api/groups/${groupId}/advisors/delete/${advisorId}`, {
@@ -34,16 +42,16 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                 },
             });
             if (response.status === 200) {
-                // toggleModalsucceed();
                 toggleAdvisorDeleted();
+                message.success('Se borró el usuario exitosamente');
             } else {
-                // toggleModalfailed();
                 console.error("Coordinator deletion failed");
             }
         } catch (error) {
             console.error("Error deleting coordinator:", error);
         }
     };
+
 
     return (
         <>
@@ -67,7 +75,15 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteAdvisor(advisor.id, group.id)}><ClearIcon/></IconButton>}
+                                {showButton &&  <Popconfirm
+                                    title="Eliminar usuario del grupo"
+                                    description="Esta seguro de que quiere eliminarlo?"
+                                    onConfirm={()=>handleDeleteAdvisor(advisor.id, group.id)}
+                                    onCancel={cancel}
+                                    okText="Si"
+                                    cancelText="No">
+                                        <IconButton ><ClearIcon/></IconButton>
+                                        </Popconfirm>}
                             </Row>
                         </Col>
                     </Row>
