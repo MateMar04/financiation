@@ -10,8 +10,10 @@ import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import { Select, MenuItem } from '@mui/material';
+import { InputLabel, Select, MenuItem } from '@mui/material';
 import {getLocations} from '../services/LocationServices';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
 
 
 export const MayorCreateModal = (props) => {
@@ -99,22 +101,24 @@ export const MayorCreateModal = (props) => {
                                 />
                             </Form.Group>  
                         </div>
-                        <div>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <Select
-                                    label="Localidad"
-                                    name='location'
-                                    value={selectedLocalidad}
-                                    onChange={(e) => setSelectedLocalidad(e.target.value)}
-                                    variant="outlined"
-                                    sx={{ width: '100%', height: '48px' }} 
-                                >
-                                    {locations?.map((location) => (
-                                        <MenuItem value={location.id}>{location.name}</MenuItem>
-                                    ))}    
-                                </Select>
-                            </Form.Group>
-                        </div>
+
+                        <Box sx={{ minWidth: 120 }}>
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Localidad</InputLabel>
+                                    <Select
+                                        label="Localidad"
+                                        value={selectedLocalidad}
+                                        onChange={(e) => setSelectedLocalidad(e.target.value)}
+                                        variant="outlined"
+                                        sx={{ width: '100%', height: '48px' }} 
+                                    >
+                                        {locations?.map((location) => (
+                                            <MenuItem value={location.id}>{location.name}</MenuItem>
+                                        ))}    
+                                    </Select>
+                            </FormControl>
+                        </Box>
+
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
                             <Button className='BtnIniciarSesionLogin btnregis' onClick={postMayor}>Registrar</Button>
                         </div>
