@@ -46,13 +46,19 @@ export const AdvisorCreateModal = (props) => {
                 })
             })
             if (response.status === 200) {
-                toggleModalsucceed();
+                // toggleModalsucceed();
+                message.success('Se creó el asesor correctamente');
                 props.setUpdateFlag((prevFlag) => !prevFlag);
+                props.onClose();
             } else {
-                toggleModalfailed();
+                // toggleModalfailed();
+                message.error('No se pudo crear el asesor');
+                props.onClose();
             }
         } else {
-            toggleModalfailed()
+            // toggleModalfailed()
+            message.error('No se pudo crear el asesor');
+            props.onClose();
         }
     }
 
