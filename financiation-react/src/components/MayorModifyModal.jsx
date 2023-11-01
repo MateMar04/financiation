@@ -61,6 +61,9 @@ export const MayorModifyModal = (props) => {
         if (response.status === 200) {
             toggleModalsucceed();
             props.setUpdateFlag((prevFlag) => !prevFlag);
+            getMayors(authTokens.access)
+            .then(data => setMayors(data))
+            .catch(error => console.error(error));
         } else if (response.status === 500) {
             toggleModalfailed();
         } else if (response.status === 401) {
