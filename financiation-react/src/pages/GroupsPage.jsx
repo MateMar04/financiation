@@ -8,15 +8,28 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from "react-router-dom";
 import FlotantButton from "../components/FlotantButton";
+import LoadingModal from "../components/LoadingModal";
+
 
 
 export const GroupsPage = () => {
     let { authTokens } = useContext(AuthContext)
     let [groups, setGroups] = useState([])
-
+    let [loading, setLoading] = useState(true)
+   
+    const [showloading, setShowloading] = useState(false);
+   
     useEffect(() => {
-        getGroups(authTokens.access).then(data => setGroups(data))
-    }, [])
+        setShowloading(true);
+        getGroups(authTokens.access)
+        .then((data) => {
+          setGroups(data);
+        })
+        .finally(() => {
+          // Oculta el modal de carga una vez que la carga se completa (independientemente de si tuvo éxito o no)
+          setShowloading(false);
+        });
+    }, []);
 
     return (
         <div>
@@ -29,6 +42,9 @@ export const GroupsPage = () => {
                         <GroupCard group={group} />
                     </Container>
                 ))}
+            </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
             </Container>
         </div>
     )
