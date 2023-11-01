@@ -158,6 +158,7 @@ const SigninPage = () => {
                         </Form.Group>
                     </Col>
                 </Row>
+                <container>
 
                 <Row className={'justify-content-center text-center'}>
                     <Col lg="5">
@@ -178,6 +179,7 @@ const SigninPage = () => {
                                 id="inputizq"
                             />
                         </Form.Group>
+                      
                     </Col>
                     <Col lg="5">
                         <Form.Group>
@@ -199,7 +201,10 @@ const SigninPage = () => {
                         </Form.Group>
                     </Col>
                 </Row>
-
+                <p className="textoaclarador">
+                            Utiliza 8 caracteres como minimo con una combinacion de letras y numeros
+                        </p>
+            </container>
                 <Container>
                     <Row className={'justify-content-center text-center'}>
                         <Col>

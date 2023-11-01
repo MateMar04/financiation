@@ -1,4 +1,8 @@
-
+.textoaclarador {
+    font-size: 0.7rem;
+    margin-top: -1.7vw;
+    margin-left: 2.9vw;
+}
 .cardsign {
     width: 80vw!important;
     max-width: 40rem!important;
