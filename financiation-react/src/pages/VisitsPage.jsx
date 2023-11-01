@@ -32,7 +32,6 @@ export const VisitsPage = () => {
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        console.log("page " + page)
     };
 
     const handleSizeChange = (number) => {
