@@ -598,6 +598,7 @@ def putUserbyId(request, id, *args, **kwargs):
     useraccount = UserAccount.objects.get(id=id)
     useraccount.first_name = data['first_name']
     useraccount.last_name = data['last_name']
+    useraccount.phone_number=data['phone_number']
     useraccount.save()
     serializer = UserAccountSerializer(useraccount, many=False)
     return Response(serializer.data)

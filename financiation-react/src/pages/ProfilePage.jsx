@@ -43,7 +43,7 @@ const ProfilePage = () => {
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault();
         putUser();
     };
@@ -59,11 +59,18 @@ const ProfilePage = () => {
             body: JSON.stringify({
                 "first_name": editedUser.first_name,
                 "last_name": editedUser.last_name,
+                "phone_number":editedUser.phone_number,
             })
         })
 
         if (response.status === 200) {
             toggleModalsucceed();
+            setMyUser({
+                ...myUser,
+                first_name: editedUser.first_name,
+                last_name: editedUser.last_name,
+                phone_number:editedUser.phone_number,
+            });
         } else if (response.status === 500) {
             toggleModalfailed();
         } else if (response.status === 401) {
@@ -158,18 +165,21 @@ const ProfilePage = () => {
                         </Col>
                         <Col md={6} className="py-3">
                             {editMode ?
-                                <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                           defaultValue={defaultPhoneNumber} InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: false
-                                }}></TextField> :
-                                <TextField variant='outlined' label='Telefono' required className='profileTextField'
-                                           value={defaultPhoneNumber} InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: true
-                                }}></TextField>
+                                <TextField variant='outlined' label='Teléfono' required className='profileTextField'
+                                           defaultValue={defaultPhoneNumber}
+                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
+                                           InputProps={{
+                                               sx: {borderRadius: 5},
+                                               readOnly: false
+                                           }}></TextField> :
+                                <TextField variant='outlined' label='Teléfono' required className='profileTextField'
+                                           value={defaultPhoneNumber}
+                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
+                                           InputProps={{
+                                               sx: {borderRadius: 5},
+                                               readOnly: true
+                                           }}></TextField>
                             }
-
                         </Col>
                     </Row>
                     <Row className={"d-flex justify-content-center text-center"}>
