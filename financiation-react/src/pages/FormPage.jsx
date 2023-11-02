@@ -141,7 +141,6 @@ const FormPage = () => {
                         <Container>
                             <p>Visita</p>
                             <select
-                                placeholder="Visita"
                                 className='form-select'
                                 name="visit"
                                 onChange={(e) => setSelectedVisit(e.target.value)}>
