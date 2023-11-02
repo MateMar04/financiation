@@ -141,7 +141,6 @@ const FormPage = () => {
                         <Container>
                             <p>Visita</p>
                             <select
-                                className='form-select'
                                 name="visit"
                                 onChange={(e) => setSelectedVisit(e.target.value)}>
 
@@ -250,9 +249,10 @@ const FormPage = () => {
                     <Col lg={3}>
                         <Container>
                             <p>Cantidad</p>
-                            <textarea className={"consulta-field"}
+                            <input className={"consulta-field"}
                                       name="quantity"
                                       defaultValue={1}
+                                        type="number"
                                       onChange={(e) => setSelectedQuantity(e.target.value)}/>
 
                         </Container>
