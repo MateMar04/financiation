@@ -1,21 +1,17 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import "../assets/styles/FormPage.css";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
 import {getVisits} from "../services/VisitServices";
 import {getAdvisorUsers} from "../services/AdvisorServices";
-import {getFaqsByDivisions} from "../services/FaqServices";
 import {getDivisions} from "../services/DivisionServices";
-import Avatar from '@mui/material/Avatar';
 import {getUser} from '../services/UserServices';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import TextField from "@mui/material/TextField";
 import {getWhys} from "../services/WhyServices";
-import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {Col, Container, Form, Row} from "react-bootstrap";
+import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DateTimeField} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Avatar from "@mui/material/Avatar";
 
 
 const FormPage = () => {
@@ -120,174 +116,219 @@ const FormPage = () => {
 
 
     return (
-
-        <Form onSubmit={handleSumbit}>
-            <Container className={'FirstContainerForm'}>
-                <Row className='justify-content-center'>
-                    <Col md={{span: 3, order: 1}} xs={{span: 6, order: 1}}>
-                        <p className={'pInFormPage'}>Fecha y hora</p>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimeField
-                                inputRef={dateRef}
-                                format='DD/MM/YYYY HH:mm'
-                                label={''}
-                                className='InputsFormPage'
-                                name="request_datetime"
-                                defaultValue={dayjs(getCurrentDateTimeString())}
-                                InputProps={{
-                                    sx: {borderRadius: '2vh', height: '7vh', borderColor: 'white'}
-                                }}
-                            />
-                        </LocalizationProvider>
-                    </Col>
-                    <Col md={{span: 4, order: 2}} className={'VisitaDropDown'} xs={{order: 3}}>
-                        <p className={'pInFormPage'}>Visita</p>
-                        <select
-                            placeholder="Visita"
-                            className='form-select'
-                            name="visit"
-                            onChange={(e) => setSelectedVisit(e.target.value)}>
-
-                            {visits?.map((visit) => (
-                                <option value={visit.id}>{visit.name}</option>
-                            ))}
-                        </select>
-
-
-                    </Col>
-                    <Col md={{span: 3, order: 3}} xs={{span: 6, order: 2}}>
-                        <p className={'pInFormPage'}>Asesor</p>
-                        <Row className='ContainerPersonForm'>
-                            <Col md={4} xs={2}
-                                 className='justify-content-center d-flex align-items-center col-avatar'>
-                                <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                        sx={{width: 35, height: 35}}/>
-                            </Col>
-                            <Col className='d-flex align-items-center text-center'>
-                                <h5 className={'userFirstName'}>{user.first_name}</h5>
-                            </Col>
-                        </Row>
-
-                    </Col>
-                </Row>
-            </Container>
-            <Container className='justify-content-center'>
-
-
-                <Row className='justify-content-md-center py-2'>
-                    <Col xs={12} md={10}>
-                        <p className={'pInFormPage'}>Reparticiones</p>
-                        <select
-                            placeholder="Reparticiones"
-                            className='form-select department-select'
-                            name="division"
-
-                            onChange={(e) => {
-                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-                                setShowObservacionesInput(selectedOptionName === 'Otros');
-                                getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
-                            }}>
-                            <option value="" disabled selected>Seleccione una reparticion</option>
-                            {divisions?.map((ministryDepartment) => (
-                                <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
-                            ))}
-
-                        </select>
-                    </Col>
-                </Row>
-
-
-                <Row className='justify-content-md-center py-2'>
-                    <Col xs={12} md={10}>
-                        <p className={'pInFormPage'}>Consulta</p>
-                        <select
-                            placeholder="Departamento"
-                            className='form-select department-select'
-                            name="faq"
-                            onChange={(e) => {
-                                const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-                                setShowObservacionesInput(selectedOptionName.includes('Otros'));
-                                setSelectedFaq(e.target.value)
-                            }}>
-                            <option value="" disabled selected>Seleccione un tipo de consulta</option>
-                            {faqs?.map((faq) => (
-                                <option value={faq.id}>{faq.name}</option>
-                            ))}
-
-
-                        </select>
-                    </Col>
-                </Row>
-
-                {showObservacionesInput && (
-                    <Row className='justify-content-md-center py-2'>
-                        <Col xs={12} md={10}>
-                            <p className={'pInFormPage'}>Observaciones</p>
-                            <textarea
-                                type="text"
-                                placeholder="La persona...."
-                                className="ObservationsInput"
-                                name="observaciones"
-                            />
-                        </Col>
-                    </Row>
-                )}
-
-
-                <Row className='justify-content-md-center py-2'>
-                    <Col xs={12} md={10}>
-                        <p className={'pInFormPage'}>¿Por que vino?</p>
-                        <select
-                            placeholder="Por que vino?"
-                            className='form-select department-select'
-                            name='why'
-                            onChange={(e) => setSelectedWhy(e.target.value)}>
-                            <option value="" disabled selected>Determine el motivo de la visita</option>
-                            {whys?.map((why) => (
-                                <option value={why.id}>{why.name}</option>
-                            ))}
-
-
-                        </select>
-                    </Col>
-                </Row>
-            </Container>
-
-            <Container className={'SecondContainerForm'}>
+        <Form>
+            <Container>
                 <Row>
-                    <p className={'pInFormPage'}>Cantidad</p>
-                </Row>
-
-                <Row className={'justify-content-start py-2'} xs={12}>
-                    <Col md={8} xs={5}>
-                        <TextField className={'InputInForm'}
-                                   name="quantity"
-                                   defaultValue={1}
-                                   InputProps={{sx: {borderRadius: 4, borderColor: 'white', height: '7vh'}}}
-                                   onChange={(e) => setSelectedQuantity(e.target.value)}/>
+                    <Col lg={3}>
+                        <Container>
+                            <p>Fecha y Hora</p>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DateTimeField
+                                    inputRef={dateRef}
+                                    format='DD/MM/YYYY HH:mm'
+                                    label={''}
+                                    name="request_datetime"
+                                    defaultValue={dayjs(getCurrentDateTimeString())}
+                                    className={"fecha-field"}
+                                />
+                            </LocalizationProvider>
+                        </Container>
                     </Col>
+                    <Col>
+                        <Container>
+                            <p>Visita</p>
+                            <select
+                                placeholder="Visita"
+                                className='form-select'
+                                name="visit"
+                                onChange={(e) => setSelectedVisit(e.target.value)}>
 
-                    <Col md={3} xs={6}>
-
-                        <Button type='submit' variant="primary"
-                                className='buttonconsulta'>Enviar Consulta</Button>
+                                {visits?.map((visit) => (
+                                    <option value={visit.id}>{visit.name}</option>
+                                ))}
+                            </select>
+                        </Container>
+                    </Col>
+                    <Col lg={3}>
+                        <Container>
+                            <p>Asesor</p>
+                            <Row className='ContainerPersonForm'>
+                                <Col>
+                                    <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+                                </Col>
+                                <Col>
+                                    <h5>{user.first_name}</h5>
+                                </Col>
+                            </Row>
+                        </Container>
                     </Col>
                 </Row>
             </Container>
-
-
-            <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
-                    Consulta enviada!
-                </Alert>
-            </Snackbar>
-
-
         </Form>
+
 
     )
         ;
 };
+
+/*<Form onSubmit={handleSumbit}>
+<Container className={'FirstContainerForm'}>
+<Row className='justify-content-center'>
+<Col>
+<p className={'pInFormPage'}>Fecha y hora</p>
+<LocalizationProvider dateAdapter={AdapterDayjs}>
+<DateTimeField
+inputRef={dateRef}
+format='DD/MM/YYYY HH:mm'
+label={''}
+className='InputsFormPage'
+name="request_datetime"
+defaultValue={dayjs(getCurrentDateTimeString())}
+/>
+</LocalizationProvider>
+</Col>
+<Col className={'VisitaDropDown'}>
+<p className={'pInFormPage'}>Visita</p>
+<select
+placeholder="Visita"
+className='form-select'
+name="visit"
+onChange={(e) => setSelectedVisit(e.target.value)}>
+
+{visits?.map((visit) => (
+<option value={visit.id}>{visit.name}</option>
+))}
+</select>
+
+
+</Col>
+<Col>
+<p className={'pInFormPage'}>Asesor</p>
+<Row className='ContainerPersonForm'>
+<Col md={4} xs={2}
+className='justify-content-center d-flex align-items-center col-avatar'>
+<Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+</Col>
+<Col className='d-flex align-items-center text-center'>
+<h5 className={'userFirstName'}>{user.first_name}</h5>
+</Col>
+</Row>
+
+</Col>
+</Row>
+</Container>
+<Container className='justify-content-center'>
+
+
+<Row className='justify-content-md-center py-2'>
+<Col xs={12} md={10}>
+<p className={'pInFormPage'}>Reparticiones</p>
+<select
+placeholder="Reparticiones"
+className='form-select department-select'
+name="division"
+
+onChange={(e) => {
+const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+setShowObservacionesInput(selectedOptionName === 'Otros');
+getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
+}}>
+<option value="" disabled selected>Seleccione una reparticion</option>
+{divisions?.map((ministryDepartment) => (
+<option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+))}
+
+</select>
+</Col>
+</Row>
+
+
+<Row className='justify-content-md-center py-2'>
+<Col xs={12} md={10}>
+<p className={'pInFormPage'}>Consulta</p>
+<select
+placeholder="Departamento"
+className='form-select department-select'
+name="faq"
+onChange={(e) => {
+const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+setShowObservacionesInput(selectedOptionName.includes('Otros'));
+setSelectedFaq(e.target.value)
+}}>
+<option value="" disabled selected>Seleccione un tipo de consulta</option>
+{faqs?.map((faq) => (
+<option value={faq.id}>{faq.name}</option>
+))}
+
+
+</select>
+</Col>
+</Row>
+
+{showObservacionesInput && (
+<Row className='justify-content-md-center py-2'>
+<Col xs={12} md={10}>
+<p className={'pInFormPage'}>Observaciones</p>
+<textarea
+type="text"
+placeholder="La persona...."
+className="ObservationsInput"
+name="observaciones"
+/>
+</Col>
+</Row>
+)}
+
+
+<Row className='justify-content-md-center py-2'>
+<Col xs={12} md={10}>
+<p className={'pInFormPage'}>¿Por que vino?</p>
+<select
+placeholder="Por que vino?"
+className='form-select department-select'
+name='why'
+onChange={(e) => setSelectedWhy(e.target.value)}>
+<option value="" disabled selected>Determine el motivo de la visita</option>
+{whys?.map((why) => (
+<option value={why.id}>{why.name}</option>
+))}
+
+
+</select>
+</Col>
+</Row>
+</Container>
+
+<Container className={'SecondContainerForm'}>
+<Row>
+<p className={'pInFormPage'}>Cantidad</p>
+</Row>
+
+<Row className={'justify-content-start py-2'} xs={12}>
+<Col md={8} xs={5}>
+<TextField className={'InputInForm'}
+name="quantity"
+defaultValue={1}
+onChange={(e) => setSelectedQuantity(e.target.value)}/>
+</Col>
+
+<Col md={3} xs={6}>
+
+<Button type='submit' variant="primary"
+className='buttonconsulta'>Enviar Consulta</Button>
+</Col>
+</Row>
+</Container>
+
+
+<Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+<Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
+Consulta enviada!
+</Alert>
+</Snackbar>
+
+
+</Form>*/
 
 
 export default FormPage;
