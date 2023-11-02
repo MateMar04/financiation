@@ -21,12 +21,12 @@ export const EmailSended = () => {
                     <img src={Logo} className="ImgLogoResetPassword" alt="Logo del ministerio de finanzas" />
                 </Row>
                 <Row className={'justify-content-center text-center'}>
-                    <h3 className={'h3ResetPasswordPage'}>El e-mail de confirmacion de cuenta ha sido enviado al referente</h3>
+                    <h3 className={'h3ResetPasswordPage'}>El e-mail de confirmación de su cuenta ha sido enviado al referente.</h3>
                 </Row>
                 <Row className={'justify-content-center text-center'}>
 
-                    <p className={'pResetPassword'}>El correo de confirmación de cuenta ha sido enviado al referente para su revisión. Por favor, mantente en contacto con el/ella para obtener más información y para completar el proceso de creación de cuenta.</p>
-                    <p className={'pResetPassword'}>Podras usar el sistema una vez que el correo electronico haya sido aprobado.</p>
+                    <p className={'pResetPassword'}>El correo de confirmación de cuenta ha sido enviado al referente para su revisión. Por favor, mantente en contacto con el referente para obtener más información y para completar el proceso de creación de cuenta.</p>
+                    <p className={'pResetPassword'}>Podrás usar el sistema una vez que el correo electrónico haya sido aprobado.</p>
 
                 </Row>
 

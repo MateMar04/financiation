@@ -6,12 +6,14 @@ import {LoadingOutlined} from '@ant-design/icons';
 
 const LoadingModal = (props) => {
     return (
-        <div className="loading-modal"> {/* Add a CSS class for centering */}
-            <LoadingOutlined size="large" tip="Cargando..." style={{
-                fontSize: 80
-            }}>
-            </LoadingOutlined>
-        </div>
+<h6>hola</h6>
+        // <div className="loading-modal"> {/* Add a CSS class for centering */}
+        //     <LoadingOutlined size="large" tip="Cargando..." style={{
+        //         fontSize: 80
+        //     }}>
+        //     </LoadingOutlined>
+        // </div>
+        
     );
 };
 
