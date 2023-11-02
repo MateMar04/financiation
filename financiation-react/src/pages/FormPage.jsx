@@ -221,13 +221,13 @@ const FormPage = () => {
                             <Container>
                                 <p>Observaciones</p>
                                 <Form.Item
-                                name={"obsevaciones"}
-                                rules={[
-                                    {
-                                        required: false,
-                                    },
-                                ]}>
-                                <Input placeholder="Basic usage" />
+                                    name={"obsevaciones"}
+                                    rules={[
+                                        {
+                                            required: false,
+                                        },
+                                    ]}>
+                                    <Input placeholder="Basic usage"/>
                                 </Form.Item>
                             </Container>
 
