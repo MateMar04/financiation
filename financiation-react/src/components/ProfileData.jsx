@@ -1,6 +1,7 @@
 import {Col, Container, Row} from "react-bootstrap";
 import '../assets/styles/ProfileData.css'
-
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 export const ProfileData = ({username, firstName, lastName, email, ssn, phone_number}) => {
     return (
@@ -19,7 +20,7 @@ export const ProfileData = ({username, firstName, lastName, email, ssn, phone_nu
                         <h5 className="mini-title">CUIL:</h5>
                         <p className="data">{ssn}</p>
                     </Col>
-                </Row>
+                </Row>  
                 <Row>
                     <Col md={6}>
                         <h5 className="mini-title">Número de Teléfono:</h5>
