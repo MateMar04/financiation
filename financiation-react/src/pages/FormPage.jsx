@@ -12,6 +12,7 @@ import {DateTimeField} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Avatar from "@mui/material/Avatar";
+import {getFaqsByDivisions} from "../services/FaqServices";
 
 
 const FormPage = () => {
@@ -129,7 +130,7 @@ const FormPage = () => {
                                     label={''}
                                     name="request_datetime"
                                     defaultValue={dayjs(getCurrentDateTimeString())}
-                                    className={"fecha-field"}
+                                    className={"consulta-field"}
                                 />
                             </LocalizationProvider>
                         </Container>
@@ -163,6 +164,68 @@ const FormPage = () => {
                         </Container>
                     </Col>
                 </Row>
+                <Row>
+                    <Col>
+                        <Container>
+                            <p>Reparticiones</p>
+                            <select
+                                placeholder="Reparticiones"
+                                name="division"
+                                className={"consulta-field"}
+                                onChange={(e) => {
+                                    const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                    setShowObservacionesInput(selectedOptionName === 'Otros');
+                                    getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
+                                }}>
+                                <option value="" disabled selected>Seleccione una reparticion</option>
+                                {divisions?.map((ministryDepartment) => (
+                                    <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                                ))}
+
+                            </select>
+
+                        </Container>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Container>
+                            <p>Consultas</p>
+                            <select
+                                placeholder="Departamento"
+                                name="faq"
+                                className={"consulta-field"}
+                                onChange={(e) => {
+                                    const selectedOptionName = e.target.options[e.target.selectedIndex].text;
+                                    setShowObservacionesInput(selectedOptionName.includes('Otros'));
+                                    setSelectedFaq(e.target.value)
+                                }}>
+                                <option value="" disabled selected>Seleccione un tipo de consulta</option>
+                                {faqs?.map((faq) => (
+                                    <option value={faq.id}>{faq.name}</option>
+                                ))}
+
+
+                            </select>
+                        </Container>
+                    </Col>
+                </Row>
+                {showObservacionesInput && (
+                    <Row>
+                        <Col>
+                            <Container>
+                                <p>Observaciones</p>
+                                <textarea
+                                    className={"consulta-field"}
+                                    type="text"
+                                    placeholder="La persona...."
+                                    name="observaciones"
+                                />
+                            </Container>
+
+                        </Col>
+                    </Row>
+                )}
             </Container>
         </Form>
 
@@ -171,77 +234,8 @@ const FormPage = () => {
         ;
 };
 
-/*<Form onSubmit={handleSumbit}>
-<Container className={'FirstContainerForm'}>
-<Row className='justify-content-center'>
-<Col>
-<p className={'pInFormPage'}>Fecha y hora</p>
-<LocalizationProvider dateAdapter={AdapterDayjs}>
-<DateTimeField
-inputRef={dateRef}
-format='DD/MM/YYYY HH:mm'
-label={''}
-className='InputsFormPage'
-name="request_datetime"
-defaultValue={dayjs(getCurrentDateTimeString())}
-/>
-</LocalizationProvider>
-</Col>
-<Col className={'VisitaDropDown'}>
-<p className={'pInFormPage'}>Visita</p>
-<select
-placeholder="Visita"
-className='form-select'
-name="visit"
-onChange={(e) => setSelectedVisit(e.target.value)}>
-
-{visits?.map((visit) => (
-<option value={visit.id}>{visit.name}</option>
-))}
-</select>
-
-
-</Col>
-<Col>
-<p className={'pInFormPage'}>Asesor</p>
-<Row className='ContainerPersonForm'>
-<Col md={4} xs={2}
-className='justify-content-center d-flex align-items-center col-avatar'>
-<Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
-</Col>
-<Col className='d-flex align-items-center text-center'>
-<h5 className={'userFirstName'}>{user.first_name}</h5>
-</Col>
-</Row>
-
-</Col>
-</Row>
-</Container>
+/*
 <Container className='justify-content-center'>
-
-
-<Row className='justify-content-md-center py-2'>
-<Col xs={12} md={10}>
-<p className={'pInFormPage'}>Reparticiones</p>
-<select
-placeholder="Reparticiones"
-className='form-select department-select'
-name="division"
-
-onChange={(e) => {
-const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-setShowObservacionesInput(selectedOptionName === 'Otros');
-getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
-}}>
-<option value="" disabled selected>Seleccione una reparticion</option>
-{divisions?.map((ministryDepartment) => (
-<option value={ministryDepartment.id}>{ministryDepartment.name}</option>
-))}
-
-</select>
-</Col>
-</Row>
-
 
 <Row className='justify-content-md-center py-2'>
 <Col xs={12} md={10}>
