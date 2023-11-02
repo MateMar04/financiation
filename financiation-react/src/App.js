@@ -27,6 +27,7 @@ import React from 'react';
 import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
 import { CalendarPage } from './pages/CalendarPage';
+import {EmailSended} from './pages/EmailSended';
 import "@fontsource/poppins";
 
 function App() {
@@ -45,6 +46,8 @@ function App() {
                                element={<PublicRoute children={<ResetPasswordConfirmPage/>}/>}/>
                         <Route path='/activate/:uid/:token'
                                element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
+
+                         <Route path='/emailsended' element={<PublicRoute children={<EmailSended/>}/>}/>
 
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
@@ -70,6 +73,7 @@ function App() {
 
                         <Route path='/mayors/add' element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
                         <Route path='/calendar' element={<PrivateRoute children={<CalendarPage></CalendarPage>}/>}/>
+
                     </Routes>
                 </AuthProvider>
             </div>
