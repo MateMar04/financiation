@@ -6,15 +6,15 @@ import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getDivisions} from "../services/DivisionServices";
 import {getUser} from '../services/UserServices';
 import {getWhys} from "../services/WhyServices";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DateTimeField} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Avatar from "@mui/material/Avatar";
-import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import {Button, Form, Input, InputNumber, Select} from "antd";
 
 
 const FormPage = () => {
@@ -117,6 +117,13 @@ const FormPage = () => {
         }
     }
 
+    const getItemNames = (array) => {
+        return array?.map(item => ({
+            label: item.name,
+            value: item.id
+        }));
+    }
+
 
     return (
         <Form onSubmit={e => handleSumbit(e)}>
@@ -140,16 +147,16 @@ const FormPage = () => {
                     <Col>
                         <Container>
                             <p>Visita</p>
-                            <select
-                                placeholder="Visita"
-                                className='form-select'
-                                name="visit"
-                                onChange={(e) => setSelectedVisit(e.target.value)}>
-
-                                {visits?.map((visit) => (
-                                    <option value={visit.id}>{visit.name}</option>
-                                ))}
-                            </select>
+                            <Form.Item
+                                name={"visita"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    options={getItemNames(visits)}/>
+                            </Form.Item>
                         </Container>
                     </Col>
                     <Col lg={3}>
@@ -170,22 +177,20 @@ const FormPage = () => {
                     <Col>
                         <Container>
                             <p>Reparticiones</p>
-                            <select
-                                placeholder="Reparticiones"
-                                name="division"
-                                className={"consulta-field"}
-                                onChange={(e) => {
-                                    const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-                                    setShowObservacionesInput(selectedOptionName === 'Otros');
-                                    getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
-                                }}>
-                                <option value="" disabled selected>Seleccione una reparticion</option>
-                                {divisions?.map((ministryDepartment) => (
-                                    <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
-                                ))}
-
-                            </select>
-
+                            <Form.Item
+                                name={"reparticion"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    placeholder="Reparticiones"
+                                    name="division"
+                                    className={"consulta-field"}
+                                    options={getItemNames(divisions)}>
+                                </Select>
+                            </Form.Item>
                         </Container>
                     </Col>
                 </Row>
@@ -193,22 +198,20 @@ const FormPage = () => {
                     <Col>
                         <Container>
                             <p>Consultas</p>
-                            <select
-                                placeholder="Departamento"
-                                name="faq"
-                                className={"consulta-field"}
-                                onChange={(e) => {
-                                    const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-                                    setShowObservacionesInput(selectedOptionName.includes('Otros'));
-                                    setSelectedFaq(e.target.value)
-                                }}>
-                                <option value="" disabled selected>Seleccione un tipo de consulta</option>
-                                {faqs?.map((faq) => (
-                                    <option value={faq.id}>{faq.name}</option>
-                                ))}
-
-
-                            </select>
+                            <Form.Item
+                                name={"consulta"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    placeholder="Departamento"
+                                    name="faq"
+                                    className={"consulta-field"}
+                                    options={getItemNames(faqs)}>
+                                </Select>
+                            </Form.Item>
                         </Container>
                     </Col>
                 </Row>
@@ -217,12 +220,15 @@ const FormPage = () => {
                         <Col>
                             <Container>
                                 <p>Observaciones</p>
-                                <textarea
-                                    className={"consulta-field"}
-                                    type="text"
-                                    placeholder="La persona...."
-                                    name="observaciones"
-                                />
+                                <Form.Item
+                                name={"obsevaciones"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Input placeholder="Basic usage" />
+                                </Form.Item>
                             </Container>
 
                         </Col>
@@ -232,18 +238,20 @@ const FormPage = () => {
                     <Col>
                         <Container>
                             <p>¿Por que vino?</p>
-                            <select
-                                placeholder="Por que vino?"
-                                className={"consulta-field"}
-                                name='why'
-                                onChange={(e) => setSelectedWhy(e.target.value)}>
-                                <option value="" disabled selected>Determine el motivo de la visita</option>
-                                {whys?.map((why) => (
-                                    <option value={why.id}>{why.name}</option>
-                                ))}
-
-
-                            </select>
+                            <Form.Item
+                                name={"porque"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    placeholder="Por que vino?"
+                                    className={"consulta-field"}
+                                    name='why'
+                                    options={getItemNames(whys)}>
+                                </Select>
+                            </Form.Item>
                         </Container>
                     </Col>
                 </Row>
@@ -251,18 +259,22 @@ const FormPage = () => {
                     <Col lg={3}>
                         <Container>
                             <p>Cantidad</p>
-                            <textarea className={"consulta-field"}
-                                      name="quantity"
-                                      defaultValue={1}
-                                      onChange={(e) => setSelectedQuantity(e.target.value)}/>
-
+                            <Form.Item
+                                name={"cantidad"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber/>
+                            </Form.Item>
                         </Container>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <Container>
-                            <Button type='submit' variant="primary"
+                            <Button htmlType="submit" type="primary"
                                     className={"consulta-field"}>Enviar Consulta</Button>
                         </Container>
                     </Col>
