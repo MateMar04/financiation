@@ -16,6 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import {message} from 'antd';
 
 export const CoordinatorCreateModal = (props) => {
 
@@ -45,13 +46,19 @@ export const CoordinatorCreateModal = (props) => {
                 })
             })
             if (response.status === 200) {
-                toggleModalsucceed();
+                // toggleModalsucceed();
                 props.setUpdateFlag((prevFlag) => !prevFlag);
+                message.success('Se creó el coordinador correctamente');
+                props.onClose();
             } else {
-                toggleModalfailed();
+                // toggleModalfailed();
+                message.error('No se pudo crear el coordinador');
+                props.onClose();
             }
         } else {
-            toggleModalfailed()
+            // toggleModalfailed()
+            message.error('No se pudo crear el coordinador');
+            props.onClose();
         }
     }
 
