@@ -6,13 +6,15 @@ import {getAdvisorUsers} from "../services/AdvisorServices";
 import {getDivisions} from "../services/DivisionServices";
 import {getUser} from '../services/UserServices';
 import {getWhys} from "../services/WhyServices";
-import {Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DateTimeField} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 
 const FormPage = () => {
@@ -117,7 +119,7 @@ const FormPage = () => {
 
 
     return (
-        <Form>
+        <Form onSubmit={e => handleSumbit(e)}>
             <Container>
                 <Row>
                     <Col lg={3}>
@@ -158,7 +160,7 @@ const FormPage = () => {
                                     <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
                                 </Col>
                                 <Col>
-                                    <h5>{user.first_name}</h5>
+                                    <h5>{user.first_name} {user.last_name}</h5>
                                 </Col>
                             </Row>
                         </Container>
@@ -226,104 +228,58 @@ const FormPage = () => {
                         </Col>
                     </Row>
                 )}
+                <Row>
+                    <Col>
+                        <Container>
+                            <p>¿Por que vino?</p>
+                            <select
+                                placeholder="Por que vino?"
+                                className={"consulta-field"}
+                                name='why'
+                                onChange={(e) => setSelectedWhy(e.target.value)}>
+                                <option value="" disabled selected>Determine el motivo de la visita</option>
+                                {whys?.map((why) => (
+                                    <option value={why.id}>{why.name}</option>
+                                ))}
+
+
+                            </select>
+                        </Container>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg={3}>
+                        <Container>
+                            <p>Cantidad</p>
+                            <textarea className={"consulta-field"}
+                                      name="quantity"
+                                      defaultValue={1}
+                                      onChange={(e) => setSelectedQuantity(e.target.value)}/>
+
+                        </Container>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Container>
+                            <Button type='submit' variant="primary"
+                                    className={"consulta-field"}>Enviar Consulta</Button>
+                        </Container>
+                    </Col>
+                </Row>
             </Container>
+
+            <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
+                    Consulta enviada!
+                </Alert>
+            </Snackbar>
         </Form>
 
 
     )
         ;
 };
-
-/*
-<Container className='justify-content-center'>
-
-<Row className='justify-content-md-center py-2'>
-<Col xs={12} md={10}>
-<p className={'pInFormPage'}>Consulta</p>
-<select
-placeholder="Departamento"
-className='form-select department-select'
-name="faq"
-onChange={(e) => {
-const selectedOptionName = e.target.options[e.target.selectedIndex].text;
-setShowObservacionesInput(selectedOptionName.includes('Otros'));
-setSelectedFaq(e.target.value)
-}}>
-<option value="" disabled selected>Seleccione un tipo de consulta</option>
-{faqs?.map((faq) => (
-<option value={faq.id}>{faq.name}</option>
-))}
-
-
-</select>
-</Col>
-</Row>
-
-{showObservacionesInput && (
-<Row className='justify-content-md-center py-2'>
-<Col xs={12} md={10}>
-<p className={'pInFormPage'}>Observaciones</p>
-<textarea
-type="text"
-placeholder="La persona...."
-className="ObservationsInput"
-name="observaciones"
-/>
-</Col>
-</Row>
-)}
-
-
-<Row className='justify-content-md-center py-2'>
-<Col xs={12} md={10}>
-<p className={'pInFormPage'}>¿Por que vino?</p>
-<select
-placeholder="Por que vino?"
-className='form-select department-select'
-name='why'
-onChange={(e) => setSelectedWhy(e.target.value)}>
-<option value="" disabled selected>Determine el motivo de la visita</option>
-{whys?.map((why) => (
-<option value={why.id}>{why.name}</option>
-))}
-
-
-</select>
-</Col>
-</Row>
-</Container>
-
-<Container className={'SecondContainerForm'}>
-<Row>
-<p className={'pInFormPage'}>Cantidad</p>
-</Row>
-
-<Row className={'justify-content-start py-2'} xs={12}>
-<Col md={8} xs={5}>
-<TextField className={'InputInForm'}
-name="quantity"
-defaultValue={1}
-onChange={(e) => setSelectedQuantity(e.target.value)}/>
-</Col>
-
-<Col md={3} xs={6}>
-
-<Button type='submit' variant="primary"
-className='buttonconsulta'>Enviar Consulta</Button>
-</Col>
-</Row>
-</Container>
-
-
-<Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
-<Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
-Consulta enviada!
-</Alert>
-</Snackbar>
-
-
-</Form>*/
-
 
 export default FormPage;
 
