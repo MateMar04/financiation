@@ -10,6 +10,7 @@ import { FailedModal } from "../components/FailedModal"
 import { getUsers } from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
 import { UserCard } from "../components/UserCard";
+import FlotantButton from "../components/FlotantButton";
 
 export const CreateGroupPage = () => {
     let { authTokens } = useContext(AuthContext)
@@ -96,7 +97,8 @@ export const CreateGroupPage = () => {
                 <Row className='text-center'>
                     <Col>
                         <Form.Group>
-                            <Button type="submit" className={'BtnCrearGrupo'}>Crear Grupo</Button>
+
+                            <FlotantButton type="submit" className={'BtnCrearGrupo'}name='Crear Grupo'  />
 
                         </Form.Group>
                     </Col>
