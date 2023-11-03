@@ -4,11 +4,8 @@
     margin-top: 5vh;
 }
 
-.groupacord{
-    margin-bottom: -1vh !important;
-}
 .vl {
-    border-left: 1px solid grey;
+    border-left: 1px solid rgb(250, 207, 207);
     position: relative;
     right: 0;
     left: 15px;
@@ -17,10 +14,10 @@
 }
 
 .pencil-groups{
-    padding-bottom: 2vh;
-    padding-left: 2vh;
+    padding: 2vh
 }
 
 .accordion-group{
     border-radius: 3vh !important;
+
 }
