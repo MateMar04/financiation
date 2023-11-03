@@ -39,7 +39,7 @@ const FormPage = () => {
     let [selectedFaq, setSelectedFaq] = useState()
     let [selectedWhy, setSelectedWhy] = useState()
     let [selectedQuantity, setSelectedQuantity] = useState(1)
-    const [observation, setObservation] = useState("")
+    const [observation, setObservation] = useState("-")
     const [myUser, setMyUser] = useState()
 
     const getData = async () => {
