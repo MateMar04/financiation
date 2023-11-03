@@ -35,10 +35,11 @@ const FormPage = () => {
 
     let dateRef = useRef(null);
 
-    let [selectedVisit, setSelectedVisit] = useState(1)
+    let [selectedVisit, setSelectedVisit] = useState()
     let [selectedFaq, setSelectedFaq] = useState()
-    let [selectedWhy, setSelectedWhy] = useState(1)
+    let [selectedWhy, setSelectedWhy] = useState()
     let [selectedQuantity, setSelectedQuantity] = useState(1)
+    const [observation, setObservation] = useState("")
     const [myUser, setMyUser] = useState()
 
     const getData = async () => {
@@ -85,6 +86,10 @@ const FormPage = () => {
         getData()
     }, [])
 
+    useEffect(() => {
+        setSelectedVisit(visits[0]?.id);
+    }, [visits]);
+
     let postRequest = async (e) => {
         let response = await fetch('/api/requests', {
             method: "POST",
@@ -99,7 +104,8 @@ const FormPage = () => {
                 "advisor_id": myUser.id,
                 "faq_id": selectedFaq,
                 "why_id": selectedWhy,
-                "status_id": 1
+                "status_id": 1,
+                "observation": observation
             })
         })
         if (response.status === 200) {
@@ -111,6 +117,7 @@ const FormPage = () => {
 
     let handleSumbit = async (e) => {
         e.preventDefault()
+        console.log(observation)
 
         for (let i = 1; i <= selectedQuantity; i++) {
             await postRequest()
@@ -156,7 +163,8 @@ const FormPage = () => {
                             <p className={"request-field-title"}>Asesor</p>
                             <Row className={"asesor-container input-in-form"}>
                                 <Col className={"avatar-col"} lg={3}>
-                                    <Avatar className={"asesor-avatar"} alt="user" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+                                    <Avatar className={"asesor-avatar"} alt="user"
+                                            src={'data:image/png;base64, ' + myUser?.profile_picture}/>
                                 </Col>
                                 <Col className={"avatar-col"}>
                                     <h5 className={"asesor-name"}>{user.first_name} {user.last_name}</h5>
@@ -217,6 +225,7 @@ const FormPage = () => {
                             <Container className={"fields-container"}>
                                 <p className={"request-field-title"}>Observaciones</p>
                                 <textarea
+                                    onChange={(e) => setObservation(e.target.value)}
                                     className={"consulta-field input-in-form"}
                                     type="text"
                                     placeholder="La persona...."
@@ -251,10 +260,10 @@ const FormPage = () => {
                         <Container className={"fields-container"}>
                             <p className={"request-field-title"}>Cantidad</p>
                             <input className={"consulta-field input-in-form"}
-                                      name="quantity"
-                                      defaultValue={1}
-                                        type="number"
-                                      onChange={(e) => setSelectedQuantity(e.target.value)}/>
+                                   name="quantity"
+                                   defaultValue={1}
+                                   type="number"
+                                   onChange={(e) => setSelectedQuantity(e.target.value)}/>
 
                         </Container>
                     </Col>
