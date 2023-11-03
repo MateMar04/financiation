@@ -120,11 +120,11 @@ const FormPage = () => {
 
     return (
         <Form onSubmit={e => handleSumbit(e)}>
-            <Container>
-                <Row>
+            <Container className={"request-container"}>
+                <Row className={"fields-row"}>
                     <Col lg={3}>
-                        <Container>
-                            <p>Fecha y Hora</p>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Fecha y Hora</p>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateTimeField
                                     inputRef={dateRef}
@@ -132,15 +132,16 @@ const FormPage = () => {
                                     label={''}
                                     name="request_datetime"
                                     defaultValue={dayjs(getCurrentDateTimeString())}
-                                    className={"consulta-field"}
+                                    className={"input-in-form"}
                                 />
                             </LocalizationProvider>
                         </Container>
                     </Col>
                     <Col>
-                        <Container>
-                            <p>Visita</p>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Visita</p>
                             <select
+                                className={"consulta-field form-select"}
                                 name="visit"
                                 onChange={(e) => setSelectedVisit(e.target.value)}>
 
@@ -150,28 +151,28 @@ const FormPage = () => {
                             </select>
                         </Container>
                     </Col>
-                    <Col lg={3}>
-                        <Container>
-                            <p>Asesor</p>
-                            <Row className='ContainerPersonForm'>
-                                <Col>
-                                    <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+                    <Col lg={3} className={"bigger-avatar-col"}>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Asesor</p>
+                            <Row className={"asesor-container input-in-form"}>
+                                <Col className={"avatar-col"} lg={3}>
+                                    <Avatar className={"asesor-avatar"} alt="user" src={'data:image/png;base64, ' + myUser?.profile_picture}/>
                                 </Col>
-                                <Col>
-                                    <h5>{user.first_name} {user.last_name}</h5>
+                                <Col className={"avatar-col"}>
+                                    <h5 className={"asesor-name"}>{user.first_name} {user.last_name}</h5>
                                 </Col>
                             </Row>
                         </Container>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={"fields-row"}>
                     <Col>
-                        <Container>
-                            <p>Reparticiones</p>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Reparticiones</p>
                             <select
                                 placeholder="Reparticiones"
                                 name="division"
-                                className={"consulta-field"}
+                                className={"consulta-field form-select"}
                                 onChange={(e) => {
                                     const selectedOptionName = e.target.options[e.target.selectedIndex].text;
                                     setShowObservacionesInput(selectedOptionName === 'Otros');
@@ -187,14 +188,14 @@ const FormPage = () => {
                         </Container>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={"fields-row"}>
                     <Col>
-                        <Container>
-                            <p>Consultas</p>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Consultas</p>
                             <select
                                 placeholder="Departamento"
                                 name="faq"
-                                className={"consulta-field"}
+                                className={"consulta-field form-select"}
                                 onChange={(e) => {
                                     const selectedOptionName = e.target.options[e.target.selectedIndex].text;
                                     setShowObservacionesInput(selectedOptionName.includes('Otros'));
@@ -211,12 +212,12 @@ const FormPage = () => {
                     </Col>
                 </Row>
                 {showObservacionesInput && (
-                    <Row>
+                    <Row className={"fields-row"}>
                         <Col>
-                            <Container>
-                                <p>Observaciones</p>
+                            <Container className={"fields-container"}>
+                                <p className={"request-field-title"}>Observaciones</p>
                                 <textarea
-                                    className={"consulta-field"}
+                                    className={"consulta-field input-in-form"}
                                     type="text"
                                     placeholder="La persona...."
                                     name="observaciones"
@@ -226,13 +227,13 @@ const FormPage = () => {
                         </Col>
                     </Row>
                 )}
-                <Row>
+                <Row className={"fields-row"}>
                     <Col>
-                        <Container>
-                            <p>¿Por que vino?</p>
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>¿Por que vino?</p>
                             <select
                                 placeholder="Por que vino?"
-                                className={"consulta-field"}
+                                className={"consulta-field form-select"}
                                 name='why'
                                 onChange={(e) => setSelectedWhy(e.target.value)}>
                                 <option value="" disabled selected>Determine el motivo de la visita</option>
@@ -245,11 +246,11 @@ const FormPage = () => {
                         </Container>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={"fields-row"}>
                     <Col lg={3}>
-                        <Container>
-                            <p>Cantidad</p>
-                            <input className={"consulta-field"}
+                        <Container className={"fields-container"}>
+                            <p className={"request-field-title"}>Cantidad</p>
+                            <input className={"consulta-field input-in-form"}
                                       name="quantity"
                                       defaultValue={1}
                                         type="number"
@@ -258,9 +259,9 @@ const FormPage = () => {
                         </Container>
                     </Col>
                 </Row>
-                <Row>
+                <Row className={"fields-row"}>
                     <Col>
-                        <Container>
+                        <Container className={"fields-container"}>
                             <Button type='submit' variant="primary"
                                     className={"consulta-field"}>Enviar Consulta</Button>
                         </Container>

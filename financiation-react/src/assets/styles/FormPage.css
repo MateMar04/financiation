@@ -1,3 +1,46 @@
-.consulta-field {
-    width: 100%;
+.fields-container {
+    height: 8vh;
+}
+
+.asesor-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+}
+
+.asesor-avatar {
+    margin: 0;
+    padding: 0;
+}
+
+.asesor-name {
+    margin: 0;
+    padding: 0;
+}
+
+.avatar-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.request-field-title {
+    margin: 0;
+    padding: 0;
+}
+
+.fields-row {
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.form-select {
+    background-color: white;
+    border-radius: 2vh;
+    height: 7vh;
+}
+
+.input-in-form {
+    height: 7vh;
+    background-color: white;
+    border-radius: 2vh;
 }
