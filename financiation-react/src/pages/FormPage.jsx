@@ -140,6 +140,8 @@ const FormPage = () => {
                                     name="request_datetime"
                                     defaultValue={dayjs(getCurrentDateTimeString())}
                                     className={"input-in-form"}
+                                    sx={{border:"none"}}
+
                                 />
                             </LocalizationProvider>
                         </Container>
@@ -278,7 +280,7 @@ const FormPage = () => {
                 </Row>
             </Container>
 
-            <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+            <Snackbar open={show} autoHideDuration={3500} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
                     Consulta enviada!
                 </Alert>
