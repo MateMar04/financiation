@@ -163,7 +163,7 @@ const AddVisitPage = () => {
             <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
-            <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
 
             <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
 
