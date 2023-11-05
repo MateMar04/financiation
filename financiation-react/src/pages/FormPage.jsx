@@ -15,6 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import { Zoom } from "@mui/material";
 
 
 const FormPage = () => {
@@ -127,6 +128,7 @@ const FormPage = () => {
 
     return (
         <Form onSubmit={e => handleSumbit(e)}>
+            <Zoom in>
             <Container className={"request-container"}>
                 <Row className={"fields-row"}>
                     <Col lg={3}>
@@ -278,13 +280,16 @@ const FormPage = () => {
                         </Container>
                     </Col>
                 </Row>
+
             </Container>
+                </Zoom>
 
             <Snackbar open={show} autoHideDuration={3500} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
                     Consulta enviada!
                 </Alert>
             </Snackbar>
+
         </Form>
 
 
