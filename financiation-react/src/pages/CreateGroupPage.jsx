@@ -34,9 +34,17 @@ export const CreateGroupPage = () => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
     
-        const filtered = users.filter(user => user.first_name && user.first_name.toLowerCase().includes(query));
+        const filtered = users.filter((user) => {
+            const fullName = `${user.first_name} ${user.last_name}`;
+            return (
+                fullName.toLowerCase().includes(query) ||
+                user.first_name.toLowerCase().includes(query) ||
+                user.last_name.toLowerCase().includes(query)
+            );
+        });
+    
         setFilteredUsers(filtered);
-    };    
+    };   
 
     let postGroup = async (e) => {
         if (e && e.target) {
