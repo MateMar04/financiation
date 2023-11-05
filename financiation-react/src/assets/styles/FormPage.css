@@ -51,11 +51,31 @@
     padding: 15px;
 }
 
+.consulta-button{
+    border-radius: 15px;
+    background-color: #53A6DC;
+    border-color: #53A6DC;
+    color: white;
+    padding: 10px;
+    height: 7vh;
+
+}
+
 @media (max-width: 800px) {
 
     .fields-container{
         height: auto;
     }
 
-    .input-in-form{}
+    .form-select{
+        width: 90vw !important;
+    }
+
+    .request-field-title{
+        justify-content: center;
+    }
+
+    .consulta-field{
+        width: 90vw !important;
+    }
 }
