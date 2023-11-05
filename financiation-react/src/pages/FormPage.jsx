@@ -176,7 +176,7 @@ const FormPage = () => {
                             <Row className={"asesor-container input-in-form"}>
                                 <Col className={"avatar-col"} lg={3}>
                                     <Avatar className={"asesor-avatar"} alt="user"
-                                            src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+                                            src={'data:image/png;base64, ' + myUser?.profile_picture} sx={{height: 38}}/>
                                 </Col>
                                 <Col className={"avatar-col"}>
                                     <h5 className={"asesor-name"}>{user.first_name} {user.last_name}</h5>
