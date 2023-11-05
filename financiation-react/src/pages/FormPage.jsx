@@ -142,7 +142,9 @@ const FormPage = () => {
                                     name="request_datetime"
                                     defaultValue={dayjs(getCurrentDateTimeString())}
                                     className={"input-in-form"}
-                                    sx={{border:"none"}}
+                                    InputProps={{
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor:'white'}
+                                }}
 
                                 />
                             </LocalizationProvider>
