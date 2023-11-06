@@ -15,7 +15,10 @@ import "../assets/styles/VisitPage.css"
 export const VisitsPage = () => {
 
     useEffect(() => {
-        getVisits(authTokens.access).then(r => setVisits(r))
+        getVisits(authTokens.access).then(r => {
+            setVisits(r);
+            setFilteredVisits(r);
+        });
     }, [])
 
     let {authTokens} = useContext(AuthContext)
@@ -24,11 +27,16 @@ export const VisitsPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
     const totalItems = visits.length;
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredVisits, setFilteredVisits] = useState([]);
+    const [filterActive, setFilterActive] = useState(false);
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
 
-    const currentData = visits.slice(startIndex, endIndex)
+    const currentData = filterActive
+    ? filteredVisits.slice(startIndex, endIndex)
+    : visits.slice(startIndex, endIndex);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -37,6 +45,18 @@ export const VisitsPage = () => {
     const handleSizeChange = (number) => {
 
     };
+    const handleSearch = (e) => {
+        const query = e.target.value.toLowerCase();
+        setSearchQuery(query);
+    
+        const filtered = visits.filter((visit) => {
+            return (
+                visit.location && visit.location.toLowerCase().includes(query) 
+            );
+        });
+    
+        setFilteredVisits(filtered);
+    };  
 
 
     return (
@@ -64,6 +84,8 @@ export const VisitsPage = () => {
                                 </IconButton>
                             ),
                         }}
+                        value={searchQuery}
+                        onChange={handleSearch}
                     />
                 </Col>
             </Row>
@@ -75,14 +97,17 @@ export const VisitsPage = () => {
                     </Col>
 
                 </Row>
-                <Pagination className='justify-content-center text-center visit-pagination-menu'
-                            defaultCurrent={1}
-                            onChange={handlePageChange}
-                            total={totalItems}
-                            defaultPageSize={10}
-                            showSizeChanger={false}
-                            current={currentPage}/>
-
+                {filterActive ? null : (
+                <Pagination
+                    className="justify-content-center text-center visit-pagination-menu"
+                    defaultCurrent={1}
+                    onChange={handlePageChange}
+                    total={totalItems}
+                    defaultPageSize={10}
+                    showSizeChanger={false}
+                    current={currentPage}
+                />
+                )}
             </Container>
         </Container>
     )
