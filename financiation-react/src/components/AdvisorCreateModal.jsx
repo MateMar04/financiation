@@ -1,5 +1,5 @@
 import '../assets/styles/RowWithCheck.css'
-import { Button, Col, Modal, Row } from "react-bootstrap";
+import {Col, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
@@ -16,7 +16,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import {message} from 'antd';
+import {message, Button, Modal} from 'antd';
 
 export const AdvisorCreateModal = (props) => {
 
@@ -46,62 +46,65 @@ export const AdvisorCreateModal = (props) => {
                 })
             })
             if (response.status === 200) {
-                // toggleModalsucceed();
-                message.success('Se creó el asesor correctamente');
+                toggleModalsucceed();
                 props.setUpdateFlag((prevFlag) => !prevFlag);
                 props.onClose();
             } else {
-                // toggleModalfailed();
-                message.error('No se pudo crear el asesor');
+                 toggleModalfailed();
+
                 props.onClose();
             }
         } else {
-            // toggleModalfailed()
-            message.error('No se pudo crear el asesor');
+           toggleModalfailed()
+
             props.onClose();
         }
     }
 
     return (
-        <Modal className='modalcreate' show={props.show} >
+         <Modal
+                open={props.show}
+                title="Agregar Asesor"
+                onCancel={props.onClose}
+                footer={[
+                    <Button key="back" onClick={props.onClose}>
+                        Cancelar
+                    </Button>,
+                    <Button
+                         onClick={postAdvisor}
+                        type="primary"
+                    >
+                        Agregar
+                    </Button>
+                ]}
+            >
             <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess} />
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
-            <Container className="containermayor container-addmayor-modal">
+
 
                 <Form>
-                    <h3 className={'h3LoginPage crearintendente'}>Crear asesor</h3>
-
-                    <Box sx={{ minWidth: 120 }}>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Nombre del usuario</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Nombre de la persona</InputLabel>
                             <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
                                 label="Nombre de la persona"
                                 value={selectedUserId} 
                                 onChange={(event) => {
                                     console.log('Selected User ID:', event.target.value);
                                     setSelectedUserId(event.target.value);
                                 }}
-
                             >
                                 {users?.map((user) => (
                                     <MenuItem key={user.id} value={user.id}>{user.first_name} {user.last_name}</MenuItem>
                                 ))}
                             </Select>
                         </FormControl>
-                    </Box>
-                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postAdvisor}>Registrar</Button>
-                    </div>
-                    <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                        <Button variant="outlined" color="primary" onClick={props.onClose}>
-                            Cancelar
-                        </Button>
-                    </div>
+
+
                 </Form>
-            </Container>
+
         </Modal>
+
+
     )
 }
 
