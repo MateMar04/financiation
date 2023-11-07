@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import "../assets/styles/FormPage.css";
 import AuthContext from "../context/AuthContext";
 import {getVisits} from "../services/VisitServices";
@@ -15,7 +15,8 @@ import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-
+import { Zoom } from "@mui/material";
+import FailedModal from '../components/FailedModal';
 
 const FormPage = () => {
 
@@ -41,6 +42,9 @@ const FormPage = () => {
     let [selectedQuantity, setSelectedQuantity] = useState(1)
     const [observation, setObservation] = useState("-")
     const [myUser, setMyUser] = useState()
+
+    const [showfail, setShowfailture] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
@@ -111,7 +115,7 @@ const FormPage = () => {
         if (response.status === 200) {
             handleShow()
         } else {
-            alert('Something went wrong')
+            toggleModalfailed();
         }
     }
 
@@ -126,7 +130,11 @@ const FormPage = () => {
 
 
     return (
+        <Container fluid>
+        <FailedModal onClose={() => toggleModalfailed()} message={"El formulario no ha sido enviado."} show={showfail}/>
+
         <Form onSubmit={e => handleSumbit(e)}>
+            <Zoom in>
             <Container className={"request-container"}>
                 <Row className={"fields-row"}>
                     <Col lg={3}>
@@ -140,6 +148,10 @@ const FormPage = () => {
                                     name="request_datetime"
                                     defaultValue={dayjs(getCurrentDateTimeString())}
                                     className={"input-in-form"}
+                                    InputProps={{
+                                    sx: {borderRadius: '2vh', height: '7vh', borderColor:'white'}
+                                }}
+
                                 />
                             </LocalizationProvider>
                         </Container>
@@ -158,13 +170,13 @@ const FormPage = () => {
                             </select>
                         </Container>
                     </Col>
-                    <Col lg={3} className={"bigger-avatar-col"}>
+                    <Col lg={3} className={"bigger-avatar-col d-none d-lg-block"}>
                         <Container className={"fields-container"}>
                             <p className={"request-field-title"}>Asesor</p>
                             <Row className={"asesor-container input-in-form"}>
                                 <Col className={"avatar-col"} lg={3}>
                                     <Avatar className={"asesor-avatar"} alt="user"
-                                            src={'data:image/png;base64, ' + myUser?.profile_picture}/>
+                                            src={'data:image/png;base64, ' + myUser?.profile_picture} sx={{height: 38}}/>
                                 </Col>
                                 <Col className={"avatar-col"}>
                                     <h5 className={"asesor-name"}>{user.first_name} {user.last_name}</h5>
@@ -272,18 +284,22 @@ const FormPage = () => {
                     <Col>
                         <Container className={"fields-container"}>
                             <Button type='submit' variant="primary"
-                                    className={"consulta-field"}>Enviar Consulta</Button>
+                                    className={"consulta-field consulta-button"}>Enviar Consulta</Button>
                         </Container>
                     </Col>
                 </Row>
-            </Container>
 
-            <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
+            </Container>
+                </Zoom>
+
+            <Snackbar open={show} autoHideDuration={3500} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" variant="filled" sx={{width: '100%'}}>
                     Consulta enviada!
                 </Alert>
             </Snackbar>
+
         </Form>
+            </Container>
 
 
     )
