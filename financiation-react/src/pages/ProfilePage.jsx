@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
 import {Avatar, TextField} from "@mui/material";
@@ -16,6 +16,8 @@ import {Divider} from 'antd';
 import {Input} from 'antd';
 import {DatePicker} from 'antd';
 import {getLocations} from "../services/LocationServices";
+import {Button} from 'antd';
+
 
 const ProfilePage = () => {
 
@@ -103,14 +105,6 @@ const ProfilePage = () => {
     return (
         <form onSubmit={(e) => handleFormSubmit(e)}>
             <Container className="ContainerProfilePage">
-                <Row className="d-flex justify-content-end">
-                    <Col className="d-flex justify-content-end">
-                        <Popover title="¿Desea editar el perfil?">
-                            <EditOutlined className={'IconEdit'} onClick={handleAddButton}/>
-                        </Popover>
-                    </Col>
-                </Row>
-
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
@@ -118,14 +112,16 @@ const ProfilePage = () => {
                     </Col>
                 </Row>
 
-                {handleAddButton && (
-                    <Row className={'justify-content-center text-center'}>
-                        <ProfilePicture/>
-                    </Row>
-                )}
 
-                <Row>
-                    <h3 className={'ImportantTextProfile'}>Información básica</h3>
+                <Row className={'d-flex justify-content-end'}>
+                    <Col>
+                        <h3 className={'ImportantTextProfile'}>Información básica</h3>
+                    </Col>
+                    <Col className={'d-flex justify-content-end'}>
+                        <Popover content="¿Desea editar el perfil?">
+                            <EditOutlined className={'IconEdit'} onClick={handleAddButton}/>
+                        </Popover>
+                    </Col>
                 </Row>
 
                 <Container>
@@ -223,18 +219,27 @@ const ProfilePage = () => {
                         }
                         <Divider/>
                     </Row>
-                    <Row>
-                        {showLogoutButton && (
+                    <Row className={'justify-content-center'}>
+                        {showLogoutButton ?
+                            <>
+                                <Button type="primary" danger onClick={logoutUser} className='BtnProfileCerrarSesion'>
+                                    Cerrar sesión
+                                </Button>
+                            </>
+                            :
+                            <>
+                                <Col md={4}>
+                                    <Button className={'CancelarBtnProfile'} onClick={handleAddButton}>Cancelar</Button>
+                                </Col>
+                                <Col md={4}>
+                                    <Button className={'GuardarBtnProfile'} type='submit'>Actualizar
+                                        Datos</Button>
+                                </Col>
 
-                            <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my: 3}}>Cerrar
-                                Sesion</Button>
 
-
-                        )}
+                            </>
+                        }
                     </Row>
-                    <div className='btnactualizar'>
-                        <Button className='BtnIniciarSesionLogin btninedit' type='submit'>Actualizar Datos</Button>
-                    </div>
 
                 </Container>
             </Container>

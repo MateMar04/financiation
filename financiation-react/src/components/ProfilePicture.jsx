@@ -70,13 +70,10 @@ export const ProfilePicture = () => {
                             className="SelectFileInput"
                             onChange={handleFileChange}
                         />
-                    </Col>
-                </Row>
-
-                <Row className={'justify-content-center text-center'}>
+                 </Col>
                     <Col>
                         <Button type="submit" className={'GuardarCambiosButton'}>Guardar Cambios</Button>
-                    </Col>
+                   </Col>
                 </Row>
             </form>
             <p>{message}</p>
