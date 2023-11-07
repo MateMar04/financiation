@@ -69,6 +69,7 @@ class RequestApiView(APIView):
             faq=faq,
             why=why,
             status=requestStatus,
+            observation=data['observation']
         )
 
         serializer = RequestSerializer(request, many=False)
@@ -85,7 +86,8 @@ class VisitApiView(APIView):
                 cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name "
                                "from \"financiationAPI_visit\" as V "
                                "inner join \"financiationAPI_location\" L on L.id = V.location_id "
-                               "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id")
+                               "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id "
+                               "ORDER BY V.visit_date DESC")
                 row = cursor.fetchall()
                 print(row)
                 return JsonResponse(to_json(
