@@ -33,6 +33,7 @@ urlpatterns = [
     # Users
     path('users/<int:id>', views.getUserById, name='user'),
     path('users', views.getUsers, name='users'),
+    path('users/put/<int:id>', views.putUserbyId, name='put_user'),
     path('advisor-users', views.getAdvisorUsers, name='advisorUsers'),
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
     path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),

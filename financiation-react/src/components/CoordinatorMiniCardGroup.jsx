@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import CoordinatorCreateModal from './CoordinatorCreateModal';
+import { Button, message, Popconfirm } from 'antd';
 
 export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
     let { authTokens } = useContext(AuthContext)
@@ -22,6 +23,11 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
         getGroupCoordinatorUsers(authTokens.access, group.id).then(data => setCoordinators(data))
     }, [coordinatorDeleted, updateFlag])
 
+    const cancel = (e) => {
+        console.log(e);
+        message.error('Se ha cancelado la eliminación');
+    };
+
     const handleDeleteCoordinator = async (coordinatorId, groupId) => {
         try {
             const response = await fetch(`/api/groups/${groupId}/coordinators/delete/${coordinatorId}`, {
@@ -33,12 +39,13 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
                 },
             });
             if (response.status === 200) {
-                toggleCoordinatorDeleted();
+                // toggleCoordinatorDeleted();
+                message.success('Se borró el usuario exitosamente');
             } else {
-                console.error("Coordinator deletion failed");
+                console.error("No se pudo borrar el coordinador");
             }
         } catch (error) {
-            console.error("Error deleting coordinator:", error);
+            console.error("No se pudo borrar el coordinador:", error);
         }
     };
 
@@ -64,7 +71,16 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton && <IconButton onClick={() => handleDeleteCoordinator(coordinator.id, group.id)}><ClearIcon /></IconButton>}
+                                {showButton && 
+                                    <Popconfirm
+                                    title="Eliminar usuario del grupo"
+                                    description="Esta seguro de que quiere eliminarlo?"
+                                    onConfirm={() => handleDeleteCoordinator(coordinator.id, group.id)}
+                                    onCancel={cancel}
+                                    okText="Si"
+                                    cancelText="No">
+                                        <IconButton><ClearIcon /></IconButton>
+                                    </Popconfirm>}
                             </Row>
                         </Col>
                     </Row>

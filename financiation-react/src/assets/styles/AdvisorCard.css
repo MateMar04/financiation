@@ -86,32 +86,6 @@
 		}
 	
 }
-.circle_red{
-    background-color: #a32323;
-    border-radius: 15vw;
-    display: inline-block;
-	@media only screen and (min-width : 801px) {
-		height: 0.6vw;
-    	width: 0.6vw;
-		}
-	@media only screen and (max-width : 800px) {
-		height: 1vw;
-    	width: 1vw;
-		}
-}
-.circle_green{
-    background-color: #177c17;
-    border-radius: 15vw;
-    display: inline-block;
-	@media only screen and (min-width : 801px) {
-		height: 0.6vw;
-    	width: 0.6vw;
-		}
-	@media only screen and (max-width : 800px) {
-		height: 1vw;
-    	width: 1vw;
-		}
-}
 
 
 .content-select{
