@@ -69,6 +69,7 @@ class RequestApiView(APIView):
             faq=faq,
             why=why,
             status=requestStatus,
+            observation=data['observation']
         )
 
         serializer = RequestSerializer(request, many=False)
