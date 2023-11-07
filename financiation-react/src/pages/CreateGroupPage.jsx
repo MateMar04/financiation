@@ -10,6 +10,7 @@ import { FailedModal } from "../components/FailedModal"
 import { getUsers } from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
 import { UserCard } from "../components/UserCard";
+import { Popover } from 'antd';
 
 export const CreateGroupPage = () => {
     let { authTokens } = useContext(AuthContext);
@@ -21,6 +22,11 @@ export const CreateGroupPage = () => {
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+
+    const content = (
+        <a></a>
+      );
+      
 
     useEffect(() => {
         getUsers(authTokens.access).then(data => {
@@ -103,8 +109,10 @@ export const CreateGroupPage = () => {
                         </Col>
 
                         <Col md={2} xs={1} lg={1}>
-                            <IconButton href="/groups/" id="icongroupgrupo" sx={{ width: 56, height: 56 }}
+                        <Popover content={content} title="Ver Grupos Creados">
+                        <IconButton href="/groups/" id="icongroupgrupo" sx={{ width: 56, height: 56 }}
                                 className={'GroupsIcon'}><GroupsIcon/></IconButton>
+                        </Popover> 
                         </Col>
                     </Row>
                 </Container>
