@@ -39,7 +39,7 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
                 },
             });
             if (response.status === 200) {
-                // toggleCoordinatorDeleted();
+                toggleCoordinatorDeleted();
                 message.success('Se borró el usuario exitosamente');
             } else {
                 console.error("No se pudo borrar el coordinador");
