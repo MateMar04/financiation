@@ -35,8 +35,8 @@ export const VisitsPage = () => {
     const endIndex = startIndex + itemsPerPage;
 
     const currentData = filterActive
-    ? filteredVisits.slice(startIndex, endIndex)
-    : visits.slice(startIndex, endIndex);
+    ? visits.slice(startIndex, endIndex)
+    : filteredVisits.slice(startIndex, endIndex);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -51,7 +51,7 @@ export const VisitsPage = () => {
     
         const filtered = visits.filter((visit) => {
             return (
-                visit.location && visit.location.toLowerCase().includes(query) 
+                visit.location_name && visit.location_name.toLowerCase().includes(query) 
             );
         });
     
