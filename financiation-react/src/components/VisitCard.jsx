@@ -1,4 +1,4 @@
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
 
 import Accordion from '@mui/material/Accordion';
@@ -6,7 +6,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {Zoom} from "@mui/material";
+import { Zoom } from "@mui/material";
 
 const DurationToTime = (duration) => {
     const hoursMatch = duration.match(/(\d+)H/);
@@ -26,10 +26,10 @@ const DurationToTime = (duration) => {
     timeDate.setHours(hours);
     timeDate.setMinutes(minutes);
 
-    return timeDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+    return timeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-export const VisitCard = ({visit}) => {
+export const VisitCard = ({ visit }) => {
     return (
 
         <Container className='CompletlyContainer'>
@@ -37,28 +37,47 @@ export const VisitCard = ({visit}) => {
                 <div>
                     <Accordion className={'accordion-visits'}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon fontSize="large"/>}
+                            expandIcon={<ExpandMoreIcon fontSize="large" />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             className="AccordionSummary"
                         >
-                            <Typography sx={{width: '70%'}} className="VisitName text-start"><h6>
+                            <Typography sx={{ width: '70%' }} className="VisitName text-start"><h6>
                                 {visit.name}</h6>
                             </Typography>
-                            <Typography sx={{color: 'text.secondary', width: '20%'}}
-                                        className="text-end">{visit.visit_status_name}</Typography>
-                            <Typography sx={{color: 'text.secondary', width: '10%'}}><a
-                                className="circle_green text-end"></a></Typography>
+                            <Typography sx={{ color: 'text.secondary', width: '20%' }}
+                                className="text-end">{visit.visit_status_name}</Typography>
+
+                            {visit.visit_status_name === 'Finalizada' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_green text-end"></a></Typography>
+                            )}
+
+                            {visit.visit_status_name === 'No Confirmada' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_red text-end"></a></Typography>
+                            )}
+                            {visit.visit_status_name === 'Pendiente' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_red text-end"></a></Typography>
+                            )}
+
+                            {visit.visit_status_name === 'En proceso' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_orange text-end"></a></Typography>
+                            )}
+
+
 
 
                         </AccordionSummary>
 
                         <AccordionDetails>
                             <Row className="row1">
-                                <Col>
-                                    <p>Id Localidad:</p>
+                                <Col className="d-flex align-items-center">
+                                    <p>Localidad:</p>
                                 </Col>
-                                <Col>
+                                <Col className="d-flex align-items-center">
                                     <p>{visit.location_name}</p>
                                 </Col>
                             </Row>
@@ -103,15 +122,15 @@ export const VisitCard = ({visit}) => {
                                     <p>{visit.id_group}</p>
                                 </Col>
                             </Row>
+
                             <Row className="row1">
                                 <Col className="d-flex align-items-center">
                                     <p>Estado:</p>
-                                    <Col className="d-flex align-items-center">
                                     </Col>
-                                    <p>{visit.visit_status_name}</p>
-                                </Col>
+                                    <Col className="d-flex align-items-center">
+                                        <p>{visit.visit_status_name}</p>
+                                    </Col>
                             </Row>
-
                         </AccordionDetails>
                     </Accordion>
                 </div>

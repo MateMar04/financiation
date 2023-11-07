@@ -6,8 +6,11 @@ import {LoadingOutlined} from '@ant-design/icons';
 
 const LoadingModal = (props) => {
     return (
-<a>spinner</a>
-        //  <div className="loading-modal"> {/* Add a CSS class for centering */}
+<a>spinner DALE JULIAN ARRGEGLA ESTA MIERDA</a>
+
+        // @ELQUEARREGLEESTO:  CUANDO TERMINES, DESCOMENTA LAS LINEAS DE ABAJO Y VA A CARGAR EL SPINNER LINDO!!!!!! ATTE:LAUTIN
+
+        //  <div className="loading-modal">
         //     <LoadingOutlined size="large" tip="Cargando..." style={{
         //          fontSize: 80
         //     }}>
