@@ -97,8 +97,8 @@ export const CreateGroupPage = () => {
                 <Row className='text-center'>
                     <Col>
                         <Form.Group>
-
-                            <FlotantButton type="submit" className={'BtnCrearGrupo'}name='Crear Grupo'  />
+                            {/*De ser preferente se puede agregar un texto que indique que hace el boton*/}
+                            <FlotantButton name='' />
 
                         </Form.Group>
                     </Col>
