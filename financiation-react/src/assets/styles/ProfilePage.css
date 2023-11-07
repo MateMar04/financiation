@@ -7,23 +7,8 @@
         width: 60vw;
     }
 
-    .profileTextField{
-        width: 20vw !important;
-        background-color: #f4f4f4;
-        border-radius: 3vh;
-
-    }
-
     .ProfilePicture{
         transform: translateY(-15vh)
-    }
-
-    .ProfileText{
-        transform: translateY(-8vh)
-    }
-
-    .InputsProfile{
-        transform: translateY(-5vh)
     }
 
     .EditIconProfile{
@@ -31,6 +16,19 @@
         z-index: 1;
         transform: translate(8vw,9vh);
     }
+    .ImportantTextProfile{
+        margin-left: 2vw;
+    }
+
+    .InfoProfile{
+        margin-left: 4vw;
+    }
+
+    .InputsProfile{
+        width: 40vw;
+        padding: 10px;
+    }
+
 }
 
 
@@ -128,4 +126,10 @@
     padding: 8px;
     color: white;
     transform: translateY(-8vh);
+}
+
+
+.IconEdit{
+    z-index: 2;
+    font-size: 3vh;
 }
