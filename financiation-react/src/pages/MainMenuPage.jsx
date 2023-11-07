@@ -167,7 +167,7 @@ export const MainMenuPage = () => {
                                     </Link>
                                 </Col>
                             </Row>
-                            <Row className="text-center">
+                            <Row className="text-center justify-content-center">
                                 {userGroup && userGroup.length > 0 ? (
                                     <h2 className="name-title">{userGroup[0].group}</h2>
                                 ) : (
@@ -175,7 +175,7 @@ export const MainMenuPage = () => {
                                 )}
 
                             </Row>
-                            <Row className="justify-content-center text-center">
+                            <Row className="text-center justify-content-center ">
 
                                 {userGroup?.map((i) => (
                                     <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
