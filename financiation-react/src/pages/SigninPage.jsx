@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import '../assets/styles/SigninPage.css'
 import Logo from "../assets/images/PRUEBA.PNG";
 import { Col, Container, Form, Row, } from "react-bootstrap";
@@ -14,9 +14,14 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 
 const SigninPage = () => {
+    const [error, setError] = useState(null);
+    const [emailMatchError, setEmailMatchError] = useState(false);
+    
     let { signIn } = useContext(AuthContext)
+    
     return (
-        <Container className="cardsign ">
+        
+       <Container className="cardsign ">
             <Row className={'justify-content-center text-center'}>
                 <img src={Logo} className="logosign" alt="Logo ministerio de finanzas" />
             </Row>
@@ -137,8 +142,10 @@ const SigninPage = () => {
                             />
                         </Form.Group>
                     </Col>
+
                     <Col lg="5">
                         <Form.Group>
+
                             <TextField
                                 label="Repetir Correo Electrónico"
                                 type="email"
@@ -157,7 +164,10 @@ const SigninPage = () => {
                             />
                         </Form.Group>
                     </Col>
+                    <label  className={`error ${emailMatchError ? 'show-error' : ''}`}> Los emails no coinciden </label>
+
                 </Row>
+
                 <container>
 
                 <Row className={'justify-content-center text-center'}>
@@ -195,6 +205,7 @@ const SigninPage = () => {
                                 type="password"
                                 name="re_password"
                                 required
+                                
                                 className={'InputSigninPage'}
                                 id="inputder"
                             />
