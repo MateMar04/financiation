@@ -1,4 +1,4 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
 
 import Accordion from '@mui/material/Accordion';
@@ -7,6 +7,27 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
+
+const DurationToTime = (duration) => {
+    const hoursMatch = duration.match(/(\d+)H/);
+    const minutesMatch = duration.match(/(\d+)M/);
+    let hours = 0;
+    let minutes = 0;
+
+    if (hoursMatch) {
+        hours = parseInt(hoursMatch[1], 10);
+    }
+
+    if (minutesMatch) {
+        minutes = parseInt(minutesMatch[1], 10);
+    }
+
+    const timeDate = new Date();
+    timeDate.setHours(hours);
+    timeDate.setMinutes(minutes);
+
+    return timeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
 
 export const VisitCard = ({ visit }) => {
     return (
@@ -24,8 +45,27 @@ export const VisitCard = ({ visit }) => {
                             <Typography sx={{ width: '70%' }} className="VisitName text-start"><h6>
                                 {visit.name}</h6>
                             </Typography>
-                            <Typography sx={{ color: 'text.secondary', width: '20%' }} className="text-end">Realizada</Typography>
-                            <Typography sx={{ color: 'text.secondary', width: '10%' }}><a className="circle_green text-end"></a></Typography>
+                            <Typography sx={{ color: 'text.secondary', width: '20%' }}
+                                className="text-end">{visit.visit_status_name}</Typography>
+
+                            {visit.visit_status_name === 'Finalizada' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_green text-end"></a></Typography>
+                            )}
+
+                            {visit.visit_status_name === 'No Confirmada' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_red text-end"></a></Typography>
+                            )}
+                            {visit.visit_status_name === 'Pendiente' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_red text-end"></a></Typography>
+                            )}
+
+                            {visit.visit_status_name === 'En proceso' && (
+                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
+                                    className="circle_orange text-end"></a></Typography>
+                            )}
 
 
 
@@ -34,11 +74,11 @@ export const VisitCard = ({ visit }) => {
 
                         <AccordionDetails>
                             <Row className="row1">
-                                <Col>
-                                    <p>Id Localidad:</p>
+                                <Col className="d-flex align-items-center">
+                                    <p>Localidad:</p>
                                 </Col>
-                                <Col>
-                                    <p>{visit.id_locality}</p>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.location_name}</p>
                                 </Col>
                             </Row>
                             <Row className="row2 d-flex align-items-center ">
@@ -46,7 +86,7 @@ export const VisitCard = ({ visit }) => {
                                     <p>Tiempo de viaje:</p>
                                 </Col>
                                 <Col className="d-flex align-items-center">
-                                    <p>{visit.travel_time} hs</p>
+                                    <p>{DurationToTime(visit.travel_time)}</p>
                                 </Col>
                             </Row>
                             <Row className="row1">
@@ -82,19 +122,19 @@ export const VisitCard = ({ visit }) => {
                                     <p>{visit.id_group}</p>
                                 </Col>
                             </Row>
+
                             <Row className="row1">
                                 <Col className="d-flex align-items-center">
                                     <p>Estado:</p>
-                                    <Col className="d-flex align-items-center">
                                     </Col>
-                                    <p>{visit.id_visit_status}</p>
-                                </Col>
+                                    <Col className="d-flex align-items-center">
+                                        <p>{visit.visit_status_name}</p>
+                                    </Col>
                             </Row>
-
                         </AccordionDetails>
                     </Accordion>
                 </div>
-            </Zoom >
-        </Container >
+            </Zoom>
+        </Container>
     )
 }

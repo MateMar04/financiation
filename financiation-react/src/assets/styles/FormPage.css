@@ -1,101 +1,81 @@
+.fields-container {
+    height: 8vh;
+}
 
-.buttonconsulta {
-    width: 210px;
+.asesor-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+}
+
+.asesor-avatar {
+    margin: 0;
+    padding: 0;
+}
+
+.asesor-name {
+    margin: 0;
+    padding: 0;
+}
+
+.avatar-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.request-field-title {
+    margin: 0;
+    padding: 0;
+}
+
+.fields-row {
+    margin-top: 3%;
+    margin-bottom: 1%;
+}
+
+.form-select {
+    background-color: white;
+    border-radius: 2vh;
+    height: 7vh;
+}
+
+.input-in-form {
+    height: 7vh;
+    background-color: white;
+    border-radius: 2vh;
+    border:1px solid lightgray;
+    outline-color: lightgray;
+}
+
+.consulta-field{
+    padding: 15px;
+}
+
+.consulta-button{
     border-radius: 15px;
     background-color: #53A6DC;
     border-color: #53A6DC;
     color: white;
     padding: 10px;
     height: 7vh;
-    height: 7vh;
 
-}
-
-.ContainerPersonForm{
-    background-color: white;
-    border-color: black !important;
-    width: 12vw;
-    border-radius: 2vh;
-    align-items: center;
-    padding: 1vh;
-    text-align: center;
-    justify-content: center !important;
-    height: 7vh;
-}
-
-.PinContainerPersonForm{
-    align-self: center;
-    text-align: center;
-    justify-content: center;
-
-}
-
-.InputsFormPage{
-    background-color: white;
-    border-radius: 2vh;
-}
-
-.pInFormPage{
-    transform: translateY(1.5vh);
-}
-
-.form-select{
-    background-color: white;
-    border-radius: 2vh;
-    height: 7vh;
-}
-
-.department-select{
-    width: 65vw;
-}
-
-.FirstContainerForm{
-    width: 70vw;
-}
-
-
-.SecondContainerForm{
-     width: 60vw;
-}
-.VisitaDropDown{
-    margin-right: 2vw;
-}
-
-.InputInForm{
-    width: 10vw !important;
-        background-color: white;
-        border-radius: 2vh;
 }
 
 @media (max-width: 800px) {
 
-    .FirstContainerForm{
-        width: 100%;
+    .fields-container{
+        height: auto;
     }
-  .ContainerPersonForm{
-    width: max-content;
-  }
 
-  .VisitaDropDown{
-        width: 100%;
-  }
+    .form-select{
+        width: 90vw !important;
+    }
 
-  .col-avatar{
-    justify-content: left;
-  }
+    .request-field-title{
+        justify-content: center;
+    }
 
-  .SecondContainerForm{
-    width: 100%;
-  }
-  .InputInForm{
-    width: 30vw !important;
-  }
-
-  .buttonconsulta{
-    width: 50vw !important;
-  }
-
-  .department-select{
-    width: 100% !important;
-}
+    .consulta-field{
+        width: 85vw !important;
+    }
 }
