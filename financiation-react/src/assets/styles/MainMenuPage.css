@@ -52,10 +52,15 @@
 
 .container-visit-card-main-menu{
     overflow-y:auto;
-    height: 65vh;
+    height: 64vh;
 }
 
 #container-group-card-main-menu{
+    overflow-y:auto;
+    height: 23vh;
+}
+
+#nombresscroll{
     overflow-y:auto;
     height: 23vh;
 }
