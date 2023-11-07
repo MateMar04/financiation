@@ -4,10 +4,6 @@
 	top: 0;
 }
 
-.GroupsIcon {
-	align-items: center;
-}
-
 body {
 	background-color: #F4F4F4;
 	font-family: poppins;
@@ -32,5 +28,6 @@ body {
 }
 
 #icongroupgrupo{
+	align-items: center;
 	margin-top: 2vh;
 }
