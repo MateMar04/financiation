@@ -250,10 +250,16 @@ const ProfilePage = () => {
                                         Datos</Button>
                                 </Col>
 
-
-
                             </>
                         }
+                        
+                    </Row>
+                    <Row>
+                    {handleAddButton && (
+                    <Row className={'justify-content-center text-center'}>
+                        <ProfilePicture/>
+                    </Row>
+                )}
                     </Row>
 
                 </Container>
