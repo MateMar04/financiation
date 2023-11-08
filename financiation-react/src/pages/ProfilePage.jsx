@@ -108,15 +108,18 @@ const ProfilePage = () => {
                 <Row className="text-center">
 
                 </Row>
+
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                                 sx={{width: 180, height: 180}} className="ProfilePicture"/>
                     </Col>
                 </Row>
+
                 <Row className="text-center">
                     <h4 className=""> Bienvenido, {myUser?.first_name} {myUser?.last_name} </h4>
                 </Row>
+
                 <Row className="text-center">
                     <p className={'WelcomeUser'}>Aquí encontraras información personal y podrás modificarla. </p>
                 </Row>
@@ -238,13 +241,15 @@ const ProfilePage = () => {
                             </>
                             :
                             <>
-                                <Col md={4}>
+
+                                <Col md={4} xs={6}>
                                     <Button className={'CancelarBtnProfile'} onClick={handleAddButton}>Cancelar</Button>
                                 </Col>
-                                <Col md={4}>
+                                <Col md={4} xs={6}>
                                     <Button className={'GuardarBtnProfile'} type='submit'>Actualizar
                                         Datos</Button>
                                 </Col>
+
 
 
                             </>
