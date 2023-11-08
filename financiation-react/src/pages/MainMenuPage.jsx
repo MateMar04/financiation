@@ -59,13 +59,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '100ms' }}>
                         <Card className="profile-card " id="left-card">
-                            <Row className={'justify-content-end'}>
-                                <Col md={4} xs={6}>
-                                    <Link to={'/me'}>
-                                        <VerMasButton />
-                                    </Link>
-                                </Col>
-                            </Row>
+                            
 
                             <Container className={'d-flex align-items-center'}>
                                 <Container>
@@ -120,6 +114,13 @@ export const MainMenuPage = () => {
                                     </Container>
                                 </Container>
                             </Container>
+                            <Row className={'justify-content-end'}>
+                                <Col md={4} xs={6}>
+                                    <Link to={'/me'}>
+                                        <VerMasButton />
+                                    </Link>
+                                </Col>
+                            </Row>
 
                         </Card></Zoom>
                     <Zoom in style={{ transitionDelay: '150ms' }}>
@@ -168,14 +169,8 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '250ms' }}>
                         <Card className="group-card-main-menu" id="right-card">
-                            <Row className={'justify-content-end'}>
-                                <Col md={4} xs={6}>
-                                    <Link to={'/groups'}>
-                                        <VerMasButton />
-                                    </Link>
-                                </Col>
-                            </Row>
-                            <Row className="text-center">
+                            
+                            <Row className="text-center justify-content-center">
                                 {userGroup && userGroup.length > 0 ? (
                                     <h2 className="name-title">{userGroup[0].group}</h2>
                                 ) : (
@@ -183,11 +178,18 @@ export const MainMenuPage = () => {
                                 )}
 
                             </Row>
-                            <Row className="justify-content-center text-center">
+                            <Row id="nombresscroll" className="text-center justify-content-center ">
 
                                 {userGroup?.map((i) => (
                                     <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
                                 ))}
+                            </Row>
+                            <Row className={'justify-content-end'}>
+                                <Col md={4} xs={6}>
+                                    <Link to={'/groups'}>
+                                        <VerMasButton />
+                                    </Link>
+                                </Col>
                             </Row>
                         </Card>
                     </Zoom>
