@@ -105,11 +105,20 @@ const ProfilePage = () => {
     return (
         <form onSubmit={(e) => handleFormSubmit(e)}>
             <Container className="ContainerProfilePage">
+                <Row className="text-center">
+
+                </Row>
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                sx={{width: 200, height: 200}} className="ProfilePicture"/>
+                                sx={{width: 180, height: 180}} className="ProfilePicture"/>
                     </Col>
+                </Row>
+                <Row className="text-center">
+                    <h4 className=""> Bienvenido, {myUser?.first_name} {myUser?.last_name} </h4>
+                </Row>
+                <Row className="text-center">
+                    <p className={'WelcomeUser'}>Aquí encontraras información personal y podrás modificarla. </p>
                 </Row>
 
 
@@ -118,7 +127,7 @@ const ProfilePage = () => {
                         <h3 className={'ImportantTextProfile'}>Información básica</h3>
                     </Col>
                     <Col className={'d-flex justify-content-end'}>
-                        <Popover content="¿Desea editar el perfil?">
+                        <Popover content="¿Desea editar los datos?">
                             <EditOutlined className={'IconEdit'} onClick={handleAddButton}/>
                         </Popover>
                     </Col>
@@ -206,8 +215,9 @@ const ProfilePage = () => {
                                         options={getItemNames(locations)}
                                         showSearch
                                         filterOption={filterOption}
-                                        className={'InputsProfile'}
-                                        size="large"
+                                        className={'SelectProfile'}
+                                        size={"large"}
+
                                 />
 
                             </>

@@ -1,7 +1,7 @@
 
 @media (min-width: 800px) {
     .ContainerProfilePage{
-        transform: translateY(15vh);
+        transform: translateY(5vh);
         background-color: white;
         border-radius: 10vh;
         width: 60vw;
@@ -23,6 +23,12 @@
         width: 40vw;
         padding: 10px;
     }
+
+    .SelectProfile{
+    width: 42vw;
+        transform: translateX(-1vw);
+
+}
 }
 
 
@@ -63,8 +69,6 @@
 }
 
 
-
-
 .CancelarBtnProfile{
     background-color: #848484;
     border-radius: 3vh;
@@ -95,9 +99,12 @@
     border-color: #026fb8;
 }
 
-
-
 .IconEdit{
     z-index: 2;
     font-size: 3vh;
 }
+
+.WelcomeUser{
+    margin-bottom: 3vh;
+}
+
