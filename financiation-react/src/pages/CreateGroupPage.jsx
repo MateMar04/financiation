@@ -21,15 +21,23 @@ export const CreateGroupPage = () => {
     const [users, setUsers] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredUsers, setFilteredUsers] = useState([]);
+    const [userCheckboxes, setUserCheckboxes] = useState({});
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     const content = (
         <a></a>
-      );
+    );
       
-
+    
+    const handleCheckboxChange = (userId) => {
+        setUserCheckboxes((prevUserCheckboxes) => ({
+            ...prevUserCheckboxes,
+            [userId]: !prevUserCheckboxes[userId],
+        }));
+    };
+    
     useEffect(() => {
         getUsers(authTokens.access).then(data => {
             console.log("User Data:", data);
@@ -122,7 +130,7 @@ export const CreateGroupPage = () => {
                 <Container className="justify-content-center">
                     {filteredUsers.map((user) => (
                         <Container key={user.id} className="containerUserCard justify-content-center text-center">
-                            <UserCard user={user} />
+                            <UserCard user={user} isChecked={userCheckboxes[user.id]} onCheckboxChange={handleCheckboxChange}/>
                         </Container>
                     ))}
                 </Container>
