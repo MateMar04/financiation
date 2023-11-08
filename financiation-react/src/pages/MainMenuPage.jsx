@@ -27,6 +27,7 @@ export const MainMenuPage = () => {
     const [userGroup, setUserGroup] = useState([])
     let [role, setRole] = useState([])
     let [status, setStatus] = useState([])
+    const [lastReqLoc, setLastReqLoc] = useState()
 
 
     const getData = async () => {
@@ -44,6 +45,13 @@ export const MainMenuPage = () => {
         getData();
 
     }, []);
+
+    useEffect(() => {
+        if (latestVisitRequests && latestVisitRequests.length > 0) {
+            setLastReqLoc(latestVisitRequests[0].location)
+        }
+
+    }, [latestVisitRequests]);
 
     return (
         <Container fluid className="main-menu-container">
@@ -118,7 +126,7 @@ export const MainMenuPage = () => {
                         <Card className="last-visits-card border d-flex align-items-center" id="left-card">
                             <Container className="">
                                 <Row className="text-center first-row-main-menu-card">
-                                    <h4>Consultas resueltas en la ultima visita:</h4>
+                                    <h4>Consultas resueltas en la ultima visita en {lastReqLoc}:</h4>
                                 </Row>
                                 <Row className="text-center">
                                     {latestVisitRequests && latestVisitRequests.length > 0 ? (
