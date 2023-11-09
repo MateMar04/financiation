@@ -16,10 +16,8 @@ import {Modal} from 'antd';
 import LoadingModal from "../components/LoadingModal"; //fasfafasffa
 
 
-import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Alert from '@mui/material/Alert';
 import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";

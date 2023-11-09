@@ -1,23 +1,25 @@
 import React from "react";
-import {Spin, Alert} from 'antd';
-import '../assets/styles/LoadingModal.css'
-import {LoadingOutlined} from '@ant-design/icons';
-
+import '../assets/styles/RowWithCheck.css'
+import Load from "../assets/images/Loading.gif";
+import {Link} from "react-router-dom";
+import {Button, Col, Container, Modal, Row} from "react-bootstrap";
+import { Space, Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const LoadingModal = (props) => {
-    return (
-<a>spinner DALE JULIAN ARRGEGLA ESTA MIERDA</a>
+    if (props.show) {
+      return (
 
         // @ELQUEARREGLEESTO:  CUANDO TERMINES, DESCOMENTA LAS LINEAS DE ABAJO Y VA A CARGAR EL SPINNER LINDO!!!!!! ATTE:LAUTIN
 
-        //  <div className="loading-modal">
-        //     <LoadingOutlined size="large" tip="Cargando..." style={{
-        //          fontSize: 80
-        //     }}>
-        //      </LoadingOutlined>
-        // </div>
+          <div className="loading-modal">
+             <LoadingOutlined size="large" tip="Cargando..." style={{
+                  fontSize: 80
+             }}>
+              </LoadingOutlined>
+        </div>
         
-    );
-};
-
+    )
+  }
+}
 export default LoadingModal;

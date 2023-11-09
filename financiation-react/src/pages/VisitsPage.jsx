@@ -9,8 +9,6 @@ import FlotantButton from "../components/FlotantButton";
 import { Link } from "react-router-dom";
 import LoadingModal from "../components/LoadingModal";
 
-
-import {Link} from "react-router-dom";
 import {Pagination} from "antd";
 import {VisitCard} from "../components/VisitCard";
 import "../assets/styles/VisitPage.css"
