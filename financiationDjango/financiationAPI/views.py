@@ -83,10 +83,11 @@ class VisitApiView(APIView):
 
         if isinstance(locations_ids, type(None)):
             with connection.cursor() as cursor:
-                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name "
+                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name, G.name "
                                "from \"financiationAPI_visit\" as V "
                                "inner join \"financiationAPI_location\" L on L.id = V.location_id "
                                "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id "
+                               "inner join \"financiationAPI_group\" G on V.group_id = G.id  "
                                "ORDER BY V.visit_date DESC")
                 row = cursor.fetchall()
                 print(row)
@@ -94,7 +95,7 @@ class VisitApiView(APIView):
                     ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
                      "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
                      "address_id", "contacted_referrer_id", "group_id", "location_id", "mayor_id", "politic_party_id",
-                     "visit_status_id", "location_name", "visit_status_name", "name"], row), safe=False)
+                     "visit_status_id", "location_name", "visit_status_name", "name", "group_name"], row), safe=False)
 
         else:
             visits = Visit.objects.raw("SELECT * "
