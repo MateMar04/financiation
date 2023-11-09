@@ -28,6 +28,7 @@ const ProfilePage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [editProfilePicture, setEditProfilePicture] = useState(false);
 
 
     const handleUserSelection = (e) => {
@@ -35,11 +36,20 @@ const ProfilePage = () => {
         const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
         setEditedUser(selecteduser);
     };
-
+    const getData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+    }
     useEffect(() => {
         getUser(authTokens.access).then(data => setMyUser(data))
+        getData()
     }, []);
+
+  
+
+    
     const handleAddButton = () => {
+        setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
@@ -86,7 +96,7 @@ const ProfilePage = () => {
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <IconButton className="EditIconProfile" onClick={handleAddButton}>
-                            <EditIcon color='action' sx={{width: 25, height: 25}}/>
+                            <EditIcon color='action' sx={{width: 25, height: 25}} />
                         </IconButton>
                     </Col>
                 </Row>
@@ -98,7 +108,7 @@ const ProfilePage = () => {
                 </Row>
                 {showButton && (
                     <Row className={'justify-content-center text-center'}>
-                        <ProfilePicture/>
+                        <ProfilePicture editProfilePicture={editProfilePicture} />
                     </Row>
                 )}
 

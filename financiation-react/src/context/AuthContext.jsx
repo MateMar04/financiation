@@ -1,10 +1,9 @@
 import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
-import FailedModal from "../components/FailedModal";
 import LoadingModal from "../components/LoadingModal";
 import {getUserById} from "../services/UserServices";
-
+import FailedModal from "../components/FailedModal";
 
 const AuthContext = createContext();
 
@@ -26,7 +25,8 @@ export const AuthProvider = ({children}) => {
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+
+
     let signIn = async (e) => {
         e.preventDefault()
         const email = e.target.email.value;
@@ -55,6 +55,10 @@ export const AuthProvider = ({children}) => {
         } else if (response.status === 400) {
             toggleModalfailed();
         }
+        else {
+            console.log(error.response);
+        }
+    
     }
     
 
@@ -75,13 +79,11 @@ export const AuthProvider = ({children}) => {
             history('/menu')
         } else {
             if (response.status === 401) {
-                alert("Revisa las credenciales ingresadas")
-
+                toggleModalfailed()
+                
             }
-            if (response.status === 400) {
-                alert("Ocurrio un error inesperado")
-            } else {
-                alert("Ocurrio un error inesperado")
+            else {
+                console.log(error.response);
 
             }
         }
@@ -144,8 +146,9 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={contextData}>
 
-            <FailedModal message="la visita" show={showfail}/>
-            <LoadingModal message="la visita" show={showloading}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"Revisa las Credenciales"} show={showfail}/>
+
+            <LoadingModal message="Sign in" show={showloading}/>
 
             {loading ? null : children}
         </AuthContext.Provider>

@@ -7,17 +7,25 @@ import {getMyUser, getUser} from "../services/UserServices";
 export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
-    const {authTokens} = useContext(AuthContext)
-    const [myUser, setMyUser] = useState()
-
+    const {authTokens} = useContext(AuthContext);
+    const [myUser, setMyUser] = useState({
+        first_name: '',
+        last_name: '',
+        phone_number: '',
+        profile_picture: '',
+      });    
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
         setMyUser(usuario)
     }
-
+    
     useEffect(() => {
-        getData()
-    }, []);
+        const fetchData = async () => {
+          const userData = await getUser(authTokens.access);
+          setMyUser(userData);
+        };
+        fetchData();
+      }, [authTokens.access]);
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -58,7 +66,6 @@ export const ProfilePicture = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
                 <Row className={'justify-content-center text-center'}>
                     <Col>
                         <label htmlFor="imageFile" className="SelectFileButton">Cambiar Imagen</label>
@@ -78,7 +85,6 @@ export const ProfilePicture = () => {
                         <Button type="submit" className={'GuardarCambiosButton'}>Guardar Cambios</Button>
                     </Col>
                 </Row>
-            </form>
             <p>{message}</p>
         </div>
     );
