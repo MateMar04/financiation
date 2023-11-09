@@ -68,6 +68,8 @@ class Why(models.Model):
 class Location(models.Model):
     name = models.CharField(max_length=70)
     department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
+    travel_time = models.DurationField(null=True, blank=True)
+    distance = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -171,6 +173,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     profile_picture = models.BinaryField(editable=True, blank=True)
     role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
+    birth_date = models.DateField(null=True, blank=True)
+    location = models.ForeignKey(Location, models.DO_NOTHING, null=True)
 
     objects = UserAccountManager()
 
