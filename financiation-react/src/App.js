@@ -23,8 +23,11 @@ import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
 import { CalendarPage } from './pages/CalendarPage';
 import {EmailSended} from './pages/EmailSended';
+import {EditPhotoPage} from './pages/EditPhotoPage';
 import "@fontsource/poppins";
 import * as logo from './assets/images/logo.jpeg'
+
+
 function App() {
     return (
         <Router>
@@ -61,7 +64,7 @@ function App() {
 
                         <Route path='/mayors/add' element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
                         <Route path='/calendar' element={<PrivateRoute children={<CalendarPage></CalendarPage>}/>}/>
-
+                        <Route path='/editphoto' element={<PrivateRoute children={<EditPhotoPage/>}/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
