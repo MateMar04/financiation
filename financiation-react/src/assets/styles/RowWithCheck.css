@@ -8,12 +8,9 @@
     text-align: start;
     text-align: center;
 }
-.profile-fc {
-    
+.profile-fc {  
     box-shadow: rgba(0, 0, 0, 0.2) 0px 7px 29px 0px;
     align-self: center;
-    
-    
 }
 .fondovisitas {
     width: 50%;
@@ -29,4 +26,10 @@
     border-radius: 3vh;
     padding: 1vh;
     text-align: left;
+}
+
+.form-check-input {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    vertical-align: middle;
 }

@@ -3,6 +3,7 @@
     margin: 3vh;
     border-radius: 5vh !important;
     vertical-align: middle !important;
+    padding-top: 3vh;
 }
 
 .first-row-main-menu-card{
@@ -25,7 +26,7 @@
     margin: 3vh;
 }
 .name-title{
-    padding-top: 2vh;
+    padding-top: 2.5vh;
 }
 
 .group-card-main-menu{
@@ -51,10 +52,15 @@
 
 .container-visit-card-main-menu{
     overflow-y:auto;
-    height: 65vh;
+    height: 64vh;
 }
 
-
-.container-group-card-main-menu{
+#container-group-card-main-menu{
     overflow-y:auto;
+    height: 23vh;
+}
+
+#nombresscroll{
+    overflow-y:auto;
+    height: 23vh;
 }
