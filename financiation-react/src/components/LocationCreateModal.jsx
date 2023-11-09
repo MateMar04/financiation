@@ -11,30 +11,30 @@ import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import { InputLabel, Select, MenuItem } from '@mui/material';
-import {getLocations} from '../services/LocationServices';
+import { getDepartments } from '../services/DepartmentServices';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import {message} from 'antd';
 
-export const MayorCreateModal = (props) => {
+export const LocationCreateModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
     const [selectedLocalidad, setSelectedLocalidad] = useState('');
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
-    let [locations, setLocations] = useState([])
+    let [departments, setDepartments] = useState([])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getLocations(authTokens.access).then(data => setLocations(data))
+        getDepartments(authTokens.access).then(data => setDepartments(data))
     }, [])
 
     let postLocation = async () => {
         console.log('aaa')
-        let response = await fetch('/api/mayors', {
+        let response = await fetch('/api/locations', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -42,9 +42,8 @@ export const MayorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": first_name,
-                "last_name": last_name,
-                "location": selectedLocalidad
+                "name": name,
+                "department": selectedDepartment
             })
         });
     
@@ -67,7 +66,7 @@ export const MayorCreateModal = (props) => {
                 <Container className="containermayor container-addmayor-modal">
 
                     <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
+                        <h3 className={'h3LoginPage'}>Crear localidad</h3>
 
                         <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
@@ -87,23 +86,6 @@ export const MayorCreateModal = (props) => {
                                     }}
                                 />
                             </Form.Group>
-                            <Form.Group style={{ textAlign: 'center' }}>
-                                <TextField
-                                    className="input"
-                                    label="Apellido"
-                                    name='last_name'
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>  
                         </div>
 
                         <Box sx={{ minWidth: 120 }}>

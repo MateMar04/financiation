@@ -231,11 +231,6 @@ class AdvisorApiView(APIView):
         return Response(serializer.data)
 
 class LocationApiView(APIView):
-    def get(self, request, *args, **kwargs):
-        locations = Location.objects.all()
-        serializer = LocationsSerializer(locations, many=True)
-        return Response(serializer.data)
-    
     def post(self, request, *args, **kwargs):
         data = request.data
         department_id = data.get('department')
@@ -246,6 +241,13 @@ class LocationApiView(APIView):
         )
         serializer = LocationsSerializer(location, many=False)
         return Response(serializer.data)
+    
+    def get(self, request, *args, **kwargs):
+        locations = Location.objects.all()
+        serializer = LocationsSerializer(locations, many=True)
+        return Response(serializer.data)
+    
+    
 
 
 

@@ -7,6 +7,7 @@ import FailedModal from '../components/FailedModal';
 import SucceedModal from '../components/SucceedModal';
 import MayorCreateModal from '../components/MayorCreateModal';
 import MayorModifyModal from '../components/MayorModifyModal';
+import LocationCreateModal from '../components/LocationCreateModal'
 import {getLocations} from "../services/LocationServices";
 import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
@@ -35,8 +36,10 @@ const AddVisitPage = () => {
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [showcreate, setShowcreate] = useState(false);
     const [showmodify, setShowmodify] = useState(false);
+    const [showlocationcreate, setShowLocationCreate] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
+    const toggleModalLocationCreate = () => setShowLocationCreate(!showlocationcreate);
     const [mayors, setMayors] = useState([])
     const [locations, setLocations] = useState()
     const [visitStatuses, setVisitStatuses] = useState()
@@ -161,6 +164,8 @@ const AddVisitPage = () => {
             <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <LocationCreateModal onClose={() => toggleModalLocationCreate()} show={showlocationcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
