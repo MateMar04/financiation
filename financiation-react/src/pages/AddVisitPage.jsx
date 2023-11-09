@@ -13,7 +13,7 @@ import {getPoliticParties} from "../services/PoliticPartiesServices";
 import {getUsers} from "../services/UserServices";
 import {getContactedReferrers} from "../services/ContactedReferrersServices";
 import {Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
-import {PlusCircleOutlined, PlusOutlined} from '@ant-design/icons';
+import {PlusCircleOutlined, PlusOutlined, EditOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {getAgreements} from "../services/AgreementServices";
@@ -415,7 +415,10 @@ const AddVisitPage = () => {
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
+                            </Tooltip>
+                            <Tooltip placement={"right"} title="Editar Intendente" >
+                                <Button type="primary" shape="circle" icon={<EditOutlined/>} onClick={toggleModalModify} className='separarboton'/>
                             </Tooltip>
                         </Col>
                     </Row>
