@@ -119,7 +119,7 @@ export const VisitCard = ({ visit }) => {
                                     <p>Grupo:</p>
                                 </Col>
                                 <Col className="d-flex align-items-center">
-                                    <p>{visit.id_group}</p>
+                                    <p>{visit.group_name}</p>
                                 </Col>
                             </Row>
 
