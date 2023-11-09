@@ -34,7 +34,6 @@ export const CalendarPage = () => {
     };
 
     useEffect(() => {
-        // Muestra el modal de carga antes de iniciar la carga de visitas
         setShowloading(true);
     
         getVisits(authTokens.access)
@@ -42,7 +41,6 @@ export const CalendarPage = () => {
             setVisits(data);
           })
           .finally(() => {
-            // Oculta el modal de carga una vez que la carga se completa (independientemente de si tuvo éxito o no)
             setShowloading(false);
           });
       }, []);

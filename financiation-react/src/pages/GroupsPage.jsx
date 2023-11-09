@@ -28,7 +28,6 @@ export const GroupsPage = () => {
           setGroups(data);
         })
         .finally(() => {
-          // Oculta el modal de carga una vez que la carga se completa (independientemente de si tuvo éxito o no)
           setShowloading(false);
         });
     }, []);

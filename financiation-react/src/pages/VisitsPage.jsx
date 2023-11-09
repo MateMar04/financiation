@@ -11,7 +11,7 @@ import LoadingModal from "../components/LoadingModal";
 
 import {Pagination} from "antd";
 import {VisitCard} from "../components/VisitCard";
-import "../assets/styles/VisitPage.css"
+import "../assets/styles/VisitPage.css";
 
 
 export const VisitsPage = () => {
@@ -39,6 +39,7 @@ export const VisitsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
+  const [showloading, setShowloading] = useState(false);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -130,7 +131,7 @@ export const VisitsPage = () => {
             </Container>
             <Container> 
                 <LoadingModal message="cargando" show={showloading}/>
-      </Container>
+            </Container>
     </Container>
   );
 };

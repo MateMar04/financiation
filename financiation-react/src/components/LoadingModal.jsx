@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import {Button, Col, Container, Modal, Row} from "react-bootstrap";
 import { Space, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import "../assets/styles/LoadingModal.css";
 
 const LoadingModal = (props) => {
     if (props.show) {

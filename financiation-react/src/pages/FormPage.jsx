@@ -13,11 +13,7 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import {getUserGroup} from "../services/GroupServices";
 import {Modal} from 'antd';
-import LoadingModal from "../components/LoadingModal"; //fasfafasffa
-
-
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import LoadingModal from "../components/LoadingModal"; 
 import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
@@ -34,8 +30,7 @@ const FormPage = () => {
     let [user, setUser] = useState([])
     let [visits, setVisits] = useState([])
     let [whys, setWhys] = useState([])
-    let [loading, setLoading] = useState(true) //qwqrqwrqr
-    const [showloading, setShowloading] = useState(false); //werwer
+    const [showloading, setShowloading] = useState(false); 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -104,7 +99,7 @@ const FormPage = () => {
     }, [visits]);
 
     let postRequest = async (e) => {
-        setShowloading(true)   //asfafasfasf
+        setShowloading(true)  
         let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
@@ -122,11 +117,12 @@ const FormPage = () => {
                 "observation": observation
             })
         })
-        //adsdad
+
         if (response.status === 200) {
             await setShowloading(false);
             handleShow();
         } else {
+            await setShowloading(false);
             toggleModalfailed();
         }
     }
