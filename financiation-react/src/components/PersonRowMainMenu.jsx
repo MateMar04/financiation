@@ -5,7 +5,7 @@ import {Divider} from 'antd';
 export const PersonRowMainMenu = ({ role, first_name, last_name }) => {
     return (
         <>
-            <Row className="containerGroupsNames">
+            <Row className="containerGroupsNames visit-container">
                 <Col md={4} xs={5}>
                     <b>{role}:</b>
                 </Col>

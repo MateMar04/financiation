@@ -136,7 +136,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '200ms' }}>
                         <Card className="next-visits-card" id="center-card">
-                            <Container>
+                            <Container> 
                                 <Row className="text-center">
                                     <h2 className="name-title">Próximas Visitas</h2>
                                 </Row>
