@@ -1,12 +1,17 @@
 import {Col, Container, Row} from "react-bootstrap";
+import "../assets/styles/MainMenuPage.css";
 
 export const PersonRowMainMenu = ({role, first_name, last_name}) => {
     return (
-        <Container fluid>
-            <Row>
-                <Col lg={6} className="fw-bold">{role}:</Col>
-                <Col lg={6}>{first_name} {last_name}</Col>
+       
+            <Row className="containerGroupsNames">
+                <Col md={4}>
+                <b>{role}:</b>
+                </Col>
+                <Col md={8}>
+                <a>{first_name} {last_name}</a>
+                </Col>
             </Row>
-        </Container>
+       
     )
 }

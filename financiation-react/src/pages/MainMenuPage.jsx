@@ -82,7 +82,7 @@ export const MainMenuPage = () => {
                                             </strong>
                                         </Row>
                                         <Row>
-                                            <Col xs={1} md={3}>
+                                            <Col xs={5} md={3}>
                                                 <p className="p-main-menu-card">{status?.name}</p>
                                             </Col>
                                             <Col xs={1} md={1} className="justify-content-end">
@@ -124,7 +124,7 @@ export const MainMenuPage = () => {
                                     {latestVisitRequests && latestVisitRequests.length > 0 ? (
                                         <h3 className="fw-bold">{latestVisitRequests[0].requests}</h3>
                                     ) : (
-                                        <p>No visit requests available</p>
+                                        <p>No hay hubo visita</p>
                                     )}
                                 </Row>
                             </Container>
@@ -151,7 +151,6 @@ export const MainMenuPage = () => {
                                         </Col>
                                     </Row>
                                 </Link>
-
                             </Container>
                         </Card>
                     </Zoom>
@@ -160,27 +159,32 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '250ms' }}>
                         <Card className="group-card-main-menu" id="right-card">
-                            <Row className={'justify-content-end'}>
-                                <Col md={4} xs={6}>
-                                    <Link to={'/groups'}>
-                                        <VerMasButton />
-                                    </Link>
-                                </Col>
-                            </Row>
-                            <Row className="text-center justify-content-center">
-                                {userGroup && userGroup.length > 0 ? (
-                                    <h2 className="name-title">{userGroup[0].group}</h2>
-                                ) : (
-                                    <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
-                                )}
+                            <Container>
+                                <Row className={'justify-content-end'}>
+                                    <Col md={4} xs={6}>
+                                        <Link to={'/groups'}>
+                                            <VerMasButton />
+                                        </Link>
+                                    </Col>
+                                </Row>
+                                <Container className="container-group-card-main-menu">
+                                    <Row className="text-center justify-content-center">
 
-                            </Row>
-                            <Row className="text-center justify-content-center ">
+                                        {userGroup && userGroup.length > 0 ? (
+                                            <h2 className="name-title">{userGroup[0].group}</h2>
+                                        ) : (
+                                            <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
+                                        )}
 
-                                {userGroup?.map((i) => (
-                                    <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
-                                ))}
-                            </Row>
+                                    </Row>
+                                </Container>
+                                <Row className="text-center justify-content-center ">
+
+                                    {userGroup?.map((i) => (
+                                        <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
+                                    ))}
+                                </Row>
+                            </Container>
                         </Card>
                     </Zoom>
                     <Zoom in style={{ transitionDelay: '300ms' }}>

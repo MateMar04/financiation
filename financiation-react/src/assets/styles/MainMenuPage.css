@@ -53,3 +53,8 @@
     overflow-y:auto;
     height: 65vh;
 }
+
+
+.container-group-card-main-menu{
+    overflow-y:auto;
+}
