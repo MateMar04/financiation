@@ -551,8 +551,6 @@ const AddVisitPage = () => {
                             icon={<PlusCircleOutlined/>}>
                         Crear Visita
                     </Button></Container>
-
-
             </Form>
         </Container>
 

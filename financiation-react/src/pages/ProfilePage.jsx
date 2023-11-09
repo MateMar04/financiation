@@ -10,6 +10,7 @@ import {ProfilePicture} from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import {getUser} from "../services/UserServices";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
 
@@ -93,6 +94,11 @@ const ProfilePage = () => {
     return (
         <form onSubmit={(e) => handleFormSubmit(e)}>
             <Container className="ContainerProfilePage">
+            <Row>
+                <Link to={'/editphoto'}>
+                    <Button>Editar foto</Button>
+                    </Link>
+                </Row>
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <IconButton className="EditIconProfile" onClick={handleAddButton}>
@@ -100,12 +106,15 @@ const ProfilePage = () => {
                         </IconButton>
                     </Col>
                 </Row>
+                
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                                 sx={{width: 200, height: 200}} className="ProfilePicture"/>
                     </Col>
                 </Row>
+
+                
                 {showButton && (
                     <Row className={'justify-content-center text-center'}>
                         <ProfilePicture editProfilePicture={editProfilePicture} />
@@ -117,7 +126,7 @@ const ProfilePage = () => {
                     <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
                     <h3 className="ProfileText">Coordinador</h3>
                 </Row>
-
+                    
                 <Container className="InputsProfile">
 
                     <Row className={"d-flex justify-content-center text-center"}>
