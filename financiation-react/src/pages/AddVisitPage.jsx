@@ -201,7 +201,7 @@ const AddVisitPage = () => {
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
                             </Tooltip>
                         </Col>
                     </Row>

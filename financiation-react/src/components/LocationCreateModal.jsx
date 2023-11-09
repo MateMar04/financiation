@@ -19,8 +19,8 @@ import {message} from 'antd';
 export const LocationCreateModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
-    const [selectedLocalidad, setSelectedLocalidad] = useState('');
-    const [first_name, setFirstName] = useState("");
+    const [selectedDepartment, setSelectedDepartment] = useState('');
+    const [name, setName] = useState("");
     const [last_name, setLastName] = useState("");
     let [departments, setDepartments] = useState([])
     const [showfail, setShowfailture] = useState(false);
@@ -73,8 +73,8 @@ export const LocationCreateModal = (props) => {
                                 <TextField
                                     className="input"
                                     label="Nombre"
-                                    name='first_name'
-                                    onChange={(e) => setFirstName(e.target.value)}
+                                    name='name'
+                                    onChange={(e) => setName(e.target.value)}
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -90,23 +90,23 @@ export const LocationCreateModal = (props) => {
 
                         <Box sx={{ minWidth: 120 }}>
                             <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Localidad</InputLabel>
+                                <InputLabel id="demo-simple-select-label">Departamento</InputLabel>
                                     <Select
-                                        label="Localidad"
-                                        value={selectedLocalidad}
-                                        onChange={(e) => setSelectedLocalidad(e.target.value)}
+                                        label="Departamento"
+                                        value={selectedDepartment}
+                                        onChange={(e) => setSelectedDepartment(e.target.value)}
                                         variant="outlined"
                                         sx={{ width: '100%', height: '48px' }} 
                                     >
-                                        {locations?.map((location) => (
-                                            <MenuItem value={location.id}>{location.name}</MenuItem>
+                                        {departments?.map((department) => (
+                                            <MenuItem value={department.id}>{department.name}</MenuItem>
                                         ))}    
                                     </Select>
                             </FormControl>
                         </Box>
 
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postMayor}>Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postLocation}>Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
@@ -121,4 +121,4 @@ export const LocationCreateModal = (props) => {
     )
 }
 
-export default MayorCreateModal
+export default LocationCreateModal
