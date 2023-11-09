@@ -9,6 +9,9 @@ urlpatterns = [
     # City Departments
     path('city-departments', views.getCityDepartments, name='cityDepartments'),
 
+    # Agreements
+    path('agreements', views.AgreementApiView.as_view(), name='agreements'),
+
     # Groups
     path('groups', views.GroupApiView.as_view(), name='groups'),
     path('groups/<int:id>', views.getGroupById, name='group'),

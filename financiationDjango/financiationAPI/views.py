@@ -245,12 +245,17 @@ class LocationApiView(APIView):
     def get(self, request, *args, **kwargs):
         locations = Location.objects.all()
         serializer = LocationsSerializer(locations, many=True)
+        return Response(serializer.data)   
+
+class AgreementApiView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        agreement = Agreement.objects.create(
+            name=data['name'],
+            description=data['name']
+        )
+        serializer = AgreementSerializer(agreement, many=False)
         return Response(serializer.data)
-    
-    
-
-
-
 
 @api_view(['GET'])
 def getDivisions(request):
