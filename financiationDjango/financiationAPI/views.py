@@ -1,4 +1,3 @@
-from datetime import datetime
 from datetime import timedelta
 
 from django.db import connection
@@ -230,6 +229,7 @@ class AdvisorApiView(APIView):
         serializer = AdvisorSerializer(advisor, many=False)
         return Response(serializer.data)
 
+
 class LocationApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -241,13 +241,20 @@ class LocationApiView(APIView):
         )
         serializer = LocationsSerializer(location, many=False)
         return Response(serializer.data)
-    
+
     def get(self, request, *args, **kwargs):
         locations = Location.objects.all()
         serializer = LocationsSerializer(locations, many=True)
-        return Response(serializer.data)   
+        return Response(serializer.data)
+
 
 class AgreementApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        agreements = Agreement.objects.all()
+        serializer = AgreementSerializer(agreements, many=True)
+        return Response(serializer.data)
+
     def post(self, request, *args, **kwargs):
         data = request.data
         agreement = Agreement.objects.create(
@@ -256,6 +263,7 @@ class AgreementApiView(APIView):
         )
         serializer = AgreementSerializer(agreement, many=False)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getDivisions(request):
@@ -286,13 +294,6 @@ def getDivisionsFaqs(request):
 def getVisitSatuses(request):
     visit_statuses = VisitStatus.objects.all()
     serializer = VisitStatusSerializer(visit_statuses, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getAgreements(request):
-    agreements = Agreement.objects.all()
-    serializer = AgreementSerializer(agreements, many=True)
     return Response(serializer.data)
 
 
@@ -630,16 +631,18 @@ def putMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['PUT'])
 def putUserbyId(request, id, *args, **kwargs):
     data = request.data
     useraccount = UserAccount.objects.get(id=id)
     useraccount.first_name = data['first_name']
     useraccount.last_name = data['last_name']
-    useraccount.phone_number=data['phone_number']
+    useraccount.phone_number = data['phone_number']
     useraccount.save()
     serializer = UserAccountSerializer(useraccount, many=False)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):

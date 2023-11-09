@@ -18,7 +18,7 @@ urlpatterns = [
     path('groups/user/<int:id>', views.getUserGroup, name='currenGroup'),
 
     # Agreements
-    path('agreements', views.getAgreements, name='agreements'),
+    path('agreements', views.AgreementApiView.as_view(), name='agreements'),
 
     # Contacted Referrers
     path('contacted-referrers', views.getContactedReferrers, name='contactedReferrers'),
