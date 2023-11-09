@@ -191,18 +191,11 @@ export const MainMenuPage = () => {
                                 <Row className="text-center">
                                     <h2 className="name-title ">Consultas</h2>
                                 </Row>
-                                <Row>
+                                
 
-                                    <BarChart className="barchart-report-card-main-menu" chartData={{
-                                        labels: ["Pedro", "Maria", "Juan"],
-                                        datasets: [{
-                                            label: "",
-                                            data: [30, 30, 40],
-                                            backgroundColor: ["red", "green", "blue"]
-                                        }]
-                                    }} />
+                                    
 
-                                </Row>
+                                
                             </Container>
                         </Card>
                     </Zoom>
