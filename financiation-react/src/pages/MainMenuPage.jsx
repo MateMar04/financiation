@@ -133,7 +133,7 @@ export const MainMenuPage = () => {
                                     {latestVisitRequests && latestVisitRequests.length > 0 ? (
                                         <h3 className="fw-bold">{latestVisitRequests[0].requests}</h3>
                                     ) : (
-                                        <p>No hay hubo visita</p>
+                                        <p>No hubo visita</p>
                                     )}
                                 </Row>
                             </Container>
