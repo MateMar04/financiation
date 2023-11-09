@@ -63,4 +63,9 @@
 #nombresscroll{
     overflow-y:auto;
     height: 23vh;
+    padding-left: 2vw;
+}
+
+.dividergroup{
+    width: 5vw !important;
 }
