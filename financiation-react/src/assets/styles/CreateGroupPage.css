@@ -2,10 +2,7 @@
 	position: absolute;
 	right: 0;
 	top: 0;
-}
 
-.GroupsIcon {
-	align-items: center;
 }
 
 body {
@@ -29,4 +26,9 @@ body {
 
 .containerUserCard {
 	margin-top: 3vh;
+}
+
+#icongroupgrupo{
+	align-items: center;
+	margin-top: 2vh;
 }
