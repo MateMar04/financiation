@@ -10,6 +10,7 @@ import {ProfilePicture} from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import {getUser} from "../services/UserServices";
+import { Link } from "react-router-dom";
 
 export const EditPhotoPage = () => {
 
@@ -97,6 +98,11 @@ export const EditPhotoPage = () => {
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
                                 sx={{width: 200, height: 200}} className="ProfilePicture"/>
                     </Col>
+                </Row>
+                <Row>
+                <Link to={'/me'}>
+                    <Button>Volver Atras</Button>
+                    </Link>
                 </Row>
             </Container>
 
