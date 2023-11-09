@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # Locations
-    path('locations', views.getLocations, name='locations'),
+    path('locations', views.LocationApiView.as_view(), name='locations'),
 
     # City Departments
     path('city-departments', views.getCityDepartments, name='cityDepartments'),
