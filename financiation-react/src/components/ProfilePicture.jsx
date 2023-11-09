@@ -8,12 +8,7 @@ export const ProfilePicture = () => {
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState('');
     const {authTokens} = useContext(AuthContext);
-    const [myUser, setMyUser] = useState({
-        first_name: '',
-        last_name: '',
-        phone_number: '',
-        profile_picture: '',
-      });    
+    const [myUser, setMyUser] = useState();    
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
         setMyUser(usuario)
