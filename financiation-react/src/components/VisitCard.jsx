@@ -7,6 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
+import Button from '@mui/material/Button';
 
 const DurationToTime = (duration) => {
     const hoursMatch = duration.match(/(\d+)H/);
@@ -130,6 +131,11 @@ export const VisitCard = ({ visit }) => {
                                     <Col className="d-flex align-items-center">
                                         <p>{visit.visit_status_name}</p>
                                     </Col>
+                            </Row>
+                            <Row className="ButtonEditVisit">
+                                <Button variant="contained" className="Buttonedit">
+                                    Editar Visita
+                                </Button>
                             </Row>
                         </AccordionDetails>
                     </Accordion>
