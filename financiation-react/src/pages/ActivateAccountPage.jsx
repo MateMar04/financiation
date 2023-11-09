@@ -5,11 +5,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../assets/images/PRUEBA.PNG";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import LoadingModal from "../components/LoadingModal";
+
 
 const ActivateAccountPage = () => {
     const { uid, token } = useParams()
     let history = useNavigate()
 
+    const [showloading, setShowloading] = useState(false);
+   
+    let [loading, setLoading] = useState(true)
 
     let uidToken = uid
     let activationToken = token
@@ -38,7 +43,10 @@ const ActivateAccountPage = () => {
 
     let pressedVerifyButton = async () => {
         handleShow()
+        setShowloading(true)
         await activateAccount()
+        setShowloading(false)
+
     }
 
     return (
@@ -71,6 +79,9 @@ const ActivateAccountPage = () => {
                 ¡Su cuenta ha sido validada!
                 </Alert>
             </Snackbar>
+            </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
             </Container>
         </Container>
     );

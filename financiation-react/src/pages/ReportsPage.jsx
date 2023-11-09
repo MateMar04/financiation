@@ -9,6 +9,7 @@ import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import ReportsContext from "../context/ReportsContext";
+import LoadingModal from "../components/LoadingModal";
 
 
 export const ReportsPage = () => {
@@ -17,6 +18,7 @@ export const ReportsPage = () => {
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
+    let [loading, setLoading] = useState(true)
 
     let {
         visits,
@@ -37,9 +39,11 @@ export const ReportsPage = () => {
         getLocationsForFilter(authTokens.access).then(r => setLocalities(r))
         getMinistryDepartmentsForFilter(authTokens.access).then(r => setMinistryDepartments(r))
     }, [])
-
+    const [showloading, setShowloading] = useState(false);
     const buttonClick = async () => {
+        setShowloading(true);
         await generateReports()
+        setShowloading(false); 
     };
 
     return (
@@ -90,7 +94,11 @@ export const ReportsPage = () => {
                     </Col>
                 </Row>
             </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
+            </Container> 
         </Container>
+        
     )
 }
 
