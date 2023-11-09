@@ -10,30 +10,20 @@ import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import { InputLabel, Select, MenuItem } from '@mui/material';
-import { getDepartments } from '../services/DepartmentServices';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
 import {message} from 'antd';
 
-export const LocationCreateModal = (props) => {
+export const AgreementCreateModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
-    const [selectedDepartment, setSelectedDepartment] = useState('');
     const [name, setName] = useState("");
-    const [last_name, setLastName] = useState("");
-    let [departments, setDepartments] = useState([])
+    const [description, setDescription] = useState("");
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-    useEffect(() => {
-        getDepartments(authTokens.access).then(data => setDepartments(data))
-    }, [])
-
-    let postLocation = async () => {
-        let response = await fetch('/api/locations', {
+    let postAgreement = async () => {
+        let response = await fetch('/api/agreements', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -42,18 +32,18 @@ export const LocationCreateModal = (props) => {
             },
             body: JSON.stringify({
                 "name": name,
-                "department": selectedDepartment
+                "description": description
             })
         });
     
         if (response.status === 200) {
             // toggleModalsucceed();
             props.setUpdateFlag((prevFlag) => !prevFlag);
-            message.success('Se creó la localidad exitosamente');
+            message.success('Se creó el acuerdo exitosamente');
             props.onClose();
         } else {
             // toggleModalfailed();
-            console.error("No se pudo crear la localidad");
+            console.error("No se pudo crear el acuerdo");
             props.onClose()
         }
     }
@@ -65,7 +55,7 @@ export const LocationCreateModal = (props) => {
                 <Container className="containermayor container-addmayor-modal">
 
                     <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Crear localidad</h3>
+                        <h3 className={'h3LoginPage'}>Crear Acuerdo</h3>
 
                         <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
@@ -87,25 +77,28 @@ export const LocationCreateModal = (props) => {
                             </Form.Group>
                         </div>
 
-                        <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Departamento</InputLabel>
-                                    <Select
-                                        label="Departamento"
-                                        value={selectedDepartment}
-                                        onChange={(e) => setSelectedDepartment(e.target.value)}
-                                        variant="outlined"
-                                        sx={{ width: '100%', height: '48px' }} 
-                                    >
-                                        {departments?.map((department) => (
-                                            <MenuItem value={department.id}>{department.name}</MenuItem>
-                                        ))}    
-                                    </Select>
-                            </FormControl>
-                        </Box>
+                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
+                                <TextField
+                                    className="input"
+                                    label="Descripcion"
+                                    name='descripcion'
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    variant="outlined"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start" >
+                                                <AccountCircleOutlinedIcon />
+                                            </InputAdornment>
+                                        ),
+                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
+                                    }}
+                                />
+                            </Form.Group>
+                        </div>
 
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postLocation}>Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postAgreement}>Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
@@ -120,4 +113,4 @@ export const LocationCreateModal = (props) => {
     )
 }
 
-export default LocationCreateModal
+export default AgreementCreateModal

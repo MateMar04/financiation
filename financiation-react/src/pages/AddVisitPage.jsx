@@ -8,6 +8,7 @@ import SucceedModal from '../components/SucceedModal';
 import MayorCreateModal from '../components/MayorCreateModal';
 import MayorModifyModal from '../components/MayorModifyModal';
 import LocationCreateModal from '../components/LocationCreateModal'
+import AgreementCreateModal from '../components/AgreementCreateModal';
 import {getLocations} from "../services/LocationServices";
 import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
@@ -37,9 +38,11 @@ const AddVisitPage = () => {
     const [showcreate, setShowcreate] = useState(false);
     const [showmodify, setShowmodify] = useState(false);
     const [showlocationcreate, setShowLocationCreate] = useState(false);
+    const [showagreementcreate, setShowAgreementCreate] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
     const toggleModalLocationCreate = () => setShowLocationCreate(!showlocationcreate);
+    const toggleModalAgreementCreate = () => setShowAgreementCreate(!showagreementcreate);
     const [mayors, setMayors] = useState([])
     const [locations, setLocations] = useState()
     const [visitStatuses, setVisitStatuses] = useState()
@@ -56,7 +59,6 @@ const AddVisitPage = () => {
             value: item.id
         }));
     }
-
 
     const getPersonNames = (array) => {
         return array?.map(item => ({
@@ -166,6 +168,8 @@ const AddVisitPage = () => {
             <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <LocationCreateModal onClose={() => toggleModalLocationCreate()} show={showlocationcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <AgreementCreateModal onClose={() => toggleModalAgreementCreate()} show={showagreementcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
@@ -507,7 +511,7 @@ const AddVisitPage = () => {
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
                             </Tooltip>
                         </Col>
                     </Row>
