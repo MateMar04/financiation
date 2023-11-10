@@ -657,15 +657,17 @@ def putUserbyId(request, id, *args, **kwargs):
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT count(*) "
-                       "from \"financiationAPI_request\" "
+        cursor.execute("SELECT L.name, count(*) "
+                       "from \"financiationAPI_request\" AS R "
+                       "inner join \"financiationAPI_visit\" V on V.id = R.visit_id "
+                       "Inner JOIN \"financiationAPI_location\" L on V.location_id = L.id "
                        "where visit_id = (SELECT id "
                        "FROM \"financiationAPI_visit\" "
                        "WHERE visit_status_id = 4 "
                        "ORDER BY visit_date desc "
-                       "limit 1)", request)
+                       "limit 1) group by L.name", request)
         row = cursor.fetchall()
-        return JsonResponse(to_json(["requests"], row), safe=False)
+        return JsonResponse(to_json(["location", "requests"], row), safe=False)
 
 
 @api_view(['GET'])

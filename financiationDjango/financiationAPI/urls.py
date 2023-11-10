@@ -52,10 +52,6 @@ urlpatterns = [
     # Politic Parties
     path('politic-parties', views.getPoliticParties, name='politicParties'),
 
-    # Mayors
-    path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
-    path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
-
     # Divisions
     path('divisions', views.getDivisions, name='divisions'),
 
@@ -107,5 +103,6 @@ urlpatterns = [
     path('mayors/delete/<int:id>', views.deleteMayorById, name='delete_mayor'),
     path('mayors/put/<int:id>', views.putMayorById, name='put_mayor'),
     path('mayors', views.MayorApiView.as_view(), name='mayors'),
-
+    path('mayors-emails', views.getMayorsEmails, name='mayorEmails'),
+    path('mayors-phones', views.getMayorsPhones, name='getMayorPhones'),
 ]
