@@ -21,7 +21,7 @@ urlpatterns = [
     path('agreements', views.AgreementApiView.as_view(), name='agreements'),
 
     # Contacted Referrers
-    path('contacted-referrers', views.getContactedReferrers, name='contactedReferrers'),
+    path('contacted-referrers', views.ContactedRederrerApiView.as_view(), name='contactedReferrers'),
     path('contacted-referrers-emails', views.getContactedReferrersEmails, name='contactedReferrerEmails'),
     path('contacted-referrers-phones', views.getContactedReferrersPhones, name='contactedReferrerPhones'),
 

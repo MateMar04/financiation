@@ -259,10 +259,27 @@ class AgreementApiView(APIView):
         data = request.data
         agreement = Agreement.objects.create(
             name=data['name'],
-            description=data['name']
+            description=data['description']
         )
         serializer = AgreementSerializer(agreement, many=False)
         return Response(serializer.data)
+
+class ContactedRederrerApiView(APIView):
+    def get(self, request):
+        contacted_referrers = ContactedReferrer.objects.all()
+        serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        contacted_referrer = ContactedReferrer.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            position=data['position']
+        )
+        serializer = ContactedReferrerSerializer(contacted_referrer, many=False)
+        return Response(serializer.data)
+
 
 
 @api_view(['GET'])
@@ -294,13 +311,6 @@ def getDivisionsFaqs(request):
 def getVisitSatuses(request):
     visit_statuses = VisitStatus.objects.all()
     serializer = VisitStatusSerializer(visit_statuses, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getContactedReferrers(request):
-    contacted_referrers = ContactedReferrer.objects.all()
-    serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
     return Response(serializer.data)
 
 
