@@ -653,6 +653,50 @@ def putUserbyId(request, id, *args, **kwargs):
     serializer = UserAccountSerializer(useraccount, many=False)
     return Response(serializer.data)
 
+def putVisitById(request, id, *args, **kwargs):
+    data = request.data
+    address = Address.objects.get(id=data['address_id'])
+    contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+    group = Group.objects.get(id=data['group_id'])
+    mayor = Mayor.objects.get(id=data['mayor_id'])
+    location = Location.objects.get(id=data['location_id'])
+    politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+    visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
+
+    visit = Visit.objects.get(id=id)
+    visit.accommodation=data['accommodation'],
+    visit.address=address,
+    visit.civil_registration=data['civil_registration'],
+    visit.contacted_referrer=contacted_referrer,
+    visit.distance=data['distance'],
+    visit.flyer=data['flyer'],
+    visit.group=group,
+    visit.location=location,
+    visit.mayor=mayor,
+    visit.modernization_fund=data['modernization_fund'],
+    visit.rent_observations=data['rent_observations'],
+    visit.place_name=data['place_name'],
+    visit.politic_party=politic_party,
+    visit.travel_time=timedelta(minutes=data['travel_time']),
+    visit.visit_date=parse_date(data['visit_date']),
+    visit.start_time=data['start_time'],
+    visit.finish_time=data['finish_time'],
+    visit.visit_status=visit_status
+
+    for i in data['agreement_id']:
+            agreement = Agreement.objects.get(id=i)
+            visit.agreement.add(agreement)
+
+    finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
+    visit.finance_collaborator.add(finance_collaborator)
+
+    rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
+    
+    visit.rent_collaborator.add(rent_collaborator)
+    visit.save()
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
 
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
