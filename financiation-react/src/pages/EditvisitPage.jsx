@@ -22,6 +22,8 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import {getAgreements} from "../services/AgreementServices";
 import {getGroups} from "../services/GroupServices";
 import {getAddresses} from "../services/AddressServices";
+import { useLocation } from "react-router-dom";
+import 'dayjs/locale/es';
 
 const {TextArea} = Input;
 
@@ -55,6 +57,9 @@ const EditVisitPage = () => {
     const [agreements, setAgreements] = useState()
     const [groups, setGroups] = useState();
     const [addresses, setAddresses] = useState()
+    const location = useLocation();
+    const visitData = location.state?.visitData;
+    
 
     const getItemNames = (array) => {
         return array?.map(item => ({
@@ -185,8 +190,8 @@ const EditVisitPage = () => {
                 {...layout}
                 ref={formRef}
                 name="control-ref"
-                onFinish={onFinish}>
-
+                onFinish={onFinish}
+                initialValues={visitData}>
 
                 <Container>
 

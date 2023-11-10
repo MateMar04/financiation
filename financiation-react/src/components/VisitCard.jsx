@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
-
+import { Link } from "react-router-dom";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -133,9 +133,11 @@ export const VisitCard = ({ visit }) => {
                                     </Col>
                             </Row>
                             <Row className="ButtonEditVisit">
+                            <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit }}>
                                 <Button variant="contained" className="Buttonedit">
                                     Editar Visita
                                 </Button>
+                            </Link>
                             </Row>
                         </AccordionDetails>
                     </Accordion>

@@ -55,7 +55,7 @@ function App() {
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
 
                         <Route path='/visits/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
-                        <Route path='/visits/edit' element={<PrivateRoute children={<EditVisitPage/>}/>}/>
+                        <Route path='/visits/edit/:visitId' element={<PrivateRoute children={<EditVisitPage/>}/>}/>
                         <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
 
                         <Route path='/reports'

@@ -653,6 +653,7 @@ def putUserbyId(request, id, *args, **kwargs):
     serializer = UserAccountSerializer(useraccount, many=False)
     return Response(serializer.data)
 
+@api_view(['PUT'])
 def putVisitById(request, id, *args, **kwargs):
     data = request.data
     address = Address.objects.get(id=data['address_id'])
@@ -664,23 +665,23 @@ def putVisitById(request, id, *args, **kwargs):
     visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
 
     visit = Visit.objects.get(id=id)
-    visit.accommodation=data['accommodation'],
-    visit.address=address,
-    visit.civil_registration=data['civil_registration'],
-    visit.contacted_referrer=contacted_referrer,
-    visit.distance=data['distance'],
-    visit.flyer=data['flyer'],
-    visit.group=group,
-    visit.location=location,
-    visit.mayor=mayor,
-    visit.modernization_fund=data['modernization_fund'],
-    visit.rent_observations=data['rent_observations'],
-    visit.place_name=data['place_name'],
-    visit.politic_party=politic_party,
-    visit.travel_time=timedelta(minutes=data['travel_time']),
-    visit.visit_date=parse_date(data['visit_date']),
-    visit.start_time=data['start_time'],
-    visit.finish_time=data['finish_time'],
+    visit.accommodation=data['accommodation']
+    visit.address=address
+    visit.civil_registration=data['civil_registration']
+    visit.contacted_referrer=contacted_referrer
+    visit.distance=data['distance']
+    visit.flyer=data['flyer']
+    visit.group=group
+    visit.location=location
+    visit.mayor=mayor
+    visit.modernization_fund=data['modernization_fund']
+    visit.rent_observations=data['rent_observations']
+    visit.place_name=data['place_name']
+    visit.politic_party=politic_party
+    visit.travel_time=timedelta(minutes=data['travel_time'])
+    visit.visit_date=parse_date(data['visit_date'])
+    visit.start_time=data['start_time']
+    visit.finish_time=data['finish_time']
     visit.visit_status=visit_status
 
     for i in data['agreement_id']:
@@ -691,7 +692,7 @@ def putVisitById(request, id, *args, **kwargs):
     visit.finance_collaborator.add(finance_collaborator)
 
     rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
-    
+
     visit.rent_collaborator.add(rent_collaborator)
     visit.save()
     serializer = VisitSerializer(visit, many=False)
