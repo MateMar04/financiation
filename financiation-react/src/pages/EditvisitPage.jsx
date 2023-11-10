@@ -58,8 +58,8 @@ const EditVisitPage = () => {
     const [groups, setGroups] = useState();
     const [addresses, setAddresses] = useState()
     const location = useLocation();
-    const visitData = location.state?.visitData;
-    
+    const { visitData } = location.state;
+    const [form] = Form.useForm();
 
     const getItemNames = (array) => {
         return array?.map(item => ({
@@ -83,6 +83,33 @@ const EditVisitPage = () => {
     }
 
     useEffect(() => {
+        if (visitData) {
+            console.log("Agreement IDs:", visitData.agreement_id);
+            console.log("finance_collaborator:", visitData.finance_collaborator_id);
+            console.log("rent_collaborator IDs:", visitData.rent_collaborator_id);
+            form.setFieldsValue({
+                location: visitData.location_id,
+                visit_date: dayjs(visitData.visit_date),
+                visit_time: [dayjs(visitData.start_time, 'HH:mm:ss'),dayjs(visitData.finish_time, 'HH:mm:ss'),],
+                finance_collaborator: visitData.finance_collaborator_id,
+                rent_collaborator: visitData.rent_collaborator_id,
+                observations: visitData.rent_observations,
+                distance: visitData.distance,
+                travel_time: visitData.travel_time,
+                place: visitData.place_name,
+                address: visitData.address_id,
+                contacted_referrer: visitData.contacted_referrer_id,
+                politic_party: visitData.politic_party_id,
+                mayor: visitData.mayor_id,
+                flyer: visitData.flyer,
+                civil_registration: visitData.civil_registration,
+                accommodation: visitData.accommodation,
+                modernization_fund: visitData.modernization_fund,
+                agreements: visitData.agreement_id,
+                visit_status: visitData.visit_status_id,
+                group: visitData.group_id,
+            });
+        }
         getMayors(authTokens.access).then(data => setMayors(data))
         getLocations(authTokens.access).then(data => setLocations(data))
         getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
@@ -92,7 +119,7 @@ const EditVisitPage = () => {
         getAgreements(authTokens.access).then(data => setAgreements(data))
         getGroups(authTokens.access).then(data => setGroups(data))
         getAddresses(authTokens.access).then(data => setAddresses(data))
-    }, [updateFlag])
+    }, [updateFlag], [visitData])
 
     const getTimeFromDate = (date) => {
         let nDate = new Date(date)
@@ -191,8 +218,29 @@ const EditVisitPage = () => {
                 ref={formRef}
                 name="control-ref"
                 onFinish={onFinish}
-                initialValues={visitData}>
-
+                initialValues={visitData ? {
+                    location: visitData.location_id,
+                    visit_date: dayjs(visitData.visit_date),
+                    visit_time: [dayjs(visitData.start_time, 'HH:mm:ss'), dayjs(visitData.finish_time, 'HH:mm:ss'),],
+                    finance_collaborator: visitData.finance_collaborator_id,
+                    rent_collaborator: visitData.rent_collaborator_id,
+                    observations: visitData.rent_observations,
+                    distance: visitData.distance,
+                    travel_time: visitData.travel_time,
+                    place: visitData.place_name,
+                    address: visitData.address_id,
+                    contacted_referrer: visitData.contacted_referrer_id,
+                    politic_party: visitData.politic_party_id,
+                    mayor: visitData.mayor_id,
+                    flyer: visitData.flyer,
+                    civil_registration: visitData.civil_registration,
+                    accommodation: visitData.accommodation,
+                    modernization_fund: visitData.modernization_fund,
+                    agreements: visitData.agreement_id,
+                    visit_status: visitData.visit_status_id,
+                    group: visitData.group_id,
+                } : {}}>
+                
                 <Container>
 
                     <Row className="visit-field-row">
