@@ -9,6 +9,7 @@ import MayorCreateModal from '../components/MayorCreateModal';
 import MayorModifyModal from '../components/MayorModifyModal';
 import LocationCreateModal from '../components/LocationCreateModal'
 import AgreementCreateModal from '../components/AgreementCreateModal';
+import ContactedReferrerCreateModal from '../components/ContactedReferrerCreateModal';
 import {getLocations} from "../services/LocationServices";
 import {getVisitStatuses} from "../services/StatusServices";
 import {getPoliticParties} from "../services/PoliticPartiesServices";
@@ -39,10 +40,12 @@ const AddVisitPage = () => {
     const [showmodify, setShowmodify] = useState(false);
     const [showlocationcreate, setShowLocationCreate] = useState(false);
     const [showagreementcreate, setShowAgreementCreate] = useState(false);
+    const [showcontactedreferrercreate, setShowContactedReferrerCreate] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
     const toggleModalLocationCreate = () => setShowLocationCreate(!showlocationcreate);
     const toggleModalAgreementCreate = () => setShowAgreementCreate(!showagreementcreate);
+    const toggleModalContactedReferrerCreate = () => setShowContactedReferrerCreate(!showcontactedreferrercreate);
     const [mayors, setMayors] = useState([])
     const [locations, setLocations] = useState()
     const [visitStatuses, setVisitStatuses] = useState()
@@ -170,6 +173,8 @@ const AddVisitPage = () => {
             <LocationCreateModal onClose={() => toggleModalLocationCreate()} show={showlocationcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <AgreementCreateModal onClose={() => toggleModalAgreementCreate()} show={showagreementcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <ContactedReferrerCreateModal onClose={() => toggleModalContactedReferrerCreate()} show={showcontactedreferrercreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
@@ -380,7 +385,7 @@ const AddVisitPage = () => {
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
                             </Tooltip>
                         </Col>
                     </Row>

@@ -24,7 +24,7 @@ export const ContactedReferrerCreateModal = (props) => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     let postContactedReferrer = async () => {
-        let response = await fetch('/api/contacted_referrers', {
+        let response = await fetch('/api/contacted-referrers', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
