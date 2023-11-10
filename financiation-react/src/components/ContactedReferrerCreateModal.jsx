@@ -12,18 +12,19 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import {message} from 'antd';
 
-export const AgreementCreateModal = (props) => {
+export const ContactedReferrerCreateModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [position, setPosition] = useState("");
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
-    let postAgreement = async () => {
-        let response = await fetch('/api/agreements', {
+    let postContactedReferrer = async () => {
+        let response = await fetch('/api/contacted_referrers', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -31,19 +32,20 @@ export const AgreementCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "name": name,
-                "description": description
+                "first_name": first_name,
+                "last_name": last_name,
+                "position": position
             })
         });
     
         if (response.status === 200) {
             // toggleModalsucceed();
             props.setUpdateFlag((prevFlag) => !prevFlag);
-            message.success('Se agregó el acuerdo exitosamente');
+            message.success('Se agregó el referente contactado exitosamente');
             props.onClose();
         } else {
             // toggleModalfailed();
-            console.error("No se pudo agregar el acuerdo");
+            console.error("No se pudo agregar el referente contactado");
             props.onClose()
         }
     }
@@ -55,15 +57,32 @@ export const AgreementCreateModal = (props) => {
                 <Container className="containermayor container-addmayor-modal">
 
                     <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Crear Acuerdo</h3>
+                        <h3 className={'h3LoginPage'}>Agregar Referente Contactado</h3>
 
                         <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
                                 <TextField
                                     className="input"
                                     label="Nombre"
-                                    name='name'
-                                    onChange={(e) => setName(e.target.value)}
+                                    name='first_name'
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    variant="outlined"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start" >
+                                                <AccountCircleOutlinedIcon />
+                                            </InputAdornment>
+                                        ),
+                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
+                                    }}
+                                />
+                            </Form.Group>
+                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
+                                <TextField
+                                    className="input"
+                                    label="Apellido"
+                                    name='last_name'
+                                    onChange={(e) => setLastName(e.target.value)}
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -81,9 +100,9 @@ export const AgreementCreateModal = (props) => {
                             <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
                                 <TextField
                                     className="input"
-                                    label="Descripcion"
-                                    name='descripcion'
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    label="Posicion"
+                                    name='position'
+                                    onChange={(e) => setPosition(e.target.value)}
                                     variant="outlined"
                                     InputProps={{
                                         startAdornment: (
@@ -98,7 +117,7 @@ export const AgreementCreateModal = (props) => {
                         </div>
 
                         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postAgreement}>Registrar</Button>
+                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postContactedReferrer}>Registrar</Button>
                         </div>
                         <div style={{ textAlign: 'center', marginTop: '10px' }}>
                             <Button variant="outlined" color="primary" onClick={props.onClose}>
@@ -113,4 +132,4 @@ export const AgreementCreateModal = (props) => {
     )
 }
 
-export default AgreementCreateModal
+export default ContactedReferrerCreateModal
