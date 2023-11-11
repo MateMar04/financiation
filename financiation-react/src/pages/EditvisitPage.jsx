@@ -23,7 +23,7 @@ import {getAgreements} from "../services/AgreementServices";
 import {getGroups} from "../services/GroupServices";
 import {getAddresses} from "../services/AddressServices";
 import { useLocation } from "react-router-dom";
-import 'dayjs/locale/es';
+import { getVisitById } from '../services/VisitServices';
 
 const {TextArea} = Input;
 
@@ -59,7 +59,8 @@ const EditVisitPage = () => {
     const [addresses, setAddresses] = useState()
     const location = useLocation();
     const { visitData } = location.state;
-    const [form] = Form.useForm();
+    const [visit, setVisit] = useState([])
+
 
     const getItemNames = (array) => {
         return array?.map(item => ({
@@ -83,33 +84,34 @@ const EditVisitPage = () => {
     }
 
     useEffect(() => {
-        if (visitData) {
-            console.log("Agreement IDs:", visitData.agreement_id);
-            console.log("finance_collaborator:", visitData.finance_collaborator_id);
-            console.log("rent_collaborator IDs:", visitData.rent_collaborator_id);
-            form.setFieldsValue({
-                location: visitData.location_id,
-                visit_date: dayjs(visitData.visit_date),
-                visit_time: [dayjs(visitData.start_time, 'HH:mm:ss'),dayjs(visitData.finish_time, 'HH:mm:ss'),],
-                finance_collaborator: visitData.finance_collaborator_id,
-                rent_collaborator: visitData.rent_collaborator_id,
-                observations: visitData.rent_observations,
-                distance: visitData.distance,
-                travel_time: visitData.travel_time,
-                place: visitData.place_name,
-                address: visitData.address_id,
-                contacted_referrer: visitData.contacted_referrer_id,
-                politic_party: visitData.politic_party_id,
-                mayor: visitData.mayor_id,
-                flyer: visitData.flyer,
-                civil_registration: visitData.civil_registration,
-                accommodation: visitData.accommodation,
-                modernization_fund: visitData.modernization_fund,
-                agreements: visitData.agreement_id,
-                visit_status: visitData.visit_status_id,
-                group: visitData.group_id,
+        getVisitById(authTokens.access, visitData).then(data => {
+            setVisit(data);
+    
+            formRef.current.setFieldsValue({
+                location: data.location,
+                visit_date: dayjs(data.visit_date),
+                visit_time: [dayjs(data.start_time, 'HH:mm:ss'),dayjs(data.finish_time, 'HH:mm:ss'),],
+                finance_collaborator: data.finance_collaborator,
+                rent_collaborator: data.rent_collaborator,
+                observations: data.rent_observations,
+                distance: data.distance,
+                travel_time: data.travel_time,
+                place: data.place_name,
+                address: data.address,
+                contacted_referrer: data.contacted_referrer,
+                politic_party: data.politic_party,
+                mayor: data.mayor,
+                flyer: Boolean(data.flyer),
+                civil_registration: Boolean(data.civil_registration),
+                accommodation: Boolean(data.accommodation),
+                modernization_fund: Boolean(data.modernization_fund),
+                agreements: data.agreement, 
+                visit_status: data.visit_status,
+                group: data.group,
             });
-        }
+        });
+    
+        getVisitById(authTokens.access, visitData.id).then(data => setVisit(data))
         getMayors(authTokens.access).then(data => setMayors(data))
         getLocations(authTokens.access).then(data => setLocations(data))
         getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
@@ -126,9 +128,9 @@ const EditVisitPage = () => {
         return nDate.getHours() + ":" + nDate.getMinutes() + ":" + nDate.getSeconds()
     }
 
-    let putVisit = async (values) => {
-        let response = await fetch('/api/visits', {
-            method: "POST",
+    let putVisit = async (values, id) => {
+        let response = await fetch(`/api/visits/put/${id}`, {
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": "JWT " + String(authTokens.access),
@@ -172,7 +174,7 @@ const EditVisitPage = () => {
 
     const onFinish = (values) => {
         console.log(values.accommodation)
-        putVisit(values)
+        putVisit(values, visitData)
     };
 
     const formRef = useRef(null);
@@ -217,29 +219,7 @@ const EditVisitPage = () => {
                 {...layout}
                 ref={formRef}
                 name="control-ref"
-                onFinish={onFinish}
-                initialValues={visitData ? {
-                    location: visitData.location_id,
-                    visit_date: dayjs(visitData.visit_date),
-                    visit_time: [dayjs(visitData.start_time, 'HH:mm:ss'), dayjs(visitData.finish_time, 'HH:mm:ss'),],
-                    finance_collaborator: visitData.finance_collaborator_id,
-                    rent_collaborator: visitData.rent_collaborator_id,
-                    observations: visitData.rent_observations,
-                    distance: visitData.distance,
-                    travel_time: visitData.travel_time,
-                    place: visitData.place_name,
-                    address: visitData.address_id,
-                    contacted_referrer: visitData.contacted_referrer_id,
-                    politic_party: visitData.politic_party_id,
-                    mayor: visitData.mayor_id,
-                    flyer: visitData.flyer,
-                    civil_registration: visitData.civil_registration,
-                    accommodation: visitData.accommodation,
-                    modernization_fund: visitData.modernization_fund,
-                    agreements: visitData.agreement_id,
-                    visit_status: visitData.visit_status_id,
-                    group: visitData.group_id,
-                } : {}}>
+                onFinish={onFinish}>
                 
                 <Container>
 
@@ -619,7 +599,7 @@ const EditVisitPage = () => {
                 <Container fluid className={"button-container"}>
                     <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
                             icon={<PlusCircleOutlined/>}>
-                        Crear Visita
+                        Actualizar Visita
                     </Button></Container>
 
 
