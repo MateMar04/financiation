@@ -133,7 +133,7 @@ export const VisitCard = ({ visit }) => {
                                     </Col>
                             </Row>
                             <Row className="ButtonEditVisit">
-                            <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit }}>
+                            <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
                                 <Button variant="contained" className="Buttonedit">
                                     Editar Visita
                                 </Button>

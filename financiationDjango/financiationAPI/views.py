@@ -506,6 +506,12 @@ def getGroupAdvisorUsers(request, id):
 
 
 @api_view(['GET'])
+def getVisitById(request, id):
+    visit = Visit.objects.get(id=id)
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
