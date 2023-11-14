@@ -60,6 +60,11 @@ const EditVisitPage = () => {
     const location = useLocation();
     const { visitData } = location.state;
     const [visit, setVisit] = useState([])
+    const [flyerSwitch, setFlyerSwitch] = useState(false);
+    const [civilRegistrationSwitch, setCivilRegistrationSwitch] = useState(false);
+    const [accommodationSwitch, setAccommodationSwitch] = useState(false);
+    const [modernizationFundSwitch, setModernizationFundSwitch] = useState(false);
+
 
 
     const getItemNames = (array) => {
@@ -114,7 +119,13 @@ const EditVisitPage = () => {
     }, [visit])
 
     useEffect(() => {
-        getVisitById(authTokens.access, visitData).then(data => {setVisit(data);});
+        getVisitById(authTokens.access, visitData).then(data => {
+            setVisit(data);
+            setFlyerSwitch(data.flyer);
+            setCivilRegistrationSwitch(data.civil_registration);
+            setAccommodationSwitch(data.accommodation);
+            setModernizationFundSwitch(data.modernization_fund);
+        });
 
         getVisitById(authTokens.access, visitData.id).then(data => setVisit(data))
         getMayors(authTokens.access).then(data => setMayors(data))
@@ -493,7 +504,7 @@ const EditVisitPage = () => {
                                     },
                                 ]}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Switch defaultChecked={visit?.flyer} />
+                                    <Switch checked={flyerSwitch} onChange={(checked) => setFlyerSwitch(checked)} />
                                 </div> 
                             </Form.Item>
                         </Col>
@@ -510,7 +521,7 @@ const EditVisitPage = () => {
                                     },
                                 ]}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Switch defaultChecked={visit.civil_registration} />
+                                    <Switch checked={civilRegistrationSwitch} onChange={(checked) => setCivilRegistrationSwitch(checked)} />
                                 </div>
                             </Form.Item>
                         </Col>
@@ -527,7 +538,7 @@ const EditVisitPage = () => {
                                     },
                                 ]}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Switch defaultChecked={visit.accommodation} />
+                                    <Switch checked={accommodationSwitch} onChange={(checked) => setAccommodationSwitch(checked)} />
                                 </div>
                             </Form.Item>
                         </Col>
@@ -544,7 +555,7 @@ const EditVisitPage = () => {
                                     },
                                 ]}>
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <Switch defaultChecked={visit.modernization_fund} />
+                                    <Switch checked={modernizationFundSwitch} onChange={(checked) => setModernizationFundSwitch(checked)} />
                                 </div>
                             </Form.Item>
                         </Col>
