@@ -4,10 +4,13 @@ from . import views
 
 urlpatterns = [
     # Locations
-    path('locations', views.getLocations, name='locations'),
+    path('locations', views.LocationApiView.as_view(), name='locations'),
 
     # City Departments
     path('city-departments', views.getCityDepartments, name='cityDepartments'),
+
+    # Agreements
+    path('agreements', views.AgreementApiView.as_view(), name='agreements'),
 
     # Groups
     path('groups', views.GroupApiView.as_view(), name='groups'),
@@ -15,10 +18,10 @@ urlpatterns = [
     path('groups/user/<int:id>', views.getUserGroup, name='currenGroup'),
 
     # Agreements
-    path('agreements', views.getAgreements, name='agreements'),
+    path('agreements', views.AgreementApiView.as_view(), name='agreements'),
 
     # Contacted Referrers
-    path('contacted-referrers', views.getContactedReferrers, name='contactedReferrers'),
+    path('contacted-referrers', views.ContactedRederrerApiView.as_view(), name='contactedReferrers'),
     path('contacted-referrers-emails', views.getContactedReferrersEmails, name='contactedReferrerEmails'),
     path('contacted-referrers-phones', views.getContactedReferrersPhones, name='contactedReferrerPhones'),
 
@@ -27,6 +30,8 @@ urlpatterns = [
 
     # Visits
     path('visits', views.VisitApiView.as_view(), name='visits'),
+    path('visits/<int:id>', views.getVisitById, name='visit'),
+    path('visits/put/<int:id>', views.putVisitById, name='put_visit'),
     path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
     path('visits/latest', views.getLatestVisits, name='latestVisits'),
 
