@@ -15,7 +15,15 @@ const EditPhotoPage = () => {
   const [showLogoutButton, setShowLogoutButton] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [myUser, setMyUser] = useState();
-  const [imageChangeIndicator, setImageChangeIndicator] = useState(0);
+
+  const updateUserData = async () => {
+    try {
+      const usuario = await getUser(authTokens.access);
+      setMyUser(usuario);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
 
   const getData = async () => {
     const usuario = await getUser(authTokens.access);
@@ -23,9 +31,8 @@ const EditPhotoPage = () => {
   };
 
   useEffect(() => {
-    getUser(authTokens.access).then((data) => setMyUser(data));
     getData();
-  }, [imageChangeIndicator]); 
+  }, []); 
 
   const handleAddButton = () => {
     setShowButton(!showButton);
@@ -54,7 +61,7 @@ const EditPhotoPage = () => {
       </Row>
       {showButton && (
         <Row className={"justify-content-center text-center"}>
-          <ProfilePicture myUser={myUser} />
+          <ProfilePicture myUser={myUser} updateUserData={updateUserData} />
         </Row>
       )}
 

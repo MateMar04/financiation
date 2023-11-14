@@ -45,7 +45,6 @@ const ProfilePage = () => {
 
 
     const handleAddButton = () => {
-        setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
     };
