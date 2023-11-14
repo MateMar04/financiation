@@ -11,7 +11,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import {getUser} from "../services/UserServices";
 import { Link } from "react-router-dom";
-
+import SucceedModal from "../components/SucceedModal";
 const ProfilePage = () => {
 
     let {authTokens, logoutUser, user} = useContext(AuthContext)
@@ -33,7 +33,7 @@ const ProfilePage = () => {
     const [editedFirstName, setEditedFirstName] = useState(defaultFirstName);
     const [editedLastName, setEditedLastName] = useState(defaultLastName);
     const [editedPhoneNumber, setEditedPhoneNumber] = useState(defaultPhoneNumber);
-
+    
     const handleUserSelection = (e) => {
         const selectedUserId = e.target.value;
         const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
@@ -82,7 +82,7 @@ const ProfilePage = () => {
                 ...myUser,
                 first_name: editedFirstName.first_name,
                 last_name: editedLastName.last_name,
-                phone_number:editedPhoneNumber.phone_number,
+                phone_number:editedPhoneNumber.phone_number
             });
         } else if (response.status === 500) {
             toggleModalfailed();
@@ -137,14 +137,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            defaultValue={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({...editedUser, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({...editedFirstName, first_name: e.target.value})}
                                            InputProps={{
                                     sx: {borderRadius: 5},
                                     readOnly: false
                                 }}></TextField> :
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            value={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({...editedUser, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({...editedFirstName, first_name: e.target.value})}
                                            InputProps={{
                                     sx: {borderRadius: 5},
                                     readOnly: true
@@ -157,14 +157,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            defaultValue={defaultLastName}
-                                           onChange={(e) => setEditedLastName({...editedUser, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({...editedLastName, last_name: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            value={defaultLastName}
-                                           onChange={(e) => setEditedLastName({...editedUser, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({...editedLastName, last_name: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true
@@ -188,14 +188,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            defaultValue={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({...editedUser, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({...editedPhoneNumber, phone_number: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            value={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({...editedUser, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({...editedPhoneNumber, phone_number: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true
