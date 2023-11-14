@@ -30,7 +30,9 @@ const ProfilePage = () => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [editProfilePicture, setEditProfilePicture] = useState(false);
-
+    const [editedFirstName, setEditedFirstName] = useState(defaultFirstName);
+    const [editedLastName, setEditedLastName] = useState(defaultLastName);
+    const [editedPhoneNumber, setEditedPhoneNumber] = useState(defaultPhoneNumber);
 
     const handleUserSelection = (e) => {
         const selectedUserId = e.target.value;
@@ -68,9 +70,9 @@ const ProfilePage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": editedUser.first_name,
-                "last_name": editedUser.last_name,
-                "phone_number":editedUser.phone_number,
+                "first_name": editedFirstName.first_name,
+                "last_name": editedLastName.last_name,
+                "phone_number":editedPhoneNumber.phone_number,
             })
         })
 
@@ -78,9 +80,9 @@ const ProfilePage = () => {
             toggleModalsucceed();
             setMyUser({
                 ...myUser,
-                first_name: editedUser.first_name,
-                last_name: editedUser.last_name,
-                phone_number:editedUser.phone_number,
+                first_name: editedFirstName.first_name,
+                last_name: editedLastName.last_name,
+                phone_number:editedPhoneNumber.phone_number,
             });
         } else if (response.status === 500) {
             toggleModalfailed();
@@ -135,14 +137,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            defaultValue={defaultFirstName}
-                                           onChange={(e) => setEditedUser({...editedUser, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({...editedUser, first_name: e.target.value})}
                                            InputProps={{
                                     sx: {borderRadius: 5},
                                     readOnly: false
                                 }}></TextField> :
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            value={defaultFirstName}
-                                           onChange={(e) => setEditedUser({...editedUser, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({...editedUser, first_name: e.target.value})}
                                            InputProps={{
                                     sx: {borderRadius: 5},
                                     readOnly: true
@@ -155,14 +157,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            defaultValue={defaultLastName}
-                                           onChange={(e) => setEditedUser({...editedUser, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({...editedUser, last_name: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            value={defaultLastName}
-                                           onChange={(e) => setEditedUser({...editedUser, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({...editedUser, last_name: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true
@@ -186,14 +188,14 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            defaultValue={defaultPhoneNumber}
-                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({...editedUser, phone_number: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            value={defaultPhoneNumber}
-                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({...editedUser, phone_number: e.target.value})}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true

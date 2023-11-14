@@ -23,7 +23,7 @@ import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
 import { CalendarPage } from './pages/CalendarPage';
 import {EmailSended} from './pages/EmailSended';
-import {EditPhotoPage} from './pages/EditPhotoPage';
+import EditPhotoPage from './pages/EditPhotoPage';
 import "@fontsource/poppins";
 import * as logo from './assets/images/logo.jpeg'
 
