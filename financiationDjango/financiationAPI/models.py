@@ -217,7 +217,7 @@ class Visit(models.Model):
     rent_collaborator = models.ManyToManyField(UserAccount, related_name='rent_collaborator')
     rent_observations = models.TextField()
     distance = models.IntegerField()
-    travel_time = models.DurationField()
+    travel_time = models.IntegerField()
     civil_registration = models.BooleanField()
     place_name = models.CharField(max_length=70)
     address = models.ForeignKey(Address, models.DO_NOTHING)
