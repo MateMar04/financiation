@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../assets/styles/AddVisitPage.css';
-import {Col, Container, Row} from 'react-bootstrap';
-import {getMayors} from '../services/MayorServices'
+import { Col, Container, Row } from 'react-bootstrap';
+import { getMayors } from '../services/MayorServices'
 import AuthContext from '../context/AuthContext';
 import FailedModal from '../components/FailedModal';
 import SucceedModal from '../components/SucceedModal';
@@ -10,27 +10,29 @@ import MayorModifyModal from '../components/MayorModifyModal';
 import LocationCreateModal from '../components/LocationCreateModal'
 import AgreementCreateModal from '../components/AgreementCreateModal';
 import ContactedReferrerCreateModal from '../components/ContactedReferrerCreateModal';
-import {getLocations} from "../services/LocationServices";
-import {getVisitStatuses} from "../services/StatusServices";
-import {getPoliticParties} from "../services/PoliticPartiesServices";
-import {getUsers} from "../services/UserServices";
-import {getContactedReferrers} from "../services/ContactedReferrersServices";
-import {Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
-import {PlusCircleOutlined, PlusOutlined, EditOutlined} from '@ant-design/icons';
+import { getLocations } from "../services/LocationServices";
+import { getVisitStatuses } from "../services/StatusServices";
+import { getPoliticParties } from "../services/PoliticPartiesServices";
+import { getUsers } from "../services/UserServices";
+import { getContactedReferrers } from "../services/ContactedReferrersServices";
+import { Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip } from 'antd';
+import { PlusCircleOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
-import {getAgreements} from "../services/AgreementServices";
-import {getGroups} from "../services/GroupServices";
-import {getAddresses} from "../services/AddressServices";
+import { getAgreements } from "../services/AgreementServices";
+import { getGroups } from "../services/GroupServices";
+import { getAddresses } from "../services/AddressServices";
+import { useLocation } from "react-router-dom";
+import { getVisitById } from '../services/VisitServices';
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 
 dayjs.extend(customParseFormat);
 
 
-const AddVisitPage = () => {
+const EditVisitPage = () => {
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
     const [updateFlag, setUpdateFlag] = useState(false);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
@@ -55,6 +57,15 @@ const AddVisitPage = () => {
     const [agreements, setAgreements] = useState()
     const [groups, setGroups] = useState();
     const [addresses, setAddresses] = useState()
+    const location = useLocation();
+    const { visitData } = location.state;
+    const [visit, setVisit] = useState([])
+    const [flyerSwitch, setFlyerSwitch] = useState(false);
+    const [civilRegistrationSwitch, setCivilRegistrationSwitch] = useState(false);
+    const [accommodationSwitch, setAccommodationSwitch] = useState(false);
+    const [modernizationFundSwitch, setModernizationFundSwitch] = useState(false);
+
+
 
     const getItemNames = (array) => {
         return array?.map(item => ({
@@ -78,6 +89,45 @@ const AddVisitPage = () => {
     }
 
     useEffect(() => {
+        console.log(visit)
+        formRef.current.setFieldsValue({
+            location: visit.location,
+            visit_date: dayjs(visit.visit_date),
+            visit_time: [dayjs(visit.start_time, 'HH:mm:ss'), dayjs(visit.finish_time, 'HH:mm:ss'),],
+            finance_collaborator: visit.finance_collaborator,
+            rent_collaborator: visit.rent_collaborator,
+            observations: visit.rent_observations,
+            distance: visit.distance,
+            travel_time: visit.travel_time,
+            place: visit.place_name,
+            address: visit.address,
+            contacted_referrer: visit.contacted_referrer,
+            politic_party: visit.politic_party,
+            mayor: visit.mayor,
+            flyer: visit.flyer,
+            civil_registration: visit.civil_registration,
+            accommodation: visit.accommodation,
+            modernization_fund: visit.modernization_fund,
+            agreements: visit.agreement,
+            visit_status: visit.visit_status,
+            group: visit.group,
+        });
+        console.log("Flyer:", visit.flyer);
+        console.log("Civil Registration:", visit.civil_registration);
+        console.log("Accommodation:", visit.accommodation);
+        console.log("Modernization Fund:", visit.modernization_fund);
+    }, [visit])
+
+    useEffect(() => {
+        getVisitById(authTokens.access, visitData).then(data => {
+            setVisit(data);
+            setFlyerSwitch(data.flyer);
+            setCivilRegistrationSwitch(data.civil_registration);
+            setAccommodationSwitch(data.accommodation);
+            setModernizationFundSwitch(data.modernization_fund);
+        });
+
+        getVisitById(authTokens.access, visitData.id).then(data => setVisit(data))
         getMayors(authTokens.access).then(data => setMayors(data))
         getLocations(authTokens.access).then(data => setLocations(data))
         getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
@@ -87,43 +137,43 @@ const AddVisitPage = () => {
         getAgreements(authTokens.access).then(data => setAgreements(data))
         getGroups(authTokens.access).then(data => setGroups(data))
         getAddresses(authTokens.access).then(data => setAddresses(data))
-    }, [updateFlag])
+    }, [updateFlag], [visitData])
 
     const getTimeFromDate = (date) => {
         let nDate = new Date(date)
         return nDate.getHours() + ":" + nDate.getMinutes() + ":" + nDate.getSeconds()
     }
 
-    let postVisit = async (values) => {
-        let response = await fetch('/api/visits', {
-            method: "POST",
+    let putVisit = async (values, id) => {
+        let response = await fetch(`/api/visits/put/${id}`, {
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": "JWT " + String(authTokens.access),
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "accommodation": values.accommodation,
-                "address_id": values.address,
+                "address_id": String(values.address),
                 "agreement_id": values.agreements,
-                "civil_registration": values.civil_registration,
-                "contacted_referrer_id": values.contacted_referrer,
+                "contacted_referrer_id": String(values.contacted_referrer),
                 "distance": values.distance,
-                "finance_collaborator_id": values.finance_collaborator,
-                "flyer": values.flyer,
-                "group_id": values.group,
-                "location_id": values.location,
-                "mayor_id": values.mayor,
-                "modernization_fund": values.modernization_fund,
+                "finance_collaborator_id": values.finance_collaborator && values.finance_collaborator.length > 0 ? values.finance_collaborator.map(String) : null,
+                "rent_collaborator_id": values.rent_collaborator && values.rent_collaborator.length > 0 ? values.rent_collaborator.map(String) : null,
+                "group_id": String(values.group),
+                "location_id": String(values.location),
+                "mayor_id": String(values.mayor),
                 "rent_observations": values.observations,
                 "place_name": values.place,
-                "politic_party_id": values.politic_party,
-                "rent_collaborator_id": values.rent_collaborator,
+                "politic_party_id": String(values.politic_party),
                 "travel_time": values.travel_time,
+                "flyer": Boolean(flyerSwitch),
+                "civil_registration": Boolean(civilRegistrationSwitch),
+                "accommodation": Boolean(accommodationSwitch),
+                "modernization_fund": Boolean(modernizationFundSwitch),
                 "visit_date": values.visit_date.toISOString().split('T')[0],
                 "start_time": getTimeFromDate(values.visit_time[0]),
                 "finish_time": getTimeFromDate(values.visit_time[1]),
-                "visit_status_id": values.visit_status
+                "visit_status_id": String(values.visit_status)
             })
         })
         if (response.status === 200) {
@@ -140,7 +190,7 @@ const AddVisitPage = () => {
 
     const onFinish = (values) => {
         console.log(values.accommodation)
-        postVisit(values)
+        putVisit(values, visitData)
     };
 
     const formRef = useRef(null);
@@ -167,17 +217,17 @@ const AddVisitPage = () => {
 
         <Container fluid>
             <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
-                              setUpdateFlag={setUpdateFlag}/>
+                setUpdateFlag={setUpdateFlag} />
             <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
-                              setUpdateFlag={setUpdateFlag}/>
+                setUpdateFlag={setUpdateFlag} />
             <LocationCreateModal onClose={() => toggleModalLocationCreate()} show={showlocationcreate} updateFlag={updateFlag}
-                              setUpdateFlag={setUpdateFlag}/>
+                setUpdateFlag={setUpdateFlag} />
             <AgreementCreateModal onClose={() => toggleModalAgreementCreate()} show={showagreementcreate} updateFlag={updateFlag}
-                              setUpdateFlag={setUpdateFlag}/>
+                setUpdateFlag={setUpdateFlag} />
             <ContactedReferrerCreateModal onClose={() => toggleModalContactedReferrerCreate()} show={showcontactedreferrercreate} updateFlag={updateFlag}
-                              setUpdateFlag={setUpdateFlag}/>
-            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
-            <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
+                setUpdateFlag={setUpdateFlag} />
+            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess} />
+            <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail} />
 
             <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
 
@@ -186,7 +236,6 @@ const AddVisitPage = () => {
                 ref={formRef}
                 name="control-ref"
                 onFinish={onFinish}>
-
 
                 <Container>
 
@@ -201,16 +250,16 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select placeholder={"Localidad"} className="visit-field"
-                                        options={getItemNames(locations)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getItemNames(locations)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalLocationCreate} />
                             </Tooltip>
                         </Col>
                     </Row>
@@ -225,7 +274,7 @@ const AddVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
+                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field" />
                             </Form.Item>
 
                         </Col>
@@ -241,7 +290,7 @@ const AddVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
+                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field" />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -304,7 +353,7 @@ const AddVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"}/>
+                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"} />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -319,7 +368,7 @@ const AddVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"}/>
+                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"} />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -332,10 +381,9 @@ const AddVisitPage = () => {
                                 rules={[
                                     {
                                         required: true,
-                                        type: 'number',
                                     },
                                 ]}>
-                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>
+                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"} />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -350,7 +398,7 @@ const AddVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <Input className="visit-field" placeholder="Lugar"/>
+                                <Input className="visit-field" placeholder="Lugar" />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -366,10 +414,10 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" placeholder={"Referente Contactado"}
-                                        options={getAddressNames(addresses)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}/>
+                                    options={getAddressNames(addresses)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption} />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -385,16 +433,16 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" placeholder={"Referente Contactado"}
-                                        options={getPersonNames(contactedReferrers)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getPersonNames(contactedReferrers)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalContactedReferrerCreate} />
                             </Tooltip>
                         </Col>
                     </Row>
@@ -409,10 +457,10 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" placeholder={"Partido Politico"}
-                                        options={getItemNames(politicParties)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getItemNames(politicParties)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -429,19 +477,19 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" placeholder={"Intendente"}
-                                        options={getPersonNames(mayors)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getPersonNames(mayors)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalCreate} />
                             </Tooltip>
                             <Tooltip placement={"right"} title="Editar Intendente" >
-                                <Button type="primary" shape="circle" icon={<EditOutlined/>} onClick={toggleModalModify} className='separarboton'/>
+                                <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={toggleModalModify} className='separarboton' />
                             </Tooltip>
                         </Col>
                     </Row>
@@ -455,7 +503,9 @@ const AddVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch/>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch checked={flyerSwitch} onChange={(checked) => setFlyerSwitch(checked)} />
+                                </div> 
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -470,7 +520,9 @@ const AddVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch/>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch checked={civilRegistrationSwitch} onChange={(checked) => setCivilRegistrationSwitch(checked)} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -485,7 +537,9 @@ const AddVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch/>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch checked={accommodationSwitch} onChange={(checked) => setAccommodationSwitch(checked)} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -500,7 +554,9 @@ const AddVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch/>
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch checked={modernizationFundSwitch} onChange={(checked) => setModernizationFundSwitch(checked)} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -516,16 +572,16 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
-                                        options={getItemNames(agreements)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getItemNames(agreements)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
                         <Col xs={2}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
-                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
+                                <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalAgreementCreate} />
                             </Tooltip>
                         </Col>
                     </Row>
@@ -541,10 +597,10 @@ const AddVisitPage = () => {
                                 ]}>
 
                                 <Select className="visit-field" placeholder={"Estado de Visita"}
-                                        options={getItemNames(visitStatuses)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}/>
+                                    options={getItemNames(visitStatuses)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption} />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -560,10 +616,10 @@ const AddVisitPage = () => {
                                     },
                                 ]}>
                                 <Select className="visit-field" placeholder={"Grupo"}
-                                        options={getItemNames(groups)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                    options={getItemNames(groups)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -574,8 +630,8 @@ const AddVisitPage = () => {
 
                 <Container fluid className={"button-container"}>
                     <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
-                            icon={<PlusCircleOutlined/>}>
-                        Crear Visita
+                        icon={<PlusCircleOutlined />}>
+                        Actualizar Visita
                     </Button></Container>
 
 
@@ -585,4 +641,4 @@ const AddVisitPage = () => {
     )
         ;
 };
-export default AddVisitPage;
+export default EditVisitPage;

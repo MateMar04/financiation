@@ -9,6 +9,24 @@ export const getVisits = async (tokens) => {
     return data
 };
 
+
+export const getVisitById = async (tokens, visitId) => {
+    try {
+        let headers = {
+            "Content-Type": "application/json",
+            "Authorization": "JWT " + String(tokens),
+            "Accept": "application/json"
+        }
+        let response = await fetch(`/api/visits/${visitId}`, {headers: headers})
+        let data = await response.json()
+        console.log('Visit Data:', data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching visit:', error);
+        throw error;
+    }
+};
+
 export const getLatestVisits = async (tokens) => {
     let headers = {
         "Content-Type": "application/json",

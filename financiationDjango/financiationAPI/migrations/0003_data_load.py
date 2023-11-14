@@ -780,7 +780,7 @@ class Migration(migrations.Migration):
             "string_agg(substring('abcdefghijklmnopqrstuvwxyz', round(random() * 26)::integer, 1), '') "
             "FROM generate_series(1, 9))                    as rent_observation, "
             "cast(random() * 300 as int)                     as distance, "
-            "cast(visit_stamp as time) + interval '1.5 hour' as travel_time, "
+            "1 as travel_time, "
             "mod(extract(MINUTE FROM visit_stamp), 2) = 1    as civil_registration, "
             "(SELECT 'place: ' || "
             "string_agg(substring('abcdefghijklmnopqrstuvwxyz', round(random() * 26)::integer, 1), '') "
