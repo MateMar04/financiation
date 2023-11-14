@@ -250,17 +250,21 @@ const AddVisitPage = () => {
                         <Col>
                             <Form.Item
                                 name={"finance_collaborator"}
-                                label={"Colaborador de Finanzas:"}
+                                label={"Colaboradores de Finanzas:"}
                                 rules={[
                                     {
                                         required: true,
                                     },
                                 ]}>
-                                <Select className="visit-field" placeholder={"Colaborador de Finanzas"}
-                                        options={getPersonNames(users)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                <Select
+                                    className="visit-field"
+                                    mode="multiple"
+                                    allowClear
+                                    placeholder="Colaboradores De Finanzas"
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -270,17 +274,21 @@ const AddVisitPage = () => {
                         <Col>
                             <Form.Item
                                 name={"rent_collaborator"}
-                                label={"Colaborador de Rentas:"}
+                                label={"Colaboradores de Rentas:"}
                                 rules={[
                                     {
                                         required: true,
                                     },
                                 ]}>
-                                <Select className="visit-field" placeholder={"Colaborador de Rentas"}
-                                        options={getPersonNames(users)}
-                                        showSearch
-                                        optionFilterProp="children"
-                                        filterOption={filterOption}
+                                <Select
+                                    className="visit-field"
+                                    mode="multiple"
+                                    allowClear
+                                    placeholder="Colaboradores De Rentas"
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
                                 />
                             </Form.Item>
                         </Col>
@@ -324,6 +332,7 @@ const AddVisitPage = () => {
                                 rules={[
                                     {
                                         required: true,
+                                        type: 'number',
                                     },
                                 ]}>
                                 <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"}/>

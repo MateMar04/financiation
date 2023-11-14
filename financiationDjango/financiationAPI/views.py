@@ -131,7 +131,7 @@ class VisitApiView(APIView):
             rent_observations=data['rent_observations'],
             place_name=data['place_name'],
             politic_party=politic_party,
-            travel_time=timedelta(minutes=data['travel_time']),
+            travel_time=data['travel_time'],
             visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
@@ -141,12 +141,14 @@ class VisitApiView(APIView):
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
             visit.agreement.add(agreement)
+        
+        for i in data['finance_collaborator_id']:
+            finance_collaborator = UserAccount.objects.get(id=i)
+            visit.finance_collaborator.add(finance_collaborator)
 
-        finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
-        visit.finance_collaborator.add(finance_collaborator)
-
-        rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
-        visit.rent_collaborator.add(rent_collaborator)
+        for i in data['rent_collaborator_id']:
+            rent_collaborator = UserAccount.objects.get(id=i)
+            visit.rent_collaborator.add(rent_collaborator)
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
@@ -694,12 +696,14 @@ def putVisitById(request, id, *args, **kwargs):
             agreement = Agreement.objects.get(id=i)
             visit.agreement.add(agreement)
 
-    finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
-    visit.finance_collaborator.add(finance_collaborator)
+    for i in data['finance_collaborator_id']:
+        finance_collaborator = UserAccount.objects.get(id=i)
+        visit.finance_collaborator.add(finance_collaborator)
 
-    rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
+    for i in data['rent_collaborator_id']:
+        rent_collaborator = UserAccount.objects.get(id=i)
+        visit.rent_collaborator.add(rent_collaborator)
 
-    visit.rent_collaborator.add(rent_collaborator)
     visit.save()
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)

@@ -84,32 +84,37 @@ const EditVisitPage = () => {
     }
 
     useEffect(() => {
-        getVisitById(authTokens.access, visitData).then(data => {
-            setVisit(data);
-
-            formRef.current.setFieldsValue({
-                location: data.location,
-                visit_date: dayjs(data.visit_date),
-                visit_time: [dayjs(data.start_time, 'HH:mm:ss'), dayjs(data.finish_time, 'HH:mm:ss'),],
-                finance_collaborator: data.finance_collaborator,
-                rent_collaborator: data.rent_collaborator,
-                observations: data.rent_observations,
-                distance: data.distance,
-                travel_time: dayjs(data.travel_time, 'HH:mm:ss').format('mm'),
-                place: data.place_name,
-                address: data.address,
-                contacted_referrer: data.contacted_referrer,
-                politic_party: data.politic_party,
-                mayor: data.mayor,
-                flyer: Boolean(data.flyer),
-                civil_registration: Boolean(data.civil_registration),
-                accommodation: Boolean(data.accommodation),
-                modernization_fund: Boolean(data.modernization_fund),
-                agreements: data.agreement,
-                visit_status: data.visit_status,
-                group: data.group,
-            });
+        console.log(visit)
+        formRef.current.setFieldsValue({
+            location: visit.location,
+            visit_date: dayjs(visit.visit_date),
+            visit_time: [dayjs(visit.start_time, 'HH:mm:ss'), dayjs(visit.finish_time, 'HH:mm:ss'),],
+            finance_collaborator: visit.finance_collaborator,
+            rent_collaborator: visit.rent_collaborator,
+            observations: visit.rent_observations,
+            distance: visit.distance,
+            travel_time: visit.travel_time,
+            place: visit.place_name,
+            address: visit.address,
+            contacted_referrer: visit.contacted_referrer,
+            politic_party: visit.politic_party,
+            mayor: visit.mayor,
+            flyer: visit.flyer,
+            civil_registration: visit.civil_registration,
+            accommodation: visit.accommodation,
+            modernization_fund: visit.modernization_fund,
+            agreements: visit.agreement,
+            visit_status: visit.visit_status,
+            group: visit.group,
         });
+        console.log("Flyer:", visit.flyer);
+        console.log("Civil Registration:", visit.civil_registration);
+        console.log("Accommodation:", visit.accommodation);
+        console.log("Modernization Fund:", visit.modernization_fund);
+    }, [visit])
+
+    useEffect(() => {
+        getVisitById(authTokens.access, visitData).then(data => {setVisit(data);});
 
         getVisitById(authTokens.access, visitData.id).then(data => setVisit(data))
         getMayors(authTokens.access).then(data => setMayors(data))
@@ -143,7 +148,8 @@ const EditVisitPage = () => {
                 "civil_registration": Boolean(values.civil_registration),
                 "contacted_referrer_id": String(values.contacted_referrer),
                 "distance": values.distance,
-                "finance_collaborator_id": values.finance_collaborator,
+                "finance_collaborator_id": values.finance_collaborator && values.finance_collaborator.length > 0 ? values.finance_collaborator.map(String) : null,
+                "rent_collaborator_id": values.rent_collaborator && values.rent_collaborator.length > 0 ? values.rent_collaborator.map(String) : null,
                 "flyer": Boolean(values.flyer),
                 "group_id": String(values.group),
                 "location_id": String(values.location),
@@ -152,7 +158,6 @@ const EditVisitPage = () => {
                 "rent_observations": values.observations,
                 "place_name": values.place,
                 "politic_party_id": String(values.politic_party),
-                "rent_collaborator_id": values.rent_collaborator,
                 "travel_time": values.travel_time,
                 "visit_date": values.visit_date.toISOString().split('T')[0],
                 "start_time": getTimeFromDate(values.visit_time[0]),
@@ -487,7 +492,9 @@ const EditVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch defaultChecked={visit?.flyer} />
+                                </div> 
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -502,7 +509,9 @@ const EditVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch defaultChecked={visit.civil_registration} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -517,7 +526,9 @@ const EditVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch defaultChecked={visit.accommodation} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -532,7 +543,9 @@ const EditVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <Switch />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <Switch defaultChecked={visit.modernization_fund} />
+                                </div>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
