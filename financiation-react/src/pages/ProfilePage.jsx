@@ -10,8 +10,8 @@ import {ProfilePicture} from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import {getUser} from "../services/UserServices";
-import { Link } from "react-router-dom";
-import SucceedModal from "../components/SucceedModal";
+import {Link} from "react-router-dom";
+
 const ProfilePage = () => {
 
     let {authTokens, logoutUser, user} = useContext(AuthContext)
@@ -33,12 +33,7 @@ const ProfilePage = () => {
     const [editedFirstName, setEditedFirstName] = useState(defaultFirstName);
     const [editedLastName, setEditedLastName] = useState(defaultLastName);
     const [editedPhoneNumber, setEditedPhoneNumber] = useState(defaultPhoneNumber);
-    
-    const handleUserSelection = (e) => {
-        const selectedUserId = e.target.value;
-        const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
-        setEditedUser(selecteduser);
-    };
+
     const getData = async () => {
         const usuario = await getUser(authTokens.access)
         setMyUser(usuario)
@@ -48,9 +43,7 @@ const ProfilePage = () => {
         getData()
     }, []);
 
-  
 
-    
     const handleAddButton = () => {
         setShowButton(!showButton);
         setShowLogoutButton(!showLogoutButton);
@@ -62,6 +55,8 @@ const ProfilePage = () => {
     };
     let putUser = async () => {
 
+        console.log("hola")
+
         let response = await fetch(`/api/users/put/${myUser?.id}`, {
             method: "PUT",
             headers: {
@@ -70,9 +65,9 @@ const ProfilePage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": editedFirstName.first_name,
-                "last_name": editedLastName.last_name,
-                "phone_number":editedPhoneNumber.phone_number,
+                "first_name": editedFirstName.first_name || myUser?.first_name,
+                "last_name": editedLastName.last_name || myUser?.last_name,
+                "phone_number": editedPhoneNumber.phone_number || myUser?.phone_number,
             })
         })
 
@@ -80,9 +75,9 @@ const ProfilePage = () => {
             toggleModalsucceed();
             setMyUser({
                 ...myUser,
-                first_name: editedFirstName.first_name,
-                last_name: editedLastName.last_name,
-                phone_number:editedPhoneNumber.phone_number
+                first_name: editedFirstName.first_name || myUser?.first_name,
+                last_name: editedLastName.last_name || myUser?.last_name,
+                phone_number: editedPhoneNumber.phone_number || myUser?.phone_number
             });
         } else if (response.status === 500) {
             toggleModalfailed();
@@ -96,19 +91,19 @@ const ProfilePage = () => {
     return (
         <form onSubmit={(e) => handleFormSubmit(e)}>
             <Container className="ContainerProfilePage">
-            <Row>
-                <Link to={'/editphoto'}>
-                    <Button>Editar foto</Button>
+                <Row>
+                    <Link to={'/editphoto'}>
+                        <Button>Editar foto</Button>
                     </Link>
                 </Row>
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <IconButton className="EditIconProfile" onClick={handleAddButton}>
-                            <EditIcon color='action' sx={{width: 25, height: 25}} />
+                            <EditIcon color='action' sx={{width: 25, height: 25}}/>
                         </IconButton>
                     </Col>
                 </Row>
-                
+
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
@@ -116,10 +111,10 @@ const ProfilePage = () => {
                     </Col>
                 </Row>
 
-                
+
                 {showButton && (
                     <Row className={'justify-content-center text-center'}>
-                        <ProfilePicture editProfilePicture={editProfilePicture} />
+                        <ProfilePicture editProfilePicture={editProfilePicture}/>
                     </Row>
                 )}
 
@@ -128,7 +123,7 @@ const ProfilePage = () => {
                     <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
                     <h3 className="ProfileText">Coordinador</h3>
                 </Row>
-                    
+
                 <Container className="InputsProfile">
 
                     <Row className={"d-flex justify-content-center text-center"}>
@@ -137,18 +132,24 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            defaultValue={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({...editedFirstName, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({
+                                               ...editedFirstName,
+                                               first_name: e.target.value
+                                           })}
                                            InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: false
-                                }}></TextField> :
+                                               sx: {borderRadius: 5},
+                                               readOnly: false
+                                           }}></TextField> :
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
                                            value={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({...editedFirstName, first_name: e.target.value})}
+                                           onChange={(e) => setEditedFirstName({
+                                               ...editedFirstName,
+                                               first_name: e.target.value
+                                           })}
                                            InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: true
-                                }}></TextField>
+                                               sx: {borderRadius: 5},
+                                               readOnly: true
+                                           }}></TextField>
                             }
 
 
@@ -157,14 +158,20 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            defaultValue={defaultLastName}
-                                           onChange={(e) => setEditedLastName({...editedLastName, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({
+                                               ...editedLastName,
+                                               last_name: e.target.value
+                                           })}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
                                            value={defaultLastName}
-                                           onChange={(e) => setEditedLastName({...editedLastName, last_name: e.target.value})}
+                                           onChange={(e) => setEditedLastName({
+                                               ...editedLastName,
+                                               last_name: e.target.value
+                                           })}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true
@@ -188,14 +195,20 @@ const ProfilePage = () => {
                             {editMode ?
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            defaultValue={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({...editedPhoneNumber, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({
+                                               ...editedPhoneNumber,
+                                               phone_number: e.target.value
+                                           })}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: false
                                            }}></TextField> :
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
                                            value={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({...editedPhoneNumber, phone_number: e.target.value})}
+                                           onChange={(e) => setEditedPhoneNumber({
+                                               ...editedPhoneNumber,
+                                               phone_number: e.target.value
+                                           })}
                                            InputProps={{
                                                sx: {borderRadius: 5},
                                                readOnly: true
