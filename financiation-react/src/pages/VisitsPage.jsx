@@ -73,7 +73,7 @@ export const VisitsPage = () => {
   return (
     <Container>
       <Container>
-        <Link to="/visit/add/">
+        <Link to="/visits/add/">
           <FlotantButton name={"Nueva Visita"} />
         </Link>
       </Container>

@@ -684,7 +684,7 @@ def putVisitById(request, id, *args, **kwargs):
     visit.rent_observations=data['rent_observations']
     visit.place_name=data['place_name']
     visit.politic_party=politic_party
-    visit.travel_time=timedelta(minutes=data['travel_time'])
+    visit.travel_time=data['travel_time']
     visit.visit_date=parse_date(data['visit_date'])
     visit.start_time=data['start_time']
     visit.finish_time=data['finish_time']
