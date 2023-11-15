@@ -68,5 +68,25 @@
 
 
 .containerGroupsNames{
-    margin-right: 0.2vw;
+    margin-right: 0.1vw;
+}
+
+.PersonRowMainMenu{
+    background-color: #f4f4f4;
+    border-radius: 1vw;
+    width: 25vw;
+ 
+    margin-top: 1.5vh;
+    padding: 0.5vh;
+    display: flex;
+}
+
+@media (max-width: 800px) {
+    .PersonRowMainMenu{
+    border-radius: 5vw;
+    width: 70vw;
+   
+    padding: 1vh;
+
+    }
 }
