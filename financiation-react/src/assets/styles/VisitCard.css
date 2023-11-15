@@ -36,3 +36,10 @@
 .Buttonedit{
     border-radius: 10vh;
 }
+
+.statusName{
+    margin-right: 1vw !important;
+}
+.IconDropdownVisitCard{
+    margin-left: 1vw;
+}

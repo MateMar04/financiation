@@ -38,34 +38,37 @@ export const VisitCard = ({ visit }) => {
                 <div>
                     <Accordion className={'accordion-visits'}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon fontSize="large" />}
+                            expandIcon={<ExpandMoreIcon fontSize="large" className="IconDropdownVisitCard"/>}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             className="AccordionSummary"
                         >
-                            <Typography sx={{ width: '70%' }} className="VisitName text-start"><h6>
-                                {visit.name}</h6>
-                            </Typography>
-                            <Typography sx={{ color: 'text.secondary', width: '20%' }}
-                                className="text-end">{visit.visit_status_name}</Typography>
-
+                            <Col xs={7}>
+                                <Typography sx={{ width: '70%' }} className="text-start"><h6>
+                                    {visit.name}</h6>
+                                </Typography>
+                            </Col>
+                            <Col xs={5}>
+                                <Typography sx={{ color: 'text.secondary'}}
+                                    className="statusName text-end">{visit.visit_status_name}</Typography>
+                            </Col>
                             {visit.visit_status_name === 'Finalizada' && (
-                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="circle_green text-end"></a></Typography>
+                                <Typography sx={{ color: 'text.secondary', width: '20%' }}><a
+                                    className="statusName circle_green text-end"></a></Typography>
                             )}
 
                             {visit.visit_status_name === 'No Confirmada' && (
                                 <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="circle_red text-end"></a></Typography>
+                                    className="statusName circle_red text-end"></a></Typography>
                             )}
                             {visit.visit_status_name === 'Pendiente' && (
                                 <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="circle_red text-end"></a></Typography>
+                                    className="statusName circle_red text-end"></a></Typography>
                             )}
 
                             {visit.visit_status_name === 'En proceso' && (
                                 <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="circle_orange text-end"></a></Typography>
+                                    className="statusName circle_orange text-end"></a></Typography>
                             )}
 
 
@@ -127,17 +130,17 @@ export const VisitCard = ({ visit }) => {
                             <Row className="row1">
                                 <Col className="d-flex align-items-center">
                                     <p>Estado:</p>
-                                    </Col>
-                                    <Col className="d-flex align-items-center">
-                                        <p>{visit.visit_status_name}</p>
-                                    </Col>
+                                </Col>
+                                <Col className="d-flex align-items-center">
+                                    <p>{visit.visit_status_name}</p>
+                                </Col>
                             </Row>
                             <Row className="ButtonEditVisit">
-                            <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
-                                <Button variant="contained" className="Buttonedit">
-                                    Editar Visita
-                                </Button>
-                            </Link>
+                                <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
+                                    <Button variant="contained" className="Buttonedit">
+                                        Editar Visita
+                                    </Button>
+                                </Link>
                             </Row>
                         </AccordionDetails>
                     </Accordion>
