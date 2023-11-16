@@ -28,6 +28,7 @@ import "@fontsource/poppins";
 import * as logo from './assets/images/logo.jpeg'
 
 
+import EditVisitPage from './pages/EditvisitPage';
 function App() {
     return (
         <Router>
@@ -56,7 +57,8 @@ function App() {
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
 
-                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                        <Route path='/visits/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                        <Route path='/visits/edit/:visitId' element={<PrivateRoute children={<EditVisitPage/>}/>}/>
                         <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
 
                         <Route path='/reports'

@@ -1,33 +1,34 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
-
+import { Link } from "react-router-dom";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
+import Button from '@mui/material/Button';
 
-const DurationToTime = (duration) => {
-    const hoursMatch = duration.match(/(\d+)H/);
-    const minutesMatch = duration.match(/(\d+)M/);
-    let hours = 0;
-    let minutes = 0;
+// const DurationToTime = (duration) => {
+//     const hoursMatch = duration.match(/(\d+)H/);
+//     const minutesMatch = duration.match(/(\d+)M/);
+//     let hours = 0;
+//     let minutes = 0;
 
-    if (hoursMatch) {
-        hours = parseInt(hoursMatch[1], 10);
-    }
+//     if (hoursMatch) {
+//         hours = parseInt(hoursMatch[1], 10);
+//     }
 
-    if (minutesMatch) {
-        minutes = parseInt(minutesMatch[1], 10);
-    }
+//     if (minutesMatch) {
+//         minutes = parseInt(minutesMatch[1], 10);
+//     }
 
-    const timeDate = new Date();
-    timeDate.setHours(hours);
-    timeDate.setMinutes(minutes);
+//     const timeDate = new Date();
+//     timeDate.setHours(hours);
+//     timeDate.setMinutes(minutes);
 
-    return timeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+//     return timeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+// }
 
 export const VisitCard = ({ visit }) => {
     return (
@@ -86,7 +87,7 @@ export const VisitCard = ({ visit }) => {
                                     <p>Tiempo de viaje:</p>
                                 </Col>
                                 <Col className="d-flex align-items-center">
-                                    <p>{DurationToTime(visit.travel_time)}</p>
+                                    <p>{visit.travel_time}</p>
                                 </Col>
                             </Row>
                             <Row className="row1">
@@ -119,7 +120,7 @@ export const VisitCard = ({ visit }) => {
                                     <p>Grupo:</p>
                                 </Col>
                                 <Col className="d-flex align-items-center">
-                                    <p>{visit.id_group}</p>
+                                    <p>{visit.group_name}</p>
                                 </Col>
                             </Row>
 
@@ -130,6 +131,13 @@ export const VisitCard = ({ visit }) => {
                                     <Col className="d-flex align-items-center">
                                         <p>{visit.visit_status_name}</p>
                                     </Col>
+                            </Row>
+                            <Row className="ButtonEditVisit">
+                            <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
+                                <Button variant="contained" className="Buttonedit">
+                                    Editar Visita
+                                </Button>
+                            </Link>
                             </Row>
                         </AccordionDetails>
                     </Accordion>

@@ -27,6 +27,7 @@ export const MainMenuPage = () => {
     const [userGroup, setUserGroup] = useState([])
     let [role, setRole] = useState([])
     let [status, setStatus] = useState([])
+    const [lastReqLoc, setLastReqLoc] = useState()
 
 
     const getData = async () => {
@@ -45,19 +46,20 @@ export const MainMenuPage = () => {
 
     }, []);
 
+    useEffect(() => {
+        if (latestVisitRequests && latestVisitRequests.length > 0) {
+            setLastReqLoc(latestVisitRequests[0].location)
+        }
+
+    }, [latestVisitRequests]);
+
     return (
         <Container fluid className="main-menu-container">
             <Row>
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '100ms' }}>
                         <Card className="profile-card " id="left-card">
-                            <Row className={'justify-content-end'}>
-                                <Col md={4} xs={6}>
-                                    <Link to={'/me'}>
-                                        <VerMasButton />
-                                    </Link>
-                                </Col>
-                            </Row>
+                            
 
                             <Container className={'d-flex align-items-center'}>
                                 <Container>
@@ -112,13 +114,20 @@ export const MainMenuPage = () => {
                                     </Container>
                                 </Container>
                             </Container>
+                            <Row className={'justify-content-end'}>
+                                <Col md={4} xs={6}>
+                                    <Link to={'/me'}>
+                                        <VerMasButton />
+                                    </Link>
+                                </Col>
+                            </Row>
 
                         </Card></Zoom>
                     <Zoom in style={{ transitionDelay: '150ms' }}>
                         <Card className="last-visits-card border d-flex align-items-center" id="left-card">
                             <Container className="">
                                 <Row className="text-center first-row-main-menu-card">
-                                    <h4>Consultas resueltas en la ultima visita:</h4>
+                                    <h4>Consultas resueltas en la ultima visita en {lastReqLoc}:</h4>
                                 </Row>
                                 <Row className="text-center">
                                     {latestVisitRequests && latestVisitRequests.length > 0 ? (
@@ -160,13 +169,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '250ms' }}>
                         <Card className="group-card-main-menu" id="right-card">
-                            <Row className={'justify-content-end'}>
-                                <Col md={4} xs={6}>
-                                    <Link to={'/groups'}>
-                                        <VerMasButton />
-                                    </Link>
-                                </Col>
-                            </Row>
+                            
                             <Row className="text-center justify-content-center">
                                 {userGroup && userGroup.length > 0 ? (
                                     <h2 className="name-title">{userGroup[0].group}</h2>
@@ -175,11 +178,18 @@ export const MainMenuPage = () => {
                                 )}
 
                             </Row>
-                            <Row className="text-center justify-content-center ">
+                            <Row id="nombresscroll" className="text-center justify-content-center ">
 
                                 {userGroup?.map((i) => (
                                     <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
                                 ))}
+                            </Row>
+                            <Row className={'justify-content-end'}>
+                                <Col md={4} xs={6}>
+                                    <Link to={'/groups'}>
+                                        <VerMasButton />
+                                    </Link>
+                                </Col>
                             </Row>
                         </Card>
                     </Zoom>

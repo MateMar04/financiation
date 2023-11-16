@@ -11,6 +11,9 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {DateTimeField} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import {getUserGroup} from "../services/GroupServices";
+import {Modal} from 'antd';
+import LoadingModal from "../components/LoadingModal"; 
 import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
@@ -27,6 +30,7 @@ const FormPage = () => {
     let [user, setUser] = useState([])
     let [visits, setVisits] = useState([])
     let [whys, setWhys] = useState([])
+    const [showloading, setShowloading] = useState(false); 
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -95,6 +99,7 @@ const FormPage = () => {
     }, [visits]);
 
     let postRequest = async (e) => {
+        setShowloading(true)  
         let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
@@ -112,9 +117,12 @@ const FormPage = () => {
                 "observation": observation
             })
         })
+
         if (response.status === 200) {
-            handleShow()
+            await setShowloading(false);
+            handleShow();
         } else {
+            await setShowloading(false);
             toggleModalfailed();
         }
     }
@@ -297,6 +305,11 @@ const FormPage = () => {
                     Consulta enviada!
                 </Alert>
             </Snackbar>
+
+            
+            <Container> 
+                <LoadingModal message="la visita" show={showloading}/>
+            </Container> 
 
         </Form>
             </Container>
