@@ -48,30 +48,31 @@ export const VisitCard = ({ visit }) => {
                                     {visit.name}</h6>
                                 </Typography>
                             </Col>
-                            <Col xs={5}>
-                                <Typography sx={{ color: 'text.secondary'}}
-                                    className="statusName text-end">{visit.visit_status_name}</Typography>
+                            <Col xs={4} className="d-flex align-items-center">
+                                <Typography sx={{ color: 'text.secondary' }}
+                                    className=" d-flex align-items-center">{visit.visit_status_name}</Typography>
                             </Col>
+                            <Col xs={1} className="d-flex align-items-center">
                             {visit.visit_status_name === 'Finalizada' && (
-                                <Typography sx={{ color: 'text.secondary', width: '20%' }}><a
-                                    className="statusName circle_green text-end"></a></Typography>
+                                <Typography sx={{ color: 'text.secondary' }}><a
+                                    className="d-flex align-items-center statusName circle_green text-end "></a></Typography>
                             )}
 
                             {visit.visit_status_name === 'No Confirmada' && (
-                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="statusName circle_red text-end"></a></Typography>
+                                <Typography sx={{ color: 'text.secondary' }}><a
+                                    className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
                             )}
                             {visit.visit_status_name === 'Pendiente' && (
-                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="statusName circle_red text-end"></a></Typography>
+                                <Typography sx={{ color: 'text.secondary' }}><a
+                                    className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
                             )}
 
                             {visit.visit_status_name === 'En proceso' && (
-                                <Typography sx={{ color: 'text.secondary', width: '10%' }}><a
-                                    className="statusName circle_orange text-end"></a></Typography>
+                                <Typography sx={{ color: 'text.secondary' }}><a
+                                    className="d-flex align-items-center statusName circle_orange text-end "></a></Typography>
                             )}
 
-
+</Col>
 
 
                         </AccordionSummary>
