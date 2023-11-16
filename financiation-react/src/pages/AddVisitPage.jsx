@@ -128,15 +128,10 @@ const AddVisitPage = () => {
         })
         if (response.status === 200) {
             toggleModalsucceed();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
+        } else {
             toggleModalfailed();
         }
     }
-
 
     const onFinish = (values) => {
         console.log(values.accommodation)

@@ -12,7 +12,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
-
+import GroupNameModal from "../components/GroupNameModal";
 
 export const CreateGroupPage = () => {
     let { authTokens } = useContext(AuthContext);
@@ -22,22 +22,23 @@ export const CreateGroupPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [userCheckboxes, setUserCheckboxes] = useState({});
+    const [showgroupcreate, setShowGroupCreate] = useState(false);
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const toggleModalGroupCreate = () => setShowGroupCreate(!showgroupcreate);
 
     const content = (
         <a></a>
     );
       
-    
     const handleCheckboxChange = (userId) => {
         setUserCheckboxes((prevUserCheckboxes) => ({
             ...prevUserCheckboxes,
             [userId]: !prevUserCheckboxes[userId],
         }));
     };
-    
+
     useEffect(() => {
         getUsers(authTokens.access).then(data => {
             console.log("User Data:", data);
@@ -62,40 +63,15 @@ export const CreateGroupPage = () => {
         setFilteredUsers(filtered);
     };   
 
-    let postGroup = async (e) => {
-        if (e && e.target) {
-            e.preventDefault();
-            let response = await fetch('/api/groups', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": "JWT " + String(authTokens.access),
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({ "name": e.target.name.value })
-            })
-            if (response.status === 200) {
-                toggleModalsucceed();
-                await postGroup();
-            } else if (response.status === 500) {
-                toggleModalfailed();
-                await postGroup();
-            } else if (response.status === 401) {
-                toggleModalfailed();
-                await postGroup();
-            } else if (response.status === 400) {
-                toggleModalfailed();
-                await postGroup();
-            }
-        }
-    }
+    
 
     return (
         <Container fluid>
             <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
             <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
+            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate}/>
 
-            <Form onSubmit={postGroup}>
+            <Form>
                 <Container className="separation font text-center justify-content-center">
                     <Row className='justify-content-center text-center'>
                         <Col md={10}>
@@ -137,10 +113,8 @@ export const CreateGroupPage = () => {
 
                 <Row className='text-center'>
                     <Col>
-                        <Form.Group>
-                            {/*De ser preferente se puede agregar un texto que indique que hace el boton*/}
+                        <Form.Group onClick={() =>toggleModalGroupCreate()}> 
                             <FlotantButton name='' />
-
                         </Form.Group>
                     </Col>
                 </Row>
