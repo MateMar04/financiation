@@ -38,7 +38,7 @@ export const VisitCard = ({ visit }) => {
                 <div>
                     <Accordion className={'accordion-visits'}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon fontSize="large" className="IconDropdownVisitCard"/>}
+                            expandIcon={<ExpandMoreIcon fontSize="large" className="IconDropdownVisitCard" />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                             className="AccordionSummary"
@@ -48,100 +48,104 @@ export const VisitCard = ({ visit }) => {
                                     {visit.name}</h6>
                                 </Typography>
                             </Col>
-                            <Col xs={4} className="d-flex align-items-center">
+                            <Col className="d-flex align-items-center">
                                 <Typography sx={{ color: 'text.secondary' }}
                                     className=" d-flex align-items-center">{visit.visit_status_name}</Typography>
                             </Col>
                             <Col xs={1} className="d-flex align-items-center">
-                            {visit.visit_status_name === 'Finalizada' && (
-                                <Typography sx={{ color: 'text.secondary' }}><a
-                                    className="d-flex align-items-center statusName circle_green text-end "></a></Typography>
-                            )}
+                                {visit.visit_status_name === 'Finalizada' && (
+                                    <Typography sx={{ color: 'text.secondary' }}><a
+                                        className="d-flex align-items-center statusName circle_green text-end "></a></Typography>
+                                )}
 
-                            {visit.visit_status_name === 'No Confirmada' && (
-                                <Typography sx={{ color: 'text.secondary' }}><a
-                                    className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
-                            )}
-                            {visit.visit_status_name === 'Pendiente' && (
-                                <Typography sx={{ color: 'text.secondary' }}><a
-                                    className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
-                            )}
+                                {visit.visit_status_name === 'No Confirmada' && (
+                                    <Typography sx={{ color: 'text.secondary' }}><a
+                                        className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
+                                )}
+                                {visit.visit_status_name === 'Pendiente' && (
+                                    <Typography sx={{ color: 'text.secondary' }}><a
+                                        className="d-flex align-items-center statusName circle_red text-end "></a></Typography>
+                                )}
 
-                            {visit.visit_status_name === 'En proceso' && (
-                                <Typography sx={{ color: 'text.secondary' }}><a
-                                    className="d-flex align-items-center statusName circle_orange text-end "></a></Typography>
-                            )}
+                                {visit.visit_status_name === 'En proceso' && (
+                                    <Typography sx={{ color: 'text.secondary' }}><a
+                                        className="d-flex align-items-center statusName circle_orange text-end "></a></Typography>
+                                )}
 
-</Col>
+                            </Col>
 
 
                         </AccordionSummary>
 
                         <AccordionDetails>
                             <Row className="row1">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Localidad:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.location_name}</p>
                                 </Col>
                             </Row>
                             <Row className="row2 d-flex align-items-center ">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Tiempo de viaje:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.travel_time}</p>
                                 </Col>
                             </Row>
                             <Row className="row1">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Distancia:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.distance} Km</p>
                                 </Col>
                             </Row>
                             <Row className="row2">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Fecha de la visita:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.visit_date}</p>
                                 </Col>
                             </Row>
                             <Row className="row1">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Nombre del lugar:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.place_name}</p>
                                 </Col>
                             </Row>
 
                             <Row className="row2">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Grupo:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.group_name}</p>
                                 </Col>
                             </Row>
 
                             <Row className="row1">
-                                <Col className="d-flex align-items-center">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Estado:</p>
                                 </Col>
-                                <Col className="d-flex align-items-center">
+                                <Col >
                                     <p>{visit.visit_status_name}</p>
                                 </Col>
                             </Row>
                             <Row className="ButtonEditVisit">
-                                <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
-                                    <Button variant="contained" className="Buttonedit">
-                                        Editar Visita
-                                    </Button>
-                                </Link>
+                                <Col>
+                                    <Link to={`/visits/edit/${visit.id}`} state={{ visitData: visit.id }}>
+
+                                        <Button variant="contained" className="Buttonedit">
+                                            Editar Visita
+                                        </Button>
+
+                                    </Link>
+                                </Col>
                             </Row>
                         </AccordionDetails>
                     </Accordion>
