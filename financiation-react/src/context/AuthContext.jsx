@@ -1,10 +1,9 @@
 import React, {createContext, useEffect, useState} from "react";
 import jwt_decode from "jwt-decode";
 import {useNavigate} from 'react-router-dom'
-import FailedModal from "../components/FailedModal";
 import LoadingModal from "../components/LoadingModal";
 import {getUserById} from "../services/UserServices";
-
+import FailedModal from "../components/FailedModal";
 
 const AuthContext = createContext();
 
@@ -20,15 +19,18 @@ export const AuthProvider = ({children}) => {
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null);
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null);
     let [loading, setLoading] = useState(true)
-
+    
 
     let history = useNavigate()
     const [show, setShow] = React.useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+
     let signIn = async (e) => {
         e.preventDefault()
+        const email = e.target.email.value;
+        const re_email = e.target.re_email.value;
         setShowloading(true)
         let response = await fetch('/auth/users/', {
             method: 'POST',
@@ -40,6 +42,7 @@ export const AuthProvider = ({children}) => {
                 "last_name": e.target.last_name.value,
                 "ssn": e.target.ssn.value,
                 "email": e.target.email.value,
+                "re_email":e.targer.email.value,
                 "phone_number": e.target.phone_number.value,
                 "password": e.target.password.value,
                 "re_password": e.target.re_password.value
@@ -52,8 +55,12 @@ export const AuthProvider = ({children}) => {
         } else if (response.status === 400) {
             toggleModalfailed();
         }
+        else {
+            console.log(error.response);
+        }
+    
     }
-
+    
 
     let loginUser = async (e) => {
         e.preventDefault()
@@ -72,13 +79,11 @@ export const AuthProvider = ({children}) => {
             history('/menu')
         } else {
             if (response.status === 401) {
-                alert("Revisa las credenciales ingresadas")
-
+                toggleModalfailed()
+                
             }
-            if (response.status === 400) {
-                alert("Ocurrio un error inesperado")
-            } else {
-                alert("Ocurrio un error inesperado")
+            else {
+                console.log(error.response);
 
             }
         }
@@ -141,8 +146,9 @@ export const AuthProvider = ({children}) => {
     return (
         <AuthContext.Provider value={contextData}>
 
-            <FailedModal message="la visita" show={showfail}/>
-            <LoadingModal message="la visita" show={showloading}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"Revisa las Credenciales"} show={showfail}/>
+
+            <LoadingModal message="Sign in" show={showloading}/>
 
             {loading ? null : children}
         </AuthContext.Provider>
