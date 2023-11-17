@@ -12,7 +12,7 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import {message} from 'antd';
 
-export const GroupNameModal = (props, advisors, coordinators) => {
+export const GroupNameModal = (props) => {
 
     let {authTokens} = useContext(AuthContext)
     const [name, setName] = useState("");
@@ -31,8 +31,8 @@ export const GroupNameModal = (props, advisors, coordinators) => {
                 },
                 body: JSON.stringify({ 
                     "name": name,
-                    "advisors": advisors,
-                    "coordinators": coordinators
+                    "advisors": props.advisors,
+                    "coordinators": props.coordinators
                 })
             })
             if (response.status === 200) {
