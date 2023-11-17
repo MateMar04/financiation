@@ -12,7 +12,7 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 import {message} from 'antd';
 
-export const GroupNameModal = (props) => {
+export const GroupNameModal = (props, advisors, coordinators) => {
 
     let {authTokens} = useContext(AuthContext)
     const [name, setName] = useState("");
@@ -22,14 +22,18 @@ export const GroupNameModal = (props) => {
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     let postGroup = async (e) => {
-            let response = await fetch('/api/groups', {
+            let response = await fetch('/api/creategroup', {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                     "Authorization": "JWT " + String(authTokens.access),
                     "Accept": "application/json"
                 },
-                body: JSON.stringify({ "name": name })
+                body: JSON.stringify({ 
+                    "name": name,
+                    "advisors": advisors,
+                    "coordinators": coordinators
+                })
             })
             if (response.status === 200) {
                 // toggleModalsucceed();
