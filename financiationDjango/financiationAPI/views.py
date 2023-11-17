@@ -189,7 +189,25 @@ class GroupApiView(APIView):
         serializer = GroupSerializer(group, many=False)
         return Response(serializer.data)
 
+class CreateGroupApiView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
 
+        groupo = Group.objects.create(
+            name=data['name']
+        )
+        for c in data['coordinators']:
+            Coordinator.objects.create(
+                user = c,
+                group = groupo
+            )
+        for a in data['advisors']:
+            Advisor.objects.create(
+                user = a,
+                group = groupo
+            )
+        return JsonResponse("OK", safe=False)
+    
 class CoordinatorApiView(APIView):
     def get(self, request, *args, **kwargs):
         coordinators = Coordinator.objects.all()
