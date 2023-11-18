@@ -31,8 +31,7 @@ export const GroupNameModal = (props) => {
                 },
                 body: JSON.stringify({ 
                     "name": name,
-                    "advisors": props.advisors,
-                    "coordinators": props.coordinators
+                    
                 })
             })
             if (response.status === 200) {

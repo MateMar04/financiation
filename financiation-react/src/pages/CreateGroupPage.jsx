@@ -13,6 +13,7 @@ import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
 import GroupNameModal from "../components/GroupNameModal";
+import { PropertySafetyFilled } from "@ant-design/icons";
 
 export const CreateGroupPage = () => {
     let { authTokens } = useContext(AuthContext);
@@ -62,8 +63,6 @@ export const CreateGroupPage = () => {
     
         setFilteredUsers(filtered);
     };   
-
-    
 
     return (
         <Container fluid>
