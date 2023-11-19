@@ -31,10 +31,6 @@ export const CreateGroupPage = () => {
     const [selectedAdvisors, setSelectedAdvisors] = useState([]);
     const [selectedCoordinators, setSelectedCoordinators] = useState([]);
     
-    const handleButtonClick = () => {
-        console.log('Selected Advisors:', selectedAdvisors);
-        console.log('Selected Coordinators:', selectedCoordinators);
-    };
     const content = (
         <a></a>
     );
@@ -92,7 +88,6 @@ export const CreateGroupPage = () => {
             <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
 
                 <Container className="separation font text-center justify-content-center">
-                <Button onClick={handleButtonClick}>Check Arrays</Button>
                     <Row className='justify-content-center text-center'>
                         <Col md={10}>
                             <TextField

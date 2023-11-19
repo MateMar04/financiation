@@ -1,62 +1,92 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {Col, Container, Row} from 'react-bootstrap';
+import React, { useState, useContext } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import "../assets/styles/GroupCard.css"
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {AdvisorMiniCardGroup} from "./AdvisorMiniCardGroup";
-import {CoordinatorMiniCardGroup} from "./CoordinatorMiniCardGroup";
-import AuthContext from "../context/AuthContext";
 import CreateIcon from '@mui/icons-material/Create';
+import DeleteIcon from '@mui/icons-material/Delete';  // Import the DeleteIcon
 import IconButton from "@mui/material/IconButton";
-import AddIcon from '@mui/icons-material/Add';
-import {Zoom} from "@mui/material";
+import { Zoom } from "@mui/material";
+import AuthContext from "../context/AuthContext";
+import { AdvisorMiniCardGroup } from "./AdvisorMiniCardGroup";
+import { CoordinatorMiniCardGroup } from "./CoordinatorMiniCardGroup";
+import SucceedModal from './SucceedModal';
+import FailedModal from './FailedModal';
 
-
-export const GroupCard = ({group}) => {
-
-    let {authTokens} = useContext(AuthContext)
+const GroupCard = ({group, onDeleteSuccess}) => {
+    const { authTokens } = useContext(AuthContext);
     const [showButton, setShowButton] = useState(false);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
     const handleAddButton = () => {
         setShowButton(!showButton);
     };
 
+    let deletegroup = async (id) => {
+        let response = await fetch(`/api/groups/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+            onDeleteSuccess();
+        } else {
+            toggleModalfailed();
+        }
+    }
+
     return (
         <Container fluid className='CompletlyContainer'>
-            
-            <Zoom in style={{transitionDelay: '100ms'}}>
+            <Zoom in style={{ transitionDelay: '100ms' }}>
                 <div>
                     <Accordion className={'accordion-group'}>
                         <AccordionSummary
-                            expandIcon={<ExpandMoreIcon/>}
+                            expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography >{group.name}</Typography>
-
+                            <Typography>{group.name}</Typography>
                         </AccordionSummary>
 
                         <AccordionDetails>
-                            <Row className={'justify-content-start pencil-groups'}>
-                                <Col md={11}>
-                                    <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
-                                        <CreateIcon/>
-                                    </IconButton>
-                                </Col>
-                            </Row>
                             <Container>
+                                <Row className={'align-items-center'}>
+                                    <Col>
+                                        <Row>
+                                            <Col>
+                                                <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
+                                                    <CreateIcon />
+                                                </IconButton>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col className="ml-auto"> 
+                                        {showButton && (
+                                            <IconButton className='delete-button' type="submit" aria-label="delete" onClick={() => deletegroup(group.id)}>
+                                                <DeleteIcon />
+                                            </IconButton>
+                                        )}
+                                    </Col>
+                                </Row>
                                 <Row>
                                     <Col>
-                                        <AdvisorMiniCardGroup group={group} showButton={showButton}/>
+                                        <AdvisorMiniCardGroup group={group} showButton={showButton} />
                                     </Col>
                                     <Col md={1}>
                                         <div className="vl"></div>
                                     </Col>
                                     <Col>
-                                        <CoordinatorMiniCardGroup group={group} showButton={showButton}/>
+                                        <CoordinatorMiniCardGroup group={group} showButton={showButton} />
                                     </Col>
                                 </Row>
                             </Container>
@@ -65,8 +95,7 @@ export const GroupCard = ({group}) => {
                 </div>
             </Zoom>
         </Container>
-
-    )
-}
+    );
+};
 
 export default GroupCard;
