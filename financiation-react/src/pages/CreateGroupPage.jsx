@@ -28,16 +28,32 @@ export const CreateGroupPage = () => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const toggleModalGroupCreate = () => setShowGroupCreate(!showgroupcreate);
-
+    const [selectedAdvisors, setSelectedAdvisors] = useState([]);
+    const [selectedCoordinators, setSelectedCoordinators] = useState([]);
+    
+    const handleButtonClick = () => {
+        console.log('Selected Advisors:', selectedAdvisors);
+        console.log('Selected Coordinators:', selectedCoordinators);
+    };
     const content = (
         <a></a>
     );
       
-    const handleCheckboxChange = (userId) => {
+    const handleCheckboxChange = (userId, selectedRole) => {
         setUserCheckboxes((prevUserCheckboxes) => ({
             ...prevUserCheckboxes,
-            [userId]: !prevUserCheckboxes[userId],
+            [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
         }));
+    
+        if (selectedRole === 'coordinador') {
+            setSelectedCoordinators((prevCoordinators) => (
+                !userCheckboxes[userId]?.checked ? [...prevCoordinators, userId] : prevCoordinators.filter(id => id !== userId)
+            ));
+        } else if (selectedRole === 'asesor') {
+            setSelectedAdvisors((prevAdvisors) => (
+                !userCheckboxes[userId]?.checked ? [...prevAdvisors, userId] : prevAdvisors.filter(id => id !== userId)
+            ));
+        }
     };
 
     useEffect(() => {
@@ -47,6 +63,11 @@ export const CreateGroupPage = () => {
             setFilteredUsers(data);
         });
     }, [authTokens.access]);
+
+    useEffect(() => {
+        console.log('Updated Selected Advisors:', selectedAdvisors);
+        console.log('Updated Selected Coordinators:', selectedCoordinators);
+    }, [selectedAdvisors, selectedCoordinators]);
 
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
@@ -68,10 +89,10 @@ export const CreateGroupPage = () => {
         <Container fluid>
             <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
             <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
-            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate}/>
+            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
 
-            <Form>
                 <Container className="separation font text-center justify-content-center">
+                <Button onClick={handleButtonClick}>Check Arrays</Button>
                     <Row className='justify-content-center text-center'>
                         <Col md={10}>
                             <TextField
@@ -105,7 +126,13 @@ export const CreateGroupPage = () => {
                 <Container className="justify-content-center">
                     {filteredUsers.map((user) => (
                         <Container key={user.id} className="containerUserCard justify-content-center text-center">
-                            <UserCard user={user} isChecked={userCheckboxes[user.id]} onCheckboxChange={handleCheckboxChange}/>
+                            <UserCard
+                                user={user}
+                                isChecked={userCheckboxes[user.id]?.checked}
+                                onCheckboxChange={handleCheckboxChange}
+                                selectedAdvisors={selectedAdvisors}
+                                selectedCoordinators={selectedCoordinators}
+                            />
                         </Container>
                     ))}
                 </Container>
@@ -117,7 +144,6 @@ export const CreateGroupPage = () => {
                         </Form.Group>
                     </Col>
                 </Row>
-            </Form>
         </Container>
     )
 }
