@@ -13,16 +13,14 @@ import { Zoom } from "@mui/material";
 import AuthContext from "../context/AuthContext";
 import { AdvisorMiniCardGroup } from "./AdvisorMiniCardGroup";
 import { CoordinatorMiniCardGroup } from "./CoordinatorMiniCardGroup";
-import SucceedModal from './SucceedModal';
 import FailedModal from './FailedModal';
+import ConfirmDeleteModal from './ConfirmDeleteModal';
 
 const GroupCard = ({group, onDeleteSuccess}) => {
     const { authTokens } = useContext(AuthContext);
     const [showButton, setShowButton] = useState(false);
-    const [showfail, setShowfailture] = useState(false);
-    const [showsuccess, setShowsuccese] = useState(false);
-    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
-    const toggleModalfailed = () => setShowfailture(!showfail);
+    const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
+    const toggleModalfail = () => setShowConfirmDeleteModal(!showConfirmDeleteModal);
 
     const handleAddButton = () => {
         setShowButton(!showButton);
@@ -38,10 +36,9 @@ const GroupCard = ({group, onDeleteSuccess}) => {
             },
         });
         if (response.status === 200) {
-            toggleModalsucceed();
             onDeleteSuccess();
         } else {
-            toggleModalfailed();
+            toggleModalfail();
         }
     }
 
@@ -94,6 +91,7 @@ const GroupCard = ({group, onDeleteSuccess}) => {
                     </Accordion>
                 </div>
             </Zoom>
+            <ConfirmDeleteModal show={showConfirmDeleteModal} onClose={() => toggleModalfail()}/>
         </Container>
     );
 };
