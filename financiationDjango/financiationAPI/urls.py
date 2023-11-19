@@ -17,6 +17,7 @@ urlpatterns = [
     path('groups/<int:id>', views.getGroupById, name='group'),
     path('groups/user/<int:id>', views.getUserGroup, name='currenGroup'),
     path('creategroup', views.CreateGroupApiView.as_view(), name='createGroup'),
+    path('groups/delete/<int:id>', views.deleteGroupById, name='delete_group'),
 
     # Agreements
     path('agreements', views.AgreementApiView.as_view(), name='agreements'),

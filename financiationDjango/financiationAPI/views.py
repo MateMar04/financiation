@@ -641,6 +641,12 @@ def deleteMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def deleteGroupById(request, id, *args, **kwargs):
+    group = Group.objects.get(id=id)
+    group.delete()
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
 
 @api_view(['DELETE'])
 def deleteadvisorById(request, id, groupId, *args, **kwargs):
