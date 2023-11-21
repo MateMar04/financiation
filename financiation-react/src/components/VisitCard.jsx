@@ -20,6 +20,7 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [accordionExpanded, setAccordionExpanded] = useState(false);
 
     let deleteVisit = async (id) => {
         let response = await fetch(`/api/visits/delete/${id}`, {
@@ -33,11 +34,20 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
         if (response.status === 200) {
             toggleModalsucceed();
             onDeleteSuccess();
+            setAccordionExpanded(false);
+
         } else {
             toggleModalfailed();
         }
     }
-    
+
+    const handleAccordionChange = (event, isExpanded) => {
+        setAccordionExpanded(isExpanded);
+    };
+
+    useEffect(() => {
+        setAccordionExpanded(false);
+    }, []);
     return (
 
         <Container className='CompletlyContainer'>
@@ -45,7 +55,7 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
             <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Zoom in>
                 <div>
-                    <Accordion className={'accordion-visits'}>
+                    <Accordion className={'accordion-visits'} expanded={accordionExpanded} onChange={handleAccordionChange}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon fontSize="large" className="IconDropdownVisitCard" />}
                             aria-controls="panel1a-content"
