@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
@@ -10,19 +10,25 @@ import { getUserStatusesById } from "../services/StatusServices";
 import { getUserRolesById } from "../services/RoleServices";
 import { Tooltip } from 'antd';
 
-export const UserCard = ({ user, isChecked, onCheckboxChange, selectedAdvisors, selectedCoordinators }) => {
+export const UserCard = ({ user, isChecked, onCheckboxChange, defaultRole}) => {
     const { authTokens } = useContext(AuthContext);
     const [role, setRole] = useState([]);
     const [status, setStatus] = useState([]);
-    const [selectedRole, setSelectedRole] = useState(null);
+    const [selectedRole, setSelectedRole] = useState(defaultRole || null);
 
     const handleCheckboxChange = () => {
         onCheckboxChange(user.id, selectedRole);
     };
 
+    const handleRoleChange = (e) => {
+        const roleValue = e.target.value;
+        setSelectedRole(roleValue);
+        setRole(roleValue); // Update role state if needed
+    };
+
     useEffect(() => {
-        getUserStatusesById(authTokens.access, user?.user_status).then(data => setStatus(data))
-        getUserRolesById(authTokens.access, user?.role).then(data => setRole(data))
+        getUserStatusesById(authTokens.access, user?.user_status).then((data) => setStatus(data));
+        getUserRolesById(authTokens.access, user?.role).then((data) => setRole(data));
     }, [authTokens.access, user]);
 
     return (
@@ -60,10 +66,10 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, selectedAdvisors, 
                                             <Col xs={2} md={3} className='role content-select'>
                                                 <select
                                                     placeholder="Rol en grupo"
-                                                    className='form-select '
+                                                    className='form-select'
                                                     name="Role"
-                                                    value={selectedRole}
-                                                    onChange={(e) => setSelectedRole(e.target.value)}
+                                                    defaultValue={selectedRole}  
+                                                    onChange={handleRoleChange}
                                                 >
                                                     <option value="none" disabled hidden selected>Seleccionar</option>
                                                     <option value="coordinador">Coordinador</option>
@@ -79,13 +85,14 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, selectedAdvisors, 
                                         {status.name === 'Disponible' ? (
                                             <Col xs={2} md={2} className='check'>
                                                 <Row>
-                                                    <input
-                                                        type="checkbox"
-                                                        className='check'
-                                                        checked={isChecked && selectedRole !== null}
-                                                        onChange={handleCheckboxChange}
-                                                        disabled={!selectedRole}
-                                                    />
+                                                <input
+                                                    type="checkbox"
+                                                    className='check'
+                                                    checked={isChecked}
+                                                    onChange={handleCheckboxChange}
+                                                    disabled={!selectedRole}
+                                                />
+
                                                 </Row>
                                             </Col>
                                         ) : (

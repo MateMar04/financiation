@@ -24,7 +24,6 @@ export const CreateGroupPage = () => {
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [userCheckboxes, setUserCheckboxes] = useState({});
     const [showgroupcreate, setShowGroupCreate] = useState(false);
-
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const toggleModalGroupCreate = () => setShowGroupCreate(!showgroupcreate);
@@ -34,21 +33,35 @@ export const CreateGroupPage = () => {
     const content = (
         <a></a>
     );
-      
+    
+    const setSelectedRole = (role) => {
+        console.log('Selected Role:', role);
+    };
+
     const handleCheckboxChange = (userId, selectedRole) => {
-        setUserCheckboxes((prevUserCheckboxes) => ({
-            ...prevUserCheckboxes,
-            [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
-        }));
+        setUserCheckboxes((prevUserCheckboxes) => {
+            const updatedCheckboxes = {
+                ...prevUserCheckboxes,
+                [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
+            };
+    
+            console.log('Updated userCheckboxes:', updatedCheckboxes);
+    
+            return updatedCheckboxes;
+        });
+    
+        if (!userCheckboxes[userId]?.checked) {
+            setSelectedRole(selectedRole);
+        }
     
         if (selectedRole === 'coordinador') {
-            setSelectedCoordinators((prevCoordinators) => (
-                !userCheckboxes[userId]?.checked ? [...prevCoordinators, userId] : prevCoordinators.filter(id => id !== userId)
-            ));
+            setSelectedCoordinators((prevCoordinators) =>
+                !userCheckboxes[userId]?.checked ? [...prevCoordinators, userId] : prevCoordinators.filter((id) => id !== userId)
+            );
         } else if (selectedRole === 'asesor') {
-            setSelectedAdvisors((prevAdvisors) => (
-                !userCheckboxes[userId]?.checked ? [...prevAdvisors, userId] : prevAdvisors.filter(id => id !== userId)
-            ));
+            setSelectedAdvisors((prevAdvisors) =>
+                !userCheckboxes[userId]?.checked ? [...prevAdvisors, userId] : prevAdvisors.filter((id) => id !== userId)
+            );
         }
     };
 
@@ -59,6 +72,17 @@ export const CreateGroupPage = () => {
             setFilteredUsers(data);
         });
     }, [authTokens.access]);
+
+    useEffect(() => {
+        console.log('Initial userCheckboxes state:', userCheckboxes);
+        setUserCheckboxes((prevUserCheckboxes) => {
+            const newUserCheckboxes = { ...prevUserCheckboxes };
+            filteredUsers.forEach((user) => {
+                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || { checked: false, role: null };
+            });
+            return newUserCheckboxes;
+        });
+    }, [filteredUsers]);
 
     useEffect(() => {
         console.log('Updated Selected Advisors:', selectedAdvisors);
@@ -119,14 +143,13 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <Container className="justify-content-center">
-                    {filteredUsers.map((user) => (
+                {filteredUsers.map((user) => (
                         <Container key={user.id} className="containerUserCard justify-content-center text-center">
                             <UserCard
                                 user={user}
                                 isChecked={userCheckboxes[user.id]?.checked}
                                 onCheckboxChange={handleCheckboxChange}
-                                selectedAdvisors={selectedAdvisors}
-                                selectedCoordinators={selectedCoordinators}
+                                defaultRole={userCheckboxes[user.id]?.role}
                             />
                         </Container>
                     ))}
