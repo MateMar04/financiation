@@ -14,7 +14,7 @@ import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
 
 
-export const VisitCard = ({ visit }) => {
+export const VisitCard = ({visit, onDeleteSuccess}) => {
     let { authTokens } = useContext(AuthContext);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
@@ -32,10 +32,12 @@ export const VisitCard = ({ visit }) => {
         });
         if (response.status === 200) {
             toggleModalsucceed();
+            onDeleteSuccess();
         } else {
             toggleModalfailed();
         }
     }
+    
     return (
 
         <Container className='CompletlyContainer'>
