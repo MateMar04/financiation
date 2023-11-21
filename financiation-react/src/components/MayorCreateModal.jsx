@@ -116,8 +116,8 @@ export const MayorCreateModal = (props) => {
                                         variant="outlined"
                                         sx={{ width: '100%', height: '48px' }} 
                                     >
-                                        {locations?.map((location) => (
-                                            <MenuItem value={location.id}>{location.name}</MenuItem>
+                                        {locations?.map((location, i) => (
+                                            <MenuItem key={i} value={location.id}>{location.name}</MenuItem>
                                         ))}    
                                     </Select>
                             </FormControl>

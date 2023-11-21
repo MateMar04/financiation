@@ -83,7 +83,6 @@ export const AdvisorCreateModal = (props) => {
                         label="Nombre de la persona"
                         value={selectedUserId}
                         onChange={(event) => {
-                            console.log('Selected User ID:', event.target.value);
                             setSelectedUserId(event.target.value);
                         }}
                     >

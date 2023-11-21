@@ -16,7 +16,7 @@ export const CalendarPage = () => {
     const {authTokens} = useContext(AuthContext);
     const navigate = useNavigate();
     const [showloading, setShowloading] = useState(false);
-   
+
     let [loading, setLoading] = useState(true)
 
     const showModal = (date) => {
@@ -35,7 +35,7 @@ export const CalendarPage = () => {
 
     useEffect(() => {
         setShowloading(true);
-    
+
         getVisits(authTokens.access)
           .then((data) => {
             setVisits(data);
@@ -44,7 +44,7 @@ export const CalendarPage = () => {
             setShowloading(false);
           });
       }, []);
-    
+
 
     let getDayVisits = (date) => {
         return visits.filter(v => {
@@ -70,7 +70,6 @@ export const CalendarPage = () => {
 
     function isWeekend(date) {
         const dayOfWeek = new Date(date).getDay();
-        console.log("Dia: ", dayOfWeek)
         return dayOfWeek === 0 || dayOfWeek === 6;
     }
 
@@ -82,7 +81,7 @@ export const CalendarPage = () => {
                           dateCellRender={(date) => {
                               let day = new Date(date)
                               let visits = getDayVisits(day)
-                              return visits?.map(v => <Badge status={v.status} text={v.name}/>)
+                              return visits?.map((v, i) => <Badge key={i} status={v.status} text={v.name}/>)
                           }}
 
                           monthCellRender={(date) => {
@@ -97,7 +96,7 @@ export const CalendarPage = () => {
             <Modal title="Agregar Visita" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 {selectedDate && <p>¿Quiere agregar una visita para el día {selectedDate.format('DD/MM/YYYY')}?</p>}
             </Modal>
-            <Container> 
+            <Container>
                 <LoadingModal message="cargando" show={showloading}/>
             </Container>
         </Container>

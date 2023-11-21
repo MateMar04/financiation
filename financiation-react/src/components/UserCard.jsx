@@ -27,9 +27,9 @@ export const UserCard = ({user, isChecked, onCheckboxChange}) => {
                 <Zoom in style={{ transitionDelay: '200ms'}}>
                 <div className={'UserCard font'}>
                     <Container>
-                    <Card className='UserCard font' onClick={() => console.log(user)}>
+                    <Card className='UserCard font'>
                         <Container className='UserCard'>
-                            <Row key={user.id}>
+                            <Row>
                                 <Col md={1} xs={1} className='profileimage'>
                                     <Avatar className='avatar' alt="Remy Sharp" src={'data:image/png;base64, ' + user?.profile_picture}/>
                                 </Col>

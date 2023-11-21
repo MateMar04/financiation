@@ -4,7 +4,7 @@ import "../assets/styles/VisitCardMainMenu.css"
 
 export const VisitCardMainMenu = ({name, status}) => {
     return (
-        <Container flex className="visit-container">
+        <Container className="visit-container d-flex">
             <Row className="visit-row">
                 <Col lg={7} >
                     <p className="visit-title">{name}</p>
