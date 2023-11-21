@@ -134,7 +134,6 @@ const AddVisitPage = () => {
     }
 
     const onFinish = (values) => {
-        console.log(values.accommodation)
         postVisit(values)
     };
 

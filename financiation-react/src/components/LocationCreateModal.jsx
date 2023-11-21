@@ -97,9 +97,9 @@ export const LocationCreateModal = (props) => {
                                         variant="outlined"
                                         sx={{ width: '100%', height: '48px' }} 
                                     >
-                                        {departments?.map((department) => (
-                                            <MenuItem value={department.id}>{department.name}</MenuItem>
-                                        ))}    
+                                        {departments?.map((department, i) => (
+                                            <MenuItem key={i} value={department.id}>{department.name}</MenuItem>
+                                        ))}
                                     </Select>
                             </FormControl>
                         </Box>

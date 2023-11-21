@@ -12,15 +12,21 @@ import {getUser} from "../services/UserServices";
 
 const NavbarComponent = () => {
 
-    let {authTokens, logoutUser} = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     let {user} = useContext(AuthContext)
     const [myUser, setMyUser] = useState()
 
 
 
     const getData = async () => {
-        const usuario = await getUser(authTokens.access)
-        setMyUser(usuario)
+
+        if (authTokens) {
+            const usuario = await getUser(authTokens.access)
+            setMyUser(usuario)
+        }
+
+
+
 
     }
 
@@ -28,7 +34,7 @@ const NavbarComponent = () => {
 
         getData();
 
-    }, []);
+    }, [authTokens]);
     return (
 
         <Navbar expand="lg" id="navbarcs" className="navbarcs">
@@ -75,7 +81,7 @@ const NavbarComponent = () => {
                                                         sx={{width: 40, height: 40}}/>
                                             </Col>
 
-                                        
+
 
                                             <Col md={9} xs={9} className={'justify-content-center'}>
                                                 <Row className={'justify-content-center text-center'}>

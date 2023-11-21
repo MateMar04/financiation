@@ -35,7 +35,6 @@ export const ProfilePicture = () => {
         formData.append("profile_picture", file)
 
         try {
-            console.log(file)
             const response = await fetch(`/api/update-profile-picture/${myUser.id}`, {
                 method: 'PUT',
                 headers: headers,
@@ -48,7 +47,6 @@ export const ProfilePicture = () => {
             }
 
             const data = await response.json();
-            console.log('Response from server:', data);
             await window.location.reload();
         } catch (error) {
             console.error('Error uploading profile picture:', error);
