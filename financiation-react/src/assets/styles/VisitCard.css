@@ -39,4 +39,11 @@
     color: white !important;
     padding: 10px !important;
     }
-
+    
+    .Buttondelete{
+        border-radius: 15px !important;
+        background-color: #dc5353 !important;
+        border-color: #df2e2e !important;
+        color: white !important;
+        padding: 10px !important;
+        }

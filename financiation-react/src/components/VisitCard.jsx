@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -8,12 +9,38 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
 import Button from '@mui/material/Button';
+import AuthContext from "../context/AuthContext";
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
 
 
 export const VisitCard = ({ visit }) => {
+    let { authTokens } = useContext(AuthContext);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
+
+    let deleteVisit = async (id) => {
+        let response = await fetch(`/api/visits/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+        } else {
+            toggleModalfailed();
+        }
+    }
     return (
 
         <Container className='CompletlyContainer'>
+            <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess} />
+            <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Zoom in>
                 <div>
                     <Accordion className={'accordion-visits'}>
@@ -125,6 +152,11 @@ export const VisitCard = ({ visit }) => {
                                         </Button>
 
                                     </Link>
+                                </Col>
+                                <Col>
+                                    <Button variant="contained" className="Buttondelete" onClick={() => deleteVisit(visit.id)}>
+                                        Eliminar Visita
+                                    </Button>
                                 </Col>
                             </Row>
                         </AccordionDetails>
