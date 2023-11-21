@@ -82,10 +82,11 @@ class VisitApiView(APIView):
 
         if isinstance(locations_ids, type(None)):
             with connection.cursor() as cursor:
-                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name "
+                cursor.execute("select V.*, L.name, VS.name, CONCAT(l.name, ' ', V.visit_date) as name, G.name "
                                "from \"financiationAPI_visit\" as V "
                                "inner join \"financiationAPI_location\" L on L.id = V.location_id "
                                "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id "
+                               "inner join \"financiationAPI_group\" G on V.group_id = G.id  "
                                "ORDER BY V.visit_date DESC")
                 row = cursor.fetchall()
                 print(row)
@@ -93,7 +94,7 @@ class VisitApiView(APIView):
                     ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
                      "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
                      "address_id", "contacted_referrer_id", "group_id", "location_id", "mayor_id", "politic_party_id",
-                     "visit_status_id", "location_name", "visit_status_name", "name"], row), safe=False)
+                     "visit_status_id", "location_name", "visit_status_name", "name", "group_name"], row), safe=False)
 
         else:
             visits = Visit.objects.raw("SELECT * "
@@ -130,7 +131,7 @@ class VisitApiView(APIView):
             rent_observations=data['rent_observations'],
             place_name=data['place_name'],
             politic_party=politic_party,
-            travel_time=timedelta(minutes=data['travel_time']),
+            travel_time=data['travel_time'],
             visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
@@ -140,12 +141,14 @@ class VisitApiView(APIView):
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
             visit.agreement.add(agreement)
+        
+        for i in data['finance_collaborator_id']:
+            finance_collaborator = UserAccount.objects.get(id=i)
+            visit.finance_collaborator.add(finance_collaborator)
 
-        finance_collaborator = UserAccount.objects.get(id=data['finance_collaborator_id'])
-        visit.finance_collaborator.add(finance_collaborator)
-
-        rent_collaborator = UserAccount.objects.get(id=data['rent_collaborator_id'])
-        visit.rent_collaborator.add(rent_collaborator)
+        for i in data['rent_collaborator_id']:
+            rent_collaborator = UserAccount.objects.get(id=i)
+            visit.rent_collaborator.add(rent_collaborator)
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
@@ -229,11 +232,56 @@ class AdvisorApiView(APIView):
         return Response(serializer.data)
 
 
-@api_view(['GET'])
-def getLocations(request):
-    locations = Location.objects.all()
-    serializer = LocationsSerializer(locations, many=True)
-    return Response(serializer.data)
+class LocationApiView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        department_id = data.get('department')
+        department = CityDepartment.objects.get(id=department_id)
+        location = Location.objects.create(
+            name=data['name'],
+            department=department
+        )
+        serializer = LocationsSerializer(location, many=False)
+        return Response(serializer.data)
+
+    def get(self, request, *args, **kwargs):
+        locations = Location.objects.all()
+        serializer = LocationsSerializer(locations, many=True)
+        return Response(serializer.data)
+
+
+class AgreementApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        agreements = Agreement.objects.all()
+        serializer = AgreementSerializer(agreements, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        agreement = Agreement.objects.create(
+            name=data['name'],
+            description=data['description']
+        )
+        serializer = AgreementSerializer(agreement, many=False)
+        return Response(serializer.data)
+
+class ContactedRederrerApiView(APIView):
+    def get(self, request):
+        contacted_referrers = ContactedReferrer.objects.all()
+        serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        contacted_referrer = ContactedReferrer.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            position=data['position']
+        )
+        serializer = ContactedReferrerSerializer(contacted_referrer, many=False)
+        return Response(serializer.data)
+
 
 
 @api_view(['GET'])
@@ -265,20 +313,6 @@ def getDivisionsFaqs(request):
 def getVisitSatuses(request):
     visit_statuses = VisitStatus.objects.all()
     serializer = VisitStatusSerializer(visit_statuses, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getAgreements(request):
-    agreements = Agreement.objects.all()
-    serializer = AgreementSerializer(agreements, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getContactedReferrers(request):
-    contacted_referrers = ContactedReferrer.objects.all()
-    serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
     return Response(serializer.data)
 
 
@@ -474,6 +508,12 @@ def getGroupAdvisorUsers(request, id):
 
 
 @api_view(['GET'])
+def getVisitById(request, id):
+    visit = Visit.objects.get(id=id)
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
@@ -619,6 +659,53 @@ def putUserbyId(request, id, *args, **kwargs):
     useraccount.phone_number = data['phone_number']
     useraccount.save()
     serializer = UserAccountSerializer(useraccount, many=False)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def putVisitById(request, id, *args, **kwargs):
+    data = request.data
+    address = Address.objects.get(id=data['address_id'])
+    contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+    group = Group.objects.get(id=data['group_id'])
+    mayor = Mayor.objects.get(id=data['mayor_id'])
+    location = Location.objects.get(id=data['location_id'])
+    politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+    visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
+
+    visit = Visit.objects.get(id=id)
+    visit.accommodation=data['accommodation']
+    visit.address=address
+    visit.civil_registration=data['civil_registration']
+    visit.contacted_referrer=contacted_referrer
+    visit.distance=data['distance']
+    visit.flyer=data['flyer']
+    visit.group=group
+    visit.location=location
+    visit.mayor=mayor
+    visit.modernization_fund=data['modernization_fund']
+    visit.rent_observations=data['rent_observations']
+    visit.place_name=data['place_name']
+    visit.politic_party=politic_party
+    visit.travel_time=data['travel_time']
+    visit.visit_date=parse_date(data['visit_date'])
+    visit.start_time=data['start_time']
+    visit.finish_time=data['finish_time']
+    visit.visit_status=visit_status
+
+    for i in data['agreement_id']:
+            agreement = Agreement.objects.get(id=i)
+            visit.agreement.add(agreement)
+
+    for i in data['finance_collaborator_id']:
+        finance_collaborator = UserAccount.objects.get(id=i)
+        visit.finance_collaborator.add(finance_collaborator)
+
+    for i in data['rent_collaborator_id']:
+        rent_collaborator = UserAccount.objects.get(id=i)
+        visit.rent_collaborator.add(rent_collaborator)
+
+    visit.save()
+    serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
 
 

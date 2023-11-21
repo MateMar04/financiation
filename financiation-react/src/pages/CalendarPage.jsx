@@ -7,6 +7,7 @@ import {Badge, Calendar, ConfigProvider, Modal} from 'antd';
 import {getVisits} from "../services/VisitServices";
 import AuthContext from "../context/AuthContext";
 import {useNavigate} from 'react-router-dom';
+import LoadingModal from "../components/LoadingModal";
 
 export const CalendarPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,6 +15,9 @@ export const CalendarPage = () => {
     const [visits, setVisits] = useState([]);
     const {authTokens} = useContext(AuthContext);
     const navigate = useNavigate();
+    const [showloading, setShowloading] = useState(false);
+   
+    let [loading, setLoading] = useState(true)
 
     const showModal = (date) => {
         setSelectedDate(date);
@@ -30,8 +34,17 @@ export const CalendarPage = () => {
     };
 
     useEffect(() => {
-        getVisits(authTokens.access).then(data => setVisits(data));
-    }, []);
+        setShowloading(true);
+    
+        getVisits(authTokens.access)
+          .then((data) => {
+            setVisits(data);
+          })
+          .finally(() => {
+            setShowloading(false);
+          });
+      }, []);
+    
 
     let getDayVisits = (date) => {
         return visits.filter(v => {
@@ -84,6 +97,9 @@ export const CalendarPage = () => {
             <Modal title="Agregar Visita" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 {selectedDate && <p>¿Quiere agregar una visita para el día {selectedDate.format('DD/MM/YYYY')}?</p>}
             </Modal>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
+            </Container>
         </Container>
 
     );

@@ -10,7 +10,7 @@ import {getUserStatusesById} from "../services/StatusServices";
 import {getUserRolesById} from "../services/RoleServices";
 
 
-export const UserCard = ({user}) => {
+export const UserCard = ({user, isChecked, onCheckboxChange}) => {
 
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     let {authTokens} = useContext(AuthContext)
@@ -73,7 +73,10 @@ export const UserCard = ({user}) => {
                                 {status.name === 'Disponible' ? (
                                         <Col xs={2} md={2} className='check'>
                                             <Row>
-                                                <input type="checkbox" className='check' />
+                                                <input type="checkbox" 
+                                                className='check' 
+                                                checked={isChecked}
+                                                onChange={() => onCheckboxChange(user.id)}/>
                                             </Row>
                                         </Col> 
                                     ) : (

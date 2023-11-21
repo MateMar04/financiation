@@ -7,17 +7,28 @@ import IconButton from "@mui/material/IconButton";
 import { Col, Container, Row } from "react-bootstrap";
 import FlotantButton from "../components/FlotantButton";
 import { Link } from "react-router-dom";
-import { Pagination } from "antd";
-import { VisitCard } from "../components/VisitCard";
+import LoadingModal from "../components/LoadingModal";
+
+import {Pagination} from "antd";
+import {VisitCard} from "../components/VisitCard";
 import "../assets/styles/VisitPage.css";
 
+
 export const VisitsPage = () => {
-  useEffect(() => {
-    getVisits(authTokens.access).then((r) => {
-      setVisits(r);
-      setFilteredVisits(r);
-    });
-  }, []);
+
+    useEffect(() => {
+        // Muestra el modal de carga antes de iniciar la carga de visitas
+        setShowloading(true);
+    
+        getVisits(authTokens.access)
+          .then((data) => {
+            setVisits(data);
+          })
+          .finally(() => {
+            // Oculta el modal de carga una vez que la carga se completa (independientemente de si tuvo éxito o no)
+            setShowloading(false);
+          });
+      }, []);
 
   let { authTokens } = useContext(AuthContext);
   let [visits, setVisits] = useState([]);
@@ -28,6 +39,7 @@ export const VisitsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredVisits, setFilteredVisits] = useState([]);
   const [filterActive, setFilterActive] = useState(false);
+  const [showloading, setShowloading] = useState(false);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -61,7 +73,7 @@ export const VisitsPage = () => {
   return (
     <Container>
       <Container>
-        <Link to="/visit/add/">
+        <Link to="/visits/add/">
           <FlotantButton name={"Nueva Visita"} />
         </Link>
       </Container>
@@ -116,7 +128,10 @@ export const VisitsPage = () => {
             current={currentPage}
           />
         )}
-      </Container>
+            </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
+            </Container>
     </Container>
   );
 };
