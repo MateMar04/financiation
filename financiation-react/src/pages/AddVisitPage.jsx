@@ -103,19 +103,19 @@ const AddVisitPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "accommodation": values.accommodation,
+                "accommodation": values.accommodation || false,
                 "address_id": values.address,
                 "agreement_id": values.agreements,
-                "civil_registration": values.civil_registration,
+                "civil_registration": values.civil_registration || false,
                 "contacted_referrer_id": values.contacted_referrer,
                 "distance": values.distance,
                 "finance_collaborator_id": values.finance_collaborator,
-                "flyer": values.flyer,
+                "flyer": values.flyer || false,
                 "group_id": values.group,
                 "location_id": values.location,
                 "mayor_id": values.mayor,
-                "modernization_fund": values.modernization_fund,
-                "rent_observations": values.observations,
+                "modernization_fund": values.modernization_fund || false,
+                "rent_observations": values.observations || '',
                 "place_name": values.place,
                 "politic_party_id": values.politic_party,
                 "rent_collaborator_id": values.rent_collaborator,
@@ -128,15 +128,10 @@ const AddVisitPage = () => {
         })
         if (response.status === 200) {
             toggleModalsucceed();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
+        } else {
             toggleModalfailed();
         }
     }
-
 
     const onFinish = (values) => {
         postVisit(values)

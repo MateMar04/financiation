@@ -10,7 +10,7 @@ export const SucceedModal = (props, {message}) => {
     return (
         <Snackbar open={props.show} autoHideDuration={2500} onClose={props.onClose}>
                 <Alert onClose={props.onClose} severity="success" variant="filled" sx={{ width: '100%' }}>
-                    Se ha registrado correctamente {message}.
+                    Accion exitosa {message}.
                 </Alert>
             </Snackbar>
     )
