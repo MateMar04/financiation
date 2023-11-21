@@ -1,0 +1,28 @@
+.SelectFileButton {
+    background-color: #848484;
+    border-radius: 3vh;
+    border-color: #848484;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    transform: translateY(-10vh);
+}
+
+.SelectFileButton:hover{
+    background-color: #545454 !important;
+    border-color: #545454 !important;
+}
+
+.SelectFileInput {
+    display: none;
+  }
+  
+.GuardarCambiosButton{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    transform: translateY(-8vh);
+}

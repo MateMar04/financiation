@@ -1,4 +1,3 @@
-
 @media (min-width: 800px) {
     .ContainerProfilePage{
         transform: translateY(5vh);
@@ -29,10 +28,19 @@
         padding: 10px;
     }
 
+    .ProfilePictureRow{
+        margin-top: 15vh;
+    }
+
+    .ProfilePictureChange{
+        margin-top: 5vh;
+    }
+    
     .SelectProfile{
     width: 42vw;
         transform: translateX(-1vw);
 
+  
 }
 }
 
@@ -65,12 +73,14 @@
         width: 40vw !important;
         margin-right: 2vw !important;
     }
-
-
-
-
+    }
+    .ProfilePictureRow{
+        margin-top: 15vh;
     }
 
+    .ProfilePictureChange{
+        margin-top: 5vh;
+    }
 
 
 .BtnProfileCerrarSesion{
@@ -122,3 +132,9 @@
     margin-bottom: 3vh;
 }
 
+.IconBackEditPhoto{
+    z-index: 2;
+    font-size: 3vh;
+    color: gray !important;
+    margin: 2vw
+}
