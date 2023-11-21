@@ -13,6 +13,7 @@ import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
 import LoadingModal from "../components/LoadingModal";
+import {getGroups} from "../services/GroupServices";
 
 
 
@@ -43,13 +44,16 @@ export const CreateGroupPage = () => {
     };
     
     useEffect(() => {
-        getUsers(authTokens.access).then(data => {
-            console.log("User Data:", data);
-            setUsers(data);
-            setFilteredUsers(data);
+        setShowloading(true)
+        getUsers(authTokens.access)
+        .then((data) => {
+          setUsers(data);
+          setFilteredUsers(data);
+        })
+        .finally(() => {
+          setShowloading(false);
         });
-    }, [authTokens.access]);
-
+    }, []);
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
@@ -96,9 +100,10 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
+            <LoadingModal message="cargando" show={showloading}/>
             <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
             <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
-
+    
             <Form onSubmit={postGroup}>
                 <Container className="separation font text-center justify-content-center">
                     <Row className='justify-content-center text-center'>
