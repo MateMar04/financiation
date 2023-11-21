@@ -1,20 +1,20 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
-import {Avatar, TextField} from "@mui/material";
-import {DateField} from '@mui/x-date-pickers/DateField';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {ProfilePicture} from "../components/ProfilePicture"
+import { Avatar, TextField } from "@mui/material";
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { ProfilePicture } from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-import {getUser} from "../services/UserServices";
-import {Link} from "react-router-dom";
+import { getUser } from "../services/UserServices";
+import { Link } from "react-router-dom";
 
 const ProfilePage = () => {
 
-    let {authTokens, logoutUser, user} = useContext(AuthContext)
+    let { authTokens, logoutUser, user } = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
@@ -98,31 +98,31 @@ const ProfilePage = () => {
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <IconButton className="EditIconProfile" onClick={handleAddButton}>
-                            <EditIcon color='action' sx={{width: 25, height: 25}}/>
+                            <EditIcon color='action' sx={{ width: 25, height: 25 }} />
                         </IconButton>
                     </Col>
+                </Row>
+
+                <Row className="text-center">
+
                 </Row>
 
                 <Row>
                     <Col className="d-flex justify-content-center">
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                sx={{width: 200, height: 200}} className="ProfilePicture"/>
+                            sx={{ width: 180, height: 180 }} className="ProfilePicture" />
                     </Col>
                 </Row>
 
-
-                {showButton && (
-                    <Row className={'justify-content-center text-center'}>
-                        <ProfilePicture editProfilePicture={editProfilePicture}/>
-                    </Row>
-                )}
-
-
-                <Row className={'justify-content-center text-center'}>
-                    <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
-                    <h3 className="ProfileText">Coordinador</h3>
+                <Row className="text-center">
+                    <h4 className=""> Bienvenido, {myUser?.first_name} {myUser?.last_name} </h4>
                 </Row>
 
+                <Row className="text-center">
+                    <p className={'WelcomeUser'}>Aquí encontraras información personal y podrás modificarla. </p>
+                </Row>
+
+           
                 <Container className="InputsProfile">
 
                     <Row className={"d-flex justify-content-center text-center"}>
@@ -130,25 +130,25 @@ const ProfilePage = () => {
 
                             {editMode ?
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                           defaultValue={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({
-                                               ...editedFirstName,
-                                               first_name: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: false
-                                           }}></TextField> :
+                                    defaultValue={defaultFirstName}
+                                    onChange={(e) => setEditedFirstName({
+                                        ...editedFirstName,
+                                        first_name: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: false
+                                    }}></TextField> :
                                 <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                           value={defaultFirstName}
-                                           onChange={(e) => setEditedFirstName({
-                                               ...editedFirstName,
-                                               first_name: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: true
-                                           }}></TextField>
+                                    value={defaultFirstName}
+                                    onChange={(e) => setEditedFirstName({
+                                        ...editedFirstName,
+                                        first_name: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: true
+                                    }}></TextField>
                             }
 
 
@@ -156,25 +156,25 @@ const ProfilePage = () => {
                         <Col md={6} className="py-3">
                             {editMode ?
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                           defaultValue={defaultLastName}
-                                           onChange={(e) => setEditedLastName({
-                                               ...editedLastName,
-                                               last_name: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: false
-                                           }}></TextField> :
+                                    defaultValue={defaultLastName}
+                                    onChange={(e) => setEditedLastName({
+                                        ...editedLastName,
+                                        last_name: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: false
+                                    }}></TextField> :
                                 <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                           value={defaultLastName}
-                                           onChange={(e) => setEditedLastName({
-                                               ...editedLastName,
-                                               last_name: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: true
-                                           }}></TextField>
+                                    value={defaultLastName}
+                                    onChange={(e) => setEditedLastName({
+                                        ...editedLastName,
+                                        last_name: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: true
+                                    }}></TextField>
                             }
                         </Col>
                     </Row>
@@ -184,34 +184,34 @@ const ProfilePage = () => {
                         <Col md={6} className="py-3">
 
                             <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                       value={defaultSSN} InputProps={{
-                                sx: {borderRadius: 5},
-                                readOnly: !editMode
-                            }}></TextField>
+                                value={defaultSSN} InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: !editMode
+                                }}></TextField>
 
                         </Col>
                         <Col md={6} className="py-3">
                             {editMode ?
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
-                                           defaultValue={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({
-                                               ...editedPhoneNumber,
-                                               phone_number: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: false
-                                           }}></TextField> :
+                                    defaultValue={defaultPhoneNumber}
+                                    onChange={(e) => setEditedPhoneNumber({
+                                        ...editedPhoneNumber,
+                                        phone_number: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: false
+                                    }}></TextField> :
                                 <TextField variant='outlined' label='Teléfono' required className='profileTextField'
-                                           value={defaultPhoneNumber}
-                                           onChange={(e) => setEditedPhoneNumber({
-                                               ...editedPhoneNumber,
-                                               phone_number: e.target.value
-                                           })}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: true
-                                           }}></TextField>
+                                    value={defaultPhoneNumber}
+                                    onChange={(e) => setEditedPhoneNumber({
+                                        ...editedPhoneNumber,
+                                        phone_number: e.target.value
+                                    })}
+                                    InputProps={{
+                                        sx: { borderRadius: 5 },
+                                        readOnly: true
+                                    }}></TextField>
                             }
                         </Col>
                     </Row>
@@ -219,9 +219,9 @@ const ProfilePage = () => {
                         <Col md={6} xs={12} className="py-3">
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{
-                                    sx: {borderRadius: 5},
+                                    sx: { borderRadius: 5 },
                                     readOnly: !editMode
-                                }} variant="outlined"/>
+                                }} variant="outlined" />
                             </LocalizationProvider>
 
 
@@ -229,18 +229,18 @@ const ProfilePage = () => {
                         <Col md={6} className="py-3">
 
                             <TextField variant='outlined' label='Ciudad' className='profileTextField'
-                                       InputProps={{
-                                           sx: {borderRadius: 5},
-                                           readOnly: !editMode
+                                InputProps={{
+                                    sx: { borderRadius: 5 },
+                                    readOnly: !editMode
 
-                                       }}></TextField>
+                                }}></TextField>
 
                         </Col>
                     </Row>
                     <Row>
                         {showLogoutButton && (
                             <Col className="d-flex justify-content-center py-3">
-                                <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my: 3}}>Cerrar
+                                <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{ my: 3 }}>Cerrar
                                     Sesion</Button>
                             </Col>
 
