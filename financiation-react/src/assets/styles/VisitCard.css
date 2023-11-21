@@ -26,3 +26,13 @@
 .ButtonAddVisit{
     margin-top: 2vh !important;
 }
+
+.ButtonEditVisit{
+    
+    margin: 1px;
+    padding-top: 1vh;
+}
+
+.Buttonedit{
+    border-radius: 10vh;
+}
