@@ -82,7 +82,7 @@ export const CalendarPage = () => {
                           dateCellRender={(date) => {
                               let day = new Date(date)
                               let visits = getDayVisits(day)
-                              return visits?.map(v => <Badge status={v.status} text={v.name}/>)
+                              return visits?.map((v, i) => <Badge key={i} status={v.status} text={v.name}/>)
                           }}
 
                           monthCellRender={(date) => {
