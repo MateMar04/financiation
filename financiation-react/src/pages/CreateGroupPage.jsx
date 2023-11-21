@@ -12,6 +12,8 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
+import LoadingModal from "../components/LoadingModal";
+
 
 
 export const CreateGroupPage = () => {
@@ -22,6 +24,8 @@ export const CreateGroupPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [userCheckboxes, setUserCheckboxes] = useState({});
+    const [showloading, setShowloading] = useState(false);
+
 
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
