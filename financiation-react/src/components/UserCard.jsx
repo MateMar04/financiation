@@ -10,11 +10,11 @@ import { getUserStatusesById } from "../services/StatusServices";
 import { getUserRolesById } from "../services/RoleServices";
 import { Tooltip } from 'antd';
 
-export const UserCard = ({ user, isChecked, onCheckboxChange, defaultRole}) => {
+export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defaultRole}) => {
     const { authTokens } = useContext(AuthContext);
     const [role, setRole] = useState([]);
     const [status, setStatus] = useState([]);
-    const [selectedRole, setSelectedRole] = useState(defaultRole || null);
+    const [selectedRole, setSelectedRole] = useState(null);
 
     const handleCheckboxChange = () => {
         onCheckboxChange(user.id, selectedRole);
@@ -23,13 +23,25 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, defaultRole}) => {
     const handleRoleChange = (e) => {
         const roleValue = e.target.value;
         setSelectedRole(roleValue);
-        setRole(roleValue); // Update role state if needed
+        onRoleChange(user.id, roleValue);
     };
+
+    const setDefaultRole = () => {
+        if (defaultRole === 'coordinador') {
+            setSelectedRole('coordinador');
+        } else if (defaultRole === 'asesor') {
+            setSelectedRole('asesor');
+        } else {
+            setSelectedRole(null);
+        }
+    };
+    
 
     useEffect(() => {
         getUserStatusesById(authTokens.access, user?.user_status).then((data) => setStatus(data));
         getUserRolesById(authTokens.access, user?.role).then((data) => setRole(data));
-    }, [authTokens.access, user]);
+        setDefaultRole();
+    }, [authTokens.access, user, defaultRole]);
 
     return (
         <>
@@ -68,10 +80,9 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, defaultRole}) => {
                                                     placeholder="Rol en grupo"
                                                     className='form-select'
                                                     name="Role"
-                                                    defaultValue={selectedRole}  
                                                     onChange={handleRoleChange}
                                                 >
-                                                    <option value="none" disabled hidden selected>Seleccionar</option>
+                                                    <option value="seleccionar" disabled hidden selected>{selectedRole}</option>
                                                     <option value="coordinador">Coordinador</option>
                                                     <option value="asesor">Asesor</option>
                                                 </select>

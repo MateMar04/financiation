@@ -47,23 +47,57 @@ export const CreateGroupPage = () => {
     
             console.log('Updated userCheckboxes:', updatedCheckboxes);
     
+            // Capture the selected role directly from the event
+            setSelectedRole(selectedRole);
+    
+            setSelectedCoordinators((prevCoordinators) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
+                    ? [...prevCoordinators, userId]
+                    : prevCoordinators.filter((id) => id !== userId)
+            );
+    
+            setSelectedAdvisors((prevAdvisors) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
+                    ? [...prevAdvisors, userId]
+                    : prevAdvisors.filter((id) => id !== userId)
+            );
+    
             return updatedCheckboxes;
         });
-    
-        if (!userCheckboxes[userId]?.checked) {
-            setSelectedRole(selectedRole);
-        }
-    
-        if (selectedRole === 'coordinador') {
-            setSelectedCoordinators((prevCoordinators) =>
-                !userCheckboxes[userId]?.checked ? [...prevCoordinators, userId] : prevCoordinators.filter((id) => id !== userId)
-            );
-        } else if (selectedRole === 'asesor') {
-            setSelectedAdvisors((prevAdvisors) =>
-                !userCheckboxes[userId]?.checked ? [...prevAdvisors, userId] : prevAdvisors.filter((id) => id !== userId)
-            );
-        }
     };
+    const handleRoleChange = (userId, selectedRole) => {
+        setUserCheckboxes((prevUserCheckboxes) => {
+            // Your logic for handling role changes in the CreateGroupPage component
+            console.log(`Role change for user ${userId} to ${selectedRole}`);
+            const updatedCheckboxes = {
+                ...prevUserCheckboxes,
+                [userId]: { checked: prevUserCheckboxes[userId]?.checked, role: selectedRole },
+            };
+    
+            // Capture the selected role directly from the event
+            setSelectedRole(selectedRole);
+    
+            setSelectedCoordinators((prevCoordinators) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
+                    ? [...prevCoordinators, userId]
+                    : prevCoordinators.filter((id) => id !== userId)
+            );
+    
+            setSelectedAdvisors((prevAdvisors) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
+                    ? [...prevAdvisors, userId]
+                    : prevAdvisors.filter((id) => id !== userId)
+            );
+    
+            // Call onRoleChange prop to handle role change
+            // onRoleChange(userId, selectedRole);
+    
+            return updatedCheckboxes;
+        });
+    };
+    
+    
+    
 
     useEffect(() => {
         getUsers(authTokens.access).then(data => {
@@ -148,6 +182,7 @@ export const CreateGroupPage = () => {
                                 user={user}
                                 isChecked={userCheckboxes[user.id]?.checked}
                                 onCheckboxChange={handleCheckboxChange}
+                                onRoleChange={handleRoleChange}  // Passed onRoleChange as a prop
                                 defaultRole={userCheckboxes[user.id]?.role}
                             />
                         </Container>
