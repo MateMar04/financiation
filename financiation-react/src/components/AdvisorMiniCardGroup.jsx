@@ -27,7 +27,6 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
 
     const cancel = (e) => {
-        console.log(e);
         message.error('Se ha cancelado la eliminación');
     };
 

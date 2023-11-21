@@ -24,7 +24,6 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
     }, [coordinatorDeleted, updateFlag])
 
     const cancel = (e) => {
-        console.log(e);
         message.error('Se ha cancelado la eliminación');
     };
 

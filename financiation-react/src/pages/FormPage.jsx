@@ -129,7 +129,6 @@ const FormPage = () => {
 
     let handleSumbit = async (e) => {
         e.preventDefault()
-        console.log(observation)
 
         for (let i = 1; i <= selectedQuantity; i++) {
             await postRequest()

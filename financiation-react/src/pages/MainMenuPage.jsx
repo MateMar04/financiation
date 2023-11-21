@@ -174,7 +174,7 @@ export const MainMenuPage = () => {
                                 {userGroup && userGroup.length > 0 ? (
                                     <h2 className="name-title">{userGroup[0].group}</h2>
                                 ) : (
-                                    <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
+                                    <h2 className="name-title">Sin Grupo</h2>
                                 )}
 
                             </Row>

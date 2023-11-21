@@ -89,7 +89,6 @@ const EditVisitPage = () => {
     }
 
     useEffect(() => {
-        console.log(visit)
         formRef.current.setFieldsValue({
             location: visit.location,
             visit_date: dayjs(visit.visit_date),
@@ -112,10 +111,6 @@ const EditVisitPage = () => {
             visit_status: visit.visit_status,
             group: visit.group,
         });
-        console.log("Flyer:", visit.flyer);
-        console.log("Civil Registration:", visit.civil_registration);
-        console.log("Accommodation:", visit.accommodation);
-        console.log("Modernization Fund:", visit.modernization_fund);
     }, [visit])
 
     useEffect(() => {
@@ -189,7 +184,6 @@ const EditVisitPage = () => {
 
 
     const onFinish = (values) => {
-        console.log(values.accommodation)
         putVisit(values, visitData)
     };
 

@@ -19,10 +19,8 @@ export const getVisitById = async (tokens, visitId) => {
         }
         let response = await fetch(`/api/visits/${visitId}`, {headers: headers})
         let data = await response.json()
-        console.log('Visit Data:', data);
         return data;
     } catch (error) {
-        console.error('Error fetching visit:', error);
         throw error;
     }
 };
