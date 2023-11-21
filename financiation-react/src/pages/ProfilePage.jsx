@@ -1,19 +1,27 @@
-import React, {useContext, useEffect, useState} from "react";
-import {Button, Col, Container, Row} from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/ProfilePage.css";
 import AuthContext from "../context/AuthContext";
-import {Avatar, TextField} from "@mui/material";
-import {DateField} from '@mui/x-date-pickers/DateField';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {ProfilePicture} from "../components/ProfilePicture"
+import { Avatar, TextField } from "@mui/material";
+import { DateField } from '@mui/x-date-pickers/DateField';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { ProfilePicture } from "../components/ProfilePicture"
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-import {getUser} from "../services/UserServices";
+import { getUser } from "../services/UserServices";
+import { Link } from "react-router-dom";
 
+import { EditOutlined } from "@ant-design/icons";
+import { Popover, Select } from 'antd';
+import { Divider } from 'antd';
+import { Input } from 'antd';
+import { DatePicker } from 'antd';
+import { getLocations } from "../services/LocationServices";
+import { Button } from 'antd';
 const ProfilePage = () => {
 
-    let {authTokens, logoutUser, user} = useContext(AuthContext)
+    let { authTokens, logoutUser, user } = useContext(AuthContext)
 
     const [showButton, setShowButton] = useState(false);
     const [showLogoutButton, setShowLogoutButton] = useState(true);
@@ -28,17 +36,21 @@ const ProfilePage = () => {
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
+    const [editProfilePicture, setEditProfilePicture] = useState(false);
+    const [editedFirstName, setEditedFirstName] = useState(defaultFirstName);
+    const [editedLastName, setEditedLastName] = useState(defaultLastName);
+    const [editedPhoneNumber, setEditedPhoneNumber] = useState(defaultPhoneNumber);
 
-
-    const handleUserSelection = (e) => {
-        const selectedUserId = e.target.value;
-        const selecteduser = myUser.find((myUser) => myUser.id === parseInt(selectedUserId, 10));
-        setEditedUser(selecteduser);
-    };
-
+    const getData = async () => {
+        const usuario = await getUser(authTokens.access)
+        setMyUser(usuario)
+    }
     useEffect(() => {
         getUser(authTokens.access).then(data => setMyUser(data))
+        getData()
     }, []);
+
+
     const handleAddButton = () => {
         setShowLogoutButton(!showLogoutButton);
         setEditMode(!editMode);
@@ -46,8 +58,13 @@ const ProfilePage = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         putUser();
+        setShowLogoutButton(!showLogoutButton);
+        setEditMode(!editMode);
     };
+
+
     let putUser = async () => {
+
 
         let response = await fetch(`/api/users/put/${myUser?.id}`, {
             method: "PUT",
@@ -57,9 +74,9 @@ const ProfilePage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": editedUser.first_name,
-                "last_name": editedUser.last_name,
-                "phone_number":editedUser.phone_number,
+                "first_name": editedFirstName.first_name || myUser?.first_name,
+                "last_name": editedLastName.last_name || myUser?.last_name,
+                "phone_number": editedPhoneNumber.phone_number || myUser?.phone_number,
             })
         })
 
@@ -67,9 +84,9 @@ const ProfilePage = () => {
             toggleModalsucceed();
             setMyUser({
                 ...myUser,
-                first_name: editedUser.first_name,
-                last_name: editedUser.last_name,
-                phone_number:editedUser.phone_number,
+                first_name: editedFirstName.first_name || myUser?.first_name,
+                last_name: editedLastName.last_name || myUser?.last_name,
+                phone_number: editedPhoneNumber.phone_number || myUser?.phone_number
             });
         } else if (response.status === 500) {
             toggleModalfailed();
@@ -83,139 +100,132 @@ const ProfilePage = () => {
     return (
         <form onSubmit={(e) => handleFormSubmit(e)}>
             <Container className="ContainerProfilePage">
-                <Row>
-                    <Col className="d-flex justify-content-center">
-                        <IconButton className="EditIconProfile" onClick={handleAddButton}>
-                            <EditIcon color='action' sx={{width: 25, height: 25}}/>
-                        </IconButton>
-                    </Col>
+
+                <Row className="text-center">
+
                 </Row>
+
                 <Row>
                     <Col className="d-flex justify-content-center">
+                    <Popover content="Editar foto de perfil >">
+                    <Link to={'/editphoto'}>
                         <Avatar alt="Remy Sharp" src={'data:image/png;base64, ' + myUser?.profile_picture}
-                                sx={{width: 200, height: 200}} className="ProfilePicture"/>
+                            sx={{ width: 180, height: 180 }} className="ProfilePicture" />
+                            </Link>
+                            </Popover>
                     </Col>
                 </Row>
-                {showButton && (
-                    <Row className={'justify-content-center text-center'}>
-                        <ProfilePicture/>
-                    </Row>
-                )}
 
-
-                <Row className={'justify-content-center text-center'}>
-                    <h1 className="ProfileText">{myUser?.first_name} {myUser?.last_name}</h1>
-                    <h3 className="ProfileText">Coordinador</h3>
+                <Row className="text-center">
+                    <h4 className=""> Bienvenido, {myUser?.first_name} {myUser?.last_name} </h4>
                 </Row>
 
-                <Container className="InputsProfile">
-
-                    <Row className={"d-flex justify-content-center text-center"}>
-                        <Col md={6} className="py-3">
-
-                            {editMode ?
-                                <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                           defaultValue={defaultFirstName}
-                                           onChange={(e) => setEditedUser({...editedUser, first_name: e.target.value})}
-                                           InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: false
-                                }}></TextField> :
-                                <TextField variant='outlined' label='Nombre' required className='profileTextField'
-                                           value={defaultFirstName}
-                                           onChange={(e) => setEditedUser({...editedUser, first_name: e.target.value})}
-                                           InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: true
-                                }}></TextField>
-                            }
+                <Row className="text-center">
+                    <p className={'WelcomeUser'}>Aquí encontraras información personal y podrás modificarla. </p>
+                </Row>
 
 
-                        </Col>
-                        <Col md={6} className="py-3">
-                            {editMode ?
-                                <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                           defaultValue={defaultLastName}
-                                           onChange={(e) => setEditedUser({...editedUser, last_name: e.target.value})}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: false
-                                           }}></TextField> :
-                                <TextField variant='outlined' label='Apellido' required className='profileTextField'
-                                           value={defaultLastName}
-                                           onChange={(e) => setEditedUser({...editedUser, last_name: e.target.value})}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: true
-                                           }}></TextField>
-                            }
-                        </Col>
+                <Row className={'d-flex justify-content-end'}>
+                    <Col>
+                        <h3 className={'ImportantTextProfile'}>Información básica</h3>
+                    </Col>
+                    <Col className={'d-flex justify-content-end'}>
+                        <Popover content="¿Desea editar los datos?">
+                            <EditOutlined className={'IconEdit'} onClick={handleAddButton} />
+                        </Popover>
+                    </Col>
+                </Row>
+
+                <Container>
+                    <Row className={'InfoProfile'}>
+                        <Divider/>
+                        {editMode ?
+                            <>
+                                <a>Nombre</a>
+                                <Input placeholder="Nombre" defaultValue={defaultFirstName}
+                                       onChange={(e) => setEditedFirstName({
+                                        ...editedFirstName,
+                                        first_name: e.target.value
+                                    })}
+                                       required className={'InputsProfile'} size="large"/>
+
+                            </>
+                            :
+                            <>
+                                <a>Nombre</a>
+                                <h5>{defaultFirstName}</h5>
+                            </>
+                        }
+                        <Divider/>
+                        {editMode ?
+                            <>
+                                <a>Apellido</a>
+                                <Input placeholder={"Apellido"} defaultValue={defaultLastName}
+                                       onChange={(e) => setEditedLastName({...editedLastName, last_name: e.target.value})}
+                                       required className={'InputsProfile'} size="large"/>
+                            </>
+                            :
+                            <>
+                                <a>Apellido</a>
+                                <h5>{defaultLastName}</h5>
+                            </>
+                        }
+                        <Divider/>
+                        <>
+                            <a>CUIL</a>
+                            <h5>{defaultSSN}</h5>
+                        </>
+                        <Divider/>
                     </Row>
 
 
-                    <Row className={"d-flex justify-content-center text-center"}>
-                        <Col md={6} className="py-3">
-
-                            <TextField variant='outlined' label='CUIL' required className='profileTextField'
-                                       value={defaultSSN} InputProps={{
-                                sx: {borderRadius: 5},
-                                readOnly: !editMode
-                            }}></TextField>
-
-                        </Col>
-                        <Col md={6} className="py-3">
-                            {editMode ?
-                                <TextField variant='outlined' label='Teléfono' required className='profileTextField'
-                                           defaultValue={defaultPhoneNumber}
-                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: false
-                                           }}></TextField> :
-                                <TextField variant='outlined' label='Teléfono' required className='profileTextField'
-                                           value={defaultPhoneNumber}
-                                           onChange={(e) => setEditedUser({...editedUser, phone_number: e.target.value})}
-                                           InputProps={{
-                                               sx: {borderRadius: 5},
-                                               readOnly: true
-                                           }}></TextField>
-                            }
-                        </Col>
-                    </Row>
-                    <Row className={"d-flex justify-content-center text-center"}>
-                        <Col md={6} xs={12} className="py-3">
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DateField label="Fecha de Nacimiento" className='profileTextField' InputProps={{
-                                    sx: {borderRadius: 5},
-                                    readOnly: !editMode
-                                }} variant="outlined"/>
-                            </LocalizationProvider>
-
-
-                        </Col>
-                        <Col md={6} className="py-3">
-
-                            <TextField variant='outlined' label='Ciudad' className='profileTextField'
-                                       InputProps={{
-                                           sx: {borderRadius: 5},
-                                           readOnly: !editMode
-
-                                       }}></TextField>
-
-                        </Col>
-                    </Row>
                     <Row>
-                        {showLogoutButton && (
-                            <Col className="d-flex justify-content-center py-3">
-                                <Button className='BtnProfileCerrarSesion' onClick={logoutUser} sx={{my: 3}}>Cerrar
-                                    Sesion</Button>
-                            </Col>
-
-                        )}
+                        <h3 className={'ImportantTextProfile'}>Información adicional</h3>
                     </Row>
-                    <div className='btnactualizar'>
-                        <Button className='BtnIniciarSesionLogin btninedit' type='submit'>Actualizar</Button>
-                    </div>
+
+                    <Row className={'InfoProfile'}>
+                        <Divider/>
+                        {editMode ?
+                            <>
+                                <a>Teléfono</a>
+                                <Input placeholder="Teléfono" defaultValue={defaultPhoneNumber}
+                                       onChange={(e) => setEditedPhoneNumber({...editedPhoneNumber, phone_number: e.target.value})}
+                                       required className={'InputsProfile'} size="large"/>
+                            </>
+                            :
+                            <>
+                                <a>Teléfono</a>
+                                <h5>{defaultPhoneNumber}</h5>
+
+                            </>
+
+                        }
+                        <Divider/>  
+            
+                    </Row>
+
+                    <Row className={'justify-content-center'}>
+                        {showLogoutButton ?
+                            <>
+                                <Button type="primary" danger onClick={logoutUser} className='BtnProfileCerrarSesion'>
+                                    Cerrar sesión
+                                </Button>
+                            </>
+                            :
+                            <>
+
+                                <Col md={4} xs={6}>
+                                    <Button className={'CancelarBtnProfile'} onClick={handleAddButton}>Cancelar</Button>
+                                </Col>
+                                <Col md={4} xs={6}>
+                                    <Button className={'GuardarBtnProfile'} onClick={handleFormSubmit}>Actualizar
+                                        Datos</Button>
+                                </Col>
+
+                            </>
+                        }
+
+                    </Row>
                 </Container>
             </Container>
         </form>

@@ -1,38 +1,29 @@
-import React, {useContext, useEffect, useState} from "react";
-import '../assets/styles/ProfilePicture.css';
+import React, { useContext, useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
 import AuthContext from "../context/AuthContext";
-import {Button, Col, Row} from "react-bootstrap";
-import {getMyUser, getUser} from "../services/UserServices";
+import "../assets/styles/ProfilePicture.css";
 
-export const ProfilePicture = () => {
-    const [file, setFile] = useState(null);
-    const [message, setMessage] = useState('');
-    const {authTokens} = useContext(AuthContext)
-    const [myUser, setMyUser] = useState()
+export const ProfilePicture = ({ myUser, updateUserData }) => {
+  const [file, setFile] = useState(null);
+  const [message, setMessage] = useState("");
+  const { authTokens } = useContext(AuthContext);
 
-    const getData = async () => {
-        const usuario = await getUser(authTokens.access)
-        setMyUser(usuario)
-    }
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    // Immediately update user data when a new picture is selected
 
-    useEffect(() => {
-        getData()
-    }, []);
+  };
 
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
+  let headers = {
+    Authorization: "JWT " + String(authTokens.access),
+    Accept: "application/json",
+  };
 
-    let headers = {
-        "Authorization": "JWT " + String(authTokens.access),
-        "Accept": "application/json"
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formData = new FormData()
-        formData.append("profile_picture", file)
+    const formData = new FormData();
+    formData.append("profile_picture", file);
 
         try {
             const response = await fetch(`/api/update-profile-picture/${myUser.id}`, {
@@ -42,9 +33,9 @@ export const ProfilePicture = () => {
 
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
 
             const data = await response.json();
             await window.location.reload();
@@ -54,8 +45,8 @@ export const ProfilePicture = () => {
     };
 
 
-    return (
-        <div>
+  return (
+    <div>
             <form onSubmit={handleSubmit}>
                 <Row className={'justify-content-center text-center'}>
                     <Col>
@@ -79,5 +70,5 @@ export const ProfilePicture = () => {
             </form>
             <p>{message}</p>
         </div>
-    );
+  );
 };

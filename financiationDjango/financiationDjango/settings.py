@@ -63,7 +63,7 @@ SIMPLE_JWT = {
 }
 
 DOMAIN = ('localhost:3000')
-SITE_NAME = ('Dragoncitos Financieros Moviles')
+SITE_NAME = ('Finanzas moviles')
 
 DJOSER = {
     'LOGIN_FIELD': 'ssn',
