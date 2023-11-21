@@ -84,7 +84,7 @@ export const MainMenuPage = () => {
                                             </strong>
                                         </Row>
                                         <Row>
-                                            <Col xs={1} md={3}>
+                                            <Col xs={5} md={3}>
                                                 <p className="p-main-menu-card">{status?.name}</p>
                                             </Col>
                                             <Col xs={1} md={1} className="justify-content-end">
@@ -133,7 +133,7 @@ export const MainMenuPage = () => {
                                     {latestVisitRequests && latestVisitRequests.length > 0 ? (
                                         <h3 className="fw-bold">{latestVisitRequests[0].requests}</h3>
                                     ) : (
-                                        <p>No visit requests available</p>
+                                        <p>No hubo visita</p>
                                     )}
                                 </Row>
                             </Container>
@@ -144,7 +144,7 @@ export const MainMenuPage = () => {
                 <Col lg={4}>
                     <Zoom in style={{ transitionDelay: '200ms' }}>
                         <Card className="next-visits-card" id="center-card">
-                            <Container>
+                            <Container> 
                                 <Row className="text-center">
                                     <h2 className="name-title">Próximas Visitas</h2>
                                 </Row>
@@ -160,7 +160,6 @@ export const MainMenuPage = () => {
                                         </Col>
                                     </Row>
                                 </Link>
-
                             </Container>
                         </Card>
                     </Zoom>

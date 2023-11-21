@@ -14,6 +14,7 @@ const LoginPage = () => {
     let {loginUser} = useContext(AuthContext)
     return (
 
+
         <Container className="ContainerLoginPage">
 
             <Row className={'justify-content-center text-center'}>
