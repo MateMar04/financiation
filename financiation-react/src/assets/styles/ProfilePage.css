@@ -9,8 +9,13 @@
 
     .ProfilePicture{
         margin: 2vh;
+        transition: box-shadow 0.8s ease;
     }
 
+    .ProfilePicture:hover{
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5) !important;
+        z-index: 2;
+    }
     .ImportantTextProfile{
         margin-left: 2vw;
     }
@@ -87,7 +92,8 @@
 
 .CancelarBtnProfile:hover{
     background-color: #545454;
-    border-color: #545454;
+    border-color: #545454 !important;
+    color: white !important;
 
 }
 
@@ -104,6 +110,7 @@
 .GuardarBtnProfile:hover{
     background-color: #026fb8;
     border-color: #026fb8;
+    color: white !important;
 }
 
 .IconEdit{
