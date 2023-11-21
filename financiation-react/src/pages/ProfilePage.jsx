@@ -58,12 +58,13 @@ const ProfilePage = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         putUser();
+        setShowLogoutButton(!showLogoutButton);
+        setEditMode(!editMode);
     };
 
 
     let putUser = async () => {
 
-        console.log("hola")
 
         let response = await fetch(`/api/users/put/${myUser?.id}`, {
             method: "PUT",
