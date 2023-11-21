@@ -9,26 +9,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
 import Button from '@mui/material/Button';
 
-// const DurationToTime = (duration) => {
-//     const hoursMatch = duration.match(/(\d+)H/);
-//     const minutesMatch = duration.match(/(\d+)M/);
-//     let hours = 0;
-//     let minutes = 0;
-
-//     if (hoursMatch) {
-//         hours = parseInt(hoursMatch[1], 10);
-//     }
-
-//     if (minutesMatch) {
-//         minutes = parseInt(minutesMatch[1], 10);
-//     }
-
-//     const timeDate = new Date();
-//     timeDate.setHours(hours);
-//     timeDate.setMinutes(minutes);
-
-//     return timeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-// }
 
 export const VisitCard = ({ visit }) => {
     return (
@@ -43,8 +23,8 @@ export const VisitCard = ({ visit }) => {
                             id="panel1a-header"
                             className="AccordionSummary"
                         >
-                            <Typography sx={{ width: '70%' }} className="VisitName text-start"><h6>
-                                {visit.name}</h6>
+                            <Typography sx={{ width: '70%' }} className="VisitName text-start">
+                                {visit.name}
                             </Typography>
                             <Typography sx={{ color: 'text.secondary', width: '20%' }}
                                 className="text-end">{visit.visit_status_name}</Typography>
