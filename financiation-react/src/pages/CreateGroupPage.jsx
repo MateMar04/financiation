@@ -40,7 +40,6 @@ export const CreateGroupPage = () => {
     
     useEffect(() => {
         getUsers(authTokens.access).then(data => {
-            console.log("User Data:", data);
             setUsers(data);
             setFilteredUsers(data);
         });
@@ -128,8 +127,8 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <Container className="justify-content-center">
-                    {filteredUsers.map((user) => (
-                        <Container key={user.id} className="containerUserCard justify-content-center text-center">
+                    {filteredUsers.map((user, i) => (
+                        <Container key={i} className="containerUserCard justify-content-center text-center">
                             <UserCard user={user} isChecked={userCheckboxes[user.id]} onCheckboxChange={handleCheckboxChange}/>
                         </Container>
                     ))}

@@ -20,9 +20,7 @@ export const GroupsPage = () => {
     const [showloading, setShowloading] = useState(false);
    
     useEffect(() => {
-        console.log(showloading)
         setShowloading(true);
-        console.log(showloading)
         getGroups(authTokens.access)
         .then((data) => {
           setGroups(data);
@@ -38,8 +36,8 @@ export const GroupsPage = () => {
                 <Link to='/groups/add'>
                     <FlotantButton name='Nuevo Grupo'/>
                     </Link>
-                {groups?.map((group) => (
-                    <Container>
+                {groups?.map((group, i) => (
+                    <Container key={i}>
                         <GroupCard group={group} />
                     </Container>
                 ))}

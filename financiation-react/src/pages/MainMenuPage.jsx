@@ -149,8 +149,8 @@ export const MainMenuPage = () => {
                                     <h2 className="name-title">Próximas Visitas</h2>
                                 </Row>
                                 <Container className="container-visit-card-main-menu">
-                                    {latestVisits?.map((visit) => (
-                                        <VisitCardMainMenu name={visit.name} status={visit.status} />
+                                    {latestVisits?.map((visit, i) => (
+                                        <VisitCardMainMenu key={i} name={visit.name} status={visit.status} />
                                     ))}
                                 </Container>
                                 <Link to={'/visits'}>
@@ -173,14 +173,14 @@ export const MainMenuPage = () => {
                                 {userGroup && userGroup.length > 0 ? (
                                     <h2 className="name-title">{userGroup[0].group}</h2>
                                 ) : (
-                                    <h2 className="name-title" onClick={() => console.log(userGroup)}>Sin Grupo</h2>
+                                    <h2 className="name-title">Sin Grupo</h2>
                                 )}
 
                             </Row>
                             <Row id="nombresscroll" className="text-center justify-content-center ">
 
-                                {userGroup?.map((i) => (
-                                    <PersonRowMainMenu role={i?.role} first_name={i?.first_name} last_name={i?.last_name} />
+                                {userGroup?.map((user, i) => (
+                                    <PersonRowMainMenu key={i} role={user?.role} first_name={user?.first_name} last_name={user?.last_name} />
                                 ))}
                             </Row>
                             <Row className={'justify-content-end'}>

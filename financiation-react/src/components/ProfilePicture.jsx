@@ -25,26 +25,25 @@ export const ProfilePicture = ({ myUser, updateUserData }) => {
     const formData = new FormData();
     formData.append("profile_picture", file);
 
-    try {
-      const response = await fetch(`/api/update-profile-picture/${myUser.id}`, {
-        method: "PUT",
-        headers: headers,
-        body: formData,
-      });
+        try {
+            const response = await fetch(`/api/update-profile-picture/${myUser.id}`, {
+                method: 'PUT',
+                headers: headers,
+                body: formData
+
+            });
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      console.log("Response from server:", data);
-      updateUserData();
-      // Note: You can choose whether to keep this line or remove it based on your needs
-      // updateUserData(); // You may or may not want to call it here as well
-    } catch (error) {
-      console.error("Error uploading profile picture:", error);
-    }
-  };
+            const data = await response.json();
+            await window.location.reload();
+        } catch (error) {
+            console.error('Error uploading profile picture:', error);
+        }
+    };
+
 
   return (
     <div>
