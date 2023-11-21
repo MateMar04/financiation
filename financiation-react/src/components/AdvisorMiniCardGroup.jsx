@@ -56,8 +56,8 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
     return (
         <>
             <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
-            {advisors?.map((advisor) => (
-                <Container key={advisor.id_user}>
+            {advisors?.map((advisor, i) => (
+                <Container key={i}>
                     <Row className='AdvisorBorder'>
                         <Col xs={2} md={2} className='"d-flex align-items-center justify-content-center'>
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={'data:image/png;base64, ' + advisor?.profile_picture}>

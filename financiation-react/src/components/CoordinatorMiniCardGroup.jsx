@@ -52,8 +52,8 @@ export const CoordinatorMiniCardGroup = ({ group, showButton }) => {
     return (
         <>
             <CoordinatorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
-            {coordinators?.map((coordinator) => (
-                <Container key={coordinator.id_user}>
+            {coordinators?.map((coordinator, i) => (
+                <Container key={i}>
                     <Row className='AdvisorBorder'>
                         <Col xs="2" md="2" className='"d-flex align-items-center justify-content-center'>
                             <Avatar alt="Remy Sharp" className='AvatarImg' src={'data:image/png;base64, ' + coordinator?.profile_picture}>
