@@ -36,7 +36,7 @@ export const MayorModifyModal = (props) => {
 
         if (!editedMayor.first_name || !editedMayor.last_name) {
             // Fields are empty, show an error message or handle it accordingly
-            alert("Please fill in all required fields.");
+             toggleModalfailed();
             return;
         }
 
@@ -59,16 +59,14 @@ export const MayorModifyModal = (props) => {
         })
 
         if (response.status === 200) {
-            // toggleModalsucceed();
-            message.success('Se actualizó el intendente exitosamente');
+            toggleModalsucceed();
             props.onClose();
             props.setUpdateFlag((prevFlag) => !prevFlag);
             getMayors(authTokens.access)
                 .then(data => setMayors(data))
                 .catch(error => console.error(error));
         } else {
-            // toggleModalfailed();
-            console.error("No se pudo actualizar el intendente");
+            toggleModalfailed();
             props.onClose()
         }
     }
@@ -92,7 +90,7 @@ export const MayorModifyModal = (props) => {
         }
     }
     const cancel = (e) => {
-        message.error('Se ha cancelado la eliminación');
+
     };
     return (
         <Form onSubmit={(e) => handleFormSubmit(e)}>
@@ -103,17 +101,15 @@ export const MayorModifyModal = (props) => {
                 <Popconfirm
                     title="Eliminar intendente creado"
                     description="Esta seguro que desea eleminar al intendente?"
-                    onConfirm= {deleteMayor(mayor.id)}
+                    onClick={() => deleteMayor(mayor.id)}
                     onCancel={cancel}
                     okText="Si"
                     cancelText="No">
 
-                    <Button danger>
+                    <Button danger  onClick={() => deleteMayor(mayor.id)}>
                         Eliminar
                     </Button>
                 </Popconfirm>,
-
-
                 <Button type="primary" key='submit' onClick={handleFormSubmit} >
                     Actualizar
                 </Button>,
@@ -138,6 +134,7 @@ export const MayorModifyModal = (props) => {
                         className='InputModal' required
                         type="text"
                         value={editedMayor.first_name || ""}
+                        placeholder={'Nombre'}
                         onChange={(e) => setEditedMayor({ ...editedMayor, first_name: e.target.value })}
                     />
 
@@ -146,6 +143,7 @@ export const MayorModifyModal = (props) => {
                         className='InputModal' required
                         type="text"
                         value={editedMayor.last_name || ""}
+                        placeholder={'Apellido'}
                         onChange={(e) => setEditedMayor({ ...editedMayor, last_name: e.target.value })}
                     />
 
