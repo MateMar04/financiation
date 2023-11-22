@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import AuthContext from "../context/AuthContext";
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-
+import {message, Popconfirm } from 'antd';
 
 export const VisitCard = ({visit, onDeleteSuccess}) => {
     let { authTokens } = useContext(AuthContext);
@@ -21,6 +21,10 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [accordionExpanded, setAccordionExpanded] = useState(false);
+
+    const cancel = (e) => {
+        message.error('Se ha cancelado la eliminación');
+    };
 
     let deleteVisit = async (id) => {
         let response = await fetch(`/api/visits/delete/${id}`, {
@@ -35,9 +39,11 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
             toggleModalsucceed();
             onDeleteSuccess();
             setAccordionExpanded(false);
+            message.success('Se borró la visita exitosamente');
 
         } else {
             toggleModalfailed();
+            console.error("No se pudo borrar la visita");
         }
     }
 
@@ -166,9 +172,17 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
                                     </Link>
                                 </Col>
                                 <Col>
-                                    <Button variant="contained" className="Buttondelete" onClick={() => deleteVisit(visit.id)}>
-                                        Eliminar Visita
-                                    </Button>
+                                    <Popconfirm
+                                        title="Eliminar la visita"
+                                        description="Esta seguro de que quiere eliminarla?"
+                                        onConfirm={()=>deleteVisit(visit.id)}
+                                        onCancel={cancel}
+                                        okText="Si"
+                                        cancelText="No">
+                                            <Button variant="contained" className="Buttondelete">
+                                                Eliminar Visita
+                                            </Button>
+                                    </Popconfirm>
                                 </Col>
                             </Row>
                         </AccordionDetails>
