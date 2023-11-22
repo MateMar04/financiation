@@ -22,7 +22,7 @@
 }
 
 .separarboton{
-    margin-left: 1vh;
+    margin-left: 0.5vh;
 }
 
 @media (max-width: 800px){
@@ -33,6 +33,7 @@
 
 .botonesredondos{
     margin-top: 0px;
+    padding-left: 0px !important;
 }
 
 @media (max-width: 574px) {
@@ -42,6 +43,7 @@
 }
 .botonesredondoslocal{
     margin-top: 0px;
+    padding-left: 0px !important;
 }
 
 @media (max-width: 574px) {
