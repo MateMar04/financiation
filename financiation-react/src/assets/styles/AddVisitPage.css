@@ -24,3 +24,9 @@
 .separarboton{
     margin-left: 1vh;
 }
+
+@media (max-width: 800px){
+    .visit-submit-button{
+        width: 100%;
+    }
+}
