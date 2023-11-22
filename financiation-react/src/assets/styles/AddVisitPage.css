@@ -30,3 +30,22 @@
         width: 100%;
     }
 }
+
+.botonesredondos{
+    margin-top: 0px;
+}
+
+@media (max-width: 574px) {
+    .botonesredondos {
+        margin-top: 5vh;
+    }
+}
+.botonesredondoslocal{
+    margin-top: 0px;
+}
+
+@media (max-width: 574px) {
+    .botonesredondoslocal {
+        margin-top: 0vh;
+    }
+}
