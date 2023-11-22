@@ -128,6 +128,7 @@ const AddVisitPage = () => {
         })
         if (response.status === 200) {
             toggleModalsucceed();
+
         } else {
             toggleModalfailed();
         }

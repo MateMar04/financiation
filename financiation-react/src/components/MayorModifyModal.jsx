@@ -31,17 +31,25 @@ export const MayorModifyModal = (props) => {
         getMayors(authTokens.access).then(data => setMayors(data))
     }, [])
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmitPut = (e) => {
         e.preventDefault();
 
         if (!editedMayor.first_name || !editedMayor.last_name) {
-            // Fields are empty, show an error message or handle it accordingly
-             message.error('No se se ha podido actualizar al intendente');
+            message.error('Por favor, complete todos los campos.');
             return;
         }
 
-        // If the fields are not empty, proceed with form submission logic
         putMayor(editedMayor.id);
+    };
+
+    const handleFormSubmitDelete = (e) => {
+        e.preventDefault();
+
+        if (!editedMayor.first_name || !editedMayor.last_name) {
+            message.error('Por favor, complete todos los campos.');
+            return;
+        }
+        deleteMayor(editedMayor.id);
     };
 
     let putMayor = async (id) => {
@@ -82,19 +90,17 @@ export const MayorModifyModal = (props) => {
         });
         if (response.status === 200) {
             toggleModalsucceed();
-        } else if (response.status === 500) {
+            props.onClose()
+            message.success('Se ha borrado el intendente exitosamente');
+        } else {
             toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
+            message.error('No se se ha podido borrar el intendente');
         }
     }
     const cancel = (e) => {
 
     };
     return (
-        <Form onSubmit={(e) => handleFormSubmit(e)}>
             <Modal title='Editar Intendente' open={props.show} onCancel={props.onClose} footer={[
                 <Button onClick={props.onClose}>
                     Cancelar
@@ -102,16 +108,16 @@ export const MayorModifyModal = (props) => {
                 <Popconfirm
                     title="Eliminar intendente creado"
                     description="Esta seguro que desea eleminar al intendente?"
-                    onClick={() => deleteMayor(mayor.id)}
+                    onConfirm={handleFormSubmitDelete}
                     onCancel={cancel}
                     okText="Si"
                     cancelText="No">
 
-                    <Button danger onClick={() => deleteMayor(mayor.id)}>
+                    <Button danger >
                         Eliminar
                     </Button>
                 </Popconfirm>,
-                <Button type="primary" key='submit' onClick={handleFormSubmit}>
+                <Button type="primary" key='submit' onClick={handleFormSubmitPut}>
                     Actualizar
                 </Button>
             ]}
@@ -151,7 +157,6 @@ export const MayorModifyModal = (props) => {
                     />
                 </Container>
             </Modal>
-        </Form>
     )
 }
 
