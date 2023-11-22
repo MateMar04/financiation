@@ -12,6 +12,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
+import LoadingModal from "../components/LoadingModal";
 import GroupNameModal from "../components/GroupNameModal";
 import { PropertySafetyFilled } from "@ant-design/icons";
 
@@ -23,6 +24,7 @@ export const CreateGroupPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [userCheckboxes, setUserCheckboxes] = useState({});
+    const [showloading, setShowloading] = useState(false);
     const [showgroupcreate, setShowGroupCreate] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
@@ -100,9 +102,15 @@ export const CreateGroupPage = () => {
     
 
     useEffect(() => {
-        getUsers(authTokens.access).then(data => {
-            setUsers(data);
-            setFilteredUsers(data);
+
+        setShowloading(true)
+        getUsers(authTokens.access)
+        .then((data) => {
+          setUsers(data);
+          setFilteredUsers(data);
+        })
+        .finally(() => {
+          setShowloading(false);
         });
     }, [authTokens.access]);
 
@@ -140,6 +148,7 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
+            <LoadingModal message="cargando" show={showloading}/>
             <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
             <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
             <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
