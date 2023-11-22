@@ -159,6 +159,7 @@ const AddVisitPage = () => {
 
     return (
 
+
         <Container fluid>
             <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
@@ -173,7 +174,7 @@ const AddVisitPage = () => {
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
 
-            <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
+             <h1 className='titulo1'>Nueva Visita</h1>
 
             <Form
                 {...layout}
@@ -182,7 +183,7 @@ const AddVisitPage = () => {
                 onFinish={onFinish}>
 
 
-                <Container>
+                <Container className='justify-content-center'>
 
                     <Row className="visit-field-row">
                         <Col className="visit-field">
@@ -199,10 +200,11 @@ const AddVisitPage = () => {
                                         showSearch
                                         optionFilterProp="children"
                                         filterOption={filterOption}
+
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
                             </Tooltip>
@@ -221,7 +223,6 @@ const AddVisitPage = () => {
                                 ]}>
                                 <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
                             </Form.Item>
-
                         </Col>
                         <Col xs={2}></Col>
                     </Row>
@@ -386,7 +387,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
                             </Tooltip>
@@ -430,7 +431,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
                             </Tooltip>
@@ -517,7 +518,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
                             </Tooltip>
@@ -566,7 +567,7 @@ const AddVisitPage = () => {
                 </Container>
 
 
-                <Container fluid className={"button-container"}>
+                <Container fluid className={"justify-content-center button-container"}>
                     <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
                             icon={<PlusCircleOutlined/>}>
                         Crear Visita

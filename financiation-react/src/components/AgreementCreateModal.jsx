@@ -1,16 +1,10 @@
 import '../assets/styles/RowWithCheck.css'
-import { Button, Col, Modal, Row } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import React, { useContext, useState, useEffect } from "react";
+import {Container} from "react-bootstrap";
+import {Form} from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
-import {message} from 'antd';
+import {message, Modal, Input,} from 'antd';
 
 export const AgreementCreateModal = (props) => {
 
@@ -35,81 +29,47 @@ export const AgreementCreateModal = (props) => {
                 "description": description
             })
         });
-    
+
         if (response.status === 200) {
-            // toggleModalsucceed();
+
             props.setUpdateFlag((prevFlag) => !prevFlag);
             message.success('Se agregó el acuerdo exitosamente');
             props.onClose();
         } else {
-            // toggleModalfailed();
+
             console.error("No se pudo agregar el acuerdo");
             props.onClose()
         }
     }
-    
+
     return (
-            <Modal className='modalcreate' show={props.show} >
-                <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
-                <Container className="containermayor container-addmayor-modal">
+        <Modal className='modalcreate' open={props.show} onCancel={props.onClose} onOk={postAgreement}
+               title={'Crear Acuerdo'}>
+            <Container className="containermayor container-addmayor-modal">
 
-                    <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Crear Acuerdo</h3>
-
-                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="input"
-                                    label="Nombre"
-                                    name='name'
-                                    onChange={(e) => setName(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start" >
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                        </div>
-
-                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="input"
-                                    label="Descripcion"
-                                    name='descripcion'
-                                    onChange={(e) => setDescription(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start" >
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                        </div>
-
-                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postAgreement}>Registrar</Button>
-                        </div>
-                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                            <Button variant="outlined" color="primary" onClick={props.onClose}>
-                                Cancelar
-                            </Button>
-                        </div>
-                    </Form>
-                </Container>
-            </Modal>
-
-
+                <a>Nombre del acuerdo</a>
+                <Form>
+                    <Form.Group>
+                        <Input
+                            className="InputModal"
+                            placeholder="Nombre"
+                            name='name'
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Form.Group>
+                    <br/>
+                    <a>Descripción</a>
+                    <Form.Group style={{textAlign: 'center', marginRight: '10px'}}>
+                        <Input
+                            className="InputModal"
+                            placeholder="Descripcion"
+                            name='descripcion'
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </Form.Group>
+                </Form>
+            </Container>
+        </Modal>
     )
 }
 
