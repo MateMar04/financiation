@@ -1,34 +1,34 @@
-import '../assets/styles/RowWithCheck.css'
-import {Container } from "react-bootstrap";
-import {Form} from "react-bootstrap";
-import React, {useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import {getDepartments} from '../services/DepartmentServices';
+import { getDepartments } from '../services/DepartmentServices';
 import FormControl from '@mui/material/FormControl';
-
-import {MenuItem, Select} from '@mui/material';
-import {message, Modal, Input} from 'antd';
+import { MenuItem, Select } from '@mui/material';
+import { message, Modal, Input } from 'antd';
 
 export const LocationCreateModal = (props) => {
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext);
     const [selectedDepartment, setSelectedDepartment] = useState('');
     const [name, setName] = useState("");
-    const [last_name, setLastName] = useState("");
-    let [departments, setDepartments] = useState([])
+    const [departments, setDepartments] = useState([]);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
 
     useEffect(() => {
-        getDepartments(authTokens.access).then(data => setDepartments(data))
-    }, [])
+        getDepartments(authTokens.access).then(data => setDepartments(data));
+    }, []);
 
     let postLocation = async () => {
+        if (!name || !selectedDepartment) {
+            message.error('Por favor, complete todos los campos obligatorios.');
+            return;
+        }
+
         let response = await fetch('/api/locations', {
             method: "POST",
             headers: {
@@ -47,48 +47,50 @@ export const LocationCreateModal = (props) => {
             message.success('Se creó la localidad exitosamente');
             props.onClose();
         } else {
-            console.error("No se pudo crear la localidad");
-            props.onClose()
+            message.error("No se pudo crear la localidad");
+            props.onClose();
         }
-    }
+    };
 
     return (
         <Modal className='modalcreate' open={props.show} onCancel={props.onClose} onOk={postLocation}
                title={'Crear Localidad'}>
-            <Container className="containermayor container-addmayor-modal">
+            <div className="containermayor container-addmayor-modal">
 
-                <Form className='datos'>
-                    <a>Nombre de la nueva localidad</a>
-                    <Form.Group>
+                <form className='datos'>
+                    <div>
+                        <label htmlFor='name'>Nombre de la nueva localidad</label>
                         <Input
                             className="InputModal"
                             placeholder="Nombre"
                             name='name'
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                    </Form.Group>
+                    </div>
                     <br/>
 
-                    <a>Departamento</a>
-                    <FormControl fullWidth>
-                        <Select
-                            label="Departamento"
-                            value={selectedDepartment}
-                            onChange={(e) => setSelectedDepartment(e.target.value)}
-                            className='InputModal'
-                            id="standard-basic"
-                        >
-                            {departments?.map((department, i) => (
-                                <MenuItem key={i} value={department.id}>{department.name}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </Form>
-            </Container>
+                    <div>
+                        <label htmlFor='department'>Departamento</label>
+                        <FormControl fullWidth>
+                            <Select
+                                label="Departamento"
+                                value={selectedDepartment}
+                                onChange={(e) => setSelectedDepartment(e.target.value)}
+                                className='InputModal'
+                                id="standard-basic"
+                            >
+                                <MenuItem value="" disabled>Select Department</MenuItem>
+                                {departments?.map((department, i) => (
+                                    <MenuItem key={i} value={department.id}>{department.name}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                </form>
+            </div>
         </Modal>
+    );
+};
 
-
-    )
-}
-
-export default LocationCreateModal
+export default LocationCreateModal;
