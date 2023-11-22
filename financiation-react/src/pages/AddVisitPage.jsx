@@ -159,6 +159,7 @@ const AddVisitPage = () => {
 
     return (
 
+
         <Container fluid>
             <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
@@ -173,7 +174,7 @@ const AddVisitPage = () => {
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
 
-            <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
+             <h1 className='titulo1'>Nueva Visita</h1>
 
             <Form
                 {...layout}
@@ -223,7 +224,7 @@ const AddVisitPage = () => {
                             </Form.Item>
 
                         </Col>
-                        <Col xs={2}></Col>
+
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -238,7 +239,7 @@ const AddVisitPage = () => {
                                 <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
                             </Form.Item>
                         </Col>
-                        <Col xs={2}></Col>
+
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -262,7 +263,6 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
