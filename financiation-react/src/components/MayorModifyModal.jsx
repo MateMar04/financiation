@@ -59,15 +59,16 @@ export const MayorModifyModal = (props) => {
         })
 
         if (response.status === 200) {
-            toggleModalsucceed();
             props.onClose();
+             message.success('Se actualizó el intendente exitosamente');
             props.setUpdateFlag((prevFlag) => !prevFlag);
             getMayors(authTokens.access)
                 .then(data => setMayors(data))
                 .catch(error => console.error(error));
         } else {
+             props.onClose()
             toggleModalfailed();
-            props.onClose()
+
         }
     }
     let deleteMayor = async (id) => {
@@ -123,7 +124,7 @@ export const MayorModifyModal = (props) => {
 
                     <a>Seleccione Intendente</a>
 
-                    <Select className='InputModal' id="standard-basic" name='mayor' onChange={handleMayorSelection}>
+                    <Select className='InputModal' id="standard-basic" name='mayor' onChange={handleMayorSelection} placeholder={'Intendente'}>
                         {mayors?.map((mayor, i) => (
                             <MenuItem key={i} value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
                         ))}
@@ -146,8 +147,6 @@ export const MayorModifyModal = (props) => {
                         placeholder={'Apellido'}
                         onChange={(e) => setEditedMayor({ ...editedMayor, last_name: e.target.value })}
                     />
-
-
                 </Container>
             </Modal>
         </Form>
