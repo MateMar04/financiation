@@ -183,7 +183,7 @@ const AddVisitPage = () => {
                 onFinish={onFinish}>
 
 
-                <Container>
+                <Container className='justify-content-center'>
 
                     <Row className="visit-field-row">
                         <Col className="visit-field">
@@ -200,6 +200,7 @@ const AddVisitPage = () => {
                                         showSearch
                                         optionFilterProp="children"
                                         filterOption={filterOption}
+
                                 />
                             </Form.Item>
                         </Col>
@@ -222,9 +223,8 @@ const AddVisitPage = () => {
                                 ]}>
                                 <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
                             </Form.Item>
-
                         </Col>
-
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -239,7 +239,7 @@ const AddVisitPage = () => {
                                 <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field"/>
                             </Form.Item>
                         </Col>
-
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
@@ -263,6 +263,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
+                        <Col xs={2}></Col>
                     </Row>
                     <Row className="visit-field-row">
                         <Col>
