@@ -1,15 +1,13 @@
 import '../assets/styles/RowWithCheck.css'
-import { Col, Row, Container, Card, Form } from "react-bootstrap";
+import  {Container, Form } from "react-bootstrap";
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import { InputLabel, MenuItem, Select } from '@mui/material';
+import { MenuItem, Select } from '@mui/material';
 import { getLocations } from '../services/LocationServices';
-import { message } from 'antd';
-
-import { Button, Modal, Input } from 'antd';
+import {Modal, Input, message} from 'antd';
 
 export const MayorCreateModal = (props) => {
 
@@ -44,28 +42,16 @@ export const MayorCreateModal = (props) => {
         });
 
         if (response.status === 200) {
-            toggleModalsucceed();
+             message.success('El intendente se ha creado exitosamente');
+            props.onClose();
           
         } else {
-           toggleModalfailed();
-         
+           message.error('El intendente no se ha creado');
         }
-    }
-
-    const filterOption = (input, option) =>
-        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
-
-    const getItemNames = (array) => {
-        return array?.map(item => ({
-            label: item.name,
-            value: item.id
-        }));
     }
 
     return (
         <Modal className='modalcreate' title={'Ingresar Intendente'} open={props.show} onOk={postMayor} onCancel={props.onClose}>
-            <SucceedModal onClose={() => toggleModalsucceed()} message="El intendente se ha creado exitosamente" show={showsuccess} />
-            <FailedModal onClose={() => toggleModalfailed()} message="El intendente no se ha creado" show={showfail} />
             <Container className="containermayor container-addmayor-modal">
 
                 <Form className='datos'>
@@ -79,6 +65,7 @@ export const MayorCreateModal = (props) => {
                                 onChange={(e) => setFirstName(e.target.value)}
                             />
                         </Form.Group>
+                        <br/>
                         <a>Apellido</a>
                         <Form.Group>
                             <Input
@@ -89,6 +76,7 @@ export const MayorCreateModal = (props) => {
                                 size="large"
                             />
                         </Form.Group>
+                        <br/>
 
                         <a>Seleccione localidad</a>
                         <Select

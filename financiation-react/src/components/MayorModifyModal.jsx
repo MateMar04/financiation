@@ -1,18 +1,18 @@
 import '../assets/styles/RowWithCheck.css'
-import { Col, Row, Container, Form } from "react-bootstrap";
-import React, { useContext, useState, useEffect } from "react";
+import {Col, Row, Container, Form} from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
 import AuthContext from "../context/AuthContext";
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import { getMayors } from '../services/MayorServices';
-import { getMayorById } from '../services/MayorServices';
-import { InputLabel, MenuItem, Select } from '@mui/material';
-import { message, Button, Modal, Input, Popconfirm } from 'antd';
+import {getMayors} from '../services/MayorServices';
+import {getMayorById} from '../services/MayorServices';
+import {InputLabel, MenuItem, Select} from '@mui/material';
+import {message, Button, Modal, Input, Popconfirm} from 'antd';
 
 export const MayorModifyModal = (props) => {
 
-    let { authTokens } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
@@ -36,7 +36,7 @@ export const MayorModifyModal = (props) => {
 
         if (!editedMayor.first_name || !editedMayor.last_name) {
             // Fields are empty, show an error message or handle it accordingly
-             toggleModalfailed();
+             message.error('No se se ha podido actualizar al intendente');
             return;
         }
 
@@ -60,14 +60,14 @@ export const MayorModifyModal = (props) => {
 
         if (response.status === 200) {
             props.onClose();
-             message.success('Se actualizó el intendente exitosamente');
+            message.success('Se actualizó al intendente exitosamente');
             props.setUpdateFlag((prevFlag) => !prevFlag);
             getMayors(authTokens.access)
                 .then(data => setMayors(data))
                 .catch(error => console.error(error));
         } else {
-             props.onClose()
-            toggleModalfailed();
+            props.onClose()
+             message.error('No se se ha podido actualizar al intendente');
 
         }
     }
@@ -107,51 +107,51 @@ export const MayorModifyModal = (props) => {
                     okText="Si"
                     cancelText="No">
 
-                    <Button danger  onClick={() => deleteMayor(mayor.id)}>
+                    <Button danger onClick={() => deleteMayor(mayor.id)}>
                         Eliminar
                     </Button>
                 </Popconfirm>,
-                <Button type="primary" key='submit' onClick={handleFormSubmit} >
+                <Button type="primary" key='submit' onClick={handleFormSubmit}>
                     Actualizar
-                </Button>,
-
+                </Button>
             ]}
             >
-                <SucceedModal onClose={() => toggleModalsucceed()} message="El intendente se ha editado correctamente" show={showsuccess} />
-                <FailedModal onClose={() => toggleModalfailed()} message="El intendente no se ha podido editar" show={showfail} />
+                <SucceedModal onClose={() => toggleModalsucceed()} message="El intendente se ha editado correctamente"
+                              show={showsuccess}/>
+                <FailedModal onClose={() => toggleModalfailed()} message="El intendente no se ha podido editar"
+                             show={showfail}/>
                 <Container>
-
-
                     <a>Seleccione Intendente</a>
 
-                    <Select className='InputModal' id="standard-basic" name='mayor' onChange={handleMayorSelection} placeholder={'Intendente'}>
+                    <Select className='InputModal' id="standard-basic" name='mayor' onChange={handleMayorSelection}
+                            placeholder={'Intendente'}>
                         {mayors?.map((mayor, i) => (
                             <MenuItem key={i} value={mayor.id}>{mayor.first_name} {mayor.last_name}</MenuItem>
                         ))}
                     </Select>
-
-                    <a>Nombre:</a>
+                    <br/>
+                    <br/>
+                    <a>Nombre</a>
                     <Input
                         className='InputModal' required
                         type="text"
                         value={editedMayor.first_name || ""}
                         placeholder={'Nombre'}
-                        onChange={(e) => setEditedMayor({ ...editedMayor, first_name: e.target.value })}
+                        onChange={(e) => setEditedMayor({...editedMayor, first_name: e.target.value})}
                     />
-
-                    <a>Apellido:</a>
+                    <br/>
+                    <br/>
+                    <a>Apellido</a>
                     <Input
                         className='InputModal' required
                         type="text"
                         value={editedMayor.last_name || ""}
                         placeholder={'Apellido'}
-                        onChange={(e) => setEditedMayor({ ...editedMayor, last_name: e.target.value })}
+                        onChange={(e) => setEditedMayor({...editedMayor, last_name: e.target.value})}
                     />
                 </Container>
             </Modal>
         </Form>
-
-
     )
 }
 
