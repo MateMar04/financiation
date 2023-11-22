@@ -105,8 +105,8 @@ export const MayorModifyModal = (props) => {
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                         <select className='select selcetuser' id="standard-basic" variant="standard" name='mayor' onChange={handleMayorSelection}>
                             <option selected disabled hidden></option>
-                            {mayors?.map((mayor) => (
-                                <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
+                            {mayors?.map((mayor, i) => (
+                                <option key={i} value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
                             ))}
                         </select>
                     </div>

@@ -18,7 +18,7 @@
 .filter-card-scroll {
         overflow-y: scroll;
         scroll-margin-right: 300vh;
-        flex: 1; /* Hace que el área de desplazamiento ocupe el espacio restante */
+        flex: 1;
     
 }
 
@@ -35,12 +35,7 @@
     text-align: center;
 
 }
-.pepeloco{
-    text-align: center;
-    margin: auto;
-    align-items: center;
 
-}
 .container-white{
   
     background-color: white;
@@ -72,16 +67,17 @@
     margin: 3vh;
     border-radius: 5vh;
     background-color: #f4f4f4;
-    width: 35vw;
+   
 }
 
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .chart-column{
         text-align: center;
         margin: 3vh;
         border-radius: 5vh;
         background-color: #f4f4f4;
-        width: 80vw;
+    
+        justify-content: center;
     }
     
 }

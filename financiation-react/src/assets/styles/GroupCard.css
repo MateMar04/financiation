@@ -14,10 +14,14 @@
 }
 
 .pencil-groups{
-    padding: 2vh
+    padding: 2vh;
 }
 
 .accordion-group{
     border-radius: 3vh !important;
 
+}
+
+.delete-button {
+    margin-left: 40vw !important;
 }

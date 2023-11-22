@@ -13,9 +13,8 @@ import { UserCard } from "../components/UserCard";
 import { Popover } from 'antd';
 import FlotantButton from "../components/FlotantButton";
 import LoadingModal from "../components/LoadingModal";
-
-
-
+import GroupNameModal from "../components/GroupNameModal";
+import { PropertySafetyFilled } from "@ant-design/icons";
 
 export const CreateGroupPage = () => {
     let { authTokens } = useContext(AuthContext);
@@ -26,24 +25,84 @@ export const CreateGroupPage = () => {
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [userCheckboxes, setUserCheckboxes] = useState({});
     const [showloading, setShowloading] = useState(false);
-
-
+    const [showgroupcreate, setShowGroupCreate] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
-
+    const toggleModalGroupCreate = () => setShowGroupCreate(!showgroupcreate);
+    const [selectedAdvisors, setSelectedAdvisors] = useState([]);
+    const [selectedCoordinators, setSelectedCoordinators] = useState([]);
+    
     const content = (
         <a></a>
     );
-      
     
-    const handleCheckboxChange = (userId) => {
-        setUserCheckboxes((prevUserCheckboxes) => ({
-            ...prevUserCheckboxes,
-            [userId]: !prevUserCheckboxes[userId],
-        }));
+    const setSelectedRole = (role) => {
+        console.log('Selected Role:', role);
+    };
+
+    const handleCheckboxChange = (userId, selectedRole) => {
+        setUserCheckboxes((prevUserCheckboxes) => {
+            const updatedCheckboxes = {
+                ...prevUserCheckboxes,
+                [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
+            };
+    
+            console.log('Updated userCheckboxes:', updatedCheckboxes);
+    
+            // Capture the selected role directly from the event
+            setSelectedRole(selectedRole);
+    
+            setSelectedCoordinators((prevCoordinators) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
+                    ? [...prevCoordinators, userId]
+                    : prevCoordinators.filter((id) => id !== userId)
+            );
+    
+            setSelectedAdvisors((prevAdvisors) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
+                    ? [...prevAdvisors, userId]
+                    : prevAdvisors.filter((id) => id !== userId)
+            );
+    
+            return updatedCheckboxes;
+        });
+    };
+    const handleRoleChange = (userId, selectedRole) => {
+        setUserCheckboxes((prevUserCheckboxes) => {
+            // Your logic for handling role changes in the CreateGroupPage component
+            console.log(`Role change for user ${userId} to ${selectedRole}`);
+            const updatedCheckboxes = {
+                ...prevUserCheckboxes,
+                [userId]: { checked: prevUserCheckboxes[userId]?.checked, role: selectedRole },
+            };
+    
+            // Capture the selected role directly from the event
+            setSelectedRole(selectedRole);
+    
+            setSelectedCoordinators((prevCoordinators) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
+                    ? [...prevCoordinators, userId]
+                    : prevCoordinators.filter((id) => id !== userId)
+            );
+    
+            setSelectedAdvisors((prevAdvisors) =>
+                updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
+                    ? [...prevAdvisors, userId]
+                    : prevAdvisors.filter((id) => id !== userId)
+            );
+    
+            // Call onRoleChange prop to handle role change
+            // onRoleChange(userId, selectedRole);
+    
+            return updatedCheckboxes;
+        });
     };
     
+    
+    
+
     useEffect(() => {
+
         setShowloading(true)
         getUsers(authTokens.access)
         .then((data) => {
@@ -53,7 +112,24 @@ export const CreateGroupPage = () => {
         .finally(() => {
           setShowloading(false);
         });
-    }, []);
+    }, [authTokens.access]);
+
+    useEffect(() => {
+        console.log('Initial userCheckboxes state:', userCheckboxes);
+        setUserCheckboxes((prevUserCheckboxes) => {
+            const newUserCheckboxes = { ...prevUserCheckboxes };
+            filteredUsers.forEach((user) => {
+                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || { checked: false, role: null };
+            });
+            return newUserCheckboxes;
+        });
+    }, [filteredUsers]);
+
+    useEffect(() => {
+        console.log('Updated Selected Advisors:', selectedAdvisors);
+        console.log('Updated Selected Coordinators:', selectedCoordinators);
+    }, [selectedAdvisors, selectedCoordinators]);
+
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
@@ -70,41 +146,13 @@ export const CreateGroupPage = () => {
         setFilteredUsers(filtered);
     };   
 
-    let postGroup = async (e) => {
-        if (e && e.target) {
-            e.preventDefault();
-            let response = await fetch('/api/groups', {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json',
-                    "Authorization": "JWT " + String(authTokens.access),
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify({ "name": e.target.name.value })
-            })
-            if (response.status === 200) {
-                toggleModalsucceed();
-                await postGroup();
-            } else if (response.status === 500) {
-                toggleModalfailed();
-                await postGroup();
-            } else if (response.status === 401) {
-                toggleModalfailed();
-                await postGroup();
-            } else if (response.status === 400) {
-                toggleModalfailed();
-                await postGroup();
-            }
-        }
-    }
-
     return (
         <Container fluid>
             <LoadingModal message="cargando" show={showloading}/>
             <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
             <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
-    
-            <Form onSubmit={postGroup}>
+            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
+
                 <Container className="separation font text-center justify-content-center">
                     <Row className='justify-content-center text-center'>
                         <Col md={10}>
@@ -137,23 +185,26 @@ export const CreateGroupPage = () => {
                 </Container>
 
                 <Container className="justify-content-center">
-                    {filteredUsers.map((user) => (
-                        <Container key={user.id} className="containerUserCard justify-content-center text-center">
-                            <UserCard user={user} isChecked={userCheckboxes[user.id]} onCheckboxChange={handleCheckboxChange}/>
+                {filteredUsers.map((user, i) => (
+                        <Container key={i} className="containerUserCard justify-content-center text-center">
+                            <UserCard
+                                user={user}
+                                isChecked={userCheckboxes[user.id]?.checked}
+                                onCheckboxChange={handleCheckboxChange}
+                                onRoleChange={handleRoleChange}  // Passed onRoleChange as a prop
+                                defaultRole={userCheckboxes[user.id]?.role}
+                            />
                         </Container>
                     ))}
                 </Container>
 
                 <Row className='text-center'>
                     <Col>
-                        <Form.Group>
-                            {/*De ser preferente se puede agregar un texto que indique que hace el boton*/}
+                        <Form.Group onClick={() =>toggleModalGroupCreate()}> 
                             <FlotantButton name='' />
-
                         </Form.Group>
                     </Col>
                 </Row>
-            </Form>
         </Container>
     )
 }

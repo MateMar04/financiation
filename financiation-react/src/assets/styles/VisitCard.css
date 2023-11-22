@@ -28,11 +28,15 @@
 }
 
 .ButtonEditVisit{
-    
-    margin: 1px;
+    justify-content: center;
     padding-top: 1vh;
 }
 
 .Buttonedit{
-    border-radius: 10vh;
-}
+    border-radius: 15px !important;
+    background-color: #53A6DC !important;
+    border-color: #53A6DC !important;
+    color: white !important;
+    padding: 10px !important;
+    }
+
