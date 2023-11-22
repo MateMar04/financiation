@@ -204,7 +204,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
                             </Tooltip>
@@ -387,7 +387,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
                             </Tooltip>
@@ -431,7 +431,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
                             </Tooltip>
@@ -518,7 +518,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
                             </Tooltip>
@@ -567,7 +567,7 @@ const AddVisitPage = () => {
                 </Container>
 
 
-                <Container fluid className={"button-container"}>
+                <Container fluid className={"justify-content-center button-container"}>
                     <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
                             icon={<PlusCircleOutlined/>}>
                         Crear Visita
