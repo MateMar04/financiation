@@ -1,5 +1,7 @@
 import {createContext, useContext, useState} from "react";
 import AuthContext from "./AuthContext";
+import FailedModal from "../components/FailedModal";
+import {message, Button, Modal, Input, Popconfirm} from 'antd';
 
 const ReportsContext = createContext();
 
@@ -15,6 +17,8 @@ export const ReportsProvider = ({children}) => {
 
     const [visits, setVisits] = useState({});
     const [faqs, setFaqs] = useState({});
+    const [showfail, setShowfailture] = useState(false);
+    const toggleModalfailed = () => setShowfailture(!showfail);
 
     const [requests, setRequests] = useState({});
 
@@ -187,70 +191,78 @@ export const ReportsProvider = ({children}) => {
     }
 
     let generateReports = async () => {
-
-        if (checkText(faqsQP()) || checkText(visitsQP())) {
-            const promises = Promise.all([await getRequestsByVisitFaq(),
+        if (checkText(faqsQP()) && checkText(visitsQP())) {
+            const promises = Promise.all([
+                await getRequestsByVisitFaq(),
                 await getTotalRequests(),
                 await getTotalRequestsByAdvisors(),
                 await getTotalRequestsByVisits(),
                 await getTotalRequestsByLocations(),
                 await getTotalRequestsByFaqs(),
-                await getTotalRequestsByMinistryDepartments()]);
-            promises.then(result => {
-                setRequests(result[0]);
-                setTotalRequests(result[1]);
-                setTotalRequestsByAdvisors(result[2]);
-                setTotalRequestsByVisits(result[3]);
-                setTotalRequestsByLocations(result[4]);
-                setTotalRequestsByFaqs(result[5])
-                setTotalRequestsByMinistryDepartments(result[6]);
-
-
-                setAdvisorsData({
-                    labels: result[2]?.map(item => item.name),
-                    datasets: [{
-                        label: "Consultas",
-                        data: result[2]?.map(data => data.requests),
-                        backgroundColor: colors
-                    }]
+                await getTotalRequestsByMinistryDepartments()
+            ]);
+    
+            promises
+                .then((result) => {
+                    setRequests(result[0]);
+                    setTotalRequests(result[1]);
+                    setTotalRequestsByAdvisors(result[2]);
+                    setTotalRequestsByVisits(result[3]);
+                    setTotalRequestsByLocations(result[4]);
+                    setTotalRequestsByFaqs(result[5]);
+                    setTotalRequestsByMinistryDepartments(result[6]);
+    
+                    setAdvisorsData({
+                        labels: result[2]?.map((item) => item.name),
+                        datasets: [
+                            {
+                                label: "Consultas",
+                                data: result[2]?.map((data) => data.requests),
+                                backgroundColor: colors,
+                            },
+                        ],
+                    });
+    
+                    setFaqsData({
+                        labels: result[5]?.map((item) => item.name),
+                        datasets: [
+                            {
+                                label: "Consultas",
+                                data: result[5]?.map((data) => data.requests),
+                                backgroundColor: colors,
+                            },
+                        ],
+                    });
+    
+                    setMinistryDepsData({
+                        labels: result[6]?.map((item) => item.name),
+                        datasets: [
+                            {
+                                label: "Consultas",
+                                data: result[6]?.map((data) => data.requests),
+                                backgroundColor: colors,
+                            },
+                        ],
+                    });
+    
+                    setVisitsData({
+                        labels: result[3]?.map((item) => item.name),
+                        datasets: [
+                            {
+                                label: "Consultas",
+                                data: result[3]?.map((data) => data.requests),
+                                backgroundColor: colors,
+                            },
+                        ],
+                    });
                 })
-
-                setFaqsData({
-                    labels: result[5]?.map(item => item.name),
-                    datasets: [{
-                        label: "Consultas",
-                        data: result[5]?.map(data => data.requests),
-                        backgroundColor: colors
-                    }]
-                })
-
-                setMinistryDepsData({
-                    labels: result[6]?.map(item => item.name),
-                    datasets: [{
-                        label: "Consultas",
-                        data: result[6]?.map(data => data.requests),
-                        backgroundColor: colors
-                    }]
-                })
-
-                setVisitsData({
-                    labels: result[3]?.map(item => item.name),
-                    datasets: [{
-                        label: "Consultas",
-                        data: result[3]?.map(data => data.requests),
-                        backgroundColor: colors
-                    }]
-                })
-
-            }).catch(err => {
-                console.log('Error')
-            });
-
-
+                .catch((err) => {
+                    console.log("Error");
+                });
         } else {
-            alert('Selecciona algo en todos los campos')
+            message.error("Debes seleccionar al menos una opción en cada campo");
         }
-    }
+    };
 
     const colors = ['#ffa43a', '#ffbf75', '#759eff', '#75c7ff', '#ff5252', '#4fc468', '#b66be8', '#B87D4B','#c7ede8']
 
@@ -316,6 +328,7 @@ export const ReportsProvider = ({children}) => {
 
     return (
         <ReportsContext.Provider value={contextData}>
+            <FailedModal onClose={() => toggleModalfailed()} message={"Debes seleccionar al menos un casillero en todos los campos"} show={showfail}/>
             {children}
         </ReportsContext.Provider>
     );
