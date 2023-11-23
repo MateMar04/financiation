@@ -56,6 +56,7 @@ export const AuthProvider = ({children}) => {
             setShowloading(false);
         } else if (response.status === 400) {
             toggleModalfailed();
+            setShowloading(false);
         }
         else {
             console.log(error.response);
@@ -69,7 +70,7 @@ export const AuthProvider = ({children}) => {
     
         const ssn = e.target.ssn.value;
         const password = e.target.password.value;
-    
+        setShowloading(true);
         // Realizar validación adicional aquí (por ejemplo, verificar el formato del SSN)
     
         try {
@@ -92,6 +93,7 @@ export const AuthProvider = ({children}) => {
                 if (response.status === 401) {
                     // Manejar la respuesta 401 según lo necesites
                     toggleModalfailed();
+                    setShowloading(false);
                 } else {
                     console.log("Unexpected response status:", response.status);
                 }
