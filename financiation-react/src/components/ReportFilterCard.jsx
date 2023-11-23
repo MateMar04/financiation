@@ -14,8 +14,8 @@ export const ReportFilterCard = ({title, items}) => {
             <h1 className="titulolocalidad" >{title}</h1>
             <Container className='filter-card-scroll'>
                 <Form onChange={(e) => dataHandler(title, e)}>
-                    {items?.map((item) => (
-                        <RowWithCheck item={item}></RowWithCheck>
+                    {items?.map((item, i) => (
+                        <RowWithCheck key={i} item={item}></RowWithCheck>
                     ))}
                 </Form>
             </Container>

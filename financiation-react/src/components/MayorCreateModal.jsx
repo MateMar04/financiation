@@ -1,24 +1,17 @@
 import '../assets/styles/RowWithCheck.css'
-import { Button, Col, Modal, Row } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import  {Container, Form } from "react-bootstrap";
 import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Container, Card } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
 import FailedModal from "../components/FailedModal";
 import SucceedModal from "../components/SucceedModal";
-import { InputLabel, Select, MenuItem } from '@mui/material';
-import {getLocations} from '../services/LocationServices';
-import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import {message} from 'antd';
+import { MenuItem, Select } from '@mui/material';
+import { getLocations } from '../services/LocationServices';
+import {Modal, Input, message} from 'antd';
 
 export const MayorCreateModal = (props) => {
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
     const [selectedLocalidad, setSelectedLocalidad] = useState('');
     const [first_name, setFirstName] = useState("");
     const [last_name, setLastName] = useState("");
@@ -47,95 +40,62 @@ export const MayorCreateModal = (props) => {
                 "location": selectedLocalidad
             })
         });
-    
+
         if (response.status === 200) {
-            // toggleModalsucceed();
-            props.setUpdateFlag((prevFlag) => !prevFlag);
-            message.success('Se creó el intendente exitosamente');
+             message.success('El intendente se ha creado exitosamente');
             props.onClose();
+          
         } else {
-            // toggleModalfailed();
-            console.error("No se pudo crear el intendente");
-            props.onClose()
+           message.error('El intendente no se ha creado');
         }
     }
-    
+
     return (
-            <Modal className='modalcreate' show={props.show} >
-                <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
-                <Container className="containermayor container-addmayor-modal">
+        <Modal className='modalcreate' title={'Ingresar Intendente'} open={props.show} onOk={postMayor} onCancel={props.onClose}>
+            <Container className="containermayor container-addmayor-modal">
 
-                    <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
+                <Form className='datos'>
+                    <Container className='justify-content-center'>
+                        <a>Nombre</a>
+                        <Form.Group>
+                            <Input
+                                className="InputModal"
+                                placeholder="Nombre"
+                                name='first_name'
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                        </Form.Group>
+                        <br/>
+                        <a>Apellido</a>
+                        <Form.Group>
+                            <Input
+                                className="InputModal"
+                                name='last_name'
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder="Apellido"
+                                size="large"
+                            />
+                        </Form.Group>
+                        <br/>
 
-                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="input"
-                                    label="Nombre"
-                                    name='first_name'
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start" >
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                            <Form.Group style={{ textAlign: 'center' }}>
-                                <TextField
-                                    className="input"
-                                    label="Apellido"
-                                    name='last_name'
-                                    onChange={(e) => setLastName(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>  
-                        </div>
+                        <a>Seleccione localidad</a>
+                        <Select
+                            label="Localidad"
+                            value={selectedLocalidad}
+                            onChange={(e) => setSelectedLocalidad(e.target.value)}
+                            variant="outlined"
+                            className='InputModal'
+                            
+                        >
+                            {locations?.map((location, i) => (
+                                <MenuItem key={i} value={location.id}>{location.name}</MenuItem>
+                            ))}
+                        </Select>
 
-                        <Box sx={{ minWidth: 120 }}>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">Localidad</InputLabel>
-                                    <Select
-                                        label="Localidad"
-                                        value={selectedLocalidad}
-                                        onChange={(e) => setSelectedLocalidad(e.target.value)}
-                                        variant="outlined"
-                                        sx={{ width: '100%', height: '48px' }} 
-                                    >
-                                        {locations?.map((location) => (
-                                            <MenuItem value={location.id}>{location.name}</MenuItem>
-                                        ))}    
-                                    </Select>
-                            </FormControl>
-                        </Box>
-
-                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postMayor}>Registrar</Button>
-                        </div>
-                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                            <Button variant="outlined" color="primary" onClick={props.onClose}>
-                                Cancelar
-                            </Button>
-                        </div>
-                    </Form>
-                </Container>
-            </Modal>
-
-
+                    </Container>
+                </Form>
+            </Container>
+        </Modal>
     )
 }
 

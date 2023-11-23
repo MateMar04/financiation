@@ -76,21 +76,21 @@ export const ReportsPage = () => {
 
             
 
-            <Container className='container1 container-white'>
+            <Container className='container1 container-white justify-content-center text-center'>
                 <Row className='justify-content-center text-center'>
-                    <Col lg={6} >
-                        <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Visitas" className='filters-column' chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
-                    <Col lg={6} >
-                        <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Organismos" className='filters-column' chart={<BarChart chartData={ministryDepsData}/>}/>
                     </Col>
                 </Row>
                 <Row className='justify-content-center text-center'>
-                    <Col lg={6} >
-                        <ReportChartCard title="Motivos" chart={<PieChart chartData={faqsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Motivos" className='filters-column' chart={<PieChart chartData={faqsData}/>}/>
                     </Col>
-                    <Col lg={6} >
-                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={advisorsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Asesores" className='filters-column' chart={<PolarAreaChart chartData={advisorsData}/>}/>
                     </Col>
                 </Row>
             </Container>

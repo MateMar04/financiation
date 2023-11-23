@@ -244,7 +244,7 @@ class RequestStatus(models.Model):
 
 class Coordinator(models.Model):
     user = models.ForeignKey(UserAccount, models.DO_NOTHING)
-    group = models.ForeignKey(Group, models.DO_NOTHING)
+    group = models.ForeignKey(Group, models.CASCADE)
 
     def __str__(self):
         return f"{self.user} {self.group}"
@@ -252,7 +252,7 @@ class Coordinator(models.Model):
 
 class Advisor(models.Model):
     user = models.ForeignKey(UserAccount, models.DO_NOTHING)
-    group = models.ForeignKey(Group, models.DO_NOTHING)
+    group = models.ForeignKey(Group, models.CASCADE)
 
     unique_together = (('user', 'group'),)
 

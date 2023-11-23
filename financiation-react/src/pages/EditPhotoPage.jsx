@@ -8,6 +8,9 @@ import { ProfilePicture } from "../components/ProfilePicture";
 import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
 import { getUser } from "../services/UserServices";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+import { Popover } from 'antd';
 
 const EditPhotoPage = () => {
   const { authTokens, logoutUser } = useContext(AuthContext);
@@ -32,7 +35,7 @@ const EditPhotoPage = () => {
 
   useEffect(() => {
     getData();
-  }, []); 
+  }, []);
 
   const handleAddButton = () => {
     setShowButton(!showButton);
@@ -42,11 +45,13 @@ const EditPhotoPage = () => {
 
   return (
     <Container className="ContainerProfilePage">
-      <Row>
-        <Col className="d-flex justify-content-center">
-          <IconButton className="EditIconProfile" onClick={handleAddButton}>
-            <EditIcon color="action" sx={{ width: 25, height: 25 }} />
-          </IconButton>
+      <Row className="justify-content-start text-start">
+        <Col>
+        <Popover content="Volver">
+        <Link to='/me/'>
+          <ArrowLeftOutlined className={'IconBackEditPhoto'} />
+          </Link>
+          </Popover>
         </Col>
       </Row>
       <Row>
@@ -55,36 +60,13 @@ const EditPhotoPage = () => {
             alt="Remy Sharp"
             src={"data:image/png;base64, " + myUser?.profile_picture}
             sx={{ width: 200, height: 200 }}
-            className="ProfilePicture"
+            className="ProfilePictureChange"
           />
         </Col>
       </Row>
-      {showButton && (
+      <Container className="ProfilePictureRow">
         <Row className={"justify-content-center text-center"}>
           <ProfilePicture myUser={myUser} updateUserData={updateUserData} />
-        </Row>
-      )}
-
-      <Row className={"justify-content-center text-center"}>
-        <h1 className="ProfileText">
-          {myUser?.first_name} {myUser?.last_name}
-        </h1>
-        <h3 className="ProfileText">Coordinador</h3>
-      </Row>
-
-      <Container className="InputsProfile">
-        <Row>
-          {showLogoutButton && (
-            <Col className="d-flex justify-content-center py-3">
-              <Button
-                className="BtnProfileCerrarSesion"
-                onClick={logoutUser}
-                sx={{ my: 3 }}
-              >
-                Cerrar Sesion
-              </Button>
-            </Col>
-          )}
         </Row>
       </Container>
     </Container>

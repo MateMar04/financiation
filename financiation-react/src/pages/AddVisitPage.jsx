@@ -103,19 +103,19 @@ const AddVisitPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "accommodation": values.accommodation,
+                "accommodation": values.accommodation || false,
                 "address_id": values.address,
                 "agreement_id": values.agreements,
-                "civil_registration": values.civil_registration,
+                "civil_registration": values.civil_registration || false,
                 "contacted_referrer_id": values.contacted_referrer,
                 "distance": values.distance,
                 "finance_collaborator_id": values.finance_collaborator,
-                "flyer": values.flyer,
+                "flyer": values.flyer || false,
                 "group_id": values.group,
                 "location_id": values.location,
                 "mayor_id": values.mayor,
-                "modernization_fund": values.modernization_fund,
-                "rent_observations": values.observations,
+                "modernization_fund": values.modernization_fund || false,
+                "rent_observations": values.observations || '',
                 "place_name": values.place,
                 "politic_party_id": values.politic_party,
                 "rent_collaborator_id": values.rent_collaborator,
@@ -128,18 +128,12 @@ const AddVisitPage = () => {
         })
         if (response.status === 200) {
             toggleModalsucceed();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
+        } else {
             toggleModalfailed();
         }
     }
 
-
     const onFinish = (values) => {
-        console.log(values.accommodation)
         postVisit(values)
     };
 
@@ -165,6 +159,7 @@ const AddVisitPage = () => {
 
     return (
 
+
         <Container fluid>
             <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
                               setUpdateFlag={setUpdateFlag}/>
@@ -179,7 +174,7 @@ const AddVisitPage = () => {
             <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
             <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
 
-            <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
+             <h1 className='titulo1'>Nueva Visita</h1>
 
             <Form
                 {...layout}
@@ -188,7 +183,7 @@ const AddVisitPage = () => {
                 onFinish={onFinish}>
 
 
-                <Container>
+                <Container className='justify-content-center'>
 
                     <Row className="visit-field-row">
                         <Col className="visit-field">
@@ -205,10 +200,11 @@ const AddVisitPage = () => {
                                         showSearch
                                         optionFilterProp="children"
                                         filterOption={filterOption}
+
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
                             </Tooltip>
@@ -227,7 +223,6 @@ const AddVisitPage = () => {
                                 ]}>
                                 <DatePicker placeholder={"Fecha de la consulta"} className="visit-field"/>
                             </Form.Item>
-
                         </Col>
                         <Col xs={2}></Col>
                     </Row>
@@ -392,7 +387,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
                             </Tooltip>
@@ -436,7 +431,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
                             </Tooltip>
@@ -523,7 +518,7 @@ const AddVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className={'d-flex align-items-center'}>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
                             </Tooltip>
@@ -572,7 +567,7 @@ const AddVisitPage = () => {
                 </Container>
 
 
-                <Container fluid className={"button-container"}>
+                <Container fluid className={"justify-content-center button-container"}>
                     <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
                             icon={<PlusCircleOutlined/>}>
                         Crear Visita

@@ -102,8 +102,8 @@ export const VisitsPage = () => {
       <Container>
         <Row className="justify-content-center text-center">
           <Col md={8}>
-            {currentData.map((visit) => (
-              <VisitCard visit={visit} />
+            {currentData.map((visit, i) => (
+              <VisitCard key={i} visit={visit} />
             ))}
           </Col>
         </Row>

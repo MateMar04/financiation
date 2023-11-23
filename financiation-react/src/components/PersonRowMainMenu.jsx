@@ -1,12 +1,21 @@
-import {Col, Container, Row} from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
+import "../assets/styles/MainMenuPage.css";
+import {Divider} from 'antd';
 
-export const PersonRowMainMenu = ({role, first_name, last_name}) => {
+export const PersonRowMainMenu = ({ role, first_name, last_name }) => {
     return (
-        <Container fluid>
-            <Row>
-                <Col lg={6} className="fw-bold">{role}:</Col>
-                <Col lg={6}>{first_name} {last_name}</Col>
+        <>
+            <Row className="containerGroupsNames PersonRowMainMenu">
+                <Col md={4} xs={5}>
+                    <b>{role}:</b>
+                </Col>
+                <Col md={8} xs={7}>
+                    <a>{first_name} {last_name}</a>
+                </Col>
             </Row>
-        </Container>
+            
+        </>
+
+
     )
 }

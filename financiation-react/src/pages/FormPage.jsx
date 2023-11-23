@@ -129,7 +129,6 @@ const FormPage = () => {
 
     let handleSumbit = async (e) => {
         e.preventDefault()
-        console.log(observation)
 
         for (let i = 1; i <= selectedQuantity; i++) {
             await postRequest()
@@ -172,8 +171,8 @@ const FormPage = () => {
                                 name="visit"
                                 onChange={(e) => setSelectedVisit(e.target.value)}>
 
-                                {visits?.map((visit) => (
-                                    <option value={visit.id}>{visit.name}</option>
+                                {visits?.map((visit, i) => (
+                                    <option key={i} value={visit.id}>{visit.name}</option>
                                 ))}
                             </select>
                         </Container>
@@ -207,8 +206,8 @@ const FormPage = () => {
                                     getFaqsByDivisions(authTokens.access, e.target.value).then(r => setFaqs(r));
                                 }}>
                                 <option value="" disabled selected>Seleccione una reparticion</option>
-                                {divisions?.map((ministryDepartment) => (
-                                    <option value={ministryDepartment.id}>{ministryDepartment.name}</option>
+                                {divisions?.map((ministryDepartment, i) => (
+                                    <option key={i} value={ministryDepartment.id}>{ministryDepartment.name}</option>
                                 ))}
 
                             </select>
@@ -230,8 +229,8 @@ const FormPage = () => {
                                     setSelectedFaq(e.target.value)
                                 }}>
                                 <option value="" disabled selected>Seleccione un tipo de consulta</option>
-                                {faqs?.map((faq) => (
-                                    <option value={faq.id}>{faq.name}</option>
+                                {faqs?.map((faq, i) => (
+                                    <option key={i} value={faq.id}>{faq.name}</option>
                                 ))}
 
 
@@ -266,8 +265,8 @@ const FormPage = () => {
                                 name='why'
                                 onChange={(e) => setSelectedWhy(e.target.value)}>
                                 <option value="" disabled selected>Determine el motivo de la visita</option>
-                                {whys?.map((why) => (
-                                    <option value={why.id}>{why.name}</option>
+                                {whys?.map((why, i) => (
+                                    <option key={i} value={why.id}>{why.name}</option>
                                 ))}
 
 
