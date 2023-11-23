@@ -25,9 +25,6 @@ const NavbarComponent = () => {
             setMyUser(usuario)
         }
 
-
-
-
     }
 
     useEffect(() => {
@@ -129,6 +126,6 @@ const NavbarComponent = () => {
         </Navbar>
 
     );
-}
 
+}
 export default NavbarComponent;
