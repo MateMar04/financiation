@@ -251,7 +251,7 @@ const EditVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className='botonesredondos'>
                             <Tooltip placement={"right"} title="Agregar Localidad">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalLocationCreate} />
                             </Tooltip>
@@ -434,7 +434,7 @@ const EditVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className='botonesredondos'>
                             <Tooltip placement={"right"} title="Agregar Referente Contactado">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalContactedReferrerCreate} />
                             </Tooltip>
@@ -478,7 +478,7 @@ const EditVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className='d-flex botonesredondos'>
                             <Tooltip placement={"right"} title="Agregar Intendente">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalCreate} />
                             </Tooltip>
@@ -573,7 +573,7 @@ const EditVisitPage = () => {
                                 />
                             </Form.Item>
                         </Col>
-                        <Col xs={2}>
+                        <Col xs={2} className='botonesredondos'>
                             <Tooltip placement={"right"} title="Agregar Acuerdo">
                                 <Button type="primary" shape="circle" icon={<PlusOutlined />} onClick={toggleModalAgreementCreate} />
                             </Tooltip>

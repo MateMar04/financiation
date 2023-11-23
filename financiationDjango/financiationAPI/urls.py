@@ -36,6 +36,7 @@ urlpatterns = [
     path('visits/put/<int:id>', views.putVisitById, name='put_visit'),
     path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
     path('visits/latest', views.getLatestVisits, name='latestVisits'),
+    path('visits/delete/<int:id>', views.deleteVisitById, name='deletevisit'),
 
     # Users
     path('users/<int:id>', views.getUserById, name='user'),

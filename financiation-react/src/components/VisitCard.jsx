@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "../assets/styles/VisitCard.css"
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -8,15 +9,59 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Zoom } from "@mui/material";
 import Button from '@mui/material/Button';
+import AuthContext from "../context/AuthContext";
+import FailedModal from "../components/FailedModal";
+import SucceedModal from "../components/SucceedModal";
+import {message, Popconfirm } from 'antd';
 
+export const VisitCard = ({visit, onDeleteSuccess}) => {
+    let { authTokens } = useContext(AuthContext);
+    const [showfail, setShowfailture] = useState(false);
+    const [showsuccess, setShowsuccese] = useState(false);
+    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
+    const toggleModalfailed = () => setShowfailture(!showfail);
+    const [accordionExpanded, setAccordionExpanded] = useState(false);
 
-export const VisitCard = ({ visit }) => {
+    const cancel = (e) => {
+        message.error('Se ha cancelado la eliminación');
+    };
+
+    let deleteVisit = async (id) => {
+        let response = await fetch(`/api/visits/delete/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": "JWT " + String(authTokens.access),
+                "Accept": "application/json"
+            },
+        });
+        if (response.status === 200) {
+            toggleModalsucceed();
+            onDeleteSuccess();
+            setAccordionExpanded(false);
+            message.success('Se borró la visita exitosamente');
+
+        } else {
+            toggleModalfailed();
+            console.error("No se pudo borrar la visita");
+        }
+    }
+
+    const handleAccordionChange = (event, isExpanded) => {
+        setAccordionExpanded(isExpanded);
+    };
+
+    useEffect(() => {
+        setAccordionExpanded(false);
+    }, []);
     return (
 
         <Container className='CompletlyContainer'>
+            <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess} />
+            <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail} />
             <Zoom in>
                 <div>
-                    <Accordion className={'accordion-visits'}>
+                    <Accordion className={'accordion-visits'} expanded={accordionExpanded} onChange={handleAccordionChange}>
                         <AccordionSummary
                             expandIcon={<ExpandMoreIcon fontSize="large" className="IconDropdownVisitCard" />}
                             aria-controls="panel1a-content"
@@ -125,6 +170,19 @@ export const VisitCard = ({ visit }) => {
                                         </Button>
 
                                     </Link>
+                                </Col>
+                                <Col>
+                                    <Popconfirm
+                                        title="Eliminar la visita"
+                                        description="Esta seguro de que quiere eliminarla?"
+                                        onConfirm={()=>deleteVisit(visit.id)}
+                                        onCancel={cancel}
+                                        okText="Si"
+                                        cancelText="No">
+                                            <Button variant="contained" className="Buttondelete">
+                                                Eliminar Visita
+                                            </Button>
+                                    </Popconfirm>
                                 </Col>
                             </Row>
                         </AccordionDetails>
