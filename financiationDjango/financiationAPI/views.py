@@ -154,6 +154,7 @@ class VisitApiView(APIView):
         return Response(serializer.data)
 
 
+
 class MayorApiView(APIView):
     def get(self, request, *args, **kwargs):
         mayor = Mayor.objects.all()
@@ -633,6 +634,12 @@ def getMayorById(request, id):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+@api_view(['DELETE'])
+def deleteVisitById(request, id, *args, **kwargs):
+    visit = Visit.objects.get(id=id)
+    visit.delete()
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
 
 @api_view(['DELETE'])
 def deleteMayorById(request, id, *args, **kwargs):

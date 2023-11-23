@@ -7,7 +7,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CreateIcon from '@mui/icons-material/Create';
-import DeleteIcon from '@mui/icons-material/Delete';  // Import the DeleteIcon
+import DeleteIcon from '@mui/icons-material/Delete';  
 import IconButton from "@mui/material/IconButton";
 import { Zoom } from "@mui/material";
 import AuthContext from "../context/AuthContext";
@@ -15,12 +15,16 @@ import { AdvisorMiniCardGroup } from "./AdvisorMiniCardGroup";
 import { CoordinatorMiniCardGroup } from "./CoordinatorMiniCardGroup";
 import FailedModal from './FailedModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import { Button, message, Popconfirm } from 'antd';
 
 const GroupCard = ({group, onDeleteSuccess}) => {
     const { authTokens } = useContext(AuthContext);
     const [showButton, setShowButton] = useState(false);
     const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
     const toggleModalfail = () => setShowConfirmDeleteModal(!showConfirmDeleteModal);
+    const cancel = (e) => {
+        message.error('Se ha cancelado la eliminación');
+    };
 
     const handleAddButton = () => {
         setShowButton(!showButton);
@@ -37,8 +41,10 @@ const GroupCard = ({group, onDeleteSuccess}) => {
         });
         if (response.status === 200) {
             onDeleteSuccess();
+            message.success('Se borró el grupo exitosamente');
         } else {
             toggleModalfail();
+            console.error("No se pudo borrar el grupo");
         }
     }
 
@@ -69,9 +75,17 @@ const GroupCard = ({group, onDeleteSuccess}) => {
                                     </Col>
                                     <Col className="ml-auto"> 
                                         {showButton && (
-                                            <IconButton className='delete-button' type="submit" aria-label="delete" onClick={() => deletegroup(group.id)}>
+                                            <Popconfirm
+                                            title="Eliminar el grupo"
+                                            description="Esta seguro de que quiere eliminarlo?"
+                                            onConfirm={()=>deletegroup(group.id)}
+                                            onCancel={cancel}
+                                            okText="Si"
+                                            cancelText="No">
+                                            <IconButton className='delete-button' type="submit" aria-label="delete">
                                                 <DeleteIcon />
                                             </IconButton>
+                                            </Popconfirm>
                                         )}
                                     </Col>
                                 </Row>
