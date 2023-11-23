@@ -25,21 +25,7 @@ const NavbarComponent = () => {
             setMyUser(usuario)
         }
 
-
-
-
     }
-        if (authTokens && authTokens.access) {
-            try {
-                const usuario = await getUser(authTokens.access);
-                setMyUser(usuario);
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        } else {
-            console.error("Auth tokens are null or access token is missing.");
-        }
-    };
 
     useEffect(() => {
 
@@ -141,5 +127,5 @@ const NavbarComponent = () => {
 
     );
 
-
+}
 export default NavbarComponent;
