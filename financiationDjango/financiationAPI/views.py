@@ -141,7 +141,7 @@ class VisitApiView(APIView):
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
             visit.agreement.add(agreement)
-        
+
         for i in data['finance_collaborator_id']:
             finance_collaborator = UserAccount.objects.get(id=i)
             visit.finance_collaborator.add(finance_collaborator)
@@ -206,8 +206,11 @@ class CreateGroupApiView(APIView):
                 user = UserAccount.objects.get(id=a),
                 group = groupo
             )
+            user = UserAccount.objects.get(id=a)
+            user.user_status_id = 2
+            user.save()
         return JsonResponse("OK", safe=False)
-    
+
 class CoordinatorApiView(APIView):
     def get(self, request, *args, **kwargs):
         coordinators = Coordinator.objects.all()
@@ -289,7 +292,7 @@ class ContactedRederrerApiView(APIView):
         contacted_referrers = ContactedReferrer.objects.all()
         serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request, *args, **kwargs):
         data = request.data
         contacted_referrer = ContactedReferrer.objects.create(
