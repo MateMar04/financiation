@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from django.db import connection
 from django.http import JsonResponse
 from django.utils.dateparse import parse_date
@@ -141,7 +139,7 @@ class VisitApiView(APIView):
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
             visit.agreement.add(agreement)
-        
+
         for i in data['finance_collaborator_id']:
             finance_collaborator = UserAccount.objects.get(id=i)
             visit.finance_collaborator.add(finance_collaborator)
@@ -152,7 +150,6 @@ class VisitApiView(APIView):
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
-
 
 
 class MayorApiView(APIView):
@@ -190,6 +187,7 @@ class GroupApiView(APIView):
         serializer = GroupSerializer(group, many=False)
         return Response(serializer.data)
 
+
 class CreateGroupApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -198,16 +196,20 @@ class CreateGroupApiView(APIView):
         )
         for c in data['coordinators']:
             Coordinator.objects.create(
-                user = UserAccount.objects.get(id=c),
-                group = groupo
+                user=UserAccount.objects.get(id=c),
+                group=groupo
             )
         for a in data['advisors']:
             Advisor.objects.create(
-                user = UserAccount.objects.get(id=a),
-                group = groupo
+                user=UserAccount.objects.get(id=a),
+                group=groupo
             )
+            user = UserAccount.objects.get(id=a)
+            user.user_status_id = 2
+            user.save()
         return JsonResponse("OK", safe=False)
-    
+
+
 class CoordinatorApiView(APIView):
     def get(self, request, *args, **kwargs):
         coordinators = Coordinator.objects.all()
@@ -284,12 +286,13 @@ class AgreementApiView(APIView):
         serializer = AgreementSerializer(agreement, many=False)
         return Response(serializer.data)
 
+
 class ContactedRederrerApiView(APIView):
     def get(self, request):
         contacted_referrers = ContactedReferrer.objects.all()
         serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
         return Response(serializer.data)
-    
+
     def post(self, request, *args, **kwargs):
         data = request.data
         contacted_referrer = ContactedReferrer.objects.create(
@@ -299,7 +302,6 @@ class ContactedRederrerApiView(APIView):
         )
         serializer = ContactedReferrerSerializer(contacted_referrer, many=False)
         return Response(serializer.data)
-
 
 
 @api_view(['GET'])
@@ -531,6 +533,7 @@ def getVisitById(request, id):
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
@@ -634,12 +637,14 @@ def getMayorById(request, id):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 def deleteVisitById(request, id, *args, **kwargs):
     visit = Visit.objects.get(id=id)
     visit.delete()
     serializer = VisitSerializer(visit, many=False)
     return Response(serializer.data)
+
 
 @api_view(['DELETE'])
 def deleteMayorById(request, id, *args, **kwargs):
@@ -648,12 +653,21 @@ def deleteMayorById(request, id, *args, **kwargs):
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
 
+
 @api_view(['DELETE'])
 def deleteGroupById(request, id, *args, **kwargs):
     group = Group.objects.get(id=id)
+    advisor_users = Advisor.objects.filter(group=group)
+
+    for i in advisor_users:
+        user = UserAccount.objects.get(id=i.user_id)
+        user.user_status_id = 1
+        user.save()
+
     group.delete()
     serializer = GroupSerializer(group, many=False)
     return Response(serializer.data)
+
 
 @api_view(['DELETE'])
 def deleteadvisorById(request, id, groupId, *args, **kwargs):
@@ -691,6 +705,7 @@ def putUserbyId(request, id, *args, **kwargs):
     serializer = UserAccountSerializer(useraccount, many=False)
     return Response(serializer.data)
 
+
 @api_view(['PUT'])
 def putVisitById(request, id, *args, **kwargs):
     data = request.data
@@ -703,28 +718,28 @@ def putVisitById(request, id, *args, **kwargs):
     visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
 
     visit = Visit.objects.get(id=id)
-    visit.accommodation=data['accommodation']
-    visit.address=address
-    visit.civil_registration=data['civil_registration']
-    visit.contacted_referrer=contacted_referrer
-    visit.distance=data['distance']
-    visit.flyer=data['flyer']
-    visit.group=group
-    visit.location=location
-    visit.mayor=mayor
-    visit.modernization_fund=data['modernization_fund']
-    visit.rent_observations=data['rent_observations']
-    visit.place_name=data['place_name']
-    visit.politic_party=politic_party
-    visit.travel_time=data['travel_time']
-    visit.visit_date=parse_date(data['visit_date'])
-    visit.start_time=data['start_time']
-    visit.finish_time=data['finish_time']
-    visit.visit_status=visit_status
+    visit.accommodation = data['accommodation']
+    visit.address = address
+    visit.civil_registration = data['civil_registration']
+    visit.contacted_referrer = contacted_referrer
+    visit.distance = data['distance']
+    visit.flyer = data['flyer']
+    visit.group = group
+    visit.location = location
+    visit.mayor = mayor
+    visit.modernization_fund = data['modernization_fund']
+    visit.rent_observations = data['rent_observations']
+    visit.place_name = data['place_name']
+    visit.politic_party = politic_party
+    visit.travel_time = data['travel_time']
+    visit.visit_date = parse_date(data['visit_date'])
+    visit.start_time = data['start_time']
+    visit.finish_time = data['finish_time']
+    visit.visit_status = visit_status
 
     for i in data['agreement_id']:
-            agreement = Agreement.objects.get(id=i)
-            visit.agreement.add(agreement)
+        agreement = Agreement.objects.get(id=i)
+        visit.agreement.add(agreement)
 
     for i in data['finance_collaborator_id']:
         finance_collaborator = UserAccount.objects.get(id=i)
