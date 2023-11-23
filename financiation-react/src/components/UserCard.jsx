@@ -4,11 +4,11 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
-import { Zoom } from "@mui/material";
+import { MenuItem, Zoom } from "@mui/material";
 import { getUserStatusesById } from "../services/StatusServices";
 import { getUserRolesById } from "../services/RoleServices";
-import { Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
+import {Select} from 'antd';
 
 export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defaultRole}) => {
     const { authTokens } = useContext(AuthContext);
@@ -45,12 +45,11 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
 
     return (
         <>
-            <Tooltip title="Seleccione el rol que tendra el usuario antes de agregarlo" placement="right" color='blue' key='blue'>
+            
                 <Zoom in style={{ transitionDelay: '200ms' }}>
-                    <div className={'UserCard font'}>
                         <Container>
-                            <Card className='UserCard font'>
-                                <Container className='UserCard'>
+                            <Card className='UserCard'>
+                                <Container>
                                     <Row key={user.id}>
                                         <Col md={1} xs={1} className='profileimage'>
                                             <Avatar className='avatar' alt="Remy Sharp" src={'data:image/png;base64, ' + user?.profile_picture} />
@@ -62,7 +61,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                 </strong>
                                             </Row>
                                             <Row>
-                                                <small>{role.name}</small>
+                                                <sub className='SecondaryText'>{role.name}</sub>
                                             </Row>
                                         </Col>
                                         {status.name === 'Disponible' ? (
@@ -75,18 +74,34 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={3} className='role content-select'>
-                                                <select
+                                            <Col xs={2} md={3} className='d-flex align-items-center'>
+
+
+                                                <Select
                                                     placeholder="Rol en grupo"
-                                                    className='form-select'
                                                     name="Role"
+                                                    className='content-select'
                                                     onChange={handleRoleChange}
                                                 >
-                                                    <option value="seleccionar" disabled hidden selected>{selectedRole}</option>
-                                                    <option value="coordinador">Coordinador</option>
-                                                    <option value="asesor">Asesor</option>
-                                                </select>
-                                                <i></i>
+                                                    <MenuItem value="seleccionar" disabled hidden selected>{selectedRole}Seleccione el rol</MenuItem>
+                                                    <MenuItem value="coordinador">Coordinador</MenuItem>
+                                                    <MenuItem value="asesor">Asesor</MenuItem>
+                                                </Select>
+
+                                                <Select className="visit-field"  placeholder="Seleccione rol"
+                                                name="Role"
+                                                onChange={handleRoleChange}
+                                                options={[
+                                                    {
+                                                      value: 'coordinador',
+                                                      label: 'Coordinador',
+                                                    },
+                                                    {
+                                                      value: 'asesor',
+                                                      label: 'Asesor',
+                                                    }]}
+                                />
+                                                
                                             </Col>
                                         ) : (
                                             <Col xs={5} md={5} className='roleocupado'>
@@ -114,9 +129,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                 </Container>
                             </Card>
                         </Container>
-                    </div>
                 </Zoom>
-            </Tooltip>
         </>
     );
 };
