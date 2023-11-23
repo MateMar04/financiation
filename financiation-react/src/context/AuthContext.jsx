@@ -89,6 +89,7 @@ export const AuthProvider = ({children}) => {
                 setUser(jwt_decode(data.access));
                 localStorage.setItem('authTokens', JSON.stringify(data));
                 history('/menu');
+                setShowloading(false);
             } else {
                 if (response.status === 401) {
                     // Manejar la respuesta 401 según lo necesites
