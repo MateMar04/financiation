@@ -248,6 +248,9 @@ class AdvisorApiView(APIView):
             group_id=group.id,
         )
 
+        user.user_status_id = 2
+        user.save()
+
         serializer = AdvisorSerializer(advisor, many=False)
         return Response(serializer.data)
 
@@ -671,8 +674,14 @@ def deleteGroupById(request, id, *args, **kwargs):
 
 @api_view(['DELETE'])
 def deleteadvisorById(request, id, groupId, *args, **kwargs):
-    advisor = Advisor.objects.filter(user=id, group=groupId)
+    advisor = Advisor.objects.get(user=id, group=groupId)
+
+    user = UserAccount.objects.get(id=advisor.user_id)
+    user.user_status_id = 1
+    user.save()
+
     advisor.delete()
+
     return JsonResponse("OK", safe=False)
 
 
