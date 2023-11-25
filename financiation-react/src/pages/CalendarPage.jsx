@@ -26,7 +26,7 @@ export const CalendarPage = () => {
 
     const handleOk = () => {
         setIsModalOpen(false);
-        navigate('/visit/add');
+        navigate('/visits/add/');
     };
 
     const handleCancel = () => {
