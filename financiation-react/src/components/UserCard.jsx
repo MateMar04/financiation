@@ -75,17 +75,17 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                         {status.name === 'Disponible' ? (
                                             <Col xs={2} md={3} className='d-flex align-items-center justify-content-center'>
 
-
-                                                <Select
+                                                <select
                                                     placeholder="Rol en grupo"
+                                                    className='form-select'
                                                     name="Role"
-                                                    className='content-select'
                                                     onChange={handleRoleChange}
-                                                    displayEmpty
                                                 >
-                                                    <MenuItem value="coordinador">Coordinador</MenuItem>
-                                                    <MenuItem value="asesor">Asesor</MenuItem>
-                                                </Select>
+                                                    <option value="seleccionar" selected disabled hidden>{selectedRole}Seleccione rol</option>
+                                                    <option value="coordinador">Coordinador</option>
+                                                    <option value="asesor">Asesor</option>
+                                                </select>
+                                                <i></i>
 
 
                                                 
@@ -105,6 +105,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                     onChange={handleCheckboxChange}
                                                     disabled={!selectedRole}
                                                 />
+
 
                                                 </Row>
                                             </Col>
