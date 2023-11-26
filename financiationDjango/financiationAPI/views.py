@@ -826,3 +826,17 @@ def getUserGroup(request, id):
         print(row)
         return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
                             safe=False)
+
+
+@api_view(['GET'])
+def getTopThreeAdvisors(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(U.first_name, ' ', U.last_name), count(*) from \"financiationAPI_request\" as R "
+                       "inner join \"financiationAPI_advisor\" as A on A.id = R.advisor_id "
+                       "inner join \"financiationAPI_useraccount\" as U on U.id = A.user_id "
+                       "GROUP BY R.advisor_id, CONCAT(U.first_name, ' ', U.last_name) "
+                       "order by 2 desc limit 3")
+        row = cursor.fetchall()
+        print(row)
+        return JsonResponse(to_json(["user", "requests"], row),
+                            safe=False)
