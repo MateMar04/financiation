@@ -98,6 +98,7 @@ urlpatterns = [
     re_path(r'reports/total-requests-by-faqs$', views.getTotalRequestsByFaq, name='report'),
     re_path(r'reports/total-requests-by-locations$', views.getTotalRequestsByLocation, name='report'),
     re_path(r'reports/total-requests-by-visits$', views.getTotalRequestsByVisits, name='report'),
+    path('top-three-advisors', views.getTopThreeAdvisors, name='top-three'),
 
     # EditarProfilePic
     path('update-profile-picture/<int:id>', views.ProfilePictureView.as_view(), name='ProfilePicture'),
