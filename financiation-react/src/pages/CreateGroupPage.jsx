@@ -2,21 +2,14 @@ import React, {useContext, useState, useEffect} from "react";
 import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
 import {SucceedModal} from "../components/SucceedModal"
 import {FailedModal} from "../components/FailedModal"
 import {getUsers} from "../services/UserServices";
-import GroupsIcon from '@mui/icons-material/Groups';
 import {UserCard} from "../components/UserCard";
-import {Popover} from 'antd';
-import FlotantButton from "../components/FlotantButton";
 import LoadingModal from "../components/LoadingModal";
 import GroupNameModal from "../components/GroupNameModal";
-import {OrderedListOutlined, PropertySafetyFilled, UsergroupAddOutlined} from "@ant-design/icons";
-import {CloseCircleOutlined} from '@ant-design/icons';
-import {Space, Tag, Button, Input} from 'antd';
+import {OrderedListOutlined, UsergroupAddOutlined} from "@ant-design/icons";
+import { Button, Input} from 'antd';
 
 export const CreateGroupPage = () => {
     const {Search} = Input;
