@@ -19,11 +19,7 @@ export const MayorCreateModal = (props) => {
     }, [])
 
     let postMayor = async () => {
-        if (!first_name || !last_name || !selectedLocalidad) {
-            message.error('Por favor, complete todos los campos obligatorios.');
-            return;
-        }
-
+        console.log('aaa')
         let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
@@ -39,7 +35,7 @@ export const MayorCreateModal = (props) => {
         });
 
         if (response.status === 200) {
-            message.success('El intendente se ha creado exitosamente');
+            message.success('El intendente se ha creado exitosamente, recarga la pagina para verlo');
             props.onClose();
         } else {
             message.error('El intendente no se ha creado');

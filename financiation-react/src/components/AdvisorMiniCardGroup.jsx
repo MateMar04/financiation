@@ -8,14 +8,14 @@ import IconButton from "@mui/material/IconButton";
 import ClearIcon from '@mui/icons-material/Clear';
 import AddIcon from '@mui/icons-material/Add';
 import AdvisorCreateModal from './AdvisorCreateModal';
-import { Button, message, Popconfirm } from 'antd';
+import {Button, message, Popconfirm, Popover} from 'antd';
 
 
 export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     let {authTokens} = useContext(AuthContext);
     let [advisors, setAdvisors] = useState([])
-    const [updateFlag, setUpdateFlag] = useState(false);    
+    const [updateFlag, setUpdateFlag] = useState(false);
     const [advisorDeleted, setAdvisorDeleted] = useState(false);
     const toggleAdvisorDeleted = () => setAdvisorDeleted(!advisorDeleted);
     const [showCreationModal, setShowCreationModal] = useState(false);
@@ -54,12 +54,14 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
 
     return (
         <>
-            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag} setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
+            <AdvisorCreateModal group={group} onClose={() => toggleCreationModal()} updateFlag={updateFlag}
+                                setUpdateFlag={setUpdateFlag} show={showCreationModal}/>
             {advisors?.map((advisor, i) => (
                 <Container key={i}>
                     <Row className='AdvisorBorder'>
                         <Col xs={3} md={2} className='"d-flex align-items-center justify-content-center'>
-                            <Avatar alt="Remy Sharp" className='AvatarImg' src={'data:image/png;base64, ' + advisor?.profile_picture}>
+                            <Avatar alt="Remy Sharp" className='AvatarImg'
+                                    src={'data:image/png;base64, ' + advisor?.profile_picture}>
                             </Avatar>
                         </Col>
                         <Col>
@@ -74,25 +76,30 @@ export const AdvisorMiniCardGroup = ({group, showButton}) => {
                         </Col>
                         <Col md={1} xs={1}>
                             <Row className={'justify-content-end'}>
-                                {showButton &&  
-                                    <Popconfirm
-                                        title="Eliminar usuario del grupo"
-                                        description="Esta seguro de que quiere eliminarlo?"
-                                        onConfirm={()=>handleDeleteAdvisor(advisor.id, group.id)}
-                                        onCancel={cancel}
-                                        okText="Si"
-                                        cancelText="No">
-                                            <IconButton ><ClearIcon/></IconButton>
-                                    </Popconfirm>}
+                                {showButton &&
+                                    <Popover content={'Eliminar'}>
+                                        <Popconfirm
+                                            title="Eliminar usuario del grupo"
+                                            description="Esta seguro de que quiere eliminarlo?"
+                                            onConfirm={() => handleDeleteAdvisor(advisor.id, group.id)}
+                                            onCancel={cancel}
+                                            okText="Si"
+                                            cancelText="No">
+                                            <IconButton><ClearIcon/></IconButton>
+                                        </Popconfirm>
+                                    </Popover>}
                             </Row>
                         </Col>
                     </Row>
                     <hr/>
                 </Container>
             ))}
-            {showButton &&<div className='centered_icon'>
+            {showButton && <div className='centered_icon'>
                 <div className='buttonWithBorder'>
-                     <IconButton  type="submit" aria-label="search" onClick={() => toggleCreationModal()}><AddIcon fontSize="large"/></IconButton>
+                    <Popover content={'Agregar nuevo asesor'}>
+                        <IconButton type="submit" aria-label="search" onClick={() => toggleCreationModal()}><AddIcon
+                            fontSize="large"/></IconButton>
+                    </Popover>
                 </div>
             </div>}
         </>

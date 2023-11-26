@@ -1,23 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Button, Container, Col, Row, Form } from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
+import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
-import TextField from "@mui/material/TextField";
-import { SucceedModal } from "../components/SucceedModal"
-import { FailedModal } from "../components/FailedModal"
-import { getUsers } from "../services/UserServices";
-import GroupsIcon from '@mui/icons-material/Groups';
-import { UserCard } from "../components/UserCard";
-import { Popover } from 'antd';
-import FlotantButton from "../components/FlotantButton";
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
+import {getUsers} from "../services/UserServices";
+import {UserCard} from "../components/UserCard";
 import LoadingModal from "../components/LoadingModal";
 import GroupNameModal from "../components/GroupNameModal";
-import { PropertySafetyFilled } from "@ant-design/icons";
+import {OrderedListOutlined, UsergroupAddOutlined} from "@ant-design/icons";
+import { Button, Input} from 'antd';
 
 export const CreateGroupPage = () => {
-    let { authTokens } = useContext(AuthContext);
+    const {Search} = Input;
+    let {authTokens} = useContext(AuthContext);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const [users, setUsers] = useState([]);
@@ -31,11 +27,8 @@ export const CreateGroupPage = () => {
     const toggleModalGroupCreate = () => setShowGroupCreate(!showgroupcreate);
     const [selectedAdvisors, setSelectedAdvisors] = useState([]);
     const [selectedCoordinators, setSelectedCoordinators] = useState([]);
-    
-    const content = (
-        <a></a>
-    );
-    
+
+
     const setSelectedRole = (role) => {
         console.log('Selected Role:', role);
     };
@@ -44,26 +37,26 @@ export const CreateGroupPage = () => {
         setUserCheckboxes((prevUserCheckboxes) => {
             const updatedCheckboxes = {
                 ...prevUserCheckboxes,
-                [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
+                [userId]: {checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole},
             };
-    
+
             console.log('Updated userCheckboxes:', updatedCheckboxes);
-    
+
             // Capture the selected role directly from the event
             setSelectedRole(selectedRole);
-    
+
             setSelectedCoordinators((prevCoordinators) =>
                 updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
                     ? [...prevCoordinators, userId]
                     : prevCoordinators.filter((id) => id !== userId)
             );
-    
+
             setSelectedAdvisors((prevAdvisors) =>
                 updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
                     ? [...prevAdvisors, userId]
                     : prevAdvisors.filter((id) => id !== userId)
             );
-    
+
             return updatedCheckboxes;
         });
     };
@@ -73,53 +66,51 @@ export const CreateGroupPage = () => {
             console.log(`Role change for user ${userId} to ${selectedRole}`);
             const updatedCheckboxes = {
                 ...prevUserCheckboxes,
-                [userId]: { checked: prevUserCheckboxes[userId]?.checked, role: selectedRole },
+                [userId]: {checked: prevUserCheckboxes[userId]?.checked, role: selectedRole},
             };
-    
+
             // Capture the selected role directly from the event
             setSelectedRole(selectedRole);
-    
+
             setSelectedCoordinators((prevCoordinators) =>
                 updatedCheckboxes[userId]?.checked && selectedRole === 'coordinador'
                     ? [...prevCoordinators, userId]
                     : prevCoordinators.filter((id) => id !== userId)
             );
-    
+
             setSelectedAdvisors((prevAdvisors) =>
                 updatedCheckboxes[userId]?.checked && selectedRole === 'asesor'
                     ? [...prevAdvisors, userId]
                     : prevAdvisors.filter((id) => id !== userId)
             );
-    
+
             // Call onRoleChange prop to handle role change
             // onRoleChange(userId, selectedRole);
-    
+
             return updatedCheckboxes;
         });
     };
-    
-    
-    
+
 
     useEffect(() => {
 
         setShowloading(true)
         getUsers(authTokens.access)
-        .then((data) => {
-          setUsers(data);
-          setFilteredUsers(data);
-        })
-        .finally(() => {
-          setShowloading(false);
-        });
+            .then((data) => {
+                setUsers(data);
+                setFilteredUsers(data);
+            })
+            .finally(() => {
+                setShowloading(false);
+            });
     }, [authTokens.access]);
 
     useEffect(() => {
         console.log('Initial userCheckboxes state:', userCheckboxes);
         setUserCheckboxes((prevUserCheckboxes) => {
-            const newUserCheckboxes = { ...prevUserCheckboxes };
+            const newUserCheckboxes = {...prevUserCheckboxes};
             filteredUsers.forEach((user) => {
-                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || { checked: false, role: null };
+                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || {checked: false, role: null};
             });
             return newUserCheckboxes;
         });
@@ -133,7 +124,7 @@ export const CreateGroupPage = () => {
     const handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
-    
+
         const filtered = users.filter((user) => {
             const fullName = `${user.first_name} ${user.last_name}`;
             return (
@@ -142,69 +133,62 @@ export const CreateGroupPage = () => {
                 user.last_name.toLowerCase().includes(query)
             );
         });
-    
+
         setFilteredUsers(filtered);
-    };   
+    };
 
     return (
         <Container fluid>
             <LoadingModal message="cargando" show={showloading}/>
-            <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
-            <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
-            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
+            <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess}/>
+            <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail}/>
+            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate}
+                            selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
 
-                <Container className="separation font text-center justify-content-center">
-                    <Row className='justify-content-center text-center'>
-                        <Col md={10}>
-                            <TextField
-                                fullWidth
-                                id="SearchVisit"
-                                variant="outlined"
-                                label='Buscar'
-                                className="SearchVisit"
-                                InputProps={{
-                                    sx: { borderRadius: 5, color: "black" },
-                                    endAdornment: (
-                                        <IconButton>
-                                            <SearchIcon />
-                                        </IconButton>
-                                    ),
-                                }}
-                                value={searchQuery}
-                                onChange={handleSearch}
-                            />
-                        </Col>
+            <Container>
+                <Row className={'justify-content-center d-flex align-items-center'}>
+                    <Col md={{ order: 1, span: 2}} xs={{ order: 1, span: 6}}>
+                        <Button href="/groups/" className="SeeGroupsButton" size={'large'} shape="round" icon={<OrderedListOutlined />}>Ver grupos</Button>
+                    </Col>
 
-                        <Col md={2} xs={1} lg={1}>
-                        <Popover content={content} title="Ver Grupos Creados">
-                        <IconButton href="/groups/" id="icongroupgrupo" sx={{ width: 56, height: 56 }}
-                                className={'GroupsIcon'}><GroupsIcon/></IconButton>
-                        </Popover> 
-                        </Col>
-                    </Row>
-                </Container>
+                    <Col className='text-center justify-content-center' xs={{ order: 3 }} md={{order:2}}>
+                        <Input
+                            placeholder='Buscar persona'
+                            value={searchQuery}
+                            className="SearchCreateGroup"
+                            onChange={handleSearch}
+                        />
+                    </Col>
 
-                <Container className="justify-content-center">
-                {filteredUsers.map((user, i) => (
-                        <Container key={i} className="containerUserCard justify-content-center text-center">
-                            <UserCard
-                                user={user}
-                                isChecked={userCheckboxes[user.id]?.checked}
-                                onCheckboxChange={handleCheckboxChange}
-                                onRoleChange={handleRoleChange}  // Passed onRoleChange as a prop
-                                defaultRole={userCheckboxes[user.id]?.role}
-                            />
-                        </Container>
-                    ))}
-                </Container>
+                    <Col  xs={{ order: 2, span: 6 }} md={{order:3, span: 2}}>
+                        <Button type={'primary'} className="CreateGroupsButton" onClick={() => toggleModalGroupCreate()} size={'large'} shape="round" icon={<UsergroupAddOutlined/>}>Crear grupo</Button>
+                    </Col>
 
-                <Row className='text-center'>
+                </Row>
+                <Row className={'text-center'}>
                     <Col>
-                        <Form.Group onClick={() =>toggleModalGroupCreate()}> 
-                            <FlotantButton name='' />
-                        </Form.Group>
+                        <a>Seleccione el rol que tendrá el usuario antes de agregarlo</a>
                     </Col>
                 </Row>
+            </Container>
+
+             <Container className="justify-content-center">
+                {filteredUsers.map((user, i) => (
+                    <Container key={i} className="containerUserCard justify-content-center ">
+                        <Row>
+                            <Col xs={12}>
+                        <UserCard
+                            user={user}
+                            isChecked={userCheckboxes[user.id]?.checked}
+                            onCheckboxChange={handleCheckboxChange}
+                            onRoleChange={handleRoleChange}  // Passed onRoleChange as a prop
+                            defaultRole={userCheckboxes[user.id]?.role}
+                        />
+                                </Col>
+                            </Row>
+                    </Container>
+                ))}
+            </Container>
         </Container>
     )
 }

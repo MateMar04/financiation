@@ -15,7 +15,7 @@ import { AdvisorMiniCardGroup } from "./AdvisorMiniCardGroup";
 import { CoordinatorMiniCardGroup } from "./CoordinatorMiniCardGroup";
 import FailedModal from './FailedModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
-import { Button, message, Popconfirm } from 'antd';
+import { Button, message, Popconfirm, Popover } from 'antd';
 
 const GroupCard = ({group, onDeleteSuccess}) => {
     const { authTokens } = useContext(AuthContext);
@@ -63,21 +63,24 @@ const GroupCard = ({group, onDeleteSuccess}) => {
 
                         <AccordionDetails>
                             <Container>
-                                <Row className={'align-items-center'}>
+                                <Row className={'align-items-center ButtonsGroupCard'}>
                                     <Col>
                                         <Row>
                                             <Col>
+                                                <Popover content={'Editar grupo'}>
                                                 <IconButton type="submit" aria-label="search" onClick={handleAddButton}>
                                                     <CreateIcon />
                                                 </IconButton>
+                                                </Popover>
                                             </Col>
                                         </Row>
                                     </Col>
                                     <Col className="ml-auto"> 
                                         {showButton && (
+                                            <Popover content={'Eliminar grupo'}>
                                             <Popconfirm
                                             title="Eliminar el grupo"
-                                            description="Esta seguro de que quiere eliminarlo?"
+                                            description="Esta seguro de que quiere eliminar el grupo?"
                                             onConfirm={()=>deletegroup(group.id)}
                                             onCancel={cancel}
                                             okText="Si"
@@ -86,6 +89,7 @@ const GroupCard = ({group, onDeleteSuccess}) => {
                                                 <DeleteIcon />
                                             </IconButton>
                                             </Popconfirm>
+                                                </Popover>
                                         )}
                                     </Col>
                                 </Row>

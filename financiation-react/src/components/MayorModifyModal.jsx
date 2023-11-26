@@ -37,19 +37,19 @@ export const MayorModifyModal = (props) => {
 
     const handleFormSubmitPut = (e) => {
         e.preventDefault();
-    
+
         if (!editedMayor.first_name || !editedMayor.last_name) {
             message.error('Por favor, complete todos los campos.');
             return;
         }
-    
+
         putMayor(editedMayor.id);
         setEditedMayor({}); // Reset the selected mayor
     };
-    
+
     const handleFormSubmitDelete = (e) => {
         e.preventDefault();
-    
+
         if (!editedMayor.first_name || !editedMayor.last_name) {
             message.error('Por favor, complete todos los campos.');
             return;
@@ -94,7 +94,7 @@ export const MayorModifyModal = (props) => {
                 Accept: 'application/json',
             },
         });
-    
+
         if (response.status === 200) {
             props.setUpdateFlag((prevFlag) => !prevFlag);
             getMayors(authTokens.access)

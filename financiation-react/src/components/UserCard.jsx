@@ -4,11 +4,10 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import Checkbox from '@mui/material/Checkbox';
-import { Zoom } from "@mui/material";
+import { MenuItem, Zoom,Select } from "@mui/material";
 import { getUserStatusesById } from "../services/StatusServices";
 import { getUserRolesById } from "../services/RoleServices";
-import { Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
 
 export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defaultRole}) => {
     const { authTokens } = useContext(AuthContext);
@@ -45,24 +44,23 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
 
     return (
         <>
-            <Tooltip title="Seleccione el rol que tendra el usuario antes de agregarlo" placement="right" color='blue' key='blue'>
+            
                 <Zoom in style={{ transitionDelay: '200ms' }}>
-                    <div className={'UserCard font'}>
                         <Container>
-                            <Card className='UserCard font'>
-                                <Container className='UserCard'>
+                            <Card className='UserCard'>
+                                <Container>
                                     <Row key={user.id}>
-                                        <Col md={1} xs={1} className='profileimage'>
+                                        <Col md={1} xs={2} className='profileimage'>
                                             <Avatar className='avatar' alt="Remy Sharp" src={'data:image/png;base64, ' + user?.profile_picture} />
                                         </Col>
-                                        <Col xs={3} md={3} className='name'>
+                                        <Col xs={6} md={3} className='name'>
                                             <Row>
                                                 <strong>
                                                     <p>{user.first_name} {user.last_name}</p>
                                                 </strong>
                                             </Row>
                                             <Row>
-                                                <small>{role.name}</small>
+                                                <sub className='SecondaryText'>{role.name}</sub>
                                             </Row>
                                         </Col>
                                         {status.name === 'Disponible' ? (
@@ -75,18 +73,18 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={3} className='role content-select'>
+                                            <Col xs={8} md={3} className='d-flex align-items-center justify-content-center'>
+
                                                 <select
                                                     placeholder="Rol en grupo"
                                                     className='form-select'
                                                     name="Role"
                                                     onChange={handleRoleChange}
                                                 >
-                                                    <option value="seleccionar" disabled hidden selected>{selectedRole}</option>
+                                                    <option value="seleccionar" selected disabled hidden>{selectedRole}Seleccione rol</option>
                                                     <option value="coordinador">Coordinador</option>
                                                     <option value="asesor">Asesor</option>
                                                 </select>
-                                                <i></i>
                                             </Col>
                                         ) : (
                                             <Col xs={5} md={5} className='roleocupado'>
@@ -94,7 +92,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={2} className='check'>
+                                            <Col xs={4} md={2} className='check justify-content-sm-center'>
                                                 <Row>
                                                 <input
                                                     type="checkbox"
@@ -103,7 +101,6 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                     onChange={handleCheckboxChange}
                                                     disabled={!selectedRole}
                                                 />
-
                                                 </Row>
                                             </Col>
                                         ) : (
@@ -114,9 +111,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                 </Container>
                             </Card>
                         </Container>
-                    </div>
                 </Zoom>
-            </Tooltip>
         </>
     );
 };

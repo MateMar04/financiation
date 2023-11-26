@@ -1,16 +1,13 @@
 import '../assets/styles/RowWithCheck.css'
-import { Button, Col, Modal, Row } from "react-bootstrap";
 import { Form } from "react-bootstrap";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Container, Card } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import '../assets/styles/AddMayorPage.css';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
-import {message} from 'antd';
+import {message, Modal, Input} from 'antd';
 
 export const GroupNameModal = (props) => {
 
@@ -36,53 +33,25 @@ export const GroupNameModal = (props) => {
                 })
             })
             if (response.status === 200) {
-                // toggleModalsucceed();
-                message.success('Se agregó el acuerdo exitosamente');
+
+                message.success('Se ha creado el grupo exitosamente');
                 props.onClose();
             } else {
-                console.error("No se pudo agregar el acuerdo");
+                console.error("No se ha podido crear el grupo");
                 props.onClose()
             }
         }
 
     
     return (
-            <Modal className='modalcreate' show={props.show} >
-                <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
+            <Modal className='modalcreate' open={props.show} title={'Crear grupo'} onCancel={props.onClose} onOk={postGroup}>
                 <Container className="containermayor container-addmayor-modal">
-
+                    <a>Introduzca el nombre del grupo</a>
                     <Form className='datos'>
-                        <h3 className={'h3LoginPage'}>Crear Grupo</h3>
+                            <Form.Group>
+                                <Input placeholder="Nombre del grupo" size={'large'} onChange={(e) => setName(e.target.value)} name='name'/>
 
-                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="input"
-                                    label="Nombre"
-                                    name='name'
-                                    onChange={(e) => setName(e.target.value)}
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start" >
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
                             </Form.Group>
-                        </div>
-
-                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' onClick={postGroup}>Registrar</Button>
-                        </div>
-                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                            <Button variant="outlined" color="primary" onClick={props.onClose}>
-                                Cancelar
-                            </Button>
-                        </div>
                     </Form>
                 </Container>
             </Modal>
