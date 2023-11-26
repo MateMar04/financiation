@@ -113,7 +113,7 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
                                     <p>Tiempo de viaje:</p>
                                 </Col>
                                 <Col >
-                                    <p>{visit.travel_time}</p>
+                                    <p>{visit.travel_time} min</p>
                                 </Col>
                             </Row>
                             <Row className="row1">
@@ -156,6 +156,54 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
                                 </Col>
                                 <Col >
                                     <p>{visit.visit_status_name}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row2">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Colaborador de finanzas:</p>
+                                </Col>
+                                <Col >
+                                    <p>{visit.finance_collaborator}</p>
+                                </Col>
+                            </Row>
+                             <Row className="row1">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Referente contactado:</p>
+                                </Col>
+                                <Col >
+                                    <p>{visit.contacted_referrer}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row2">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Partido politico:</p>
+                                </Col>
+                                <Col >
+                                    <p>{visit.politic_party}</p>
+                                </Col>
+                            </Row>
+                             <Row className="row1">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Intendente:</p>
+                                </Col>
+                                <Col >
+                                    <p>{visit.mayor}</p>
+                                </Col>
+                            </Row>
+                             <Row className="row2">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Hora de inicio:</p>
+                                </Col>
+                                <Col>
+                                    <p>{visit.start_time}</p>
+                                </Col>
+                            </Row>
+                            <Row className="row1">
+                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
+                                    <p>Hora de fin:</p>
+                                </Col>
+                                <Col>
+                                    <p>{visit.finish_time}</p>
                                 </Col>
                             </Row>
                             <Row className="ButtonEditVisit">

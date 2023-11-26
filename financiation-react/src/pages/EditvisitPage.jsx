@@ -15,7 +15,7 @@ import { getVisitStatuses } from "../services/StatusServices";
 import { getPoliticParties } from "../services/PoliticPartiesServices";
 import { getUsers } from "../services/UserServices";
 import { getContactedReferrers } from "../services/ContactedReferrersServices";
-import { Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip } from 'antd';
+import {Button, DatePicker, Form, Input, InputNumber, message, Select, Switch, TimePicker, Tooltip} from 'antd';
 import { PlusCircleOutlined, PlusOutlined, EditOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -172,13 +172,18 @@ const EditVisitPage = () => {
             })
         })
         if (response.status === 200) {
-            toggleModalsucceed();
+
+            message.success('La visita ha sido actualizada');
+
         } else if (response.status === 500) {
-            toggleModalfailed();
+
+            console.error("No se ha podido actualizar la visita");
         } else if (response.status === 401) {
-            toggleModalfailed();
+
+            console.error("No se ha podido actualizar la visita");
         } else if (response.status === 400) {
-            toggleModalfailed();
+
+            console.error("No se ha podido actualizar la visita");
         }
     }
 
@@ -220,10 +225,8 @@ const EditVisitPage = () => {
                 setUpdateFlag={setUpdateFlag} />
             <ContactedReferrerCreateModal onClose={() => toggleModalContactedReferrerCreate()} show={showcontactedreferrercreate} updateFlag={updateFlag}
                 setUpdateFlag={setUpdateFlag} />
-            <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess} />
-            <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail} />
 
-            <h1 className={'h1NuevaVisita'}>Nueva Visita</h1>
+            <h2 className={'titulo1'}>Editar visita</h2>
 
             <Form
                 {...layout}
@@ -248,6 +251,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -268,7 +272,7 @@ const EditVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field" />
+                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field" size={'large'}/>
                             </Form.Item>
 
                         </Col>
@@ -284,7 +288,7 @@ const EditVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field" />
+                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field" size={'large'}/>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -308,6 +312,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                    size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -332,6 +337,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                    size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -347,7 +353,7 @@ const EditVisitPage = () => {
                                         required: false,
                                     },
                                 ]}>
-                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"} />
+                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"} size={'large'}/>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -362,7 +368,7 @@ const EditVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"} />
+                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"} size={'large'}/>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -377,7 +383,7 @@ const EditVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"} />
+                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"} size={'large'}/>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -392,7 +398,7 @@ const EditVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <Input className="visit-field" placeholder="Lugar" />
+                                <Input className="visit-field" placeholder="Lugar" size={'large'}/>
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -411,7 +417,9 @@ const EditVisitPage = () => {
                                     options={getAddressNames(addresses)}
                                     showSearch
                                     optionFilterProp="children"
-                                    filterOption={filterOption} />
+                                    filterOption={filterOption}
+                                    size={'large'}
+                                />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -431,6 +439,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -455,6 +464,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -475,6 +485,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -570,6 +581,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>
@@ -594,7 +606,9 @@ const EditVisitPage = () => {
                                     options={getItemNames(visitStatuses)}
                                     showSearch
                                     optionFilterProp="children"
-                                    filterOption={filterOption} />
+                                    filterOption={filterOption}
+                                    size={'large'}
+                                />
                             </Form.Item>
                         </Col>
                         <Col xs={2}></Col>
@@ -614,6 +628,7 @@ const EditVisitPage = () => {
                                     showSearch
                                     optionFilterProp="children"
                                     filterOption={filterOption}
+                                        size={'large'}
                                 />
                             </Form.Item>
                         </Col>

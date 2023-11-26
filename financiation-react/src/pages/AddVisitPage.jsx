@@ -364,7 +364,7 @@ const AddVisitPage = () => {
                                         required: true,
                                     },
                                 ]}>
-                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                <Select className="visit-field" placeholder={"Direccion"}
                                         options={getAddressNames(addresses)}
                                         showSearch
                                         optionFilterProp="children"
