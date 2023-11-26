@@ -49,6 +49,7 @@
 
 .consulta-field{
     padding: 15px;
+    height: 7vh !important;
 }
 
 .consulta-button{

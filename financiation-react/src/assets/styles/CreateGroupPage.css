@@ -17,17 +17,9 @@
 	margin-top: 2vh;
 }
 
-.SeeGroupsButton{
-	width: auto;
-	margin-top: 3vh;
-
-
-}
-
-.CreateGroupsButton{
-	width: auto;
-	margin-top: 3vh;
-
+.SeeGroupsButton, .CreateGroupsButton {
+    width: auto;
+    margin-top: 3vh;
 }
 
 .SearchCreateGroup{
@@ -35,9 +27,15 @@
 	height: 8vh;
 	margin-top: 3vh !important;
 	border-radius: 3vh;
-;
+}
 
-
-
+@media (max-width: 800px){
+    .SearchCreateGroup{
+        width: 80vw !important;
+    }
+    .SeeGroupsButton, .CreateGroupsButton {
+        margin-left: -3vw;
+        width: 45vw;
+    }
 }
 

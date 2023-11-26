@@ -50,10 +50,10 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                             <Card className='UserCard'>
                                 <Container>
                                     <Row key={user.id}>
-                                        <Col md={1} xs={1} className='profileimage'>
+                                        <Col md={1} xs={2} className='profileimage'>
                                             <Avatar className='avatar' alt="Remy Sharp" src={'data:image/png;base64, ' + user?.profile_picture} />
                                         </Col>
-                                        <Col xs={3} md={3} className='name'>
+                                        <Col xs={6} md={3} className='name'>
                                             <Row>
                                                 <strong>
                                                     <p>{user.first_name} {user.last_name}</p>
@@ -73,7 +73,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={3} className='d-flex align-items-center justify-content-center'>
+                                            <Col xs={8} md={3} className='d-flex align-items-center justify-content-center'>
 
                                                 <select
                                                     placeholder="Rol en grupo"
@@ -85,10 +85,6 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                     <option value="coordinador">Coordinador</option>
                                                     <option value="asesor">Asesor</option>
                                                 </select>
-                                                <i></i>
-
-
-                                                
                                             </Col>
                                         ) : (
                                             <Col xs={5} md={5} className='roleocupado'>
@@ -96,7 +92,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={2} className='check'>
+                                            <Col xs={4} md={2} className='check justify-content-sm-center'>
                                                 <Row>
                                                 <input
                                                     type="checkbox"
@@ -105,8 +101,6 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                     onChange={handleCheckboxChange}
                                                     disabled={!selectedRole}
                                                 />
-
-
                                                 </Row>
                                             </Col>
                                         ) : (

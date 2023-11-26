@@ -32,3 +32,25 @@
 	height: 6vh;
 }
 
+.RoleSelect{
+	background-color: white;
+    border-radius: 2vh;
+    height: 7vh;
+}
+
+@media	(max-width: 800px){
+	.UserCard{
+		margin-left: -13vw;
+		width: 100vw;
+	}
+
+	.check{
+		width: 5vw;
+		height: 5vh;
+		margin-left: 6vw;
+	}
+	.form-select{
+		width: 60vw !important;
+	}
+}
+

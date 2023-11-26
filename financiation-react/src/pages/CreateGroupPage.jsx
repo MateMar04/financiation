@@ -154,11 +154,11 @@ export const CreateGroupPage = () => {
 
             <Container>
                 <Row className={'justify-content-center d-flex align-items-center'}>
-                    <Col md={2} className='justify-content-start'>
+                    <Col md={{ order: 1, span: 2}} xs={{ order: 1, span: 6}}>
                         <Button href="/groups/" className="SeeGroupsButton" size={'large'} shape="round" icon={<OrderedListOutlined />}>Ver grupos</Button>
                     </Col>
 
-                    <Col className='text-center justify-content-center'>
+                    <Col className='text-center justify-content-center' xs={{ order: 3 }} md={{order:2}}>
                         <Input
                             placeholder='Buscar persona'
                             value={searchQuery}
@@ -167,7 +167,7 @@ export const CreateGroupPage = () => {
                         />
                     </Col>
 
-                    <Col md={2}  className='justify-content-end'>
+                    <Col  xs={{ order: 2, span: 6 }} md={{order:3, span: 2}}>
                         <Button type={'primary'} className="CreateGroupsButton" onClick={() => toggleModalGroupCreate()} size={'large'} shape="round" icon={<UsergroupAddOutlined/>}>Crear grupo</Button>
                     </Col>
 
@@ -176,13 +176,14 @@ export const CreateGroupPage = () => {
                     <Col>
                         <a>Seleccione el rol que tendrá el usuario antes de agregarlo</a>
                     </Col>
-
                 </Row>
             </Container>
 
-            <Container className="justify-content-center">
+             <Container className="justify-content-center">
                 {filteredUsers.map((user, i) => (
-                    <Container key={i} className="containerUserCard justify-content-center text-center">
+                    <Container key={i} className="containerUserCard justify-content-center ">
+                        <Row>
+                            <Col xs={12}>
                         <UserCard
                             user={user}
                             isChecked={userCheckboxes[user.id]?.checked}
@@ -190,6 +191,8 @@ export const CreateGroupPage = () => {
                             onRoleChange={handleRoleChange}  // Passed onRoleChange as a prop
                             defaultRole={userCheckboxes[user.id]?.role}
                         />
+                                </Col>
+                            </Row>
                     </Container>
                 ))}
             </Container>
