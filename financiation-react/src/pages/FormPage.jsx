@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react';
 import "../assets/styles/FormPage.css";
 import AuthContext from "../context/AuthContext";
 import {getVisits} from "../services/VisitServices";
-import {getAdvisorUsers} from "../services/AdvisorServices";
+import {getAdvisorByUser, getAdvisorUsers} from "../services/AdvisorServices";
 import {getDivisions} from "../services/DivisionServices";
 import {getUser} from '../services/UserServices';
 import {getWhys} from "../services/WhyServices";
@@ -13,7 +13,7 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import {getUserGroup} from "../services/GroupServices";
 import {Modal} from 'antd';
-import LoadingModal from "../components/LoadingModal"; 
+import LoadingModal from "../components/LoadingModal";
 import Avatar from "@mui/material/Avatar";
 import {getFaqsByDivisions} from "../services/FaqServices";
 import Snackbar from "@mui/material/Snackbar";
@@ -30,7 +30,7 @@ const FormPage = () => {
     let [user, setUser] = useState([])
     let [visits, setVisits] = useState([])
     let [whys, setWhys] = useState([])
-    const [showloading, setShowloading] = useState(false); 
+    const [showloading, setShowloading] = useState(false);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -46,6 +46,7 @@ const FormPage = () => {
     let [selectedQuantity, setSelectedQuantity] = useState(1)
     const [observation, setObservation] = useState("-")
     const [myUser, setMyUser] = useState()
+    const [advisorId, setAdvisorId] = useState();
 
     const [showfail, setShowfailture] = useState(false);
     const toggleModalfailed = () => setShowfailture(!showfail);
@@ -58,6 +59,7 @@ const FormPage = () => {
         getVisits(authTokens.access).then(data => setVisits(data))
         getAdvisorUsers(authTokens.access).then(data => setAdvisors(data))
         getUser(authTokens.access).then(data => setUser(data))
+        getAdvisorByUser(authTokens.access, usuario.id).then(data => setAdvisorId(data))
     }
 
     function getCurrentDateTimeString() {
@@ -99,7 +101,7 @@ const FormPage = () => {
     }, [visits]);
 
     let postRequest = async (e) => {
-        setShowloading(true)  
+        setShowloading(true)
         let response = await fetch('/api/requests', {
             method: "POST",
             headers: {
@@ -110,7 +112,7 @@ const FormPage = () => {
             body: JSON.stringify({
                 "request_datetime": formatDate(dateRef.current.value),
                 "visit_id": selectedVisit,
-                "advisor_id": myUser.id,
+                "advisor_id": advisorId.length === 0 ? "None" : advisorId[0].advisor,
                 "faq_id": selectedFaq,
                 "why_id": selectedWhy,
                 "status_id": 1,
@@ -305,10 +307,10 @@ const FormPage = () => {
                 </Alert>
             </Snackbar>
 
-            
-            <Container> 
+
+            <Container>
                 <LoadingModal message="la visita" show={showloading}/>
-            </Container> 
+            </Container>
 
         </Form>
             </Container>
