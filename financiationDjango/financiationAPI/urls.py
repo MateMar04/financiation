@@ -36,6 +36,7 @@ urlpatterns = [
     path('visits/put/<int:id>', views.putVisitById, name='put_visit'),
     path('visits/latest/requests', views.getLatestVisitRequestCount, name='latestRequests'),
     path('visits/latest', views.getLatestVisits, name='latestVisits'),
+    path('visits/delete/<int:id>', views.deleteVisitById, name='deletevisit'),
 
     # Users
     path('users/<int:id>', views.getUserById, name='user'),
@@ -45,7 +46,6 @@ urlpatterns = [
     path('coordinator-users', views.getCoordinatorUsers, name='coordinatorUsers'),
     path('groups/<int:id>/coordinator-users', views.getGroupCoordinatorUsers, name='getGroupCoordinatorUsers'),
     path('groups/<int:id>/advisor-users', views.getGroupAdvisorUsers, name='getGroupAdvisorUsers'),
-    # path('users/me/<int:id>', views.getMyUser, name='me'),
 
     # Vehicles
     path('vehicles', views.getVehicles, name='vehicles'),

@@ -100,15 +100,18 @@ export const MayorModifyModal = (props) => {
             getMayors(authTokens.access)
                 .then((data) => {
                     setMayors(data);
+                    toggleModalsucceed();
                     message.success('Se ha borrado el intendente exitosamente');
                     props.onClose();
                 })
                 .catch((error) => {
                     console.error(error);
+                    toggleModalfailed();
                     message.error('No se ha podido actualizar la lista de intendentes');
                     props.onClose();
                 });
         } else {
+            toggleModalfailed();
             message.error('No se ha podido borrar el intendente');
         }
     };

@@ -263,7 +263,7 @@ class Advisor(models.Model):
 class Request(models.Model):
     request_datetime = models.DateTimeField()
     observation = models.TextField(blank=True, default='None')
-    visit = models.ForeignKey(Visit, models.DO_NOTHING)
+    visit = models.ForeignKey(Visit, models.CASCADE)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)
     advisor = models.ForeignKey(Advisor, models.SET_NULL, null=True)

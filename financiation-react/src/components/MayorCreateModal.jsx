@@ -19,11 +19,7 @@ export const MayorCreateModal = (props) => {
     }, [])
 
     let postMayor = async () => {
-        if (!first_name || !last_name || !selectedLocalidad) {
-            message.error('Por favor, complete todos los campos obligatorios.');
-            return;
-        }
-
+        console.log('aaa')
         let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
