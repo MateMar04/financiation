@@ -54,7 +54,11 @@ class RequestApiView(APIView):
         data = request.data
 
         visit = Visit.objects.get(id=data['visit_id'])
-        advisor = Advisor.objects.get(id=data['advisor_id'])
+        if data['advisor_id'] != "None":
+            advisor = Advisor.objects.get(id=data['advisor_id'])
+        else:
+            advisor = None
+
         faq = Faq.objects.get(id=data['faq_id'])
         why = Why.objects.get(id=data['why_id'])
         requestStatus = RequestStatus.objects.get(id=data['status_id'])
@@ -97,7 +101,6 @@ class VisitApiView(APIView):
                                "inner join \"financiationAPI_mayor\" M on M.id = V.mayor_id "
                                "ORDER BY V.visit_date DESC")
                 row = cursor.fetchall()
-                print(row)
                 return JsonResponse(to_json(
                     ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
                      "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
@@ -116,7 +119,6 @@ class VisitApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
-        print(data)
 
         address = Address.objects.get(id=data['address_id'])
         contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
@@ -823,7 +825,6 @@ def getUserGroup(request, id):
                        "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
                        "order by 4", [id, id])
         row = cursor.fetchall()
-        print(row)
         return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
                             safe=False)
 
@@ -837,6 +838,15 @@ def getTopThreeAdvisors(request):
                        "GROUP BY R.advisor_id, CONCAT(U.first_name, ' ', U.last_name) "
                        "order by 2 desc limit 3")
         row = cursor.fetchall()
-        print(row)
         return JsonResponse(to_json(["user", "requests"], row),
                             safe=False)
+
+
+@api_view(['GET'])
+def getAdvisorByUserId(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from \"financiationAPI_advisor\" "
+                       "where user_id = (%s) limit 1", [id])
+        row = cursor.fetchall()
+        print(to_json(["advisor"], row))
+        return JsonResponse(to_json(["advisor"], row), safe=False)
