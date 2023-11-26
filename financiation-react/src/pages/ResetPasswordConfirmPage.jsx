@@ -38,10 +38,8 @@ const ResetPasswordConfirmPage = () => {
             });
     
             if (response.status === 204) {
-                toggleModalsucceed();
                 message.success('Contraseña modificada correctamente');
             } else {
-                toggleModalfailed();
                 message.error('La contraseña no se ha cambiado');
             }
         } finally {
