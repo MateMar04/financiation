@@ -158,39 +158,31 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
                                     <p>{visit.visit_status_name}</p>
                                 </Col>
                             </Row>
-                            <Row className="row2">
-                                <Col className="text-md-start text-sm-center" xs={12} md={6}>
-                                    <p>Colaborador de finanzas:</p>
-                                </Col>
-                                <Col >
-                                    <p>{visit.finance_collaborator}</p>
-                                </Col>
-                            </Row>
-                             <Row className="row1">
+                             <Row className="row2">
                                 <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Referente contactado:</p>
                                 </Col>
                                 <Col >
-                                    <p>{visit.contacted_referrer}</p>
+                                    <p>{visit.contacted_referrer_name}</p>
                                 </Col>
                             </Row>
-                            <Row className="row2">
+                            <Row className="row1">
                                 <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Partido politico:</p>
                                 </Col>
                                 <Col >
-                                    <p>{visit.politic_party}</p>
+                                    <p>{visit.politic_party_name}</p>
                                 </Col>
                             </Row>
-                             <Row className="row1">
+                             <Row className="row2">
                                 <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Intendente:</p>
                                 </Col>
                                 <Col >
-                                    <p>{visit.mayor}</p>
+                                    <p>{visit.mayor_name}</p>
                                 </Col>
                             </Row>
-                             <Row className="row2">
+                             <Row className="row1">
                                 <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Hora de inicio:</p>
                                 </Col>
@@ -198,7 +190,7 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
                                     <p>{visit.start_time}</p>
                                 </Col>
                             </Row>
-                            <Row className="row1">
+                            <Row className="row2">
                                 <Col className="text-md-start text-sm-center" xs={12} md={6}>
                                     <p>Hora de fin:</p>
                                 </Col>
