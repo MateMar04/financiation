@@ -36,14 +36,11 @@ export const VisitCard = ({visit, onDeleteSuccess}) => {
             },
         });
         if (response.status === 200) {
-            toggleModalsucceed();
             onDeleteSuccess();
             setAccordionExpanded(false);
-            message.success('Se borró la visita exitosamente');
-
+            message.success('Se ha borrado la visita exitosamente');
         } else {
-            toggleModalfailed();
-            console.error("No se pudo borrar la visita");
+            console.error("No se ha podido borrar la visita");
         }
     }
 
