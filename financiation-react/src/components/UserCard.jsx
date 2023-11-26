@@ -4,11 +4,10 @@ import "../assets/styles/AdvisorCard.css";
 import AuthContext from "../context/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-import { MenuItem, Zoom } from "@mui/material";
+import { MenuItem, Zoom,Select } from "@mui/material";
 import { getUserStatusesById } from "../services/StatusServices";
 import { getUserRolesById } from "../services/RoleServices";
 import { Popover, Tooltip } from 'antd';
-import {Select} from 'antd';
 
 export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defaultRole}) => {
     const { authTokens } = useContext(AuthContext);
@@ -74,7 +73,7 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                             </Col>
                                         )}
                                         {status.name === 'Disponible' ? (
-                                            <Col xs={2} md={3} className='d-flex align-items-center'>
+                                            <Col xs={2} md={3} className='d-flex align-items-center justify-content-center'>
 
 
                                                 <Select
@@ -82,25 +81,13 @@ export const UserCard = ({ user, isChecked, onCheckboxChange, onRoleChange,defau
                                                     name="Role"
                                                     className='content-select'
                                                     onChange={handleRoleChange}
+                                                    displayEmpty
                                                 >
-                                                    <MenuItem value="seleccionar" disabled hidden selected>{selectedRole}Seleccione el rol</MenuItem>
                                                     <MenuItem value="coordinador">Coordinador</MenuItem>
                                                     <MenuItem value="asesor">Asesor</MenuItem>
                                                 </Select>
 
-                                                <Select className="visit-field"  placeholder="Seleccione rol"
-                                                name="Role"
-                                                onChange={handleRoleChange}
-                                                options={[
-                                                    {
-                                                      value: 'coordinador',
-                                                      label: 'Coordinador',
-                                                    },
-                                                    {
-                                                      value: 'asesor',
-                                                      label: 'Asesor',
-                                                    }]}
-                                />
+
                                                 
                                             </Col>
                                         ) : (

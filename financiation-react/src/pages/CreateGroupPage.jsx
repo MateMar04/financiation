@@ -1,26 +1,26 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Button, Container, Col, Row, Form } from "react-bootstrap";
+import React, {useContext, useState, useEffect} from "react";
+import {Container, Col, Row, Form} from "react-bootstrap";
 import '../assets/styles/CreateGroupPage.css'
 import AuthContext from "../context/AuthContext";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import { SucceedModal } from "../components/SucceedModal"
-import { FailedModal } from "../components/FailedModal"
-import { getUsers } from "../services/UserServices";
+import {SucceedModal} from "../components/SucceedModal"
+import {FailedModal} from "../components/FailedModal"
+import {getUsers} from "../services/UserServices";
 import GroupsIcon from '@mui/icons-material/Groups';
-import { UserCard } from "../components/UserCard";
-import { Popover } from 'antd';
+import {UserCard} from "../components/UserCard";
+import {Popover} from 'antd';
 import FlotantButton from "../components/FlotantButton";
 import LoadingModal from "../components/LoadingModal";
 import GroupNameModal from "../components/GroupNameModal";
-import { PropertySafetyFilled } from "@ant-design/icons";
-
-import { CloseCircleOutlined } from '@ant-design/icons';
-import { Space, Tag } from 'antd';
+import {OrderedListOutlined, PropertySafetyFilled, UsergroupAddOutlined} from "@ant-design/icons";
+import {CloseCircleOutlined} from '@ant-design/icons';
+import {Space, Tag, Button, Input} from 'antd';
 
 export const CreateGroupPage = () => {
-    let { authTokens } = useContext(AuthContext);
+    const {Search} = Input;
+    let {authTokens} = useContext(AuthContext);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const [users, setUsers] = useState([]);
@@ -35,9 +35,6 @@ export const CreateGroupPage = () => {
     const [selectedAdvisors, setSelectedAdvisors] = useState([]);
     const [selectedCoordinators, setSelectedCoordinators] = useState([]);
 
-    const content = (
-        <a></a>
-    );
 
     const setSelectedRole = (role) => {
         console.log('Selected Role:', role);
@@ -47,7 +44,7 @@ export const CreateGroupPage = () => {
         setUserCheckboxes((prevUserCheckboxes) => {
             const updatedCheckboxes = {
                 ...prevUserCheckboxes,
-                [userId]: { checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole },
+                [userId]: {checked: !prevUserCheckboxes[userId]?.checked, role: selectedRole},
             };
 
             console.log('Updated userCheckboxes:', updatedCheckboxes);
@@ -76,7 +73,7 @@ export const CreateGroupPage = () => {
             console.log(`Role change for user ${userId} to ${selectedRole}`);
             const updatedCheckboxes = {
                 ...prevUserCheckboxes,
-                [userId]: { checked: prevUserCheckboxes[userId]?.checked, role: selectedRole },
+                [userId]: {checked: prevUserCheckboxes[userId]?.checked, role: selectedRole},
             };
 
             // Capture the selected role directly from the event
@@ -102,8 +99,6 @@ export const CreateGroupPage = () => {
     };
 
 
-
-
     useEffect(() => {
 
         setShowloading(true)
@@ -120,9 +115,9 @@ export const CreateGroupPage = () => {
     useEffect(() => {
         console.log('Initial userCheckboxes state:', userCheckboxes);
         setUserCheckboxes((prevUserCheckboxes) => {
-            const newUserCheckboxes = { ...prevUserCheckboxes };
+            const newUserCheckboxes = {...prevUserCheckboxes};
             filteredUsers.forEach((user) => {
-                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || { checked: false, role: null };
+                newUserCheckboxes[user.id] = newUserCheckboxes[user.id] || {checked: false, role: null};
             });
             return newUserCheckboxes;
         });
@@ -151,41 +146,37 @@ export const CreateGroupPage = () => {
 
     return (
         <Container fluid>
-            <LoadingModal message="cargando" show={showloading} />
-            <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess} />
-            <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail} />
-            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate} selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators} />
+            <LoadingModal message="cargando" show={showloading}/>
+            <SucceedModal message="el coordinador" onClose={() => toggleModalsucceed()} show={showsuccess}/>
+            <FailedModal message="el coordinador" onClose={() => toggleModalfailed()} show={showfail}/>
+            <GroupNameModal onClose={() => toggleModalGroupCreate()} show={showgroupcreate}
+                            selectedAdvisors={selectedAdvisors} selectedCoordinators={selectedCoordinators}/>
 
-            <Container className="separation font text-center justify-content-center">
-                <Row className='justify-content-center text-center d-flex align-items-center'>
-                    <Col md={10}>
-                        <TextField
-                            fullWidth
-                            id="SearchVisit"
-                            variant="outlined"
-                            label='Buscar'
-                            className="SearchVisit"
-                            InputProps={{
-                                sx: { borderRadius: 5, color: "black" },
-                                endAdornment: (
-                                    <IconButton>
-                                        <SearchIcon />
-                                    </IconButton>
-                                ),
-                            }}
+            <Container>
+                <Row className={'justify-content-center d-flex align-items-center'}>
+                    <Col md={2} className='justify-content-start'>
+                        <Button href="/groups/" className="SeeGroupsButton" size={'large'} shape="round" icon={<OrderedListOutlined />}>Ver grupos</Button>
+                    </Col>
+
+                    <Col className='text-center justify-content-center'>
+                        <Input
+                            placeholder='Buscar persona'
                             value={searchQuery}
+                            className="SearchCreateGroup"
                             onChange={handleSearch}
                         />
                     </Col>
 
-                    <Col md={2} xs={1} lg={1}>
-                        <Popover content={content} title="Ver Grupos Creados">
-                                <Button href="/groups/" className="SeeGroupsButton">Ver Grupos</Button>
-                        </Popover>
+                    <Col md={2}  className='justify-content-end'>
+                        <Button type={'primary'} className="CreateGroupsButton" onClick={() => toggleModalGroupCreate()} size={'large'} shape="round" icon={<UsergroupAddOutlined/>}>Crear grupo</Button>
                     </Col>
+
                 </Row>
-                <Row>
-                    <a>Seleccione el rol que tendrá el usuario antes de agregarlo</a>
+                <Row className={'text-center'}>
+                    <Col>
+                        <a>Seleccione el rol que tendrá el usuario antes de agregarlo</a>
+                    </Col>
+
                 </Row>
             </Container>
 
@@ -202,14 +193,6 @@ export const CreateGroupPage = () => {
                     </Container>
                 ))}
             </Container>
-
-            <Row className='text-center'>
-                <Col>
-                    <Form.Group onClick={() => toggleModalGroupCreate()}>
-                        <FlotantButton name='Crear' />
-                    </Form.Group>
-                </Col>
-            </Row>
         </Container>
     )
 }
