@@ -39,6 +39,7 @@ const ResetPasswordConfirmPage = () => {
     
             if (response.status === 204) {
                 message.success('Contraseña modificada correctamente');
+                history('/'); 
             } else {
                 message.error('La contraseña no se ha cambiado');
             }
