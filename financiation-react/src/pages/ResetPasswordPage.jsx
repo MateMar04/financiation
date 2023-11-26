@@ -1,59 +1,49 @@
-
 import React, { useState } from "react";
-import { Button, Col, Container, FloatingLabel, Form, Row } from "react-bootstrap";
+import { Button, Container, Form, Row } from "react-bootstrap";
 import Logo from "../assets/images/PRUEBA.PNG";
-
-import { Link, useNavigate } from "react-router-dom";
-import '../assets/styles/ResetPassword.css'
+import { Modal } from 'antd';
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import { Modal } from 'antd';
+import { useNavigate } from "react-router-dom";
+import { message } from 'antd';
+import LoadingModal from "../components/LoadingModal";
 
 const ResetPasswordPage = () => {
-
-    let history = useNavigate()
-    const [show, setShow] = React.useState(false);
+    const history = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [showloading, setShowloading] = useState(false);
 
-    const showModal = () => {
-       
-        setIsModalOpen(true);
-    };
+    const resetPasswordEmail = async (e) => {
+        e.preventDefault();
+        setShowloading(true);
+        try {
+            const response = await fetch('/auth/users/reset_password/', {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({
+                    "email": e.target.email.value
+                })
+            });
 
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
-
-    let resetPasswordEmail = async (e) => {
-        let response = await fetch('/auth/users/reset_password/', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                "email": e.target.email.value
-            })
-        })
-        if (response.status === 204) {
-            handleShow()
-            await resetPasswordEmail()
-
-        } else {
-            alert('Something went wrong')
+            if (response.status === 204) {
+                message.success('Se ha enviado el correo correctamente');
+            } else {
+                message.error('No se puedo enviar el correo');
+            }
+        } finally {
+            setShowloading(false);
         }
+
     }
 
     return (
 
         <Container fluid className="fondo">
+             <LoadingModal message="Cargando" show={showloading} />
             <Container className="ContainerResetPassword">
 
                 <Row className={'justify-content-center text-center'}>
@@ -89,9 +79,6 @@ const ResetPasswordPage = () => {
                         <Button type="submit" className="BtnEnviarResetPassword">Enviar</Button>
                     </Row>
                 </Form>
-                <Modal title="Activación de cuenta" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                  <p>Se ha enviado el mail</p>
-                </Modal>
             </Container>
 
         </Container>
