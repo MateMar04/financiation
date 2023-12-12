@@ -18,7 +18,7 @@ class CityDepartment(models.Model):
         return f"{self.name}"
 
 
-class MinistryDepartment(models.Model):
+class Division(models.Model):
     name = models.CharField(max_length=30)
     description = models.TextField()
 
@@ -52,7 +52,7 @@ class VisitStatus(models.Model):
 
 class Faq(models.Model):
     name = models.TextField()
-    ministry_department = models.ForeignKey(MinistryDepartment, models.DO_NOTHING)
+    division = models.ForeignKey(Division, models.DO_NOTHING)
 
     def __str__(self):
         return f"{self.name}"
@@ -65,20 +65,23 @@ class Why(models.Model):
         return f"{self.name}"
 
 
-class Mayor(models.Model):
-    first_name = models.CharField(max_length=70)
-    last_name = models.CharField(max_length=70)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
 class Location(models.Model):
     name = models.CharField(max_length=70)
     department = models.ForeignKey(CityDepartment, models.DO_NOTHING)
+    travel_time = models.DurationField(null=True, blank=True)
+    distance = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
+
+
+class Mayor(models.Model):
+    first_name = models.CharField(max_length=70)
+    last_name = models.CharField(max_length=70)
+    location = models.ForeignKey(Location, models.DO_NOTHING)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
 
 
 class VehicleBrand(models.Model):
@@ -170,6 +173,8 @@ class UserAccount(AbstractBaseUser, PermissionsMixin):
     profile_picture = models.BinaryField(editable=True, blank=True)
     role = models.ForeignKey(Role, models.DO_NOTHING, null=True)
     user_status = models.ForeignKey(UserStatus, models.DO_NOTHING, null=True)
+    birth_date = models.DateField(null=True, blank=True)
+    location = models.ForeignKey(Location, models.DO_NOTHING, null=True)
 
     objects = UserAccountManager()
 
@@ -212,7 +217,7 @@ class Visit(models.Model):
     rent_collaborator = models.ManyToManyField(UserAccount, related_name='rent_collaborator')
     rent_observations = models.TextField()
     distance = models.IntegerField()
-    travel_time = models.TimeField()
+    travel_time = models.IntegerField()
     civil_registration = models.BooleanField()
     place_name = models.CharField(max_length=70)
     address = models.ForeignKey(Address, models.DO_NOTHING)
@@ -239,7 +244,7 @@ class RequestStatus(models.Model):
 
 class Coordinator(models.Model):
     user = models.ForeignKey(UserAccount, models.DO_NOTHING)
-    group = models.ForeignKey(Group, models.DO_NOTHING)
+    group = models.ForeignKey(Group, models.CASCADE)
 
     def __str__(self):
         return f"{self.user} {self.group}"
@@ -247,7 +252,7 @@ class Coordinator(models.Model):
 
 class Advisor(models.Model):
     user = models.ForeignKey(UserAccount, models.DO_NOTHING)
-    group = models.ForeignKey(Group, models.DO_NOTHING)
+    group = models.ForeignKey(Group, models.CASCADE)
 
     unique_together = (('user', 'group'),)
 
@@ -256,11 +261,12 @@ class Advisor(models.Model):
 
 
 class Request(models.Model):
-    request_datatime = models.DateTimeField()
-    visit = models.ForeignKey(Visit, models.DO_NOTHING)
+    request_datetime = models.DateTimeField()
+    observation = models.TextField(blank=True, default='None')
+    visit = models.ForeignKey(Visit, models.CASCADE)
     faq = models.ForeignKey(Faq, models.DO_NOTHING)
     why = models.ForeignKey(Why, models.DO_NOTHING)
-    advisor = models.ForeignKey(Advisor, models.DO_NOTHING)
+    advisor = models.ForeignKey(Advisor, models.SET_NULL, null=True)
     status = models.ForeignKey(RequestStatus, models.DO_NOTHING)
 
     def __str__(self):

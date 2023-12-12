@@ -1,21 +1,28 @@
-.profile-picture {
-    border-radius: 50%;
-    width: 30vh;
-    height: 30vh;
-    border-width: 0;
-    padding: 0;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 7px 29px 0px;
-    margin-top: 3vh;
-    margin-bottom: 4vh;
+.SelectFileButton {
+    background-color: #848484;
+    border-radius: 3vh;
+    border-color: #848484;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    transform: translateY(-10vh);
 }
 
-.responsive-image {
-    border-radius: 50%;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+.SelectFileButton:hover{
+    background-color: #545454 !important;
+    border-color: #545454 !important;
 }
 
-.responsive-image:hover {
-    filter: grayscale(50%) blur(1px) brightness(30%);
+.SelectFileInput {
+    display: none;
+  }
+  
+.GuardarCambiosButton{
+    background-color: #53A6DC;
+    border-radius: 3vh;
+    border-color: #53A6DC;
+    width: 200px;
+    padding: 8px;
+    color: white;
+    transform: translateY(-8vh);
 }

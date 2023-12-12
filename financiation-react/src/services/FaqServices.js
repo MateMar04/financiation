@@ -9,7 +9,7 @@ export const getFaqs = async (tokens) => {
     return data
 };
 
-export const getFaqsByMinistryDepartment = async (tokens, mdId) => {
+export const getFaqsByDivisions = async (tokens, mdId) => {
     let headers = {
         "Content-Type": "application/json",
         "Authorization": "JWT " + String(tokens),

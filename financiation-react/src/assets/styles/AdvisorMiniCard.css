@@ -48,3 +48,16 @@
     vertical-align: center;
 }
 
+.centered_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh;
+  }
+
+.buttonWithBorder {
+    border-radius: 10vh;
+    border: 2px solid lightgrey;
+    transition: border-color 0.3s ease;
+}
+

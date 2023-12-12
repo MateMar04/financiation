@@ -5,11 +5,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Logo from "../assets/images/PRUEBA.PNG";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import LoadingModal from "../components/LoadingModal";
+
 
 const ActivateAccountPage = () => {
     const { uid, token } = useParams()
     let history = useNavigate()
 
+    const [showloading, setShowloading] = useState(false);
+   
+    let [loading, setLoading] = useState(true)
 
     let uidToken = uid
     let activationToken = token
@@ -38,7 +43,10 @@ const ActivateAccountPage = () => {
 
     let pressedVerifyButton = async () => {
         handleShow()
+        setShowloading(true)
         await activateAccount()
+        setShowloading(false)
+
     }
 
     return (
@@ -58,7 +66,7 @@ const ActivateAccountPage = () => {
                     </Row>
                     <Row className={'justify-content-center text-center'}>
                         <Col>                        
-                        <Button className="botonactivate" type="submit" onClick={pressedVerifyButton}>Activar Cuenta</Button>
+                        <Button className="botonactivate" type="submit" onClick={pressedVerifyButton}>Validar Cuenta</Button>
                         </Col>
 
                     </Row>
@@ -68,9 +76,12 @@ const ActivateAccountPage = () => {
 
                 <Snackbar open={show} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" variant="filled" sx={{ width: '100%' }}>
-                ¡Su cuenta ha sido verficada!
+                ¡Su cuenta ha sido validada!
                 </Alert>
             </Snackbar>
+            </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
             </Container>
         </Container>
     );

@@ -2,11 +2,10 @@
     justify-content: center;
     align-items: center;
     margin-top: 5vh;
-
 }
 
 .vl {
-    border-left: 1px solid grey;
+    border-left: 1px solid rgb(174, 174, 174);
     position: relative;
     right: 0;
     left: 15px;
@@ -20,4 +19,9 @@
 
 .accordion-group{
     border-radius: 3vh !important;
+
+}
+
+.delete-button {
+    margin-left: 40vw !important;
 }

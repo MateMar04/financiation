@@ -26,3 +26,24 @@
 .ButtonAddVisit{
     margin-top: 2vh !important;
 }
+
+.ButtonEditVisit{
+    justify-content: center;
+    padding-top: 1vh;
+}
+
+.Buttonedit{
+    border-radius: 15px !important;
+    background-color: #53A6DC !important;
+    border-color: #53A6DC !important;
+    color: white !important;
+    padding: 10px !important;
+    }
+    
+    .Buttondelete{
+        border-radius: 15px !important;
+        background-color: #dc5353 !important;
+        border-color: #df2e2e !important;
+        color: white !important;
+        padding: 10px !important;
+        }

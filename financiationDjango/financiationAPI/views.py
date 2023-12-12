@@ -1,12 +1,13 @@
 from django.db import connection
 from django.http import JsonResponse
+from django.utils.dateparse import parse_date
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from .serializers import *
 from .serializers import UserAccountSerializer
-from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, convert_to_json
+from .utils import in_memory_uploaded_file_to_binary, parse_and_convert, execute_query, to_json
 
 
 # Create your views here.
@@ -53,18 +54,23 @@ class RequestApiView(APIView):
         data = request.data
 
         visit = Visit.objects.get(id=data['visit_id'])
-        advisor = Advisor.objects.get(id=data['advisor_id'])
+        if data['advisor_id'] != "None":
+            advisor = Advisor.objects.get(id=data['advisor_id'])
+        else:
+            advisor = None
+
         faq = Faq.objects.get(id=data['faq_id'])
         why = Why.objects.get(id=data['why_id'])
         requestStatus = RequestStatus.objects.get(id=data['status_id'])
 
         request = Request.objects.create(
-            request_datatime=data['request_datetime'],
+            request_datetime=data['request_datetime'],
             visit=visit,
             advisor=advisor,
             faq=faq,
             why=why,
             status=requestStatus,
+            observation=data['observation']
         )
 
         serializer = RequestSerializer(request, many=False)
@@ -77,7 +83,31 @@ class VisitApiView(APIView):
         locations_ids = parse_and_convert(request.GET.getlist('locs'))
 
         if isinstance(locations_ids, type(None)):
-            visits = Visit.objects.all()[:100]
+            with connection.cursor() as cursor:
+                cursor.execute("select V.*, "
+                               "L.name, "
+                               "VS.name, "
+                               "CONCAT(l.name, ' ', V.visit_date) as name, "
+                               "G.name, "
+                               "PP.name                           as politic_party_name, "
+                               "CONCAT(CR.first_name, ' ', CR.last_name) as contacter_referrer_name, "
+                               "CONCAT(M.first_name, ' ', M.last_name) as mayor_name "
+                               "from \"financiationAPI_visit\" as V "
+                               "inner join \"financiationAPI_location\" L on L.id = V.location_id "
+                               "inner join \"financiationAPI_visitstatus\" VS on V.visit_status_id = VS.id "
+                               "inner join \"financiationAPI_group\" G on V.group_id = G.id "
+                               "inner join \"financiationAPI_politicparty\" PP on PP.id = V.politic_party_id "
+                               "inner join \"financiationAPI_contactedreferrer\" CR on V.contacted_referrer_id = CR.id "
+                               "inner join \"financiationAPI_mayor\" M on M.id = V.mayor_id "
+                               "ORDER BY V.visit_date DESC")
+                row = cursor.fetchall()
+                return JsonResponse(to_json(
+                    ["id", "visit_date", "start_time", "finish_time", "flyer", "rent_observations", "distance",
+                     "travel_time", "civil_registration", "place_name", "accommodation", "modernization_fund",
+                     "address_id", "contacted_referrer_id", "group_id", "location_id", "mayor_id", "politic_party_id",
+                     "visit_status_id", "location_name", "visit_status_name", "name", "group_name",
+                     "politic_party_name", "contacted_referrer_name", "mayor_name"], row), safe=False)
+
         else:
             visits = Visit.objects.raw("SELECT * "
                                        "FROM \"financiationAPI_visit\" "
@@ -90,33 +120,46 @@ class VisitApiView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
 
-        location = Location.objects.get(id=data['location_id'])
-        group = Group.objects.get(id=data['group_id'])
-        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
-        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
         address = Address.objects.get(id=data['address_id'])
+        contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+        group = Group.objects.get(id=data['group_id'])
+        mayor = Mayor.objects.get(id=data['mayor_id'])
+        location = Location.objects.get(id=data['location_id'])
+        politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+        visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
 
         visit = Visit.objects.create(
-            flyer=data['flyer'],
-            distance=data['distance'],
-            travel_time=data['travel_time'],
-            visit_date=data['visit_date'],
-            civil_registration=data['civil_registration'],
             accommodation=data['accommodation'],
+            address=address,
+            civil_registration=data['civil_registration'],
+            contacted_referrer=contacted_referrer,
+            distance=data['distance'],
+            flyer=data['flyer'],
+            group=group,
+            location=location,
+            mayor=mayor,
             modernization_fund=data['modernization_fund'],
+            rent_observations=data['rent_observations'],
+            place_name=data['place_name'],
+            politic_party=politic_party,
+            travel_time=data['travel_time'],
+            visit_date=parse_date(data['visit_date']),
             start_time=data['start_time'],
             finish_time=data['finish_time'],
-            place_name=data['place_name'],
-            location_id=location,
-            group_id=group,
-            visit_status_id=visit_status,
-            contacted_referrer_id=contacted_referrer,
-            address_id=address,
+            visit_status=visit_status
         )
 
         for i in data['agreement_id']:
             agreement = Agreement.objects.get(id=i)
-            visit.agreement_id.add(agreement)
+            visit.agreement.add(agreement)
+
+        for i in data['finance_collaborator_id']:
+            finance_collaborator = UserAccount.objects.get(id=i)
+            visit.finance_collaborator.add(finance_collaborator)
+
+        for i in data['rent_collaborator_id']:
+            rent_collaborator = UserAccount.objects.get(id=i)
+            visit.rent_collaborator.add(rent_collaborator)
 
         serializer = VisitSerializer(visit, many=False)
         return Response(serializer.data)
@@ -130,9 +173,13 @@ class MayorApiView(APIView):
 
     def post(self, request, *args, **kwargs):
         data = request.data
+        location_id = data.get('location')
+        location = Location.objects.get(id=location_id)
         mayor = Mayor.objects.create(
             first_name=data['first_name'],
             last_name=data['last_name'],
+            location=location
+
         )
         serializer = MayorSerializer(mayor, many=False)
         return Response(serializer.data)
@@ -154,6 +201,28 @@ class GroupApiView(APIView):
         return Response(serializer.data)
 
 
+class CreateGroupApiView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        groupo = Group.objects.create(
+            name=data['name']
+        )
+        for c in data['coordinators']:
+            Coordinator.objects.create(
+                user=UserAccount.objects.get(id=c),
+                group=groupo
+            )
+        for a in data['advisors']:
+            Advisor.objects.create(
+                user=UserAccount.objects.get(id=a),
+                group=groupo
+            )
+            user = UserAccount.objects.get(id=a)
+            user.user_status_id = 2
+            user.save()
+        return JsonResponse("OK", safe=False)
+
+
 class CoordinatorApiView(APIView):
     def get(self, request, *args, **kwargs):
         coordinators = Coordinator.objects.all()
@@ -167,8 +236,8 @@ class CoordinatorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         coordinator = Coordinator.objects.create(
-            user_id=user,
-            group_id=group
+            user_id=user.id,
+            group_id=group.id
         )
 
         serializer = CoordinatorSerializer(coordinator, many=False)
@@ -188,41 +257,89 @@ class AdvisorApiView(APIView):
         group = Group.objects.get(id=data['group_id'])
 
         advisor = Advisor.objects.create(
-            user_id=user,
-            group_id=group,
+            user_id=user.id,
+            group_id=group.id,
         )
+
+        user.user_status_id = 2
+        user.save()
 
         serializer = AdvisorSerializer(advisor, many=False)
         return Response(serializer.data)
 
 
+class LocationApiView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        department_id = data.get('department')
+        department = CityDepartment.objects.get(id=department_id)
+        location = Location.objects.create(
+            name=data['name'],
+            department=department
+        )
+        serializer = LocationsSerializer(location, many=False)
+        return Response(serializer.data)
+
+    def get(self, request, *args, **kwargs):
+        locations = Location.objects.all()
+        serializer = LocationsSerializer(locations, many=True)
+        return Response(serializer.data)
+
+
+class AgreementApiView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        agreements = Agreement.objects.all()
+        serializer = AgreementSerializer(agreements, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        agreement = Agreement.objects.create(
+            name=data['name'],
+            description=data['description']
+        )
+        serializer = AgreementSerializer(agreement, many=False)
+        return Response(serializer.data)
+
+
+class ContactedRederrerApiView(APIView):
+    def get(self, request):
+        contacted_referrers = ContactedReferrer.objects.all()
+        serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        contacted_referrer = ContactedReferrer.objects.create(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            position=data['position']
+        )
+        serializer = ContactedReferrerSerializer(contacted_referrer, many=False)
+        return Response(serializer.data)
+
+
 @api_view(['GET'])
-def getLocations(request):
-    locations = Location.objects.all()
-    serializer = LocationsSerializer(locations, many=True)
+def getDivisions(request):
+    divisions = Division.objects.all()
+    serializer = DivisionSerializer(divisions, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def getMinistryDepartments(request):
-    departments = MinistryDepartment.objects.all()
-    serializer = MinistryDepartmentSerializer(departments, many=True)
-    return Response(serializer.data)
+def getDivisionsFaqs(request):
+    divisions_ids = parse_and_convert(request.GET.getlist('deps'))
 
-
-@api_view(['GET'])
-def getMinistryDepartmentFaqs(request):
-    ministry_ids = parse_and_convert(request.GET.getlist('deps'))
-
-    if isinstance(ministry_ids, type(None)):
-        faqs = Faq.objects.all()[:100]
+    if isinstance(divisions_ids, type(None)):
+        faqs = Faq.objects.all()
     else:
         faqs = Faq.objects.raw(
             "SELECT F.id "
             "FROM \"financiationAPI_faq\" AS F "
-            "WHERE ministry_department_id IN %s "
+            "WHERE division_id IN %s "
             "GROUP BY F.id",
-            [ministry_ids])
+            [divisions_ids])
 
     serializer = FaqSerializer(faqs, many=True)
     return Response(serializer.data)
@@ -232,20 +349,6 @@ def getMinistryDepartmentFaqs(request):
 def getVisitSatuses(request):
     visit_statuses = VisitStatus.objects.all()
     serializer = VisitStatusSerializer(visit_statuses, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getAgreements(request):
-    agreements = Agreement.objects.all()
-    serializer = AgreementSerializer(agreements, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def getContactedReferrers(request):
-    contacted_referrers = ContactedReferrer.objects.all()
-    serializer = ContactedReferrerSerializer(contacted_referrers, many=True)
     return Response(serializer.data)
 
 
@@ -441,6 +544,13 @@ def getGroupAdvisorUsers(request, id):
 
 
 @api_view(['GET'])
+def getVisitById(request, id):
+    visit = Visit.objects.get(id=id)
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def getGroupById(request, id):
     group = Group.objects.get(id=id)
     serializer = GroupSerializer(group, many=False)
@@ -481,11 +591,11 @@ def getTotalRequestsByAdvisor(request):
 
 
 @api_view(['GET'])
-def getTotalRequestsByMinistryDepartment(request):
+def getTotalRequestsByDivisions(request):
     return execute_query("SELECT MD.name, count(*) "
                          "FROM \"financiationAPI_request\" "
                          "INNER JOIN \"financiationAPI_faq\" F on F.id = faq_id "
-                         "INNER JOIN \"financiationAPI_ministrydepartment\" MD on MD.id = F.ministry_department_id "
+                         "INNER JOIN \"financiationAPI_division\" MD on MD.id = F.division_id "
                          "WHERE visit_id IN %s "
                          "AND faq_id IN %s "
                          "GROUP BY MD.name", request)
@@ -545,11 +655,54 @@ def getMayorById(request, id):
 
 
 @api_view(['DELETE'])
+def deleteVisitById(request, id, *args, **kwargs):
+    visit = Visit.objects.get(id=id)
+    visit.delete()
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
 def deleteMayorById(request, id, *args, **kwargs):
     mayor = Mayor.objects.get(id=id)
     mayor.delete()
     serializer = MayorSerializer(mayor, many=False)
     return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def deleteGroupById(request, id, *args, **kwargs):
+    group = Group.objects.get(id=id)
+    advisor_users = Advisor.objects.filter(group=group)
+
+    for i in advisor_users:
+        user = UserAccount.objects.get(id=i.user_id)
+        user.user_status_id = 1
+        user.save()
+
+    group.delete()
+    serializer = GroupSerializer(group, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+def deleteadvisorById(request, id, groupId, *args, **kwargs):
+    advisor = Advisor.objects.get(user=id, group=groupId)
+
+    user = UserAccount.objects.get(id=advisor.user_id)
+    user.user_status_id = 1
+    user.save()
+
+    advisor.delete()
+
+    return JsonResponse("OK", safe=False)
+
+
+@api_view(['DELETE'])
+def deletecoordinatorById(request, id, groupId, *args, **kwargs):
+    coordinator = Coordinator.objects.filter(user=id, group=groupId)
+    coordinator.delete()
+    return JsonResponse("OK", safe=False)
 
 
 @api_view(['PUT'])
@@ -563,18 +716,80 @@ def putMayorById(request, id, *args, **kwargs):
     return Response(serializer.data)
 
 
+@api_view(['PUT'])
+def putUserbyId(request, id, *args, **kwargs):
+    data = request.data
+    useraccount = UserAccount.objects.get(id=id)
+    useraccount.first_name = data['first_name']
+    useraccount.last_name = data['last_name']
+    useraccount.phone_number = data['phone_number']
+    useraccount.save()
+    serializer = UserAccountSerializer(useraccount, many=False)
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+def putVisitById(request, id, *args, **kwargs):
+    data = request.data
+    address = Address.objects.get(id=data['address_id'])
+    contacted_referrer = ContactedReferrer.objects.get(id=data['contacted_referrer_id'])
+    group = Group.objects.get(id=data['group_id'])
+    mayor = Mayor.objects.get(id=data['mayor_id'])
+    location = Location.objects.get(id=data['location_id'])
+    politic_party = PoliticParty.objects.get(id=data["politic_party_id"])
+    visit_status = VisitStatus.objects.get(id=data['visit_status_id'])
+
+    visit = Visit.objects.get(id=id)
+    visit.accommodation = data['accommodation']
+    visit.address = address
+    visit.civil_registration = data['civil_registration']
+    visit.contacted_referrer = contacted_referrer
+    visit.distance = data['distance']
+    visit.flyer = data['flyer']
+    visit.group = group
+    visit.location = location
+    visit.mayor = mayor
+    visit.modernization_fund = data['modernization_fund']
+    visit.rent_observations = data['rent_observations']
+    visit.place_name = data['place_name']
+    visit.politic_party = politic_party
+    visit.travel_time = data['travel_time']
+    visit.visit_date = parse_date(data['visit_date'])
+    visit.start_time = data['start_time']
+    visit.finish_time = data['finish_time']
+    visit.visit_status = visit_status
+
+    for i in data['agreement_id']:
+        agreement = Agreement.objects.get(id=i)
+        visit.agreement.add(agreement)
+
+    for i in data['finance_collaborator_id']:
+        finance_collaborator = UserAccount.objects.get(id=i)
+        visit.finance_collaborator.add(finance_collaborator)
+
+    for i in data['rent_collaborator_id']:
+        rent_collaborator = UserAccount.objects.get(id=i)
+        visit.rent_collaborator.add(rent_collaborator)
+
+    visit.save()
+    serializer = VisitSerializer(visit, many=False)
+    return Response(serializer.data)
+
+
 @api_view(['GET'])
 def getLatestVisitRequestCount(request):
     with connection.cursor() as cursor:
-        cursor.execute("SELECT 'requests', count(*) "
-                       "from \"financiationAPI_request\" "
+        cursor.execute("SELECT L.name, count(*) "
+                       "from \"financiationAPI_request\" AS R "
+                       "inner join \"financiationAPI_visit\" V on V.id = R.visit_id "
+                       "Inner JOIN \"financiationAPI_location\" L on V.location_id = L.id "
                        "where visit_id = (SELECT id "
                        "FROM \"financiationAPI_visit\" "
                        "WHERE visit_status_id = 4 "
                        "ORDER BY visit_date desc "
-                       "limit 1)", request)
+                       "limit 1) group by L.name", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json(row), safe=False)
+        return JsonResponse(to_json(["location", "requests"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -586,7 +801,7 @@ def getLatestVisits(request):
                        "INNER JOIN \"financiationAPI_location\" L on L.id = V.location_id "
                        "order by visit_date desc limit 10", request)
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_large(row), safe=False)
+        return JsonResponse(to_json(["name", "status"], row), safe=False)
 
 
 @api_view(['GET'])
@@ -610,66 +825,28 @@ def getUserGroup(request, id):
                        "where b.group_id in (select group_id from persona_grupo_roles r where r.user_id = (%s)) "
                        "order by 4", [id, id])
         row = cursor.fetchall()
-        return JsonResponse(convert_to_json_larger(row), safe=False)
+        return JsonResponse(to_json(["role", "group_id", "group", "user_id", "first_name", "last_name"], row),
+                            safe=False)
 
 
-# @api_view(['GET'])
-# def getMyUser(request, id):
-#     with connection.cursor() as cursor:
-#         cursor.execute("SELECT U.id, "
-#                        "ssn, "
-#                        "email, "
-#                        "first_name, "
-#                        "last_name, "
-#                        "phone_number, "
-#                        "profile_picture, "
-#                        "R.name, "
-#                        "US.name "
-#                        "FROM \"financiationAPI_useraccount\" AS U "
-#                        "INNER JOIN \"financiationAPI_role\" R ON U.role_id = R.id "
-#                        "INNER JOIN \"financiationAPI_userstatus\" US on US.id = U.user_status_id WHERE U.id = %s", [id])
-#         row = cursor.fetchall()
-#         print(row)
-#         return JsonResponse(convert_to_json_1(row), safe=False)
+@api_view(['GET'])
+def getTopThreeAdvisors(request):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT CONCAT(U.first_name, ' ', U.last_name), count(*) from \"financiationAPI_request\" as R "
+                       "inner join \"financiationAPI_advisor\" as A on A.id = R.advisor_id "
+                       "inner join \"financiationAPI_useraccount\" as U on U.id = A.user_id "
+                       "GROUP BY R.advisor_id, CONCAT(U.first_name, ' ', U.last_name) "
+                       "order by 2 desc limit 3")
+        row = cursor.fetchall()
+        return JsonResponse(to_json(["user", "requests"], row),
+                            safe=False)
 
 
-def convert_to_json_large(data):
-    result = []
-
-    for item in data:
-        key, value = item
-        result.append({"name": key, "status": value})
-
-    return result
-
-
-def convert_to_json_larger(data):
-    result = []
-
-    for item in data:
-        role, group_id, group_name, user_id, first_name, last_name = item
-        result.append({
-            "role": role,
-            "group": group_name,
-            "first_name": first_name,
-            "last_name": last_name
-        })
-
-    return result
-
-
-# def convert_to_json_1(data):
-#     result = {
-#         "id": data[0][0],
-#         "ssn": str(data[0][1]),
-#         "mail": data[0][2],
-#         "first_name": data[0][3],
-#         "last_name": data[0][4],
-#         "phone_number": str(data[0][5]),
-#         "profile_picture": str(data[0][6]),  # Assuming you want to represent it as a string
-#         "role": data[0][7],
-#         "status": data[0][8]
-#     }
-#     return result
-
-
+@api_view(['GET'])
+def getAdvisorByUserId(request, id):
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * from \"financiationAPI_advisor\" "
+                       "where user_id = (%s) limit 1", [id])
+        row = cursor.fetchall()
+        print(to_json(["advisor"], row))
+        return JsonResponse(to_json(["advisor"], row), safe=False)

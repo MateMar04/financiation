@@ -22,6 +22,10 @@ def execute_query(query, request):
         return JsonResponse(convert_to_json(row), safe=False)
 
 
+def to_json(keys, values):
+    return [dict(zip(keys, item)) for item in values]
+
+
 def convert_to_json(input_data):
     result = []
     for name, requests in input_data:

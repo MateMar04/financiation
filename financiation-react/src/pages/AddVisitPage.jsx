@@ -1,52 +1,100 @@
-import React, {useContext, useState, useEffect, useRef} from 'react';
-import "../assets/styles/AddVisitPage.css"
-import Carousel from 'react-bootstrap/Carousel';
-import { Col, Container, Form, Row, } from "react-bootstrap";
-import AuthContext from "../context/AuthContext";
-import TextField from '@mui/material/TextField';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
-import MayorCreateModal from "../components/MayorCreateModal";
-import MayorModifyModal from "../components/MayorModifyModal";
-import Card from '@mui/material/Card';
-import Select from "@mui/material/Select";
-import { CardContent, Switch } from "@mui/material";
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PlaceOutlinedIcon from '@mui/icons-material/PlaceOutlined';
-import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
-import DirectionsIcon from '@mui/icons-material/Directions';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import StickyNote2OutlinedIcon from '@mui/icons-material/StickyNote2Outlined';
-import HistoryToggleOffOutlinedIcon from '@mui/icons-material/HistoryToggleOffOutlined';
-import SocialDistanceOutlinedIcon from '@mui/icons-material/SocialDistanceOutlined';
-import HotelIcon from '@mui/icons-material/Hotel';
-import PersonIcon from '@mui/icons-material/Person';
-import CarouselButtons from "../components/CarouselButton";
-import Checkbox from '@mui/material/Checkbox';
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
+import React, {useContext, useEffect, useRef, useState} from 'react';
+import '../assets/styles/AddVisitPage.css';
+import {Col, Container, Row} from 'react-bootstrap';
 import {getMayors} from '../services/MayorServices'
-import CreateIcon from '@mui/icons-material/Create';
+import AuthContext from '../context/AuthContext';
+import FailedModal from '../components/FailedModal';
+import SucceedModal from '../components/SucceedModal';
+import MayorCreateModal from '../components/MayorCreateModal';
+import MayorModifyModal from '../components/MayorModifyModal';
+import LocationCreateModal from '../components/LocationCreateModal'
+import AgreementCreateModal from '../components/AgreementCreateModal';
+import ContactedReferrerCreateModal from '../components/ContactedReferrerCreateModal';
+import {getLocations} from "../services/LocationServices";
+import {getVisitStatuses} from "../services/StatusServices";
+import {getPoliticParties} from "../services/PoliticPartiesServices";
+import {getUsers} from "../services/UserServices";
+import {getContactedReferrers} from "../services/ContactedReferrersServices";
+import {Button, DatePicker, Form, Input, InputNumber, Select, Switch, TimePicker, Tooltip} from 'antd';
+import {PlusCircleOutlined, PlusOutlined, EditOutlined} from '@ant-design/icons';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import {getAgreements} from "../services/AgreementServices";
+import {getGroups} from "../services/GroupServices";
+import {getAddresses} from "../services/AddressServices";
+
+const {TextArea} = Input;
+
+dayjs.extend(customParseFormat);
+
 
 const AddVisitPage = () => {
 
-    let { authTokens } = useContext(AuthContext)
+    let {authTokens} = useContext(AuthContext)
+    const [updateFlag, setUpdateFlag] = useState(false);
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
     const toggleModalsucceed = () => setShowsuccese(!showsuccess);
     const toggleModalfailed = () => setShowfailture(!showfail);
     const [showcreate, setShowcreate] = useState(false);
     const [showmodify, setShowmodify] = useState(false);
+    const [showlocationcreate, setShowLocationCreate] = useState(false);
+    const [showagreementcreate, setShowAgreementCreate] = useState(false);
+    const [showcontactedreferrercreate, setShowContactedReferrerCreate] = useState(false);
     const toggleModalCreate = () => setShowcreate(!showcreate);
     const toggleModalModify = () => setShowmodify(!showmodify);
-    let [mayors, setMayors] = useState([]) 
+    const toggleModalLocationCreate = () => setShowLocationCreate(!showlocationcreate);
+    const toggleModalAgreementCreate = () => setShowAgreementCreate(!showagreementcreate);
+    const toggleModalContactedReferrerCreate = () => setShowContactedReferrerCreate(!showcontactedreferrercreate);
+    const [mayors, setMayors] = useState([])
+    const [locations, setLocations] = useState()
+    const [visitStatuses, setVisitStatuses] = useState()
+    const [politicParties, setPoliticParties] = useState()
+    const [users, setUsers] = useState()
+    const [contactedReferrers, setContactedReferrers] = useState()
+    const [agreements, setAgreements] = useState()
+    const [groups, setGroups] = useState();
+    const [addresses, setAddresses] = useState()
+
+    const getItemNames = (array) => {
+        return array?.map(item => ({
+            label: item.name,
+            value: item.id
+        }));
+    }
+
+    const getPersonNames = (array) => {
+        return array?.map(item => ({
+            label: item.first_name + " " + item.last_name,
+            value: item.id
+        }));
+    }
+
+    const getAddressNames = (array) => {
+        return array?.map(item => ({
+            label: item.street + " " + item.number,
+            value: item.id
+        }));
+    }
 
     useEffect(() => {
         getMayors(authTokens.access).then(data => setMayors(data))
-    }, [])
+        getLocations(authTokens.access).then(data => setLocations(data))
+        getVisitStatuses(authTokens.access).then(data => setVisitStatuses(data))
+        getPoliticParties(authTokens.access).then(data => setPoliticParties(data))
+        getUsers(authTokens.access).then(data => setUsers(data))
+        getContactedReferrers(authTokens.access).then(data => setContactedReferrers(data))
+        getAgreements(authTokens.access).then(data => setAgreements(data))
+        getGroups(authTokens.access).then(data => setGroups(data))
+        getAddresses(authTokens.access).then(data => setAddresses(data))
+    }, [updateFlag])
 
-    let postVisit = async (e) => {
-        e.preventDefault()
+    const getTimeFromDate = (date) => {
+        let nDate = new Date(date)
+        return nDate.getHours() + ":" + nDate.getMinutes() + ":" + nDate.getSeconds()
+    }
+
+    let postVisit = async (values) => {
         let response = await fetch('/api/visits', {
             method: "POST",
             headers: {
@@ -55,506 +103,489 @@ const AddVisitPage = () => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "flyer": e.target.flyer.value,
-                "distance": e.target.distance.value,
-                "travel_time": e.target.travel_time.value,
-                "visit_date": e.target.visit_date.value,
-                "civil_registration": e.target.civil_registration.value,
-                "accommodation": e.target.accommodation.value,
-                "modernization_fund": e.target.modernization_fund.value,
-                "start_time": e.target.start_time.value,
-                "finish_time": e.target.finish_time.value,
-                "place_name": e.target.place_name.value,
-                "id_locality": e.target.id_locality.value,
-                "id_group": e.target.id_group.value,
-                "id_visit_status": e.target.id_visit_status.value,
-                "id_agreement": e.target.id_agreement.value,
-                "id_contacted_referrer": e.target.id_contacted_referrer.value,
-                "id_address": e.target.id_address.value,
-                "id_logo": e.target.id_logo.value
+                "accommodation": values.accommodation || false,
+                "address_id": values.address,
+                "agreement_id": values.agreements,
+                "civil_registration": values.civil_registration || false,
+                "contacted_referrer_id": values.contacted_referrer,
+                "distance": values.distance,
+                "finance_collaborator_id": values.finance_collaborator,
+                "flyer": values.flyer || false,
+                "group_id": values.group,
+                "location_id": values.location,
+                "mayor_id": values.mayor,
+                "modernization_fund": values.modernization_fund || false,
+                "rent_observations": values.observations || '',
+                "place_name": values.place,
+                "politic_party_id": values.politic_party,
+                "rent_collaborator_id": values.rent_collaborator,
+                "travel_time": values.travel_time,
+                "visit_date": values.visit_date.toISOString().split('T')[0],
+                "start_time": getTimeFromDate(values.visit_time[0]),
+                "finish_time": getTimeFromDate(values.visit_time[1]),
+                "visit_status_id": values.visit_status
             })
         })
         if (response.status === 200) {
             toggleModalsucceed();
-            await postVisit()
-        } else if (response.status === 500) {
+
+        } else {
             toggleModalfailed();
-            await postVisit()
-        } else if (response.status === 401) {
-            toggleModalfailed();
-            await postVisit()
-        } else if (response.status === 400) {
-            toggleModalfailed();
-            await postVisit()
         }
     }
 
-    const carouselRef = useRef(null);
-
-    const handlePrev = () => {
-        carouselRef.current.prev();
+    const onFinish = (values) => {
+        postVisit(values)
     };
 
-    const handleNext = () => {
-        carouselRef.current.next();
+    const formRef = useRef(null);
+
+    const layout = {
+        labelCol: {
+            span: 8,
+        },
+        wrapperCol: {
+            span: 16,
+        },
     };
+    const tailLayout = {
+        wrapperCol: {
+            offset: 8,
+            span: 16,
+        },
+    };
+
+    const filterOption = (input, option) =>
+        (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
     return (
-        <Container fluid className={'Background'}>
-            <Container>
-                <h4 className={'h1NuevaVisita'}>Nueva Visita</h4>
-                <Container className={'MiniContainerVisit'}>
-                    <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate}/>
-                    <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify}/>
-                    <SucceedModal onClose={() => toggleModalsucceed()} message={"la visita"} show={showsuccess}/>
-                    <FailedModal onClose={() => toggleModalfailed()} message={"la visita"} show={showfail}/>
-                    <Form onSubmit={postVisit}>
-                        <Carousel variant="dark" interval={null} ref={carouselRef} controls={false}
-                            className={'carouselAddVisit justify-content-center text-center'}>
 
-                            <Carousel.Item className='CarouselItemOne'>
-                                <Row className='justify-content-center text-center'>
-                                    <Col className='justify-content-center CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <CalendarMonthIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Fecha de Visita'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" type='date' className='InputVisit' />
-                                                        </Col>
 
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <PlaceOutlinedIcon sx={{ fontSize: 65 }} className='' />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Localidad'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit' />
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <HouseOutlinedIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Nombre del Lugar'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
+        <Container fluid>
+            <MayorCreateModal onClose={() => toggleModalCreate()} show={showcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <MayorModifyModal onClose={() => toggleModalModify()} show={showmodify} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <LocationCreateModal onClose={() => toggleModalLocationCreate()} show={showlocationcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <AgreementCreateModal onClose={() => toggleModalAgreementCreate()} show={showagreementcreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <ContactedReferrerCreateModal onClose={() => toggleModalContactedReferrerCreate()} show={showcontactedreferrercreate} updateFlag={updateFlag}
+                              setUpdateFlag={setUpdateFlag}/>
+            <SucceedModal onClose={() => toggleModalsucceed()} message={"La visita ha sido registrada"} show={showsuccess}/>
+            <FailedModal onClose={() => toggleModalfailed()} message={"La visita no ha sido registrada"} show={showfail}/>
 
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <DirectionsIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Dirección del Lugar'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
+             <h2 className='titulo1'>Nueva Visita</h2>
 
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                </Row>
+            <Form
+                {...layout}
+                ref={formRef}
+                name="control-ref"
+                onFinish={onFinish}>
 
-                                <Row>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <AccessTimeIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Horario de Jornada'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
 
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <SocialDistanceOutlinedIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Distancia'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <HistoryToggleOffOutlinedIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Tiempo de Viaje'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <TextField id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
+                <Container className='justify-content-center'>
 
-                                                    <Row className="justify-content-center">
-                                                        <StickyNote2OutlinedIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'¿Registro Civil?'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Switch id="standard-basic" label=""
-                                                                variant="standard"/>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                </Row>
+                    <Row className="visit-field-row">
+                        <Col className="visit-field">
+                            <Form.Item
+                                name={"location"}
+                                label={"Localidad"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select placeholder={"Localidad"} className="visit-field"
+                                        options={getItemNames(locations)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
 
-                            </Carousel.Item>
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2} className={'botonesredondoslocal'}>
+                            <Tooltip placement={"right"} title="Agregar Localidad">
+                                <Button type="primary" shape="circle" className='botonesredondos' icon={<PlusOutlined/>} onClick={toggleModalLocationCreate}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
 
-                            <Carousel.Item className={'MiniContainerVisit'}>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_date"}
+                                label={"Fecha de la Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <DatePicker placeholder={"Fecha de la consulta"} className="visit-field" size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_time"}
+                                label={"Jornada de trabajo:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <TimePicker.RangePicker placeholder={["Inicio", "Fin"]} className="visit-field" size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"finance_collaborator"}
+                                label={"Colaboradores de Finanzas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    className="visit-field"
+                                    mode="multiple"
+                                    allowClear
+                                    placeholder="Colaboradores De Finanzas"
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
+                                    size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"rent_collaborator"}
+                                label={"Colaboradores de Rentas:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select
+                                    className="visit-field"
+                                    mode="multiple"
+                                    allowClear
+                                    placeholder="Colaboradores De Rentas"
+                                    options={getPersonNames(users)}
+                                    showSearch
+                                    optionFilterProp="children"
+                                    filterOption={filterOption}
+                                    size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"observations"}
+                                label={"Observaciones:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <TextArea className="visit-field" rows={2} placeholder={"Observaciones"} size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"distance"}
+                                label={"Distancia:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="km" placeholder={"Distancia"} size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"travel_time"}
+                                label={"Tiempo de Viaje:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                        type: 'number',
+                                    },
+                                ]}>
+                                <InputNumber className="visit-field" addonAfter="min" placeholder={"Tiempo de Viaje"} size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"place"}
+                                label={"Lugar:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Input className="visit-field" placeholder="Lugar" size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"address"}
+                                label={"Direccion:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Direccion"}
+                                        options={getAddressNames(addresses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"contacted_referrer"}
+                                label={"Referente Contactado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Referente Contactado"}
+                                        options={getPersonNames(contactedReferrers)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2} className={'botonesredondos'}>
+                            <Tooltip placement={"right"} title="Agregar Referente Contactado">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalContactedReferrerCreate}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"politic_party"}
+                                label={"Partido Politico:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Partido Politico"}
+                                        options={getItemNames(politicParties)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"mayor"}
+                                label={"Intendente:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Intendente"}
+                                        options={getPersonNames(mayors)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2} className={'d-flex botonesredondos'}>
+                            <Tooltip placement={"right"} title="Agregar Intendente">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalCreate}/>
+                            </Tooltip>
+                            <Tooltip placement={"right"} title="Editar Intendente" >
+                                <Button type="primary" shape="circle" icon={<EditOutlined/>} onClick={toggleModalModify} className='separarboton'/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"flyer"}
+                                label={"Flyer:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"civil_registration"}
+                                label={"Registro Civil:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"accommodation"}
+                                label={"Hospedaje:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"modernization_fund"}
+                                label={"Fondo de Modernizacion:"}
+                                rules={[
+                                    {
+                                        required: false,
+                                    },
+                                ]}>
+                                <Switch/>
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"agreements"}
+                                label={"Acuerdos:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" mode="multiple" allowClear placeholder="Acuerdos"
+                                        options={getItemNames(agreements)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2} className={'botonesredondos'}>
+                            <Tooltip placement={"right"} title="Agregar Acuerdo">
+                                <Button type="primary" shape="circle" icon={<PlusOutlined/>} onClick={toggleModalAgreementCreate}/>
+                            </Tooltip>
+                        </Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"visit_status"}
+                                label={"Estado de Visita:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
 
-                                <Row className='justify-content-center'>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-
-                                                    <Row className="justify-content-center">
-                                                        <HotelIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'¿Hospedaje?'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Switch id="standard-basic" label=""
-                                                                variant="standard"/>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <PersonIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Colaborador Finanzas'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <PersonIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Colaborador Rentas'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <PersonIcon sx={{ fontSize: 65 }} />
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Referente Local'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Partido Politico'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-                                                    </Row>
-
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-
-                                            <CardContent className={'CenterContentCard'}>
-
-                                                <Container>
-                                                    <Row className="justify-content-center">
-                                                        <AddIcon className='iconadd' sx={{fontSize: 65}} type="submit" onClick={() => toggleModalCreate()}></AddIcon>
-                                                        <CreateIcon className='iconedit' sx={{fontSize: 65}} type="submit"onClick={() => toggleModalModify()}></CreateIcon>
-                                                        </Row>
-                                                    <Row>
-                                                        <PersonIcon className='iconperson' sx={{fontSize: 65}}/>
-                                                    </Row>
-                                                </Container>
-                                                <Container>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Intendente'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <select className='select' id="standard-basic" variant="standard" >  
-                                                                    <option selected disabled hidden></option>
-                                                                {mayors?.map((mayor) => (
-                                                                    <option value={mayor.id}>{mayor.first_name} {mayor.last_name}</option>
-                                                                ))}
-                                                            </select>
-                                                            
-                                                        </Col>
-                                                    </Row>
-
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className='CenterContentCard'>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'Fondo de Modernización'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Switch id="standard-basic" label=""
-                                                                variant="standard" />
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col className={'CenterContentCard'}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <a>{'¿Flyer?'}</a>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Switch id="standard-basic" label=""
-                                                                variant="standard" />
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                </Row>
-                            </Carousel.Item>
-
-                            <Carousel.Item className={'ThirdCarousel'}>
-                                <Row className='justify-content-center'>
-                                    <Col>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisitConvenios'}>
-                                            <CardContent className='CenterContentCardConvenios'>
-                                                <Row>
-                                                    <Col md={3}>
-                                                        <Row className='text-center'>
-                                                            <p>{'Convenios Firmados'}</p>
-                                                        </Row>
-                                                    </Col>
-
-                                                    <Col md={4}>
-                                                        <Row className='justify-content-center text-center'>
-
-                                                            <Col>
-                                                                <Checkbox />
-                                                            </Col>
-                                                            <Col>
-                                                                <p>{'Convenio 1'}</p>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row className='justify-content-center text-center'>
-                                                            <Col>
-                                                                <Checkbox />
-                                                            </Col>
-                                                            <Col>
-                                                                <p>{'Convenio 2'}</p>
-                                                            </Col>
-                                                        </Row>
-                                                    </Col>
-                                                    <Col md={4}>
-                                                        <Row className='justify-content-center text-center'>
-                                                            <Col>
-                                                                <Checkbox />
-                                                            </Col>
-                                                            <Col>
-                                                                <p>{'Convenio 3'}</p>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row className='justify-content-center text-center'>
-                                                            <Col>
-                                                                <Checkbox />
-                                                            </Col>
-                                                            <Col>
-                                                                <p>{'Convenio 4'}</p>
-                                                            </Col>
-                                                        </Row>
-                                                    </Col>
-                                                </Row>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                    <Col md={3}>
-                                        <Card sx={{ my: 2, mx: 2 }} className={'CardVisit'}>
-                                            <CardContent className={'CenterContentCard'}>
-                                                <Container>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <p>{'Estado'}</p>
-                                                    </Row>
-                                                    <Row className='justify-content-center text-center'>
-                                                        <Col>
-                                                            <Select id="standard-basic" label=""
-                                                                variant="standard" className='InputVisit'/>
-                                                        </Col>
-                                                    </Row>
-                                                </Container>
-                                            </CardContent>
-                                        </Card>
-                                    </Col>
-                                </Row>
-                                <Row className='justify-content-center text-center'>
-                                    <Col>
-                                        <Button className={'BtnAddVisit'} variant='outlined'>Guardar Visita</Button>
-                                    </Col>
-                                </Row>
-                            </Carousel.Item>
-                        </Carousel>
-                        <CarouselButtons prev={handlePrev} next={handleNext}/>
-                    </Form>
+                                <Select className="visit-field" placeholder={"Estado de Visita"}
+                                        options={getItemNames(visitStatuses)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
+                    <Row className="visit-field-row">
+                        <Col>
+                            <Form.Item
+                                name={"group"}
+                                label={"Grupo encargado:"}
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}>
+                                <Select className="visit-field" placeholder={"Grupo"}
+                                        options={getItemNames(groups)}
+                                        showSearch
+                                        optionFilterProp="children"
+                                        filterOption={filterOption}
+                                        size={'large'}
+                                />
+                            </Form.Item>
+                        </Col>
+                        <Col xs={2}></Col>
+                    </Row>
                 </Container>
-            </Container>
+
+
+                <Container fluid className={"justify-content-center button-container"}>
+                    <Button className={"visit-submit-button primary"} htmlType="submit" type="primary"
+                            size={'large'}
+                            icon={<PlusCircleOutlined/>}>
+                        Crear Visita
+                    </Button></Container>
+            </Form>
         </Container>
 
     )

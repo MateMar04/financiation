@@ -1,37 +1,25 @@
-import '../assets/styles/RowWithCheck.css'
-import { Button, Col, Modal, Row } from "react-bootstrap";
-import { Form } from "react-bootstrap";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
-import TextField from '@mui/material/TextField';
-import InputAdornment from '@mui/material/InputAdornment';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { Container, Card } from 'react-bootstrap';
-import '../assets/styles/AddMayorPage.css';
-import FailedModal from "../components/FailedModal";
-import SucceedModal from "../components/SucceedModal";
+import { MenuItem, Select } from '@mui/material';
+import { getLocations } from '../services/LocationServices';
+import { Modal, Input, message } from 'antd';
 
 export const MayorCreateModal = (props) => {
 
-    let {authTokens} = useContext(AuthContext)
+    let { authTokens } = useContext(AuthContext)
+    const [selectedLocalidad, setSelectedLocalidad] = useState('');
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    let [locations, setLocations] = useState([])
     const [showfail, setShowfailture] = useState(false);
     const [showsuccess, setShowsuccese] = useState(false);
-    const toggleModalsucceed = () => setShowsuccese(!showsuccess);
-    const toggleModalfailed = () => setShowfailture(!showfail);
 
-    let postMayor = async (e) => {
-        e.preventDefault();
-    
-        const firstName = e.target.first_name.value;
-        const lastName = e.target.last_name.value;
-    
-        // Check if either the first name or last name is empty
-        if (!firstName || !lastName) {
-            // Display an error message or take appropriate action
-            toggleModalfailed();
-            return;
-        }
-    
+    useEffect(() => {
+        getLocations(authTokens.access).then(data => setLocations(data))
+    }, [])
+
+    let postMayor = async () => {
+        console.log('aaa')
         let response = await fetch('/api/mayors', {
             method: "POST",
             headers: {
@@ -40,83 +28,66 @@ export const MayorCreateModal = (props) => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                "first_name": firstName,
-                "last_name": lastName
+                "first_name": first_name,
+                "last_name": last_name,
+                "location": selectedLocalidad
             })
         });
-    
+
         if (response.status === 200) {
-            toggleModalsucceed();
-        } else if (response.status === 500) {
-            toggleModalfailed();
-        } else if (response.status === 401) {
-            toggleModalfailed();
-        } else if (response.status === 400) {
-            toggleModalfailed();
+            message.success('El intendente se ha creado exitosamente, recarga la pagina para verlo');
+            props.onClose();
+        } else {
+            message.error('El intendente no se ha creado');
         }
     }
-    
+
     return (
-            <Modal className='modalcreate' show={props.show} >
-                <SucceedModal onClose={() => toggleModalsucceed()} message="la visita" show={showsuccess}/>
-                <FailedModal onClose={() => toggleModalfailed()} message="la visita" show={showfail}/>
-                <Container className="containermayor container-addmayor-modal">
-
-                    <Form className='datos' onSubmit={postMayor}>
-                        <h3 className={'h3LoginPage'}>Ingresar Intendente</h3>
-
-
-                        <div className='datosin' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Form.Group style={{ textAlign: 'center', marginRight: '10px' }}>
-                                <TextField
-                                    className="input"
-                                    label="Nombre"
-                                    name='first_name'
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start" >
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                            <Form.Group style={{ textAlign: 'center' }}>
-                                <TextField
-                                    className="input"
-                                    label="Apellido"
-                                    name='last_name'
-                                    variant="outlined"
-                                    InputProps={{
-                                        startAdornment: (
-                                            <InputAdornment position="start">
-                                                <AccountCircleOutlinedIcon />
-                                            </InputAdornment>
-                                        ),
-                                        sx: { borderRadius: 6, borderColor: '#f4f4f4' },
-                                    }}
-                                />
-                            </Form.Group>
-                        </div>
-
-                        
-
-                        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                            <Button className='BtnIniciarSesionLogin btnregis' type="submit">Registrar</Button>
-                        </div>
-                        <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                            <Button variant="outlined" color="primary" onClick={props.onClose}>
-                                Cancelar
-                            </Button>
-                        </div>
-                    </Form>
-                </Container>
-            </Modal>
-
-
+        <Modal className='modalcreate' title={'Ingresar Intendente'} open={props.show} onOk={postMayor} onCancel={props.onClose}>
+            <div className="containermayor container-addmayor-modal">
+                <form className='datos'>
+                    <div>
+                        <label htmlFor='first_name'>Nombre</label>
+                        <Input
+                            className="InputModal"
+                            placeholder="Nombre"
+                            name='first_name'
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <br/>
+                    <div>
+                        <label htmlFor='last_name'>Apellido</label>
+                        <Input
+                            className="InputModal"
+                            name='last_name'
+                            onChange={(e) => setLastName(e.target.value)}
+                            placeholder="Apellido"
+                            size="large"
+                            required
+                        />
+                    </div>
+                    <br/>
+                    <div>
+                        <label htmlFor='selectedLocalidad'>Seleccione localidad</label>
+                        <Select
+                            label="Localidad"
+                            value={selectedLocalidad}
+                            onChange={(e) => setSelectedLocalidad(e.target.value)}
+                            variant="outlined"
+                            className='InputModal'
+                            required
+                        >
+                            {locations?.map((location, i) => (
+                                <MenuItem key={i} value={location.id}>{location.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </div>
+                </form>
+            </div>
+        </Modal>
     )
 }
 
-export default MayorCreateModal
+export default MayorCreateModal;

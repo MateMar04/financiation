@@ -9,6 +9,7 @@ import '../assets/styles/RowWithCheck.css'
 import {ReportFilterCard} from "../components/ReportFilterCard";
 import {ReportChartCard} from "../components/ReportChartCard";
 import ReportsContext from "../context/ReportsContext";
+import LoadingModal from "../components/LoadingModal";
 
 
 export const ReportsPage = () => {
@@ -17,6 +18,7 @@ export const ReportsPage = () => {
     let [localities, setLocalities] = useState([])
     let [ministryDepartments, setMinistryDepartments] = useState([])
     let {authTokens} = useContext(AuthContext)
+    let [loading, setLoading] = useState(true)
 
     let {
         visits,
@@ -37,9 +39,11 @@ export const ReportsPage = () => {
         getLocationsForFilter(authTokens.access).then(r => setLocalities(r))
         getMinistryDepartmentsForFilter(authTokens.access).then(r => setMinistryDepartments(r))
     }, [])
-
+    const [showloading, setShowloading] = useState(false);
     const buttonClick = async () => {
+        setShowloading(true);
         await generateReports()
+        setShowloading(false); 
     };
 
     return (
@@ -51,7 +55,7 @@ export const ReportsPage = () => {
                         <ReportFilterCard title="Localidades" items={localities} tokens={authTokens.access}/>
                     </Col>
                     <Col lg={6} className='filters-column'>
-                        <ReportFilterCard title="Departamentos" items={ministryDepartments}
+                        <ReportFilterCard title="Reparticiones" items={ministryDepartments}
                                           tokens={authTokens.access}/>
                     </Col>
                 </Row>
@@ -72,25 +76,29 @@ export const ReportsPage = () => {
 
             
 
-            <Container className='container1 container-white'>
+            <Container className='container1 container-white justify-content-center text-center'>
                 <Row className='justify-content-center text-center'>
-                    <Col lg={6} >
-                        <ReportChartCard title="Visitas" chart={<BarChart chartData={visitsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Visitas" className='filters-column' chart={<BarChart chartData={visitsData}/>}/>
                     </Col>
-                    <Col lg={6} >
-                        <ReportChartCard title="Organismos" chart={<BarChart chartData={ministryDepsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Organismos" className='filters-column' chart={<BarChart chartData={ministryDepsData}/>}/>
                     </Col>
                 </Row>
                 <Row className='justify-content-center text-center'>
-                    <Col lg={6} >
-                        <ReportChartCard title="Motivos" chart={<PieChart chartData={faqsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Motivos" className='filters-column' chart={<PieChart chartData={faqsData}/>}/>
                     </Col>
-                    <Col lg={6} >
-                        <ReportChartCard title="Asesores" chart={<PolarAreaChart chartData={advisorsData}/>}/>
+                    <Col lg={6} xs={12} className='justify-content-center text-center'>
+                        <ReportChartCard title="Asesores" className='filters-column' chart={<PolarAreaChart chartData={advisorsData}/>}/>
                     </Col>
                 </Row>
             </Container>
+            <Container> 
+                <LoadingModal message="cargando" show={showloading}/>
+            </Container> 
         </Container>
+        
     )
 }
 

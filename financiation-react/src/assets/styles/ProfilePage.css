@@ -1,39 +1,48 @@
-
 @media (min-width: 800px) {
     .ContainerProfilePage{
-        transform: translateY(15vh);
+        transform: translateY(5vh);
         background-color: white;
         border-radius: 10vh;
         width: 60vw;
     }
 
-    .profileTextField{
-        width: 20vw !important;
-        background-color: #f4f4f4;
-        border-radius: 3vh;
-
-    }
-
     .ProfilePicture{
-        transform: translateY(-15vh)
+        margin: 2vh;
+        transition: box-shadow 0.8s ease;
     }
 
-    .ProfileText{
-        transform: translateY(-8vh)
+    .ProfilePicture:hover{
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5) !important;
+        z-index: 2;
+    }
+    .ImportantTextProfile{
+        margin-left: 2vw;
+    }
+
+    .InfoProfile{
+        margin-left: 4vw;
     }
 
     .InputsProfile{
-        transform: translateY(-5vh)
+        width: 40vw;
+        padding: 10px;
     }
 
-    .EditIconProfile{
-        position: fixed;
-        z-index: 1;
-        transform: translate(8vw,9vh);
+    .ProfilePictureRow{
+        margin-top: 15vh;
     }
+
+    .ProfilePictureChange{
+        margin-top: 5vh;
+    }
+    
+    .SelectProfile{
+    width: 42vw;
+        transform: translateX(-1vw);
+
+  
 }
-
-
+}
 
 @media (max-width: 800px) {
 
@@ -44,36 +53,41 @@
         width: 90vw;
     }
 
-    .profileTextField{
-        background-color: #f4f4f4;
-        border-radius: 3vh;
-    }
-
-    .ProfileText{
-        transform: translateY(-5vh);
-    }
     .ProfilePicture{
-        transform: translateY(-14vh)
+        margin: 2vh;
     }
 
-     .EditIconProfile{
-        position: fixed;
-        z-index: 1;
-        transform: translate(25vw,15vh);
+    .InfoProfile{
+        margin-left: 2vw;
     }
-}
+
+    .BtnProfileCerrarSesion{
+        width: 50vw !important;
+    }
+
+    .CancelarBtnProfile{
+        width: 40vw !important;
+    }
+
+    .GuardarBtnProfile{
+        width: 40vw !important;
+        margin-right: 2vw !important;
+    }
+    }
+    .ProfilePictureRow{
+        margin-top: 15vh;
+    }
+
+    .ProfilePictureChange{
+        margin-top: 5vh;
+    }
+
 
 .BtnProfileCerrarSesion{
-    background-color: #F33131;
     border-radius: 3vh;
-    border-color: #F33131;
-    width: 230px;
-}
-
-.BtnProfileCerrarSesion:hover{
-    background-color: #a20d0d;
-    border-color: #a20d0d;
-
+    height: 7vh;
+    width: 15vw;
+    margin-bottom: 5vh;
 }
 
 
@@ -81,12 +95,15 @@
     background-color: #848484;
     border-radius: 3vh;
     border-color: #848484;
-    width: 230px;
+    height: 7vh;
+    width: 15vw;
+    color: white;
 }
 
 .CancelarBtnProfile:hover{
     background-color: #545454;
-    border-color: #545454;
+    border-color: #545454 !important;
+    color: white !important;
 
 }
 
@@ -94,38 +111,30 @@
     background-color: #53A6DC;
     border-radius: 3vh;
     border-color: #53A6DC;
-    width: 230px;
+    height: 7vh;
+    width: 15vw;
+    color: white;
+    margin-bottom: 5vh;
 }
 
 .GuardarBtnProfile:hover{
     background-color: #026fb8;
     border-color: #026fb8;
+    color: white !important;
 }
 
-.SelectFileButton {
-    background-color: #848484;
-    border-radius: 3vh;
-    border-color: #848484;
-    width: 200px;
-    padding: 8px;
-    color: white;
-    transform: translateY(-10vh);
+.IconEdit{
+    z-index: 2;
+    font-size: 3vh;
 }
 
-.SelectFileButton:hover{
-    background-color: #545454;
-    border-color: #545454;
-}
-.SelectFileInput {
-  display: none;
+.WelcomeUser{
+    margin-bottom: 3vh;
 }
 
-.GuardarCambiosButton{
-    background-color: #53A6DC;
-    border-radius: 3vh;
-    border-color: #53A6DC;
-    width: 200px;
-    padding: 8px;
-    color: white;
-    transform: translateY(-8vh);
+.IconBackEditPhoto{
+    z-index: 2;
+    font-size: 3vh;
+    color: gray !important;
+    margin: 2vw
 }

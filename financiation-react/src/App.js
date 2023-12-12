@@ -15,20 +15,20 @@ import ProfilePage from "./pages/ProfilePage";
 import {ReportsPage} from "./pages/ReportsPage";
 import {CreateGroupPage} from "./pages/CreateGroupPage";
 import {PublicRoute} from "./utils/PublicRoute";
-import CreateAdvisorPage from './pages/CreateAdvisorPage';
-import CreateCoordinatorPage from './pages/CreateCoordinatorPage';
-import {AddAdvisedPage} from "./pages/AddAdvisedPage";
 import {GroupsPage} from "./pages/GroupsPage";
 import {MainMenuPage} from "./pages/MainMenuPage";
 import {VisitsPage} from "./pages/VisitsPage";
-import {AdvisorsPage} from "./pages/AdvisorsPage";
-import {CoordinatorsPage} from "./pages/CoordinatorsPage";
 import React from 'react';
 import {ReportsProvider} from "./context/ReportsContext";
 import {AddMayorPage} from './pages/AddMayorPage';
 import { CalendarPage } from './pages/CalendarPage';
+import {EmailSended} from './pages/EmailSended';
+import EditPhotoPage from './pages/EditPhotoPage';
 import "@fontsource/poppins";
+import * as logo from './assets/images/logo.jpeg'
 
+
+import EditVisitPage from './pages/EditvisitPage';
 function App() {
     return (
         <Router>
@@ -46,6 +46,8 @@ function App() {
                         <Route path='/activate/:uid/:token'
                                element={<PublicRoute children={<ActivateAccountPage/>}/>}/>
 
+                         <Route path='/emailsended' element={<PublicRoute children={<EmailSended/>}/>}/>
+
                         <Route exact path='/me' element={<PrivateRoute children={<ProfilePage/>}/>}/>
 
                         <Route path="/menu" element={<PrivateRoute children={<MainMenuPage/>}/>}/>
@@ -54,23 +56,17 @@ function App() {
                         <Route path='/groups' element={<PrivateRoute children={<GroupsPage/>}/>}/>
                         <Route path='/form' element={<PrivateRoute children={<FormPage/>}/>}></Route>
                         <Route path='/visits' element={<PrivateRoute children={<VisitsPage/>}/>}></Route>
-                        <Route path='/advisors' element={<PrivateRoute children={<AdvisorsPage/>}/>}></Route>
-                        <Route path='/coordinators'
-                               element={<PrivateRoute children={<CoordinatorsPage/>}/>}></Route>
 
-
-                        <Route path='/visit/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                        <Route path='/visits/add' element={<PrivateRoute children={<AddVisitPage/>}/>}/>
+                        <Route path='/visits/edit/:visitId' element={<PrivateRoute children={<EditVisitPage/>}/>}/>
                         <Route path='/groups/add' element={<PrivateRoute children={<CreateGroupPage/>}/>}/>
-                        <Route path='/advisor/add' element={<PrivateRoute children={<CreateAdvisorPage/>}/>}/>
-                        <Route path='/coordinator/add'
-                               element={<PrivateRoute children={<CreateCoordinatorPage/>}/>}/>
-                        <Route path='/advised/add' element={<PrivateRoute children={<AddAdvisedPage/>}/>}/>
 
                         <Route path='/reports'
                                element={<PrivateRoute children={<ReportsProvider><ReportsPage/></ReportsProvider>}/>}/>
 
                         <Route path='/mayors/add' element={<PrivateRoute children={<AddMayorPage></AddMayorPage>}/>}/>
                         <Route path='/calendar' element={<PrivateRoute children={<CalendarPage></CalendarPage>}/>}/>
+                        <Route path='/editphoto' element={<PrivateRoute children={<EditPhotoPage/>}/>}/>
                     </Routes>
                 </AuthProvider>
             </div>
